@@ -1,0 +1,37 @@
+# Mia-Care P4SaMD
+
+Mia-Care P4SaMD is an AI-native platform for Software as a Medical Device (SaMD) compliance.
+It embeds regulatory compliance directly into software development workflows, eliminating
+the bottleneck between engineering velocity and regulatory requirements.
+
+## What P4SaMD does
+
+P4SaMD orchestrates the entire SDLC with compliance enforced at every stage. It connects
+existing tools (Git, ALM, eQMS) into a fully IEC 62304-compliant workflow, automates
+traceability, generates audit-ready documentation, and provides real-time regulatory guidance.
+
+## Regulatory frameworks covered
+
+EU MDR 2017/745, IVDR 2017/746, FDA, ISO 13485, ISO 14971, 21 CFR Part 820,
+IEC 62304, IEC 82304-1, IEC 62366-1, IEC 81001-5-1, EU AI Act, GMLP, PCCP, GDPR, HIPAA.
+
+## Eight capabilities
+
+1. SDLC Workflow Orchestrator — orchestrates compliant development workflows
+2. Automated Real-time Traceability (ARTT) — end-to-end traceability automatically maintained
+3. Documentation Engine — automatic DHF and Technical File generation
+4. Smart Assistant (Whisper) — in-workflow regulatory guidance
+5. Master AI for Compliance — EU AI Act and GMLP enforcement for AI-enabled SaMD
+6. Brownfield Remediator — legacy software certification without rebuilding
+7. Secure Software Development — IEC 81001-5-1 security compliance
+8. Guided Workflows — step-by-step compliance guidance for every developer
+
+## Use cases
+
+- SaMD Greenfield Development
+- Building High-Risk AI Software (CDSS)
+- Legacy Regulated Software Remediation
+
+## Company
+
+Mia-Care S.r.l. — https://www.mia-care.io
