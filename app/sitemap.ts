@@ -2,6 +2,8 @@ import type { MetadataRoute } from "next";
 import { capabilities } from "@/data/capabilities";
 import { useCases } from "@/data/use-cases";
 
+export const dynamic = "force-static";
+
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.mia-care.io";
 
 export default function sitemap(): MetadataRoute.Sitemap {
