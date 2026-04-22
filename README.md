@@ -1,46 +1,36 @@
-# mia-care-website
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Summary
+## Getting Started
 
+First, run the development server:
 
-
-## Local development
-
-### Setup local env file
-
-```
-cp .env local.env
-vim local.env
-```
-
-Finally, in order to load the environment variables file use:
-
-```
-set -a && source local.env
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
 ```
 
-## Contributing
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-To contribute to the project, please be mindful for this simple rules:
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-1. Don’t commit directly on the default branhc
-2. Start your branches with `feature/` or `fix/` based on the content of the branch
-3. If possible, refer to the Jira issue id, inside the name of the branch, but not call it only `fix/TASK-ID`
-4. Always commit in english
-5. Once you are happy with your branch, open a [Merge Request][merge-request]
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-## Run the Docker Image
+## Learn More
 
-If you are interested in the docker image you can get one and run it locally with this commands:
+To learn more about Next.js, take a look at the following resources:
 
-```shell
-docker pull nexus.mia-platform.eu/mia-care-website/mia-care-website:latest
-set -a
-source .env
-docker run --name mia-care-website \
-  --detach \
-  nexus.mia-platform.eu/mia-care-website/mia-care-website
-```
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-[merge-request]: https://git.tools.mia-platform.eu/mia-care/clients/mia-care-website/services/mia-care-website/merge_requests
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
+## Deploy on Vercel
+
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
