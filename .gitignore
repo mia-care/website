@@ -23,6 +23,7 @@
 # misc
 .DS_Store
 *.pem
+.vscode/
 
 # legacy pre-scaffold files (not tracked)
 /.legacy/

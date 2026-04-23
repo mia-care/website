@@ -106,14 +106,31 @@ The site is a fully static export (`output: 'export'`). No server required.
 ## Project Structure
 
 ```
-app/                   # Next.js App Router pages
-  capabilities/[slug]/ # Individual capability pages
-  use-cases/[slug]/    # Individual use-case pages
-  resources/           # Blog, docs, events, FAQ
-components/            # Shared UI components
-data/                  # Capabilities and use-cases content
-lib/                   # Utility functions
-public/                # Static assets
+app/                        # Next.js App Router pages
+  page.tsx                  # Homepage (/)
+  (marketing)/              # Conversion pages — pricing, request-demo
+  (platform)/               # Product pages — product, capabilities/[slug], use-cases/[slug]
+  (company)/                # Company pages — about-us, careers, newsroom, certifications, sustainability
+  (resources)/              # Knowledge hub — blog, competence-center, docs, events, faq
+  (legal)/                  # Legal — privacy-policy, cookie-policy
+
+components/
+  layout/                   # Global shell — Navbar, Footer, MobileMenu
+  common/                   # Reusable across 2+ pages — CtaBanner, ComplianceStrip, PillTag…
+  sections/                 # Page-specific sections
+    home/                   # Homepage sections — HeroBanner, StatsRow, ProblemSection…
+    capability/             # Capability detail — CapabilityHero, FeatureCards…
+    use-case/               # Use-case detail — UseCaseHero, CaseStudyBlock…
+  ui/                       # shadcn/ui primitives — button, card, badge…
+
+data/                       # TypeScript content files — capabilities, use-cases, nav, site
+lib/                        # Utility functions
+public/                     # Static assets (fonts, images, robots.txt)
+
+docs/
+  content/                  # Copy and information architecture
+  design/                   # Visual identity, branding, Styrene fonts
+  specs/                    # Technical and feature specifications
 ```
 
 ---

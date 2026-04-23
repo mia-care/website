@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { PillTag } from "@/components/blocks/shared/PillTag";
+import { PillTag } from "@/components/common/PillTag";
 
 export default function NotFound() {
   return (

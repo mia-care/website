@@ -1,0 +1,1197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mia-Care P4SaMD — Navbar UI Kit v2</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    a { text-decoration: none; }
+    ul { list-style: none; }
+    button { background: none; border: none; cursor: pointer; font: inherit; }
+
+    /* ── Canvas ─────────────────────────────────────────────── */
+    body {
+      font-family: -apple-system, "Inter", "SF Pro Display", "Segoe UI", sans-serif;
+      background: #080910;
+      color: #f0f0f2;
+      min-height: 100vh;
+      padding: 64px 40px 100px;
+    }
+
+    /* ── Design tokens ──────────────────────────────────────── */
+    :root {
+      --bg-base:          #0b0c10;
+      --bg-surface:       #111318;
+      --bg-raised:        #181a22;
+      --bg-border:        rgba(255,255,255,0.07);
+      --bg-border-strong: rgba(255,255,255,0.13);
+      --brand-green:      #00f096;
+      --brand-cyan:       #00f0f0;
+      --grad:             linear-gradient(90deg, #00f096, #00f0f0);
+      --grad-135:         linear-gradient(135deg, #00f096, #00f0f0);
+      --text-primary:     #f0f0f2;
+      --text-secondary:   rgba(240,240,242,0.55);
+      --text-muted:       rgba(240,240,242,0.28);
+      --glow-green:       rgba(0,240,150,0.18);
+      --shadow-drop:      0 24px 64px rgba(0,0,0,0.7), 0 4px 16px rgba(0,0,0,0.4);
+    }
+
+    /* ══════════════════════════════════════════════════════════
+       KIT HEADER
+    ══════════════════════════════════════════════════════════ */
+    .kit-header {
+      text-align: center;
+      margin-bottom: 72px;
+    }
+    .kit-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(240,240,242,0.28);
+      margin-bottom: 18px;
+    }
+    .kit-eyebrow::before, .kit-eyebrow::after {
+      content: '';
+      width: 32px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(0,240,150,0.3));
+    }
+    .kit-eyebrow::after { transform: scaleX(-1); }
+    .kit-title {
+      font-size: 32px;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      background: linear-gradient(135deg, #f0f0f2 60%, rgba(240,240,242,0.5));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 10px;
+    }
+    .kit-subtitle {
+      font-size: 13px;
+      color: rgba(240,240,242,0.35);
+    }
+    .kit-rule {
+      width: 56px;
+      height: 2px;
+      background: var(--grad);
+      border-radius: 2px;
+      margin: 20px auto 0;
+    }
+
+    /* ══════════════════════════════════════════════════════════
+       BREAKPOINT LABELS + FRAMES
+    ══════════════════════════════════════════════════════════ */
+    .kit-grid {
+      display: flex;
+      align-items: flex-start;
+      gap: 40px;
+      overflow-x: auto;
+      padding-bottom: 8px;
+    }
+    .bp-col { flex: none; }
+
+    .bp-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 5px 13px 5px 9px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 100px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.11em;
+      text-transform: uppercase;
+      color: rgba(240,240,242,0.4);
+      margin-bottom: 16px;
+    }
+    .bp-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--grad);
+      flex-shrink: 0;
+    }
+
+    .state-tag {
+      display: inline-block;
+      padding: 3px 8px;
+      background: rgba(0,240,150,0.06);
+      border: 1px solid rgba(0,240,150,0.15);
+      border-radius: 100px;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: rgba(0,240,150,0.7);
+    }
+
+    /* ── Browser chrome ─────────────────────────────────────── */
+    .chrome {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      height: 32px;
+      padding: 0 14px;
+      background: #13151d;
+      border: 1px solid rgba(255,255,255,0.07);
+      border-bottom: none;
+      border-radius: 12px 12px 0 0;
+    }
+    .tl { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+    .tl-r { background: #ff5f57; } .tl-y { background: #febc2e; } .tl-g { background: #28c840; }
+    .url-pill {
+      flex: 1;
+      margin-left: 10px;
+      height: 17px;
+      background: rgba(255,255,255,0.04);
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+      padding: 0 10px;
+    }
+    .url-pill span { font-size: 10px; color: rgba(240,240,242,0.18); }
+
+    /* ── Browser body ───────────────────────────────────────── */
+    .frame-body {
+      border: 1px solid rgba(255,255,255,0.07);
+      border-top: none;
+      border-radius: 0 0 10px 10px;
+      overflow: hidden;
+      background: var(--bg-base);
+    }
+    .state-row {
+      position: relative;
+      border-top: 1px solid rgba(255,255,255,0.04);
+    }
+    .state-row:first-child { border-top: none; }
+    .state-row-badge {
+      position: absolute;
+      top: 10px;
+      right: 12px;
+      z-index: 200;
+    }
+
+    /* ── Phone chrome ───────────────────────────────────────── */
+    .phone-wrap {
+      border: 1.5px solid rgba(255,255,255,0.09);
+      border-radius: 28px;
+      overflow: hidden;
+      background: var(--bg-base);
+    }
+    .phone-bar {
+      height: 36px;
+      background: #13151d;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .notch {
+      width: 72px;
+      height: 18px;
+      background: #0b0c10;
+      border-radius: 10px;
+    }
+
+    /* ── Page stub ──────────────────────────────────────────── */
+    .page-stub {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--bg-base);
+    }
+    .stub-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      padding: 20px;
+    }
+    .stub-lines { display: flex; gap: 5px; }
+    .stub-line { height: 5px; border-radius: 3px; background: rgba(255,255,255,0.05); }
+    .stub-note { font-size: 9.5px; color: rgba(240,240,242,0.1); letter-spacing: 0.05em; }
+
+    /* ══════════════════════════════════════════════════════════
+       SHARED NAVBAR SHELL
+    ══════════════════════════════════════════════════════════ */
+    .nav-shell {
+      display: flex;
+      align-items: center;
+      background: rgba(10,11,16,0.88);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      /* Subtle inset glow at top = brand touch */
+      box-shadow: inset 0 1px 0 rgba(0,240,150,0.07);
+      position: relative;
+      z-index: 10;
+    }
+
+    /* ── Logo ───────────────────────────────────────────────── */
+    .logo-link {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+    /* Gradient icon mark */
+    .logo-mark {
+      width: 30px;
+      height: 30px;
+      border-radius: 8px;
+      background: var(--grad-135);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      box-shadow: 0 0 14px rgba(0,240,150,0.25);
+    }
+    .logo-text { line-height: 1; }
+    .logo-wordmark {
+      display: block;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-primary);
+      letter-spacing: -0.02em;
+    }
+    .logo-sub {
+      display: block;
+      font-size: 8.5px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--brand-green);
+      margin-top: 2px;
+    }
+
+    /* ── Separator ──────────────────────────────────────────── */
+    .nav-sep {
+      width: 1px;
+      height: 22px;
+      background: linear-gradient(180deg, transparent, rgba(255,255,255,0.1), transparent);
+      flex-shrink: 0;
+    }
+
+    /* ── Nav items ──────────────────────────────────────────── */
+    .nav-list {
+      display: flex;
+      align-items: center;
+    }
+    .nav-item { position: relative; }
+    .nav-link {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 13.5px;
+      font-weight: 450;
+      color: var(--text-secondary);
+      padding: 7px 11px;
+      border-radius: 8px;
+      white-space: nowrap;
+      position: relative;
+      transition: color 0.15s, background 0.15s;
+    }
+    .nav-link:hover, .nav-link.hov {
+      color: var(--text-primary);
+      background: rgba(255,255,255,0.05);
+    }
+    /* Active — green pill + gradient underline */
+    .nav-link.active {
+      color: var(--text-primary);
+      background: rgba(0,240,150,0.08);
+    }
+    .nav-link.active::after {
+      content: '';
+      position: absolute;
+      bottom: 4px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 18px;
+      height: 2px;
+      border-radius: 2px;
+      background: var(--grad);
+    }
+    /* Open */
+    .nav-link.open {
+      color: var(--text-primary);
+      background: rgba(255,255,255,0.06);
+    }
+    /* Keyboard focus ring */
+    .nav-link.focus-ring {
+      outline: 2px solid rgba(0,240,150,0.45);
+      outline-offset: 2px;
+    }
+    .chevron {
+      width: 11px; height: 11px;
+      flex-shrink: 0;
+      opacity: 0.4;
+      transition: transform 0.2s, opacity 0.15s;
+    }
+    .nav-link.open .chevron   { transform: rotate(180deg); opacity: 0.9; }
+    .nav-link.hov .chevron    { opacity: 0.7; }
+
+    /* ── CTA button ─────────────────────────────────────────── */
+    .cta {
+      display: inline-flex;
+      align-items: center;
+      white-space: nowrap;
+      font-weight: 600;
+      background: var(--grad);
+      color: #080910;
+      border-radius: 9px;
+      flex-shrink: 0;
+      box-shadow: 0 0 18px rgba(0,240,150,0.22), 0 2px 8px rgba(0,0,0,0.35);
+      transition: box-shadow 0.2s, transform 0.15s;
+    }
+    .cta:hover {
+      box-shadow: 0 0 28px rgba(0,240,150,0.38), 0 2px 12px rgba(0,0,0,0.4);
+      transform: translateY(-1px);
+    }
+
+    /* ══════════════════════════════════════════════════════════
+       MEGA-MENU (Product)
+    ══════════════════════════════════════════════════════════ */
+    .mega {
+      position: absolute;
+      top: calc(100% + 6px);
+      left: -12px;
+      width: 580px;
+      background: var(--bg-raised);
+      border: 1px solid var(--bg-border-strong);
+      border-radius: 16px;
+      padding: 6px;
+      box-shadow: var(--shadow-drop);
+      z-index: 100;
+      display: grid;
+      grid-template-columns: 210px 1fr;
+    }
+
+    /* Left col */
+    .mega-left {
+      padding: 6px;
+      border-right: 1px solid var(--bg-border);
+      display: flex;
+      flex-direction: column;
+    }
+    .mega-feat {
+      display: block;
+      padding: 14px;
+      border-radius: 10px;
+      background: rgba(0,240,150,0.05);
+      border: 1px solid rgba(0,240,150,0.12);
+    }
+    .mega-feat-eye {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--brand-green);
+      margin-bottom: 6px;
+    }
+    .mega-feat-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 5px;
+      line-height: 1.3;
+    }
+    .mega-feat-desc {
+      font-size: 11.5px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+    .mega-feat-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 12px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--brand-green);
+    }
+    .mega-sep { height: 1px; background: var(--bg-border); margin: 6px 0; }
+    .mega-sec-label {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      padding: 6px 12px 2px;
+    }
+    .mega-plain {
+      display: block;
+      padding: 7px 12px;
+      border-radius: 7px;
+      font-size: 12.5px;
+      color: var(--text-secondary);
+      transition: color 0.12s, background 0.12s;
+    }
+    .mega-plain:hover { color: var(--text-primary); background: rgba(255,255,255,0.04); }
+
+    /* Right col — 8 capability cards */
+    .mega-right {
+      padding: 6px;
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+    }
+    .cap-card {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 8px 10px;
+      border-radius: 9px;
+      transition: background 0.12s;
+    }
+    .cap-card:hover { background: rgba(255,255,255,0.04); }
+    .cap-card.hov   { background: rgba(255,255,255,0.05); }
+    .cap-num {
+      width: 22px; height: 22px;
+      border-radius: 6px;
+      background: rgba(0,240,150,0.08);
+      border: 1px solid rgba(0,240,150,0.16);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 9px;
+      font-weight: 700;
+      color: var(--brand-green);
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .cap-name { font-size: 12.5px; font-weight: 500; color: var(--text-primary); line-height: 1.3; }
+    .cap-desc { font-size: 10.5px; color: var(--text-muted); margin-top: 1px; line-height: 1.4; }
+
+    /* ── Simple dropdown (Use Cases, Resources, Company) ───── */
+    .dropdown {
+      position: absolute;
+      top: calc(100% + 6px);
+      left: 50%;
+      transform: translateX(-50%);
+      width: 230px;
+      background: var(--bg-raised);
+      border: 1px solid var(--bg-border-strong);
+      border-radius: 12px;
+      padding: 6px;
+      box-shadow: var(--shadow-drop);
+      z-index: 100;
+    }
+    .dd-item {
+      display: block;
+      padding: 9px 11px;
+      border-radius: 8px;
+      font-size: 13px;
+      color: var(--text-secondary);
+      transition: color 0.12s, background 0.12s;
+    }
+    .dd-item:hover, .dd-item.hov {
+      color: var(--text-primary);
+      background: rgba(255,255,255,0.05);
+    }
+
+    /* ══════════════════════════════════════════════════════════
+       DESKTOP
+    ══════════════════════════════════════════════════════════ */
+    .w-desktop { width: 900px; }
+    .nav-desktop { height: 64px; padding: 0 28px; gap: 0; }
+    .nav-desktop .logo-link { margin-right: 12px; }
+    .nav-desktop .nav-sep   { margin: 0 16px; }
+    .nav-desktop .nav-list  { gap: 1px; flex: 1; }
+    .nav-desktop .cta       { height: 36px; padding: 0 18px; font-size: 13px; margin-left: auto; }
+
+    /* ══════════════════════════════════════════════════════════
+       TABLET
+    ══════════════════════════════════════════════════════════ */
+    .w-tablet { width: 480px; }
+    .nav-tablet { height: 56px; padding: 0 18px; }
+    .nav-tablet .logo-link { margin-right: 10px; }
+    .nav-tablet .nav-sep   { margin: 0 11px; }
+    .nav-tablet .nav-list  { gap: 0; flex: 1; }
+    .nav-tablet .nav-link  { font-size: 12.5px; padding: 6px 8px; }
+    .nav-tablet .cta       { height: 33px; padding: 0 13px; font-size: 12px; border-radius: 8px; margin-left: auto; }
+
+    .t-dropdown {
+      position: absolute;
+      top: calc(100% + 5px);
+      left: 0;
+      width: 220px;
+      background: var(--bg-raised);
+      border: 1px solid var(--bg-border-strong);
+      border-radius: 12px;
+      padding: 6px;
+      box-shadow: var(--shadow-drop);
+      z-index: 100;
+    }
+    .t-dd-item {
+      display: block;
+      padding: 9px 11px;
+      border-radius: 8px;
+      font-size: 12.5px;
+      color: var(--text-secondary);
+      transition: color 0.12s, background 0.12s;
+    }
+    .t-dd-item:hover, .t-dd-item.hov { color: var(--text-primary); background: rgba(255,255,255,0.05); }
+
+    /* ══════════════════════════════════════════════════════════
+       MOBILE
+    ══════════════════════════════════════════════════════════ */
+    .w-mobile { width: 280px; }
+    .nav-mobile { height: 56px; padding: 0 16px; }
+    .nav-mobile .logo-link { margin-right: auto; }
+
+    .hamburger {
+      width: 40px; height: 40px;
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      flex-shrink: 0;
+      transition: background 0.15s;
+    }
+    .hamburger:hover { background: rgba(255,255,255,0.06); }
+    .h-bar {
+      width: 20px; height: 1.5px;
+      background: var(--text-primary);
+      border-radius: 1.5px;
+    }
+
+    /* Drawer */
+    .drawer {
+      display: flex;
+      flex-direction: column;
+      background: var(--bg-surface);
+      min-height: 420px;
+    }
+    .drawer-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 15px 16px 13px;
+      border-bottom: 1px solid var(--bg-border);
+    }
+    .drawer-close {
+      width: 34px; height: 34px;
+      border-radius: 9px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-primary);
+      flex-shrink: 0;
+    }
+    .drawer-nav { padding: 10px 14px; flex: 1; }
+    .d-top {
+      display: flex;
+      align-items: center;
+      height: 46px;
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--text-primary);
+      border-bottom: 1px solid var(--bg-border);
+    }
+    .d-section { margin-top: 16px; }
+    .d-label {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+      padding: 0 2px;
+    }
+    /* Gradient accent bar = section label personality */
+    .d-label::before {
+      content: '';
+      width: 2px;
+      height: 12px;
+      background: var(--grad);
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+    .d-sub {
+      display: flex;
+      align-items: center;
+      height: 38px;
+      padding: 0 10px;
+      font-size: 13px;
+      color: var(--text-secondary);
+      border-radius: 7px;
+      transition: color 0.12s, background 0.12s;
+    }
+    .d-sub:hover { color: var(--text-primary); background: rgba(255,255,255,0.04); }
+    .drawer-foot {
+      padding: 13px 14px 22px;
+      border-top: 1px solid var(--bg-border);
+    }
+    .drawer-cta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 50px;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 600;
+      background: var(--grad);
+      color: #080910;
+      box-shadow: 0 0 20px rgba(0,240,150,0.2);
+    }
+
+    /* ══════════════════════════════════════════════════════════
+       SPEC PILLS
+    ══════════════════════════════════════════════════════════ */
+    .specs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 16px;
+    }
+    .spec {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 4px 10px;
+      background: rgba(255,255,255,0.025);
+      border: 1px solid rgba(255,255,255,0.065);
+      border-radius: 100px;
+      font-size: 10px;
+      color: rgba(240,240,242,0.4);
+    }
+    .spec-dot {
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: var(--brand-green);
+      flex-shrink: 0;
+    }
+
+    /* ══════════════════════════════════════════════════════════
+       REFERENCE
+    ══════════════════════════════════════════════════════════ */
+    .ref-block {
+      max-width: 1760px;
+      margin: 64px auto 0;
+      padding-top: 36px;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+    .ref-heading {
+      font-size: 9.5px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(240,240,242,0.22);
+      margin-bottom: 20px;
+    }
+    .ref-row { display: flex; flex-wrap: wrap; gap: 10px; }
+
+    .tok {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      padding: 10px 14px;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 9px;
+    }
+    .tok-sw { width: 26px; height: 26px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.09); flex-shrink: 0; }
+    .tok-name { font-size: 11px; font-weight: 600; color: #f0f0f2; margin-bottom: 2px; }
+    .tok-val  { font-size: 9.5px; color: rgba(240,240,242,0.3); }
+
+    .state-card {
+      padding: 12px 16px;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 9px;
+      min-width: 155px;
+    }
+    .state-card-role {
+      font-size: 9.5px; font-weight: 700; letter-spacing: 0.08em;
+      text-transform: uppercase; color: rgba(240,240,242,0.25); margin-bottom: 8px;
+    }
+    .state-card-spec { font-size: 10px; color: rgba(240,240,242,0.25); margin-top: 6px; line-height: 1.6; }
+
+    /* Kit footer */
+    .kit-foot {
+      max-width: 1760px;
+      margin: 44px auto 0;
+      padding-top: 22px;
+      border-top: 1px solid rgba(255,255,255,0.04);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .kit-foot p { font-size: 10px; color: rgba(240,240,242,0.18); }
+    .badge-row { display: flex; flex-wrap: wrap; gap: 7px; }
+    .wcag-b {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 4px 10px;
+      background: rgba(0,240,150,0.04);
+      border: 1px solid rgba(0,240,150,0.13);
+      border-radius: 100px;
+      font-size: 9.5px; font-weight: 600; color: rgba(0,240,150,0.65);
+    }
+    .ml-auto { margin-left: auto; }
+  </style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════════════════════════
+     KIT HEADER
+════════════════════════════════════════════════════════════ -->
+<header class="kit-header">
+  <div class="kit-eyebrow">UI Kit — Navigation Bar · v2</div>
+  <h1 class="kit-title">Mia-Care P4SaMD — Responsive Navbar</h1>
+  <p class="kit-subtitle">Three breakpoints &nbsp;·&nbsp; Desktop 1440px &nbsp;·&nbsp; Tablet 768px &nbsp;·&nbsp; Mobile 375px</p>
+  <div class="kit-rule"></div>
+</header>
+
+
+<!-- ════════════════════════════════════════════════════════════
+     BREAKPOINTS
+════════════════════════════════════════════════════════════ -->
+<div class="kit-grid">
+
+
+  <!-- ╔═══════════════════════════════════════════════════════╗
+       ║  DESKTOP 1440px                                       ║
+       ╚═══════════════════════════════════════════════════════╝ -->
+  <section class="bp-col w-desktop">
+    <div class="bp-label"><span class="bp-dot"></span>Desktop · 1440px</div>
+
+    <div class="chrome">
+      <div class="tl tl-r"></div><div class="tl tl-y"></div><div class="tl tl-g"></div>
+      <div class="url-pill"><span>https://www.mia-care.io/pricing</span></div>
+    </div>
+    <div class="frame-body">
+
+      <!-- State 1: Default -->
+      <div class="state-row">
+        <div class="state-row-badge"><span class="state-tag">Default · Pricing = active page</span></div>
+        <nav class="nav-shell nav-desktop" aria-label="Desktop default state">
+
+          <a href="#" class="logo-link" aria-label="Mia-Care P4SaMD home">
+            <div class="logo-mark" aria-hidden="true">
+              <svg width="16" height="16" viewBox="0 0 18 18" fill="none">
+                <path d="M3 14.5V8L9 3l6 5v6.5H11v-3.5H7v3.5H3z" fill="#080910"/>
+              </svg>
+            </div>
+            <div class="logo-text">
+              <span class="logo-wordmark">Mia-Care</span>
+              <span class="logo-sub">P4SaMD</span>
+            </div>
+          </a>
+          <div class="nav-sep" aria-hidden="true"></div>
+
+          <ul class="nav-list" role="menubar" aria-label="Primary navigation">
+            <li class="nav-item" role="none"><a href="#" class="nav-link" role="menuitem" aria-haspopup="true" aria-expanded="false">Product<svg class="chevron" viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+            <li class="nav-item" role="none"><a href="#" class="nav-link" role="menuitem" aria-haspopup="true" aria-expanded="false">Use Cases<svg class="chevron" viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+            <li class="nav-item" role="none"><a href="#" class="nav-link active" role="menuitem" aria-current="page">Pricing</a></li>
+            <li class="nav-item" role="none"><a href="#" class="nav-link" role="menuitem" aria-haspopup="true" aria-expanded="false">Resources<svg class="chevron" viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+            <li class="nav-item" role="none"><a href="#" class="nav-link" role="menuitem" aria-haspopup="true" aria-expanded="false">Company<svg class="chevron" viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+          </ul>
+
+          <a href="#" class="cta ml-auto">Request a Demo &nbsp;→</a>
+        </nav>
+      </div><!-- /state-row -->
+
+      <!-- State 2: Product mega-menu open -->
+      <div class="state-row" style="overflow:visible; padding-bottom:292px;">
+        <div class="state-row-badge"><span class="state-tag">Hover · Product mega-menu open</span></div>
+        <nav class="nav-shell nav-desktop" style="overflow:visible;" aria-label="Desktop mega-menu state">
+
+          <a href="#" class="logo-link" aria-label="Mia-Care P4SaMD home">
+            <div class="logo-mark" aria-hidden="true">
+              <svg width="16" height="16" viewBox="0 0 18 18" fill="none">
+                <path d="M3 14.5V8L9 3l6 5v6.5H11v-3.5H7v3.5H3z" fill="#080910"/>
+              </svg>
+            </div>
+            <div class="logo-text">
+              <span class="logo-wordmark">Mia-Care</span>
+              <span class="logo-sub">P4SaMD</span>
+            </div>
+          </a>
+          <div class="nav-sep" aria-hidden="true"></div>
+
+          <ul class="nav-list" role="menubar">
+            <!-- Product open -->
+            <li class="nav-item" role="none">
+              <a href="#" class="nav-link open focus-ring" role="menuitem" aria-haspopup="true" aria-expanded="true">
+                Product<svg class="chevron" viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </a>
+
+              <!-- MEGA MENU -->
+              <div class="mega" role="menu" aria-label="Product submenu">
+                <!-- Left: featured entry + section label -->
+                <div class="mega-left">
+                  <a href="#" class="mega-feat" role="menuitem">
+                    <div class="mega-feat-eye">Platform</div>
+                    <div class="mega-feat-title">Platform Overview</div>
+                    <div class="mega-feat-desc">The AI-native SaMD development platform — compliance by design.</div>
+                    <div class="mega-feat-cta">Explore platform <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6 3l3 3-3 3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                  </a>
+                  <div class="mega-sep"></div>
+                  <div class="mega-sec-label">Capabilities</div>
+                </div>
+
+                <!-- Right: 8 capability cards -->
+                <div class="mega-right">
+                  <a href="#" class="cap-card hov" role="menuitem"><div class="cap-num">01</div><div><div class="cap-name">SDLC Orchestrator</div><div class="cap-desc">Compliant workflow orchestration</div></div></a>
+                  <a href="#" class="cap-card" role="menuitem"><div class="cap-num">02</div><div><div class="cap-name">Automated Traceability</div><div class="cap-desc">Real-time ARTT</div></div></a>
+                  <a href="#" class="cap-card" role="menuitem"><div class="cap-num">03</div><div><div class="cap-name">Documentation Engine</div><div class="cap-desc">Auto-generated DHF &amp; Technical Files</div></div></a>
+                  <a href="#" class="cap-card" role="menuitem"><div class="cap-num">04</div><div><div class="cap-name">Smart Assistant</div><div class="cap-desc">Whisper regulatory intelligence</div></div></a>
+                  <a href="#" class="cap-card" role="menuitem"><div class="cap-num">05</div><div><div class="cap-name">Master AI for Compliance</div><div class="cap-desc">EU AI Act &amp; PCCP support</div></div></a>
+                  <a href="#" class="cap-card" role="menuitem"><div class="cap-num">06</div><div><div class="cap-name">Brownfield Remediator</div><div class="cap-desc">Legacy software certification</div></div></a>
+                  <a href="#" class="cap-card" role="menuitem"><div class="cap-num">07</div><div><div class="cap-name">Secure Software Development</div><div class="cap-desc">IEC 81001-5-1 by design</div></div></a>
+                  <a href="#" class="cap-card" role="menuitem"><div class="cap-num">08</div><div><div class="cap-name">Guided Workflows</div><div class="cap-desc">Step-by-step compliance guidance</div></div></a>
+                </div>
+              </div><!-- /mega -->
+            </li>
+
+            <li class="nav-item" role="none"><a href="#" class="nav-link" role="menuitem" aria-haspopup="true">Use Cases<svg class="chevron" viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+            <li class="nav-item" role="none"><a href="#" class="nav-link active" role="menuitem" aria-current="page">Pricing</a></li>
+            <li class="nav-item" role="none"><a href="#" class="nav-link" role="menuitem" aria-haspopup="true">Resources<svg class="chevron" viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+            <li class="nav-item" role="none"><a href="#" class="nav-link" role="menuitem" aria-haspopup="true">Company<svg class="chevron" viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+          </ul>
+
+          <a href="#" class="cta ml-auto">Request a Demo &nbsp;→</a>
+        </nav>
+      </div><!-- /state-row -->
+
+      <!-- Page stub -->
+      <div class="page-stub" style="height:52px;">
+        <div class="stub-content">
+          <div class="stub-lines"><div class="stub-line" style="width:100px;"></div><div class="stub-line" style="width:55px;"></div><div class="stub-line" style="width:80px;"></div></div>
+          <div class="stub-note">Page content area (Hero section below navbar)</div>
+        </div>
+      </div>
+    </div><!-- /frame-body -->
+
+    <div class="specs">
+      <span class="spec"><span class="spec-dot"></span>Height: 64px</span>
+      <span class="spec"><span class="spec-dot"></span>Gradient icon-mark + glow shadow</span>
+      <span class="spec"><span class="spec-dot"></span>Vertical separator: 1px gradient</span>
+      <span class="spec"><span class="spec-dot"></span>Active pill: rgba(0,240,150,0.08) + 2px gradient underline</span>
+      <span class="spec"><span class="spec-dot"></span>CTA glow: box-shadow 0 0 18px</span>
+      <span class="spec"><span class="spec-dot"></span>Mega-menu: 580px · 2-col (210 + 370)</span>
+      <span class="spec"><span class="spec-dot"></span>Capability badges: 22×22px numbered</span>
+      <span class="spec"><span class="spec-dot"></span>Inset top-glow: rgba(0,240,150,0.07)</span>
+    </div>
+  </section>
+
+
+  <!-- ╔═══════════════════════════════════════════════════════╗
+       ║  TABLET 768px                                         ║
+       ╚═══════════════════════════════════════════════════════╝ -->
+  <section class="bp-col w-tablet">
+    <div class="bp-label"><span class="bp-dot"></span>Tablet · 768px</div>
+
+    <div class="chrome">
+      <div class="tl tl-r"></div><div class="tl tl-y"></div><div class="tl tl-g"></div>
+      <div class="url-pill"><span>mia-care.io</span></div>
+    </div>
+    <div class="frame-body">
+
+      <!-- State 1: Default -->
+      <div class="state-row">
+        <div class="state-row-badge"><span class="state-tag">Default</span></div>
+        <nav class="nav-shell nav-tablet" aria-label="Tablet default">
+          <a href="#" class="logo-link" aria-label="Mia-Care home">
+            <div class="logo-mark" style="width:26px;height:26px;border-radius:7px;" aria-hidden="true">
+              <svg width="14" height="14" viewBox="0 0 18 18" fill="none"><path d="M3 14.5V8L9 3l6 5v6.5H11v-3.5H7v3.5H3z" fill="#080910"/></svg>
+            </div>
+            <div class="logo-text">
+              <span class="logo-wordmark" style="font-size:12px;">Mia-Care</span>
+              <span class="logo-sub" style="font-size:7.5px;">P4SaMD</span>
+            </div>
+          </a>
+          <div class="nav-sep" aria-hidden="true"></div>
+          <ul class="nav-list" role="menubar">
+            <li class="nav-item" role="none"><a href="#" class="nav-link" role="menuitem" aria-haspopup="true">Product<svg class="chevron" viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+            <li class="nav-item" role="none"><a href="#" class="nav-link" role="menuitem" aria-haspopup="true">Use Cases<svg class="chevron" viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+            <li class="nav-item" role="none"><a href="#" class="nav-link active" role="menuitem" aria-current="page">Pricing</a></li>
+            <li class="nav-item" role="none"><a href="#" class="nav-link" role="menuitem" aria-haspopup="true">Resources<svg class="chevron" viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+            <li class="nav-item" role="none"><a href="#" class="nav-link" role="menuitem" aria-haspopup="true">Company<svg class="chevron" viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+          </ul>
+          <a href="#" class="cta" style="height:33px;padding:0 12px;font-size:12px;border-radius:8px;margin-left:auto;box-shadow:0 0 12px rgba(0,240,150,0.18);">Demo →</a>
+        </nav>
+      </div>
+
+      <!-- State 2: Use Cases dropdown open -->
+      <div class="state-row" style="overflow:visible; padding-bottom:120px;">
+        <div class="state-row-badge"><span class="state-tag">Hover · Use Cases open</span></div>
+        <nav class="nav-shell nav-tablet" style="overflow:visible;" aria-label="Tablet dropdown state">
+          <a href="#" class="logo-link" aria-label="Mia-Care home">
+            <div class="logo-mark" style="width:26px;height:26px;border-radius:7px;" aria-hidden="true">
+              <svg width="14" height="14" viewBox="0 0 18 18" fill="none"><path d="M3 14.5V8L9 3l6 5v6.5H11v-3.5H7v3.5H3z" fill="#080910"/></svg>
+            </div>
+            <div class="logo-text">
+              <span class="logo-wordmark" style="font-size:12px;">Mia-Care</span>
+              <span class="logo-sub" style="font-size:7.5px;">P4SaMD</span>
+            </div>
+          </a>
+          <div class="nav-sep" aria-hidden="true"></div>
+          <ul class="nav-list" role="menubar">
+            <li class="nav-item" role="none"><a href="#" class="nav-link" role="menuitem">Product<svg class="chevron" viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+            <!-- Use Cases open -->
+            <li class="nav-item" role="none">
+              <a href="#" class="nav-link open focus-ring" role="menuitem" aria-expanded="true">
+                Use Cases<svg class="chevron" viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </a>
+              <div class="t-dropdown" role="menu" aria-label="Use Cases submenu">
+                <a href="#" class="t-dd-item hov" role="menuitem">Greenfield SaMD Development</a>
+                <a href="#" class="t-dd-item" role="menuitem">High-Risk AI Software (CDSS)</a>
+                <a href="#" class="t-dd-item" role="menuitem">Legacy Software Remediation</a>
+              </div>
+            </li>
+            <li class="nav-item" role="none"><a href="#" class="nav-link active" role="menuitem" aria-current="page">Pricing</a></li>
+            <li class="nav-item" role="none"><a href="#" class="nav-link" role="menuitem">Resources<svg class="chevron" viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+            <li class="nav-item" role="none"><a href="#" class="nav-link" role="menuitem">Company<svg class="chevron" viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+          </ul>
+          <a href="#" class="cta" style="height:33px;padding:0 12px;font-size:12px;border-radius:8px;margin-left:auto;box-shadow:0 0 12px rgba(0,240,150,0.18);">Demo →</a>
+        </nav>
+      </div>
+
+      <!-- Page stub -->
+      <div class="page-stub" style="height:40px;">
+        <div class="stub-note">Page content</div>
+      </div>
+    </div><!-- /frame-body -->
+
+    <div class="specs">
+      <span class="spec"><span class="spec-dot"></span>Height: 56px</span>
+      <span class="spec"><span class="spec-dot"></span>Full horizontal nav preserved</span>
+      <span class="spec"><span class="spec-dot"></span>CTA compact: "Demo →"</span>
+      <span class="spec"><span class="spec-dot"></span>Touch targets ≥ 44×44px</span>
+      <span class="spec"><span class="spec-dot"></span>Active pill + gradient underline</span>
+      <span class="spec"><span class="spec-dot"></span>Separator logo / nav kept</span>
+    </div>
+  </section>
+
+
+  <!-- ╔═══════════════════════════════════════════════════════╗
+       ║  MOBILE 375px                                         ║
+       ╚═══════════════════════════════════════════════════════╝ -->
+  <section class="bp-col w-mobile">
+    <div class="bp-label"><span class="bp-dot"></span>Mobile · 375px</div>
+
+    <!-- Closed -->
+    <div>
+      <div class="state-tag" style="margin-bottom:10px; display:block;">Closed — header only</div>
+      <div class="phone-wrap">
+        <div class="phone-bar"><div class="notch" aria-hidden="true"></div></div>
+        <nav class="nav-shell nav-mobile" aria-label="Mobile navigation">
+          <a href="#" class="logo-link" aria-label="Mia-Care home">
+            <div class="logo-mark" style="width:26px;height:26px;border-radius:7px;" aria-hidden="true">
+              <svg width="14" height="14" viewBox="0 0 18 18" fill="none"><path d="M3 14.5V8L9 3l6 5v6.5H11v-3.5H7v3.5H3z" fill="#080910"/></svg>
+            </div>
+            <div class="logo-text">
+              <span class="logo-wordmark" style="font-size:11.5px;">Mia-Care</span>
+              <span class="logo-sub" style="font-size:7px;">P4SaMD</span>
+            </div>
+          </a>
+          <button class="hamburger ml-auto" aria-label="Open menu" aria-expanded="false" aria-controls="m-drawer">
+            <div class="h-bar"></div><div class="h-bar"></div><div class="h-bar"></div>
+          </button>
+        </nav>
+        <div class="page-stub" style="height:68px;">
+          <div class="stub-content">
+            <div class="stub-lines"><div class="stub-line" style="width:48px;"></div><div class="stub-line" style="width:28px;"></div></div>
+            <div class="stub-note">Hero</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="height:20px;"></div>
+
+    <!-- Open drawer -->
+    <div>
+      <div class="state-tag" style="margin-bottom:10px; display:block;">Open — drawer expanded</div>
+      <div class="phone-wrap">
+        <div class="phone-bar"><div class="notch" aria-hidden="true"></div></div>
+        <div class="drawer" id="m-drawer" role="dialog" aria-modal="true" aria-label="Navigation menu">
+
+          <div class="drawer-head">
+            <a href="#" class="logo-link" aria-label="Mia-Care home">
+              <div class="logo-mark" style="width:24px;height:24px;border-radius:6px;" aria-hidden="true">
+                <svg width="12" height="12" viewBox="0 0 18 18" fill="none"><path d="M3 14.5V8L9 3l6 5v6.5H11v-3.5H7v3.5H3z" fill="#080910"/></svg>
+              </div>
+              <div class="logo-text">
+                <span class="logo-wordmark" style="font-size:11px;">Mia-Care</span>
+                <span class="logo-sub" style="font-size:7px;">P4SaMD</span>
+              </div>
+            </a>
+            <button class="drawer-close" aria-label="Close menu">
+              <svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+              </svg>
+            </button>
+          </div>
+
+          <nav class="drawer-nav" aria-label="Mobile navigation">
+            <a href="#" class="d-top">Pricing</a>
+
+            <div class="d-section">
+              <div class="d-label" role="heading" aria-level="3">Product</div>
+              <a href="#" class="d-sub">Platform Overview</a>
+              <a href="#" class="d-sub">SDLC Orchestrator</a>
+              <a href="#" class="d-sub">Automated Traceability</a>
+              <a href="#" class="d-sub">Documentation Engine</a>
+              <a href="#" class="d-sub">Smart Assistant</a>
+              <a href="#" class="d-sub">Master AI for Compliance</a>
+              <a href="#" class="d-sub">Brownfield Remediator</a>
+              <a href="#" class="d-sub">Secure Software Development</a>
+              <a href="#" class="d-sub">Guided Workflows</a>
+            </div>
+
+            <div class="d-section">
+              <div class="d-label" role="heading" aria-level="3">Use Cases</div>
+              <a href="#" class="d-sub">Greenfield SaMD Development</a>
+              <a href="#" class="d-sub">High-Risk AI Software (CDSS)</a>
+              <a href="#" class="d-sub">Legacy Software Remediation</a>
+            </div>
+
+            <div class="d-section">
+              <div class="d-label" role="heading" aria-level="3">Resources</div>
+              <a href="#" class="d-sub">Competence Center</a>
+              <a href="#" class="d-sub">Blog</a>
+              <a href="#" class="d-sub">Docs</a>
+              <a href="#" class="d-sub">Events</a>
+              <a href="#" class="d-sub">FAQ</a>
+            </div>
+
+            <div class="d-section">
+              <div class="d-label" role="heading" aria-level="3">Company</div>
+              <a href="#" class="d-sub">About Us</a>
+              <a href="#" class="d-sub">Newsroom</a>
+              <a href="#" class="d-sub">Careers</a>
+              <a href="#" class="d-sub">Certifications</a>
+              <a href="#" class="d-sub">Sustainability</a>
+            </div>
+          </nav>
+
+          <div class="drawer-foot">
+            <a href="#" class="drawer-cta">Request a Demo &nbsp;→</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="specs">
+      <span class="spec"><span class="spec-dot"></span>Header: 56px</span>
+      <span class="spec"><span class="spec-dot"></span>Hamburger: 40×40px</span>
+      <span class="spec"><span class="spec-dot"></span>Close btn: 34×34px</span>
+      <span class="spec"><span class="spec-dot"></span>Section labels: gradient accent bar</span>
+      <span class="spec"><span class="spec-dot"></span>CTA: 50px h · full-width glow</span>
+      <span class="spec"><span class="spec-dot"></span>Sub-links: 38px row height</span>
+    </div>
+  </section>
+
+</div><!-- /kit-grid -->
+
+
+<!-- ════════════════════════════════════════════════════════════
+     REFERENCE: DESIGN TOKENS
+════════════════════════════════════════════════════════════ -->
+<section class="ref-block">
+  <div class="ref-heading">Design Tokens</div>
+  <div class="ref-row">
+    <div class="tok"><div class="tok-sw" style="background:#0b0c10;"></div><div><div class="tok-name">bg-base</div><div class="tok-val">#0B0C10</div></div></div>
+    <div class="tok"><div class="tok-sw" style="background:#111318;"></div><div><div class="tok-name">bg-surface</div><div class="tok-val">#111318 — drawer bg</div></div></div>
+    <div class="tok"><div class="tok-sw" style="background:#181a22;"></div><div><div class="tok-name">bg-raised</div><div class="tok-val">#181A22 — dropdown / mega bg</div></div></div>
+    <div class="tok"><div class="tok-sw" style="background:rgba(10,11,16,0.88);border:1px solid rgba(255,255,255,0.12);"></div><div><div class="tok-name">navbar-bg</div><div class="tok-val">rgba(10,11,16,0.88) + blur(24px)</div></div></div>
+    <div class="tok"><div class="tok-sw" style="background:linear-gradient(135deg,#00f096,#00f0f0);"></div><div><div class="tok-name">brand-gradient</div><div class="tok-val">#00F096 → #00F0F0</div></div></div>
+    <div class="tok"><div class="tok-sw" style="background:#f0f0f2;"></div><div><div class="tok-name">text-primary</div><div class="tok-val">#F0F0F2</div></div></div>
+    <div class="tok"><div class="tok-sw" style="background:rgba(240,240,242,0.55);"></div><div><div class="tok-name">text-secondary</div><div class="tok-val">rgba(240,240,242,0.55)</div></div></div>
+    <div class="tok"><div class="tok-sw" style="background:rgba(0,240,150,0.08);border:1px solid rgba(0,240,150,0.15);"></div><div><div class="tok-name">active-pill-bg</div><div class="tok-val">rgba(0,240,150,0.08) — active nav item</div></div></div>
+    <div class="tok"><div class="tok-sw" style="background:rgba(0,240,150,0.18);"></div><div><div class="tok-name">glow-green</div><div class="tok-val">rgba(0,240,150,0.18) — CTA + logo glow</div></div></div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════════════════════
+     REFERENCE: INTERACTION STATES
+════════════════════════════════════════════════════════════ -->
+<section class="ref-block">
+  <div class="ref-heading">Interaction States — Nav Link</div>
+  <div class="ref-row">
+
+    <div class="state-card">
+      <div class="state-card-role">Default</div>
+      <div style="display:flex;align-items:center;gap:4px;font-size:13.5px;font-weight:450;color:rgba(240,240,242,0.55);padding:6px 10px;border-radius:8px;">
+        Product <svg width="11" height="11" viewBox="0 0 12 12" fill="none" style="opacity:0.4;"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="state-card-spec">color: text-secondary<br>bg: transparent</div>
+    </div>
+
+    <div class="state-card">
+      <div class="state-card-role">Hover</div>
+      <div style="display:flex;align-items:center;gap:4px;font-size:13.5px;font-weight:450;color:#f0f0f2;padding:6px 10px;border-radius:8px;background:rgba(255,255,255,0.05);">
+        Product <svg width="11" height="11" viewBox="0 0 12 12" fill="none" style="opacity:0.7;"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="state-card-spec">color: text-primary<br>bg: rgba(255,255,255,0.05)</div>
+    </div>
+
+    <div class="state-card">
+      <div class="state-card-role">Active page</div>
+      <div style="position:relative;display:inline-flex;align-items:center;font-size:13.5px;font-weight:450;color:#f0f0f2;padding:6px 14px 10px;border-radius:8px;background:rgba(0,240,150,0.08);">
+        Pricing
+        <span style="position:absolute;bottom:3px;left:50%;transform:translateX(-50%);width:18px;height:2px;border-radius:2px;background:linear-gradient(90deg,#00f096,#00f0f0);"></span>
+      </div>
+      <div class="state-card-spec">bg: rgba(0,240,150,0.08)<br>underline: 2px gradient</div>
+    </div>
+
+    <div class="state-card">
+      <div class="state-card-role">Open / focused</div>
+      <div style="display:flex;align-items:center;gap:4px;font-size:13.5px;font-weight:450;color:#f0f0f2;padding:6px 10px;border-radius:8px;background:rgba(255,255,255,0.06);outline:2px solid rgba(0,240,150,0.45);outline-offset:2px;">
+        Product <svg width="11" height="11" viewBox="0 0 12 12" fill="none" style="opacity:0.9;transform:rotate(180deg);"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="state-card-spec">bg: rgba(255,255,255,0.06)<br>focus-ring: 2px rgba(0,240,150,0.45)</div>
+    </div>
+
+    <div class="state-card">
+      <div class="state-card-role">CTA · default</div>
+      <div style="display:inline-flex;align-items:center;height:36px;padding:0 18px;font-size:13px;font-weight:600;background:linear-gradient(90deg,#00f096,#00f0f0);color:#080910;border-radius:9px;box-shadow:0 0 18px rgba(0,240,150,0.22);">
+        Request a Demo →
+      </div>
+      <div class="state-card-spec">background: brand-gradient<br>glow: 18px rgba(0,240,150,0.22)</div>
+    </div>
+
+    <div class="state-card">
+      <div class="state-card-role">CTA · hover</div>
+      <div style="display:inline-flex;align-items:center;height:36px;padding:0 18px;font-size:13px;font-weight:600;background:linear-gradient(90deg,#00f096,#00f0f0);color:#080910;border-radius:9px;box-shadow:0 0 28px rgba(0,240,150,0.38);transform:translateY(-1px);">
+        Request a Demo →
+      </div>
+      <div class="state-card-spec">glow amplified + translateY(-1px)</div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- Kit footer -->
+<footer class="kit-foot">
+  <p>Mia-Care P4SaMD · Navbar UI Kit v2 · Aurora v2 · 2026-04-23</p>
+  <div class="badge-row">
+    <span class="wcag-b"><svg width="9" height="9" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="4.5" stroke="#00f096" stroke-width="1"/><path d="M3 5l1.5 1.5 3-3" stroke="#00f096" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/></svg>WCAG 2.1 AA</span>
+    <span class="wcag-b"><svg width="9" height="9" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="4.5" stroke="#00f096" stroke-width="1"/><path d="M3 5l1.5 1.5 3-3" stroke="#00f096" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/></svg>Touch targets ≥ 44×44px</span>
+    <span class="wcag-b"><svg width="9" height="9" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="4.5" stroke="#00f096" stroke-width="1"/><path d="M3 5l1.5 1.5 3-3" stroke="#00f096" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/></svg>ARIA menubar / menuitem / dialog</span>
+    <span class="wcag-b"><svg width="9" height="9" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="4.5" stroke="#00f096" stroke-width="1"/><path d="M3 5l1.5 1.5 3-3" stroke="#00f096" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/></svg>Contrast ratio ≥ 4.5:1</span>
+  </div>
+</footer>
+
+</body>
+</html>

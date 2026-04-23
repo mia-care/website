@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import Script from "next/script";
-import { Footer } from "@/components/blocks/layout/Footer";
-import { Navbar } from "@/components/blocks/layout/Navbar";
-import { CookieBanner } from "@/components/blocks/shared/CookieBanner";
+import { CookieBanner } from "@/components/common/CookieBanner";
+import { Footer } from "@/components/layout/Footer";
+import { Navbar } from "@/components/layout/Navbar";
 import "./globals.css";
 
-const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID ?? "GTM-XXXXXXX";
+const GTM_ID = "GTM-5N5DWRS";
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.mia-care.io";
 
 export const metadata: Metadata = {
@@ -45,34 +45,43 @@ export const metadata: Metadata = {
   },
 };
 
-const hasGtm = (id: string) => Boolean(id) && id !== "GTM-XXXXXXX";
-
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className="h-full">
       <head>
-        {hasGtm(GTM_ID) && (
-          <Script id="gtm-init" strategy="afterInteractive">
-            {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-              new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-              j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-              'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-              })(window,document,'script','dataLayer','${GTM_ID}');`}
-          </Script>
-        )}
+        {/* Consent Mode v2 defaults — must run before GTM so tags start in denied state */}
+        <Script id="consent-defaults" strategy="beforeInteractive">{`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){window.dataLayer.push(arguments);}
+          window.gtag = gtag;
+          gtag('consent', 'default', {
+            analytics_storage: 'denied',
+            ad_storage: 'denied',
+            ad_user_data: 'denied',
+            ad_personalization: 'denied',
+            functionality_storage: 'granted',
+            security_storage: 'granted',
+            wait_for_update: 500
+          });
+        `}</Script>
+        <Script id="gtm-init" strategy="afterInteractive">{`
+          (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+          new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+          j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+          'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+          })(window,document,'script','dataLayer','${GTM_ID}');
+        `}</Script>
       </head>
       <body className="min-h-full flex flex-col bg-bg-base text-text-primary">
-        {hasGtm(GTM_ID) && (
-          <noscript>
-            <iframe
-              title="gtm"
-              src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`}
-              height="0"
-              width="0"
-              style={{ display: "none", visibility: "hidden" }}
-            />
-          </noscript>
-        )}
+        <noscript>
+          <iframe
+            title="gtm"
+            src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`}
+            height="0"
+            width="0"
+            style={{ display: "none", visibility: "hidden" }}
+          />
+        </noscript>
         <Navbar />
         <main className="flex-1 pt-16">{children}</main>
         <Footer />
