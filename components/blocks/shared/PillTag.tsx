@@ -1,18 +1,20 @@
-import { cn } from "@/lib/utils";
+import type { ReactNode } from "react";
 
-interface PillTagProps {
-  children: React.ReactNode;
+type Props = {
+  children: ReactNode;
   className?: string;
-}
+};
 
-export function PillTag({ children, className }: PillTagProps) {
+export function PillTag({ children, className = "" }: Props) {
   return (
     <span
-      className={cn(
-        "inline-flex items-center gap-1.5 rounded-pill px-3 py-1 label-caps",
-        "bg-brand-green/8 border border-brand-green/18 text-brand-green",
-        className,
-      )}
+      className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full border text-xs font-semibold tracking-widest uppercase ${className}`}
+      style={{
+        background: "rgba(0,240,150,0.08)",
+        borderColor: "rgba(0,240,150,0.18)",
+        color: "var(--brand-green)",
+        letterSpacing: "0.1em",
+      }}
     >
       {children}
     </span>

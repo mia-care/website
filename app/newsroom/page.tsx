@@ -1,14 +1,6 @@
 import type { Metadata } from "next";
-
-export const metadata: Metadata = {
-  title: "Newsroom",
-};
-
-export default function Page() {
-  return (
-    <section className="flex flex-1 flex-col items-center justify-center px-6 py-32 text-center">
-      <h1 className="font-display mb-4 text-4xl font-bold text-text-primary">Newsroom</h1>
-      <p className="text-base text-text-secondary">This page is coming soon.</p>
-    </section>
-  );
+import { PlaceholderPage } from "@/components/blocks/shared/PlaceholderPage";
+export const metadata: Metadata = { title: "Newsroom — Mia-Care" };
+export default function NewsroomPage() {
+  return <PlaceholderPage tag="Newsroom" title="Latest news from Mia-Care." />;
 }

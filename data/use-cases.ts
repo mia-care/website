@@ -1,3 +1,8 @@
+export type CaseStudyResult = {
+  metric: string;
+  label: string;
+};
+
 export type UseCase = {
   slug: string;
   segment: string;
@@ -10,10 +15,9 @@ export type UseCase = {
     label: string;
     quote: string;
     scope: string[];
-    results: { metric: string; label: string }[];
+    results: CaseStudyResult[];
   };
   capabilities: string[];
-  ctaHeading: string;
   seo: { title: string; description: string };
 };
 
@@ -23,18 +27,18 @@ export const useCases: UseCase[] = [
     segment: "For Pre-Market Startups & Scaleups",
     name: "SaMD Greenfield Development",
     tagline:
-      "Building a SaMD from scratch means two simultaneous challenges: writing the software and satisfying the regulator. Most teams treat these as sequential phases; P4SaMD makes them the same phase.",
+      "Building a SaMD from scratch means two simultaneous challenges: writing the software and satisfying the regulator. P4SaMD makes them the same phase.",
     problem: {
-      heading: "The 3-6 month documentation sprint that kills launch momentum.",
-      body: "Conventional SaMD development hits a bottleneck because engineering and documentation are usually done by different teams on disconnected timelines. Engineers code; quality teams document. The result is a painful, expensive 'documentation effort' before market entry, often taking 3-6 months and delaying revenue.\n\nBy the time the documentation begins, the system has changed since the last design review, traceability is broken, and the quality team is under enormous pressure to produce artifacts that should have been generated incrementally throughout the project. The sprint is a symptom of a structural problem.",
+      heading: "The 3–6 month documentation sprint that kills launch momentum.",
+      body: "Conventional SaMD development hits a bottleneck because engineering and documentation are usually done by different teams on disconnected timelines. Engineers code; quality teams document. The result is a painful, expensive documentation effort before market entry — often taking 3–6 months and delaying revenue.\n\nBy the time the documentation begins, the system has changed since the last design review, traceability is broken, and the quality team is under enormous pressure to produce artifacts that should have been generated incrementally throughout the project.",
     },
     need: {
       heading: "Compliance as a continuous output of normal engineering work.",
-      body: "A framework that eliminates the friction between engineering speed and regulatory requirements, integrating compliance directly into the SDLC so teams maintain maximum release velocity while building software that's audit-ready at every increment, not just at the finish line.",
+      body: "A framework that eliminates the friction between engineering speed and regulatory requirements, integrating compliance directly into the SDLC so teams maintain maximum release velocity while building software that's audit-ready at every increment — not just at the finish line.",
     },
     solution: {
       heading: "From first commit to compliant MVP, in one motion.",
-      body: "P4SaMD enables continuous compliance orchestration by monitoring the development environment in real time. As code evolves, quality documentation is automatically synchronized.\n\nThe team builds their product; P4SaMD builds the regulatory file alongside it, making audit-readiness the default output of normal engineering work.",
+      body: "P4SaMD enables continuous compliance orchestration by monitoring the development environment in real time. As code evolves, quality documentation is automatically synchronized.\n\nThe team builds their product; P4SaMD builds the regulatory file alongside it — making audit-readiness the default output of normal engineering work.",
     },
     caseStudy: {
       label: "Case Study // Digital Health Startup",
@@ -59,7 +63,7 @@ export const useCases: UseCase[] = [
         {
           metric: "100%",
           label:
-            "Compliance-by-Design: eliminating the typical 3-6 month documentation sprint before launch",
+            "Compliance-by-Design: eliminating the typical 3–6 month documentation sprint before launch",
         },
       ],
     },
@@ -69,11 +73,10 @@ export const useCases: UseCase[] = [
       "documentation-engine",
       "smart-assistant",
     ],
-    ctaHeading: "Build your first SaMD with compliance from the first line of code.",
     seo: {
-      title: "SaMD Greenfield Development -- Compliance from Day One",
+      title: "SaMD Greenfield Development — Use Case | Mia-Care P4SaMD",
       description:
-        "Build your SaMD from zero with compliance embedded from the first line of code. P4SaMD eliminates the 3-6 month documentation sprint and makes audit-readiness the default.",
+        "Build your first SaMD with compliance embedded from the first line of code. Eliminate the pre-launch documentation sprint. Ship a compliant MVP in weeks, not months.",
     },
   },
   {
@@ -81,10 +84,10 @@ export const useCases: UseCase[] = [
     segment: "For AI-Native SaMD Enterprise",
     name: "Building High-Risk AI Software (CDSS)",
     tagline:
-      "AI-based clinical software evolves dynamically, but traditional compliance models are rigid and assume requirements are stable at the outset. Every model update can trigger a cascade of rework across risk management and verification files. P4SaMD decouples your engineering velocity from regulatory rigidity.",
+      "AI-based clinical software evolves dynamically, but traditional compliance models assume requirements are static. P4SaMD decouples your engineering velocity from regulatory rigidity.",
     problem: {
       heading: "Unreadable AI, untraceable compliance.",
-      body: "AI-based clinical software evolves dynamically, yet traditional compliance models assume requirements are static from the outset. Every update to an AI model risks triggering a complex cascade of rework across risk management files, verification documents, and regulatory submissions, creating a compliance drag that slows innovation to a halt.\n\nProving that an opaque algorithm is safe for life-critical decisions requires a new kind of evidence: transparency reports, bias assessments, logbooks, and PCCP documentation that most QMS systems were never designed to generate.",
+      body: "AI-based clinical software evolves dynamically, yet traditional compliance models assume requirements are static from the outset. Every update to an AI model risks triggering a complex cascade of rework across risk management files, verification documents, and regulatory submissions — creating a compliance drag that slows innovation to a halt.\n\nProving that an opaque algorithm is safe for life-critical decisions requires a new kind of evidence: transparency reports, bias assessments, logbooks, and PCCP documentation that most QMS systems were never designed to generate.",
     },
     need: {
       heading: "Compliance that keeps pace with your model updates.",
@@ -92,7 +95,7 @@ export const useCases: UseCase[] = [
     },
     solution: {
       heading: "Multi-framework compliance. One platform.",
-      body: "Mia-Care P4SaMD streamlines building and leveraging AI components while managing all compliance aspects (transparency, explainability, security, logbooks) effectively abstracting developers from the complexity of regulatory mandates.\n\nThe platform handles multi-framework compliance (MDR, EU AI Act, GMLP) within a single unified system. Your team is never forced to choose between shipping a model improvement or maintaining your compliance posture.",
+      body: "Mia-Care P4SaMD streamlines building and leveraging AI components while managing all compliance aspects (transparency, explainability, security, logbooks) — effectively abstracting developers from the complexity of regulatory mandates.\n\nThe platform handles multi-framework compliance (MDR, EU AI Act, GMLP) within a single unified system. Your team is never forced to choose between shipping a model improvement or maintaining your compliance posture.",
     },
     caseStudy: {
       label: "Case Study // CDSS Provider",
@@ -105,20 +108,19 @@ export const useCases: UseCase[] = [
         "PCCP-aligned change management enabling model updates without full re-submission",
       ],
       results: [
-        { metric: "50%", label: "reduction in time-to-compliance for new AI feature releases" },
+        { metric: "50%", label: "Reduction in time-to-compliance for new AI feature releases" },
         {
           metric: "3",
-          label: "regulatory frameworks managed in a single unified system (MDR, EU AI Act, GMLP)",
+          label: "Regulatory frameworks managed in a single unified system (MDR, EU AI Act, GMLP)",
         },
-        { metric: "0", label: "deployment delays caused by documentation bottlenecks" },
+        { metric: "0", label: "Deployment delays caused by documentation bottlenecks" },
       ],
     },
     capabilities: ["ai-compliance", "artt-traceability", "documentation-engine", "smart-assistant"],
-    ctaHeading: "Ship AI-enabled clinical software without the regulatory black box.",
     seo: {
-      title: "High-Risk AI Software (CDSS) -- Multi-framework Compliance with P4SaMD",
+      title: "Building High-Risk AI Software (CDSS) — Use Case | Mia-Care P4SaMD",
       description:
-        "Build and certify AI-based clinical decision support software across EU AI Act, MDR, and GMLP. Decouple engineering velocity from regulatory rigidity.",
+        "Ship AI-enabled clinical software with EU AI Act, GMLP, and MDR compliance in a single platform. Automated logbooks, PCCP support, and multi-framework gap detection.",
     },
   },
   {
@@ -126,10 +128,10 @@ export const useCases: UseCase[] = [
     segment: "For MedTech Giants & Life Sciences Enterprises",
     name: "Legacy Regulated Software Remediation",
     tagline:
-      "Many organizations hold valuable legacy software that wasn't designed with modern medical regulatory standards in mind. Without a structured remediation process, this software accumulates 'regulatory debt' -- unable to be modernized or legally distributed as a certified medical device.",
+      "Many organizations hold valuable legacy software trapped by regulatory debt. P4SaMD provides a structured path to certification without rebuilding from scratch.",
     problem: {
       heading: "Valuable software, trapped by regulatory debt.",
-      body: "Many organizations hold valuable legacy software not designed under ISO 13485 QMS or in alignment with IEC 62304. Often, these systems also face technical obsolescence. Manual remediation attempts are expensive, slow, and frequently fail audit review because they lack systematic traceability reconstruction.\n\nThe instinct to rebuild from scratch is costly and time-consuming. But without a structured remediation path, the legacy software remains locked, unable to be updated, re-certified, or legally distributed as a medical device in new markets.",
+      body: "Many organizations hold valuable legacy software not designed under ISO 13485 QMS or in alignment with IEC 62304. Often, these systems also face technical obsolescence. Manual remediation attempts are expensive, slow, and frequently fail audit review because they lack systematic traceability reconstruction.\n\nThe instinct to rebuild from scratch is costly and time-consuming. But without a structured remediation path, the legacy software remains locked — unable to be updated, re-certified, or legally distributed as a medical device in new markets.",
     },
     need: {
       heading: "A path to certification that doesn't start from zero.",
@@ -137,7 +139,7 @@ export const useCases: UseCase[] = [
     },
     solution: {
       heading: "From legacy to audit-ready. Without rebuilding.",
-      body: "Mia-Care P4SaMD ingests existing codebases in any language, along with existing documentation, and leverages agentic AI to automate legacy assessments and identify gaps against IEC 62304, ISO 13485, and EU MDR, FDA.\n\nThe platform generates custom remediation plans, automates traceability reconstruction using ARTT, and produces audit-ready documentation in your own templates. What typically takes years of manual effort is compressed into a structured, actionable remediation backlog your engineering team can execute immediately.",
+      body: "Mia-Care P4SaMD ingests existing codebases in any language, along with existing documentation, and leverages agentic AI to automate legacy assessments and identify gaps against IEC 62304, ISO 13485, and EU MDR / FDA.\n\nThe platform generates custom remediation plans, automates traceability reconstruction using ARTT, and produces audit-ready documentation in your own templates. What typically takes years of manual effort is compressed into a structured, actionable remediation backlog your engineering team can execute immediately.",
     },
     caseStudy: {
       label: "Case Study // Consumer Health Enterprise",
@@ -153,11 +155,11 @@ export const useCases: UseCase[] = [
         {
           metric: "60%",
           label:
-            "reduction in remediation effort identified and executed in the first sprint review",
+            "Reduction in remediation effort identified and executed in the first sprint review",
         },
         {
           metric: "90%",
-          label: "reduction in documentation generation time for mandatory Technical Files",
+          label: "Reduction in documentation generation time for mandatory Technical Files",
         },
       ],
     },
@@ -167,11 +169,10 @@ export const useCases: UseCase[] = [
       "documentation-engine",
       "sdlc-orchestrator",
     ],
-    ctaHeading: "Replicate these results in your next audit cycle.",
     seo: {
-      title: "Legacy Regulated Software Remediation -- Certify Without Rebuilding",
+      title: "Legacy Regulated Software Remediation — Use Case | Mia-Care P4SaMD",
       description:
-        "Automate gap analysis, traceability reconstruction, and remediation planning for legacy medical software. Move from regulatory debt to certification-ready without rebuilding from scratch.",
+        "Certify legacy medical software without rebuilding it. Automated gap analysis, traceability reconstruction, and audit-ready MDR Technical Files for IEC 62304 and EU MDR.",
     },
   },
 ];

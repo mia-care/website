@@ -1,4 +1,6 @@
-const segments = [
+import { PillTag } from "@/components/blocks/shared/PillTag";
+
+const SEGMENTS = [
   {
     title: "MedTech Giants",
     description:
@@ -23,30 +25,36 @@ const segments = [
 
 export function WhoWeServe() {
   return (
-    <section className="bg-bg-surface py-24">
-      <div className="mx-auto max-w-7xl px-6">
-        <div className="mb-14 text-center">
-          <p className="label-caps mb-3 text-text-muted">Who We Serve</p>
-          <h2 className="font-display text-3xl font-bold text-text-primary md:text-4xl lg:text-5xl">
-            Every company carries the weight of{" "}
-            <span className="text-brand-gradient">regulated software.</span>
+    <section className="py-24" style={{ background: "var(--bg-base)" }}>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-16">
+          <PillTag className="mb-6">Who We Serve</PillTag>
+          <h2
+            className="font-display font-bold"
+            style={{ fontSize: "clamp(32px, 4vw, 52px)", letterSpacing: "-0.03em" }}
+          >
+            Every company carries the weight of regulated software.
           </h2>
         </div>
-
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {segments.map((seg) => (
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          {SEGMENTS.map((seg) => (
             <div
               key={seg.title}
-              className="relative rounded-xl border border-bg-border bg-bg-base p-6"
+              className="rounded-card p-6"
+              style={{
+                background: "var(--bg-surface)",
+                border: "1px solid var(--bg-border)",
+              }}
             >
-              <div
-                className="absolute inset-x-0 top-0 h-px rounded-t-xl bg-brand-gradient"
-                aria-hidden="true"
-              />
-              <h3 className="font-display mb-3 text-base font-semibold text-text-primary">
+              <h3
+                className="font-display font-semibold text-base mb-3"
+                style={{ color: "var(--text-primary)" }}
+              >
                 {seg.title}
               </h3>
-              <p className="text-sm leading-relaxed text-text-secondary">{seg.description}</p>
+              <p className="text-sm" style={{ color: "var(--text-secondary)", lineHeight: 1.7 }}>
+                {seg.description}
+              </p>
             </div>
           ))}
         </div>

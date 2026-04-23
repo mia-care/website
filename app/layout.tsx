@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import Script from "next/script";
-import "./globals.css";
 import { Footer } from "@/components/blocks/layout/Footer";
 import { Navbar } from "@/components/blocks/layout/Navbar";
+import { CookieBanner } from "@/components/blocks/shared/CookieBanner";
+import "./globals.css";
 
 const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID ?? "GTM-XXXXXXX";
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.mia-care.io";
@@ -10,7 +11,7 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.mia-care.io";
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "P4SaMD — Compliant SaMD Development Platform | Mia-Care",
+    default: "P4SaMD: Compliant SaMD Development Platform — Mia-Care",
     template: "%s | Mia-Care P4SaMD",
   },
   description:
@@ -72,17 +73,10 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
             />
           </noscript>
         )}
-        <a
-          href="#main-content"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-brand-green focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-bg-base focus:outline-none"
-        >
-          Skip to main content
-        </a>
         <Navbar />
-        <main id="main-content" className="flex-1">
-          {children}
-        </main>
+        <main className="flex-1 pt-16">{children}</main>
         <Footer />
+        <CookieBanner />
       </body>
     </html>
   );

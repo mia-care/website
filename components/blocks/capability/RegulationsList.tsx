@@ -1,23 +1,24 @@
+import { PillTag } from "@/components/blocks/shared/PillTag";
 import type { Capability } from "@/data/capabilities";
 
 export function RegulationsList({ cap }: { cap: Capability }) {
   return (
-    <section className="bg-bg-base py-20">
-      <div className="mx-auto max-w-7xl px-6">
-        <div className="rounded-2xl border border-bg-border bg-bg-surface p-10">
-          <h2 className="font-display mb-8 text-2xl font-bold text-text-primary md:text-3xl">
-            Built to satisfy the standards that matter most to your auditors.
-          </h2>
-          <div className="flex flex-wrap gap-3">
-            {cap.regulations.map((reg) => (
-              <span
-                key={reg}
-                className="rounded-pill border border-bg-border-strong bg-bg-raised px-5 py-2 text-sm font-medium text-text-primary"
-              >
-                {reg}
-              </span>
-            ))}
-          </div>
+    <section
+      className="py-16"
+      style={{ background: "var(--bg-surface)", borderTop: "1px solid var(--bg-border)" }}
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <p className="label-caps mb-6">Standards Addressed</p>
+        <h2
+          className="font-display font-bold mb-8 max-w-xl"
+          style={{ fontSize: "clamp(24px, 3vw, 36px)", letterSpacing: "-0.02em" }}
+        >
+          Built to satisfy the standards that matter most to your auditors.
+        </h2>
+        <div className="flex flex-wrap gap-3">
+          {cap.regulations.map((reg) => (
+            <PillTag key={reg}>{reg}</PillTag>
+          ))}
         </div>
       </div>
     </section>

@@ -1,77 +1,21 @@
 import Image from "next/image";
 import Link from "next/link";
-
-const capabilities = [
-  { label: "SDLC Workflow Orchestrator", href: "/capabilities/sdlc-orchestrator" },
-  { label: "Automated Real-time Traceability", href: "/capabilities/artt-traceability" },
-  { label: "Documentation Engine", href: "/capabilities/documentation-engine" },
-  { label: "Smart Assistant (Whisper)", href: "/capabilities/smart-assistant" },
-  { label: "Master AI for Compliance", href: "/capabilities/ai-compliance" },
-  { label: "Brownfield Remediator", href: "/capabilities/brownfield-remediator" },
-  { label: "Secure Software Development", href: "/capabilities/software-development" },
-  { label: "Guided Workflows", href: "/capabilities/guided-workflows" },
-];
-
-const useCases = [
-  { label: "SaMD Greenfield Development", href: "/use-cases/greenfield-samd" },
-  { label: "Building High-Risk AI Software (CDSS)", href: "/use-cases/high-risk-ai-cdss" },
-  { label: "Legacy Software Remediation", href: "/use-cases/legacy-remediation" },
-];
-
-const resources = [
-  { label: "Competence Center", href: "/resources/competence-center" },
-  { label: "Blog", href: "/resources/blog" },
-  { label: "Docs", href: "/resources/docs" },
-  { label: "Events", href: "/resources/events" },
-  { label: "FAQ", href: "/resources/faq" },
-];
-
-const company = [
-  { label: "About Us", href: "/about-us" },
-  { label: "Newsroom", href: "/newsroom" },
-  { label: "Careers", href: "/careers" },
-  { label: "Certifications", href: "/certifications" },
-  { label: "Sustainability", href: "/sustainability" },
-];
-
-const legal = [
-  { label: "Privacy Policy", href: "/privacy-policy" },
-  { label: "Cookie Policy", href: "/cookie-policy" },
-];
-
-function FooterColumn({
-  heading,
-  links,
-}: {
-  heading: string;
-  links: { label: string; href: string }[];
-}) {
-  return (
-    <div className="flex flex-col gap-3">
-      <p className="label-caps text-text-muted">{heading}</p>
-      <ul className="flex flex-col gap-2">
-        {links.map((link) => (
-          <li key={link.href}>
-            <Link
-              href={link.href}
-              className="text-sm text-text-secondary transition-colors hover:text-text-primary"
-            >
-              {link.label}
-            </Link>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-}
+import { FOOTER_LINKS, SITE } from "@/data/site";
 
 export function Footer() {
+  const year = new Date().getFullYear();
+
   return (
-    <footer className="border-t border-bg-border bg-bg-base">
-      <div className="mx-auto max-w-7xl px-6 py-16">
-        <div className="grid grid-cols-2 gap-10 lg:grid-cols-5">
-          <div className="col-span-2 flex flex-col gap-6 lg:col-span-1">
-            <Link href="/" aria-label="Mia-Care home">
+    <footer
+      className="border-t pt-16 pb-10"
+      style={{ borderColor: "var(--bg-border)", background: "var(--bg-surface)" }}
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Top grid */}
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-10 mb-14">
+          {/* Brand col */}
+          <div className="col-span-2 md:col-span-3 lg:col-span-1">
+            <Link href="/" className="inline-block mb-4">
               <Image
                 src="/images/logo/Horizontal_Lockup_Primary.svg"
                 alt="Mia-Care P4SaMD"
@@ -79,33 +23,114 @@ export function Footer() {
                 height={28}
               />
             </Link>
-            <p className="text-sm leading-relaxed text-text-secondary">
-              The AI-native platform for Software as a Medical Device compliance.
+            <p className="text-sm leading-relaxed max-w-xs" style={{ color: "var(--text-muted)" }}>
+              AI-native platform for Software as a Medical Device. Compliance built into your SDLC.
             </p>
-            <Link
-              href="/request-demo"
-              className="inline-flex w-fit items-center gap-1.5 rounded-lg bg-brand-gradient px-4 py-2.5 text-sm font-semibold text-bg-base transition-opacity hover:opacity-90"
+            <a
+              href={SITE.social.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 mt-4 text-sm transition-colors hover:text-brand-green"
+              style={{ color: "var(--text-muted)" }}
             >
-              Request a Demo →
-            </Link>
+              <svg
+                width="16"
+                height="16"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+              </svg>
+              LinkedIn
+            </a>
           </div>
 
-          <FooterColumn heading="Capabilities" links={capabilities} />
-          <FooterColumn heading="Use Cases" links={useCases} />
-          <FooterColumn heading="Resources" links={resources} />
-          <FooterColumn heading="Company" links={company} />
+          {/* Product */}
+          <div>
+            <h3 className="label-caps mb-4">Product</h3>
+            <ul className="space-y-2.5">
+              {FOOTER_LINKS.product.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="text-sm transition-colors hover:text-text-primary"
+                    style={{ color: "var(--text-muted)" }}
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Use Cases */}
+          <div>
+            <h3 className="label-caps mb-4">Use Cases</h3>
+            <ul className="space-y-2.5">
+              {FOOTER_LINKS.useCases.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="text-sm transition-colors hover:text-text-primary"
+                    style={{ color: "var(--text-muted)" }}
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+
+            <h3 className="label-caps mb-4 mt-8">Resources</h3>
+            <ul className="space-y-2.5">
+              {FOOTER_LINKS.resources.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="text-sm transition-colors hover:text-text-primary"
+                    style={{ color: "var(--text-muted)" }}
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Company */}
+          <div>
+            <h3 className="label-caps mb-4">Company</h3>
+            <ul className="space-y-2.5">
+              {FOOTER_LINKS.company.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="text-sm transition-colors hover:text-text-primary"
+                    style={{ color: "var(--text-muted)" }}
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
 
-        <div className="mt-12 flex flex-col items-start justify-between gap-4 border-t border-bg-border pt-8 sm:flex-row sm:items-center">
-          <p className="text-xs text-text-muted">
-            © {new Date().getFullYear()} Mia-Care S.r.l. All rights reserved.
-          </p>
-          <div className="flex gap-5">
-            {legal.map((link) => (
+        {/* Bottom bar */}
+        <div
+          className="pt-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-t"
+          style={{ borderColor: "var(--bg-border)" }}
+        >
+          <div className="text-xs" style={{ color: "var(--text-muted)" }}>
+            © {year} {SITE.company.name} — {SITE.company.address} — VAT {SITE.company.vat}
+          </div>
+          <div className="flex items-center gap-6">
+            {FOOTER_LINKS.legal.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-xs text-text-muted transition-colors hover:text-text-secondary"
+                className="text-xs transition-colors hover:text-text-primary"
+                style={{ color: "var(--text-muted)" }}
               >
                 {link.label}
               </Link>

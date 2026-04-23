@@ -4,46 +4,53 @@ import { useCases } from "@/data/use-cases";
 
 export const dynamic = "force-static";
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.mia-care.io";
+const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.mia-care.io";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const staticRoutes = [
-    "/",
-    "/product",
-    "/pricing",
-    "/request-demo",
-    "/about-us",
-    "/newsroom",
-    "/careers",
-    "/certifications",
-    "/sustainability",
-    "/resources/competence-center",
-    "/resources/blog",
-    "/resources/docs",
-    "/resources/events",
-    "/resources/faq",
-    "/privacy-policy",
-    "/cookie-policy",
-  ].map((path) => ({
-    url: `${SITE_URL}${path}`,
-    lastModified: new Date(),
+  const now = new Date().toISOString();
+
+  const staticPages: MetadataRoute.Sitemap = [
+    { url: BASE, lastModified: now, changeFrequency: "weekly", priority: 1 },
+    { url: `${BASE}/product`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
+    { url: `${BASE}/pricing`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${BASE}/request-demo`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
+    { url: `${BASE}/about-us`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
+    { url: `${BASE}/newsroom`, lastModified: now, changeFrequency: "weekly", priority: 0.5 },
+    { url: `${BASE}/careers`, lastModified: now, changeFrequency: "weekly", priority: 0.5 },
+    { url: `${BASE}/certifications`, lastModified: now, changeFrequency: "monthly", priority: 0.5 },
+    { url: `${BASE}/sustainability`, lastModified: now, changeFrequency: "monthly", priority: 0.4 },
+    {
+      url: `${BASE}/resources/competence-center`,
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.6,
+    },
+    { url: `${BASE}/resources/blog`, lastModified: now, changeFrequency: "weekly", priority: 0.6 },
+    { url: `${BASE}/resources/docs`, lastModified: now, changeFrequency: "weekly", priority: 0.7 },
+    {
+      url: `${BASE}/resources/events`,
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.5,
+    },
+    { url: `${BASE}/resources/faq`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
+    { url: `${BASE}/privacy-policy`, lastModified: now, changeFrequency: "yearly", priority: 0.2 },
+    { url: `${BASE}/cookie-policy`, lastModified: now, changeFrequency: "yearly", priority: 0.2 },
+  ];
+
+  const capabilityPages: MetadataRoute.Sitemap = capabilities.map((cap) => ({
+    url: `${BASE}/capabilities/${cap.slug}`,
+    lastModified: now,
     changeFrequency: "monthly" as const,
-    priority: path === "/" ? 1 : 0.8,
+    priority: 0.85,
   }));
 
-  const capabilityRoutes = capabilities.map((c) => ({
-    url: `${SITE_URL}/capabilities/${c.slug}`,
-    lastModified: new Date(),
+  const useCasePages: MetadataRoute.Sitemap = useCases.map((uc) => ({
+    url: `${BASE}/use-cases/${uc.slug}`,
+    lastModified: now,
     changeFrequency: "monthly" as const,
-    priority: 0.7,
+    priority: 0.8,
   }));
 
-  const useCaseRoutes = useCases.map((u) => ({
-    url: `${SITE_URL}/use-cases/${u.slug}`,
-    lastModified: new Date(),
-    changeFrequency: "monthly" as const,
-    priority: 0.7,
-  }));
-
-  return [...staticRoutes, ...capabilityRoutes, ...useCaseRoutes];
+  return [...staticPages, ...capabilityPages, ...useCasePages];
 }

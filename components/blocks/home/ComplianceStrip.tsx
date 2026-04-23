@@ -1,34 +1,17 @@
-const standards = [
-  "EU MDR 2017/745",
-  "IVDR 2017/746",
-  "FDA",
-  "ISO 13485",
-  "ISO 14971",
-  "21 CFR Part 820",
-  "IEC 62304",
-  "IEC 82304-1",
-  "IEC 62366-1",
-  "IEC 81001-5-1",
-  "EU AI Act",
-  "GMLP",
-  "PCCP",
-  "GDPR",
-  "HIPAA",
-];
+import { PillTag } from "@/components/blocks/shared/PillTag";
+import { COMPLIANCE_STANDARDS } from "@/data/nav";
 
 export function ComplianceStrip() {
   return (
-    <section className="bg-bg-base py-16">
-      <div className="mx-auto max-w-7xl px-6">
-        <p className="label-caps mb-8 text-center text-text-muted">Compliant with</p>
-        <div className="flex flex-wrap justify-center gap-3">
-          {standards.map((standard) => (
-            <span
-              key={standard}
-              className="rounded-pill border border-bg-border bg-bg-surface px-4 py-2 text-sm font-medium text-text-secondary transition-colors hover:border-brand-green/30 hover:text-text-primary"
-            >
-              {standard}
-            </span>
+    <section
+      className="py-16"
+      style={{ background: "var(--bg-surface)", borderTop: "1px solid var(--bg-border)" }}
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <p className="label-caps mb-8">Compliant with</p>
+        <div className="flex flex-wrap items-center justify-center gap-3">
+          {COMPLIANCE_STANDARDS.map((std) => (
+            <PillTag key={std}>{std}</PillTag>
           ))}
         </div>
       </div>

@@ -5,17 +5,18 @@ import { FeatureCards } from "@/components/blocks/capability/FeatureCards";
 import { RegulationsList } from "@/components/blocks/capability/RegulationsList";
 import { RelatedUseCases } from "@/components/blocks/capability/RelatedUseCases";
 import { CtaBanner } from "@/components/blocks/home/CtaBanner";
+import { PillTag } from "@/components/blocks/shared/PillTag";
 import { capabilities, getCapabilityBySlug } from "@/data/capabilities";
 
-interface Props {
+export function generateStaticParams() {
+  return capabilities.map((cap) => ({ slug: cap.slug }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
   params: Promise<{ slug: string }>;
-}
-
-export async function generateStaticParams() {
-  return capabilities.map((c) => ({ slug: c.slug }));
-}
-
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+}): Promise<Metadata> {
   const { slug } = await params;
   const cap = getCapabilityBySlug(slug);
   if (!cap) return {};
@@ -25,7 +26,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default async function CapabilityPage({ params }: Props) {
+export default async function CapabilityPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const cap = getCapabilityBySlug(slug);
   if (!cap) notFound();
@@ -34,16 +35,25 @@ export default async function CapabilityPage({ params }: Props) {
     <>
       <CapabilityHero cap={cap} />
 
-      <section className="bg-bg-base py-20">
-        <div className="mx-auto max-w-4xl px-6">
-          <h2 className="font-display mb-6 text-2xl font-bold text-text-primary md:text-3xl">
+      {/* What it does */}
+      <section
+        className="py-20"
+        style={{ background: "var(--bg-surface)", borderTop: "1px solid var(--bg-border)" }}
+      >
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <PillTag className="mb-6">What It Does</PillTag>
+          <h2
+            className="font-display font-bold mb-6"
+            style={{ fontSize: "clamp(28px, 3.5vw, 44px)", letterSpacing: "-0.025em" }}
+          >
             {cap.whatItDoes.heading}
           </h2>
-          <div className="space-y-4">
+          <div
+            className="space-y-4 text-base"
+            style={{ color: "var(--text-secondary)", lineHeight: 1.8 }}
+          >
             {cap.whatItDoes.body.split("\n\n").map((para) => (
-              <p key={para.slice(0, 40)} className="text-base leading-relaxed text-text-secondary">
-                {para}
-              </p>
+              <p key={para.slice(0, 40)}>{para}</p>
             ))}
           </div>
         </div>
@@ -52,13 +62,6 @@ export default async function CapabilityPage({ params }: Props) {
       <FeatureCards cap={cap} />
       <RegulationsList cap={cap} />
       <RelatedUseCases cap={cap} />
-
-      <section className="bg-bg-base py-12">
-        <div className="mx-auto max-w-3xl px-6 text-center">
-          <p className="mb-8 text-lg font-medium text-text-secondary">{cap.ctaHeading}</p>
-        </div>
-      </section>
-
       <CtaBanner />
     </>
   );
