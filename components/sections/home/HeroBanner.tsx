@@ -49,10 +49,10 @@ export function HeroBanner() {
                 animationDelay: "160ms",
               }}
             >
-              Organizations developing Software as a Medical Device spend 6–12 months in regulatory
-              validation for every release. Mia-Care P4SaMD eliminates that bottleneck by embedding
-              compliance directly into your development workflow — making audit-readiness the
-              default, not the deadline.
+              Organizations developing <strong>Software as a Medical Device</strong> spend 6–12
+              months in regulatory validation for every release. Mia-Care P4SaMD eliminates that
+              bottleneck by embedding compliance directly into your development workflow; making
+              audit-readiness the default, not the deadline.
             </p>
 
             {/* CTAs */}

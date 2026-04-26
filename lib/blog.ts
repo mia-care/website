@@ -4,6 +4,7 @@ import matter from "gray-matter";
 import readingTime from "reading-time";
 import { remark } from "remark";
 import remarkHtml from "remark-html";
+import { assetPath } from "./asset";
 
 const CONTENT_DIR = path.join(process.cwd(), "content/blog");
 
@@ -79,7 +80,9 @@ export async function getPost(slug: string): Promise<Post | null> {
   const stats = readingTime(content);
 
   const processed = await remark().use(remarkHtml, { sanitize: false }).process(content);
-  const contentHtml = processed.toString();
+  const contentHtml = processed
+    .toString()
+    .replace(/src="(\/[^"]*)"/g, (_, p) => `src="${assetPath(p)}"`);
   const headings = extractHeadings(content);
 
   return {
