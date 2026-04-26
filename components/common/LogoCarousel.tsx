@@ -40,7 +40,6 @@ export function LogoMarquee() {
           animation: "marqueeScroll 35s linear infinite",
         }}
       >
-        {/* biome-ignore lint/suspicious/noArrayIndexKey: static logo array duplicated for marquee loop */}
         {TRACK.map((logo, i) => (
           <Image
             key={`${logo.alt}-${i}`}
