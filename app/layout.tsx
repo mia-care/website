@@ -25,11 +25,12 @@ export const metadata: Metadata = {
     title: "P4SaMD — Compliant SaMD Development Platform",
     description: "AI-native platform that embeds regulatory compliance directly into your SDLC.",
     url: SITE_URL,
+    // TODO: replace with a proper 1200×630 PNG at /images/og-default.png
+    // SVG is used as a stopgap because og-default.png doesn't exist yet.
+    // Some scrapers (Twitter/X, WhatsApp) do not render SVG OG images.
     images: [
       {
-        url: "/images/og-default.png",
-        width: 1200,
-        height: 630,
+        url: "/images/logo/Horizontal_Lockup_Primary.svg",
         alt: "Mia-Care P4SaMD",
       },
     ],
@@ -82,8 +83,16 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
             style={{ display: "none", visibility: "hidden" }}
           />
         </noscript>
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[200] focus:px-4 focus:py-2 focus:rounded-lg focus:text-sm focus:font-semibold focus:bg-brand-green focus:text-bg-base"
+        >
+          Skip to main content
+        </a>
         <Navbar />
-        <main className="flex-1 pt-16">{children}</main>
+        <main id="main-content" className="flex-1 pt-16">
+          {children}
+        </main>
         <Footer />
         <CookieBanner />
       </body>

@@ -40,5 +40,27 @@
       "trailingCommas": "all",
       "arrowParentheses": "always"
     }
-  }
+  },
+  "overrides": [
+    {
+      "includes": [
+        "components/common/JsonLd.tsx",
+        "app/**/blog/**/*.tsx",
+        "app/**/competence-center/**/*.tsx"
+      ],
+      "linter": {
+        "rules": {
+          "security": { "noDangerouslySetInnerHtml": "off" }
+        }
+      }
+    },
+    {
+      "includes": ["components/common/LogoCarousel.tsx"],
+      "linter": {
+        "rules": {
+          "suspicious": { "noArrayIndexKey": "off" }
+        }
+      }
+    }
+  ]
 }

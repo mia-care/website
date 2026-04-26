@@ -12,7 +12,7 @@ function SimpleDropdown({
   items,
   onClose,
 }: {
-  items: { label: string; href: string }[];
+  items: { label: string; href: string; external?: boolean }[];
   onClose: () => void;
 }) {
   return (
@@ -26,18 +26,33 @@ function SimpleDropdown({
           boxShadow: "0 24px 64px rgba(0,0,0,0.7), 0 4px 16px rgba(0,0,0,0.4)",
         }}
       >
-        {items.map((item) => (
-          <Link
-            key={item.href}
-            href={item.href}
-            role="menuitem"
-            onClick={onClose}
-            className="block rounded-lg px-3 py-2 text-sm transition-colors hover:bg-white/5 hover:text-brand-green"
-            style={{ color: "var(--text-secondary)" }}
-          >
-            {item.label}
-          </Link>
-        ))}
+        {items.map((item) =>
+          item.external ? (
+            <a
+              key={item.href}
+              href={item.href}
+              role="menuitem"
+              onClick={onClose}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block rounded-lg px-3 py-2 text-sm transition-colors hover:bg-white/5 hover:text-brand-green"
+              style={{ color: "var(--text-secondary)" }}
+            >
+              {item.label}
+            </a>
+          ) : (
+            <Link
+              key={item.href}
+              href={item.href}
+              role="menuitem"
+              onClick={onClose}
+              className="block rounded-lg px-3 py-2 text-sm transition-colors hover:bg-white/5 hover:text-brand-green"
+              style={{ color: "var(--text-secondary)" }}
+            >
+              {item.label}
+            </Link>
+          ),
+        )}
       </div>
     </div>
   );
@@ -215,9 +230,9 @@ export function Navbar() {
         boxShadow: "inset 0 1px 0 rgba(0,240,150,0.07)",
       }}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex items-center">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex items-center relative">
         {/* Logo */}
-        <Link href="/" className="shrink-0 flex items-center mr-4">
+        <Link href="/" className="shrink-0 flex items-center">
           <Image
             src={`${BASE_PATH}/images/logo/Horizontal_Lockup_White.svg`}
             alt="Mia-Care P4SaMD"
@@ -227,19 +242,11 @@ export function Navbar() {
           />
         </Link>
 
-        {/* Separator */}
-        <div
-          className="hidden lg:block shrink-0 mx-4"
-          aria-hidden="true"
-          style={{
-            width: 1,
-            height: 22,
-            background: "linear-gradient(180deg, transparent, rgba(255,255,255,0.1), transparent)",
-          }}
-        />
-
-        {/* Desktop nav */}
-        <nav className="hidden md:flex items-center gap-px flex-1" aria-label="Primary navigation">
+        {/* Desktop nav — absolutely centered */}
+        <nav
+          className="hidden md:flex items-center gap-px absolute left-1/2 -translate-x-1/2"
+          aria-label="Primary navigation"
+        >
           {navItems.map((item) => {
             const active = isActive(item.href);
             const open = activeDropdown === item.label;
@@ -332,7 +339,7 @@ export function Navbar() {
         {/* CTA */}
         <Link
           href="/request-demo"
-          className="hidden md:flex items-center h-9 px-4 rounded-lg text-sm font-semibold text-bg-base shrink-0 ml-auto transition-transform hover:-translate-y-px active:translate-y-0"
+          className="hidden md:flex items-center h-9 px-4 rounded-lg text-sm font-semibold text-bg-base shrink-0 ml-auto transition-transform hover:-translate-y-px active:translate-y-0 relative z-10"
           style={{
             background: "linear-gradient(90deg, var(--brand-green), var(--brand-cyan))",
             boxShadow: "0 0 18px rgba(0,240,150,0.22), 0 2px 8px rgba(0,0,0,0.35)",

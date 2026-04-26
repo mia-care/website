@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /downloads/
 
 Sitemap: https://www.mia-care.io/sitemap.xml

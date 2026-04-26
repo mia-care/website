@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { navItems } from "@/data/nav";
 import { BASE_PATH } from "@/lib/utils";
 
@@ -77,6 +77,8 @@ export function MobileMenu() {
         className="w-full max-w-sm p-0 border-0 flex flex-col"
         style={{ background: "var(--bg-surface)" }}
       >
+        <SheetTitle className="sr-only">Navigation menu</SheetTitle>
+
         {/* Drawer header */}
         <div
           className="flex items-center justify-between px-5 py-4"
@@ -135,18 +137,8 @@ export function MobileMenu() {
                     <div className="mt-0.5 ml-2 flex flex-col">
                       {item.dropdown.map((sub) => {
                         const active = isLinkActive(sub.href);
-                        return (
-                          <Link
-                            key={sub.href}
-                            href={sub.href}
-                            onClick={() => setOpen(false)}
-                            className="flex items-center gap-2.5 rounded-lg px-3 text-sm transition-colors hover:bg-white/[0.04]"
-                            style={{
-                              height: 38,
-                              color: active ? "var(--brand-green)" : "var(--text-secondary)",
-                              fontWeight: active ? 500 : undefined,
-                            }}
-                          >
+                        const inner = (
+                          <>
                             {active && (
                               <span
                                 aria-hidden="true"
@@ -160,6 +152,31 @@ export function MobileMenu() {
                               />
                             )}
                             {sub.label}
+                          </>
+                        );
+                        const sharedProps = {
+                          onClick: () => setOpen(false),
+                          className:
+                            "flex items-center gap-2.5 rounded-lg px-3 text-sm transition-colors hover:bg-white/[0.04]",
+                          style: {
+                            height: 38,
+                            color: active ? "var(--brand-green)" : "var(--text-secondary)",
+                            fontWeight: active ? 500 : (undefined as undefined),
+                          },
+                        };
+                        return sub.external ? (
+                          <a
+                            key={sub.href}
+                            {...sharedProps}
+                            href={sub.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            {inner}
+                          </a>
+                        ) : (
+                          <Link key={sub.href} {...sharedProps} href={sub.href}>
+                            {inner}
                           </Link>
                         );
                       })}

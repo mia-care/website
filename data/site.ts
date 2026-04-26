@@ -43,13 +43,12 @@ export const FOOTER_LINKS = {
   ],
   company: [
     { label: "About Us", href: "/about-us" },
-    { label: "Newsroom", href: "/newsroom" },
     { label: "Careers", href: "/careers" },
     { label: "Certifications", href: "/certifications" },
     { label: "Sustainability", href: "/sustainability" },
   ],
   legal: [
     { label: "Privacy Policy", href: "/privacy-policy" },
-    { label: "Cookie Policy", href: "/cookie-policy" },
+    { label: "Cookie Policy", href: "/privacy-policy#cookies" },
   ],
 };

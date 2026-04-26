@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 
 const STORAGE_KEY = "mc-cookie-consent";
 
@@ -37,6 +37,13 @@ export function CookieBanner() {
   const [visible, setVisible] = useState(false);
   const [expanded, setExpanded] = useState(false);
   const [prefs, setPrefs] = useState<Preferences>({ performance: false, profiling: false });
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (visible) {
+      containerRef.current?.focus();
+    }
+  }, [visible]);
 
   useEffect(() => {
     const stored = localStorage.getItem(STORAGE_KEY);
@@ -61,9 +68,12 @@ export function CookieBanner() {
 
   return (
     <div
-      className="fixed bottom-0 left-0 right-0 z-50 p-4 md:p-6"
+      ref={containerRef}
+      tabIndex={-1}
+      className="fixed bottom-0 left-0 right-0 z-50 p-4 md:p-6 focus:outline-none"
       role="dialog"
       aria-label="Cookie consent"
+      aria-modal="true"
     >
       <div
         className="max-w-3xl mx-auto rounded-card p-5 flex flex-col gap-4"
@@ -73,7 +83,7 @@ export function CookieBanner() {
           <p className="flex-1 text-sm" style={{ color: "var(--text-secondary)" }}>
             We use cookies to improve your experience.{" "}
             <Link
-              href="/cookie-policy"
+              href="/privacy-policy#cookies"
               className="underline"
               style={{ color: "var(--brand-green)" }}
             >
@@ -160,10 +170,11 @@ function ConsentRow({
   disabled?: boolean;
   onChange: (v: boolean) => void;
 }) {
+  const labelId = useId();
   return (
     <div className="flex items-start gap-4">
       <div className="flex-1">
-        <p className="text-sm font-medium" style={{ color: "var(--text-primary)" }}>
+        <p id={labelId} className="text-sm font-medium" style={{ color: "var(--text-primary)" }}>
           {label}
         </p>
         <p className="text-xs mt-0.5" style={{ color: "var(--text-secondary)" }}>
@@ -174,6 +185,7 @@ function ConsentRow({
         type="button"
         role="switch"
         aria-checked={checked}
+        aria-labelledby={labelId}
         disabled={disabled}
         onClick={() => onChange(!checked)}
         className={`relative inline-flex h-5 w-9 shrink-0 rounded-full transition-colors mt-0.5 ${

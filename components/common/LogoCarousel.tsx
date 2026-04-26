@@ -1,35 +1,62 @@
-const PLACEHOLDER_LOGOS = [
-  "MedTech Co",
-  "LifeSciences AG",
-  "ClinicalAI Inc",
-  "DeviceGroup",
-  "HealthTech EU",
-  "BioSoft GmbH",
+import Image from "next/image";
+import { BASE_PATH } from "@/lib/utils";
+
+// All SVGs share viewBox 0 0 376 128 → 2.9375:1 aspect ratio
+// +15% from previous 108×37
+const LOGO_W = 149;
+const LOGO_H = 52;
+
+const DEFAULT_FILTER = "grayscale(1) brightness(1.8)";
+// youhealthy embeds a black raster PNG — invert to white before brightening
+const INVERT_FILTER = "grayscale(1) invert(1) brightness(0.85)";
+
+const LOGOS: { src: string; alt: string; filter?: string }[] = [
+  { src: `${BASE_PATH}/images/clients/Bip.svg`, alt: "Bip" },
+  { src: `${BASE_PATH}/images/clients/ItaliAssistenza.svg`, alt: "Itali Assistenza" },
+  { src: `${BASE_PATH}/images/clients/GVM.svg`, alt: "GVM" },
+  { src: `${BASE_PATH}/images/clients/Avitaam.svg`, alt: "Avitaam" },
+  { src: `${BASE_PATH}/images/clients/RBdigital.svg`, alt: "RB Digital" },
+  { src: `${BASE_PATH}/images/clients/MDConsierge.svg`, alt: "MD Consierge" },
+  { src: `${BASE_PATH}/images/clients/Flex.svg`, alt: "Flex" },
+  { src: `${BASE_PATH}/images/clients/youhealthy.svg`, alt: "YouHealthy", filter: INVERT_FILTER },
+  { src: `${BASE_PATH}/images/clients/iit.svg`, alt: "IIT" },
 ];
 
-export function LogoPlaceholder() {
+// Duplicate for seamless loop: track scrolls exactly -50% of its total width → loops invisibly
+const TRACK = [...LOGOS, ...LOGOS];
+
+export function LogoMarquee() {
   return (
-    <div className="w-full overflow-hidden border-y" style={{ borderColor: "var(--bg-border)" }}>
-      <div className="flex items-center gap-12 py-6 px-8 max-w-6xl mx-auto flex-wrap justify-center">
-        {PLACEHOLDER_LOGOS.map((name) => (
-          <div
-            key={name}
-            className="flex items-center justify-center h-8 px-4 rounded"
+    <section
+      className="w-full overflow-hidden border-y py-8"
+      style={{ borderColor: "var(--bg-border)" }}
+      aria-label="Our clients"
+    >
+      <div
+        className="flex items-center"
+        style={{
+          gap: "4rem",
+          width: "max-content",
+          animation: "marqueeScroll 35s linear infinite",
+        }}
+      >
+        {/* biome-ignore lint/suspicious/noArrayIndexKey: static logo array duplicated for marquee loop */}
+        {TRACK.map((logo, i) => (
+          <Image
+            key={`${logo.alt}-${i}`}
+            src={logo.src}
+            alt={i < LOGOS.length ? logo.alt : ""}
+            aria-hidden={i >= LOGOS.length ? true : undefined}
+            width={LOGO_W}
+            height={LOGO_H}
             style={{
-              background: "rgba(255,255,255,0.04)",
-              border: "1px solid rgba(255,255,255,0.07)",
-              minWidth: 120,
+              filter: logo.filter ?? DEFAULT_FILTER,
+              opacity: 0.7,
+              flexShrink: 0,
             }}
-          >
-            <span
-              className="font-semibold text-sm tracking-wide"
-              style={{ color: "var(--text-muted)" }}
-            >
-              {name}
-            </span>
-          </div>
+          />
         ))}
       </div>
-    </div>
+    </section>
   );
 }

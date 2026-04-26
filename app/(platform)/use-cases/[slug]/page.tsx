@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { CtaBanner } from "@/components/common/CtaBanner";
+import { JsonLd } from "@/components/common/JsonLd";
 import { PillTag } from "@/components/common/PillTag";
 import { CapabilitiesInvolved } from "@/components/sections/use-case/CapabilitiesInvolved";
 import { CaseStudyBlock } from "@/components/sections/use-case/CaseStudyBlock";
 import { UseCaseHero } from "@/components/sections/use-case/UseCaseHero";
+import { SITE } from "@/data/site";
 import { getUseCaseBySlug, useCases } from "@/data/use-cases";
 
 export function generateStaticParams() {
@@ -22,6 +24,10 @@ export async function generateMetadata({
   return {
     title: uc.seo.title,
     description: uc.seo.description,
+    openGraph: {
+      title: uc.seo.title,
+      description: uc.seo.description,
+    },
   };
 }
 
@@ -67,8 +73,22 @@ export default async function UseCasePage({ params }: { params: Promise<{ slug: 
   const uc = getUseCaseBySlug(slug);
   if (!uc) notFound();
 
+  const useCaseSchema = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: uc.name,
+    description: uc.seo.description,
+    url: `${SITE.url}/use-cases/${uc.slug}`,
+    provider: {
+      "@type": "Organization",
+      "@id": `${SITE.url}/#organization`,
+      name: SITE.company.name,
+    },
+  };
+
   return (
     <>
+      <JsonLd schema={useCaseSchema} />
       <UseCaseHero uc={uc} />
       <Section
         tag="The Problem"

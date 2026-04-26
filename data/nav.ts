@@ -2,6 +2,7 @@ export type NavDropdownItem = {
   label: string;
   href: string;
   description?: string;
+  external?: boolean;
 };
 
 export type NavItem = {
@@ -74,9 +75,7 @@ export const navItems: NavItem[] = [
     dropdown: [
       { label: "Competence Center", href: "/resources/competence-center" },
       { label: "Blog", href: "/resources/blog" },
-      { label: "Docs", href: "/resources/docs" },
-      { label: "Events", href: "/resources/events" },
-      { label: "FAQ", href: "/resources/faq" },
+      { label: "Docs", href: "http://docs.mia-care.io/", external: true },
     ],
   },
   {
@@ -84,7 +83,6 @@ export const navItems: NavItem[] = [
     href: "/about-us",
     dropdown: [
       { label: "About Us", href: "/about-us" },
-      { label: "Newsroom", href: "/newsroom" },
       { label: "Careers", href: "/careers" },
       { label: "Certifications", href: "/certifications" },
       { label: "Sustainability", href: "/sustainability" },

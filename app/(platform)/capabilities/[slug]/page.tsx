@@ -1,12 +1,14 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { CtaBanner } from "@/components/common/CtaBanner";
+import { JsonLd } from "@/components/common/JsonLd";
 import { PillTag } from "@/components/common/PillTag";
 import { CapabilityHero } from "@/components/sections/capability/CapabilityHero";
 import { FeatureCards } from "@/components/sections/capability/FeatureCards";
 import { RegulationsList } from "@/components/sections/capability/RegulationsList";
 import { RelatedUseCases } from "@/components/sections/capability/RelatedUseCases";
 import { capabilities, getCapabilityBySlug } from "@/data/capabilities";
+import { SITE } from "@/data/site";
 
 export function generateStaticParams() {
   return capabilities.map((cap) => ({ slug: cap.slug }));
@@ -23,6 +25,10 @@ export async function generateMetadata({
   return {
     title: cap.seo.title,
     description: cap.seo.description,
+    openGraph: {
+      title: cap.seo.title,
+      description: cap.seo.description,
+    },
   };
 }
 
@@ -31,8 +37,22 @@ export default async function CapabilityPage({ params }: { params: Promise<{ slu
   const cap = getCapabilityBySlug(slug);
   if (!cap) notFound();
 
+  const capabilitySchema = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: cap.name,
+    description: cap.description,
+    url: `${SITE.url}/capabilities/${cap.slug}`,
+    provider: {
+      "@type": "Organization",
+      "@id": `${SITE.url}/#organization`,
+      name: SITE.company.name,
+    },
+  };
+
   return (
     <>
+      <JsonLd schema={capabilitySchema} />
       <CapabilityHero cap={cap} />
 
       {/* What it does */}
