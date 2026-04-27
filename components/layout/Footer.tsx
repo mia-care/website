@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { CookiePreferencesButton } from "@/components/common/CookiePreferencesButton";
 import { FOOTER_LINKS, SITE } from "@/data/site";
 import { BASE_PATH } from "@/lib/utils";
 
@@ -136,6 +137,7 @@ export function Footer() {
                 {link.label}
               </Link>
             ))}
+            <CookiePreferencesButton />
           </div>
         </div>
       </div>

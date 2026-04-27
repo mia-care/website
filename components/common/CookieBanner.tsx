@@ -3,12 +3,22 @@
 import Link from "next/link";
 import { useEffect, useId, useRef, useState } from "react";
 
-const STORAGE_KEY = "mc-cookie-consent";
+const COOKIE_NAME = "mc-cookie-consent";
 
 type Preferences = {
   performance: boolean;
   profiling: boolean;
 };
+
+function getPrefsFromCookie(): Preferences | null {
+  const row = document.cookie.split("; ").find((r) => r.startsWith(`${COOKIE_NAME}=`));
+  if (!row) return null;
+  const value = row.split("=")[1] ?? "";
+  return {
+    performance: value.includes("performance"),
+    profiling: value.includes("profiling"),
+  };
+}
 
 declare global {
   interface Window {
@@ -46,20 +56,21 @@ export function CookieBanner() {
   }, [visible]);
 
   useEffect(() => {
-    const stored = localStorage.getItem(STORAGE_KEY);
-    if (!stored) {
+    const saved = getPrefsFromCookie();
+    if (!saved) {
       setVisible(true);
       return;
     }
-    try {
-      pushConsent(JSON.parse(stored) as Preferences);
-    } catch {
-      setVisible(true);
-    }
+    pushConsent(saved);
   }, []);
 
   const save = (preferences: Preferences) => {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(preferences));
+    const parts: string[] = [];
+    if (preferences.performance) parts.push("performance");
+    if (preferences.profiling) parts.push("profiling");
+    const value = parts.length > 0 ? parts.join(",") : "none";
+    // biome-ignore lint/suspicious/noDocumentCookie: cookie store API unavailable in all target environments
+    document.cookie = `${COOKIE_NAME}=${value}; Max-Age=31536000; Path=/; SameSite=Lax; Secure`;
     pushConsent(preferences);
     setVisible(false);
   };
