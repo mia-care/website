@@ -1,0 +1,251 @@
+/* ========================================================================
+   Mia-Care Design System — Colors & Type
+   Source: Mia-Care Visual Book (Rev. 01 — 15 Marzo 2021)
+
+   Typography: Styrene A (display) + Styrene B (body) by Commercial Type,
+   as specified in the Visual Book. Licensed files live in /fonts.
+   ======================================================================== */
+
+/* ----- STYRENE A (display / titles) ----- */
+@font-face { font-family:'Styrene A'; src:url('fonts/StyreneA-Thin.otf')         format('opentype'); font-weight:100; font-style:normal; font-display:swap; }
+@font-face { font-family:'Styrene A'; src:url('fonts/StyreneA-ThinItalic.otf')   format('opentype'); font-weight:100; font-style:italic; font-display:swap; }
+@font-face { font-family:'Styrene A'; src:url('fonts/StyreneA-Light.otf')        format('opentype'); font-weight:300; font-style:normal; font-display:swap; }
+@font-face { font-family:'Styrene A'; src:url('fonts/StyreneA-LightItalic.otf')  format('opentype'); font-weight:300; font-style:italic; font-display:swap; }
+@font-face { font-family:'Styrene A'; src:url('fonts/StyreneA-Regular.otf')      format('opentype'); font-weight:400; font-style:normal; font-display:swap; }
+@font-face { font-family:'Styrene A'; src:url('fonts/StyreneA-RegularItalic.otf')format('opentype'); font-weight:400; font-style:italic; font-display:swap; }
+@font-face { font-family:'Styrene A'; src:url('fonts/StyreneA-Medium.otf')       format('opentype'); font-weight:500; font-style:normal; font-display:swap; }
+@font-face { font-family:'Styrene A'; src:url('fonts/StyreneA-MediumItalic.otf') format('opentype'); font-weight:500; font-style:italic; font-display:swap; }
+@font-face { font-family:'Styrene A'; src:url('fonts/StyreneA-Bold.otf')         format('opentype'); font-weight:700; font-style:normal; font-display:swap; }
+@font-face { font-family:'Styrene A'; src:url('fonts/StyreneA-BoldItalic.otf')   format('opentype'); font-weight:700; font-style:italic; font-display:swap; }
+@font-face { font-family:'Styrene A'; src:url('fonts/StyreneA-Black.otf')        format('opentype'); font-weight:900; font-style:normal; font-display:swap; }
+@font-face { font-family:'Styrene A'; src:url('fonts/StyreneA-BlackItalic.otf')  format('opentype'); font-weight:900; font-style:italic; font-display:swap; }
+
+/* ----- STYRENE B (body) ----- */
+@font-face { font-family:'Styrene B'; src:url('fonts/StyreneB-Thin.otf')         format('opentype'); font-weight:100; font-style:normal; font-display:swap; }
+@font-face { font-family:'Styrene B'; src:url('fonts/StyreneB-ThinItalic.otf')   format('opentype'); font-weight:100; font-style:italic; font-display:swap; }
+@font-face { font-family:'Styrene B'; src:url('fonts/StyreneB-Light.otf')        format('opentype'); font-weight:300; font-style:normal; font-display:swap; }
+@font-face { font-family:'Styrene B'; src:url('fonts/StyreneB-LightItalic.otf')  format('opentype'); font-weight:300; font-style:italic; font-display:swap; }
+@font-face { font-family:'Styrene B'; src:url('fonts/StyreneB-Regular.otf')      format('opentype'); font-weight:400; font-style:normal; font-display:swap; }
+@font-face { font-family:'Styrene B'; src:url('fonts/StyreneB-RegularItalic.otf')format('opentype'); font-weight:400; font-style:italic; font-display:swap; }
+@font-face { font-family:'Styrene B'; src:url('fonts/StyreneB-Medium.otf')       format('opentype'); font-weight:500; font-style:normal; font-display:swap; }
+@font-face { font-family:'Styrene B'; src:url('fonts/StyreneB-MediumItalic.otf') format('opentype'); font-weight:500; font-style:italic; font-display:swap; }
+@font-face { font-family:'Styrene B'; src:url('fonts/StyreneB-Bold.otf')         format('opentype'); font-weight:700; font-style:normal; font-display:swap; }
+@font-face { font-family:'Styrene B'; src:url('fonts/StyreneB-BoldItalic.otf')   format('opentype'); font-weight:700; font-style:italic; font-display:swap; }
+@font-face { font-family:'Styrene B'; src:url('fonts/StyreneB-Black.otf')        format('opentype'); font-weight:900; font-style:normal; font-display:swap; }
+@font-face { font-family:'Styrene B'; src:url('fonts/StyreneB-BlackItalic.otf')  format('opentype'); font-weight:900; font-style:italic; font-display:swap; }
+
+:root {
+  /* ----- BRAND COLORS (from Visual Book, "Colori — Spot") ----- */
+  --mc-green:   #00F096;   /* RGB 0/240/152 — primary accent */
+  --mc-cyan:    #00F0F0;   /* RGB 0/240/240 — secondary accent */
+  --mc-black:   #000000;
+  --mc-white:   #FFFFFF;
+
+  /* Brand gradient (Colori — Linear gradient, green → cyan, horizontal) */
+  --mc-gradient:           linear-gradient(90deg, var(--mc-green) 0%, var(--mc-cyan) 100%);
+  --mc-gradient-diagonal:  linear-gradient(135deg, var(--mc-green) 0%, var(--mc-cyan) 100%);
+  --mc-gradient-radial:    radial-gradient(circle at 30% 40%, var(--mc-green) 0%, var(--mc-cyan) 100%);
+
+  /* ----- NEUTRALS (extrapolated from black/white anchor) ----- */
+  /* Warm-tinted greys (toward brand green) for surfaces. */
+  --mc-ink-900: #0A0E10;   /* near-black for surfaces */
+  --mc-ink-800: #1A1F22;
+  --mc-ink-700: #2E3438;
+  --mc-ink-600: #4A5258;
+  --mc-ink-500: #6B747B;   /* body on white */
+  --mc-ink-400: #8E969D;
+  --mc-ink-300: #BFC6CA;   /* divider / muted */
+  --mc-ink-200: #E1E5E7;
+  --mc-ink-100: #F1F3F4;
+  --mc-ink-050: #F8F9FA;
+
+  /* ----- SEMANTIC FG / BG (light theme, default) ----- */
+  --mc-fg-1: var(--mc-black);       /* primary text / display */
+  --mc-fg-2: var(--mc-ink-700);     /* secondary text */
+  --mc-fg-3: var(--mc-ink-500);     /* tertiary / meta */
+  --mc-fg-4: var(--mc-ink-400);     /* disabled */
+  --mc-fg-accent: var(--mc-green);
+  --mc-fg-on-accent: var(--mc-black);
+  --mc-fg-on-dark: var(--mc-white);
+
+  --mc-bg-1: var(--mc-white);       /* page surface */
+  --mc-bg-2: var(--mc-ink-050);     /* recessed surface */
+  --mc-bg-3: var(--mc-ink-100);     /* card hover */
+  --mc-bg-inverted: var(--mc-black);
+  --mc-bg-accent: var(--mc-green);
+  --mc-bg-accent-2: var(--mc-cyan);
+
+  --mc-border: var(--mc-ink-200);
+  --mc-border-strong: var(--mc-ink-300);
+  --mc-border-on-dark: rgba(255,255,255,0.14);
+
+  /* ----- SEMANTIC STATUS (extrapolated, harmonized with brand) ----- */
+  --mc-success: var(--mc-green);
+  --mc-info:    var(--mc-cyan);
+  --mc-warning: #FFB800;
+  --mc-danger:  #FF4D4D;
+
+  /* ----- TYPE FAMILIES ----- */
+  --mc-font-display: 'Styrene A', 'Styrene A Web', system-ui, sans-serif;
+  --mc-font-body:    'Styrene B', 'Styrene B Web', system-ui, sans-serif;
+  --mc-font-mono:    'JetBrains Mono', ui-monospace, Menlo, monospace;
+
+  /* ----- TYPE SIZES (rem, 1rem = 16px) ----- */
+  --mc-fs-display-xl: 5.5rem;   /* 88 — hero on large */
+  --mc-fs-display-l:  4rem;     /* 64 */
+  --mc-fs-display-m:  3rem;     /* 48 */
+  --mc-fs-h1:         2.25rem;  /* 36 */
+  --mc-fs-h2:         1.75rem;  /* 28 */
+  --mc-fs-h3:         1.375rem; /* 22 */
+  --mc-fs-h4:         1.125rem; /* 18 */
+  --mc-fs-body-lg:    1.125rem; /* 18 */
+  --mc-fs-body:       1rem;     /* 16 */
+  --mc-fs-body-sm:    0.875rem; /* 14 */
+  --mc-fs-caption:    0.75rem;  /* 12 */
+  --mc-fs-overline:   0.6875rem;/* 11 — uppercased eyebrows ("COLORI", "TIPOGRAFIA") */
+
+  /* Line heights */
+  --mc-lh-tight:  1.05;
+  --mc-lh-snug:   1.2;
+  --mc-lh-normal: 1.5;
+  --mc-lh-relaxed:1.65;
+
+  /* Letter spacing */
+  --mc-tracking-tight:  -0.02em;
+  --mc-tracking-snug:   -0.01em;
+  --mc-tracking-normal:  0;
+  --mc-tracking-wide:    0.08em;   /* overlines, small caps */
+  --mc-tracking-wider:   0.16em;   /* page eyebrows in the Visual Book */
+
+  /* Weights */
+  --mc-fw-regular:  400;
+  --mc-fw-medium:   500;   /* Styrene A Medium equivalent */
+  --mc-fw-semibold: 600;
+  --mc-fw-bold:     700;
+
+  /* ----- RADII ----- */
+  --mc-radius-none: 0;
+  --mc-radius-xs:   2px;
+  --mc-radius-sm:   4px;
+  --mc-radius-md:   8px;
+  --mc-radius-lg:   14px;
+  --mc-radius-xl:   24px;
+  --mc-radius-pill: 999px;
+
+  /* ----- SPACING (4pt base) ----- */
+  --mc-space-0:  0;
+  --mc-space-1:  4px;
+  --mc-space-2:  8px;
+  --mc-space-3:  12px;
+  --mc-space-4:  16px;
+  --mc-space-5:  24px;
+  --mc-space-6:  32px;
+  --mc-space-7:  48px;
+  --mc-space-8:  64px;
+  --mc-space-9:  96px;
+  --mc-space-10: 128px;
+
+  /* ----- SHADOWS (subtle; brand is flat-leaning) ----- */
+  --mc-shadow-xs: 0 1px 2px rgba(10, 14, 16, 0.04);
+  --mc-shadow-sm: 0 2px 6px rgba(10, 14, 16, 0.06);
+  --mc-shadow-md: 0 8px 24px rgba(10, 14, 16, 0.08);
+  --mc-shadow-lg: 0 16px 48px rgba(10, 14, 16, 0.12);
+  /* Accent glow — use sparingly on interactive focus/hover */
+  --mc-shadow-glow-green: 0 0 0 4px rgba(0, 240, 150, 0.25);
+  --mc-shadow-glow-cyan:  0 0 0 4px rgba(0, 240, 240, 0.25);
+
+  /* ----- MOTION ----- */
+  --mc-ease-standard: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --mc-ease-out:      cubic-bezier(0.16, 1, 0.3, 1);
+  --mc-ease-in:       cubic-bezier(0.5, 0, 0.75, 0);
+  --mc-dur-fast:   120ms;
+  --mc-dur-base:   200ms;
+  --mc-dur-slow:   360ms;
+}
+
+/* ============================================================
+   DARK SURFACE OVERRIDES
+   Use on sections with black backgrounds (like the Visual Book's
+   "negativo" logo treatments and the Platform illustration page).
+   Apply via: <section class="mc-dark"> or [data-theme="dark"]
+   ============================================================ */
+.mc-dark, [data-theme="dark"] {
+  --mc-fg-1: var(--mc-white);
+  --mc-fg-2: rgba(255,255,255,0.72);
+  --mc-fg-3: rgba(255,255,255,0.54);
+  --mc-fg-4: rgba(255,255,255,0.38);
+  --mc-bg-1: var(--mc-black);
+  --mc-bg-2: #0A0E10;
+  --mc-bg-3: #141A1D;
+  --mc-border: rgba(255,255,255,0.14);
+  --mc-border-strong: rgba(255,255,255,0.24);
+}
+
+/* ============================================================
+   SEMANTIC TEXT ELEMENTS
+   Authored from the Visual Book's "Titolazioni / Corpo del testo"
+   spec: titles use the heavier display face, body is a lighter
+   neo-grotesque. Hero titles can break onto two lines —
+   ("Unlock the power / of digital health") — so keep line-height
+   tight.
+   ============================================================ */
+
+.mc-hero,
+h1.mc-hero {
+  font-family: var(--mc-font-display);
+  font-weight: var(--mc-fw-medium);
+  font-size: clamp(2.5rem, 6vw, var(--mc-fs-display-xl));
+  line-height: var(--mc-lh-tight);
+  letter-spacing: var(--mc-tracking-tight);
+  color: var(--mc-fg-1);
+  text-wrap: balance;
+}
+
+.mc-display { font-family: var(--mc-font-display); font-weight: 500; font-size: var(--mc-fs-display-l); line-height: var(--mc-lh-tight); letter-spacing: var(--mc-tracking-tight); }
+h1, .mc-h1 { font-family: var(--mc-font-display); font-weight: 500; font-size: var(--mc-fs-h1); line-height: var(--mc-lh-snug); letter-spacing: var(--mc-tracking-snug); color: var(--mc-fg-1); margin: 0; }
+h2, .mc-h2 { font-family: var(--mc-font-display); font-weight: 500; font-size: var(--mc-fs-h2); line-height: var(--mc-lh-snug); letter-spacing: var(--mc-tracking-snug); color: var(--mc-fg-1); margin: 0; }
+h3, .mc-h3 { font-family: var(--mc-font-display); font-weight: 500; font-size: var(--mc-fs-h3); line-height: var(--mc-lh-snug); color: var(--mc-fg-1); margin: 0; }
+h4, .mc-h4 { font-family: var(--mc-font-display); font-weight: 500; font-size: var(--mc-fs-h4); line-height: var(--mc-lh-snug); color: var(--mc-fg-1); margin: 0; }
+
+p, .mc-body { font-family: var(--mc-font-body); font-weight: 400; font-size: var(--mc-fs-body); line-height: var(--mc-lh-relaxed); color: var(--mc-fg-2); margin: 0; }
+.mc-body-lg { font-family: var(--mc-font-body); font-weight: 400; font-size: var(--mc-fs-body-lg); line-height: var(--mc-lh-relaxed); color: var(--mc-fg-2); }
+.mc-body-sm { font-family: var(--mc-font-body); font-weight: 400; font-size: var(--mc-fs-body-sm); line-height: var(--mc-lh-normal); color: var(--mc-fg-2); }
+
+.mc-caption  { font-family: var(--mc-font-body); font-size: var(--mc-fs-caption); line-height: var(--mc-lh-normal); color: var(--mc-fg-3); }
+.mc-overline {
+  font-family: var(--mc-font-body);
+  font-size: var(--mc-fs-overline);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: var(--mc-tracking-wider);
+  color: var(--mc-fg-3);
+}
+
+code, .mc-code {
+  font-family: var(--mc-font-mono);
+  font-size: 0.9em;
+  background: var(--mc-bg-2);
+  padding: 0.1em 0.35em;
+  border-radius: var(--mc-radius-xs);
+  color: var(--mc-fg-1);
+}
+
+/* Inline text accents */
+.mc-accent-green { color: var(--mc-green); }
+.mc-accent-cyan  { color: var(--mc-cyan); }
+.mc-accent-grad  {
+  background: var(--mc-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* Link */
+a {
+  color: inherit;
+  text-decoration-color: var(--mc-green);
+  text-underline-offset: 0.15em;
+  transition: color var(--mc-dur-base) var(--mc-ease-standard);
+}
+a:hover { color: var(--mc-fg-1); text-decoration-color: var(--mc-cyan); }

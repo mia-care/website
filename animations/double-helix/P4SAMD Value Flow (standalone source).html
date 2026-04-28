@@ -1,0 +1,965 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>P4SAMD — Value Flow</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="colors_and_type.css">
+<template id="__bundler_thumbnail" data-bg-color="#000000">
+  <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="t-grad" x1="0" x2="1" y1="0" y2="0">
+        <stop offset="0%" stop-color="#00F096"/>
+        <stop offset="100%" stop-color="#00F0F0"/>
+      </linearGradient>
+    </defs>
+    <g fill="none" stroke="url(#t-grad)" stroke-width="6" stroke-linecap="round">
+      <path d="M 200 400 Q 350 200 500 400 T 800 400 T 1100 400" opacity="0.95"/>
+      <path d="M 200 400 Q 350 600 500 400 T 800 400 T 1100 400" opacity="0.7"/>
+    </g>
+    <g fill="#fff">
+      <circle cx="350" cy="320" r="9"/>
+      <circle cx="650" cy="320" r="9"/>
+      <circle cx="950" cy="320" r="9"/>
+      <circle cx="350" cy="480" r="9" opacity="0.6"/>
+      <circle cx="650" cy="480" r="9" opacity="0.6"/>
+      <circle cx="950" cy="480" r="9" opacity="0.6"/>
+    </g>
+    <text x="600" y="700" text-anchor="middle" fill="#fff" font-family="sans-serif" font-size="36" font-weight="500" letter-spacing="6">P4SAMD · VALUE FLOW</text>
+  </svg>
+</template>
+<style>
+  :root{
+    --stage-bg: #000;
+    --helix-green: var(--mc-green);
+    --helix-cyan:  var(--mc-cyan);
+    --fg:          #fff;
+    --fg-dim:      rgba(255,255,255,0.42);
+    --fg-mute:     rgba(255,255,255,0.14);
+  }
+
+  html, body { margin:0; padding:0; background:#111; color:#fff; font-family:var(--mc-font-body); }
+  body{ min-height:100vh; display:flex; align-items:center; justify-content:center; padding:24px; box-sizing:border-box; }
+
+  .stage-wrap{
+    width:100%;
+    max-width:1600px;
+    aspect-ratio: 16 / 9;
+    position:relative;
+  }
+  .stage{
+    position:absolute; inset:0;
+    background: var(--stage-bg);
+    overflow:hidden;
+    border-radius: 4px;
+    isolation:isolate;
+  }
+  .stage::after{
+    content:"";
+    position:absolute; inset:0;
+    background: radial-gradient(ellipse at center, transparent 60%, rgba(0,0,0,0.6) 100%);
+    pointer-events:none;
+    z-index:10;
+  }
+
+  /* ---------------------------------------------------------------
+     DNA HELIX — drawn in SVG. The helix lives in a ribbon centred
+     vertically, and is built per-frame in JS so we can:
+       - sort segments by Z (back-to-front) for correct occlusion
+       - vary stroke width and opacity by Z (depth cue)
+       - draw real rungs between paired nucleotides
+  --------------------------------------------------------------- */
+  .helix-layer{
+    position:absolute;
+    left:0; right:0;
+    top:50%;
+    height: 60%;
+    transform: translateY(-50%);
+    pointer-events:none;
+  }
+  .helix-glow{
+    position:absolute; inset:0;
+    background:
+      radial-gradient(50% 60% at 30% 50%, rgba(0,240,150,0.15), transparent 70%),
+      radial-gradient(50% 60% at 70% 50%, rgba(0,240,240,0.15), transparent 70%);
+    filter: blur(28px);
+    pointer-events:none;
+  }
+  #helixSvg{
+    position:absolute; inset:0;
+    width:100%; height:100%;
+    overflow:visible;
+  }
+
+  /* ---------------------------------------------------------------
+     CHROME — eyebrow + brand mark
+  --------------------------------------------------------------- */
+  .chrome{
+    position:absolute; inset:0;
+    padding: clamp(20px, 2.4vw, 40px) clamp(24px, 3vw, 56px);
+    display:flex; flex-direction:column; justify-content:space-between;
+    z-index: 5;
+    pointer-events:none;
+  }
+  .chrome-row{
+    display:flex; justify-content:space-between; align-items:center;
+    font-family: var(--mc-font-body);
+    font-size: clamp(9px, 0.72vw, 12px);
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--fg-dim);
+  }
+  .chrome-row.bottom{ color: rgba(255,255,255,0.32); }
+
+  .eyebrow-mark{ display:flex; align-items:center; gap:14px; }
+  .eyebrow-mark img{ height: clamp(20px, 2vw, 30px); width:auto; display:block; }
+  .eyebrow-mark .sep{ width:1px; height:20px; background:rgba(255,255,255,0.2); }
+
+  .pulse-dot{
+    width:6px; height:6px; border-radius:50%;
+    background: var(--helix-green);
+    box-shadow: 0 0 10px var(--helix-green);
+    animation: pulse 1.8s ease-in-out infinite;
+    display:inline-block;
+    margin-right:8px;
+    vertical-align: middle;
+  }
+  @keyframes pulse{
+    0%,100%{ opacity:0.4; transform:scale(0.85); }
+    50%    { opacity:1; transform:scale(1.1); }
+  }
+
+  /* ---------------------------------------------------------------
+     CENTRE TITLE BLOCK — restored to centre. The helix runs behind it.
+  --------------------------------------------------------------- */
+  .title-block{
+    position:absolute;
+    inset: 0;
+    display:flex; flex-direction:column;
+    align-items:center; justify-content:center;
+    text-align: center;
+    z-index: 6;
+    pointer-events:none;
+  }
+  /* Soft radial scrim behind title so it stays legible inside the helix */
+  .title-block::before{
+    content:"";
+    position:absolute;
+    left:50%; top:50%;
+    width: 70%; height: 60%;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(ellipse at center, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.25) 50%, transparent 75%);
+    pointer-events:none;
+    z-index: -1;
+  }
+  .centre-eyebrow{
+    font-family: var(--mc-font-body);
+    font-size: clamp(10px, 0.85vw, 13px);
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--fg-dim);
+    margin-bottom: clamp(14px, 1.6vw, 22px);
+    display:flex; align-items:center; gap:8px;
+  }
+  .centre-eyebrow b{ color: var(--helix-green); font-weight:500; }
+  .centre-eyebrow .bar{ width:24px; height:1px; background:rgba(255,255,255,0.3); }
+
+  .phase-frame{
+    position:relative;
+    height: clamp(60px, 8vw, 120px);
+    width: 100%;
+  }
+  .phase{
+    position:absolute; left:50%; top:0; transform: translateX(-50%);
+    font-family: var(--mc-font-display);
+    font-weight: 500;
+    font-size: clamp(40px, 6.4vw, 104px);
+    line-height: 1;
+    letter-spacing: -0.025em;
+    color: #fff;
+    white-space: nowrap;
+    opacity: 0;
+  }
+  .phase .num{
+    font-family: var(--mc-font-body);
+    font-size: 0.22em;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    vertical-align: top;
+    margin-right: 0.6em;
+    color: var(--helix-green);
+    position: relative;
+    top: 0.35em;
+  }
+  .phase .word{
+    background: linear-gradient(92deg, #fff 0%, #fff 55%, var(--helix-cyan) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .phase-sub-frame{
+    position:relative;
+    height: clamp(20px, 2vw, 28px);
+    margin-top: clamp(14px, 1.6vw, 22px);
+    width: 100%;
+  }
+  .phase-sub{
+    position:absolute; left:50%; top:0; transform: translateX(-50%);
+    font-family: var(--mc-font-body);
+    font-weight: 400;
+    font-size: clamp(13px, 1.05vw, 17px);
+    color: rgba(255,255,255,0.62);
+    letter-spacing: 0.01em;
+    opacity:0;
+    white-space: nowrap;
+  }
+
+  /* Timeline — bottom-left, aligned to the title block */
+  .timeline{
+    position:absolute;
+    left: clamp(36px, 4vw, 80px);
+    bottom: clamp(54px, 6vw, 96px);
+    display:flex; gap: clamp(10px, 1vw, 18px);
+    z-index: 6;
+    pointer-events:none;
+  }
+  .tick{
+    width: clamp(18px, 2vw, 36px); height:2px;
+    background: var(--fg-mute);
+    border-radius: 2px;
+    transition: background 400ms var(--mc-ease-standard);
+    position: relative;
+    overflow:hidden;
+  }
+  .tick.active{ background: rgba(255,255,255,0.18); }
+  .tick.active::after{
+    content:"";
+    position:absolute; inset:0;
+    background: var(--mc-gradient);
+    transform-origin: left;
+    animation: fill 1500ms linear forwards;
+  }
+  .tick.done{ background: var(--helix-green); }
+  @keyframes fill{ from{ transform: scaleX(0); } to { transform: scaleX(1); } }
+
+  /* Compliance chips — placed in safe corners (right-side, away from title) */
+  .floating-chips{ position:absolute; inset: 0; pointer-events:none; z-index: 4; }
+  .chip{
+    position:absolute;
+    font-family: var(--mc-font-body);
+    font-weight:500;
+    font-size: clamp(10px, 0.78vw, 12px);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 7px 12px;
+    border: 1px solid rgba(255,255,255,0.18);
+    border-radius: 999px;
+    color: rgba(255,255,255,0.78);
+    background: rgba(0,0,0,0.35);
+    backdrop-filter: blur(6px);
+    white-space: nowrap;
+    opacity: 0;
+  }
+  .chip.c-green{ color: var(--helix-green); border-color: rgba(0,240,150,0.35); }
+  .chip.c-cyan{  color: var(--helix-cyan);  border-color: rgba(0,240,240,0.35); }
+  /* Right side stack only — keep title area clean */
+  .chip.p1{ top: 16%;  right: 6%; }
+  .chip.p2{ top: 28%;  right: 10%; }
+  .chip.p3{ top: 40%;  right: 6%; }
+  .chip.p4{ bottom: 30%; right: 10%; }
+  .chip.p5{ bottom: 18%; right: 6%; }
+  .chip.p6{ top: 14%;  left: 50%; }
+
+  /* Right-side label — small caption identifying the helix */
+  .helix-caption{
+    position:absolute;
+    right: clamp(36px, 4vw, 80px);
+    bottom: clamp(54px, 6vw, 96px);
+    text-align: right;
+    z-index: 6;
+    pointer-events:none;
+  }
+  .helix-caption .eyebrow{
+    font-family: var(--mc-font-body);
+    font-size: clamp(9px, 0.72vw, 11px);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--fg-dim);
+    margin-bottom: 6px;
+  }
+  .helix-caption .name{
+    font-family: var(--mc-font-display);
+    font-size: clamp(14px, 1.2vw, 20px);
+    font-weight: 500;
+    color: rgba(255,255,255,0.85);
+    letter-spacing: -0.005em;
+  }
+
+  /* ---------------------------------------------------------------
+     TWEAKS PANEL
+  --------------------------------------------------------------- */
+  .tweaks{
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+    width: 300px;
+    background: rgba(10, 14, 16, 0.88);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 14px;
+    padding: 18px 20px 16px;
+    color: #fff;
+    font-family: var(--mc-font-body);
+    z-index: 100;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    display:none;
+    max-height: calc(100vh - 48px);
+    overflow-y: auto;
+  }
+  .tweaks.open{ display:block; }
+  .tweaks-header{
+    display:flex; align-items:center; justify-content:space-between;
+    margin-bottom: 14px;
+  }
+  .tweaks-title{
+    font-family: var(--mc-font-display);
+    font-size: 16px; font-weight: 500; letter-spacing: -0.01em;
+  }
+  .tweaks-eyebrow{
+    font-size: 10px; font-weight: 500; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--mc-green); margin-bottom: 2px;
+  }
+  .tweaks-row{ margin-bottom: 12px; }
+  .tweaks-row label{
+    display:flex; justify-content:space-between; align-items:baseline;
+    font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
+    color: rgba(255,255,255,0.6); margin-bottom: 6px;
+  }
+  .tweaks-row label .val{
+    font-family: var(--mc-font-mono, monospace);
+    font-size: 11px; color: #fff; letter-spacing: 0; text-transform: none;
+  }
+  .tweaks-row input[type="range"]{ width: 100%; accent-color: var(--helix-green); }
+  .tweaks-seg{
+    display:flex; gap:4px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 6px; padding: 3px;
+  }
+  .tweaks-seg button{
+    flex:1; background: transparent; color: rgba(255,255,255,0.65);
+    border: 0; padding: 6px 8px; font-family: inherit; font-size: 11px;
+    letter-spacing: 0.06em; text-transform: uppercase; cursor: pointer;
+    border-radius: 4px; transition: background 180ms, color 180ms;
+  }
+  .tweaks-seg button.on{ background: var(--helix-green); color: #000; }
+  .tweaks-footer{ display:flex; gap:8px; margin-top: 14px; }
+  .tweaks-btn{
+    flex:1; background: rgba(255,255,255,0.08); color: #fff;
+    border: 1px solid rgba(255,255,255,0.14); padding: 8px 10px;
+    font-family: inherit; font-size: 11px; letter-spacing: 0.08em;
+    text-transform: uppercase; cursor: pointer; border-radius: 6px;
+    transition: background 180ms;
+  }
+  .tweaks-btn:hover{ background: rgba(255,255,255,0.14); }
+</style>
+</head>
+<body>
+
+<div class="stage-wrap">
+  <div class="stage" id="stage">
+
+    <!-- DNA HELIX -->
+    <div class="helix-layer" aria-hidden="true">
+      <div class="helix-glow"></div>
+      <svg id="helixSvg" preserveAspectRatio="xMidYMid meet"></svg>
+    </div>
+
+    <!-- COMPLIANCE CHIPS (right side only) -->
+    <div class="floating-chips" id="chips">
+      <div class="chip p1">IEC 62304</div>
+      <div class="chip c-green p2">Compliant-by-design</div>
+      <div class="chip p3">ISO 13485</div>
+      <div class="chip c-cyan p4">FHIR · HL7</div>
+      <div class="chip p5">GAMP5</div>
+    </div>
+
+    <!-- CHROME -->
+    <div class="chrome">
+      <div class="chrome-row top">
+        <div class="eyebrow-mark">
+          <img src="assets/mark.png" alt="Mia-Care"/>
+          <span class="sep"></span>
+          <span>P4SAMD · Platform for Software as a Medical Device</span>
+        </div>
+        <div><span class="pulse-dot"></span>SDLC&nbsp;·&nbsp;End-to-End</div>
+      </div>
+      <div class="chrome-row bottom">
+        <div>Mia-Care&nbsp;·&nbsp;Unlock the power of digital health</div>
+        <div>Rev.&nbsp;2026 / 001</div>
+      </div>
+    </div>
+
+    <!-- TITLE BLOCK (left) -->
+    <div class="title-block">
+      <div class="centre-eyebrow"><span class="bar"></span><b>Value Flow</b> &nbsp;/&nbsp; <span>SaMD Lifecycle</span></div>
+      <div class="phase-frame" id="phaseFrame"></div>
+      <div class="phase-sub-frame" id="subFrame"></div>
+    </div>
+
+    <!-- HELIX CAPTION (bottom-right) -->
+    <div class="helix-caption">
+      <div class="eyebrow">Continuous · Compliant · Composable</div>
+      <div class="name">A double helix of <span style="color:var(--helix-green)">Quality</span> &amp; <span style="color:var(--helix-cyan)">Velocity</span></div>
+    </div>
+
+    <!-- TIMELINE -->
+    <div class="timeline" id="timeline"></div>
+
+  </div>
+</div>
+
+<!-- TWEAKS PANEL -->
+<div class="tweaks" id="tweaks">
+  <div class="tweaks-header">
+    <div>
+      <div class="tweaks-eyebrow">Mia-Care</div>
+      <div class="tweaks-title">Tweaks</div>
+    </div>
+    <div style="font-size:10px;color:rgba(255,255,255,0.4);letter-spacing:0.12em;text-transform:uppercase;">DNA&nbsp;·&nbsp;SDLC</div>
+  </div>
+
+  <div class="tweaks-row">
+    <label>Rotation speed <span class="val" id="valRotSpeed">—</span></label>
+    <input type="range" id="rotSpeed" min="0" max="2" step="0.05"/>
+  </div>
+
+  <div class="tweaks-row">
+    <label>Helix radius <span class="val" id="valRadius">—</span></label>
+    <input type="range" id="radius" min="40" max="160" step="2"/>
+  </div>
+
+  <div class="tweaks-row">
+    <label>Twist density <span class="val" id="valTwist">—</span></label>
+    <input type="range" id="twist" min="1" max="6" step="0.25"/>
+  </div>
+
+  <div class="tweaks-row">
+    <label>Nucleotide density <span class="val" id="valDensity">—</span></label>
+    <input type="range" id="density" min="40" max="200" step="4"/>
+  </div>
+
+  <div class="tweaks-row">
+    <label>Base pairs</label>
+    <div class="tweaks-seg" id="bpSeg">
+      <button data-v="on">Visible</button>
+      <button data-v="off">Hidden</button>
+    </div>
+  </div>
+
+  <div class="tweaks-row">
+    <label>Drift speed <span class="val" id="valDrift">—</span></label>
+    <input type="range" id="drift" min="0" max="3" step="0.1"/>
+  </div>
+
+  <div class="tweaks-row">
+    <label>Tilt <span class="val" id="valTilt">—</span></label>
+    <input type="range" id="tilt" min="-30" max="30" step="1"/>
+  </div>
+
+  <div class="tweaks-footer">
+    <button class="tweaks-btn" id="btnPause">Pause</button>
+    <button class="tweaks-btn" id="btnReset">Reset</button>
+  </div>
+</div>
+
+<script>
+  // =====================================================================
+  // TWEAKABLE DEFAULTS
+  // =====================================================================
+  const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+    "rotSpeed": 0.8,
+    "radius": 78,
+    "twist": 3,
+    "density": 112,
+    "basePairs": "on",
+    "drift": 0.6,
+    "tilt": 0,
+    "paused": false
+  }/*EDITMODE-END*/;
+
+  let tweaks = { ...TWEAK_DEFAULTS };
+
+  // =====================================================================
+  // PHASES
+  // =====================================================================
+  const PHASES = [
+    { num:"01", word:"Design",    sub:"Requirements · Risk class · Architecture" },
+    { num:"02", word:"Develop",   sub:"Accelerators · Composable architecture" },
+    { num:"03", word:"Verify",    sub:"Unit · Integration · Traceability" },
+    { num:"04", word:"Validate",  sub:"Clinical evaluation · Usability" },
+    { num:"05", word:"Release",   sub:"CE-marked · Signed · Deployed" },
+    { num:"06", word:"Monitor",   sub:"Post-market surveillance · Fast Data" },
+  ];
+  const PER_PHASE_MS = 1800;
+  const OUT_MS = 320;            // exit duration
+  const IN_MS  = 420;            // entry duration
+  const GAP_MS = 80;             // gap so out finishes before in starts
+  const TOTAL_MS = PHASES.length * PER_PHASE_MS;
+
+  const phaseFrame = document.getElementById('phaseFrame');
+  const subFrame   = document.getElementById('subFrame');
+  const timeline   = document.getElementById('timeline');
+
+  const phaseEls = PHASES.map((p) => {
+    const el = document.createElement('div');
+    el.className = 'phase';
+    el.innerHTML = `<span class="num">${p.num}</span><span class="word">${p.word}</span>`;
+    phaseFrame.appendChild(el);
+    return el;
+  });
+  const subEls = PHASES.map((p) => {
+    const el = document.createElement('div');
+    el.className = 'phase-sub';
+    el.textContent = p.sub;
+    subFrame.appendChild(el);
+    return el;
+  });
+  let tickEls = PHASES.map(() => {
+    const t = document.createElement('div');
+    t.className = 'tick';
+    timeline.appendChild(t);
+    return t;
+  });
+
+  const fillStyle = document.createElement('style');
+  fillStyle.textContent = `.tick.active::after{ animation-duration: ${PER_PHASE_MS}ms !important; }`;
+  document.head.appendChild(fillStyle);
+
+  // =====================================================================
+  // DNA HELIX RENDERER (SVG, redrawn each frame)
+  //
+  // Coordinate system: SVG viewBox is sized to the helix-layer bounds.
+  // The helix axis runs horizontally across the full width.
+  // For each nucleotide pair i along the axis we compute a phase ph(i, t)
+  // that advances both with i (twist along length) and with t (rotation
+  // in time). Each strand sits at:
+  //   strand A: y = cy + R*sin(ph),     z =      R*cos(ph)
+  //   strand B: y = cy + R*sin(ph + π), z =      R*cos(ph + π)
+  // We project to 2D by ignoring x-projection (orthographic-ish) — the
+  // axis is already horizontal; we only need Y for screen and Z for
+  // depth shading + sort order.
+  //
+  // We also draw rungs (base pairs) every BP_EVERY samples — each rung
+  // is a single SVG line between strand A and strand B at that x.
+  // =====================================================================
+  const svg = document.getElementById('helixSvg');
+  const SVG_NS = 'http://www.w3.org/2000/svg';
+
+  // svg defs for gradients
+  svg.innerHTML = `
+    <defs>
+      <radialGradient id="ntG" cx="50%" cy="50%" r="50%">
+        <stop offset="0%"  stop-color="#7CFFCB" stop-opacity="1"/>
+        <stop offset="60%" stop-color="#00F096" stop-opacity="1"/>
+        <stop offset="100%" stop-color="#00F096" stop-opacity="0"/>
+      </radialGradient>
+      <radialGradient id="ntC" cx="50%" cy="50%" r="50%">
+        <stop offset="0%"  stop-color="#A8FFFF" stop-opacity="1"/>
+        <stop offset="60%" stop-color="#00F0F0" stop-opacity="1"/>
+        <stop offset="100%" stop-color="#00F0F0" stop-opacity="0"/>
+      </radialGradient>
+      <linearGradient id="rung" x1="0" x2="1" y1="0" y2="0">
+        <stop offset="0%" stop-color="#00F096"/>
+        <stop offset="100%" stop-color="#00F0F0"/>
+      </linearGradient>
+      <!-- soft fade at left/right edges -->
+      <linearGradient id="edgeFade" x1="0" x2="1" y1="0" y2="0">
+        <stop offset="0%"  stop-color="#fff" stop-opacity="0"/>
+        <stop offset="8%"  stop-color="#fff" stop-opacity="1"/>
+        <stop offset="92%" stop-color="#fff" stop-opacity="1"/>
+        <stop offset="100%" stop-color="#fff" stop-opacity="0"/>
+      </linearGradient>
+      <mask id="fadeMask">
+        <rect x="0" y="0" width="100%" height="100%" fill="url(#edgeFade)"/>
+      </mask>
+    </defs>
+    <g id="helixGroup" mask="url(#fadeMask)"></g>
+  `;
+  const helixGroup = svg.querySelector('#helixGroup');
+
+  // sized later
+  let W = 1600, H = 540;
+  function sizeSvg(){
+    const r = svg.getBoundingClientRect();
+    W = r.width || 1600;
+    H = r.height || 540;
+    svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+  }
+
+  // We accumulate two phase offsets:
+  //   driftOffset — translation along x (continuous lateral motion of
+  //                 the pattern, like the helix is being pulled through)
+  //   rotOffset   — rotation of the helix around its long axis
+  let driftOffset = 0;
+  let rotOffset   = 0;
+  let pulseProgress = 0;     // 0..1 sweep along helix
+  let lastT = performance.now();
+
+  function drawHelix(){
+    const cy = H / 2;
+    const R  = tweaks.radius;
+    const N  = Math.max(20, Math.round(tweaks.density));
+    // base pairs every K samples — denser when twist is denser
+    const BP_EVERY = Math.max(2, Math.round(N / (tweaks.twist * 6)));
+
+    // tilt (rotation in screen plane around centre)
+    const tiltRad = tweaks.tilt * Math.PI / 180;
+    const cosT = Math.cos(tiltRad), sinT = Math.sin(tiltRad);
+
+    // Build geometry
+    // We sample slightly beyond the visible width so the strand curves
+    // disappear smoothly into the edge fade.
+    const margin = 80;
+    const xs = [];
+    for (let i=0; i<N; i++){
+      const fr = i / (N - 1);
+      const x  = -margin + fr * (W + margin*2);
+      xs.push(x);
+    }
+
+    // Phase per sample. Twist = full turns across the visible width.
+    // rotOffset adds time-based rotation of the helix.
+    const turns = tweaks.twist;
+    function phaseAt(i){
+      const fr = (xs[i] - (-margin)) / (W + margin*2);
+      return fr * turns * Math.PI * 2 + rotOffset + driftOffset;
+    }
+
+    // Compute per-sample positions for both strands
+    const A = []; // strand A: green
+    const B = []; // strand B: cyan
+    for (let i=0; i<N; i++){
+      const ph = phaseAt(i);
+      const yA =  Math.sin(ph) * R;
+      const zA =  Math.cos(ph) * R;
+      const yB =  Math.sin(ph + Math.PI) * R;
+      const zB =  Math.cos(ph + Math.PI) * R;
+
+      // Apply tilt (rotation in screen plane: rotate around helix axis
+      // means rotating (x, y) around centre, but x is fixed by sample.
+      // For visual tilt we just shear y with x.)
+      const xRel = xs[i] - W/2;
+      const tyA  = cy + yA + sinT * xRel * 0.2;
+      const tyB  = cy + yB + sinT * xRel * 0.2;
+
+      A.push({ x: xs[i], y: tyA, z: zA, ph });
+      B.push({ x: xs[i], y: tyB, z: zB, ph: ph + Math.PI });
+    }
+
+    // Build draw list. Each item is an SVG element string with a depth
+    // value used to sort back-to-front. Smaller (more negative) z = deeper.
+    const items = [];
+
+    // Backbone strands as smooth polylines. Split each strand into
+    // depth-banded segments (4 bands) so we can sort them too — this
+    // gives the strand an apparent over/under as it spirals.
+    const BANDS = 8;
+    function pushStrand(points, color){
+      // For each consecutive pair, decide which band it belongs to
+      // based on the average Z. Group consecutive points sharing a band
+      // into a single polyline.
+      let curBand = -1;
+      let curPath = '';
+      let curZ = 0;
+      let curCount = 0;
+      const flush = () => {
+        if (curPath){
+          const opacity = 0.55 + 0.45 * (curZ / R); // back .55, front 1.0
+          const width = 1.6 + 1.6 * (curZ / R);     // back thinner, front thicker
+          items.push({
+            z: curZ,
+            kind: 'strand',
+            svg: `<path d="${curPath}" fill="none"
+                        stroke="${color}"
+                        stroke-width="${width.toFixed(2)}"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        opacity="${opacity.toFixed(2)}"/>`
+          });
+        }
+        curPath = ''; curZ = 0; curCount = 0;
+      };
+      for (let i=0; i<points.length-1; i++){
+        const p1 = points[i], p2 = points[i+1];
+        const avgZ = (p1.z + p2.z) / 2;
+        const bandIdx = Math.floor(((avgZ + R) / (2*R)) * BANDS);
+        if (bandIdx !== curBand){
+          flush();
+          curBand = bandIdx;
+          curPath = `M ${p1.x.toFixed(1)} ${p1.y.toFixed(1)} L ${p2.x.toFixed(1)} ${p2.y.toFixed(1)}`;
+        } else {
+          curPath += ` L ${p2.x.toFixed(1)} ${p2.y.toFixed(1)}`;
+        }
+        curZ = (curZ * curCount + avgZ) / (curCount + 1);
+        curCount++;
+      }
+      flush();
+    }
+    pushStrand(A, '#00F096');
+    pushStrand(B, '#00F0F0');
+
+    // Rungs (base pairs) — drawn between paired samples, sorted by
+    // average Z. Slight alpha falloff for back rungs.
+    if (tweaks.basePairs === 'on'){
+      for (let i=0; i<N; i+=BP_EVERY){
+        const a = A[i], b = B[i];
+        const avgZ = (a.z + b.z) / 2;
+        const opacity = 0.25 + 0.55 * ((avgZ + R) / (2*R));
+        // The rung is a thin line; we add little caps where it meets each strand
+        items.push({
+          z: avgZ - 1, // draw rung just behind the closer nucleotide
+          kind: 'rung',
+          svg: `<line x1="${a.x.toFixed(1)}" y1="${a.y.toFixed(1)}"
+                      x2="${b.x.toFixed(1)}" y2="${b.y.toFixed(1)}"
+                      stroke="url(#rung)"
+                      stroke-width="1.4"
+                      stroke-linecap="round"
+                      opacity="${opacity.toFixed(2)}"/>`
+        });
+      }
+    }
+
+    // Nucleotides — circles with depth-based size + opacity.
+    // Show every Nth one so it doesn't look beaded.
+    const NT_EVERY = Math.max(1, Math.round(BP_EVERY / 1.5));
+
+    // ---------------------------------------------------------------
+    // LIGHT PULSE — a bright signal travels along the helix axis.
+    // pulseProgress is 0..1, mapped to a position in screen X. Nucleotides
+    // and rungs near that X get boosted brightness/size. Two pulses
+    // travel offset by half-period so motion feels continuous.
+    // ---------------------------------------------------------------
+    const pulseSpan = W * 0.14;            // width of glow window in px
+    const pulseXs = [
+      -margin + ((pulseProgress)        % 1) * (W + margin*2),
+      -margin + ((pulseProgress + 0.5) % 1) * (W + margin*2),
+    ];
+    function pulseBoost(x){
+      let best = 0;
+      for (const px of pulseXs){
+        const d = Math.abs(x - px);
+        if (d < pulseSpan){
+          // smooth bell
+          const t = 1 - d / pulseSpan;
+          best = Math.max(best, t * t * (3 - 2*t)); // smoothstep
+        }
+      }
+      return best * 0.8; // overall intensity dampener
+    }
+
+    function pushNt(p, fill){
+      const depthFr = (p.z + R) / (2*R); // 0 back, 1 front
+      const boost = pulseBoost(p.x);
+      const r = 1.8 + 4.0 * depthFr + boost * 4.5;
+      const op = Math.min(1, 0.45 + 0.55 * depthFr + boost * 0.45);
+      let extra = '';
+      if (boost > 0.04){
+        // a soft white core layered on top to read as "signal"
+        extra = `<circle cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}"
+                          r="${(r * 0.55).toFixed(2)}"
+                          fill="#fff"
+                          opacity="${(boost * 0.85).toFixed(2)}"/>`;
+      }
+      items.push({
+        z: p.z + (boost > 0 ? 0.5 : 0),
+        kind: 'nt',
+        svg: `<circle cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}"
+                      r="${r.toFixed(2)}"
+                      fill="${fill}"
+                      opacity="${op.toFixed(2)}"/>${extra}`
+      });
+    }
+    for (let i=0; i<N; i+=NT_EVERY){
+      pushNt(A[i], 'url(#ntG)');
+      pushNt(B[i], 'url(#ntC)');
+    }
+
+    // Sort back-to-front
+    items.sort((a, b) => a.z - b.z);
+
+    helixGroup.innerHTML = items.map(it => it.svg).join('');
+  }
+
+  // =====================================================================
+  // PHASE TICK
+  // =====================================================================
+  let currentIdx = -1;
+  let startTime = performance.now();
+  let pauseStart = null;
+  let pauseAccum = 0;
+
+  function handlePhaseStep(now){
+    if (tweaks.paused) return;
+    const elapsed = (now - startTime - pauseAccum) % TOTAL_MS;
+    const idx = Math.floor(elapsed / PER_PHASE_MS);
+    if (idx === currentIdx) return;
+
+    const prevIdx = currentIdx;
+    const enterDelay = OUT_MS + GAP_MS;
+
+    phaseEls.forEach((el, i) => {
+      if (i === idx){
+        el.animate(
+          [
+            { opacity: 0, transform: 'translateX(-50%) translateY(18px)' },
+            { opacity: 1, transform: 'translateX(-50%) translateY(0)'   },
+          ],
+          { duration: IN_MS, delay: enterDelay, easing: 'cubic-bezier(0.16, 1, 0.3, 1)', fill: 'both' }
+        );
+      } else if (i === prevIdx){
+        el.animate(
+          [
+            { opacity: 1, transform: 'translateX(-50%) translateY(0)'   },
+            { opacity: 0, transform: 'translateX(-50%) translateY(-16px)' },
+          ],
+          { duration: OUT_MS, easing: 'cubic-bezier(0.5, 0, 0.75, 0)', fill: 'forwards' }
+        );
+      }
+    });
+    subEls.forEach((el, i) => {
+      if (i === idx){
+        el.animate(
+          [{ opacity: 0, transform: 'translateX(-50%) translateY(8px)' }, { opacity: 1, transform: 'translateX(-50%) translateY(0)' }],
+          { duration: IN_MS, delay: enterDelay + 80, easing: 'cubic-bezier(0.16, 1, 0.3, 1)', fill: 'both' }
+        );
+      } else if (i === prevIdx){
+        el.animate(
+          [{ opacity: 1, transform: 'translateX(-50%) translateY(0)' }, { opacity: 0, transform: 'translateX(-50%) translateY(-6px)' }],
+          { duration: OUT_MS, easing: 'cubic-bezier(0.5, 0, 0.75, 0)', fill: 'forwards' }
+        );
+      }
+    });
+
+    tickEls.forEach((el, i) => {
+      el.classList.remove('active', 'done');
+      if (i < idx) el.classList.add('done');
+      else if (i === idx) el.classList.add('active');
+    });
+    const activeTick = tickEls[idx];
+    if (activeTick){
+      const clone = activeTick.cloneNode(true);
+      activeTick.parentNode.replaceChild(clone, activeTick);
+      tickEls[idx] = clone;
+      clone.classList.add('active');
+    }
+    currentIdx = idx;
+  }
+
+  // =====================================================================
+  // MAIN LOOP
+  // =====================================================================
+  function frame(now){
+    const dt = Math.min(50, now - lastT);
+    lastT = now;
+
+    if (!tweaks.paused){
+      rotOffset   += tweaks.rotSpeed * (dt / 1000);
+      driftOffset -= tweaks.drift * (dt / 1000); // negative = pattern moves leftward
+      pulseProgress = (pulseProgress + (dt / 1000) / 6.5) % 1; // ~6.5s sweep
+    }
+
+    drawHelix();
+    handlePhaseStep(now);
+
+    requestAnimationFrame(frame);
+  }
+
+  // =====================================================================
+  // CHIPS
+  // =====================================================================
+  const chipEls = [...document.querySelectorAll('.chip')];
+  const CHIP_SHOW = 3500;
+  const CHIP_STAGGER = 800;
+  const CHIP_CYCLE = chipEls.length * (CHIP_SHOW / 2);
+  chipEls.forEach((el, i) => {
+    el.animate(
+      [
+        { opacity: 0, transform: 'translateY(8px)' },
+        { opacity: 1, transform: 'translateY(0)',   offset: 0.15 },
+        { opacity: 1, transform: 'translateY(0)',   offset: 0.75 },
+        { opacity: 0, transform: 'translateY(-6px)' },
+      ],
+      { duration: CHIP_CYCLE, delay: i * CHIP_STAGGER, iterations: Infinity, easing: 'cubic-bezier(0.2, 0.8, 0.2, 1)' }
+    );
+  });
+
+  // =====================================================================
+  // TWEAKS UI
+  // =====================================================================
+  const tweaksEl = document.getElementById('tweaks');
+  const $ = (id) => document.getElementById(id);
+
+  function syncUI(){
+    $('rotSpeed').value = tweaks.rotSpeed;  $('valRotSpeed').textContent = tweaks.rotSpeed.toFixed(2) + ' rad/s';
+    $('radius').value   = tweaks.radius;    $('valRadius').textContent   = Math.round(tweaks.radius) + ' px';
+    $('twist').value    = tweaks.twist;     $('valTwist').textContent    = tweaks.twist.toFixed(2) + ' turns';
+    $('density').value  = tweaks.density;   $('valDensity').textContent  = Math.round(tweaks.density);
+    $('drift').value    = tweaks.drift;     $('valDrift').textContent    = tweaks.drift === 0 ? 'still' : tweaks.drift.toFixed(1) + '×';
+    $('tilt').value     = tweaks.tilt;      $('valTilt').textContent     = tweaks.tilt + '°';
+    document.querySelectorAll('#bpSeg button').forEach(b => b.classList.toggle('on', b.dataset.v === tweaks.basePairs));
+    $('btnPause').textContent = tweaks.paused ? 'Play' : 'Pause';
+  }
+
+  function persist(edits){
+    try{ window.parent.postMessage({ type: '__edit_mode_set_keys', edits }, '*'); }catch(e){}
+  }
+
+  function set(key, value){
+    tweaks[key] = value;
+    if (key === 'paused'){
+      if (value){ pauseStart = performance.now(); }
+      else if (pauseStart != null){ pauseAccum += performance.now() - pauseStart; pauseStart = null; }
+    }
+    syncUI();
+    persist({ [key]: value });
+  }
+
+  $('rotSpeed').addEventListener('input', e => set('rotSpeed', +e.target.value));
+  $('radius')  .addEventListener('input', e => set('radius',   +e.target.value));
+  $('twist')   .addEventListener('input', e => set('twist',    +e.target.value));
+  $('density') .addEventListener('input', e => set('density',  +e.target.value));
+  $('drift')   .addEventListener('input', e => set('drift',    +e.target.value));
+  $('tilt')    .addEventListener('input', e => set('tilt',     +e.target.value));
+  document.querySelectorAll('#bpSeg button').forEach(b => {
+    b.addEventListener('click', () => set('basePairs', b.dataset.v));
+  });
+
+  $('btnPause').addEventListener('click', () => set('paused', !tweaks.paused));
+  $('btnReset').addEventListener('click', () => {
+    tweaks = { ...TWEAK_DEFAULTS };
+    pauseStart = null; pauseAccum = 0;
+    syncUI();
+    persist(tweaks);
+  });
+
+  // Edit-mode protocol
+  window.addEventListener('message', (e) => {
+    const data = e.data || {};
+    if (data.type === '__activate_edit_mode')   tweaksEl.classList.add('open');
+    if (data.type === '__deactivate_edit_mode') tweaksEl.classList.remove('open');
+  });
+  try{ window.parent.postMessage({ type: '__edit_mode_available' }, '*'); }catch(e){}
+
+  // BOOT
+  window.addEventListener('resize', sizeSvg);
+  sizeSvg();
+  syncUI();
+  requestAnimationFrame((t) => { lastT = t; frame(t); });
+</script>
+
+</body>
+</html>
