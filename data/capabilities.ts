@@ -58,7 +58,7 @@ export const capabilities: Capability[] = [
     regulations: ["IEC 62304", "ISO 13485", "EU MDR 2017/745", "ISO 14971", "FDA"],
     relatedUseCases: ["legacy-remediation", "greenfield-samd", "high-risk-ai-cdss"],
     seo: {
-      title: "SDLC Workflow Orchestrator — P4SaMD Capability | Mia-Care",
+      title: "SDLC Workflow Orchestrator | P4SaMD Capability | Mia-Care",
       description:
         "Connect your Git, ALM, and eQMS into a single IEC 62304-compliant SDLC workflow. No rip-and-replace. Compliance built into how your team already works.",
     },
@@ -72,7 +72,7 @@ export const capabilities: Capability[] = [
       "Guarantees end-to-end traceability from requirements and risks to design, implementation, and verification by integrating directly with ALM systems and SDLC toolchains in real time. No manual updates. No reconciliation sprints before audits.",
     whatItDoes: {
       heading: "Traceability that builds itself, continuously.",
-      body: "Manual traceability is the silent killer of regulated software projects. It starts as a spreadsheet and ends as an audit risk. By the time the project is ready for review, the traceability matrix is already out of date.\n\nARTT integrates directly with your ALM, Git repositories, and risk management toolchain to map every requirement to its design output, every design output to its implementation, and every implementation to its verification evidence — in real time, automatically, every time something changes.",
+      body: "Manual traceability is the silent killer of regulated software projects. It starts as a spreadsheet and ends as an audit risk. By the time the project is ready for review, the traceability matrix is already out of date.\n\nARTT integrates directly with your ALM, Git repositories, and risk management toolchain to map every requirement to its design output, every design output to its implementation, and every implementation to its verification evidence, in real time, automatically, every time something changes.",
     },
     features: [
       {
@@ -103,7 +103,7 @@ export const capabilities: Capability[] = [
     regulations: ["IEC 62304", "ISO 14971", "EU MDR 2017/745", "FDA", "ISO 13485"],
     relatedUseCases: ["legacy-remediation", "high-risk-ai-cdss", "greenfield-samd"],
     seo: {
-      title: "Automated Real-time Traceability (ARTT) — P4SaMD | Mia-Care",
+      title: "Automated Real-time Traceability (ARTT) | P4SaMD | Mia-Care",
       description:
         "End-to-end traceability from requirements to code, automatically maintained in real time. No reconciliation sprints. No gaps before audits.",
     },
@@ -114,10 +114,10 @@ export const capabilities: Capability[] = [
     name: "Documentation Engine",
     tagline: "Your audit package, assembled automatically.",
     description:
-      "P4SaMD automatically generates DHF records, risk evidence, verification reports, audit trails, and submission-ready documentation — ensuring constant audit readiness from the first commit to the final release.",
+      "P4SaMD automatically generates DHF records, risk evidence, verification reports, audit trails, and submission-ready documentation, ensuring constant audit readiness from the first commit to the final release.",
     whatItDoes: {
       heading: "Documentation that writes itself, from your work.",
-      body: "The Documentation Engine lets your SaMD team focus on what they do best: building great software. By connecting directly to your SDLC tools and pulling live development data in real time, it compiles the Design History File, Technical File, and all required regulatory evidence continuously and automatically — in your own templates, using your terminology, ready for submission at any point in the development cycle.",
+      body: "The Documentation Engine lets your SaMD team focus on what they do best: building great software. By connecting directly to your SDLC tools and pulling live development data in real time, it compiles the Design History File, Technical File, and all required regulatory evidence continuously and automatically, in your own templates, using your terminology, ready for submission at any point in the development cycle.",
     },
     features: [
       {
@@ -136,19 +136,19 @@ export const capabilities: Capability[] = [
         label: "Release Notes",
         title: "Compliant release notes, automatically",
         description:
-          "Every release automatically generates the full documentation package: SRS, Test Reports, Risk Management Files, and Traceability Matrix — complete with change log, impact assessment, and verification summary.",
+          "Every release automatically generates the full documentation package: SRS, Test Reports, Risk Management Files, and Traceability Matrix, complete with change log, impact assessment, and verification summary.",
       },
       {
         label: "Audit Trail",
         title: "Immutable record of every decision and change",
         description:
-          "A timestamped, tamper-evident log of every decision, change, and approval across the entire SDLC — answering 'who decided what, and when?' instantly, for any point in the product's lifecycle.",
+          "A timestamped, tamper-evident log of every decision, change, and approval across the entire SDLC, answering 'who decided what, and when?' instantly, for any point in the product's lifecycle.",
       },
     ],
     regulations: ["ISO 13485", "EU MDR 2017/745", "FDA", "21 CFR Part 820", "IEC 62304"],
     relatedUseCases: ["legacy-remediation", "high-risk-ai-cdss", "greenfield-samd"],
     seo: {
-      title: "Documentation Engine — P4SaMD Capability | Mia-Care",
+      title: "Documentation Engine | P4SaMD Capability | Mia-Care",
       description:
         "Automatically generate DHF records, Technical Files, and audit trails from live development data. Audit-ready documentation without manual effort.",
     },
@@ -169,7 +169,7 @@ export const capabilities: Capability[] = [
         label: "Deterministic Rule Enforcement",
         title: "No ambiguity, no gaps",
         description:
-          "Whisper applies a curated, versioned regulatory ruleset where every enforcement action is traceable to a specific requirement. Binary compliance checks, software classification boundaries, mandatory documentation triggers — all handled consistently, every time.",
+          "Whisper applies a curated, versioned regulatory ruleset where every enforcement action is traceable to a specific requirement. Binary compliance checks, software classification boundaries, mandatory documentation triggers, all handled consistently, every time.",
       },
       {
         label: "Policy Evaluation",
@@ -193,7 +193,7 @@ export const capabilities: Capability[] = [
     regulations: ["ISO 13485", "IEC 62304", "EU MDR 2017/745", "FDA", "EU AI Act", "GMLP"],
     relatedUseCases: ["high-risk-ai-cdss", "greenfield-samd", "legacy-remediation"],
     seo: {
-      title: "Smart Assistant Whisper — P4SaMD Capability | Mia-Care",
+      title: "Smart Assistant Whisper | P4SaMD Capability | Mia-Care",
       description:
         "Deterministic regulatory guidance embedded in your SDLC. Whisper enforces compliance rules and surfaces proactive suggestions aligned with IEC 62304, MDR, FDA, and EU AI Act.",
     },
@@ -207,7 +207,7 @@ export const capabilities: Capability[] = [
       "A dedicated feature set that enforces the specific regulatory requirements of AI-enabled medical software: transparency, explainability, audit logbooks, and data quality. Supports EU AI Act, GMLP, and FDA PCCP frameworks.",
     whatItDoes: {
       heading: "The compliance infrastructure for AI-enabled SaMD.",
-      body: "AI components enable smarter diagnostics and adaptive workflows — but they also introduce a new layer of regulatory complexity. The EU AI Act, FDA GMLP, and PCCP frameworks demand documentation and control practices that standard QMS systems were never designed to support.\n\nMaster AI for Compliance adds a dedicated layer within P4SaMD that enforces transparency, explainability, and logbook requirements while supporting structured documentation of AI training data, model versions, performance metrics, and PCCP change control plans.",
+      body: "AI components enable smarter diagnostics and adaptive workflows, but they also introduce a new layer of regulatory complexity. The EU AI Act, FDA GMLP, and PCCP frameworks demand documentation and control practices that standard QMS systems were never designed to support.\n\nMaster AI for Compliance adds a dedicated layer within P4SaMD that enforces transparency, explainability, and logbook requirements while supporting structured documentation of AI training data, model versions, performance metrics, and PCCP change control plans.",
     },
     features: [
       {
@@ -226,7 +226,7 @@ export const capabilities: Capability[] = [
         label: "Model Logbooks",
         title: "Automated tracking of every model state",
         description:
-          "Automated logbooks track training data characteristics, model versions, performance benchmarks, validation results, and bias assessments — creating the continuous record that regulators require for AI-enabled SaMD.",
+          "Automated logbooks track training data characteristics, model versions, performance benchmarks, validation results, and bias assessments, creating the continuous record that regulators require for AI-enabled SaMD.",
       },
       {
         label: "AI Risk Management",
@@ -238,7 +238,7 @@ export const capabilities: Capability[] = [
     regulations: ["EU AI Act", "GMLP", "PCCP", "EU MDR 2017/745", "FDA"],
     relatedUseCases: ["high-risk-ai-cdss", "greenfield-samd", "legacy-remediation"],
     seo: {
-      title: "Master AI for Compliance — P4SaMD Capability | Mia-Care",
+      title: "Master AI for Compliance | P4SaMD Capability | Mia-Care",
       description:
         "Enforce EU AI Act, GMLP, and FDA PCCP requirements for AI-enabled SaMD. Automated logbooks, transparency reports, and PCCP-aligned change management.",
     },
@@ -252,7 +252,7 @@ export const capabilities: Capability[] = [
       "Provides dedicated capabilities to ingest existing applications of any codebase, run automated gap analysis against reference standards, and generate custom remediation plans that move legacy software toward certification without a full redevelopment.",
     whatItDoes: {
       heading: "From legacy software to audit-ready evidence.",
-      body: "Millions of lines of medical device software were written before IEC 62304 was a consideration and before EU MDR came into force. This software still works and creates value — but it cannot be certified, updated, or brought to new markets without satisfying the regulatory frameworks it predates.\n\nThe Brownfield Remediator ingests your existing software regardless of programming language or documentation maturity, automates the gap analysis, reconstructs traceability from disconnected artifacts, and generates a structured, sprint-ready remediation backlog.",
+      body: "Millions of lines of medical device software were written before IEC 62304 was a consideration and before EU MDR came into force. This software still works and creates value, but it cannot be certified, updated, or brought to new markets without satisfying the regulatory frameworks it predates.\n\nThe Brownfield Remediator ingests your existing software regardless of programming language or documentation maturity, automates the gap analysis, reconstructs traceability from disconnected artifacts, and generates a structured, sprint-ready remediation backlog.",
     },
     features: [
       {
@@ -265,7 +265,7 @@ export const capabilities: Capability[] = [
         label: "Gap Analysis",
         title: "Deviations from IEC 62304 and ISO 13485, surfaced automatically",
         description:
-          "The P4SaMD Compliance Engine maps existing artifacts to reference standards and identifies every gap — what's missing, what's incomplete, what's non-conformant — with prioritized remediation effort estimates.",
+          "The P4SaMD Compliance Engine maps existing artifacts to reference standards and identifies every gap (what's missing, what's incomplete, what's non-conformant) with prioritized remediation effort estimates.",
       },
       {
         label: "Traceability Reconstruction",
@@ -283,7 +283,7 @@ export const capabilities: Capability[] = [
     regulations: ["IEC 62304", "ISO 13485", "EU MDR 2017/745", "FDA"],
     relatedUseCases: ["legacy-remediation", "high-risk-ai-cdss", "greenfield-samd"],
     seo: {
-      title: "Brownfield Remediator — P4SaMD Capability | Mia-Care",
+      title: "Brownfield Remediator | P4SaMD Capability | Mia-Care",
       description:
         "Certify legacy medical software without rebuilding it. Automated gap analysis, traceability reconstruction, and sprint-ready remediation plans for IEC 62304 and EU MDR.",
     },
@@ -297,7 +297,7 @@ export const capabilities: Capability[] = [
       "Supports Software Item implementation with ready-to-use modules and software components, while implementing Secure by Design principles by continuously scanning for vulnerabilities and managing software supply chain security per IEC 81001-5-1.",
     whatItDoes: {
       heading: "Security and compliance built into the development toolchain.",
-      body: "Medical software is an increasingly targeted attack surface. A vulnerability in a device software component is not just a security incident — it's a patient safety event and a regulatory failure. IEC 81001-5-1 sets the standard for health software cybersecurity, but satisfying it requires far more than a security audit at release time.\n\nP4SaMD's Secure Software Development capability embeds IEC 81001-5-1 requirements directly into the development workflow, maintaining an up-to-date Software Bill of Materials and continuously scanning dependencies for known CVEs.",
+      body: "Medical software is an increasingly targeted attack surface. A vulnerability in a device software component is not just a security incident, it's a patient safety event and a regulatory failure. IEC 81001-5-1 sets the standard for health software cybersecurity, but satisfying it requires far more than a security audit at release time.\n\nP4SaMD's Secure Software Development capability embeds IEC 81001-5-1 requirements directly into the development workflow, maintaining an up-to-date Software Bill of Materials and continuously scanning dependencies for known CVEs.",
     },
     features: [
       {
@@ -316,7 +316,7 @@ export const capabilities: Capability[] = [
         label: "Vulnerability Scanning",
         title: "Automated CVE detection with risk impact assessment",
         description:
-          "Continuously scans dependencies and infrastructure for known vulnerabilities, assessing each finding against its compliance impact — distinguishing between a minor update and a finding requiring an immediate risk management response.",
+          "Continuously scans dependencies and infrastructure for known vulnerabilities, assessing each finding against its compliance impact, distinguishing between a minor update and a finding requiring an immediate risk management response.",
       },
       {
         label: "Secure Development Guardrails",
@@ -328,7 +328,7 @@ export const capabilities: Capability[] = [
     regulations: ["IEC 81001-5-1", "IEC 62304", "ISO 13485"],
     relatedUseCases: ["greenfield-samd", "legacy-remediation", "high-risk-ai-cdss"],
     seo: {
-      title: "Secure Software Development — P4SaMD Capability | Mia-Care",
+      title: "Secure Software Development | P4SaMD Capability | Mia-Care",
       description:
         "Embed IEC 81001-5-1 cybersecurity compliance into your medical device SDLC. Continuous SBOM management, CVE scanning, and secure component library.",
     },
@@ -349,7 +349,7 @@ export const capabilities: Capability[] = [
         label: "Step-by-step Process Guidance",
         title: "Walk through every lifecycle phase",
         description:
-          "Guides teams through each SDLC lifecycle phase with contextual instructions, decision prompts, and required artifact checklists — so the correct process is always the path of least resistance.",
+          "Guides teams through each SDLC lifecycle phase with contextual instructions, decision prompts, and required artifact checklists, so the correct process is always the path of least resistance.",
       },
       {
         label: "Conversational Interface",
@@ -373,7 +373,7 @@ export const capabilities: Capability[] = [
     regulations: ["ISO 13485", "IEC 62304", "EU MDR 2017/745", "FDA"],
     relatedUseCases: ["greenfield-samd", "high-risk-ai-cdss", "legacy-remediation"],
     seo: {
-      title: "Guided Workflows — P4SaMD Capability | Mia-Care",
+      title: "Guided Workflows | P4SaMD Capability | Mia-Care",
       description:
         "Step-by-step compliance guidance for every developer, regardless of regulatory background. Role-based workflows aligned with IEC 62304 and ISO 13485.",
     },

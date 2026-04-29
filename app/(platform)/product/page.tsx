@@ -7,7 +7,7 @@ import { HelixSvg } from "@/components/common/HelixSvg";
 import { PillTag } from "@/components/common/PillTag";
 
 export const metadata: Metadata = {
-  title: "Platform Overview — The AI-native Platform for SaMD",
+  title: "Platform Overview | The AI-native Platform for SaMD",
   description:
     "Mia-Care P4SaMD unifies eQMS, ALM, and DevOps into a single platform, embedding regulatory compliance directly into your SDLC.",
 };
@@ -26,12 +26,12 @@ const BENEFITS = [
   {
     label: "Evidence Generation",
     title: "All regulatory evidence, generated automatically",
-    body: "The system automatically collects, compiles, and traces all necessary data points to generate a complete, audit-ready Design History File (DHF) and Technical File — without any manual effort.",
+    body: "The system automatically collects, compiles, and traces all necessary data points to generate a complete, audit-ready Design History File (DHF) and Technical File, without any manual effort.",
   },
   {
     label: "Automation",
     title: "SDLC automation from testing to release notes",
-    body: "P4SaMD automates repetitive manual tasks throughout the development lifecycle — from automated test execution to documentation updates — drastically increasing engineering velocity while maintaining strict compliance.",
+    body: "P4SaMD automates repetitive manual tasks throughout the development lifecycle (from automated test execution to documentation updates) drastically increasing engineering velocity while maintaining strict compliance.",
   },
 ];
 

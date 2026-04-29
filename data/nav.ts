@@ -68,7 +68,7 @@ export const navItems: NavItem[] = [
       { label: "Legacy Software Remediation", href: "/use-cases/legacy-remediation" },
     ],
   },
-  { label: "Pricing", href: "/pricing" },
+  { label: "Plans", href: "/plans" },
   {
     label: "Resources",
     href: "/resources/competence-center",

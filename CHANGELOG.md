@@ -4,6 +4,39 @@ All notable changes to the Mia-Care P4SaMD website are documented here.
 
 ---
 
+## [Unreleased] — 2026-04-29
+
+### Hero section — Double Helix animation
+
+- Replaced the chaos-to-order N-body physics animation and `HomepageMockup` with a new interactive **double helix** canvas animation (`HelixCanvas.tsx`)
+- `HeroBanner.tsx` refactored: animation fills the full hero section as a background; copy overlaid at z-index 2 with a top scrim for legibility
+- Layout changed from two-column (H1 left + subtitle right) to centered single-column
+- Added `ValueFlowAnimation.tsx` (standalone animation component available for future use)
+
+### Pricing → Plans
+
+- Renamed `/pricing` route to `/plans` — new page (`app/(marketing)/plans/page.tsx`) with full tier breakdown, FAQ, and CTA
+- Old `/pricing` page now redirects to `/plans` to preserve incoming links
+- Navigation updated: label "Pricing" → "Plans", href `/pricing` → `/plans`
+
+### SEO titles — separator standardization
+
+- Replaced `—` (em dash) with `|` (pipe) as separator in all `<title>` tags across:
+  - `app/(platform)/product/page.tsx`
+  - `data/capabilities.ts` (8 capability SEO titles)
+  - `data/use-cases.ts` (3 use-case SEO titles)
+
+### Copy — punctuation cleanup
+
+- Replaced em dashes used as parenthetical breaks with commas or parentheses in body copy across `data/capabilities.ts` and `data/use-cases.ts`
+
+### Request Demo page
+
+- Improved text legibility: body copy and "What to expect" list items switched from `--text-secondary` (55% opacity) to `--text-primary` at 80% opacity
+- Removed the Lorem ipsum placeholder testimonial blockquote from the left column
+
+---
+
 ## [Unreleased] — 2026-04-26
 
 ### Added

@@ -39,7 +39,7 @@ export default function RequestDemoPage() {
             </h1>
             <p
               className="text-base mb-10"
-              style={{ color: "var(--text-secondary)", lineHeight: 1.75 }}
+              style={{ color: "var(--text-primary)", lineHeight: 1.75, opacity: 0.8 }}
             >
               We'll walk through how P4SaMD maps to your specific regulatory situation: your tools,
               your standards, your team structure.
@@ -66,7 +66,7 @@ export default function RequestDemoPage() {
                     >
                       ✓
                     </span>
-                    <span style={{ color: "var(--text-secondary)" }}>{prop}</span>
+                    <span style={{ color: "var(--text-primary)", opacity: 0.8 }}>{prop}</span>
                   </li>
                 ))}
               </ul>
@@ -110,23 +110,6 @@ export default function RequestDemoPage() {
                 </div>
               ))}
             </div>
-
-            {/* Testimonial */}
-            <blockquote
-              className="mt-8 rounded-card p-5 italic text-sm"
-              style={{
-                background: "var(--bg-surface)",
-                border: "1px solid var(--bg-border)",
-                color: "var(--text-secondary)",
-                lineHeight: 1.75,
-              }}
-            >
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. P4SaMD transformed our
-              approach to regulatory compliance, cutting our time-to-market significantly."
-              <footer className="mt-3 not-italic label-caps">
-                — Customer, Global MedTech Enterprise
-              </footer>
-            </blockquote>
           </div>
 
           {/* Right col — HubSpot form */}
