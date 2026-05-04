@@ -6,6 +6,21 @@ import { remark } from "remark";
 import remarkHtml from "remark-html";
 import { assetPath } from "./asset";
 
+const HTML_ENTITIES: Record<string, string> = {
+  "&amp;": "&",
+  "&lt;": "<",
+  "&gt;": ">",
+  "&quot;": '"',
+  "&apos;": "'",
+  "&nbsp;": " ",
+};
+
+function decodeEntities(str: string): string {
+  return str
+    .replace(/&#(\d+);/g, (_, code) => String.fromCodePoint(Number(code)))
+    .replace(/&[a-z]+;/gi, (entity) => HTML_ENTITIES[entity] ?? entity);
+}
+
 const CONTENT_DIR = path.join(process.cwd(), "content/blog");
 
 export type PostMeta = {
@@ -57,17 +72,17 @@ export function getPostMeta(slug: string): PostMeta | null {
   const { data, content } = matter(raw);
   const stats = readingTime(content);
   return {
-    title: data.title ?? "",
+    title: decodeEntities(data.title ?? ""),
     slug: data.slug ?? slug,
-    description: data.description ?? "",
-    seoTitle: data.seoTitle,
+    description: decodeEntities(data.description ?? ""),
+    seoTitle: data.seoTitle ? decodeEntities(data.seoTitle) : undefined,
     date: data.date ?? "",
     modified: data.modified,
     author: data.author ?? "mia-care",
     categories: data.categories ?? [],
     featuredImage: data.featuredImage ?? "",
-    featuredImageAlt: data.featuredImageAlt ?? "",
-    excerpt: data.excerpt ?? "",
+    featuredImageAlt: decodeEntities(data.featuredImageAlt ?? ""),
+    excerpt: decodeEntities(data.excerpt ?? ""),
     readingTime: stats.text,
   };
 }
@@ -86,17 +101,17 @@ export async function getPost(slug: string): Promise<Post | null> {
   const headings = extractHeadings(content);
 
   return {
-    title: data.title ?? "",
+    title: decodeEntities(data.title ?? ""),
     slug: data.slug ?? slug,
-    description: data.description ?? "",
-    seoTitle: data.seoTitle,
+    description: decodeEntities(data.description ?? ""),
+    seoTitle: data.seoTitle ? decodeEntities(data.seoTitle) : undefined,
     date: data.date ?? "",
     modified: data.modified,
     author: data.author ?? "mia-care",
     categories: data.categories ?? [],
     featuredImage: data.featuredImage ?? "",
-    featuredImageAlt: data.featuredImageAlt ?? "",
-    excerpt: data.excerpt ?? "",
+    featuredImageAlt: decodeEntities(data.featuredImageAlt ?? ""),
+    excerpt: decodeEntities(data.excerpt ?? ""),
     readingTime: stats.text,
     content,
     contentHtml,
@@ -110,6 +125,17 @@ export function getRelatedPosts(slug: string, categories: string[], limit = 3): 
     .slice(0, limit);
 }
 
+function stripInlineMarkdown(text: string): string {
+  return text
+    .replace(/\*\*(.+?)\*\*/g, "$1")
+    .replace(/\*(.+?)\*/g, "$1")
+    .replace(/__(.+?)__/g, "$1")
+    .replace(/_(.+?)_/g, "$1")
+    .replace(/`(.+?)`/g, "$1")
+    .replace(/\[(.+?)\]\(.+?\)/g, "$1")
+    .trim();
+}
+
 function extractHeadings(markdown: string): Heading[] {
   const lines = markdown.split("\n");
   const headings: Heading[] = [];
@@ -117,10 +143,10 @@ function extractHeadings(markdown: string): Heading[] {
     const h2 = line.match(/^## (.+)/);
     const h3 = line.match(/^### (.+)/);
     if (h2) {
-      const text = h2[1].trim();
+      const text = stripInlineMarkdown(h2[1].trim());
       headings.push({ id: slugifyHeading(text), text, level: 2 });
     } else if (h3) {
-      const text = h3[1].trim();
+      const text = stripInlineMarkdown(h3[1].trim());
       headings.push({ id: slugifyHeading(text), text, level: 3 });
     }
   }

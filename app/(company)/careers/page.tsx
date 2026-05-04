@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { CtaBanner } from "@/components/common/CtaBanner";
 import { PillTag } from "@/components/common/PillTag";
-import type { Job } from "@/components/sections/careers/JobAccordion";
 import { JobAccordion } from "@/components/sections/careers/JobAccordion";
+import { getAllJobs } from "@/lib/jobs";
 
 export const metadata: Metadata = {
   title: "Careers — Join the Healthcare Revolution | Mia-Care",
@@ -25,158 +25,8 @@ const VALUES = [
   },
 ];
 
-const OFFER_COMMON = [
-  "Hybrid workplace — 50% smart working, 50% in-office",
-  "Inclusive environment with a strong DE&I commitment",
-  "Training path and access to Mia-Platform learning hub",
-  "Creative and agile work environment",
-  "Team building events and company perks",
-  "Ticket restaurants",
-  "Corporate benefits: gyms, travel, technology, language courses",
-];
-
-const JOBS: Job[] = [
-  {
-    title: "Solution Architect",
-    type: "Full time",
-    location: "Milan",
-    summary: "We seek talents who translate business needs into tailored IT solutions.",
-    applyEmail: "info@mia-care.io",
-    role: "We are looking for a Solution Architect who can create the overall vision and strategy for a specific solution to a business problem or need. You will design, describe, and manage the solution, acting as a bridge between a business problem and the technology solution. You will help both potential and existing customers understand and implement their internal solutions using Mia-Platform's and Mia-Care's products.",
-    sections: [
-      {
-        heading: "Activities",
-        items: [
-          "Work with customers to understand their needs and outline how Mia-Care's solutions could help",
-          "Suggest how to reduce cloud-native complexities and make infrastructure transparent to customer devs",
-          "Design software architecture for the Digital Platform using Mia-Platform runtime components",
-          "Assist customer teams in designing SaMD solutions using Mia-Care's platform",
-          "Define and implement a POC on Mia-Platform that solves real customer problems",
-          "Work closely with R&D, Delivery, and Sales/Pre-Sales teams to provide product feedback",
-          "Support Mia-Platform partners in defining working solutions for their customers",
-        ],
-      },
-      {
-        heading: "Required Skills",
-        items: [
-          "Master's Degree in CS or Computer Engineering with 2+ years of relevant experience",
-          "Experience with DevOps methods and tools",
-          "Experience with Cloud Native technologies",
-          "Experience delivering custom solutions to enterprises",
-          "Excellent English communication skills",
-          "Knowledge of medical device regulatory framework (ISO 13485, IEC 62304) is a plus",
-        ],
-      },
-      { heading: "We Offer", items: OFFER_COMMON },
-    ],
-  },
-  {
-    title: "Customer Success Manager",
-    type: "Full time",
-    location: "Milan",
-    summary: "We are looking for a Customer Success Manager to join our Mia-Care Team.",
-    applyEmail: "info@mia-care.io",
-    role: "As a Customer Success Manager, you will be responsible for nurturing and maintaining strong relationships with our large enterprise clients. Your primary focus will be to drive software adoption, ensure client satisfaction, and keep clients informed about product updates and enhancements — bridging the gap between our clients and our product development team.",
-    sections: [
-      {
-        heading: "Activities",
-        items: [
-          "Develop and maintain strong relationships with key stakeholders within client organizations",
-          "Understand and align with client's business goals to deliver tailored solutions",
-          "Create adoption strategies that ensure clients derive maximum value from our software",
-          "Proactively inform clients about product updates, enhancements, and new features",
-          "Identify upsell and cross-sell opportunities aligned with client needs",
-          "Act as primary point of contact for client concerns, working with support and technical teams",
-          "Data analysis and reporting on client health and adoption",
-        ],
-      },
-      {
-        heading: "Required Skills",
-        items: [
-          "Bachelor's degree in a relevant field",
-          "Proven experience as a CSM, Account Manager, or similar B2B role",
-          "Strong understanding of the software and technology industry",
-          "Excellent communication, presentation, and negotiation skills",
-          "Ability to analyze data and derive actionable insights",
-          "Agile enthusiast",
-        ],
-      },
-      { heading: "We Offer", items: OFFER_COMMON },
-    ],
-  },
-  {
-    title: "Product Owner",
-    type: "Full time",
-    location: "Milan",
-    summary:
-      "We are looking for a Product Owner to manage medium/large IT projects in digital healthcare.",
-    applyEmail: "info@mia-care.io",
-    role: "This hybrid role combines Product Owner responsibilities (70%) with Customer Success (30%). You will work directly with clients to understand their needs and translate them into actionable product requirements, while ensuring their success with our solutions. You will be involved in functional analysis, process redesign, and management of IT projects in digital healthcare.",
-    sections: [
-      {
-        heading: "Product Owner (70%)",
-        items: [
-          "Gather and analyze customer needs; translate them into clear product specifications",
-          "Collaborate with the development team to define, prioritize, and refine the product backlog",
-          "Create and maintain product roadmaps aligned with client objectives and Mia-Care's vision",
-          "Participate in agile ceremonies: sprint planning, daily stand-ups, sprint reviews",
-          "Conduct functional analysis to identify key features and improvements",
-          "Manage medium/large IT projects within the digital healthcare context",
-        ],
-      },
-      {
-        heading: "Customer Success (30%)",
-        items: [
-          "Develop and maintain strong relationships with key stakeholders",
-          "Understand client business goals and deliver tailored solutions",
-          "Create comprehensive adoption strategies for maximum software value",
-          "Act as primary point of contact for client concerns",
-          "Identify upsell and cross-sell opportunities",
-        ],
-      },
-      {
-        heading: "Requirements",
-        items: [
-          "Bachelor's degree in a relevant field",
-          "Proven experience as Product Owner or similar role in B2B software",
-          "Excellent communication, presentation, and negotiation skills",
-          "Strong project management and organizational skills",
-          "Agile enthusiast — biomedical engineering background is a plus",
-        ],
-      },
-      { heading: "We Offer", items: OFFER_COMMON },
-    ],
-  },
-  {
-    title: "Software Engineer",
-    type: "Full time",
-    location: "Milan",
-    summary:
-      "We are looking for a Software Engineer with web development skills to join one of our teams.",
-    applyEmail: "info@mia-care.io",
-    role: "You will be involved in the design and development of the platform used by our customers. The work includes development of software solutions for clients on top of Mia-Care, actively contributing to the evolution of the product.",
-    sections: [
-      {
-        heading: "Required Skills",
-        items: [
-          "Knowledge of HTTP protocol and REST architecture for API development",
-          "Node.js, Java, and other object-oriented languages",
-          "Git",
-          "At least one of: React, Angular, Vue",
-          "Experience in unit tests or automated interface tests (Cypress, Playwright)",
-          "Desire to learn and actively contribute to the company's innovation",
-        ],
-      },
-      {
-        heading: "Nice-to-Have",
-        items: ["Go", "TDD", "Fastify experience", "Docker, Kubernetes"],
-      },
-      { heading: "We Offer", items: OFFER_COMMON },
-    ],
-  },
-];
-
 export default function CareersPage() {
+  const jobs = getAllJobs();
   return (
     <>
       {/* Hero */}
@@ -280,7 +130,7 @@ export default function CareersPage() {
             Open roles
           </h2>
 
-          <JobAccordion jobs={JOBS} />
+          <JobAccordion jobs={jobs} />
 
           {/* Spontaneous application */}
           <div

@@ -1,8 +1,8 @@
 import type { MetadataRoute } from "next";
 import { capabilities } from "@/data/capabilities";
-import { RESOURCES } from "@/data/competence-center";
 import { useCases } from "@/data/use-cases";
 import { getAllPosts } from "@/lib/blog";
+import { getAllResources } from "@/lib/resources";
 
 export const dynamic = "force-static";
 
@@ -20,7 +20,7 @@ const PAGE_DATES: Record<string, string> = {
   "/careers": "2026-04-26",
   "/certifications": "2026-04-26",
   "/sustainability": "2026-04-26",
-  "/resources/competence-center": "2026-04-26",
+  "/resources": "2026-04-26",
   "/resources/blog": "2026-04-26",
   "/resources/docs": "2026-04-26",
   "/resources/events": "2026-04-26",
@@ -82,8 +82,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.4,
     },
     {
-      url: `${BASE}/resources/competence-center`,
-      lastModified: PAGE_DATES["/resources/competence-center"],
+      url: `${BASE}/resources`,
+      lastModified: PAGE_DATES["/resources"],
       changeFrequency: "weekly",
       priority: 0.6,
     },
@@ -127,8 +127,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }));
 
-  const competenceCenterPages: MetadataRoute.Sitemap = RESOURCES.map((r) => ({
-    url: `${BASE}/resources/competence-center/${r.slug}`,
+  const resourcePages: MetadataRoute.Sitemap = getAllResources().map((r) => ({
+    url: `${BASE}/resources/${r.slug}`,
     lastModified: DATA_LAST_MODIFIED,
     changeFrequency: "monthly" as const,
     priority: 0.7,
@@ -143,11 +143,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.75,
   }));
 
-  return [
-    ...staticPages,
-    ...capabilityPages,
-    ...useCasePages,
-    ...competenceCenterPages,
-    ...blogPages,
-  ];
+  return [...staticPages, ...capabilityPages, ...useCasePages, ...resourcePages, ...blogPages];
 }

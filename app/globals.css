@@ -15,44 +15,8 @@
 
 
 /* =============================================================================
-   3. FONTS — Styrene A & B (loaded from /public/fonts)
+   3. FONTS — Styrene A & B (loaded via next/font/local in layout.tsx)
    ============================================================================= */
-
-@font-face {
-  font-family: "Styrene A";
-  src: url("/fonts/StyreneA-Regular.otf") format("opentype");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Styrene A";
-  src: url("/fonts/StyreneA-Medium.otf") format("opentype");
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Styrene A";
-  src: url("/fonts/StyreneA-Bold.otf") format("opentype");
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Styrene B";
-  src: url("/fonts/StyreneB-Regular.otf") format("opentype");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Styrene B";
-  src: url("/fonts/StyreneB-Medium.otf") format("opentype");
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
 
 
 /* =============================================================================
@@ -75,8 +39,8 @@
 
   /* 4c. Testo */
   --text-primary: #f0f0f2;
-  --text-secondary: rgba(240, 240, 242, 0.55);
-  --text-muted: rgba(240, 240, 242, 0.5);
+  --text-secondary: rgba(240, 240, 242, 0.75);
+  --text-muted: rgba(240, 240, 242, 0.65);
 
   /* 4d. Glow */
   --glow-green: rgba(0, 240, 150, 0.12);
@@ -115,6 +79,26 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+}
+
+
+/* =============================================================================
+   4f. Light theme override (PoC — /light route only)
+   ============================================================================= */
+
+[data-theme="light"] {
+  --bg-base: #fafafa;
+  --bg-surface: #f0f0f2;
+  --bg-raised: #e4e4e8;
+  --bg-border: rgba(0, 0, 0, 0.08);
+  --bg-border-strong: rgba(0, 0, 0, 0.14);
+
+  --text-primary: #0d0e14;
+  --text-secondary: rgba(13, 14, 20, 0.6);
+  --text-muted: rgba(13, 14, 20, 0.5);
+
+  --glow-green: rgba(0, 180, 100, 0.14);
+  --glow-cyan: rgba(0, 180, 180, 0.12);
 }
 
 
@@ -169,10 +153,10 @@
   --color-sidebar-ring: var(--sidebar-ring);
 
   /* 5c. Font */
-  --font-styrene-a: "Styrene A", ui-sans-serif, system-ui, sans-serif;
-  --font-styrene-b: "Styrene B", ui-sans-serif, system-ui, sans-serif;
-  --font-sans: "Styrene B", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Styrene A", ui-sans-serif, system-ui, sans-serif;
+  --font-styrene-a: var(--font-sa), ui-sans-serif, system-ui, sans-serif;
+  --font-styrene-b: var(--font-sb), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-sb), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-sa), ui-sans-serif, system-ui, sans-serif;
   --font-heading: var(--font-sans);
 
   /* 5d. Border radius */
@@ -330,6 +314,11 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
   .marquee-paused { animation-play-state: paused !important; }
 }
 
@@ -505,23 +494,31 @@ body {
 }
 .blog-prose tr:last-child td { border-bottom: none; }
 
-/* HubSpot form overrides */
+/* HubSpot form overrides
+   HubSpot injects inline element.style rules (e.g. color:#33475b) that beat
+   plain class selectors — !important is required throughout this block. */
+.hs-form-wrapper * { color: var(--text-primary) !important; }
+
 .hs-form-wrapper .hs-form fieldset { max-width: 100% !important; }
+.hs-form-wrapper input,
+.hs-form-wrapper select,
+.hs-form-wrapper textarea { background: var(--bg-raised) !important; }
 .hs-form-wrapper .hs-form .hs-input {
   width: 100% !important;
   padding: 0.625rem 0.875rem;
   border-radius: 0.5rem;
-  border: 1px solid var(--bg-border-strong);
-  background: var(--bg-raised);
-  color: var(--text-primary);
+  border: 1px solid var(--bg-border-strong) !important;
+  background: var(--bg-raised) !important;
+  color: var(--text-primary) !important;
   font-size: 0.875rem;
 }
 .hs-form-wrapper .hs-form .hs-input:focus {
-  outline: none;
-  border-color: var(--brand-green);
+  outline: 2px solid var(--brand-green);
+  outline-offset: 2px;
+  border-color: var(--brand-green) !important;
 }
 .hs-form-wrapper .hs-form .hs-error-msgs {
-  color: #f87171;
+  color: #f87171 !important;
   font-size: 0.75rem;
   margin-top: 0.25rem;
   list-style: none;
@@ -530,7 +527,7 @@ body {
 .hs-form-wrapper .hs-form label {
   font-size: 0.8125rem;
   font-weight: 600;
-  color: var(--text-secondary);
+  color: var(--text-secondary) !important;
   display: block;
   margin-bottom: 0.375rem;
 }
@@ -542,20 +539,20 @@ body {
   font-size: 0.875rem;
   font-weight: 600;
   cursor: pointer;
-  background: linear-gradient(90deg, var(--brand-green), var(--brand-cyan));
-  color: #0b0c10;
+  background: linear-gradient(90deg, var(--brand-green), var(--brand-cyan)) !important;
+  color: #0b0c10 !important;
   border: none;
   transition: opacity 0.15s;
 }
 .hs-form-wrapper .hs-form .hs-button:hover { opacity: 0.9; }
 .hs-form-wrapper .hs-form .legal-consent-container {
   font-size: 0.75rem;
-  color: var(--text-muted);
+  color: var(--text-muted) !important;
   line-height: 1.5;
   margin-top: 0.75rem;
 }
 .hs-form-wrapper .hs-form .legal-consent-container a {
-  color: var(--brand-green);
+  color: var(--brand-green) !important;
   text-decoration: underline;
 }
 

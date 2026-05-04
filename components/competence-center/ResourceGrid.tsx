@@ -3,33 +3,49 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import type { Resource, ResourceCategory } from "@/data/competence-center";
 import { assetPath } from "@/lib/asset";
+import type { ResourceMeta, ResourceType } from "@/lib/resources";
 
-const CATEGORY_LABELS: Record<ResourceCategory | "all", string> = {
+const TYPE_LABELS: Record<ResourceType | "all", string> = {
   all: "All",
   whitepaper: "Whitepaper",
   video: "Video",
+  guide: "Guide",
+  "case-study": "Case Study",
+  report: "Report",
 };
 
-export function ResourceGrid({ resources }: { resources: Resource[] }) {
-  const [active, setActive] = useState<ResourceCategory | "all">("all");
+const CTA_LABELS: Record<ResourceType, string> = {
+  whitepaper: "Download →",
+  video: "Watch →",
+  guide: "Download →",
+  "case-study": "Read →",
+  report: "Download →",
+};
 
-  const filtered = active === "all" ? resources : resources.filter((r) => r.category === active);
+export function ResourceGrid({ resources }: { resources: ResourceMeta[] }) {
+  const [active, setActive] = useState<ResourceType | "all">("all");
+
+  const availableTypes = ["all", ...new Set(resources.map((r) => r.type))] as (
+    | ResourceType
+    | "all"
+  )[];
+
+  const filtered = active === "all" ? resources : resources.filter((r) => r.type === active);
 
   return (
     <>
       {/* Filters */}
       <div className="flex flex-wrap gap-2 mb-10">
-        {(["all", "whitepaper", "video"] as const).map((cat) => (
+        {availableTypes.map((type) => (
           <button
-            key={cat}
+            key={type}
             type="button"
-            onClick={() => setActive(cat)}
-            aria-pressed={active === cat}
+            onClick={() => setActive(type)}
+            aria-pressed={active === type}
             className="px-4 py-1.5 rounded-full text-sm font-medium transition-all"
             style={
-              active === cat
+              active === type
                 ? {
                     background: "linear-gradient(90deg, var(--brand-green), var(--brand-cyan))",
                     color: "#0b0c10",
@@ -41,7 +57,7 @@ export function ResourceGrid({ resources }: { resources: Resource[] }) {
                   }
             }
           >
-            {CATEGORY_LABELS[cat]}
+            {TYPE_LABELS[type]}
           </button>
         ))}
       </div>
@@ -51,7 +67,7 @@ export function ResourceGrid({ resources }: { resources: Resource[] }) {
         {filtered.map((resource) => (
           <Link
             key={resource.slug}
-            href={`/resources/competence-center/${resource.slug}`}
+            href={`/resources/${resource.slug}`}
             className="group flex flex-col rounded-2xl overflow-hidden transition-all hover:-translate-y-1"
             style={{ background: "var(--bg-surface)", border: "1px solid var(--bg-border)" }}
           >
@@ -60,13 +76,15 @@ export function ResourceGrid({ resources }: { resources: Resource[] }) {
               className="relative h-44 overflow-hidden"
               style={{ background: "var(--bg-raised)" }}
             >
-              <Image
-                src={assetPath(resource.coverImage)}
-                alt=""
-                fill
-                className="object-cover transition-transform duration-300 group-hover:scale-105"
-                unoptimized
-              />
+              {resource.featuredImage && (
+                <Image
+                  src={assetPath(resource.featuredImage)}
+                  alt=""
+                  fill
+                  className="object-cover transition-transform duration-300 group-hover:scale-105"
+                  unoptimized
+                />
+              )}
               <span
                 className="absolute top-3 left-3 text-xs px-2 py-0.5 rounded-full font-semibold capitalize"
                 style={{
@@ -76,7 +94,7 @@ export function ResourceGrid({ resources }: { resources: Resource[] }) {
                   backdropFilter: "blur(6px)",
                 }}
               >
-                {resource.category}
+                {TYPE_LABELS[resource.type]}
               </span>
             </div>
 
@@ -98,7 +116,7 @@ export function ResourceGrid({ resources }: { resources: Resource[] }) {
                 className="mt-4 inline-flex items-center gap-1.5 text-xs font-semibold"
                 style={{ color: "var(--brand-green)" }}
               >
-                {resource.category === "video" ? "Watch →" : "Download →"}
+                {CTA_LABELS[resource.type]}
               </span>
             </div>
           </Link>

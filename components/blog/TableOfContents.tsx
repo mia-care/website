@@ -47,10 +47,6 @@ export function TableOfContents({ headings }: { headings: Heading[] }) {
                   activeId === h.id ? "2px solid var(--brand-green)" : "2px solid transparent",
                 paddingLeft: "0.5rem",
               }}
-              onClick={(e) => {
-                e.preventDefault();
-                document.getElementById(h.id)?.scrollIntoView({ behavior: "smooth" });
-              }}
             >
               {h.text}
             </a>

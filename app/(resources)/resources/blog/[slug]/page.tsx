@@ -203,14 +203,13 @@ function addHeadingIds(
   html: string,
   headings: { id: string; text: string; level: 2 | 3 }[],
 ): string {
-  let result = html;
-  for (const h of headings) {
-    const tag = h.level === 2 ? "h2" : "h3";
-    const escaped = h.text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-    result = result.replace(
-      new RegExp(`<${tag}([^>]*)>${escaped}<\\/${tag}>`, "i"),
-      `<${tag}$1 id="${h.id}">${h.text}</${tag}>`,
-    );
-  }
-  return result;
+  const byLevel: Record<2 | 3, typeof headings> = { 2: [], 3: [] };
+  for (const h of headings) byLevel[h.level].push(h);
+  const counters: Record<2 | 3, number> = { 2: 0, 3: 0 };
+
+  return html.replace(/<(h[23])([^>]*)>([\s\S]*?)<\/\1>/gi, (match, tag, attrs, inner) => {
+    const level = Number(tag[1]) as 2 | 3;
+    const h = byLevel[level][counters[level]++];
+    return h ? `<${tag}${attrs} id="${h.id}">${inner}</${tag}>` : match;
+  });
 }

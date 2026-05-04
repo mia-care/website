@@ -43,8 +43,7 @@ export function CtaBanner() {
           className="font-display font-bold mb-4"
           style={{ fontSize: "clamp(32px, 4vw, 52px)", letterSpacing: "-0.03em" }}
         >
-          Ready to ship{" "}
-          <br />
+          Ready to ship <br />
           compliant software faster?
         </h2>
         <p className="text-lg mb-10" style={{ color: "var(--text-secondary)" }}>

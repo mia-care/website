@@ -6,11 +6,20 @@ import { assetPath } from "@/lib/asset";
 type Props = {
   portalId: string;
   formId: string;
+  region?: string;
+  redirectUrl?: string;
   fileUrl?: string;
   videoEmbedUrl?: string;
 };
 
-export function HubSpotForm({ portalId, formId, fileUrl, videoEmbedUrl }: Props) {
+export function HubSpotForm({
+  portalId,
+  formId,
+  region = "eu1",
+  redirectUrl,
+  fileUrl,
+  videoEmbedUrl,
+}: Props) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [submitted, setSubmitted] = useState(false);
 
@@ -25,11 +34,17 @@ export function HubSpotForm({ portalId, formId, fileUrl, videoEmbedUrl }: Props)
             forms: { create: (opts: object) => void };
           }
         ).forms.create({
-          region: "na1",
+          region,
           portalId,
           formId,
           target: "#hs-form-container",
-          onFormSubmitted: () => setSubmitted(true),
+          onFormSubmitted: () => {
+            if (redirectUrl) {
+              window.location.href = redirectUrl;
+            } else {
+              setSubmitted(true);
+            }
+          },
         });
     }
 
@@ -44,7 +59,7 @@ export function HubSpotForm({ portalId, formId, fileUrl, videoEmbedUrl }: Props)
     script.async = true;
     script.onload = createForm;
     document.head.appendChild(script);
-  }, [portalId, formId]);
+  }, [portalId, formId, region, redirectUrl]);
 
   if (submitted) {
     return (

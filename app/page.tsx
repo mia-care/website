@@ -60,8 +60,8 @@ export default function HomePage() {
       <LogoMarquee />
       <StatsRow />
       <ProblemSection />
-      <ComplianceStrip />
       <CapabilitiesGrid />
+      <ComplianceStrip />
       <UseCasesGrid />
       <WhoWeServe />
       <CtaBanner />

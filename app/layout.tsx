@@ -1,9 +1,29 @@
 import type { Metadata } from "next";
+import localFont from "next/font/local";
 import Script from "next/script";
 import { CookieBanner } from "@/components/common/CookieBanner";
 import { Footer } from "@/components/layout/Footer";
 import { Navbar } from "@/components/layout/Navbar";
 import "./globals.css";
+
+const styreneA = localFont({
+  src: [
+    { path: "../public/fonts/StyreneA-Regular.otf", weight: "400", style: "normal" },
+    { path: "../public/fonts/StyreneA-Medium.otf", weight: "500", style: "normal" },
+    { path: "../public/fonts/StyreneA-Bold.otf", weight: "700", style: "normal" },
+  ],
+  variable: "--font-sa",
+  display: "swap",
+});
+
+const styreneB = localFont({
+  src: [
+    { path: "../public/fonts/StyreneB-Regular.otf", weight: "400", style: "normal" },
+    { path: "../public/fonts/StyreneB-Medium.otf", weight: "500", style: "normal" },
+  ],
+  variable: "--font-sb",
+  display: "swap",
+});
 
 const GTM_ID = "GTM-5N5DWRS";
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.mia-care.io";
@@ -48,7 +68,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className="h-full">
+    <html lang="en" className={`h-full ${styreneA.variable} ${styreneB.variable}`}>
       <head>
         {/* Consent Mode v2 defaults — must run before GTM so tags start in denied state */}
         <Script id="consent-defaults" strategy="beforeInteractive">{`

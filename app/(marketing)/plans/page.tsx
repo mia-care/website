@@ -81,11 +81,7 @@ const COMPARISON: { label: string; values: [CellValue, CellValue, CellValue] }[]
   { label: "Smart Insight", values: ["Default", "Tailored", "Tailored"] },
   {
     label: "Documentation",
-    values: [
-      "Standard Technical Files",
-      "Custom templating",
-      "eQMS integration",
-    ],
+    values: ["Standard Technical Files", "Custom templating", "eQMS integration"],
   },
   {
     label: "AI/ML Compliance Pack",
