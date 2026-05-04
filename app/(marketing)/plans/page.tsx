@@ -15,13 +15,14 @@ const TIERS = [
     target: "Small teams getting started",
     description: "The foundation you need to build your first SaMD with compliance from day one.",
     features: [
-      "1 company · 3 projects · 5 users",
+      "1 company · 3 products · 5 users",
       "SDLC Workflow Orchestrator",
       "Requirements & Risk Management",
+      "Basic Verification & Validation framework",
       "Documentation Engine (standard templates)",
       "BOM & Change Management",
+      "Limited AI/ML Compliance Pack",
       "On-demand support",
-      "5M tokens / month",
     ],
     cta: "See it in action",
     highlight: false,
@@ -32,16 +33,15 @@ const TIERS = [
     description:
       "Custom insights, automated AI/ML compliance, and tool validation for teams moving fast.",
     features: [
-      "1 company · 5 projects · 10 users",
+      "1 company · 5 products · 10 users",
       "Everything in Standard",
-      "Custom Smart Insight",
-      "Custom documentation templating",
-      "AI/ML Compliance Pack (automated)",
+      "Tailored Smart Insight & AI Assistant",
+      "Document templating system",
+      "AI/ML Compliance Pack",
+      "Legacy Systems assessment",
       "Pre-validation package",
-      "Whisper — AI Assistant",
       "Integrations & MCP Server",
       "Ticketing support",
-      "50M tokens / month",
     ],
     cta: "Book a guided session",
     highlight: true,
@@ -52,13 +52,12 @@ const TIERS = [
     description:
       "Unlimited scale, eQMS integration, and dedicated support for the most complex regulated environments.",
     features: [
-      "Unlimited companies, projects & users",
+      "Unlimited companies, products & users",
       "Everything in Professional",
-      "AI-assisted legacy updates",
-      "Full eQMS integration",
+      "AI-Assisted Legacy remediation",
+      "eQMS integration",
       "Support for audit readiness",
-      "24/7 AI + Dedicated Lead",
-      "500M tokens / month",
+      "24/7 ticketing with dedicated Lead & AI assistant",
     ],
     cta: "Let's talk",
     highlight: false,
@@ -69,28 +68,28 @@ type CellValue = string | boolean;
 
 const COMPARISON: { label: string; values: [CellValue, CellValue, CellValue] }[] = [
   { label: "Companies", values: ["1", "1", "Unlimited"] },
-  { label: "Projects", values: ["3", "5", "Unlimited"] },
+  { label: "Products", values: ["3", "5", "Unlimited"] },
   { label: "Users", values: ["5", "10", "Unlimited"] },
   {
     label: "Legacy Support",
     values: [
-      "Basic metadata import & gap identification",
-      "Remediation plan",
-      "AI-assisted legacy updates",
+      "Basic assessment",
+      "Complete assessment and remediation plan",
+      "AI-assisted remediation",
     ],
   },
-  { label: "Smart Insight", values: ["Default", "Custom", "Custom"] },
+  { label: "Smart Insight", values: ["Default", "Tailored", "Tailored"] },
   {
     label: "Documentation",
     values: [
       "Standard Technical Files",
-      "Custom templating for diverse market regions",
-      "Full integration with eQMS",
+      "Custom templating",
+      "eQMS integration",
     ],
   },
   {
     label: "AI/ML Compliance Pack",
-    values: ["Limited", "Automated", "Automated"],
+    values: ["Limited", "Full", "Full"],
   },
   {
     label: "Tool Validation",
@@ -98,9 +97,8 @@ const COMPARISON: { label: string; values: [CellValue, CellValue, CellValue] }[]
   },
   {
     label: "Support",
-    values: ["On-demand", "Ticketing", "24/7 AI + Dedicated Lead"],
+    values: ["On-demand", "Ticketing", "24/7 ticketing with dedicated Lead & AI assistant"],
   },
-  { label: "Token / Month", values: ["5 M", "50 M", "500 M"] },
 ];
 
 const DISTRIBUTION = [
@@ -126,7 +124,7 @@ const DISTRIBUTION = [
     points: [
       "Data never leaves your environment",
       "Private cloud or on-premise deployment",
-      "Supports air-gapped and hospital networks",
+      "Supports air-gapped networks",
       "Custom security and compliance configurations",
     ],
   },
@@ -142,7 +140,7 @@ const FAQ = [
     a: "Yes. P4SaMD is modular by design. You can begin with the SDLC Orchestrator and Guided Workflows, then expand to the full capability set as your needs evolve.",
   },
   {
-    q: "Is P4SaMD validated under GAMP 5?",
+    q: "Is P4SaMD validated for Medical Device development?",
     a: "Yes. The platform is built and maintained following GAMP 5 principles, making it suitable for use in ISO 13485-controlled environments.",
   },
   {
