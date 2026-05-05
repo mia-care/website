@@ -1,13 +1,10 @@
-"use client";
+import { getAllResources } from "@/lib/resources";
+import { CompetenceCenterRedirect } from "./redirect";
 
-import { useParams, useRouter } from "next/navigation";
-import { useEffect } from "react";
+export function generateStaticParams() {
+  return getAllResources().map((r) => ({ slug: r.slug }));
+}
 
-export default function CompetenceCenterSlugRedirect() {
-  const router = useRouter();
-  const params = useParams();
-  useEffect(() => {
-    router.replace(`/resources/${params.slug}`);
-  }, [router, params.slug]);
-  return null;
+export default function Page() {
+  return <CompetenceCenterRedirect />;
 }
