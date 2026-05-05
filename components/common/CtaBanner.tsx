@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { HelixSvg } from "@/components/common/HelixSvg";
 
 export function CtaBanner() {
   return (
@@ -26,17 +25,6 @@ export function CtaBanner() {
         }}
         aria-hidden="true"
       />
-
-      {/* Helix decorations */}
-      <div className="absolute left-0 top-0 hidden lg:block pointer-events-none">
-        <HelixSvg width={200} height={400} opacity={0.05} />
-      </div>
-      <div
-        className="absolute right-0 top-0 hidden lg:block pointer-events-none"
-        style={{ transform: "scaleX(-1)" }}
-      >
-        <HelixSvg width={200} height={400} opacity={0.05} />
-      </div>
 
       <div className="relative max-w-3xl mx-auto px-4 sm:px-6 text-center">
         <h2

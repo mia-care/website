@@ -221,8 +221,10 @@ export function Navbar() {
   return (
     <header
       ref={headerRef}
-      className="fixed inset-x-0 top-0 z-40 h-16 flex items-center"
+      className="fixed inset-x-0 z-40 h-16 flex items-center"
       style={{
+        top: "var(--banner-h, 0px)",
+        transition: "top 300ms ease",
         background: "rgba(10,11,16,0.88)",
         backdropFilter: "blur(24px)",
         WebkitBackdropFilter: "blur(24px)",

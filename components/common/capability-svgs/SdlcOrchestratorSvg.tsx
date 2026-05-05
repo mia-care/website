@@ -47,8 +47,6 @@ const PHASES = [
   { id: "3", name: "Detailed Design", section: "§5.4", tools: ["Git", "ALM", "eQMS"] },
   { id: "4", name: "Implementation", section: "§5.5", tools: ["Git", "ALM", "IDP"] },
   { id: "5", name: "Unit Testing", section: "§5.5", tools: ["Git", "IDP"] },
-  { id: "6", name: "Integration Testing", section: "§5.6", tools: ["Git", "ALM"] },
-  { id: "7", name: "System Testing", section: "§5.7", tools: ["Git", "ALM", "eQMS"] },
 ];
 
 const ROW_DURATION_MS = 1100;
@@ -148,7 +146,7 @@ export function SdlcOrchestratorSvg() {
             alignItems: "center",
           }}
         >
-          {["Activity", "#", "Class", "Tool Integrations", "Compliance", "last"].map((h, i) => (
+          {["Activity", "#", "Class", "Tool Integrations", "Compliance", ""].map((h, i) => (
             <div
               key={h}
               style={{

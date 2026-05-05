@@ -3,8 +3,9 @@ import Link from "next/link";
 import { CapabilitiesGrid } from "@/components/common/CapabilitiesGrid";
 import { ComplianceStrip } from "@/components/common/ComplianceStrip";
 import { CtaBanner } from "@/components/common/CtaBanner";
-import { HelixSvg } from "@/components/common/HelixSvg";
+import { LogoMarquee } from "@/components/common/LogoCarousel";
 import { PillTag } from "@/components/common/PillTag";
+import { PlansBanner } from "@/components/common/PlansBanner";
 
 export const metadata: Metadata = {
   title: "Platform Overview | The AI-native Platform for SaMD",
@@ -61,9 +62,6 @@ export default function ProductPage() {
             "radial-gradient(ellipse 70% 50% at 50% -5%, rgba(0,240,150,0.08) 0%, transparent 55%)",
         }}
       >
-        <div className="absolute right-0 top-0 hidden lg:block pointer-events-none">
-          <HelixSvg width={300} height={600} opacity={0.06} />
-        </div>
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <PillTag className="mb-6">The Platform</PillTag>
           <h1
@@ -89,6 +87,8 @@ export default function ProductPage() {
           </Link>
         </div>
       </section>
+
+      <LogoMarquee />
 
       {/* One Solution */}
       <section
@@ -205,6 +205,7 @@ export default function ProductPage() {
         </div>
       </section>
 
+      <PlansBanner />
       <CtaBanner />
     </>
   );

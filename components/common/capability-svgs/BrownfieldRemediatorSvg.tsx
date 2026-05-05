@@ -334,50 +334,48 @@ export function BrownfieldRemediatorSvg() {
               overflowY: "hidden",
             }}
           >
-            {STEPS.map((step, i) =>
-              visibleSteps[i] ? (
-                <div
-                  key={step.title}
-                  style={{
-                    display: "flex",
-                    alignItems: "flex-start",
-                    gap: 10,
-                    padding: "8px 10px",
-                    background: activeStep === i ? "#EFF6FF" : doneSteps[i] ? "#F0FDF4" : "#FAFAFA",
-                    borderLeft: `3px solid ${activeStep === i ? "#2563EB" : doneSteps[i] ? "#22C55E" : "#E5E7EB"}`,
-                    borderRadius: "0 7px 7px 0",
-                    animation: "bf-slide 0.3s ease",
-                    transition: "background 0.3s, border-color 0.3s",
-                  }}
-                >
-                  <StepIcon
-                    icon={step.icon}
-                    done={doneSteps[i]}
-                    active={activeStep === i}
-                    analysing={analysing && i === 4}
-                  />
-                  <div style={{ minWidth: 0 }}>
-                    <div
-                      style={{ fontWeight: 600, fontSize: 11, color: "#0A0A0A", marginBottom: 2 }}
-                    >
-                      {step.title}
-                    </div>
-                    <div
-                      style={{
-                        fontSize: 9.5,
-                        color: "#6B7280",
-                        lineHeight: 1.45,
-                        overflow: "hidden",
-                        whiteSpace: "nowrap",
-                        textOverflow: "ellipsis",
-                      }}
-                    >
-                      {step.desc}
-                    </div>
+            {STEPS.map((step, i) => (
+              <div
+                key={step.title}
+                style={{
+                  display: "flex",
+                  alignItems: "flex-start",
+                  gap: 10,
+                  padding: "8px 10px",
+                  background: activeStep === i ? "#EFF6FF" : doneSteps[i] ? "#F0FDF4" : "#FAFAFA",
+                  borderLeft: `3px solid ${activeStep === i ? "#2563EB" : doneSteps[i] ? "#22C55E" : "#E5E7EB"}`,
+                  borderRadius: "0 7px 7px 0",
+                  opacity: visibleSteps[i] ? 1 : 0,
+                  transform: visibleSteps[i] ? "translateY(0)" : "translateY(6px)",
+                  transition:
+                    "opacity 0.3s ease, transform 0.3s ease, background 0.3s, border-color 0.3s",
+                }}
+              >
+                <StepIcon
+                  icon={step.icon}
+                  done={doneSteps[i]}
+                  active={activeStep === i}
+                  analysing={analysing && i === 4}
+                />
+                <div style={{ minWidth: 0 }}>
+                  <div style={{ fontWeight: 600, fontSize: 11, color: "#0A0A0A", marginBottom: 2 }}>
+                    {step.title}
+                  </div>
+                  <div
+                    style={{
+                      fontSize: 9.5,
+                      color: "#6B7280",
+                      lineHeight: 1.45,
+                      overflow: "hidden",
+                      whiteSpace: "nowrap",
+                      textOverflow: "ellipsis",
+                    }}
+                  >
+                    {step.desc}
                   </div>
                 </div>
-              ) : null,
-            )}
+              </div>
+            ))}
           </div>
 
           {/* Footer */}

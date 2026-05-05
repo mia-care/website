@@ -1,261 +1,430 @@
-export function SecureSoftwareSvg() {
-  const deps = [
-    { label: "openssl", sub: "v3.1.4  ·  no CVE", y: 28 },
-    { label: "libpng", sub: "v1.6.40 ·  no CVE", y: 88 },
-    { label: "zlib", sub: "v1.2.13 ·  SBOM tracked", y: 148 },
-    { label: "curl", sub: "v8.4.0  ·  no CVE", y: 208 },
-  ];
+"use client";
 
-  const outputs = [
-    { label: "SBOM", sub: "Live inventory", y: 52 },
-    { label: "CVE Scan", sub: "0 critical findings", y: 128 },
-    { label: "Cleared", sub: "IEC 81001-5-1 passed", y: 204 },
-  ];
+import { useEffect, useRef, useState } from "react";
 
+const RISK_TITLE = "Incorrect arrhythmia classification leading to missed diagnosis";
+const HARM_TEXT =
+  "Delayed treatment of atrial fibrillation, potentially leading to stroke or other…";
+
+const ROWS = [
+  {
+    id: "r0",
+    code: "MCRISK-001",
+    version: null,
+    inherent: "Unacceptable",
+    residual: "ALARP",
+    cls: "3",
+  },
+  {
+    id: "r1",
+    code: "MCRISK-001",
+    version: "v2.1.0",
+    inherent: "ALARP",
+    residual: "Acceptable",
+    cls: "3",
+  },
+  {
+    id: "r2",
+    code: "MCRISK-001",
+    version: null,
+    inherent: "ALARP",
+    residual: "Acceptable",
+    cls: "3",
+  },
+  {
+    id: "r3",
+    code: "MCRISK-001",
+    version: null,
+    inherent: "ALARP",
+    residual: "Acceptable",
+    cls: "3",
+  },
+];
+
+const RISK_PILL: Record<string, React.CSSProperties> = {
+  Unacceptable: { background: "#FEF3C7", color: "#D97706", border: "1px solid #FDE68A" },
+  ALARP: { background: "#FEF3C7", color: "#D97706", border: "1px solid #FDE68A" },
+  Acceptable: { background: "#DCFCE7", color: "#16A34A", border: "1px solid #A7F3D0" },
+};
+
+const BETWEEN_MS = 800;
+const REVEAL_MS = 500;
+const HOLD_MS = 2200;
+const RESET_MS = 500;
+
+function SyncIcon() {
   return (
-    <svg
-      viewBox="0 0 560 300"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      className="w-full h-full"
-      aria-hidden="true"
-    >
-      <style>{`
-        @keyframes sec-flow { from { stroke-dashoffset: 11; } to { stroke-dashoffset: 0; } }
-        @keyframes sec-pulse { 0%,100% { opacity:0.2; } 50% { opacity:0.6; } }
-        @keyframes sec-blink { 0%,100% { opacity:0.4; } 50% { opacity:1; } }
-        @keyframes sec-shield {
-          0%,100% { opacity:0.5; transform: scale(1); }
-          50%      { opacity:1;   transform: scale(1.07); }
-        }
-        .sec-line { stroke-dasharray: 6 5; animation: sec-flow 1.4s linear infinite; }
-        .sec-d0 { animation-delay: 0s; }    .sec-d1 { animation-delay: 0.35s; }
-        .sec-d2 { animation-delay: 0.7s; }  .sec-d3 { animation-delay: 1.05s; }
-        .sec-d4 { animation-delay: 0.2s; }  .sec-d5 { animation-delay: 0.55s; }
-        .sec-d6 { animation-delay: 0.9s; }
-        .sec-hub-ring { animation: sec-pulse 2s ease-in-out infinite; }
-        .sec-dot { animation: sec-blink 2.5s ease-in-out infinite; }
-        .sec-n1 { animation-delay: 0s; }   .sec-n2 { animation-delay: 0.5s; }
-        .sec-n3 { animation-delay: 1s; }   .sec-n4 { animation-delay: 1.5s; }
-        .sec-shield { animation: sec-shield 2.5s ease-in-out infinite; transform-origin: 278px 145px; transform-box: fill-box; }
-      `}</style>
-
-      <defs>
-        <linearGradient
-          id="sec-grad"
-          x1="196"
-          y1="106"
-          x2="360"
-          y2="194"
-          gradientUnits="userSpaceOnUse"
-        >
-          <stop offset="0%" stopColor="#00f096" stopOpacity="0.10" />
-          <stop offset="100%" stopColor="#00f0f0" stopOpacity="0.07" />
-        </linearGradient>
-        <linearGradient
-          id="sec-border"
-          x1="196"
-          y1="106"
-          x2="360"
-          y2="194"
-          gradientUnits="userSpaceOnUse"
-        >
-          <stop offset="0%" stopColor="#00f096" stopOpacity="0.6" />
-          <stop offset="100%" stopColor="#00f0f0" stopOpacity="0.4" />
-        </linearGradient>
-      </defs>
-
-      {deps.map((dep, i) => (
-        <g key={dep.label}>
-          <rect
-            x="8"
-            y={dep.y}
-            width="132"
-            height="44"
-            rx="6"
-            fill="var(--bg-raised)"
-            stroke="var(--bg-border-strong)"
-            strokeWidth="1"
-          />
-          <circle
-            cx="26"
-            cy={dep.y + 14}
-            r="4"
-            fill="#00f096"
-            className={`sec-dot sec-n${i + 1}`}
-          />
-          <text
-            x="36"
-            y={dep.y + 19}
-            fontSize="10"
-            fontWeight="700"
-            fill="var(--text-primary)"
-            fontFamily="ui-monospace,monospace"
-          >
-            {dep.label}
-          </text>
-          <text
-            x="26"
-            y={dep.y + 35}
-            fontSize="8.5"
-            fill="var(--text-secondary)"
-            fontFamily="ui-monospace,monospace"
-          >
-            {dep.sub}
-          </text>
-        </g>
-      ))}
-
-      {[50, 110, 170, 230].map((cy, i) => (
-        <path
-          key={cy}
-          d={`M 140,${cy} C 168,${cy} 168,150 196,150`}
-          stroke="#00f096"
-          strokeWidth="1"
-          strokeOpacity="0.55"
-          className={`sec-line sec-d${i}`}
-        />
-      ))}
-
-      <rect
-        x="188"
-        y="98"
-        width="180"
-        height="104"
-        rx="14"
-        fill="none"
-        stroke="#00f096"
-        strokeWidth="8"
-        strokeOpacity="0.08"
-        className="sec-hub-ring"
-      />
-      <rect
-        x="196"
-        y="106"
-        width="164"
-        height="88"
-        rx="10"
-        fill="url(#sec-grad)"
-        stroke="url(#sec-border)"
-        strokeWidth="1"
-      />
-      {/* shield icon */}
+    <svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true">
       <path
-        d="M278 116 L290 121 L290 133 Q290 141 278 146 Q266 141 266 133 L266 121 Z"
-        fill="none"
-        stroke="#00f096"
-        strokeWidth="1.2"
-        strokeOpacity="0.7"
-        className="sec-shield"
+        d="M13 3A6 6 0 003 8M3 13a6 6 0 0010-5"
+        stroke="#3B82F6"
+        strokeWidth="1.4"
+        strokeLinecap="round"
       />
       <path
-        d="M273 132 L277 136 L284 129"
-        stroke="#00f096"
-        strokeWidth="1.5"
+        d="M11 1l2 2-2 2M5 15l-2-2 2-2"
+        stroke="#3B82F6"
+        strokeWidth="1.4"
         strokeLinecap="round"
         strokeLinejoin="round"
-        strokeOpacity="0.8"
-        className="sec-shield"
       />
-      <text
-        x="278"
-        y="160"
-        textAnchor="middle"
-        fontSize="9"
-        fill="var(--text-secondary)"
-        fontFamily="ui-sans-serif,sans-serif"
-      >
-        Security Scan Engine
-      </text>
-      <text
-        x="278"
-        y="176"
-        textAnchor="middle"
-        fontSize="8"
-        fill="var(--text-muted)"
-        fontFamily="ui-sans-serif,sans-serif"
-        letterSpacing="0.04em"
-      >
-        IEC 81001-5-1 · IEC 62304
-      </text>
-      <text
-        x="278"
-        y="188"
-        textAnchor="middle"
-        fontSize="8"
-        fill="var(--text-muted)"
-        fontFamily="ui-sans-serif,sans-serif"
-      >
-        SBOM · CVE · Guardrails
-      </text>
-
-      {[
-        { d: `M 360,150 C 388,150 388,74  416,74` },
-        { d: `M 360,150 L 416,150` },
-        { d: `M 360,150 C 388,150 388,226 416,226` },
-      ].map(({ d }, i) => (
-        <path
-          key={d}
-          d={d}
-          stroke="#00f0f0"
-          strokeWidth="1"
-          strokeOpacity="0.55"
-          className={`sec-line sec-d${i + 4}`}
-        />
-      ))}
-
-      {outputs.map((out) => (
-        <g key={out.label}>
-          <rect
-            x="416"
-            y={out.y}
-            width="136"
-            height="44"
-            rx="6"
-            fill="var(--bg-raised)"
-            stroke="var(--bg-border-strong)"
-            strokeWidth="1"
-          />
-          <circle
-            cx="434"
-            cy={out.y + 14}
-            r="8"
-            fill="rgba(0,240,150,0.10)"
-            stroke="#00f096"
-            strokeWidth="1"
-            strokeOpacity="0.5"
-          />
-          <path
-            d={`M ${429.5} ${out.y + 14} L ${433} ${out.y + 17.5} L ${439} ${out.y + 10.5}`}
-            stroke="#00f096"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-          <text
-            x="448"
-            y={out.y + 19}
-            fontSize="11"
-            fontWeight="700"
-            fill="var(--text-primary)"
-            fontFamily="ui-sans-serif,sans-serif"
-          >
-            {out.label}
-          </text>
-          <text
-            x="434"
-            y={out.y + 35}
-            fontSize="9"
-            fill="var(--text-secondary)"
-            fontFamily="ui-sans-serif,sans-serif"
-          >
-            {out.sub}
-          </text>
-        </g>
-      ))}
-
-      <circle cx="196" cy="150" r="3" fill="#00f096" opacity="0.7" />
-      <circle cx="360" cy="150" r="3" fill="#00f0f0" opacity="0.7" />
     </svg>
+  );
+}
+
+function TargetIcon({ color }: { color: string }) {
+  return (
+    <svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+      <circle cx="8" cy="8" r="6" stroke={color} strokeWidth="1.3" />
+      <circle cx="8" cy="8" r="3" stroke={color} strokeWidth="1.3" />
+      <circle cx="8" cy="8" r="1" fill={color} />
+    </svg>
+  );
+}
+
+function SearchIcon() {
+  return (
+    <svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+      <circle cx="7" cy="7" r="5" stroke="#9CA3AF" strokeWidth="1.3" />
+      <path d="M11 11l3 3" stroke="#9CA3AF" strokeWidth="1.3" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+export function SecureSoftwareSvg() {
+  const [visibleRows, setVisibleRows] = useState<boolean[]>([false, false, false, false]);
+  const [unacceptable, setUnacceptable] = useState(5);
+  const timers = useRef<ReturnType<typeof setTimeout>[]>([]);
+
+  useEffect(() => {
+    const clear = () => timers.current.forEach(clearTimeout);
+    const later = (fn: () => void, ms: number) => {
+      const t = setTimeout(fn, ms);
+      timers.current.push(t);
+    };
+
+    const run = () => {
+      clear();
+      timers.current = [];
+      setVisibleRows([false, false, false, false]);
+      setUnacceptable(5);
+
+      ROWS.forEach((row, i) => {
+        const at = REVEAL_MS + i * BETWEEN_MS;
+        later(() => {
+          setVisibleRows((v) => {
+            const n = [...v];
+            n[i] = true;
+            return n;
+          });
+          // when a row with Acceptable residual appears, decrement unacceptable count
+          if (row.residual === "Acceptable") {
+            setUnacceptable((u) => Math.max(0, u - 1));
+          }
+        }, at);
+      });
+
+      later(run, REVEAL_MS + ROWS.length * BETWEEN_MS + HOLD_MS + RESET_MS);
+    };
+
+    run();
+    return clear;
+  }, []);
+
+  return (
+    <div
+      style={{
+        background: "white",
+        borderRadius: 12,
+        border: "1px solid #E5E5E5",
+        fontFamily: "ui-sans-serif, system-ui, sans-serif",
+        fontSize: 12,
+        color: "#0A0A0A",
+        height: "100%",
+        display: "flex",
+        flexDirection: "column",
+        overflow: "hidden",
+        padding: "14px 16px 10px",
+        gap: 10,
+      }}
+    >
+      <style>{`
+        @keyframes rm-slide {
+          from { opacity: 0; transform: translateY(5px); }
+          to   { opacity: 1; transform: translateY(0); }
+        }
+      `}</style>
+
+      {/* ── Header ── */}
+      <div>
+        <div style={{ fontWeight: 800, fontSize: 15, color: "#0A0A0A" }}>Risk Management</div>
+        <div style={{ fontSize: 9, color: "#6B7280", marginTop: 2, lineHeight: 1.4 }}>
+          Hazard identification, risk estimation, control &amp; residual risk evaluation per ISO
+          14971
+        </div>
+      </div>
+
+      {/* ── Stat cards ── */}
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 7 }}>
+        <div
+          style={{
+            border: "1px solid #E5E7EB",
+            borderRadius: 8,
+            padding: "8px 10px",
+            background: "#FAFAFA",
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              marginBottom: 4,
+            }}
+          >
+            <span style={{ fontSize: 9, color: "#6B7280", fontWeight: 500 }}>Total Risks</span>
+            <SyncIcon />
+          </div>
+          <div style={{ fontWeight: 800, fontSize: 22, color: "#0A0A0A", lineHeight: 1 }}>12</div>
+        </div>
+
+        <div
+          style={{
+            border: "1px solid #FDE68A",
+            borderRadius: 8,
+            padding: "8px 10px",
+            background: "#FFFBEB",
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              marginBottom: 4,
+            }}
+          >
+            <span style={{ fontSize: 9, color: "#D97706", fontWeight: 500 }}>Unacceptable</span>
+            <TargetIcon color="#D97706" />
+          </div>
+          <div
+            style={{
+              fontWeight: 800,
+              fontSize: 22,
+              color: "#D97706",
+              lineHeight: 1,
+              transition: "color 0.3s",
+            }}
+          >
+            {unacceptable}
+          </div>
+        </div>
+
+        <div
+          style={{
+            border: "1px solid #FDE68A",
+            borderRadius: 8,
+            padding: "8px 10px",
+            background: "#FFFBEB",
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              marginBottom: 4,
+            }}
+          >
+            <span style={{ fontSize: 9, color: "#D97706", fontWeight: 500 }}>ALARP</span>
+            <TargetIcon color="#D97706" />
+          </div>
+          <div style={{ fontWeight: 800, fontSize: 22, color: "#D97706", lineHeight: 1 }}>1</div>
+        </div>
+      </div>
+
+      {/* ── Search + filters ── */}
+      <div style={{ display: "flex", gap: 6 }}>
+        <div
+          style={{
+            flex: 1,
+            border: "1px solid #E5E7EB",
+            borderRadius: 7,
+            padding: "5px 9px",
+            display: "flex",
+            alignItems: "center",
+            gap: 6,
+          }}
+        >
+          <SearchIcon />
+          <span style={{ fontSize: 9.5, color: "#9CA3AF" }}>Search requirements…</span>
+        </div>
+        {["Status", "Severity"].map((f) => (
+          <div
+            key={f}
+            style={{
+              border: "1px solid #E5E7EB",
+              borderRadius: 7,
+              padding: "5px 9px",
+              fontSize: 9.5,
+              color: "#374151",
+              display: "flex",
+              alignItems: "center",
+              gap: 3,
+              whiteSpace: "nowrap",
+              background: "white",
+            }}
+          >
+            {f} <span style={{ fontSize: 8, color: "#9CA3AF" }}>▾</span>
+          </div>
+        ))}
+      </div>
+
+      {/* ── Table ── */}
+      <div
+        style={{
+          flex: 1,
+          border: "1px solid #E5E7EB",
+          borderRadius: 8,
+          overflow: "hidden",
+          display: "flex",
+          flexDirection: "column",
+          minHeight: 0,
+        }}
+      >
+        {/* Column headers */}
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "2fr 1.6fr 84px 84px 20px",
+            padding: "5px 10px",
+            background: "#F9FAFB",
+            borderBottom: "1px solid #E5E7EB",
+            gap: 8,
+            flexShrink: 0,
+          }}
+        >
+          {["Risk / Hazard", "Harm", "Inherent Risk", "Residual Risk", "C"].map((h) => (
+            <div key={h} style={{ fontSize: 9, color: "#6B7280", fontWeight: 600 }}>
+              {h}
+            </div>
+          ))}
+        </div>
+
+        {/* Rows */}
+        <div style={{ flex: 1, overflowY: "hidden" }}>
+          {ROWS.map((row, rowIndex) => (
+            <div
+              key={row.id}
+              style={{
+                display: "grid",
+                gridTemplateColumns: "2fr 1.6fr 84px 84px 20px",
+                padding: "7px 10px",
+                borderBottom: "1px solid #F3F4F6",
+                gap: 8,
+                alignItems: "start",
+                opacity: visibleRows[rowIndex] ? 1 : 0,
+                transform: visibleRows[rowIndex] ? "translateY(0)" : "translateY(5px)",
+                transition: "opacity 0.3s ease, transform 0.3s ease",
+              }}
+            >
+              {/* Risk / Hazard */}
+              <div style={{ minWidth: 0 }}>
+                <div
+                  style={{
+                    fontWeight: 600,
+                    fontSize: 10,
+                    color: "#0A0A0A",
+                    lineHeight: 1.35,
+                    marginBottom: 3,
+                  }}
+                >
+                  {RISK_TITLE}
+                </div>
+                <div style={{ display: "flex", alignItems: "center", gap: 4, flexWrap: "wrap" }}>
+                  {row.version && (
+                    <span
+                      style={{
+                        background: "#EFF6FF",
+                        color: "#2563EB",
+                        border: "1px solid #BFDBFE",
+                        borderRadius: 4,
+                        padding: "1px 5px",
+                        fontSize: 8,
+                        fontWeight: 700,
+                        fontFamily: "ui-monospace,monospace",
+                      }}
+                    >
+                      {row.version}
+                    </span>
+                  )}
+                  <span
+                    style={{
+                      fontSize: 8.5,
+                      color: "#6B7280",
+                      fontFamily: "ui-monospace,monospace",
+                    }}
+                  >
+                    {row.code}
+                  </span>
+                  <span
+                    style={{
+                      background: "#F3F4F6",
+                      color: "#6B7280",
+                      borderRadius: 20,
+                      padding: "1px 6px",
+                      fontSize: 8,
+                      fontWeight: 500,
+                    }}
+                  >
+                    Patient
+                  </span>
+                </div>
+              </div>
+
+              {/* Harm */}
+              <div style={{ fontSize: 9, color: "#6B7280", lineHeight: 1.45, overflow: "hidden" }}>
+                {HARM_TEXT}
+              </div>
+
+              {/* Inherent Risk */}
+              <div>
+                <span
+                  style={{
+                    ...RISK_PILL[row.inherent],
+                    borderRadius: 20,
+                    padding: "2px 7px",
+                    fontSize: 8.5,
+                    fontWeight: 600,
+                    whiteSpace: "nowrap",
+                  }}
+                >
+                  {row.inherent}
+                </span>
+              </div>
+
+              {/* Residual Risk */}
+              <div>
+                <span
+                  style={{
+                    ...RISK_PILL[row.residual],
+                    borderRadius: 20,
+                    padding: "2px 7px",
+                    fontSize: 8.5,
+                    fontWeight: 600,
+                    whiteSpace: "nowrap",
+                  }}
+                >
+                  {row.residual}
+                </span>
+              </div>
+
+              {/* Class */}
+              <div style={{ fontSize: 9.5, color: "#6B7280", textAlign: "center" }}>{row.cls}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
   );
 }

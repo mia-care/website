@@ -24,7 +24,7 @@ const TIERS = [
       "Limited AI/ML Compliance Pack",
       "On-demand support",
     ],
-    cta: "See it in action",
+    cta: "Request a Demo",
     highlight: false,
   },
   {
@@ -43,7 +43,7 @@ const TIERS = [
       "Integrations & MCP Server",
       "Ticketing support",
     ],
-    cta: "Book a guided session",
+    cta: "Request a Demo",
     highlight: true,
   },
   {
@@ -59,7 +59,7 @@ const TIERS = [
       "Support for audit readiness",
       "24/7 ticketing with dedicated Lead & AI assistant",
     ],
-    cta: "Let's talk",
+    cta: "Request a Demo",
     highlight: false,
   },
 ];
@@ -174,7 +174,7 @@ export default function PlansPage() {
             {TIERS.map((tier) => (
               <div
                 key={tier.name}
-                className="rounded-card flex flex-col overflow-hidden"
+                className={`rounded-card flex flex-col overflow-hidden transition-all duration-200 hover:-translate-y-1 ${tier.highlight ? "hover:shadow-[0_16px_48px_rgba(0,240,150,0.13)]" : "hover:shadow-[0_8px_32px_rgba(0,0,0,0.25)]"}`}
                 style={{
                   background: tier.highlight ? "var(--bg-raised)" : "var(--bg-base)",
                   border: tier.highlight
@@ -221,7 +221,7 @@ export default function PlansPage() {
 
                   <Link
                     href="/request-demo"
-                    className="mt-2 inline-flex items-center justify-center h-11 px-5 rounded-lg font-semibold text-sm transition-all"
+                    className={`mt-2 inline-flex items-center justify-center h-11 px-5 rounded-lg font-semibold text-sm transition-all ${tier.highlight ? "hover:opacity-90" : "hover:bg-white/5 hover:border-white/20"}`}
                     style={
                       tier.highlight
                         ? { background: "var(--brand-gradient)", color: "var(--bg-base)" }

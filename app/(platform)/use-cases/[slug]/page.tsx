@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { CtaBanner } from "@/components/common/CtaBanner";
 import { JsonLd } from "@/components/common/JsonLd";
+import { LogoMarquee } from "@/components/common/LogoCarousel";
 import { PillTag } from "@/components/common/PillTag";
 import { CapabilitiesInvolved } from "@/components/sections/use-case/CapabilitiesInvolved";
 import { CaseStudyBlock } from "@/components/sections/use-case/CaseStudyBlock";
@@ -90,6 +91,7 @@ export default async function UseCasePage({ params }: { params: Promise<{ slug: 
     <>
       <JsonLd schema={useCaseSchema} />
       <UseCaseHero uc={uc} />
+      <LogoMarquee />
       <Section
         tag="The Problem"
         heading={uc.problem.heading}

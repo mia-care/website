@@ -21,15 +21,6 @@ const SUGGESTIONS = [
     body: "5 software modules have no documented integration tests. IEC 62304 requires testing for all integrated components.",
     tags: ["IEC 62304:2006 §5.6", "ISO 13485:2016 §7.3.4"],
   },
-  {
-    icon: "📄",
-    iconColor: "#F59E0B",
-    borderColor: "#F59E0B",
-    bgColor: "rgba(245,158,11,0.08)",
-    title: "Software Architecture Documentation",
-    body: "The software architecture document must be updated to include the newly added microservices.",
-    tags: ["IEC 62304:2006 §5.3", "ISO 13485:2016 §7.3.4"],
-  },
 ];
 
 const REVEAL_DELAY = 800;

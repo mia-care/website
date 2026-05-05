@@ -118,11 +118,35 @@ export function Footer() {
           </div>
         </div>
 
-        {/* Bottom bar */}
+        {/* Mia-Platform strip */}
         <div
-          className="pt-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-t"
+          className="py-6 border-t border-b flex items-center justify-center gap-3"
           style={{ borderColor: "var(--bg-border)" }}
         >
+          <span className="text-xs" style={{ color: "var(--text-muted)" }}>
+            A
+          </span>
+          <a
+            href="https://mia-platform.eu"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-3 opacity-60 hover:opacity-90 transition-opacity"
+          >
+            <Image
+              src={`${BASE_PATH}/images/logo/Horizontal_Lockup_Full Color.svg`}
+              alt="Mia-Platform"
+              width={110}
+              height={39}
+              style={{ filter: "brightness(0) invert(1)" }}
+            />
+          </a>
+          <span className="text-xs" style={{ color: "var(--text-muted)" }}>
+            Company
+          </span>
+        </div>
+
+        {/* Bottom bar */}
+        <div className="pt-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <div className="text-xs" style={{ color: "var(--text-muted)" }}>
             © {year} {SITE.company.name} — {SITE.company.address} — VAT {SITE.company.vat}
           </div>

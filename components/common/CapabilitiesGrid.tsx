@@ -169,12 +169,12 @@ export function CapabilitiesGrid() {
               className="flex-1 rounded-lg overflow-hidden flex items-center justify-center"
               style={{
                 background: "var(--bg-raised)",
-                minHeight: "220px",
+                height: "450px",
                 border: "1px solid var(--bg-border)",
               }}
             >
               {ScreenshotSvg ? (
-                <div className="w-full h-full p-4 lg:p-6">
+                <div className="w-full h-full">
                   <ScreenshotSvg />
                 </div>
               ) : (

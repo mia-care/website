@@ -215,29 +215,50 @@ export function MasterAiComplianceSvg() {
                   >
                     <path
                       d="M8 2a6 6 0 100 12A6 6 0 008 2z"
-                      stroke="#0D9488"
+                      stroke={color}
                       strokeWidth="1.6"
                       strokeDasharray="16 8"
                     />
                   </svg>
                 ) : isDone ? (
-                  <svg
-                    width="13"
-                    height="13"
-                    viewBox="0 0 16 16"
-                    fill="none"
-                    aria-hidden="true"
-                    style={{ animation: "mai-checkin 0.2s ease" }}
-                  >
-                    <circle cx="8" cy="8" r="6" fill="#CCFBF1" />
-                    <path
-                      d="M5 8l2.5 2.5L11 5.5"
-                      stroke="#0D9488"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
+                  p.score >= 85 ? (
+                    <svg
+                      width="13"
+                      height="13"
+                      viewBox="0 0 16 16"
+                      fill="none"
+                      aria-hidden="true"
+                      style={{ animation: "mai-checkin 0.2s ease" }}
+                    >
+                      <circle cx="8" cy="8" r="6" fill="#CCFBF1" />
+                      <path
+                        d="M5 8l2.5 2.5L11 5.5"
+                        stroke="#0D9488"
+                        strokeWidth="1.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  ) : (
+                    <svg
+                      width="13"
+                      height="13"
+                      viewBox="0 0 16 16"
+                      fill="none"
+                      aria-hidden="true"
+                      style={{ animation: "mai-checkin 0.2s ease" }}
+                    >
+                      <circle
+                        cx="8"
+                        cy="8"
+                        r="6"
+                        fill="#FEF3C7"
+                        stroke="#F59E0B"
+                        strokeWidth="1.2"
+                      />
+                      <circle cx="8" cy="8" r="2.5" fill="#F59E0B" />
+                    </svg>
+                  )
                 ) : null}
                 <PinIcon active={isActive || isDone} />
               </div>
@@ -258,7 +279,7 @@ export function MasterAiComplianceSvg() {
                   style={{
                     fontSize: 13,
                     fontWeight: 800,
-                    color: isActive ? "#0D9488" : color,
+                    color: color,
                     transition: "color 0.3s",
                   }}
                 >
@@ -272,7 +293,7 @@ export function MasterAiComplianceSvg() {
                   style={{
                     height: "100%",
                     width: `${bars[i]}%`,
-                    background: isActive ? "#0D9488" : color,
+                    background: color,
                     borderRadius: 99,
                     transition: "width 1.0s cubic-bezier(0.4,0,0.2,1), background 0.3s",
                   }}
@@ -312,7 +333,7 @@ export function MasterAiComplianceSvg() {
               }}
             >
               <ClockIcon />
-              <span style={{ fontSize: 9, color: "#9CA3AF" }}>Lastest version {p.version}</span>
+              <span style={{ fontSize: 9, color: "#9CA3AF" }}>Latest version {p.version}</span>
             </div>
           </div>
         );

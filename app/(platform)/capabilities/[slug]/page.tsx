@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { CtaBanner } from "@/components/common/CtaBanner";
 import { JsonLd } from "@/components/common/JsonLd";
 import { PillTag } from "@/components/common/PillTag";
+import { PlansBanner } from "@/components/common/PlansBanner";
 import { CapabilityHero } from "@/components/sections/capability/CapabilityHero";
 import { FeatureCards } from "@/components/sections/capability/FeatureCards";
 import { RegulationsList } from "@/components/sections/capability/RegulationsList";
@@ -82,6 +83,7 @@ export default async function CapabilityPage({ params }: { params: Promise<{ slu
       <FeatureCards cap={cap} />
       <RegulationsList cap={cap} />
       <RelatedUseCases cap={cap} />
+      <PlansBanner />
       <CtaBanner />
     </>
   );

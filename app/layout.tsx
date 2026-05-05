@@ -1,10 +1,16 @@
 import type { Metadata } from "next";
+import { Inter } from "next/font/google";
 import localFont from "next/font/local";
 import Script from "next/script";
 import { CookieBanner } from "@/components/common/CookieBanner";
-import { Footer } from "@/components/layout/Footer";
-import { Navbar } from "@/components/layout/Navbar";
+import { announcement } from "@/data/announcement";
 import "./globals.css";
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+});
 
 const styreneA = localFont({
   src: [
@@ -68,8 +74,13 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`h-full ${styreneA.variable} ${styreneB.variable}`}>
+    <html
+      lang="en"
+      className={`h-full ${styreneA.variable} ${styreneB.variable} ${inter.variable}`}
+    >
       <head>
+        {/* Set --banner-h before first paint to prevent layout shift */}
+        <style>{`:root { --banner-h: ${announcement.enabled ? "40px" : "0px"}; }`}</style>
         {/* Consent Mode v2 defaults — must run before GTM so tags start in denied state */}
         <Script id="consent-defaults" strategy="beforeInteractive">{`
           window.dataLayer = window.dataLayer || [];
@@ -109,11 +120,13 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         >
           Skip to main content
         </a>
-        <Navbar />
-        <main id="main-content" className="flex-1 pt-16">
+        <main
+          id="main-content"
+          className="flex-1"
+          style={{ paddingTop: "calc(var(--banner-h, 0px) + 4rem)" }}
+        >
           {children}
         </main>
-        <Footer />
         <CookieBanner />
       </body>
     </html>

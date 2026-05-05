@@ -1,262 +1,343 @@
-export function GuidedWorkflowsSvg() {
-  const phases = [
-    { label: "Requirements", sub: "SRS + URS captured", y: 28 },
-    { label: "Design", sub: "Architecture docs", y: 88 },
-    { label: "Implement", sub: "Code + unit tests", y: 148 },
-    { label: "Verification", sub: "V&V evidence", y: 208 },
-  ];
+"use client";
 
-  const roles = [
-    { label: "Developer", sub: "Task-level guidance", y: 52 },
-    { label: "QA", sub: "Verification plan", y: 128 },
-    { label: "Reg. Affairs", sub: "Submission package", y: 204 },
-  ];
+import { useEffect, useRef, useState } from "react";
+
+const ROLES = [
+  {
+    label: "Developer",
+    phase: "Implementation",
+    ref: "IEC 62304 §5.5",
+    color: "#2563EB",
+    bg: "#EFF6FF",
+    border: "#BFDBFE",
+    tasks: [
+      "Create Software Item design document",
+      "Implement unit tests for all functions",
+      "Document coding standards compliance",
+      "Mark software item as ready for review",
+    ],
+    hint: "Every software unit must have documented acceptance criteria before testing begins.",
+  },
+  {
+    label: "QA",
+    phase: "Verification",
+    ref: "IEC 62304 §5.6–5.7",
+    color: "#7C3AED",
+    bg: "#F5F3FF",
+    border: "#C4B5FD",
+    tasks: [
+      "Define integration test plan",
+      "Execute system test cases",
+      "Document test results and evidence",
+      "Verify traceability coverage ≥ 100%",
+    ],
+    hint: "System testing must cover all software requirements defined in the SRS.",
+  },
+  {
+    label: "Reg. Affairs",
+    phase: "Submission",
+    ref: "EU MDR · ISO 13485",
+    color: "#0D9488",
+    bg: "#F0FDFA",
+    border: "#99F6E4",
+    tasks: [
+      "Review Technical File completeness",
+      "Confirm DHF is audit-ready",
+      "Validate clinical evaluation report",
+      "Sign off on submission package",
+    ],
+    hint: "Technical File must reference all applicable harmonised standards used.",
+  },
+];
+
+const TASK_MS = 900;
+const HOLD_MS = 1200;
+const RESET_MS = 400;
+
+export function GuidedWorkflowsSvg() {
+  const [roleIdx, setRoleIdx] = useState(0);
+  const [checked, setChecked] = useState<number>(-1); // how many tasks are checked
+  const [thinking, setThinking] = useState(false);
+  const timers = useRef<ReturnType<typeof setTimeout>[]>([]);
+
+  useEffect(() => {
+    const clear = () => timers.current.forEach(clearTimeout);
+    const later = (fn: () => void, ms: number) => {
+      const t = setTimeout(fn, ms);
+      timers.current.push(t);
+    };
+
+    const runRole = (idx: number) => {
+      clear();
+      timers.current = [];
+      setRoleIdx(idx);
+      setChecked(-1);
+      setThinking(false);
+
+      const role = ROLES[idx];
+
+      // check tasks one by one
+      role.tasks.forEach((_, i) => {
+        later(() => setChecked(i), RESET_MS + i * TASK_MS);
+      });
+
+      // after all tasks done, show thinking hint, then switch role
+      const allDoneAt = RESET_MS + role.tasks.length * TASK_MS;
+      later(() => setThinking(true), allDoneAt + 200);
+      later(() => runRole((idx + 1) % ROLES.length), allDoneAt + HOLD_MS);
+    };
+
+    runRole(0);
+    return clear;
+  }, []);
+
+  const role = ROLES[roleIdx];
 
   return (
-    <svg
-      viewBox="0 0 560 300"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      className="w-full h-full"
-      aria-hidden="true"
+    <div
+      style={{
+        background: "white",
+        borderRadius: 12,
+        border: "1px solid #E5E5E5",
+        fontFamily: "ui-sans-serif, system-ui, sans-serif",
+        fontSize: 12,
+        color: "#0A0A0A",
+        height: "100%",
+        display: "flex",
+        flexDirection: "column",
+        overflow: "hidden",
+        padding: "14px 16px 12px",
+        gap: 10,
+      }}
     >
       <style>{`
-        @keyframes gw-flow { from { stroke-dashoffset: 11; } to { stroke-dashoffset: 0; } }
-        @keyframes gw-pulse { 0%,100% { opacity:0.2; } 50% { opacity:0.6; } }
-        @keyframes gw-step {
-          0%,100% { opacity:0.5; r:4; }
-          50%      { opacity:1;   r:5.5; }
+        @keyframes gw-slide {
+          from { opacity: 0; transform: translateX(-6px); }
+          to   { opacity: 1; transform: translateX(0); }
         }
-        @keyframes gw-progress {
-          0%   { width: 0; }
-          60%  { width: 60px; }
-          100% { width: 60px; }
+        @keyframes gw-check {
+          from { transform: scale(0); opacity: 0; }
+          to   { transform: scale(1); opacity: 1; }
         }
-        .gw-line { stroke-dasharray: 6 5; animation: gw-flow 1.5s linear infinite; }
-        .gw-d0 { animation-delay: 0s; }    .gw-d1 { animation-delay: 0.4s; }
-        .gw-d2 { animation-delay: 0.8s; }  .gw-d3 { animation-delay: 1.2s; }
-        .gw-d4 { animation-delay: 0.15s; } .gw-d5 { animation-delay: 0.55s; }
-        .gw-d6 { animation-delay: 0.95s; }
-        .gw-hub-ring { animation: gw-pulse 2s ease-in-out infinite; }
-        .gw-step { animation: gw-step 2s ease-in-out infinite; }
-        .gw-s1 { animation-delay: 0s; }    .gw-s2 { animation-delay: 0.5s; }
-        .gw-s3 { animation-delay: 1s; }    .gw-s4 { animation-delay: 1.5s; }
+        @keyframes gw-dot {
+          0%, 80%, 100% { transform: scale(0.6); opacity: 0.3; }
+          40%           { transform: scale(1);   opacity: 1;   }
+        }
+        @keyframes gw-fade {
+          from { opacity: 0; }
+          to   { opacity: 1; }
+        }
       `}</style>
 
-      <defs>
-        <linearGradient
-          id="gw-grad"
-          x1="196"
-          y1="106"
-          x2="360"
-          y2="194"
-          gradientUnits="userSpaceOnUse"
+      {/* ── Role tabs ── */}
+      <div style={{ display: "flex", gap: 5 }}>
+        {ROLES.map((r, i) => {
+          const active = roleIdx === i;
+          return (
+            <div
+              key={r.label}
+              style={{
+                padding: "4px 10px",
+                borderRadius: 20,
+                fontSize: 9.5,
+                fontWeight: active ? 700 : 500,
+                background: active ? r.bg : "transparent",
+                color: active ? r.color : "#9CA3AF",
+                border: `1px solid ${active ? r.border : "transparent"}`,
+                transition: "all 0.3s",
+                display: "flex",
+                alignItems: "center",
+                gap: 4,
+              }}
+            >
+              {active && (
+                <span
+                  style={{
+                    width: 5,
+                    height: 5,
+                    borderRadius: "50%",
+                    background: r.color,
+                    display: "inline-block",
+                  }}
+                />
+              )}
+              {r.label}
+            </div>
+          );
+        })}
+      </div>
+
+      {/* ── Phase header ── */}
+      <div key={roleIdx} style={{ animation: "gw-fade 0.35s ease" }}>
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+          <div>
+            <div style={{ fontWeight: 700, fontSize: 13, color: "#0A0A0A" }}>{role.phase}</div>
+            <div style={{ fontSize: 9, color: role.color, fontWeight: 600, marginTop: 1 }}>
+              {role.ref}
+            </div>
+          </div>
+          {/* progress fraction */}
+          <div style={{ fontSize: 9, color: "#9CA3AF" }}>
+            <span style={{ fontWeight: 700, color: role.color }}>{Math.max(0, checked + 1)}</span>/
+            {role.tasks.length} tasks
+          </div>
+        </div>
+
+        {/* progress bar */}
+        <div
+          style={{
+            marginTop: 7,
+            height: 4,
+            background: "#F3F4F6",
+            borderRadius: 99,
+            overflow: "hidden",
+          }}
         >
-          <stop offset="0%" stopColor="#00f096" stopOpacity="0.10" />
-          <stop offset="100%" stopColor="#00f0f0" stopOpacity="0.07" />
-        </linearGradient>
-        <linearGradient
-          id="gw-border"
-          x1="196"
-          y1="106"
-          x2="360"
-          y2="194"
-          gradientUnits="userSpaceOnUse"
-        >
-          <stop offset="0%" stopColor="#00f096" stopOpacity="0.6" />
-          <stop offset="100%" stopColor="#00f0f0" stopOpacity="0.4" />
-        </linearGradient>
-      </defs>
-
-      {phases.map((phase, i) => (
-        <g key={phase.label}>
-          <rect
-            x="8"
-            y={phase.y}
-            width="132"
-            height="44"
-            rx="6"
-            fill="var(--bg-raised)"
-            stroke="var(--bg-border-strong)"
-            strokeWidth="1"
+          <div
+            style={{
+              height: "100%",
+              width: `${((checked + 1) / role.tasks.length) * 100}%`,
+              background: role.color,
+              borderRadius: 99,
+              transition: "width 0.6s cubic-bezier(0.4,0,0.2,1)",
+            }}
           />
-          {/* step indicator */}
-          <circle
-            cx="26"
-            cy={phase.y + 22}
-            r="4"
-            fill="#00f096"
-            className={`gw-step gw-s${i + 1}`}
-          />
-          <text
-            x="22"
-            y={phase.y + 26}
-            textAnchor="middle"
-            fontSize="8"
-            fontWeight="700"
-            fill="var(--bg-base)"
-          >
-            {i + 1}
-          </text>
-          <text
-            x="36"
-            y={phase.y + 19}
-            fontSize="10"
-            fontWeight="700"
-            fill="var(--text-primary)"
-            fontFamily="ui-sans-serif,sans-serif"
-          >
-            {phase.label}
-          </text>
-          <text
-            x="26"
-            y={phase.y + 35}
-            fontSize="9"
-            fill="var(--text-secondary)"
-            fontFamily="ui-sans-serif,sans-serif"
-          >
-            {phase.sub}
-          </text>
-        </g>
-      ))}
+        </div>
+      </div>
 
-      {[50, 110, 170, 230].map((cy, i) => (
-        <path
-          key={cy}
-          d={`M 140,${cy} C 168,${cy} 168,150 196,150`}
-          stroke="#00f096"
-          strokeWidth="1"
-          strokeOpacity="0.55"
-          className={`gw-line gw-d${i}`}
-        />
-      ))}
-
-      <rect
-        x="188"
-        y="98"
-        width="180"
-        height="104"
-        rx="14"
-        fill="none"
-        stroke="#00f096"
-        strokeWidth="8"
-        strokeOpacity="0.08"
-        className="gw-hub-ring"
-      />
-      <rect
-        x="196"
-        y="106"
-        width="164"
-        height="88"
-        rx="10"
-        fill="url(#gw-grad)"
-        stroke="url(#gw-border)"
-        strokeWidth="1"
-      />
-      {/* step progress bar */}
-      <rect x="218" y="120" width="120" height="6" rx="3" fill="var(--bg-border)" />
-      <rect x="218" y="120" width="80" height="6" rx="3" fill="#00f096" fillOpacity="0.6" />
-      <text
-        x="278"
-        y="144"
-        textAnchor="middle"
-        fontSize="12"
-        fontWeight="700"
-        fill="#00f096"
-        fontFamily="ui-monospace,monospace"
-        letterSpacing="0.06em"
+      {/* ── Checklist ── */}
+      <div
+        key={`tasks-${roleIdx}`}
+        style={{
+          flex: 1,
+          display: "flex",
+          flexDirection: "column",
+          gap: 6,
+          animation: "gw-fade 0.35s ease",
+        }}
       >
-        GUIDED
-      </text>
-      <text
-        x="278"
-        y="162"
-        textAnchor="middle"
-        fontSize="9"
-        fill="var(--text-secondary)"
-        fontFamily="ui-sans-serif,sans-serif"
+        {role.tasks.map((task, i) => {
+          const done = checked >= i;
+          const current = checked === i - 1 || (checked === -1 && i === 0);
+          return (
+            <div
+              key={task}
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: 9,
+                padding: "7px 9px",
+                borderRadius: 8,
+                background: done ? role.bg : current ? "#FAFAFA" : "transparent",
+                border: `1px solid ${done ? role.border : current ? "#E5E7EB" : "transparent"}`,
+                transition: "background 0.3s, border-color 0.3s",
+                animation: "gw-slide 0.3s ease",
+              }}
+            >
+              {/* checkbox */}
+              <div
+                style={{
+                  width: 16,
+                  height: 16,
+                  borderRadius: 4,
+                  border: `1.5px solid ${done ? role.color : "#D1D5DB"}`,
+                  background: done ? role.color : "white",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  flexShrink: 0,
+                  transition: "background 0.2s, border-color 0.2s",
+                }}
+              >
+                {done && (
+                  <svg
+                    width="9"
+                    height="9"
+                    viewBox="0 0 16 16"
+                    fill="none"
+                    aria-hidden="true"
+                    style={{ animation: "gw-check 0.2s ease" }}
+                  >
+                    <path
+                      d="M3 8l3.5 3.5L13 5"
+                      stroke="white"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                )}
+              </div>
+
+              <span
+                style={{
+                  fontSize: 10,
+                  fontWeight: done ? 500 : 400,
+                  color: done ? "#374151" : "#9CA3AF",
+                  textDecoration: done ? "none" : "none",
+                  transition: "color 0.3s",
+                  flex: 1,
+                }}
+              >
+                {task}
+              </span>
+
+              {done && (
+                <span style={{ fontSize: 8, color: role.color, fontWeight: 600, flexShrink: 0 }}>
+                  ✓
+                </span>
+              )}
+            </div>
+          );
+        })}
+      </div>
+
+      {/* ── Compliance hint ── */}
+      <div
+        style={{
+          padding: "8px 10px",
+          background: role.bg,
+          border: `1px solid ${role.border}`,
+          borderRadius: 8,
+          flexShrink: 0,
+          minHeight: 42,
+          display: "flex",
+          alignItems: "flex-start",
+          gap: 7,
+        }}
       >
-        Step-by-step Workflows
-      </text>
-      <text
-        x="278"
-        y="178"
-        textAnchor="middle"
-        fontSize="8"
-        fill="var(--text-muted)"
-        fontFamily="ui-sans-serif,sans-serif"
-        letterSpacing="0.04em"
-      >
-        IEC 62304 · ISO 13485 · EU MDR
-      </text>
-
-      {[
-        { d: `M 360,150 C 388,150 388,74  416,74` },
-        { d: `M 360,150 L 416,150` },
-        { d: `M 360,150 C 388,150 388,226 416,226` },
-      ].map(({ d }, i) => (
-        <path
-          key={d}
-          d={d}
-          stroke="#00f0f0"
-          strokeWidth="1"
-          strokeOpacity="0.55"
-          className={`gw-line gw-d${i + 4}`}
-        />
-      ))}
-
-      {roles.map((role) => (
-        <g key={role.label}>
-          <rect
-            x="416"
-            y={role.y}
-            width="136"
-            height="44"
-            rx="6"
-            fill="var(--bg-raised)"
-            stroke="var(--bg-border-strong)"
-            strokeWidth="1"
-          />
-          <circle
-            cx="434"
-            cy={role.y + 14}
-            r="8"
-            fill="rgba(0,240,150,0.10)"
-            stroke="#00f096"
-            strokeWidth="1"
-            strokeOpacity="0.5"
-          />
-          <path
-            d={`M ${429.5} ${role.y + 14} L ${433} ${role.y + 17.5} L ${439} ${role.y + 10.5}`}
-            stroke="#00f096"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-          <text
-            x="448"
-            y={role.y + 19}
-            fontSize="11"
-            fontWeight="700"
-            fill="var(--text-primary)"
-            fontFamily="ui-sans-serif,sans-serif"
-          >
-            {role.label}
-          </text>
-          <text
-            x="434"
-            y={role.y + 35}
-            fontSize="9"
-            fill="var(--text-secondary)"
-            fontFamily="ui-sans-serif,sans-serif"
-          >
-            {role.sub}
-          </text>
-        </g>
-      ))}
-
-      <circle cx="196" cy="150" r="3" fill="#00f096" opacity="0.7" />
-      <circle cx="360" cy="150" r="3" fill="#00f0f0" opacity="0.7" />
-    </svg>
+        {thinking ? (
+          <>
+            <span style={{ fontSize: 10, flexShrink: 0, marginTop: 1 }}>💡</span>
+            <span
+              style={{
+                fontSize: 9,
+                color: role.color,
+                lineHeight: 1.5,
+                animation: "gw-fade 0.4s ease",
+              }}
+            >
+              {role.hint}
+            </span>
+          </>
+        ) : (
+          <div style={{ display: "flex", alignItems: "center", gap: 5 }}>
+            <span style={{ fontSize: 9, color: role.color, opacity: 0.6 }}>Guidance loading</span>
+            {[0, 1, 2].map((j) => (
+              <div
+                key={j}
+                style={{
+                  width: 4,
+                  height: 4,
+                  borderRadius: "50%",
+                  background: role.color,
+                  animation: `gw-dot 1.2s ease-in-out ${j * 0.2}s infinite`,
+                }}
+              />
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
   );
 }

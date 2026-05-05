@@ -220,13 +220,15 @@ export function DocumentationEngineSvg() {
               padding: "6px 7px",
               background: c.bg,
               transition: "background 0.4s",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-between",
             }}
           >
             <div
               style={{
                 color: c.color,
                 fontSize: 8,
-                marginBottom: 2,
                 lineHeight: 1.2,
                 fontWeight: 500,
               }}
@@ -240,6 +242,7 @@ export function DocumentationEngineSvg() {
                 color: c.color,
                 lineHeight: 1,
                 transition: "color 0.3s",
+                marginTop: 4,
               }}
             >
               {c.value}
