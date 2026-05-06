@@ -4,6 +4,7 @@ import { ComplianceStrip } from "@/components/common/ComplianceStrip";
 import { CtaBanner } from "@/components/common/CtaBanner";
 import { JsonLd } from "@/components/common/JsonLd";
 import { LogoMarquee } from "@/components/common/LogoCarousel";
+import { PlansBanner } from "@/components/common/PlansBanner";
 import { HeroBanner } from "@/components/sections/home/HeroBanner";
 import { ProblemSection } from "@/components/sections/home/ProblemSection";
 import { StatsRow } from "@/components/sections/home/StatsRow";
@@ -64,6 +65,7 @@ export default function HomePage() {
       <ComplianceStrip />
       <UseCasesGrid />
       <WhoWeServe />
+      <PlansBanner />
       <CtaBanner />
     </>
   );
