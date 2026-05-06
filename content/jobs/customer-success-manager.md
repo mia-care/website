@@ -5,7 +5,7 @@ location: "Milan"
 summary: "We are looking for a Customer Success Manager to join our Mia-Care Team."
 applyEmail: "info@mia-care.io"
 order: 2
-published: true
+published: false
 ---
 
 As a Customer Success Manager, you will be responsible for nurturing and maintaining strong relationships with our large enterprise clients. Your primary focus will be to drive software adoption, ensure client satisfaction, and keep clients informed about product updates and enhancements — bridging the gap between our clients and our product development team.

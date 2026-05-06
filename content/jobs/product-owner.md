@@ -5,7 +5,7 @@ location: "Milan"
 summary: "We are looking for a Product Owner to manage medium/large IT projects in digital healthcare."
 applyEmail: "info@mia-care.io"
 order: 3
-published: true
+published: false
 ---
 
 This hybrid role combines Product Owner responsibilities (70%) with Customer Success (30%). You will work directly with clients to understand their needs and translate them into actionable product requirements, while ensuring their success with our solutions. You will be involved in functional analysis, process redesign, and management of IT projects in digital healthcare.

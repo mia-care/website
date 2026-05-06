@@ -20,10 +20,13 @@ We are looking for a Solution Architect who can create the overall vision and st
 - Support Mia-Platform partners in defining working solutions for their customers
 
 ## Required Skills
+- 3+ years of experience in the role
 - Master's Degree in CS or Computer Engineering with 2+ years of relevant experience
 - Experience with DevOps methods and tools
 - Experience with Cloud Native technologies
 - Experience delivering custom solutions to enterprises
+- Passionate learner
+- Good relationship skills
 - Excellent English communication skills
 - Knowledge of medical device regulatory framework (ISO 13485, IEC 62304) is a plus
 
