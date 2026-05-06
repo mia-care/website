@@ -283,6 +283,231 @@ function RequirementRow() {
   );
 }
 
+// ── Whisper AI Card ───────────────────────────────────────────────────
+const WHISPER_ALERTS = [
+  {
+    icon: "⊗",
+    borderColor: "#EF4444",
+    bg: "rgba(239,68,68,0.07)",
+    title: "Incomplete SRS traceability",
+    tag: "IEC 62304 §5.2",
+  },
+  {
+    icon: "⚠",
+    borderColor: "#F97316",
+    bg: "rgba(249,115,22,0.07)",
+    title: "Missing integration tests",
+    tag: "IEC 62304 §5.6",
+  },
+];
+
+function WhisperCard() {
+  const [visibleCount, setVisibleCount] = useState(0);
+  const [thinking, setThinking] = useState(true);
+
+  useEffect(() => {
+    const timers: ReturnType<typeof setTimeout>[] = [];
+    const later = (fn: () => void, ms: number) => timers.push(setTimeout(fn, ms));
+
+    const run = () => {
+      setVisibleCount(0);
+      setThinking(true);
+      // alert 1 appears
+      later(() => {
+        setVisibleCount(1);
+      }, 1200);
+      // alert 2 appears, thinking continues
+      later(() => {
+        setVisibleCount(2);
+      }, 1200 + 950);
+      // thinking stops
+      later(
+        () => {
+          setThinking(false);
+        },
+        1200 + 950 + 200,
+      );
+      // reset
+      later(
+        () => {
+          setThinking(true);
+          later(run, 400);
+        },
+        1200 + 950 + 200 + 2600,
+      );
+    };
+
+    run();
+    return () => timers.forEach(clearTimeout);
+  }, []);
+
+  return (
+    <div
+      style={{
+        background: "white",
+        border: "1px solid #E5E5E5",
+        borderRadius: 12,
+        boxShadow: "0 8px 32px rgba(0,0,0,0.13),0 1px 4px rgba(0,0,0,0.06)",
+        overflow: "hidden",
+        display: "flex",
+        flexDirection: "column",
+      }}
+    >
+      <style>{`
+        @keyframes wh-card-in {
+          from { opacity: 0; transform: translateY(5px); }
+          to   { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes wh-dot-mini {
+          0%, 80%, 100% { transform: scale(0.55); opacity: 0.35; }
+          40%           { transform: scale(1);    opacity: 1; }
+        }
+      `}</style>
+
+      {/* Header */}
+      <div style={{ padding: "9px 11px 7px", borderBottom: "1px solid #F3F4F6" }}>
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 5 }}>
+            <span style={{ fontSize: 12 }}>✨</span>
+            <span
+              style={{
+                fontWeight: 700,
+                fontSize: 11.5,
+                background: "linear-gradient(90deg,#7C3AED,#2563EB)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+              }}
+            >
+              Whisper AI
+            </span>
+          </div>
+          <div style={{ display: "flex", alignItems: "center", gap: 3 }}>
+            <span
+              style={{
+                width: 5,
+                height: 5,
+                borderRadius: "50%",
+                background: "#22C55E",
+                display: "inline-block",
+              }}
+            />
+            <span style={{ fontSize: 8, color: "#9CA3AF" }}>Cardio-Monitor · dev</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Alerts */}
+      <div
+        style={{ padding: "8px 10px", display: "flex", flexDirection: "column", gap: 6, flex: 1 }}
+      >
+        {WHISPER_ALERTS.slice(0, visibleCount).map((a) => (
+          <div
+            key={a.tag}
+            style={{
+              background: a.bg,
+              border: `1px solid ${a.borderColor}33`,
+              borderLeft: `3px solid ${a.borderColor}`,
+              borderRadius: 7,
+              padding: "6px 8px",
+              animation: "wh-card-in 0.3s ease",
+            }}
+          >
+            <div style={{ display: "flex", alignItems: "flex-start", gap: 6 }}>
+              <span style={{ fontSize: 11, flexShrink: 0, marginTop: 1 }}>{a.icon}</span>
+              <div>
+                <div
+                  style={{
+                    fontSize: 10,
+                    fontWeight: 600,
+                    color: "#0A0A0A",
+                    lineHeight: 1.3,
+                    marginBottom: 4,
+                  }}
+                >
+                  {a.title}
+                </div>
+                <span
+                  style={{
+                    background: "#F3F4F6",
+                    border: "1px solid #E5E5E5",
+                    borderRadius: 4,
+                    padding: "1px 5px",
+                    fontSize: 8,
+                    color: "#525252",
+                    fontFamily: "ui-monospace,monospace",
+                  }}
+                >
+                  {a.tag}
+                </span>
+              </div>
+            </div>
+          </div>
+        ))}
+
+        {thinking && (
+          <div style={{ display: "flex", alignItems: "center", gap: 5, padding: "2px 0" }}>
+            <span style={{ fontSize: 10 }}>✨</span>
+            <div style={{ display: "flex", gap: 3 }}>
+              {[0, 1, 2].map((j) => (
+                <div
+                  key={j}
+                  style={{
+                    width: 4,
+                    height: 4,
+                    borderRadius: "50%",
+                    background: "#a78bfa",
+                    animation: `wh-dot-mini 1.2s ease-in-out ${j * 0.2}s infinite`,
+                  }}
+                />
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* Input */}
+      <div style={{ padding: "7px 10px", borderTop: "1px solid #F3F4F6" }}>
+        <div
+          style={{
+            background: "#F9FAFB",
+            border: "1px solid #E5E5E5",
+            borderRadius: 7,
+            padding: "5px 8px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            gap: 6,
+          }}
+        >
+          <span style={{ fontSize: 8.5, color: "#9CA3AF" }}>Ask Whisper…</span>
+          <div
+            style={{
+              width: 20,
+              height: 20,
+              borderRadius: 5,
+              background: "linear-gradient(135deg,#7C3AED,#2563EB)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              flexShrink: 0,
+            }}
+          >
+            <svg width="9" height="9" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path
+                d="M3 8h10M9 4l4 4-4 4"
+                stroke="white"
+                strokeWidth="1.6"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 // ── AI Compliance Card ────────────────────────────────────────────────
 function ComplianceCard() {
   const [bar, setBar] = useState(0);
@@ -407,6 +632,7 @@ export function HeroProductFloating() {
   const d2 = useDrag();
   const d3 = useDrag();
   const d4 = useDrag();
+  const d5 = useDrag();
 
   function card(
     drag: ReturnType<typeof useDrag>,
@@ -445,7 +671,7 @@ export function HeroProductFloating() {
     <div
       style={{
         position: "relative",
-        height: 430,
+        height: 560,
         fontFamily: "var(--font-inter, 'Inter', ui-sans-serif, system-ui, sans-serif)",
       }}
     >
@@ -470,6 +696,13 @@ export function HeroProductFloating() {
         "4.5s 2.1s ease-in-out infinite",
         "0.9s",
         <ComplianceCard />,
+      )}
+      {card(
+        d5,
+        { top: 285, left: 0, width: 215 },
+        "5.2s 1.8s ease-in-out infinite",
+        "1.1s",
+        <WhisperCard />,
       )}
     </div>
   );
