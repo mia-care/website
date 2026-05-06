@@ -146,7 +146,7 @@ export function SdlcOrchestratorSvg() {
             alignItems: "center",
           }}
         >
-          {["Activity", "#", "Class", "Tool Integrations", "Compliance", ""].map((h, i) => (
+          {["Activity", "#", "Class", "Tool Integrations", "Compliance", ""].map((h, _i) => (
             <div
               key={h}
               style={{

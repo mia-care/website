@@ -5,10 +5,13 @@ import { JsonLd } from "@/components/common/JsonLd";
 import { PillTag } from "@/components/common/PillTag";
 import { PlansBanner } from "@/components/common/PlansBanner";
 import { CapabilityHero } from "@/components/sections/capability/CapabilityHero";
+import { CapabilityScreenshots } from "@/components/sections/capability/CapabilityScreenshots";
 import { FeatureCards } from "@/components/sections/capability/FeatureCards";
 import { RegulationsList } from "@/components/sections/capability/RegulationsList";
 import { RelatedUseCases } from "@/components/sections/capability/RelatedUseCases";
+import { WhisperDemoSection } from "@/components/sections/capability/WhisperDemoSection";
 import { capabilities, getCapabilityBySlug } from "@/data/capabilities";
+import { capabilityScreenshots } from "@/data/capability-screenshots";
 import { SITE } from "@/data/site";
 
 export function generateStaticParams() {
@@ -79,6 +82,12 @@ export default async function CapabilityPage({ params }: { params: Promise<{ slu
           </div>
         </div>
       </section>
+
+      {cap.slug === "smart-assistant" && <WhisperDemoSection />}
+
+      {capabilityScreenshots[cap.slug] && (
+        <CapabilityScreenshots screens={capabilityScreenshots[cap.slug]} />
+      )}
 
       <FeatureCards cap={cap} />
       <RegulationsList cap={cap} />
