@@ -148,35 +148,94 @@ export default function AboutUsPage() {
 
           <div>
             <h2
-              className="font-display font-bold text-2xl mb-4"
+              className="font-display font-bold text-2xl mb-6"
               style={{ color: "var(--text-primary)" }}
             >
-              Company details
+              Our offices
             </h2>
-            <div
-              className="rounded-card p-6 text-sm space-y-2"
-              style={{
-                background: "var(--bg-raised)",
-                border: "1px solid var(--bg-border)",
-                color: "var(--text-secondary)",
-              }}
-            >
-              <p>
-                <strong style={{ color: "var(--text-primary)" }}>Legal name:</strong> Mia Care srl
-              </p>
-              <p>
-                <strong style={{ color: "var(--text-primary)" }}>Registered address:</strong> Via
-                Leopardi, 8 — 20123 Milan, Italy
-              </p>
-              <p>
-                <strong style={{ color: "var(--text-primary)" }}>VAT number:</strong> IT 11504530962
-              </p>
-              <p>
-                <strong style={{ color: "var(--text-primary)" }}>Contact:</strong>{" "}
-                <a href="mailto:info@mia-care.io" style={{ color: "var(--brand-green)" }}>
-                  info@mia-care.io
-                </a>
-              </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {/* Italy */}
+              <div
+                className="rounded-2xl p-6"
+                style={{ background: "var(--bg-raised)", border: "1px solid var(--bg-border)" }}
+              >
+                <div
+                  className="inline-flex items-center justify-center w-9 h-9 rounded-xl mb-4"
+                  style={{
+                    background: "rgba(0,240,150,0.08)",
+                    border: "1px solid rgba(0,240,150,0.15)",
+                  }}
+                >
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="var(--brand-green)"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" />
+                    <circle cx="12" cy="9" r="2.5" />
+                  </svg>
+                </div>
+                <p
+                  className="font-display font-bold text-base mb-0.5"
+                  style={{ color: "var(--text-primary)" }}
+                >
+                  Italy
+                </p>
+                <p className="text-xs font-semibold mb-3" style={{ color: "var(--brand-green)" }}>
+                  Headquarters
+                </p>
+                <p className="text-sm" style={{ color: "var(--text-secondary)", lineHeight: 1.7 }}>
+                  Via Leopardi, 8<br />
+                  20123 Milan
+                </p>
+              </div>
+
+              {/* USA */}
+              <div
+                className="rounded-2xl p-6"
+                style={{ background: "var(--bg-raised)", border: "1px solid var(--bg-border)" }}
+              >
+                <div
+                  className="inline-flex items-center justify-center w-9 h-9 rounded-xl mb-4"
+                  style={{
+                    background: "rgba(0,240,150,0.08)",
+                    border: "1px solid rgba(0,240,150,0.15)",
+                  }}
+                >
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="var(--brand-green)"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" />
+                    <circle cx="12" cy="9" r="2.5" />
+                  </svg>
+                </div>
+                <p
+                  className="font-display font-bold text-base mb-0.5"
+                  style={{ color: "var(--text-primary)" }}
+                >
+                  United States
+                </p>
+                <p className="text-xs font-semibold mb-3" style={{ color: "var(--brand-green)" }}>
+                  Representatives
+                </p>
+                <p className="text-sm" style={{ color: "var(--text-secondary)", lineHeight: 1.7 }}>
+                  Austin, TX
+                </p>
+              </div>
             </div>
           </div>
         </div>

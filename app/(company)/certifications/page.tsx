@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { CtaBanner } from "@/components/common/CtaBanner";
 import { PillTag } from "@/components/common/PillTag";
+import { BASE_PATH } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: "Certifications — Digital Products Made in Quality | Mia-Care",
@@ -12,6 +14,7 @@ const CERTS = [
   {
     id: "01",
     name: "ISO 13485:2016",
+    image: `${BASE_PATH}/images/certifications/BVCER_withAccredia-ISO-13485.webp`,
     scope:
       "Design and development, production, installation, and maintenance of medical software and software for medical devices.",
     body: "ISO 13485 ensures the ability to develop and deliver medical devices and software by meeting customer requirements and applicable regulatory requirements from the MDR. The main purpose of this standard is to facilitate the certification of digital solutions that communicate with harmonized medical devices for quality management systems. Mia-Care is currently helping several companies achieve certification for Software as a Medical Device by building new digital MDR-ready products with a compliant-by-design software suite.",
@@ -19,12 +22,14 @@ const CERTS = [
   {
     id: "02",
     name: "ISO 27001:2022",
+    image: `${BASE_PATH}/images/certifications/27001-27017-27018-blu_tracciati.webp`,
     scope: "Deployment and delivery of IT solutions for building Cloud Native platforms.",
     body: "This certification represents the international standard that describes best practices for an Information Security Management System. Through this ISO, we demonstrate compliance concerning information security best practices and according to business objectives. The certification was integrated by the controls required by guidelines ISO/IEC 27017:2015 and ISO/IEC 27018:2019, which extend the scope by providing specific controls and guidelines to ensure that information security and personal data protection within cloud services are guaranteed.",
   },
   {
     id: "03",
     name: "ISO 9001:2015",
+    image: `${BASE_PATH}/images/certifications/BVCER_withAccredia-ISO-9001.webp`,
     scope:
       "Design and development, production, installation, and maintenance of medical software and software for medical devices.",
     body: "The ISO 9001 standard defines the minimum requirements an organization must meet to guarantee the claimed quality of the product and service provided. This certification is dedicated to the continuous and constant improvement of the company, optimizing the organizational structure and having the tools to make it more efficient over time, depending on the pace of growth.",
@@ -73,20 +78,17 @@ export default function CertificationsPage() {
             {CERTS.map((cert, i) => (
               <div
                 key={cert.id}
-                className="py-8 px-6 flex flex-col items-center gap-2 text-center"
+                className="py-8 px-6 flex flex-col items-center gap-3 text-center"
                 style={{
                   borderRight: i < CERTS.length - 1 ? "1px solid var(--bg-border)" : undefined,
                 }}
               >
+                <div className="relative mx-auto" style={{ width: 220, height: 88 }}>
+                  <Image src={cert.image} alt={cert.name} fill style={{ objectFit: "contain" }} />
+                </div>
                 <span
-                  className="font-display font-bold text-xs uppercase tracking-widest mb-1"
-                  style={{ color: "var(--text-muted)" }}
-                >
-                  {cert.id}
-                </span>
-                <span
-                  className="font-display font-bold text-xl"
-                  style={{ color: "var(--brand-green)" }}
+                  className="font-display font-bold text-sm"
+                  style={{ color: "var(--text-primary)" }}
                 >
                   {cert.name}
                 </span>
@@ -107,14 +109,20 @@ export default function CertificationsPage() {
             >
               <div className="flex items-start gap-6">
                 <div
-                  className="flex-shrink-0 flex items-center justify-center w-14 h-14 rounded-xl font-display font-bold text-lg"
+                  className="flex-shrink-0 relative rounded-xl overflow-hidden"
                   style={{
-                    background: "rgba(0,240,150,0.08)",
-                    border: "1px solid rgba(0,240,150,0.18)",
-                    color: "var(--brand-green)",
+                    width: 200,
+                    height: 120,
+                    background: "rgba(255,255,255,0.04)",
+                    border: "1px solid var(--bg-border)",
                   }}
                 >
-                  {cert.id}
+                  <Image
+                    src={cert.image}
+                    alt={cert.name}
+                    fill
+                    style={{ objectFit: "contain", padding: "12px" }}
+                  />
                 </div>
                 <div className="flex-1 min-w-0">
                   <h2
