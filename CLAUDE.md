@@ -12,3 +12,7 @@ When adding or updating a page in blog, resources, or jobs, run these checks bef
 - The new entry appears correctly in the related listing page (index/feed)
 - No duplicate slugs conflict with existing entries
 - Ask if should be indexed or not indexed
+
+# Resources: thank-you.md is mandatory
+Every resource folder in `content/resources/[slug]/` MUST contain both `index.md` and `thank-you.md` before the resource is published. Run `npm run validate:resources` to verify.
+- Ask if should be indexed or not indexed

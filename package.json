@@ -10,7 +10,8 @@
     "lint": "biome check .",
     "format": "biome format --write .",
     "check": "biome check --write .",
-    "prepare": "husky"
+    "prepare": "husky",
+    "validate:resources": "node scripts/validate-resources.js"
   },
   "dependencies": {
     "@base-ui/react": "^1.4.1",

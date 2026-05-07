@@ -151,6 +151,18 @@ ctaUrl: /product
 
 ---
 
+### Verifica prima di pubblicare
+
+Dopo aver creato i file, eseguire questo comando per controllare che nessuna risorsa sia incompleta:
+
+```bash
+npm run validate:resources
+```
+
+Lo script segnala ogni cartella a cui mancano `index.md` o `thank-you.md`. **Una risorsa senza `thank-you.md` non deve essere pubblicata**: la pagina di ringraziamento esiste sempre come route ma sarebbe vuota.
+
+---
+
 ### Nascondere una risorsa (senza cancellarla)
 
 1. Aprire il file `index.md` della risorsa su GitHub
