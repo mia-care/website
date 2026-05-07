@@ -16,8 +16,12 @@ export function StatsRow() {
           {STATS.map((stat) => (
             <div key={stat.label} className="text-center">
               <div
-                className="font-display font-bold text-brand-gradient mb-1"
-                style={{ fontSize: "clamp(2rem, 4vw, 3rem)", letterSpacing: "-0.02em" }}
+                className="font-display font-bold mb-1"
+                style={{
+                  color: "var(--text-primary)",
+                  fontSize: "clamp(2rem, 4vw, 3rem)",
+                  letterSpacing: "-0.02em",
+                }}
               >
                 {stat.value}
               </div>

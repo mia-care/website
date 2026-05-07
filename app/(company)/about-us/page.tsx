@@ -86,7 +86,10 @@ export default function AboutUsPage() {
                   borderRight: i < STATS.length - 1 ? "1px solid var(--bg-border)" : undefined,
                 }}
               >
-                <div className="font-display font-bold text-3xl mb-1 text-brand-gradient">
+                <div
+                  className="font-display font-bold text-3xl mb-1"
+                  style={{ color: "var(--text-primary)" }}
+                >
                   {s.value}
                 </div>
                 <div className="text-xs" style={{ color: "var(--text-muted)" }}>
@@ -187,7 +190,7 @@ export default function AboutUsPage() {
                 >
                   Italy
                 </p>
-                <p className="text-xs font-semibold mb-3" style={{ color: "var(--brand-green)" }}>
+                <p className="text-xs font-semibold mb-3" style={{ color: "var(--text-muted)" }}>
                   Headquarters
                 </p>
                 <p className="text-sm" style={{ color: "var(--text-secondary)", lineHeight: 1.7 }}>
@@ -229,7 +232,7 @@ export default function AboutUsPage() {
                 >
                   United States
                 </p>
-                <p className="text-xs font-semibold mb-3" style={{ color: "var(--brand-green)" }}>
+                <p className="text-xs font-semibold mb-3" style={{ color: "var(--text-muted)" }}>
                   Representatives
                 </p>
                 <p className="text-sm" style={{ color: "var(--text-secondary)", lineHeight: 1.7 }}>
@@ -261,9 +264,9 @@ export default function AboutUsPage() {
                 <div
                   className="flex items-center justify-center w-12 h-12 rounded-full mb-4 font-display font-bold text-sm"
                   style={{
-                    background: "rgba(0,240,150,0.1)",
-                    border: "1px solid rgba(0,240,150,0.2)",
-                    color: "var(--brand-green)",
+                    background: "rgba(255,255,255,0.06)",
+                    border: "1px solid var(--bg-border-strong)",
+                    color: "var(--text-primary)",
                   }}
                 >
                   {person.initials}
@@ -274,7 +277,7 @@ export default function AboutUsPage() {
                 >
                   {person.name}
                 </p>
-                <p className="text-xs mb-4" style={{ color: "var(--brand-green)" }}>
+                <p className="text-xs mb-4" style={{ color: "var(--text-muted)" }}>
                   {person.role}
                 </p>
                 <p

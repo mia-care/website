@@ -70,8 +70,8 @@ export function UseCasesGrid() {
                       style={{ borderColor: "var(--bg-border)" }}
                     >
                       <span
-                        className="font-display font-bold text-2xl text-brand-gradient"
-                        style={{ letterSpacing: "-0.02em" }}
+                        className="font-display font-bold text-2xl"
+                        style={{ color: "var(--text-primary)", letterSpacing: "-0.02em" }}
                       >
                         {metric.metric}
                       </span>

@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ArttTraceabilitySvg } from "@/components/common/capability-svgs/ArttTraceabilitySvg";
 import { BrownfieldRemediatorSvg } from "@/components/common/capability-svgs/BrownfieldRemediatorSvg";
 import { CapabilityPlaceholder } from "@/components/common/capability-svgs/CapabilityPlaceholder";
@@ -25,13 +25,74 @@ const SVG_MAP: Record<string, React.ComponentType> = {
   "guided-workflows": GuidedWorkflowsSvg,
 };
 
+const AUTOPLAY_MS = 20_000;
+
+function PauseIcon() {
+  return (
+    <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
+      <rect x="1.5" y="1" width="2.5" height="8" rx="1" fill="currentColor" />
+      <rect x="6" y="1" width="2.5" height="8" rx="1" fill="currentColor" />
+    </svg>
+  );
+}
+
+function PlayIcon() {
+  return (
+    <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
+      <path d="M2 1.5l7 3.5-7 3.5V1.5z" fill="currentColor" />
+    </svg>
+  );
+}
+
 export function CapabilitiesGrid() {
   const [active, setActive] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(true);
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const mobileTabRefs = useRef<(HTMLButtonElement | null)[]>([]);
+
   const cap = capabilities[active];
   const ScreenshotSvg = SVG_MAP[cap.slug];
 
+  // Auto-advance
+  useEffect(() => {
+    if (!isPlaying) {
+      if (intervalRef.current) clearInterval(intervalRef.current);
+      intervalRef.current = null;
+      return;
+    }
+    intervalRef.current = setInterval(() => {
+      setActive((prev) => (prev + 1) % capabilities.length);
+    }, AUTOPLAY_MS);
+    return () => {
+      if (intervalRef.current) clearInterval(intervalRef.current);
+    };
+  }, [isPlaying]);
+
+  // Mobile: scroll active tab into view
+  useEffect(() => {
+    mobileTabRefs.current[active]?.scrollIntoView({
+      behavior: "smooth",
+      block: "nearest",
+      inline: "center",
+    });
+  }, [active]);
+
+  const handleTabClick = (i: number) => {
+    setActive(i);
+    setIsPlaying(false);
+  };
+
+  const togglePlay = () => setIsPlaying((p) => !p);
+
   return (
     <section className="py-24" style={{ background: "var(--bg-base)" }}>
+      <style>{`
+        @keyframes cap-progress {
+          from { transform: scaleX(1); }
+          to   { transform: scaleX(0); }
+        }
+      `}</style>
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16">
@@ -50,26 +111,65 @@ export function CapabilitiesGrid() {
 
         {/* Explorer layout */}
         <div className="flex flex-col lg:flex-row gap-6 items-start">
-          {/* Mobile: horizontal scrollable tab strip */}
-          <div className="lg:hidden w-full -mx-4 px-4">
-            <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-none">
+          {/* Mobile: horizontal scrollable tab strip + play/pause */}
+          <div className="lg:hidden w-full -mx-4 px-4 flex items-center gap-2">
+            <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-none flex-1 min-w-0">
               {capabilities.map((c, i) => (
                 <button
                   key={c.slug}
+                  ref={(el) => {
+                    mobileTabRefs.current[i] = el;
+                  }}
                   type="button"
-                  onClick={() => setActive(i)}
+                  onClick={() => handleTabClick(i)}
                   aria-pressed={active === i}
                   className="flex-none px-3 py-2 rounded-lg text-xs font-semibold whitespace-nowrap transition-all"
                   style={{
+                    position: "relative",
+                    overflow: "hidden",
                     background: active === i ? "var(--bg-raised)" : "transparent",
                     color: active === i ? "var(--text-primary)" : "var(--text-secondary)",
                     border: `1px solid ${active === i ? "var(--bg-border-strong)" : "transparent"}`,
                   }}
                 >
                   {c.name}
+                  {active === i && isPlaying && (
+                    <div
+                      key={`mob-${active}`}
+                      style={{
+                        position: "absolute",
+                        bottom: 0,
+                        left: 0,
+                        right: 0,
+                        height: 2,
+                        background: "var(--brand-green)",
+                        transformOrigin: "left center",
+                        animation: `cap-progress ${AUTOPLAY_MS}ms linear forwards`,
+                        borderRadius: 1,
+                      }}
+                    />
+                  )}
                 </button>
               ))}
             </div>
+
+            {/* Mobile play/pause */}
+            <button
+              type="button"
+              onClick={togglePlay}
+              aria-label={isPlaying ? "Pause autoplay" : "Resume autoplay"}
+              className="shrink-0 pb-2 flex items-center justify-center transition-colors"
+              style={{
+                width: 28,
+                height: 28,
+                borderRadius: 6,
+                background: "var(--bg-raised)",
+                border: "1px solid var(--bg-border)",
+                color: "var(--text-muted)",
+              }}
+            >
+              {isPlaying ? <PauseIcon /> : <PlayIcon />}
+            </button>
           </div>
 
           {/* Desktop: vertical tabs sidebar */}
@@ -78,10 +178,12 @@ export function CapabilitiesGrid() {
               <button
                 key={c.slug}
                 type="button"
-                onClick={() => setActive(i)}
+                onClick={() => handleTabClick(i)}
                 aria-pressed={active === i}
                 className="flex flex-col items-start px-4 py-3 rounded-lg text-left transition-all"
                 style={{
+                  position: "relative",
+                  overflow: "hidden",
                   background: active === i ? "var(--bg-raised)" : "transparent",
                   borderLeft: `2px solid ${active === i ? "var(--brand-green)" : "transparent"}`,
                 }}
@@ -98,11 +200,69 @@ export function CapabilitiesGrid() {
                 >
                   {c.name}
                 </span>
+
+                {/* Progress bar */}
+                {active === i && isPlaying && (
+                  <div
+                    key={`desk-${active}`}
+                    style={{
+                      position: "absolute",
+                      bottom: 0,
+                      left: 0,
+                      right: 0,
+                      height: 2,
+                      background: "var(--brand-green)",
+                      transformOrigin: "left center",
+                      animation: `cap-progress ${AUTOPLAY_MS}ms linear forwards`,
+                      borderRadius: 1,
+                      opacity: 0.6,
+                    }}
+                  />
+                )}
               </button>
             ))}
+
+            {/* Desktop play/pause toggle */}
+            <button
+              type="button"
+              onClick={togglePlay}
+              aria-label={isPlaying ? "Pause autoplay" : "Resume autoplay"}
+              className="mt-2 flex items-center gap-2 px-4 py-2 rounded-lg transition-all text-left"
+              style={{
+                color: "var(--text-muted)",
+                border: "1px solid transparent",
+              }}
+              onMouseEnter={(e) => {
+                (e.currentTarget as HTMLButtonElement).style.background = "var(--bg-raised)";
+                (e.currentTarget as HTMLButtonElement).style.borderColor = "var(--bg-border)";
+              }}
+              onMouseLeave={(e) => {
+                (e.currentTarget as HTMLButtonElement).style.background = "transparent";
+                (e.currentTarget as HTMLButtonElement).style.borderColor = "transparent";
+              }}
+            >
+              <span
+                style={{
+                  width: 20,
+                  height: 20,
+                  borderRadius: 5,
+                  background: "var(--bg-raised)",
+                  border: "1px solid var(--bg-border)",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  flexShrink: 0,
+                }}
+              >
+                {isPlaying ? <PauseIcon /> : <PlayIcon />}
+              </span>
+              <span className="text-xs" style={{ color: "var(--text-muted)" }}>
+                {isPlaying ? "Pause" : "Resume"}
+              </span>
+            </button>
           </nav>
 
-          {/* Content panel — key remounts on tab change, restarting CSS animations */}
+          {/* Content panel */}
           <div
             key={active}
             className="flex-1 min-w-0 rounded-card p-6 lg:p-8 flex flex-col lg:flex-row gap-8 animate-fade-in-up"
@@ -111,7 +271,7 @@ export function CapabilitiesGrid() {
             {/* Text column */}
             <div className="flex flex-col gap-5 lg:w-[42%] shrink-0">
               <div>
-                <span className="label-caps mb-2 block" style={{ color: "var(--brand-green)" }}>
+                <span className="label-caps mb-2 block" style={{ color: "var(--text-muted)" }}>
                   {cap.code}
                 </span>
                 <h3
@@ -135,12 +295,12 @@ export function CapabilitiesGrid() {
                   <li key={f.label} className="flex gap-3 items-start">
                     <span
                       className="mt-1.5 w-1.5 h-1.5 rounded-full shrink-0"
-                      style={{ background: "var(--brand-green)" }}
+                      style={{ background: "var(--text-muted)" }}
                     />
                     <div>
                       <span
                         className="label-caps block mb-0.5"
-                        style={{ color: "var(--brand-green)", opacity: 0.7 }}
+                        style={{ color: "var(--text-muted)" }}
                       >
                         {f.label}
                       </span>

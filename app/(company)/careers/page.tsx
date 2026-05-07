@@ -88,9 +88,9 @@ export default function CareersPage() {
                 <div
                   className="w-8 h-8 rounded-lg flex items-center justify-center text-xs font-bold mb-4"
                   style={{
-                    background: "rgba(0,240,150,0.1)",
-                    border: "1px solid rgba(0,240,150,0.2)",
-                    color: "var(--brand-green)",
+                    background: "rgba(255,255,255,0.06)",
+                    border: "1px solid var(--bg-border-strong)",
+                    color: "var(--text-muted)",
                   }}
                 >
                   {String(i + 1).padStart(2, "0")}
@@ -136,18 +136,14 @@ export default function CareersPage() {
           <div
             className="mt-10 p-8 rounded-2xl flex flex-col md:flex-row items-start md:items-center justify-between gap-6"
             style={{
-              background: "rgba(0,240,150,0.04)",
-              border: "1px solid rgba(0,240,150,0.14)",
+              background: "linear-gradient(90deg, var(--brand-green), var(--brand-cyan))",
             }}
           >
             <div>
-              <h3
-                className="font-display font-bold text-lg mb-1"
-                style={{ color: "var(--text-primary)" }}
-              >
+              <h3 className="font-display font-bold text-lg mb-1" style={{ color: "#0b0c10" }}>
                 Interested in joining us?
               </h3>
-              <p className="text-sm" style={{ color: "var(--text-secondary)" }}>
+              <p className="text-sm" style={{ color: "rgba(0,0,0,0.6)" }}>
                 Don't see a role that fits? Apply spontaneously — we're always looking for great
                 people.
               </p>
@@ -156,8 +152,8 @@ export default function CareersPage() {
               href="mailto:info@mia-care.io?subject=Spontaneous Application"
               className="shrink-0 inline-flex items-center gap-2 px-6 py-2.5 rounded-lg text-sm font-semibold transition-all hover:-translate-y-px"
               style={{
-                border: "1px solid var(--bg-border-strong)",
-                color: "var(--text-primary)",
+                background: "#ffffff",
+                color: "#0b0c10",
               }}
             >
               Apply now →

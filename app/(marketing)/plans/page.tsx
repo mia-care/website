@@ -213,7 +213,7 @@ export default function PlansPage() {
                   <ul className="space-y-3 flex-1">
                     {tier.features.map((feat) => (
                       <li key={feat} className="flex items-center gap-3 text-sm">
-                        <span style={{ color: "var(--brand-green)" }}>✓</span>
+                        <span style={{ color: "var(--text-muted)" }}>✓</span>
                         <span style={{ color: "var(--text-secondary)" }}>{feat}</span>
                       </li>
                     ))}
@@ -265,7 +265,7 @@ export default function PlansPage() {
                       key={tier.name}
                       className="py-4 px-4 font-display font-bold text-base text-center"
                       style={{
-                        color: tier.highlight ? "var(--brand-green)" : "var(--text-primary)",
+                        color: "var(--text-primary)",
                       }}
                     >
                       {tier.name}
@@ -344,15 +344,18 @@ export default function PlansPage() {
                   <span
                     className="text-xs font-semibold px-2.5 py-1 rounded-full"
                     style={{
-                      background: "rgba(0,240,150,0.1)",
-                      color: "var(--brand-green)",
-                      border: "1px solid rgba(0,240,150,0.2)",
+                      background: "rgba(255,255,255,0.06)",
+                      color: "var(--text-muted)",
+                      border: "1px solid var(--bg-border-strong)",
                     }}
                   >
                     {d.badge}
                   </span>
                 </div>
-                <p className="text-sm font-semibold mb-2" style={{ color: "var(--brand-green)" }}>
+                <p
+                  className="text-sm font-semibold mb-2"
+                  style={{ color: "var(--text-secondary)" }}
+                >
                   {d.tagline}
                 </p>
                 <p
@@ -364,7 +367,7 @@ export default function PlansPage() {
                 <ul className="space-y-3">
                   {d.points.map((pt) => (
                     <li key={pt} className="flex items-start gap-3 text-sm">
-                      <span style={{ color: "var(--brand-green)", flexShrink: 0 }}>✓</span>
+                      <span style={{ color: "var(--text-muted)", flexShrink: 0 }}>✓</span>
                       <span style={{ color: "var(--text-secondary)" }}>{pt}</span>
                     </li>
                   ))}
