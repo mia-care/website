@@ -131,7 +131,7 @@ export default function CertificationsPage() {
                   >
                     {cert.name}
                   </h2>
-                  <p className="text-sm font-medium mb-4" style={{ color: "var(--brand-green)" }}>
+                  <p className="text-sm font-medium mb-4" style={{ color: "var(--text-muted)" }}>
                     {cert.scope}
                   </p>
                   <p

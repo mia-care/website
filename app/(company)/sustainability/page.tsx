@@ -115,16 +115,16 @@ export default function SustainabilityPage() {
           <div
             className="rounded-2xl p-8 flex flex-col md:flex-row items-start md:items-center gap-6"
             style={{
-              background: "rgba(0,240,150,0.05)",
-              border: "1px solid rgba(0,240,150,0.15)",
+              background: "var(--bg-raised)",
+              border: "1px solid var(--bg-border)",
             }}
           >
             <div
               className="flex-shrink-0 flex items-center justify-center w-16 h-16 rounded-xl font-display font-bold text-sm text-center leading-tight"
               style={{
-                background: "rgba(0,240,150,0.12)",
-                border: "1px solid rgba(0,240,150,0.25)",
-                color: "var(--brand-green)",
+                background: "rgba(255,255,255,0.06)",
+                border: "1px solid var(--bg-border-strong)",
+                color: "var(--text-primary)",
               }}
             >
               UNI/PdR

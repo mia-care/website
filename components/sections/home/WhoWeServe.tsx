@@ -116,7 +116,7 @@ export function WhoWeServe() {
                 border: "1px solid var(--bg-border)",
               }}
             >
-              <div className="mb-4" style={{ color: "var(--brand-green)" }}>
+              <div className="mb-4" style={{ color: "var(--text-muted)" }}>
                 {seg.icon}
               </div>
               <h3

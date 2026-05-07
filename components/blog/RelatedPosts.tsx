@@ -44,7 +44,7 @@ export function RelatedPosts({ posts }: { posts: PostMeta[] }) {
                 {post.categories[0] && (
                   <span
                     className="text-xs font-semibold uppercase tracking-wide"
-                    style={{ color: "var(--brand-green)" }}
+                    style={{ color: "var(--text-muted)" }}
                   >
                     {getCategoryName(post.categories[0])}
                   </span>

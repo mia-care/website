@@ -71,9 +71,9 @@ function JobCard({ job }: { job: Job }) {
             <span
               className="text-xs px-2 py-0.5 rounded-full font-medium"
               style={{
-                background: "rgba(0,240,150,0.08)",
-                border: "1px solid rgba(0,240,150,0.18)",
-                color: "var(--brand-green)",
+                background: "var(--bg-raised)",
+                border: "1px solid var(--bg-border)",
+                color: "var(--text-muted)",
               }}
             >
               {job.type}
@@ -114,7 +114,7 @@ function JobCard({ job }: { job: Job }) {
               <div key={section.heading}>
                 <h4
                   className="text-xs font-bold uppercase tracking-widest mb-3"
-                  style={{ color: "var(--brand-green)", letterSpacing: "0.1em" }}
+                  style={{ color: "var(--text-muted)", letterSpacing: "0.1em" }}
                 >
                   {section.heading}
                 </h4>
@@ -125,7 +125,7 @@ function JobCard({ job }: { job: Job }) {
                       className="flex gap-2 text-sm"
                       style={{ color: "var(--text-secondary)", lineHeight: 1.7 }}
                     >
-                      <span style={{ color: "var(--brand-green)", flexShrink: 0, marginTop: 1 }}>
+                      <span style={{ color: "var(--text-muted)", flexShrink: 0, marginTop: 1 }}>
                         —
                       </span>
                       {item}

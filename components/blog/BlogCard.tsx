@@ -42,10 +42,10 @@ export function BlogCard({ post }: { post: PostMeta }) {
                 key={cat}
                 className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold tracking-wide uppercase"
                 style={{
-                  background: "rgba(0,240,150,0.08)",
-                  borderColor: "rgba(0,240,150,0.18)",
-                  border: "1px solid rgba(0,240,150,0.18)",
-                  color: "var(--brand-green)",
+                  background: "rgba(255,255,255,0.05)",
+                  borderColor: "rgba(255,255,255,0.1)",
+                  border: "1px solid rgba(255,255,255,0.1)",
+                  color: "var(--text-muted)",
                   letterSpacing: "0.08em",
                 }}
               >

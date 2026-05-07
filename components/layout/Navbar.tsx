@@ -94,7 +94,7 @@ function ProductMegaMenu({
           <span className="flex flex-col flex-1 min-w-0">
             <span
               className="text-xs font-bold uppercase tracking-widest mb-0.5"
-              style={{ color: "var(--brand-green)", letterSpacing: "0.12em" }}
+              style={{ color: "var(--text-muted)", letterSpacing: "0.12em" }}
             >
               Platform
             </span>
@@ -109,7 +109,7 @@ function ProductMegaMenu({
           </span>
           <span
             className="inline-flex items-center gap-1 text-xs font-semibold shrink-0"
-            style={{ color: "var(--brand-green)" }}
+            style={{ color: "var(--text-muted)" }}
           >
             Explore
             <svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true">
@@ -147,9 +147,9 @@ function ProductMegaMenu({
                 style={{
                   width: 22,
                   height: 22,
-                  background: "rgba(0,240,150,0.08)",
-                  border: "1px solid rgba(0,240,150,0.16)",
-                  color: "var(--brand-green)",
+                  background: "rgba(255,255,255,0.05)",
+                  border: "1px solid rgba(255,255,255,0.1)",
+                  color: "var(--text-muted)",
                 }}
               >
                 {String(i + 1).padStart(2, "0")}

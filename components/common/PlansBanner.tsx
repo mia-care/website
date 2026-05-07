@@ -15,7 +15,7 @@ export function PlansBanner() {
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <p
           className="text-xs font-bold uppercase tracking-widest mb-3"
-          style={{ color: "var(--brand-green)", letterSpacing: "0.12em" }}
+          style={{ color: "var(--text-muted)", letterSpacing: "0.12em" }}
         >
           Pricing
         </p>
@@ -35,13 +35,13 @@ export function PlansBanner() {
               key={tier.name}
               className="flex flex-col items-center px-6 py-4 rounded-xl w-full sm:w-auto sm:min-w-[140px]"
               style={{
-                background: tier.highlight ? "rgba(0,240,150,0.06)" : "var(--bg-raised)",
-                border: `1px solid ${tier.highlight ? "rgba(0,240,150,0.2)" : "var(--bg-border)"}`,
+                background: tier.highlight ? "rgba(255,255,255,0.06)" : "var(--bg-raised)",
+                border: `1px solid ${tier.highlight ? "var(--bg-border-strong)" : "var(--bg-border)"}`,
               }}
             >
               <span
                 className="text-sm font-semibold mb-0.5"
-                style={{ color: tier.highlight ? "var(--brand-green)" : "var(--text-primary)" }}
+                style={{ color: "var(--text-primary)" }}
               >
                 {tier.name}
               </span>

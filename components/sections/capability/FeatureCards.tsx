@@ -23,7 +23,7 @@ export function FeatureCards({ cap }: { cap: Capability }) {
                 style={{ background: "var(--brand-gradient)" }}
                 aria-hidden="true"
               />
-              <span className="label-caps" style={{ color: "var(--brand-green)", opacity: 0.7 }}>
+              <span className="label-caps" style={{ color: "var(--text-muted)" }}>
                 {feat.label}
               </span>
               <h3

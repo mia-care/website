@@ -89,8 +89,8 @@ export function ResourceGrid({ resources }: { resources: ResourceMeta[] }) {
                 className="absolute top-3 left-3 text-xs px-2 py-0.5 rounded-full font-semibold capitalize"
                 style={{
                   background: "rgba(11,12,16,0.75)",
-                  border: "1px solid rgba(0,240,150,0.25)",
-                  color: "var(--brand-green)",
+                  border: "1px solid rgba(255,255,255,0.15)",
+                  color: "var(--text-secondary)",
                   backdropFilter: "blur(6px)",
                 }}
               >
@@ -114,7 +114,7 @@ export function ResourceGrid({ resources }: { resources: ResourceMeta[] }) {
               </p>
               <span
                 className="mt-4 inline-flex items-center gap-1.5 text-xs font-semibold"
-                style={{ color: "var(--brand-green)" }}
+                style={{ color: "var(--text-secondary)" }}
               >
                 {CTA_LABELS[resource.type]}
               </span>
