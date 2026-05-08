@@ -1,11 +1,22 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { CapabilitiesGrid } from "@/components/common/CapabilitiesGrid";
-import { ComplianceStrip } from "@/components/common/ComplianceStrip";
 import { CtaBanner } from "@/components/common/CtaBanner";
 import { LogoMarquee } from "@/components/common/LogoCarousel";
 import { PillTag } from "@/components/common/PillTag";
 import { PlansBanner } from "@/components/common/PlansBanner";
+import { HeroCompliancePipeline } from "@/components/sections/product/HeroCompliancePipeline";
+import { OneSolutionInteractive } from "@/components/sections/product/OneSolutionInteractive";
+
+const HERO_STANDARDS = [
+  "EU MDR 2017/745",
+  "ISO 13485",
+  "IEC 62304",
+  "FDA",
+  "ISO 14971",
+  "EU AI Act",
+];
+
 
 export const metadata: Metadata = {
   title: "Platform Overview | The AI-native Platform for SaMD",
@@ -56,75 +67,89 @@ export default function ProductPage() {
     <>
       {/* Hero */}
       <section
-        className="relative overflow-hidden pt-20 pb-20"
+        className="relative overflow-hidden pt-20 pb-24"
         style={{
           background:
-            "radial-gradient(ellipse 70% 50% at 50% -5%, rgba(0,240,150,0.08) 0%, transparent 55%)",
+            "radial-gradient(ellipse 80% 60% at 50% -10%, rgba(0,240,150,0.08) 0%, transparent 55%)",
         }}
       >
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <PillTag className="mb-6">The Platform</PillTag>
-          <h1
-            className="font-display font-bold mb-6 leading-tight"
-            style={{ fontSize: "clamp(40px, 5vw, 66px)", letterSpacing: "-0.035em" }}
-          >
-            The AI-native Platform for{" "}
-            <span className="text-brand-gradient">Software as a Medical Device.</span>
-          </h1>
-          <p
-            className="text-lg max-w-2xl mb-10"
-            style={{ color: "var(--text-secondary)", lineHeight: 1.75 }}
-          >
-            Mia-Care P4SaMD unifies eQMS, ALM, and DevOps into a single platform, embedding
-            regulatory compliance directly into your SDLC. Your team ships faster, stays
-            audit-ready, and achieves both engineering velocity and regulatory confidence.
-          </p>
-          <Link
-            href="/request-demo"
-            className="inline-flex items-center h-12 px-7 rounded-lg font-semibold text-sm bg-brand-gradient text-bg-base transition-opacity hover:opacity-90"
-          >
-            Request a Demo →
-          </Link>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            {/* Left column */}
+            <div>
+              <PillTag className="mb-6">The Platform</PillTag>
+              <h1
+                className="font-display font-bold mb-6 leading-tight"
+                style={{ fontSize: "clamp(36px, 4vw, 56px)", letterSpacing: "-0.035em" }}
+              >
+                The AI-native Platform
+                <br />
+                <span className="text-brand-gradient">for Software as a Medical Device.</span>
+              </h1>
+              <p
+                className="text-lg mb-8"
+                style={{ color: "var(--text-secondary)", lineHeight: 1.75, maxWidth: "34rem" }}
+              >
+                Mia-Care P4SaMD unifies eQMS, ALM, and DevOps into a single platform, embedding
+                regulatory compliance directly into your SDLC. Your team ships faster, stays
+                audit-ready, and achieves both engineering velocity and regulatory confidence.
+              </p>
+
+              {/* CTAs */}
+              <div className="flex flex-wrap items-center gap-3 mb-8">
+                <Link
+                  href="/request-demo"
+                  className="inline-flex items-center h-12 px-7 rounded-lg font-semibold text-sm bg-brand-gradient text-bg-base transition-opacity hover:opacity-90"
+                >
+                  Request a Demo →
+                </Link>
+                <Link
+                  href="/resources/mia-care-product-demo"
+                  className="inline-flex items-center gap-2 h-12 px-6 rounded-lg font-semibold text-sm transition-colors hover:opacity-80"
+                  style={{ border: "1px solid var(--bg-border-strong)", color: "var(--text-primary)" }}
+                >
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                    <circle cx="7" cy="7" r="6.5" stroke="currentColor" />
+                    <path d="M5.5 4.5l5 2.5-5 2.5V4.5z" fill="currentColor" />
+                  </svg>
+                  Watch Demo
+                </Link>
+              </div>
+
+              {/* Trust signals */}
+              <div>
+                <p className="label-caps mb-3" style={{ color: "var(--text-secondary)" }}>
+                  Compliant with
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {HERO_STANDARDS.map((std) => (
+                    <PillTag key={std}>{std}</PillTag>
+                  ))}
+                  <span
+                    className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold"
+                    style={{
+                      background: "var(--bg-raised)",
+                      border: "1px solid var(--bg-border)",
+                      color: "var(--text-muted)",
+                    }}
+                  >
+                    15+
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            {/* Right column – compliance pipeline */}
+            <div className="hidden lg:block">
+              <HeroCompliancePipeline />
+            </div>
+          </div>
         </div>
       </section>
 
       <LogoMarquee />
 
-      {/* One Solution */}
-      <section
-        className="py-20"
-        style={{ background: "var(--bg-surface)", borderTop: "1px solid var(--bg-border)" }}
-      >
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <PillTag className="mb-6">One Solution. End-to-end.</PillTag>
-          <h2
-            className="font-display font-bold mb-6"
-            style={{ fontSize: "clamp(28px, 3.5vw, 44px)", letterSpacing: "-0.025em" }}
-          >
-            Most organizations treat compliance as a layer on top of engineering.
-          </h2>
-          <div
-            className="space-y-4 text-base"
-            style={{ color: "var(--text-secondary)", lineHeight: 1.8 }}
-          >
-            <p>
-              A painful translation step between how code is written and how regulations are
-              satisfied. P4SaMD dissolves this boundary. It connects to your existing tools,
-              orchestrates your workflows, and enforces quality controls as a natural part of your
-              SDLC.
-            </p>
-            <p>
-              The platform integrates your Internal Developer Platform (IDP), your Catalog, and a
-              Compliance Engine into a single cohesive execution environment, with P4SaMD as the
-              regulatory intelligence layer that governs all of it.
-            </p>
-            <p>
-              Every requirement tracked. Every risk mapped. Every release documented. Continuously,
-              automatically, in real time.
-            </p>
-          </div>
-        </div>
-      </section>
+      <OneSolutionInteractive />
 
       {/* Benefits grid */}
       <section className="py-20" style={{ background: "var(--bg-base)" }}>
@@ -171,13 +196,52 @@ export default function ProductPage() {
         </div>
       </section>
 
-      <ComplianceStrip />
       <CapabilitiesGrid />
+
+      {/* Mid-page CTA — contextual follow-up after capabilities exploration */}
+      <section
+        className="py-16"
+        style={{ background: "var(--bg-surface)", borderTop: "1px solid var(--bg-border)" }}
+      >
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 text-center">
+          <h2
+            className="font-display font-bold mb-3"
+            style={{ fontSize: "clamp(20px, 2.5vw, 30px)", letterSpacing: "-0.02em" }}
+          >
+            Ready to see P4SaMD in action?
+          </h2>
+          <p
+            className="mb-8 text-sm"
+            style={{ color: "var(--text-secondary)", lineHeight: 1.75 }}
+          >
+            Schedule a live walkthrough and see how P4SaMD fits your stack in under 30 minutes.
+          </p>
+          <div className="flex flex-wrap gap-3 justify-center">
+            <Link
+              href="/request-demo"
+              className="inline-flex items-center h-12 px-7 rounded-lg font-semibold text-sm bg-brand-gradient text-bg-base transition-opacity hover:opacity-90"
+            >
+              Request a Demo →
+            </Link>
+            <Link
+              href="/resources/mia-care-product-demo"
+              className="inline-flex items-center gap-2 h-12 px-6 rounded-lg font-semibold text-sm transition-colors hover:opacity-80"
+              style={{ border: "1px solid var(--bg-border-strong)", color: "var(--text-primary)" }}
+            >
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                <circle cx="7" cy="7" r="6.5" stroke="currentColor" />
+                <path d="M5.5 4.5l5 2.5-5 2.5V4.5z" fill="currentColor" />
+              </svg>
+              Watch Demo
+            </Link>
+          </div>
+        </div>
+      </section>
 
       {/* Why section */}
       <section
         className="py-20"
-        style={{ background: "var(--bg-surface)", borderTop: "1px solid var(--bg-border)" }}
+        style={{ background: "var(--bg-base)", borderTop: "1px solid var(--bg-border)" }}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <PillTag className="mb-8">Why Mia-Care</PillTag>
@@ -187,7 +251,7 @@ export default function ProductPage() {
           >
             Why we are different.
           </h2>
-          <div className="grid sm:grid-cols-3 gap-6">
+          <div className="grid sm:grid-cols-3 gap-6 mb-12">
             {WHY.map((w) => (
               <div key={w.title}>
                 <h3
@@ -201,6 +265,25 @@ export default function ProductPage() {
                 </p>
               </div>
             ))}
+          </div>
+
+          <div
+            className="flex flex-wrap items-center gap-4 pt-10"
+            style={{ borderTop: "1px solid var(--bg-border)" }}
+          >
+            <Link
+              href="/request-demo"
+              className="inline-flex items-center h-11 px-6 rounded-lg font-semibold text-sm bg-brand-gradient text-bg-base transition-opacity hover:opacity-90"
+            >
+              Request a Demo →
+            </Link>
+            <Link
+              href="/about"
+              className="text-sm font-semibold transition-colors hover:opacity-80"
+              style={{ color: "var(--text-muted)" }}
+            >
+              Learn how we built it →
+            </Link>
           </div>
         </div>
       </section>

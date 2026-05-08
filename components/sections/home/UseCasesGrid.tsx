@@ -32,13 +32,20 @@ export function UseCasesGrid() {
           </p>
         </div>
 
+        <style>{`
+          .uc-card { transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease; }
+          .uc-card:hover { border-color: var(--bg-border-strong); box-shadow: 0 8px 28px rgba(0,0,0,0.18); transform: translateY(-2px); }
+          .uc-card:hover .uc-card-cta { color: var(--brand-green); }
+          .uc-card-cta::after { content: ''; position: absolute; inset: 0; z-index: 1; border-radius: inherit; }
+        `}</style>
+
         <div className="grid md:grid-cols-3 gap-6">
           {useCases.map((uc) => {
             const metric = UC_METRICS[uc.slug];
             return (
               <div
                 key={uc.slug}
-                className="rounded-card flex flex-col overflow-hidden"
+                className="uc-card rounded-card flex flex-col overflow-hidden"
                 style={{
                   background: "var(--bg-raised)",
                   border: "1px solid var(--bg-border)",
@@ -82,7 +89,7 @@ export function UseCasesGrid() {
                   )}
                   <Link
                     href={`/use-cases/${uc.slug}`}
-                    className="mt-2 text-sm font-semibold transition-colors hover:text-brand-green"
+                    className="uc-card-cta mt-2 text-sm font-semibold transition-colors"
                     style={{ color: "var(--text-secondary)" }}
                   >
                     Read Use Case →

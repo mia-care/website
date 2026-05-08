@@ -47,6 +47,7 @@ function PlayIcon() {
 export function CapabilitiesGrid() {
   const [active, setActive] = useState(0);
   const [isPlaying, setIsPlaying] = useState(true);
+  const [hoveredTab, setHoveredTab] = useState<number | null>(null);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const mobileTabRefs = useRef<(HTMLButtonElement | null)[]>([]);
 
@@ -96,12 +97,12 @@ export function CapabilitiesGrid() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16">
-          <PillTag className="mb-6">The Platform</PillTag>
+          <PillTag className="mb-6">Platform Capabilities</PillTag>
           <h2
             className="font-display font-bold mb-4"
             style={{ fontSize: "clamp(32px, 4vw, 52px)", letterSpacing: "-0.03em" }}
           >
-            Eight capabilities. One platform.
+            The full E2E in one platform.
           </h2>
           <p className="max-w-xl mx-auto" style={{ color: "var(--text-secondary)" }}>
             P4SaMD orchestrates your entire SDLC — from requirements to release — with regulatory
@@ -122,14 +123,16 @@ export function CapabilitiesGrid() {
                   }}
                   type="button"
                   onClick={() => handleTabClick(i)}
+                  onMouseEnter={() => setHoveredTab(i)}
+                  onMouseLeave={() => setHoveredTab(null)}
                   aria-pressed={active === i}
                   className="flex-none px-3 py-2 rounded-lg text-xs font-semibold whitespace-nowrap transition-all"
                   style={{
                     position: "relative",
                     overflow: "hidden",
-                    background: active === i ? "var(--bg-raised)" : "transparent",
-                    color: active === i ? "var(--text-primary)" : "var(--text-secondary)",
-                    border: `1px solid ${active === i ? "var(--bg-border-strong)" : "transparent"}`,
+                    background: active === i || hoveredTab === i ? "var(--bg-raised)" : "transparent",
+                    color: active === i ? "var(--text-primary)" : hoveredTab === i ? "var(--text-primary)" : "var(--text-secondary)",
+                    border: `1px solid ${active === i ? "var(--bg-border-strong)" : hoveredTab === i ? "var(--bg-border)" : "transparent"}`,
                   }}
                 >
                   {c.name}
@@ -179,24 +182,26 @@ export function CapabilitiesGrid() {
                 key={c.slug}
                 type="button"
                 onClick={() => handleTabClick(i)}
+                onMouseEnter={() => setHoveredTab(i)}
+                onMouseLeave={() => setHoveredTab(null)}
                 aria-pressed={active === i}
                 className="flex flex-col items-start px-4 py-3 rounded-lg text-left transition-all"
                 style={{
                   position: "relative",
                   overflow: "hidden",
-                  background: active === i ? "var(--bg-raised)" : "transparent",
-                  borderLeft: `2px solid ${active === i ? "var(--brand-green)" : "transparent"}`,
+                  background: active === i || hoveredTab === i ? "var(--bg-raised)" : "transparent",
+                  borderLeft: `2px solid ${active === i ? "var(--brand-green)" : hoveredTab === i ? "var(--bg-border-strong)" : "transparent"}`,
                 }}
               >
                 <span
                   className="label-caps mb-0.5"
-                  style={{ color: active === i ? "var(--brand-green)" : "var(--text-muted)" }}
+                  style={{ color: active === i ? "var(--brand-green)" : hoveredTab === i ? "var(--text-secondary)" : "var(--text-muted)" }}
                 >
                   {c.code}
                 </span>
                 <span
                   className="text-sm font-semibold leading-snug"
-                  style={{ color: active === i ? "var(--text-primary)" : "var(--text-secondary)" }}
+                  style={{ color: active === i || hoveredTab === i ? "var(--text-primary)" : "var(--text-secondary)" }}
                 >
                   {c.name}
                 </span>
