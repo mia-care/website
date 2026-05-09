@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { PlaceholderPage } from "@/components/common/PlaceholderPage";
-export const metadata: Metadata = { title: "Faq — Mia-Care Resources" };
+export const metadata: Metadata = {
+  title: "FAQ — Mia-Care Resources",
+  robots: { index: false, follow: false },
+};
 export default function Page() {
   return (
     <PlaceholderPage

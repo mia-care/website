@@ -5,6 +5,32 @@ export type CapabilityScreen = {
 };
 
 export const capabilityScreenshots: Record<string, CapabilityScreen[]> = {
+  "documentation-engine": [
+    {
+      tab: "Document Catalog",
+      src: "/images/capability-svgs/documentation-engine/page.svg",
+      caption:
+        "Document catalog — all DHF records grouped by category, with live status, version tracking, and one-click export across PDF, DOCX, and MD formats",
+    },
+    {
+      tab: "Document Detail",
+      src: "/images/capability-svgs/documentation-engine/page-11.svg",
+      caption:
+        "Document detail — full revision history, regulatory references (IEC 62304, ISO 13485), linked artifacts, and download buttons for every generated document",
+    },
+    {
+      tab: "Custom Templates",
+      src: "/images/capability-svgs/documentation-engine/page-12.svg",
+      caption:
+        "Custom templates — write Markdown templates with interpolated variables that pull live project data at generation time, for any document your process requires",
+    },
+    {
+      tab: "Variable Library",
+      src: "/images/capability-svgs/documentation-engine/page-13.svg",
+      caption:
+        "Variable library — browse all available template variables across product, requirements, risk, verification, AI/ML, and traceability data domains",
+    },
+  ],
   "software-development": [
     {
       tab: "Risk List",

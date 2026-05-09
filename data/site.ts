@@ -37,9 +37,7 @@ export const FOOTER_LINKS = {
   resources: [
     { label: "Competence Center", href: "/resources/competence-center" },
     { label: "Blog", href: "/resources/blog" },
-    { label: "Docs", href: "/resources/docs" },
-    { label: "Events", href: "/resources/events" },
-    { label: "FAQ", href: "/resources/faq" },
+    { label: "Docs", href: "http://docs.mia-care.io/" },
   ],
   company: [
     { label: "About Us", href: "/about-us" },

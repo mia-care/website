@@ -14,6 +14,7 @@ export type ResourceMeta = {
   description: string;
   type: ResourceType;
   featuredImage?: string;
+  featured?: boolean;
   portalId: string;
   formId: string;
   region: string;
@@ -83,6 +84,7 @@ export function getResourceMeta(slug: string): ResourceMeta | null {
     description: (data.description as string) ?? "",
     type: (data.type as ResourceType) ?? "whitepaper",
     featuredImage: data.featuredImage as string | undefined,
+    featured: data.featured === true,
     portalId,
     formId,
     region,

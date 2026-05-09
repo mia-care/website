@@ -13,6 +13,7 @@ const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.mia-care.io";
 const PAGE_DATES: Record<string, string> = {
   "/": "2026-04-26",
   "/product": "2026-04-26",
+  "/plans": "2026-05-08",
   "/pricing": "2026-04-26",
   "/request-demo": "2026-04-26",
   "/about-us": "2026-04-26",
@@ -23,8 +24,6 @@ const PAGE_DATES: Record<string, string> = {
   "/resources": "2026-04-26",
   "/resources/blog": "2026-04-26",
   "/resources/docs": "2026-04-26",
-  "/resources/events": "2026-04-26",
-  "/resources/faq": "2026-04-26",
 };
 
 // Capabilities, use-cases, competence-center: update when data in /data/*.ts changes
@@ -38,6 +37,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: PAGE_DATES["/product"],
       changeFrequency: "monthly",
       priority: 0.9,
+    },
+    {
+      url: `${BASE}/plans`,
+      lastModified: PAGE_DATES["/plans"],
+      changeFrequency: "monthly",
+      priority: 0.8,
     },
     {
       url: `${BASE}/pricing`,
@@ -98,18 +103,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: PAGE_DATES["/resources/docs"],
       changeFrequency: "weekly",
       priority: 0.7,
-    },
-    {
-      url: `${BASE}/resources/events`,
-      lastModified: PAGE_DATES["/resources/events"],
-      changeFrequency: "weekly",
-      priority: 0.5,
-    },
-    {
-      url: `${BASE}/resources/faq`,
-      lastModified: PAGE_DATES["/resources/faq"],
-      changeFrequency: "monthly",
-      priority: 0.6,
     },
   ];
 

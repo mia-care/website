@@ -34,10 +34,14 @@ export function LogoMarquee() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col sm:flex-row sm:items-center" style={{ minHeight: 80 }}>
-
           {/* Label — fixed width on desktop, full row on mobile */}
-          <div className="pt-5 pb-3 sm:py-0 sm:pr-8 shrink-0" style={{ width: "auto", minWidth: 210 }}>
-            <p className="label-caps" style={{ color: "var(--text-muted)" }}>Trusted by</p>
+          <div
+            className="pt-5 pb-3 sm:py-0 sm:pr-8 shrink-0"
+            style={{ width: "auto", minWidth: 210 }}
+          >
+            <p className="label-caps" style={{ color: "var(--text-muted)" }}>
+              Trusted by
+            </p>
             <p className="label-caps mt-0.5" style={{ color: "var(--text-secondary)" }}>
               healthcare organizations
             </p>
@@ -85,7 +89,6 @@ export function LogoMarquee() {
               ))}
             </div>
           </div>
-
         </div>
       </div>
     </section>

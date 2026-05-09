@@ -1,8 +1,10 @@
+import Link from "next/link";
 import { PillTag } from "@/components/common/PillTag";
 
 const SEGMENTS = [
   {
     title: "MedTech Giants",
+    href: "/use-cases/legacy-remediation",
     description:
       "Enterprise organizations modernizing fragmented legacy software estates into a unified, compliant digital health platform.",
     icon: (
@@ -28,6 +30,7 @@ const SEGMENTS = [
   },
   {
     title: "Life Sciences Enterprises",
+    href: "/use-cases/legacy-remediation",
     description:
       "Global pharma and biotech companies launching digital companions and Patient Support Programs alongside drug releases.",
     icon: (
@@ -47,6 +50,7 @@ const SEGMENTS = [
   },
   {
     title: "AI-Native Scaleups",
+    href: "/use-cases/high-risk-ai-cdss",
     description:
       "Series B to IPO-stage companies building and continuously improving clinical AI models without sacrificing engineering velocity.",
     icon: (
@@ -70,6 +74,7 @@ const SEGMENTS = [
   },
   {
     title: "Pre-Market Startups",
+    href: "/use-cases/greenfield-samd",
     description:
       "Seed-to-Series A teams building their Design History File and first regulated product on the path to FDA clearance.",
     icon: (
@@ -108,27 +113,35 @@ export function WhoWeServe() {
         </div>
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {SEGMENTS.map((seg) => (
-            <div
+            <Link
               key={seg.title}
-              className="rounded-card p-6"
+              href={seg.href}
+              className="group rounded-card p-6 flex flex-col gap-4 transition-all hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2"
               style={{
                 background: "var(--bg-surface)",
                 border: "1px solid var(--bg-border)",
               }}
             >
-              <div className="mb-4" style={{ color: "var(--text-muted)" }}>
-                {seg.icon}
-              </div>
+              <div style={{ color: "var(--text-muted)" }}>{seg.icon}</div>
               <h3
-                className="font-display font-semibold text-base mb-3"
+                className="font-display font-semibold text-base"
                 style={{ color: "var(--text-primary)" }}
               >
                 {seg.title}
               </h3>
-              <p className="text-sm" style={{ color: "var(--text-secondary)", lineHeight: 1.7 }}>
+              <p
+                className="text-sm flex-1"
+                style={{ color: "var(--text-secondary)", lineHeight: 1.7 }}
+              >
                 {seg.description}
               </p>
-            </div>
+              <span
+                className="text-xs font-semibold mt-auto transition-colors group-hover:text-brand-green"
+                style={{ color: "var(--text-muted)" }}
+              >
+                Explore use case →
+              </span>
+            </Link>
           ))}
         </div>
       </div>

@@ -166,7 +166,7 @@ function ProductMegaMenu({
                     className="text-xs mt-0.5 leading-snug"
                     style={{ color: "var(--text-muted)" }}
                   >
-                    {cap.description.replace(/^\d+\s*—\s*/, "")}
+                    {cap.description}
                   </span>
                 )}
               </span>
@@ -198,7 +198,14 @@ export function Navbar() {
     setActiveDropdown(null);
   };
 
-  const isActive = (href: string) => pathname === href || pathname.startsWith(`${href}/`);
+  const isActive = (item: { href: string; activeRoot?: string; dropdown?: { href: string }[] }) => {
+    const root = item.activeRoot ?? item.href;
+    if (pathname === root || pathname.startsWith(`${root}/`)) return true;
+    return (
+      item.dropdown?.some((sub) => pathname === sub.href || pathname.startsWith(`${sub.href}/`)) ??
+      false
+    );
+  };
 
   // Close on Escape key or click outside the header
   useEffect(() => {
@@ -250,7 +257,7 @@ export function Navbar() {
           aria-label="Primary navigation"
         >
           {navItems.map((item) => {
-            const active = isActive(item.href);
+            const active = isActive(item);
             const open = activeDropdown === item.label;
             return (
               <div

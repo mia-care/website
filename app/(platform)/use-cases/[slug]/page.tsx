@@ -3,9 +3,11 @@ import { notFound } from "next/navigation";
 import { CtaBanner } from "@/components/common/CtaBanner";
 import { JsonLd } from "@/components/common/JsonLd";
 import { LogoMarquee } from "@/components/common/LogoCarousel";
-import { PillTag } from "@/components/common/PillTag";
 import { CapabilitiesInvolved } from "@/components/sections/use-case/CapabilitiesInvolved";
 import { CaseStudyBlock } from "@/components/sections/use-case/CaseStudyBlock";
+import { NarrativeStory } from "@/components/sections/use-case/NarrativeStory";
+import { OtherUseCases } from "@/components/sections/use-case/OtherUseCases";
+import { StickyDemoPill } from "@/components/sections/use-case/StickyDemoPill";
 import { UseCaseHero } from "@/components/sections/use-case/UseCaseHero";
 import { SITE } from "@/data/site";
 import { getUseCaseBySlug, useCases } from "@/data/use-cases";
@@ -32,43 +34,6 @@ export async function generateMetadata({
   };
 }
 
-function Section({
-  tag,
-  heading,
-  body,
-  bg,
-}: {
-  tag: string;
-  heading: string;
-  body: string;
-  bg?: string;
-}) {
-  return (
-    <section
-      className="py-20"
-      style={{ background: bg ?? "var(--bg-base)", borderTop: "1px solid var(--bg-border)" }}
-    >
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <PillTag className="mb-6">{tag}</PillTag>
-        <h2
-          className="font-display font-bold mb-6"
-          style={{ fontSize: "clamp(28px, 3.5vw, 42px)", letterSpacing: "-0.025em" }}
-        >
-          {heading}
-        </h2>
-        <div
-          className="space-y-4 text-base"
-          style={{ color: "var(--text-secondary)", lineHeight: 1.8 }}
-        >
-          {body.split("\n\n").map((para) => (
-            <p key={para.slice(0, 40)}>{para}</p>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
 export default async function UseCasePage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const uc = getUseCaseBySlug(slug);
@@ -92,22 +57,12 @@ export default async function UseCasePage({ params }: { params: Promise<{ slug: 
       <JsonLd schema={useCaseSchema} />
       <UseCaseHero uc={uc} />
       <LogoMarquee />
-      <Section
-        tag="The Problem"
-        heading={uc.problem.heading}
-        body={uc.problem.body}
-        bg="var(--bg-surface)"
-      />
-      <Section tag="The Need" heading={uc.need.heading} body={uc.need.body} />
-      <Section
-        tag="The Solution"
-        heading={uc.solution.heading}
-        body={uc.solution.body}
-        bg="var(--bg-surface)"
-      />
+      <NarrativeStory uc={uc} />
       <CaseStudyBlock uc={uc} />
       <CapabilitiesInvolved uc={uc} />
+      <OtherUseCases currentSlug={uc.slug} />
       <CtaBanner />
+      <StickyDemoPill />
     </>
   );
 }

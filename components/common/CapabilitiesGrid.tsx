@@ -114,7 +114,13 @@ export function CapabilitiesGrid() {
         <div className="flex flex-col lg:flex-row gap-6 items-start">
           {/* Mobile: horizontal scrollable tab strip + play/pause */}
           <div className="lg:hidden w-full -mx-4 px-4 flex items-center gap-2">
-            <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-none flex-1 min-w-0">
+            <div
+              className="flex gap-2 overflow-x-auto pb-2 scrollbar-none flex-1 min-w-0"
+              style={{
+                WebkitMaskImage: "linear-gradient(to right, black 80%, transparent 100%)",
+                maskImage: "linear-gradient(to right, black 80%, transparent 100%)",
+              }}
+            >
               {capabilities.map((c, i) => (
                 <button
                   key={c.slug}
@@ -130,8 +136,14 @@ export function CapabilitiesGrid() {
                   style={{
                     position: "relative",
                     overflow: "hidden",
-                    background: active === i || hoveredTab === i ? "var(--bg-raised)" : "transparent",
-                    color: active === i ? "var(--text-primary)" : hoveredTab === i ? "var(--text-primary)" : "var(--text-secondary)",
+                    background:
+                      active === i || hoveredTab === i ? "var(--bg-raised)" : "transparent",
+                    color:
+                      active === i
+                        ? "var(--text-primary)"
+                        : hoveredTab === i
+                          ? "var(--text-primary)"
+                          : "var(--text-secondary)",
                     border: `1px solid ${active === i ? "var(--bg-border-strong)" : hoveredTab === i ? "var(--bg-border)" : "transparent"}`,
                   }}
                 >
@@ -195,13 +207,25 @@ export function CapabilitiesGrid() {
               >
                 <span
                   className="label-caps mb-0.5"
-                  style={{ color: active === i ? "var(--brand-green)" : hoveredTab === i ? "var(--text-secondary)" : "var(--text-muted)" }}
+                  style={{
+                    color:
+                      active === i
+                        ? "var(--brand-green)"
+                        : hoveredTab === i
+                          ? "var(--text-secondary)"
+                          : "var(--text-muted)",
+                  }}
                 >
                   {c.code}
                 </span>
                 <span
                   className="text-sm font-semibold leading-snug"
-                  style={{ color: active === i || hoveredTab === i ? "var(--text-primary)" : "var(--text-secondary)" }}
+                  style={{
+                    color:
+                      active === i || hoveredTab === i
+                        ? "var(--text-primary)"
+                        : "var(--text-secondary)",
+                  }}
                 >
                   {c.name}
                 </span>

@@ -8,6 +8,7 @@ export type NavDropdownItem = {
 export type NavItem = {
   label: string;
   href: string;
+  activeRoot?: string;
   dropdown?: NavDropdownItem[];
 };
 
@@ -20,48 +21,49 @@ export const navItems: NavItem[] = [
       {
         label: "SDLC Orchestrator",
         href: "/capabilities/sdlc-orchestrator",
-        description: "01 — Compliant workflow orchestration",
+        description: "Compliant workflow orchestration",
       },
       {
         label: "Automated Traceability",
         href: "/capabilities/artt-traceability",
-        description: "02 — Real-time ARTT",
+        description: "Real-time ARTT",
       },
       {
         label: "Documentation Engine",
         href: "/capabilities/documentation-engine",
-        description: "03 — Auto-generated DHF & Technical Files",
+        description: "Auto-generated DHF & Technical Files",
       },
       {
         label: "Smart Assistant",
         href: "/capabilities/smart-assistant",
-        description: "04 — Whisper regulatory intelligence",
+        description: "Whisper regulatory intelligence",
       },
       {
         label: "Master AI for Compliance",
         href: "/capabilities/ai-compliance",
-        description: "05 — EU AI Act & PCCP support",
+        description: "EU AI Act & PCCP support",
       },
       {
         label: "Brownfield Remediator",
         href: "/capabilities/brownfield-remediator",
-        description: "06 — Legacy software certification",
+        description: "Legacy software certification",
       },
       {
         label: "Secure Software Development",
         href: "/capabilities/software-development",
-        description: "07 — IEC 81001-5-1 by design",
+        description: "IEC 81001-5-1 by design",
       },
       {
         label: "Guided Workflows",
         href: "/capabilities/guided-workflows",
-        description: "08 — Step-by-step compliance guidance",
+        description: "Step-by-step compliance guidance",
       },
     ],
   },
   {
     label: "Use Cases",
     href: "/use-cases/greenfield-samd",
+    activeRoot: "/use-cases",
     dropdown: [
       { label: "Greenfield SaMD Development", href: "/use-cases/greenfield-samd" },
       { label: "High-Risk AI Software (CDSS)", href: "/use-cases/high-risk-ai-cdss" },
@@ -72,6 +74,7 @@ export const navItems: NavItem[] = [
   {
     label: "Resources",
     href: "/resources/competence-center",
+    activeRoot: "/resources",
     dropdown: [
       { label: "Competence Center", href: "/resources/competence-center" },
       { label: "Blog", href: "/resources/blog" },

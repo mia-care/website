@@ -37,6 +37,19 @@ export function MobileMenu() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
 
+  const isItemActive = (item: {
+    href: string;
+    activeRoot?: string;
+    dropdown?: { href: string }[];
+  }) => {
+    const root = item.activeRoot ?? item.href;
+    if (pathname === root || pathname.startsWith(`${root}/`)) return true;
+    return (
+      item.dropdown?.some((sub) => pathname === sub.href || pathname.startsWith(`${sub.href}/`)) ??
+      false
+    );
+  };
+
   const isChildActive = (dropdown: { href: string }[]) =>
     dropdown.some((sub) => pathname === sub.href || pathname.startsWith(`${sub.href}/`));
 
@@ -108,14 +121,12 @@ export function MobileMenu() {
                     onClick={() => toggle(item.label)}
                     className="w-full flex items-center justify-between rounded-lg px-3 py-2.5 text-sm font-medium transition-colors hover:bg-white/[0.04]"
                     style={{
-                      color: isChildActive(item.dropdown)
-                        ? "var(--text-primary)"
-                        : "var(--text-secondary)",
-                      background: isChildActive(item.dropdown) ? "rgba(0,240,150,0.06)" : undefined,
+                      color: isItemActive(item) ? "var(--text-primary)" : "var(--text-secondary)",
+                      background: isItemActive(item) ? "rgba(0,240,150,0.06)" : undefined,
                     }}
                   >
                     <span className="flex items-center gap-2">
-                      {isChildActive(item.dropdown) && (
+                      {isItemActive(item) && (
                         <span
                           aria-hidden="true"
                           className="shrink-0 rounded-sm"
@@ -159,7 +170,7 @@ export function MobileMenu() {
                           className:
                             "flex items-center gap-2.5 rounded-lg px-3 text-sm transition-colors hover:bg-white/[0.04]",
                           style: {
-                            height: 38,
+                            height: 44,
                             color: active ? "var(--brand-green)" : "var(--text-secondary)",
                             fontWeight: active ? 500 : (undefined as undefined),
                           },

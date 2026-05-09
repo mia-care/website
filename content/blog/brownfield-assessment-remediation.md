@@ -5,6 +5,7 @@ description: "Key Takeaways Introduction For MedTech leaders, legacy software is
 seoTitle: "Brownfield Assessment & Remediation: Reviving Legacy Medi…"
 date: "2026-04-20"
 modified: "2026-04-20"
+featured: true
 author: "mia-care"
 categories: ["technology-application"]
 featuredImage: "/blog/images/brownfield-assessment-remediation.webp"

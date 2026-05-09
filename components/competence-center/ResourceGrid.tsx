@@ -23,18 +23,87 @@ const CTA_LABELS: Record<ResourceType, string> = {
   report: "Download →",
 };
 
+function FeaturedCard({ resource }: { resource: ResourceMeta }) {
+  return (
+    <Link
+      href={`/resources/${resource.slug}`}
+      className="group flex flex-col sm:flex-row rounded-2xl overflow-hidden mb-12 transition-all hover:-translate-y-0.5"
+      style={{
+        background: "var(--bg-surface)",
+        border: "1px solid var(--bg-border-strong)",
+        boxShadow: "0 4px 24px rgba(0,0,0,0.12)",
+      }}
+    >
+      {/* Image */}
+      <div
+        className="relative sm:w-[45%] shrink-0 h-56 sm:h-auto overflow-hidden"
+        style={{ background: "var(--bg-raised)", minHeight: 220 }}
+      >
+        {resource.featuredImage && (
+          <Image
+            src={assetPath(resource.featuredImage)}
+            alt=""
+            fill
+            className="object-cover transition-transform duration-500 group-hover:scale-105"
+            unoptimized
+          />
+        )}
+        <span
+          className="absolute top-3 left-3 text-xs px-2 py-0.5 rounded-full font-semibold"
+          style={{
+            background: "rgba(11,12,16,0.75)",
+            border: "1px solid rgba(255,255,255,0.15)",
+            color: "var(--text-secondary)",
+            backdropFilter: "blur(6px)",
+          }}
+        >
+          {TYPE_LABELS[resource.type]}
+        </span>
+      </div>
+
+      {/* Body */}
+      <div className="flex flex-col justify-center gap-4 p-7 sm:p-10">
+        <span className="label-caps" style={{ color: "var(--brand-green)" }}>
+          Featured
+        </span>
+        <h3
+          className="font-display font-bold leading-snug"
+          style={{ fontSize: "clamp(20px, 2.2vw, 28px)", color: "var(--text-primary)" }}
+        >
+          {resource.title}
+        </h3>
+        <p className="text-sm" style={{ color: "var(--text-secondary)", lineHeight: 1.75 }}>
+          {resource.description}
+        </p>
+        <span
+          className="inline-flex items-center h-10 px-6 rounded-lg font-semibold text-sm self-start"
+          style={{
+            background: "linear-gradient(90deg, var(--brand-green), var(--brand-cyan))",
+            color: "#0b0c10",
+          }}
+        >
+          {CTA_LABELS[resource.type]}
+        </span>
+      </div>
+    </Link>
+  );
+}
+
 export function ResourceGrid({ resources }: { resources: ResourceMeta[] }) {
   const [active, setActive] = useState<ResourceType | "all">("all");
 
-  const availableTypes = ["all", ...new Set(resources.map((r) => r.type))] as (
-    | ResourceType
-    | "all"
-  )[];
+  const featured = resources.find((r) => r.featured);
+  const rest = resources.filter((r) => !r.featured);
 
-  const filtered = active === "all" ? resources : resources.filter((r) => r.type === active);
+  const availableTypes = ["all", ...new Set(rest.map((r) => r.type))] as (ResourceType | "all")[];
+
+  const filtered = active === "all" ? rest : rest.filter((r) => r.type === active);
 
   return (
     <>
+      {/* Featured hero card */}
+      {featured && <FeaturedCard resource={featured} />}
+
       {/* Filters */}
       <div className="flex flex-wrap gap-2 mb-10">
         {availableTypes.map((type) => (

@@ -17,7 +17,6 @@ const HERO_STANDARDS = [
   "EU AI Act",
 ];
 
-
 export const metadata: Metadata = {
   title: "Platform Overview | The AI-native Platform for SaMD",
   description:
@@ -106,7 +105,10 @@ export default function ProductPage() {
                 <Link
                   href="/resources/mia-care-product-demo"
                   className="inline-flex items-center gap-2 h-12 px-6 rounded-lg font-semibold text-sm transition-colors hover:opacity-80"
-                  style={{ border: "1px solid var(--bg-border-strong)", color: "var(--text-primary)" }}
+                  style={{
+                    border: "1px solid var(--bg-border-strong)",
+                    color: "var(--text-primary)",
+                  }}
                 >
                   <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
                     <circle cx="7" cy="7" r="6.5" stroke="currentColor" />
@@ -210,10 +212,7 @@ export default function ProductPage() {
           >
             Ready to see P4SaMD in action?
           </h2>
-          <p
-            className="mb-8 text-sm"
-            style={{ color: "var(--text-secondary)", lineHeight: 1.75 }}
-          >
+          <p className="mb-8 text-sm" style={{ color: "var(--text-secondary)", lineHeight: 1.75 }}>
             Schedule a live walkthrough and see how P4SaMD fits your stack in under 30 minutes.
           </p>
           <div className="flex flex-wrap gap-3 justify-center">

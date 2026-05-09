@@ -156,6 +156,19 @@ Testo di anteprima mostrato nelle card del blog e nella lista articoli. Diverso 
 
 ---
 
+### `featured` _(opzionale)_
+Mette l'articolo **in evidenza** nella pagina di listing del blog. Il post viene mostrato in una hero card full-width sopra la griglia degli articoli e **non appare nella griglia sottostante**.
+
+```yaml
+featured: true
+```
+
+- **Solo un articolo alla volta** può essere featured. Se più articoli hanno `featured: true`, viene scelto il primo in ordine cronologico inverso (il più recente).
+- Per rimuovere un articolo dalla posizione in evidenza, eliminare la riga `featured: true` o impostarla a `false`.
+- Quando si mette in evidenza un nuovo articolo, ricordarsi di rimuovere `featured: true` dal precedente.
+
+---
+
 ## Checklist pubblicazione nuovo articolo
 
 Prima di pubblicare, verificare che:

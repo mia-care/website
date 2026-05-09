@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { BlogGrid } from "@/components/blog/BlogGrid";
+import { FeaturedPost } from "@/components/blog/FeaturedPost";
 import { PillTag } from "@/components/common/PillTag";
 import { BLOG_CATEGORIES } from "@/data/blog-categories";
 import { getAllPosts } from "@/lib/blog";
@@ -11,7 +12,9 @@ export const metadata: Metadata = {
 };
 
 export default function BlogArchivePage() {
-  const posts = getAllPosts();
+  const allPosts = getAllPosts();
+  const featuredPost = allPosts.find((p) => p.featured);
+  const gridPosts = featuredPost ? allPosts.filter((p) => p.slug !== featuredPost.slug) : allPosts;
 
   return (
     <>
@@ -35,8 +38,9 @@ export default function BlogArchivePage() {
       </section>
 
       <section className="py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <BlogGrid posts={posts} categories={BLOG_CATEGORIES} />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col gap-12">
+          {featuredPost && <FeaturedPost post={featuredPost} />}
+          <BlogGrid posts={gridPosts} categories={BLOG_CATEGORIES} />
         </div>
       </section>
     </>

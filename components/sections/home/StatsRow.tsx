@@ -1,7 +1,7 @@
 const STATS = [
   { value: "3×", label: "Faster Time-To-Market" },
   { value: "50%", label: "Development Cost Reduction" },
-  { value: "100%", label: "Compliance" },
+  { value: "100%", label: "Audit-Ready" },
   { value: "90%", label: "Less Manual Documentation" },
 ];
 

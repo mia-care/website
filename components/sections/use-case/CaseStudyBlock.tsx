@@ -1,5 +1,6 @@
 import { PillTag } from "@/components/common/PillTag";
 import type { UseCase } from "@/data/use-cases";
+import { ResultsGrid } from "./ResultsGrid";
 
 export function CaseStudyBlock({ uc }: { uc: UseCase }) {
   const { caseStudy } = uc;
@@ -68,28 +69,7 @@ export function CaseStudyBlock({ uc }: { uc: UseCase }) {
           >
             Measured outcomes from the field.
           </h3>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {caseStudy.results.map((r) => (
-              <div
-                key={r.label}
-                className="rounded-card p-5"
-                style={{
-                  background: "rgba(0,240,150,0.04)",
-                  border: "1px solid rgba(0,240,150,0.12)",
-                }}
-              >
-                <div
-                  className="font-display font-bold text-2xl text-brand-gradient mb-2"
-                  style={{ letterSpacing: "-0.02em" }}
-                >
-                  {r.metric}
-                </div>
-                <div className="text-sm" style={{ color: "var(--text-secondary)" }}>
-                  {r.label}
-                </div>
-              </div>
-            ))}
-          </div>
+          <ResultsGrid results={caseStudy.results} />
         </div>
       </div>
     </section>

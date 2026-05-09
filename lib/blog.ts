@@ -36,6 +36,7 @@ export type PostMeta = {
   featuredImageAlt: string;
   excerpt: string;
   readingTime: string;
+  featured?: boolean;
 };
 
 export type Post = PostMeta & {
@@ -84,6 +85,7 @@ export function getPostMeta(slug: string): PostMeta | null {
     featuredImageAlt: decodeEntities(data.featuredImageAlt ?? ""),
     excerpt: decodeEntities(data.excerpt ?? ""),
     readingTime: stats.text,
+    featured: data.featured ?? false,
   };
 }
 
@@ -97,7 +99,8 @@ export async function getPost(slug: string): Promise<Post | null> {
   const processed = await remark().use(remarkHtml, { sanitize: false }).process(content);
   const contentHtml = processed
     .toString()
-    .replace(/src="(\/[^"]*)"/g, (_, p) => `src="${assetPath(p)}"`);
+    .replace(/src="(\/[^"]*)"/g, (_, p) => `src="${assetPath(p)}"`)
+    .replace(/<img /g, '<img loading="lazy" ');
   const headings = extractHeadings(content);
 
   return {

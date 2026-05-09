@@ -302,45 +302,6 @@ const WHISPER_ALERTS = [
 ];
 
 function WhisperCard() {
-  const [visibleCount, setVisibleCount] = useState(0);
-  const [thinking, setThinking] = useState(true);
-
-  useEffect(() => {
-    const timers: ReturnType<typeof setTimeout>[] = [];
-    const later = (fn: () => void, ms: number) => timers.push(setTimeout(fn, ms));
-
-    const run = () => {
-      setVisibleCount(0);
-      setThinking(true);
-      // alert 1 appears
-      later(() => {
-        setVisibleCount(1);
-      }, 1200);
-      // alert 2 appears, thinking continues
-      later(() => {
-        setVisibleCount(2);
-      }, 1200 + 950);
-      // thinking stops
-      later(
-        () => {
-          setThinking(false);
-        },
-        1200 + 950 + 200,
-      );
-      // reset
-      later(
-        () => {
-          setThinking(true);
-          later(run, 400);
-        },
-        1200 + 950 + 200 + 2600,
-      );
-    };
-
-    run();
-    return () => timers.forEach(clearTimeout);
-  }, []);
-
   return (
     <div
       style={{
@@ -353,17 +314,6 @@ function WhisperCard() {
         flexDirection: "column",
       }}
     >
-      <style>{`
-        @keyframes wh-card-in {
-          from { opacity: 0; transform: translateY(5px); }
-          to   { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes wh-dot-mini {
-          0%, 80%, 100% { transform: scale(0.55); opacity: 0.35; }
-          40%           { transform: scale(1);    opacity: 1; }
-        }
-      `}</style>
-
       {/* Header */}
       <div style={{ padding: "9px 11px 7px", borderBottom: "1px solid #F3F4F6" }}>
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
@@ -400,7 +350,7 @@ function WhisperCard() {
       <div
         style={{ padding: "8px 10px", display: "flex", flexDirection: "column", gap: 6, flex: 1 }}
       >
-        {WHISPER_ALERTS.slice(0, visibleCount).map((a) => (
+        {WHISPER_ALERTS.map((a) => (
           <div
             key={a.tag}
             style={{
@@ -409,7 +359,6 @@ function WhisperCard() {
               borderLeft: `3px solid ${a.borderColor}`,
               borderRadius: 7,
               padding: "6px 8px",
-              animation: "wh-card-in 0.3s ease",
             }}
           >
             <div style={{ display: "flex", alignItems: "flex-start", gap: 6 }}>
@@ -443,26 +392,6 @@ function WhisperCard() {
             </div>
           </div>
         ))}
-
-        {thinking && (
-          <div style={{ display: "flex", alignItems: "center", gap: 5, padding: "2px 0" }}>
-            <span style={{ fontSize: 10 }}>✨</span>
-            <div style={{ display: "flex", gap: 3 }}>
-              {[0, 1, 2].map((j) => (
-                <div
-                  key={j}
-                  style={{
-                    width: 4,
-                    height: 4,
-                    borderRadius: "50%",
-                    background: "#a78bfa",
-                    animation: `wh-dot-mini 1.2s ease-in-out ${j * 0.2}s infinite`,
-                  }}
-                />
-              ))}
-            </div>
-          </div>
-        )}
       </div>
 
       {/* Input */}
@@ -671,38 +600,42 @@ export function HeroProductFloating() {
     <div
       style={{
         position: "relative",
-        height: 560,
+        height: 460,
         fontFamily: "var(--font-inter, 'Inter', ui-sans-serif, system-ui, sans-serif)",
       }}
     >
+      {/* Row 1 – Stats */}
       {card(d1, { top: 0, left: 0, right: 0 }, "6s 0s ease-in-out infinite", "0.3s", <StatBar />)}
+      {/* Row 2 – Risk */}
       {card(
         d2,
-        { top: 105, left: 0, right: 0 },
+        { top: 91, left: 0, right: 0 },
         "5.5s 0.7s ease-in-out infinite",
         "0.5s",
         <RiskRow />,
       )}
+      {/* Row 3 – Requirement */}
       {card(
         d3,
-        { top: 225, left: 24, right: 0 },
+        { top: 186, left: 0, right: 0 },
         "5s 1.4s ease-in-out infinite",
         "0.7s",
         <RequirementRow />,
       )}
-      {card(
-        d4,
-        { bottom: 0, right: 0, width: 248 },
-        "4.5s 2.1s ease-in-out infinite",
-        "0.9s",
-        <ComplianceCard />,
-      )}
+      {/* Row 4 – two columns: Whisper (left) + Compliance (right) */}
       {card(
         d5,
-        { top: 285, left: 0, width: 215 },
+        { top: 252, left: 0, width: 215 },
         "5.2s 1.8s ease-in-out infinite",
-        "1.1s",
+        "0.9s",
         <WhisperCard />,
+      )}
+      {card(
+        d4,
+        { top: 252, right: 0, width: 248 },
+        "4.5s 2.1s ease-in-out infinite",
+        "1.1s",
+        <ComplianceCard />,
       )}
     </div>
   );

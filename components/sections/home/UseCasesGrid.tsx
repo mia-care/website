@@ -2,12 +2,6 @@ import Link from "next/link";
 import { PillTag } from "@/components/common/PillTag";
 import { useCases } from "@/data/use-cases";
 
-const UC_METRICS: Record<string, { metric: string; label: string }> = {
-  "greenfield-samd": { metric: "MVP in 1 month", label: "from zero to compliant" },
-  "high-risk-ai-cdss": { metric: "50% faster", label: "compliance for AI releases" },
-  "legacy-remediation": { metric: "60%", label: "remediation effort reduction" },
-};
-
 export function UseCasesGrid() {
   return (
     <section
@@ -37,11 +31,12 @@ export function UseCasesGrid() {
           .uc-card:hover { border-color: var(--bg-border-strong); box-shadow: 0 8px 28px rgba(0,0,0,0.18); transform: translateY(-2px); }
           .uc-card:hover .uc-card-cta { color: var(--brand-green); }
           .uc-card-cta::after { content: ''; position: absolute; inset: 0; z-index: 1; border-radius: inherit; }
+          .uc-card-cta:focus-visible { outline: 2px solid var(--brand-green); outline-offset: 3px; border-radius: 4px; }
         `}</style>
 
         <div className="grid md:grid-cols-3 gap-6">
           {useCases.map((uc) => {
-            const metric = UC_METRICS[uc.slug];
+            const result = uc.caseStudy.results[0];
             return (
               <div
                 key={uc.slug}
@@ -71,19 +66,19 @@ export function UseCasesGrid() {
                   >
                     {uc.tagline}
                   </p>
-                  {metric && (
+                  {result && (
                     <div
                       className="flex items-baseline gap-2 mt-2 pt-4 border-t"
                       style={{ borderColor: "var(--bg-border)" }}
                     >
                       <span
-                        className="font-display font-bold text-2xl"
+                        className="font-display font-bold text-2xl shrink-0"
                         style={{ color: "var(--text-primary)", letterSpacing: "-0.02em" }}
                       >
-                        {metric.metric}
+                        {result.metric}
                       </span>
-                      <span className="text-sm" style={{ color: "var(--text-muted)" }}>
-                        {metric.label}
+                      <span className="text-sm line-clamp-1" style={{ color: "var(--text-muted)" }}>
+                        {result.label}
                       </span>
                     </div>
                   )}

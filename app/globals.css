@@ -11,7 +11,6 @@
    2. VARIANTS
    ============================================================================= */
 
-@custom-variant dark (&:is(.dark *));
 
 
 /* =============================================================================
@@ -47,8 +46,8 @@
   --glow-cyan: rgba(0, 240, 240, 0.1);
 
   /* 4e. Shadcn tokens */
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
+  --background: var(--bg-base);
+  --foreground: var(--text-primary);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
@@ -81,25 +80,6 @@
   --sidebar-ring: oklch(0.708 0 0);
 }
 
-
-/* =============================================================================
-   4f. Light theme override (PoC — /light route only)
-   ============================================================================= */
-
-[data-theme="light"] {
-  --bg-base: #fafafa;
-  --bg-surface: #f0f0f2;
-  --bg-raised: #e4e4e8;
-  --bg-border: rgba(0, 0, 0, 0.08);
-  --bg-border-strong: rgba(0, 0, 0, 0.14);
-
-  --text-primary: #0d0e14;
-  --text-secondary: rgba(13, 14, 20, 0.6);
-  --text-muted: rgba(13, 14, 20, 0.5);
-
-  --glow-green: rgba(0, 180, 100, 0.14);
-  --glow-cyan: rgba(0, 180, 180, 0.12);
-}
 
 
 /* =============================================================================
@@ -157,7 +137,6 @@
   --font-styrene-b: var(--font-sb), ui-sans-serif, system-ui, sans-serif;
   --font-sans: var(--font-sb), ui-sans-serif, system-ui, sans-serif;
   --font-display: var(--font-sa), ui-sans-serif, system-ui, sans-serif;
-  --font-heading: var(--font-sans);
 
   /* 5d. Border radius */
   --radius-sm: calc(var(--radius) * 0.6);
@@ -246,7 +225,6 @@ body {
 /* 7c. Tipografia */
 @utility font-display {
   font-family: var(--font-display);
-  letter-spacing: -0.03em;
 }
 
 @utility label-caps {
@@ -325,6 +303,7 @@ body {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+  html { scroll-behavior: auto; }
   .marquee-paused { animation-play-state: paused !important; }
 }
 
@@ -473,7 +452,6 @@ body {
   margin: 1.75rem auto;
   max-width: 100%;
   height: auto;
-  loading: lazy;
 }
 
 .blog-prose table {

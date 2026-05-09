@@ -147,7 +147,7 @@ export function OneSolutionInteractive() {
                 type="button"
                 onClick={() => handleClick(m)}
                 className="sol-toggle relative px-4 py-2 rounded-lg text-sm font-semibold transition-all overflow-hidden"
-              data-active={isActive ? "true" : "false"}
+                data-active={isActive ? "true" : "false"}
                 style={{
                   background: isActive ? "var(--bg-surface)" : "transparent",
                   color: isActive
@@ -171,8 +171,7 @@ export function OneSolutionInteractive() {
                       left: 0,
                       right: 0,
                       height: 2,
-                      background:
-                        m === "p4samd" ? "var(--brand-green)" : "var(--text-muted)",
+                      background: m === "p4samd" ? "var(--brand-green)" : "var(--text-muted)",
                       transformOrigin: "left center",
                       animation: `sol-progress ${CYCLE_MS}ms linear forwards`,
                       opacity: 0.5,
@@ -238,10 +237,7 @@ export function OneSolutionInteractive() {
                     >
                       P4SaMD
                     </span>
-                    <p
-                      className="text-sm font-semibold"
-                      style={{ color: "var(--text-primary)" }}
-                    >
+                    <p className="text-sm font-semibold" style={{ color: "var(--text-primary)" }}>
                       Regulatory Intelligence Layer
                     </p>
                   </div>
@@ -295,7 +291,7 @@ export function OneSolutionInteractive() {
 
           {/* Tool cards — always same structure, content transitions */}
           <div className="grid sm:grid-cols-3 gap-0 sm:gap-4">
-            {TOOLS.map((tool, idx) => {
+            {TOOLS.map((tool) => {
               const data = isP4 ? tool.unified : tool.traditional;
               return (
                 <div
@@ -306,9 +302,7 @@ export function OneSolutionInteractive() {
                     border: "1px solid var(--bg-border)",
                     borderRadius: "var(--radius-card, 12px)",
                     transition: "border-color 0.35s ease",
-                    ...(isP4
-                      ? { borderColor: "var(--bg-border-strong)" }
-                      : {}),
+                    ...(isP4 ? { borderColor: "var(--bg-border-strong)" } : {}),
                   }}
                 >
                   <div className="flex items-center justify-between mb-4">
@@ -335,9 +329,7 @@ export function OneSolutionInteractive() {
                         fontWeight: 700,
                         padding: "2px 8px",
                         borderRadius: 99,
-                        background: isP4
-                          ? "rgba(0,240,150,0.08)"
-                          : "rgba(239,68,68,0.07)",
+                        background: isP4 ? "rgba(0,240,150,0.08)" : "rgba(239,68,68,0.07)",
                         color: isP4 ? "var(--brand-green)" : "#ef4444",
                         border: `1px solid ${isP4 ? "rgba(0,240,150,0.2)" : "rgba(239,68,68,0.2)"}`,
                         transition: "all 0.35s ease",
@@ -418,13 +410,13 @@ export function OneSolutionInteractive() {
         >
           <p className="text-sm" style={{ color: "var(--text-secondary)", lineHeight: 1.8 }}>
             P4SaMD connects to your existing tools, orchestrates your workflows, and enforces
-            quality controls as a natural part of your SDLC — without asking your team to change
-            how they work.
+            quality controls as a natural part of your SDLC — without asking your team to change how
+            they work.
           </p>
           <p className="text-sm" style={{ color: "var(--text-secondary)", lineHeight: 1.8 }}>
             It integrates your IDP, your Catalog, and a Compliance Engine into a single cohesive
-            execution environment, with P4SaMD as the regulatory intelligence layer that governs
-            all of it.
+            execution environment, with P4SaMD as the regulatory intelligence layer that governs all
+            of it.
           </p>
           <p className="text-sm" style={{ color: "var(--text-secondary)", lineHeight: 1.8 }}>
             Every requirement tracked. Every risk mapped. Every release documented. Continuously,

@@ -4,11 +4,16 @@ import { CtaBanner } from "@/components/common/CtaBanner";
 import { JsonLd } from "@/components/common/JsonLd";
 import { PillTag } from "@/components/common/PillTag";
 import { PlansBanner } from "@/components/common/PlansBanner";
+import { AiInActionSection } from "@/components/sections/capability/AiInActionSection";
+import { ArttInActionSection } from "@/components/sections/capability/ArttInActionSection";
+import { BrownfieldInActionSection } from "@/components/sections/capability/BrownfieldInActionSection";
 import { CapabilityHero } from "@/components/sections/capability/CapabilityHero";
 import { CapabilityScreenshots } from "@/components/sections/capability/CapabilityScreenshots";
 import { FeatureCards } from "@/components/sections/capability/FeatureCards";
+import { GuidedWorkflowsInActionSection } from "@/components/sections/capability/GuidedWorkflowsInActionSection";
 import { RegulationsList } from "@/components/sections/capability/RegulationsList";
 import { RelatedUseCases } from "@/components/sections/capability/RelatedUseCases";
+import { SdlcInActionSection } from "@/components/sections/capability/SdlcInActionSection";
 import { WhisperDemoSection } from "@/components/sections/capability/WhisperDemoSection";
 import { capabilities, getCapabilityBySlug } from "@/data/capabilities";
 import { capabilityScreenshots } from "@/data/capability-screenshots";
@@ -84,6 +89,11 @@ export default async function CapabilityPage({ params }: { params: Promise<{ slu
       </section>
 
       {cap.slug === "smart-assistant" && <WhisperDemoSection />}
+      {cap.slug === "ai-compliance" && <AiInActionSection />}
+      {cap.slug === "artt-traceability" && <ArttInActionSection />}
+      {cap.slug === "brownfield-remediator" && <BrownfieldInActionSection />}
+      {cap.slug === "sdlc-orchestrator" && <SdlcInActionSection />}
+      {cap.slug === "guided-workflows" && <GuidedWorkflowsInActionSection />}
 
       {capabilityScreenshots[cap.slug] && (
         <CapabilityScreenshots screens={capabilityScreenshots[cap.slug]} />

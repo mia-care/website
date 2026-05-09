@@ -1,12 +1,10 @@
-"use client";
+import type { Metadata } from "next";
+import { CompetenceCenterRedirect } from "./redirect";
 
-import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+export const metadata: Metadata = {
+  robots: { index: false, follow: false },
+};
 
-export default function CompetenceCenterRedirect() {
-  const router = useRouter();
-  useEffect(() => {
-    router.replace("/resources");
-  }, [router]);
-  return null;
+export default function Page() {
+  return <CompetenceCenterRedirect />;
 }

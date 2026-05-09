@@ -27,14 +27,19 @@ export function AnnouncementBanner({ config }: { config: Announcement }) {
   const bannerRef = useRef<HTMLDivElement>(null);
   const lastScrollY = useRef(0);
   const scrollShown = useRef(true);
+  const dismissed = useRef(false);
 
   useEffect(() => {
-    if (!config.enabled || isDismissed()) return;
+    if (!config.enabled || isDismissed()) {
+      setBannerHeight(0);
+      return;
+    }
 
     setVisible(true);
     setBannerHeight(BANNER_H);
 
     const onScroll = () => {
+      if (dismissed.current) return;
       const currentY = window.scrollY;
       const goingDown = currentY > lastScrollY.current;
       lastScrollY.current = currentY;
@@ -58,8 +63,11 @@ export function AnnouncementBanner({ config }: { config: Announcement }) {
     try {
       localStorage.setItem(STORAGE_KEY, String(Date.now()));
     } catch {}
-    setVisible(false);
+    dismissed.current = true;
+    // Slide banner and navbar together, then unmount
+    if (bannerRef.current) bannerRef.current.style.transform = "translateY(-100%)";
     setBannerHeight(0);
+    setTimeout(() => setVisible(false), 310);
   };
 
   if (!visible) return null;

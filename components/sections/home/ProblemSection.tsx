@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { PillTag } from "@/components/common/PillTag";
 
 export function ProblemSection() {
@@ -33,6 +34,13 @@ export function ProblemSection() {
               developer burnout, unexpected regulatory rejections, and audit findings that only
               emerge after inconsistency has been building for months.
             </p>
+            <Link
+              href="/product"
+              className="inline-flex items-center gap-1 text-sm font-semibold transition-colors hover:text-brand-green"
+              style={{ color: "var(--text-muted)" }}
+            >
+              See how P4SaMD fixes this →
+            </Link>
           </div>
         </div>
       </div>
