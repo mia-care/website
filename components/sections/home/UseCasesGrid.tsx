@@ -5,19 +5,24 @@ import { useCases } from "@/data/use-cases";
 export function UseCasesGrid() {
   return (
     <section
-      className="py-24"
+      className="relative py-14 md:py-24 overflow-hidden"
       style={{
         background: "var(--bg-surface)",
         borderTop: "1px solid var(--bg-border)",
       }}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0"
+        style={{
+          background:
+            "radial-gradient(ellipse 60% 45% at 100% 100%, rgba(0,240,240,0.05) 0%, transparent 65%)",
+        }}
+      />
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-10 md:mb-16">
           <PillTag className="mb-6">Use Cases</PillTag>
-          <h2
-            className="font-display font-bold mb-4"
-            style={{ fontSize: "clamp(32px, 4vw, 52px)", letterSpacing: "-0.03em" }}
-          >
+          <h2 className="heading-section mb-4">
             Built for every stage of the SaMD journey.
           </h2>
           <p className="max-w-xl mx-auto" style={{ color: "var(--text-secondary)" }}>
@@ -85,7 +90,7 @@ export function UseCasesGrid() {
                   <Link
                     href={`/use-cases/${uc.slug}`}
                     className="uc-card-cta mt-2 text-sm font-semibold transition-colors"
-                    style={{ color: "var(--text-secondary)" }}
+                    style={{ color: "var(--text-primary)" }}
                   >
                     Read Use Case →
                   </Link>

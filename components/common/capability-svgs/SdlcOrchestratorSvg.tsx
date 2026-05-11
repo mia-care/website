@@ -83,6 +83,12 @@ export function SdlcOrchestratorSvg() {
         minWidth: 0,
       }}
     >
+      <style>{`
+        @media (max-width: 480px) {
+          .orch-row { grid-template-columns: 1fr 1fr !important; }
+          .orch-col-sec, .orch-col-cls, .orch-col-comp, .orch-col-lock { display: none !important; }
+        }
+      `}</style>
       {/* ── Tool cards ── */}
       <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 6 }}>
         {TOOLS.map((tool) => {
@@ -137,6 +143,7 @@ export function SdlcOrchestratorSvg() {
       >
         {/* Header */}
         <div
+          className="orch-row"
           style={{
             display: "grid",
             gridTemplateColumns: "1fr 18px 54px 1fr 76px 22px",
@@ -146,9 +153,10 @@ export function SdlcOrchestratorSvg() {
             alignItems: "center",
           }}
         >
-          {["Activity", "#", "Class", "Tool Integrations", "Compliance", ""].map((h, _i) => (
+          {["Activity", "#", "Class", "Tool Integrations", "Compliance", ""].map((h, hi) => (
             <div
               key={h}
+              className={hi === 1 ? "orch-col-sec" : hi === 2 ? "orch-col-cls" : hi === 4 ? "orch-col-comp" : hi === 5 ? "orch-col-lock" : undefined}
               style={{
                 color: "#525252",
                 fontWeight: 600,
@@ -171,6 +179,7 @@ export function SdlcOrchestratorSvg() {
               key={phase.id}
               onMouseEnter={() => setHoveredRow(i)}
               onMouseLeave={() => setHoveredRow(null)}
+              className="orch-row"
               style={{
                 display: "grid",
                 gridTemplateColumns: "1fr 18px 54px 1fr 76px 22px",
@@ -201,10 +210,10 @@ export function SdlcOrchestratorSvg() {
               </div>
 
               {/* ID */}
-              <div style={{ color: "#737373", fontSize: 10 }}>{phase.id}</div>
+              <div className="orch-col-sec" style={{ color: "#737373", fontSize: 10 }}>{phase.id}</div>
 
               {/* Class */}
-              <div>
+              <div className="orch-col-cls">
                 <span
                   style={{
                     background: "#DCFCE7",
@@ -244,7 +253,7 @@ export function SdlcOrchestratorSvg() {
               </div>
 
               {/* Compliance */}
-              <div>
+              <div className="orch-col-comp">
                 <span
                   style={{
                     background: "#F0FDF4",
@@ -262,7 +271,7 @@ export function SdlcOrchestratorSvg() {
               </div>
 
               {/* Lock */}
-              <div style={{ display: "flex", justifyContent: "center" }}>
+              <div className="orch-col-lock" style={{ display: "flex", justifyContent: "center" }}>
                 <svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true">
                   <rect
                     x="3"

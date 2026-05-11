@@ -35,7 +35,7 @@ export function HeroBanner() {
           position: "absolute",
           inset: 0,
           zIndex: 1,
-          background: "linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, transparent 50%)",
+          background: "linear-gradient(to bottom, rgba(0,0,0,0.78) 0%, rgba(0,0,0,0.45) 60%, transparent 88%)",
           pointerEvents: "none",
         }}
       />
@@ -118,7 +118,7 @@ export function HeroBanner() {
                 href="/product"
                 className="inline-flex items-center h-12 px-8 rounded-lg font-semibold text-sm border transition-colors hover:bg-white/5"
                 style={{
-                  borderColor: "var(--bg-border-strong)",
+                  borderColor: "rgba(255,255,255,0.28)",
                   color: "var(--text-primary)",
                 }}
               >

@@ -29,14 +29,14 @@ export function RelatedUseCases({ cap }: { cap: Capability }) {
             >
               <PillTag>{uc.segment}</PillTag>
               <h3
-                className="font-display font-semibold text-base leading-snug group-hover:text-brand-green transition-colors"
+                className="heading-card leading-snug group-hover:text-brand-green transition-colors"
                 style={{ color: "var(--text-primary)" }}
               >
                 {uc.name}
               </h3>
               <span
                 className="mt-auto text-xs font-semibold transition-colors group-hover:text-brand-green"
-                style={{ color: "var(--text-muted)" }}
+                style={{ color: "var(--text-secondary)" }}
               >
                 Read Use Case →
               </span>

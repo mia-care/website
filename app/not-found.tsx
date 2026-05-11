@@ -25,7 +25,7 @@ export default function NotFound() {
           <Link
             href="/request-demo"
             className="inline-flex items-center h-11 px-6 rounded-lg font-semibold text-sm border transition-colors hover:bg-white/5"
-            style={{ borderColor: "var(--bg-border-strong)", color: "var(--text-primary)" }}
+            style={{ borderColor: "rgba(255,255,255,0.28)", color: "var(--text-primary)" }}
           >
             Request a Demo
           </Link>

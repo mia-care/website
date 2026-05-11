@@ -126,8 +126,20 @@ export function SdlcConfigLogSvg() {
         overflow: "hidden",
       }}
     >
+      <style>{`
+        @media (max-width: 480px) {
+          .sdlc-log-desc {
+            white-space: normal !important;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+          }
+          .sdlc-log-sidebar { display: none !important; }
+        }
+      `}</style>
       {/* Sidebar */}
       <div
+        className="sdlc-log-sidebar"
         style={{
           width: 170,
           background: D.surface,
@@ -406,6 +418,7 @@ export function SdlcConfigLogSvg() {
                       ))}
                     </div>
                     <div
+                      className="sdlc-log-desc"
                       style={{
                         fontSize: 9.5,
                         color: D.muted,

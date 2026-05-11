@@ -3,8 +3,6 @@
 import { useEffect, useRef, useState } from "react";
 
 const RISK_TITLE = "Incorrect arrhythmia classification leading to missed diagnosis";
-const HARM_TEXT =
-  "Delayed treatment of atrial fibrillation, potentially leading to stroke or other…";
 
 const ROWS = [
   {
@@ -296,7 +294,7 @@ export function SecureSoftwareSvg() {
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "2fr 1.6fr 84px 84px 20px",
+            gridTemplateColumns: "2fr 84px 84px 20px",
             padding: "5px 10px",
             background: "#F9FAFB",
             borderBottom: "1px solid #E5E7EB",
@@ -304,7 +302,7 @@ export function SecureSoftwareSvg() {
             flexShrink: 0,
           }}
         >
-          {["Risk / Hazard", "Harm", "Inherent Risk", "Residual Risk", "C"].map((h) => (
+          {["Risk / Hazard", "Inherent Risk", "Residual Risk", "C"].map((h) => (
             <div key={h} style={{ fontSize: 9, color: "#6B7280", fontWeight: 600 }}>
               {h}
             </div>
@@ -318,7 +316,7 @@ export function SecureSoftwareSvg() {
               key={row.id}
               style={{
                 display: "grid",
-                gridTemplateColumns: "2fr 1.6fr 84px 84px 20px",
+                gridTemplateColumns: "2fr 84px 84px 20px",
                 padding: "7px 10px",
                 borderBottom: "1px solid #F3F4F6",
                 gap: 8,
@@ -380,11 +378,6 @@ export function SecureSoftwareSvg() {
                     Patient
                   </span>
                 </div>
-              </div>
-
-              {/* Harm */}
-              <div style={{ fontSize: 9, color: "#6B7280", lineHeight: 1.45, overflow: "hidden" }}>
-                {HARM_TEXT}
               </div>
 
               {/* Inherent Risk */}

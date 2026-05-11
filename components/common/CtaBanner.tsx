@@ -3,7 +3,7 @@ import Link from "next/link";
 export function CtaBanner() {
   return (
     <section
-      className="relative overflow-hidden py-24"
+      className="relative overflow-hidden py-14 md:py-24"
       style={{
         background: "var(--bg-surface)",
         borderTop: "1px solid var(--bg-border)",
@@ -27,10 +27,7 @@ export function CtaBanner() {
       />
 
       <div className="relative max-w-3xl mx-auto px-4 sm:px-6 text-center">
-        <h2
-          className="font-display font-bold mb-4"
-          style={{ fontSize: "clamp(32px, 4vw, 52px)", letterSpacing: "-0.03em" }}
-        >
+        <h2 className="heading-section mb-4">
           Ready to ship <br />
           compliant software faster?
         </h2>

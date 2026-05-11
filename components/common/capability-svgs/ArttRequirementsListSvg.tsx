@@ -102,6 +102,10 @@ export function ArttRequirementsListSvg() {
           0%, 100% { opacity: 1; }
           50% { opacity: 0.5; }
         }
+        @media (max-width: 480px) {
+          .artt-req-row { grid-template-columns: 90px 1fr 84px !important; }
+          .artt-req-cnt { display: none !important; }
+        }
       `}</style>
 
       {/* Header */}
@@ -139,6 +143,7 @@ export function ArttRequirementsListSvg() {
 
       {/* Column headers */}
       <div
+        className="artt-req-row"
         style={{
           display: "grid",
           gridTemplateColumns: "90px 1fr 56px 56px 56px 84px",
@@ -154,9 +159,9 @@ export function ArttRequirementsListSvg() {
       >
         <span>ID</span>
         <span>Title</span>
-        <span style={{ textAlign: "center" }}>Tests</span>
-        <span style={{ textAlign: "center" }}>Risks</span>
-        <span style={{ textAlign: "center" }}>Impl.</span>
+        <span className="artt-req-cnt" style={{ textAlign: "center" }}>Tests</span>
+        <span className="artt-req-cnt" style={{ textAlign: "center" }}>Risks</span>
+        <span className="artt-req-cnt" style={{ textAlign: "center" }}>Impl.</span>
         <span>Status</span>
       </div>
 
@@ -170,6 +175,7 @@ export function ArttRequirementsListSvg() {
           return (
             <div
               key={req.id}
+              className="artt-req-row"
               style={{
                 display: "grid",
                 gridTemplateColumns: "90px 1fr 56px 56px 56px 84px",
@@ -200,7 +206,7 @@ export function ArttRequirementsListSvg() {
               >
                 {req.title}
               </span>
-              <div style={{ textAlign: "center" }}>
+              <div className="artt-req-cnt" style={{ textAlign: "center" }}>
                 <span
                   style={{
                     background: "#EFF6FF",
@@ -214,7 +220,7 @@ export function ArttRequirementsListSvg() {
                   {isLinking ? req.tests + 2 : req.tests}
                 </span>
               </div>
-              <div style={{ textAlign: "center" }}>
+              <div className="artt-req-cnt" style={{ textAlign: "center" }}>
                 <span
                   style={{
                     background: "#FEF2F2",
@@ -228,7 +234,7 @@ export function ArttRequirementsListSvg() {
                   {req.risks}
                 </span>
               </div>
-              <div style={{ textAlign: "center" }}>
+              <div className="artt-req-cnt" style={{ textAlign: "center" }}>
                 <span
                   style={{
                     background: "#F5F5F5",

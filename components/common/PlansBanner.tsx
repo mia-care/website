@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { PillTag } from "@/components/common/PillTag";
 
 const TIERS = [
   { name: "Standard", target: "Small teams" },
@@ -13,16 +14,8 @@ export function PlansBanner() {
       style={{ background: "var(--bg-surface)", borderTop: "1px solid var(--bg-border)" }}
     >
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <p
-          className="text-xs font-bold uppercase tracking-widest mb-3"
-          style={{ color: "var(--text-muted)", letterSpacing: "0.12em" }}
-        >
-          Pricing
-        </p>
-        <h2
-          className="font-display font-bold mb-3"
-          style={{ fontSize: "clamp(22px, 2.5vw, 32px)", letterSpacing: "-0.02em" }}
-        >
+        <PillTag className="mb-4">Pricing</PillTag>
+        <h2 className="heading-sub mb-3">
           Find the right plan for your team.
         </h2>
         <p className="text-sm mb-8 max-w-md mx-auto" style={{ color: "var(--text-secondary)" }}>

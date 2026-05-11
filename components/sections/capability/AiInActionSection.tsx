@@ -132,7 +132,7 @@ export function AiInActionSection() {
             </span>
           </div>
 
-          <div key={active} style={{ height: 400, ...wrapStyle }} className="animate-fade-in-up">
+          <div key={active} style={wrapStyle} className="h-[280px] sm:h-[340px] md:h-[400px] animate-fade-in-up">
             <Component />
           </div>
         </div>

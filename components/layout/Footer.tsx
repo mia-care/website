@@ -150,7 +150,7 @@ export function Footer() {
           <div className="text-xs" style={{ color: "var(--text-muted)" }}>
             © {year} {SITE.company.name} — {SITE.company.address} — VAT {SITE.company.vat}
           </div>
-          <div className="flex items-center gap-6">
+          <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
             {FOOTER_LINKS.legal.map((link) => (
               <Link
                 key={link.href}

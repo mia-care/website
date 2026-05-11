@@ -301,7 +301,7 @@ export function Navbar() {
                       fill="none"
                       aria-hidden="true"
                       style={{
-                        opacity: open ? 0.9 : 0.4,
+                        opacity: open ? 0.9 : 0.6,
                         transform: open ? "rotate(180deg)" : undefined,
                         transition: "transform 0.2s, opacity 0.15s",
                       }}

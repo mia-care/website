@@ -72,12 +72,7 @@ export default function CareersPage() {
         style={{ background: "var(--bg-surface)", borderTop: "1px solid var(--bg-border)" }}
       >
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <p
-            className="text-xs font-bold uppercase tracking-widest mb-10"
-            style={{ color: "var(--text-muted)", letterSpacing: "0.12em" }}
-          >
-            What we pursue
-          </p>
+          <PillTag className="mb-10">What we pursue</PillTag>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {VALUES.map((v, i) => (
               <div
@@ -117,12 +112,7 @@ export default function CareersPage() {
         style={{ borderTop: "1px solid var(--bg-border)" }}
       >
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <p
-            className="text-xs font-bold uppercase tracking-widest mb-2"
-            style={{ color: "var(--text-muted)", letterSpacing: "0.12em" }}
-          >
-            Job Positions
-          </p>
+          <PillTag className="mb-2">Job Positions</PillTag>
           <h2
             className="font-display font-bold mb-10"
             style={{ fontSize: "clamp(24px, 3vw, 38px)", letterSpacing: "-0.03em" }}

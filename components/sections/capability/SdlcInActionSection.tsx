@@ -142,7 +142,7 @@ export function SdlcInActionSection() {
           </div>
 
           {/* Animated component */}
-          <div key={active} style={{ height: 520, ...wrapStyle }} className="animate-fade-in-up">
+          <div key={active} style={wrapStyle} className="h-[300px] sm:h-[420px] md:h-[520px] animate-fade-in-up">
             <Component />
           </div>
         </div>

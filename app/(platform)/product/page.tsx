@@ -206,10 +206,7 @@ export default function ProductPage() {
         style={{ background: "var(--bg-surface)", borderTop: "1px solid var(--bg-border)" }}
       >
         <div className="max-w-3xl mx-auto px-4 sm:px-6 text-center">
-          <h2
-            className="font-display font-bold mb-3"
-            style={{ fontSize: "clamp(20px, 2.5vw, 30px)", letterSpacing: "-0.02em" }}
-          >
+          <h2 className="heading-sub mb-3">
             Ready to see P4SaMD in action?
           </h2>
           <p className="mb-8 text-sm" style={{ color: "var(--text-secondary)", lineHeight: 1.75 }}>
@@ -225,7 +222,7 @@ export default function ProductPage() {
             <Link
               href="/resources/mia-care-product-demo"
               className="inline-flex items-center gap-2 h-12 px-6 rounded-lg font-semibold text-sm transition-colors hover:opacity-80"
-              style={{ border: "1px solid var(--bg-border-strong)", color: "var(--text-primary)" }}
+              style={{ border: "1px solid rgba(255,255,255,0.28)", color: "var(--text-primary)" }}
             >
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
                 <circle cx="7" cy="7" r="6.5" stroke="currentColor" />
@@ -254,7 +251,7 @@ export default function ProductPage() {
             {WHY.map((w) => (
               <div key={w.title}>
                 <h3
-                  className="font-display font-semibold text-base mb-3"
+                  className="heading-card mb-3"
                   style={{ color: "var(--brand-green)" }}
                 >
                   {w.title}

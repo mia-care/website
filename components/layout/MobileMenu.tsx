@@ -106,6 +106,22 @@ export function MobileMenu() {
               priority
             />
           </Link>
+          <button
+            type="button"
+            onClick={() => setOpen(false)}
+            aria-label="Close menu"
+            className="inline-flex items-center justify-center rounded-lg transition-colors hover:bg-white/5"
+            style={{ width: 44, height: 44, color: "var(--text-muted)" }}
+          >
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path
+                d="M2 2l12 12M14 2L2 14"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+              />
+            </svg>
+          </button>
         </div>
 
         {/* Nav body */}

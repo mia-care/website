@@ -50,6 +50,7 @@ export function CapabilitiesGrid() {
   const [hoveredTab, setHoveredTab] = useState<number | null>(null);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const mobileTabRefs = useRef<(HTMLButtonElement | null)[]>([]);
+  const mobileStripRef = useRef<HTMLDivElement>(null);
 
   const cap = capabilities[active];
   const ScreenshotSvg = SVG_MAP[cap.slug];
@@ -69,13 +70,13 @@ export function CapabilitiesGrid() {
     };
   }, [isPlaying]);
 
-  // Mobile: scroll active tab into view
+  // Mobile: scroll active tab within the strip — never touches page scroll
   useEffect(() => {
-    mobileTabRefs.current[active]?.scrollIntoView({
-      behavior: "smooth",
-      block: "nearest",
-      inline: "center",
-    });
+    const btn = mobileTabRefs.current[active];
+    const strip = mobileStripRef.current;
+    if (!btn || !strip) return;
+    const btnCenter = btn.offsetLeft + btn.offsetWidth / 2;
+    strip.scrollTo({ left: btnCenter - strip.offsetWidth / 2, behavior: "smooth" });
   }, [active]);
 
   const handleTabClick = (i: number) => {
@@ -86,7 +87,18 @@ export function CapabilitiesGrid() {
   const togglePlay = () => setIsPlaying((p) => !p);
 
   return (
-    <section className="py-24" style={{ background: "var(--bg-base)" }}>
+    <section
+      className="relative py-14 md:py-24 overflow-hidden"
+      style={{ background: "var(--bg-surface)", borderTop: "1px solid var(--bg-border)" }}
+    >
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0"
+        style={{
+          background:
+            "radial-gradient(ellipse 70% 50% at 50% 50%, rgba(0,240,150,0.06) 0%, transparent 65%)",
+        }}
+      />
       <style>{`
         @keyframes cap-progress {
           from { transform: scaleX(1); }
@@ -94,14 +106,11 @@ export function CapabilitiesGrid() {
         }
       `}</style>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-10 md:mb-16">
           <PillTag className="mb-6">Platform Capabilities</PillTag>
-          <h2
-            className="font-display font-bold mb-4"
-            style={{ fontSize: "clamp(32px, 4vw, 52px)", letterSpacing: "-0.03em" }}
-          >
+          <h2 className="heading-section mb-4">
             The full E2E in one platform.
           </h2>
           <p className="max-w-xl mx-auto" style={{ color: "var(--text-secondary)" }}>
@@ -111,80 +120,107 @@ export function CapabilitiesGrid() {
         </div>
 
         {/* Explorer layout */}
-        <div className="flex flex-col lg:flex-row gap-6 items-start">
+        <div className="flex flex-col lg:flex-row gap-6 lg:items-start">
           {/* Mobile: horizontal scrollable tab strip + play/pause */}
-          <div className="lg:hidden w-full -mx-4 px-4 flex items-center gap-2">
-            <div
-              className="flex gap-2 overflow-x-auto pb-2 scrollbar-none flex-1 min-w-0"
-              style={{
-                WebkitMaskImage: "linear-gradient(to right, black 80%, transparent 100%)",
-                maskImage: "linear-gradient(to right, black 80%, transparent 100%)",
-              }}
-            >
-              {capabilities.map((c, i) => (
-                <button
-                  key={c.slug}
-                  ref={(el) => {
-                    mobileTabRefs.current[i] = el;
-                  }}
-                  type="button"
-                  onClick={() => handleTabClick(i)}
-                  onMouseEnter={() => setHoveredTab(i)}
-                  onMouseLeave={() => setHoveredTab(null)}
-                  aria-pressed={active === i}
-                  className="flex-none px-3 py-2 rounded-lg text-xs font-semibold whitespace-nowrap transition-all"
-                  style={{
-                    position: "relative",
-                    overflow: "hidden",
-                    background:
-                      active === i || hoveredTab === i ? "var(--bg-raised)" : "transparent",
-                    color:
-                      active === i
-                        ? "var(--text-primary)"
-                        : hoveredTab === i
+          <div className="lg:hidden w-full -mx-4 px-4 flex flex-col">
+            {/* Tab strip + play/pause row */}
+            <div className="flex items-center gap-2">
+              <div
+                ref={mobileStripRef}
+                className="flex gap-2 overflow-x-auto pb-2 scrollbar-none flex-1 min-w-0"
+                style={{
+                  WebkitMaskImage: "linear-gradient(to right, black 80%, transparent 100%)",
+                  maskImage: "linear-gradient(to right, black 80%, transparent 100%)",
+                }}
+              >
+                {capabilities.map((c, i) => (
+                  <button
+                    key={c.slug}
+                    ref={(el) => {
+                      mobileTabRefs.current[i] = el;
+                    }}
+                    type="button"
+                    onClick={() => handleTabClick(i)}
+                    onMouseEnter={() => setHoveredTab(i)}
+                    onMouseLeave={() => setHoveredTab(null)}
+                    aria-pressed={active === i}
+                    className="flex-none px-3 rounded-lg text-xs font-semibold whitespace-nowrap transition-all"
+                    style={{
+                      position: "relative",
+                      overflow: "hidden",
+                      minHeight: 44,
+                      background:
+                        active === i || hoveredTab === i ? "var(--bg-raised)" : "transparent",
+                      color:
+                        active === i
                           ? "var(--text-primary)"
-                          : "var(--text-secondary)",
-                    border: `1px solid ${active === i ? "var(--bg-border-strong)" : hoveredTab === i ? "var(--bg-border)" : "transparent"}`,
+                          : hoveredTab === i
+                            ? "var(--text-primary)"
+                            : "var(--text-secondary)",
+                      border: `1px solid ${active === i ? "var(--bg-border-strong)" : hoveredTab === i ? "var(--bg-border)" : "transparent"}`,
+                    }}
+                  >
+                    {c.name}
+                    {active === i && isPlaying && (
+                      <div
+                        key={`mob-${active}`}
+                        style={{
+                          position: "absolute",
+                          bottom: 0,
+                          left: 0,
+                          right: 0,
+                          height: 2,
+                          background: "var(--brand-green)",
+                          transformOrigin: "left center",
+                          animation: `cap-progress ${AUTOPLAY_MS}ms linear forwards`,
+                          borderRadius: 1,
+                        }}
+                      />
+                    )}
+                  </button>
+                ))}
+              </div>
+
+              {/* Mobile play/pause — 44×44 touch target */}
+              <button
+                type="button"
+                onClick={togglePlay}
+                aria-label={isPlaying ? "Pause autoplay" : "Resume autoplay"}
+                className="shrink-0 flex items-center justify-center transition-colors"
+                style={{
+                  width: 44,
+                  height: 44,
+                  borderRadius: 8,
+                  background: "var(--bg-raised)",
+                  border: "1px solid var(--bg-border)",
+                  color: "var(--text-muted)",
+                }}
+              >
+                {isPlaying ? <PauseIcon /> : <PlayIcon />}
+              </button>
+            </div>
+
+            {/* Position dots — explicit scroll affordance */}
+            <div className="flex justify-center gap-1.5 pt-2 pb-1" aria-hidden="true">
+              {capabilities.map((_, i) => (
+                <span
+                  key={i}
+                  style={{
+                    display: "inline-block",
+                    width: active === i ? 14 : 4,
+                    height: 4,
+                    borderRadius: 2,
+                    background: active === i ? "var(--brand-green)" : "var(--bg-border-strong)",
+                    transition: "width 0.25s ease, background 0.25s ease",
                   }}
-                >
-                  {c.name}
-                  {active === i && isPlaying && (
-                    <div
-                      key={`mob-${active}`}
-                      style={{
-                        position: "absolute",
-                        bottom: 0,
-                        left: 0,
-                        right: 0,
-                        height: 2,
-                        background: "var(--brand-green)",
-                        transformOrigin: "left center",
-                        animation: `cap-progress ${AUTOPLAY_MS}ms linear forwards`,
-                        borderRadius: 1,
-                      }}
-                    />
-                  )}
-                </button>
+                />
               ))}
             </div>
 
-            {/* Mobile play/pause */}
-            <button
-              type="button"
-              onClick={togglePlay}
-              aria-label={isPlaying ? "Pause autoplay" : "Resume autoplay"}
-              className="shrink-0 pb-2 flex items-center justify-center transition-colors"
-              style={{
-                width: 28,
-                height: 28,
-                borderRadius: 6,
-                background: "var(--bg-raised)",
-                border: "1px solid var(--bg-border)",
-                color: "var(--text-muted)",
-              }}
-            >
-              {isPlaying ? <PauseIcon /> : <PlayIcon />}
-            </button>
+            {/* Screen reader position announcement */}
+            <span className="sr-only" aria-live="polite" aria-atomic="true">
+              {cap.name}, {active + 1} of {capabilities.length}
+            </span>
           </div>
 
           {/* Desktop: vertical tabs sidebar */}
@@ -347,7 +383,7 @@ export function CapabilitiesGrid() {
               <Link
                 href={`/capabilities/${cap.slug}`}
                 className="mt-auto text-sm font-semibold inline-flex items-center gap-1 transition-colors hover:text-brand-green"
-                style={{ color: "var(--text-muted)" }}
+                style={{ color: "var(--text-primary)" }}
               >
                 Explore capability →
               </Link>
@@ -355,10 +391,9 @@ export function CapabilitiesGrid() {
 
             {/* SVG / screenshot column */}
             <div
-              className="flex-1 rounded-lg overflow-hidden flex items-center justify-center"
+              className="flex-1 rounded-lg overflow-hidden flex items-center justify-center h-[260px] md:h-[340px] lg:h-[450px]"
               style={{
                 background: "var(--bg-raised)",
-                height: "450px",
                 border: "1px solid var(--bg-border)",
               }}
             >

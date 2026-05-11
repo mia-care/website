@@ -9,7 +9,7 @@ export function StatsRow() {
   return (
     <section
       className="border-y py-10"
-      style={{ borderColor: "var(--bg-border)", background: "var(--bg-surface)" }}
+      style={{ borderColor: "var(--bg-border)", background: "var(--bg-base)" }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">

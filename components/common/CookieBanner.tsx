@@ -106,7 +106,7 @@ export function CookieBanner() {
               type="button"
               onClick={() => setExpanded((e) => !e)}
               className="px-4 py-2 text-sm rounded-md border transition-colors"
-              style={{ borderColor: "var(--bg-border-strong)", color: "var(--text-secondary)" }}
+              style={{ borderColor: "rgba(255,255,255,0.28)", color: "var(--text-primary)" }}
             >
               {expanded ? "Hide settings" : "Customize"}
             </button>
@@ -114,7 +114,7 @@ export function CookieBanner() {
               type="button"
               onClick={() => save({ performance: false, profiling: false })}
               className="px-4 py-2 text-sm rounded-md border transition-colors"
-              style={{ borderColor: "var(--bg-border-strong)", color: "var(--text-secondary)" }}
+              style={{ borderColor: "rgba(255,255,255,0.28)", color: "var(--text-primary)" }}
             >
               Decline all
             </button>

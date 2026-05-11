@@ -14,7 +14,7 @@ export function CookiePreferencesButton() {
       type="button"
       onClick={handleClick}
       className="text-xs transition-colors hover:text-text-primary"
-      style={{ color: "var(--text-muted)" }}
+      style={{ color: "var(--text-secondary)" }}
     >
       Cookie preferences
     </button>

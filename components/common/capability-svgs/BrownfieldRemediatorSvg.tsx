@@ -25,11 +25,6 @@ const STEPS = [
     title: "Documentation",
     desc: "Upload PDF, link, wiki, technical and regulatory documentation",
   },
-  {
-    icon: "~",
-    title: "Summary and analysis",
-    desc: "Confirmation of the entered data and start of AI-powered analysis",
-  },
 ];
 
 const REVEAL_MS = 600;
@@ -41,12 +36,10 @@ function StepIcon({
   icon,
   done,
   active,
-  analysing,
 }: {
   icon: string;
   done: boolean;
   active: boolean;
-  analysing: boolean;
 }) {
   const bg = done || active ? "#2563EB" : "#E5E7EB";
   const color = done || active ? "white" : "#9CA3AF";
@@ -66,23 +59,7 @@ function StepIcon({
         position: "relative",
       }}
     >
-      {analysing ? (
-        <svg
-          width="14"
-          height="14"
-          viewBox="0 0 16 16"
-          fill="none"
-          aria-hidden="true"
-          style={{ animation: "bf-spin 0.85s linear infinite" }}
-        >
-          <path
-            d="M8 2a6 6 0 100 12A6 6 0 008 2z"
-            stroke="white"
-            strokeWidth="1.8"
-            strokeDasharray="16 8"
-          />
-        </svg>
-      ) : done ? (
+      {done ? (
         <svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true">
           <path
             d="M3.5 8l3.5 3.5L13 5"
@@ -104,11 +81,10 @@ function StepIcon({
 }
 
 export function BrownfieldRemediatorSvg() {
-  const [visibleSteps, setVisibleSteps] = useState<boolean[]>([false, false, false, false, false]);
-  const [doneSteps, setDoneSteps] = useState<boolean[]>([false, false, false, false, false]);
+  const [visibleSteps, setVisibleSteps] = useState<boolean[]>([false, false, false, false]);
+  const [doneSteps, setDoneSteps] = useState<boolean[]>([false, false, false, false]);
   const [activeStep, setActiveStep] = useState(-1);
   const [activeTab, setActiveTab] = useState(0);
-  const [analysing, setAnalysing] = useState(false);
   const timers = useRef<ReturnType<typeof setTimeout>[]>([]);
 
   useEffect(() => {
@@ -121,11 +97,10 @@ export function BrownfieldRemediatorSvg() {
     const run = () => {
       clear();
       timers.current = [];
-      setVisibleSteps([false, false, false, false, false]);
-      setDoneSteps([false, false, false, false, false]);
+      setVisibleSteps([false, false, false, false]);
+      setDoneSteps([false, false, false, false]);
       setActiveStep(-1);
       setActiveTab(0);
-      setAnalysing(false);
 
       STEPS.forEach((_, i) => {
         const revealAt = REVEAL_MS + i * BETWEEN_MS;
@@ -154,23 +129,15 @@ export function BrownfieldRemediatorSvg() {
 
       const allDoneAt = REVEAL_MS + STEPS.length * BETWEEN_MS;
 
-      // mark last step done + start analysing
+      // mark all steps done → stepper advances to next tab
       later(() => {
-        setDoneSteps([true, true, true, true, false]);
-        setAnalysing(true);
-        setActiveStep(4);
-      }, allDoneAt);
-
-      // finish analysis → stepper advances to next tab
-      later(() => {
-        setDoneSteps([true, true, true, true, true]);
-        setAnalysing(false);
+        setDoneSteps([true, true, true, true]);
         setActiveStep(-1);
         setActiveTab(1);
-      }, allDoneAt + 1400);
+      }, allDoneAt);
 
       // reset
-      later(run, allDoneAt + 1400 + HOLD_MS + RESET_MS);
+      later(run, allDoneAt + HOLD_MS + RESET_MS);
     };
 
     run();
@@ -196,13 +163,13 @@ export function BrownfieldRemediatorSvg() {
           from { opacity: 0; transform: translateY(6px); }
           to   { opacity: 1; transform: translateY(0); }
         }
-        @keyframes bf-spin {
-          to { transform: rotate(360deg); }
-        }
+        .bf-stepper { scrollbar-width: none; }
+        .bf-stepper::-webkit-scrollbar { display: none; }
       `}</style>
 
       {/* ── Stepper ── */}
       <div
+        className="bf-stepper"
         style={{
           background: "white",
           borderBottom: "1px solid #E5E7EB",
@@ -211,6 +178,7 @@ export function BrownfieldRemediatorSvg() {
           alignItems: "center",
           gap: 4,
           flexShrink: 0,
+          overflowX: "auto",
         }}
       >
         {STEPPER_TABS.map((tab, i) => {
@@ -355,7 +323,6 @@ export function BrownfieldRemediatorSvg() {
                   icon={step.icon}
                   done={doneSteps[i]}
                   active={activeStep === i}
-                  analysing={analysing && i === 4}
                 />
                 <div style={{ minWidth: 0 }}>
                   <div style={{ fontWeight: 600, fontSize: 11, color: "#0A0A0A", marginBottom: 2 }}>

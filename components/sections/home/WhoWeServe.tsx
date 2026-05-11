@@ -100,14 +100,11 @@ const SEGMENTS = [
 
 export function WhoWeServe() {
   return (
-    <section className="py-24" style={{ background: "var(--bg-base)" }}>
+    <section className="py-14 md:py-24" style={{ background: "var(--bg-base)" }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
+        <div className="text-center mb-10 md:mb-16">
           <PillTag className="mb-6">Who We Serve</PillTag>
-          <h2
-            className="font-display font-bold"
-            style={{ fontSize: "clamp(32px, 4vw, 52px)", letterSpacing: "-0.03em" }}
-          >
+          <h2 className="heading-section">
             Every company carries the weight of regulated software.
           </h2>
         </div>
@@ -124,7 +121,7 @@ export function WhoWeServe() {
             >
               <div style={{ color: "var(--text-muted)" }}>{seg.icon}</div>
               <h3
-                className="font-display font-semibold text-base"
+                className="heading-card"
                 style={{ color: "var(--text-primary)" }}
               >
                 {seg.title}
@@ -137,7 +134,7 @@ export function WhoWeServe() {
               </p>
               <span
                 className="text-xs font-semibold mt-auto transition-colors group-hover:text-brand-green"
-                style={{ color: "var(--text-muted)" }}
+                style={{ color: "var(--text-primary)" }}
               >
                 Explore use case →
               </span>

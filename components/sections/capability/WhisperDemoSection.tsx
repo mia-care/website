@@ -175,17 +175,16 @@ export function WhisperDemoSection() {
 
         {/* Demo frame */}
         <div
-          className="rounded-card overflow-hidden"
-          style={{ border: "1px solid var(--bg-border)", display: "flex", height: 580 }}
+          className="rounded-card overflow-hidden flex h-[400px] sm:h-[580px]"
+          style={{ border: "1px solid var(--bg-border)" }}
         >
-          {/* ── Sidebar (background app chrome) ── */}
+          {/* ── Sidebar (background app chrome) — hidden on mobile ── */}
           <div
+            className="hidden sm:flex flex-col"
             style={{
               width: 148,
               flexShrink: 0,
               background: "#0B3D2E",
-              display: "flex",
-              flexDirection: "column",
               fontFamily: "ui-sans-serif, system-ui, sans-serif",
             }}
           >

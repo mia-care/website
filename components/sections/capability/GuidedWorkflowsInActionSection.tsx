@@ -134,7 +134,7 @@ export function GuidedWorkflowsInActionSection() {
           </div>
 
           {/* Animated component */}
-          <div key={active} style={{ height: 460 }} className="animate-fade-in-up">
+          <div key={active} className="h-[300px] sm:h-[380px] md:h-[460px] animate-fade-in-up">
             {active === 0 ? (
               <div
                 style={{

@@ -55,10 +55,21 @@
       }
     },
     {
-      "includes": ["components/common/LogoCarousel.tsx"],
+      "includes": ["components/common/LogoCarousel.tsx", "components/common/CapabilitiesGrid.tsx"],
       "linter": {
         "rules": {
           "suspicious": { "noArrayIndexKey": "off" }
+        }
+      }
+    },
+    {
+      "includes": [
+        "components/sections/capability/CapabilityScreenshots.tsx",
+        "components/sections/home/HeroProductPreview.tsx"
+      ],
+      "linter": {
+        "rules": {
+          "performance": { "noImgElement": "off" }
         }
       }
     }

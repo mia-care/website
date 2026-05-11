@@ -3,16 +3,24 @@ import { PillTag } from "@/components/common/PillTag";
 
 export function ProblemSection() {
   return (
-    <section className="py-24" style={{ background: "var(--bg-base)" }}>
+    <section
+      className="relative py-14 md:py-24 overflow-hidden"
+      style={{ background: "var(--bg-base)" }}
+    >
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0"
+        style={{
+          background:
+            "radial-gradient(ellipse 55% 60% at 0% 50%, rgba(0,240,150,0.05) 0%, transparent 70%)",
+        }}
+      />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-16 items-start">
           {/* Left: label + headline */}
           <div>
             <PillTag className="mb-6">The Problem</PillTag>
-            <h2
-              className="font-display font-bold leading-tight"
-              style={{ fontSize: "clamp(32px, 4vw, 52px)", letterSpacing: "-0.03em" }}
-            >
+            <h2 className="heading-section">
               The gap between engineering and compliance is costing you.
             </h2>
           </div>
@@ -37,7 +45,7 @@ export function ProblemSection() {
             <Link
               href="/product"
               className="inline-flex items-center gap-1 text-sm font-semibold transition-colors hover:text-brand-green"
-              style={{ color: "var(--text-muted)" }}
+              style={{ color: "var(--text-primary)" }}
             >
               See how P4SaMD fixes this →
             </Link>

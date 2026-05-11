@@ -27,9 +27,9 @@ export default function RequestDemoPage() {
   return (
     <section className="py-20" style={{ background: "var(--bg-base)" }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-16 items-start">
-          {/* Left col */}
-          <div>
+        <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-start">
+          {/* Left col: social proof — second on mobile, first on desktop */}
+          <div className="order-2 lg:order-1">
             <PillTag className="mb-6">Request a Demo</PillTag>
             <h1
               className="font-display font-bold mb-4 leading-tight"
@@ -88,23 +88,23 @@ export default function RequestDemoPage() {
             </div>
 
             {/* Proof metrics */}
-            <div className="grid grid-cols-3 gap-4">
+            <div className="grid grid-cols-3 gap-2 sm:gap-4">
               {PROOF_METRICS.map((m) => (
                 <div
                   key={m.label}
-                  className="rounded-card p-4 text-center"
+                  className="rounded-card p-2 sm:p-4 text-center"
                   style={{
                     background: "var(--bg-surface)",
                     border: "1px solid var(--bg-border)",
                   }}
                 >
                   <div
-                    className="font-display font-bold text-2xl text-brand-gradient"
+                    className="font-display font-bold text-xl sm:text-2xl text-brand-gradient"
                     style={{ letterSpacing: "-0.02em" }}
                   >
                     {m.metric}
                   </div>
-                  <div className="text-xs mt-1" style={{ color: "var(--text-muted)" }}>
+                  <div className="text-[10px] sm:text-xs mt-1 leading-tight" style={{ color: "var(--text-muted)" }}>
                     {m.label}
                   </div>
                 </div>
@@ -112,9 +112,9 @@ export default function RequestDemoPage() {
             </div>
           </div>
 
-          {/* Right col — HubSpot form */}
+          {/* Right col — HubSpot form: first on mobile, second on desktop */}
           <div
-            className="rounded-card p-8"
+            className="order-1 lg:order-2 rounded-card p-8"
             style={{
               background: "var(--bg-surface)",
               border: "1px solid var(--bg-border)",

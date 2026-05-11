@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { Breadcrumb } from "@/components/common/Breadcrumb";
 import { CtaBanner } from "@/components/common/CtaBanner";
 import { JsonLd } from "@/components/common/JsonLd";
 import { PillTag } from "@/components/common/PillTag";
@@ -62,6 +63,13 @@ export default async function CapabilityPage({ params }: { params: Promise<{ slu
   return (
     <>
       <JsonLd schema={capabilitySchema} />
+      <Breadcrumb
+        items={[
+          { label: "Platform", href: "/product" },
+          { label: "Capabilities", href: "/product" },
+          { label: cap.name },
+        ]}
+      />
       <CapabilityHero cap={cap} />
 
       {/* What it does */}

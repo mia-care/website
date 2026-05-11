@@ -227,13 +227,57 @@ body {
   font-family: var(--font-display);
 }
 
+/*
+  Type scale — 4 semantic levels with clear ratios:
+    display  (H1 heroes)        max 62px
+    section  (major H2s)        max 48px  → 1.29× smaller than display
+    sub      (secondary H2s)    max 34px  → 1.41× smaller than section
+    card     (H3 card titles)   fixed 18px → clearly above 14px body
+
+  @utility doesn't reliably emit clamp() values — using @layer utilities instead.
+*/
+
+@layer utilities {
+  .heading-display {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(36px, 5vw, 62px);
+    letter-spacing: -0.035em;
+    line-height: 1.1;
+  }
+
+  .heading-section {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(28px, 3.5vw, 48px);
+    letter-spacing: -0.03em;
+    line-height: 1.15;
+  }
+
+  .heading-sub {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(20px, 2.5vw, 34px);
+    letter-spacing: -0.025em;
+    line-height: 1.2;
+  }
+
+  .heading-card {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.125rem;
+    letter-spacing: -0.015em;
+    line-height: 1.3;
+  }
+}
+
 @utility label-caps {
   font-family: var(--font-styrene-b);
   font-weight: 600;
-  font-size: 11px;
+  font-size: 12px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--text-muted);
+  color: var(--text-secondary);
 }
 
 /* 7d. Animazioni */

@@ -33,7 +33,7 @@ export function OtherUseCases({ currentSlug }: { currentSlug: string }) {
                 {uc.segment}
               </span>
               <h3
-                className="font-display font-semibold text-base leading-snug transition-colors group-hover:text-brand-green"
+                className="heading-card leading-snug transition-colors group-hover:text-brand-green"
                 style={{ color: "var(--text-primary)" }}
               >
                 {uc.name}
@@ -43,7 +43,7 @@ export function OtherUseCases({ currentSlug }: { currentSlug: string }) {
               </p>
               <span
                 className="text-xs font-semibold mt-auto transition-colors group-hover:text-brand-green"
-                style={{ color: "var(--text-muted)" }}
+                style={{ color: "var(--text-secondary)" }}
               >
                 Explore →
               </span>

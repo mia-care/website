@@ -6,11 +6,9 @@ import { BASE_PATH } from "@/lib/utils";
 const LOGO_W = 149;
 const LOGO_H = 52;
 
-const DEFAULT_FILTER = "grayscale(1) brightness(1.8)";
-// youhealthy embeds a black raster PNG — invert to white before brightening
-const INVERT_FILTER = "grayscale(1) invert(1) brightness(0.85)";
+const LOGO_FILTER = "brightness(0) invert(1)";
 
-const LOGOS: { src: string; alt: string; filter?: string }[] = [
+const LOGOS: { src: string; alt: string }[] = [
   { src: `${BASE_PATH}/images/clients/Bip.svg`, alt: "Bip" },
   { src: `${BASE_PATH}/images/clients/ItaliAssistenza.svg`, alt: "Itali Assistenza" },
   { src: `${BASE_PATH}/images/clients/GVM.svg`, alt: "GVM" },
@@ -18,7 +16,7 @@ const LOGOS: { src: string; alt: string; filter?: string }[] = [
   { src: `${BASE_PATH}/images/clients/RBdigital.svg`, alt: "RB Digital" },
   { src: `${BASE_PATH}/images/clients/MDConsierge.svg`, alt: "MD Consierge" },
   { src: `${BASE_PATH}/images/clients/Flex.svg`, alt: "Flex" },
-  { src: `${BASE_PATH}/images/clients/youhealthy.svg`, alt: "YouHealthy", filter: INVERT_FILTER },
+  { src: `${BASE_PATH}/images/clients/youhealthy.svg`, alt: "YouHealthy" },
   { src: `${BASE_PATH}/images/clients/iit.svg`, alt: "IIT" },
 ];
 
@@ -80,9 +78,11 @@ export function LogoMarquee() {
                   aria-hidden={i >= LOGOS.length ? true : undefined}
                   width={LOGO_W}
                   height={LOGO_H}
+                  className="w-[110px] sm:w-[149px]"
                   style={{
-                    filter: logo.filter ?? DEFAULT_FILTER,
-                    opacity: 0.7,
+                    height: "auto",
+                    filter: LOGO_FILTER,
+                    opacity: 0.75,
                     flexShrink: 0,
                   }}
                 />

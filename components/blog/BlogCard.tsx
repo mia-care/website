@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { PillTag } from "@/components/common/PillTag";
 import { getCategoryName } from "@/data/blog-categories";
 import { assetPath } from "@/lib/asset";
 import type { PostMeta } from "@/lib/blog";
@@ -38,19 +39,9 @@ export function BlogCard({ post }: { post: PostMeta }) {
         {post.categories.length > 0 && (
           <div className="flex flex-wrap gap-2">
             {post.categories.slice(0, 2).map((cat) => (
-              <span
-                key={cat}
-                className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold tracking-wide uppercase"
-                style={{
-                  background: "rgba(255,255,255,0.05)",
-                  borderColor: "rgba(255,255,255,0.1)",
-                  border: "1px solid rgba(255,255,255,0.1)",
-                  color: "var(--text-muted)",
-                  letterSpacing: "0.08em",
-                }}
-              >
+              <PillTag key={cat} variant="tag">
                 {getCategoryName(cat)}
-              </span>
+              </PillTag>
             ))}
           </div>
         )}

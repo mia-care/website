@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { Breadcrumb } from "@/components/common/Breadcrumb";
 import { CtaBanner } from "@/components/common/CtaBanner";
 import { JsonLd } from "@/components/common/JsonLd";
 import { LogoMarquee } from "@/components/common/LogoCarousel";
@@ -55,6 +56,12 @@ export default async function UseCasePage({ params }: { params: Promise<{ slug: 
   return (
     <>
       <JsonLd schema={useCaseSchema} />
+      <Breadcrumb
+        items={[
+          { label: "Use Cases", href: "/#use-cases" },
+          { label: uc.name },
+        ]}
+      />
       <UseCaseHero uc={uc} />
       <LogoMarquee />
       <NarrativeStory uc={uc} />

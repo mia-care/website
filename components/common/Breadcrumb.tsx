@@ -1,0 +1,43 @@
+import Link from "next/link";
+
+type BreadcrumbItem = {
+  label: string;
+  href?: string;
+};
+
+export function Breadcrumb({ items }: { items: BreadcrumbItem[] }) {
+  return (
+    <nav
+      aria-label="Breadcrumb"
+      className="border-b"
+      style={{ borderColor: "var(--bg-border)", background: "var(--bg-base)" }}
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <ol className="flex items-center gap-1.5 h-10 text-sm flex-wrap">
+          {items.map((item, i) => (
+            <li key={item.label} className="flex items-center gap-1.5">
+              {i > 0 && (
+                <span aria-hidden="true" style={{ color: "var(--text-muted)" }}>
+                  /
+                </span>
+              )}
+              {item.href ? (
+                <Link
+                  href={item.href}
+                  className="transition-colors hover:text-brand-green"
+                  style={{ color: "var(--text-muted)" }}
+                >
+                  {item.label}
+                </Link>
+              ) : (
+                <span aria-current="page" style={{ color: "var(--text-secondary)" }}>
+                  {item.label}
+                </span>
+              )}
+            </li>
+          ))}
+        </ol>
+      </div>
+    </nav>
+  );
+}

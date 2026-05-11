@@ -226,7 +226,7 @@ export default function PlansPage() {
                       tier.highlight
                         ? { background: "var(--brand-gradient)", color: "var(--bg-base)" }
                         : {
-                            border: "1px solid var(--bg-border-strong)",
+                            border: "1px solid rgba(255,255,255,0.28)",
                             color: "var(--text-primary)",
                           }
                     }

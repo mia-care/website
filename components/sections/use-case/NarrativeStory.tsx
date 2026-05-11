@@ -6,9 +6,9 @@ import { PillTag } from "@/components/common/PillTag";
 import type { UseCase } from "@/data/use-cases";
 
 const STEPS = [
-  { key: "problem" as const, label: "The Problem", bg: "var(--bg-surface)" },
-  { key: "need" as const, label: "The Need", bg: "var(--bg-base)" },
-  { key: "solution" as const, label: "The Solution", bg: "var(--bg-surface)" },
+  { key: "problem" as const, label: "The Problem", short: "Problem", bg: "var(--bg-surface)" },
+  { key: "need" as const, label: "The Need", short: "Need", bg: "var(--bg-base)" },
+  { key: "solution" as const, label: "The Solution", short: "Solution", bg: "var(--bg-surface)" },
 ] as const;
 
 export function NarrativeStory({ uc }: { uc: UseCase }) {
@@ -59,7 +59,7 @@ export function NarrativeStory({ uc }: { uc: UseCase }) {
                 style={{ color: activeStep === i ? "var(--text-primary)" : "var(--text-muted)" }}
               >
                 <span className="hidden sm:inline">{step.label}</span>
-                <span className="sm:hidden">{i + 1}</span>
+                <span className="sm:hidden">{step.short}</span>
                 {activeStep === i && (
                   <span
                     className="absolute bottom-0 inset-x-0 h-px"

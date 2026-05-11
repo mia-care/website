@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { PillTag } from "@/components/common/PillTag";
 import { getCategoryName } from "@/data/blog-categories";
 import { assetPath } from "@/lib/asset";
 import type { PostMeta } from "@/lib/blog";
@@ -42,12 +43,9 @@ export function RelatedPosts({ posts }: { posts: PostMeta[] }) {
               )}
               <div className="p-4 flex flex-col gap-2">
                 {post.categories[0] && (
-                  <span
-                    className="text-xs font-semibold uppercase tracking-wide"
-                    style={{ color: "var(--text-muted)" }}
-                  >
+                  <PillTag variant="tag">
                     {getCategoryName(post.categories[0])}
-                  </span>
+                  </PillTag>
                 )}
                 <h3
                   className="font-display font-bold text-sm leading-snug group-hover:text-brand-green transition-colors line-clamp-2"

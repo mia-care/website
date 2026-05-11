@@ -154,6 +154,12 @@ export function DocumentationEngineSvg() {
           from { transform: rotate(0deg); }
           to   { transform: rotate(360deg); }
         }
+        @media (max-width: 420px) {
+          .doc-subtitle { display: none !important; }
+          .doc-stat-grid { grid-template-columns: repeat(3, 1fr) !important; }
+          .doc-table-col { grid-template-columns: 38px 1fr 82px 74px !important; }
+          .doc-col-ver, .doc-col-fmts { display: none !important; }
+        }
       `}</style>
 
       {/* ── Header ── */}
@@ -167,28 +173,12 @@ export function DocumentationEngineSvg() {
       >
         <div style={{ minWidth: 0 }}>
           <div style={{ fontWeight: 700, fontSize: 14 }}>Documentation</div>
-          <div style={{ color: "#737373", fontSize: 9, marginTop: 2, lineHeight: 1.4 }}>
+          <div className="doc-subtitle" style={{ color: "#737373", fontSize: 9, marginTop: 2, lineHeight: 1.4 }}>
             eQMS-compliant document catalog — generate, download, and manage your Technical
             Documentation File
           </div>
         </div>
         <div style={{ display: "flex", gap: 5, flexShrink: 0 }}>
-          <div
-            style={{
-              border: "1px solid #E5E5E5",
-              borderRadius: 7,
-              padding: "4px 7px",
-              fontSize: 9,
-              color: "#525252",
-              background: "white",
-              display: "flex",
-              alignItems: "center",
-              gap: 3,
-              whiteSpace: "nowrap",
-            }}
-          >
-            <span style={{ color: "#9333EA", fontWeight: 700 }}>{"{}"}</span> Variable Library
-          </div>
           <div
             style={{
               background: "#2563EB",
@@ -210,7 +200,7 @@ export function DocumentationEngineSvg() {
       </div>
 
       {/* ── Stat cards ── */}
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(6,1fr)", gap: 5 }}>
+      <div className="doc-stat-grid" style={{ display: "grid", gridTemplateColumns: "repeat(6,1fr)", gap: 5 }}>
         {statCards.map((c) => (
           <div
             key={c.label}
@@ -338,6 +328,7 @@ export function DocumentationEngineSvg() {
 
         {/* Column headers */}
         <div
+          className="doc-table-col"
           style={{
             display: "grid",
             gridTemplateColumns: "38px 1fr 82px 40px 74px 80px",
@@ -347,8 +338,12 @@ export function DocumentationEngineSvg() {
             flexShrink: 0,
           }}
         >
-          {["Code", "Document", "Status", "Ver.", "Last Updated", "Formats"].map((h) => (
-            <div key={h} style={{ color: "#9CA3AF", fontSize: 9, fontWeight: 600 }}>
+          {["Code", "Document", "Status", "Ver.", "Last Updated", "Formats"].map((h, hi) => (
+            <div
+              key={h}
+              className={hi === 3 ? "doc-col-ver" : hi === 4 ? undefined : hi === 5 ? "doc-col-fmts" : undefined}
+              style={{ color: "#9CA3AF", fontSize: 9, fontWeight: 600 }}
+            >
               {h}
             </div>
           ))}
@@ -362,6 +357,7 @@ export function DocumentationEngineSvg() {
             return (
               <div
                 key={doc.code}
+                className="doc-table-col"
                 style={{
                   display: "grid",
                   gridTemplateColumns: "38px 1fr 82px 40px 74px 80px",
@@ -454,13 +450,13 @@ export function DocumentationEngineSvg() {
                 </div>
 
                 {/* Version */}
-                <div style={{ fontSize: 10, color: "#525252" }}>{doc.version}</div>
+                <div className="doc-col-ver" style={{ fontSize: 10, color: "#525252" }}>{doc.version}</div>
 
                 {/* Last Updated */}
                 <div style={{ fontSize: 9.5, color: "#525252" }}>{doc.updated}</div>
 
                 {/* Format badges */}
-                <div style={{ display: "flex", gap: 3, flexWrap: "wrap" }}>
+                <div className="doc-col-fmts" style={{ display: "flex", gap: 3, flexWrap: "wrap" }}>
                   {status === "current" &&
                     doc.formats.map((f) => (
                       <span
