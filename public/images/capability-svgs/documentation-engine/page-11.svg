@@ -1,0 +1,165 @@
+<svg width="1440" height="900" viewBox="0 0 1440 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+<rect width="1440" height="900" fill="#F8FAFC"/>
+
+<!-- TOP NAV -->
+<rect width="1440" height="64" fill="#FFFFFF"/>
+<line x1="0" y1="64" x2="1440" y2="64" stroke="#E2E8F0" stroke-width="1"/>
+<text x="24" y="37" font-family="system-ui,sans-serif" font-size="13" fill="#475569">Mia-Care Dev</text>
+<path d="M108 28 L113 32 L108 36" stroke="#CBD5E1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+<text x="120" y="37" font-family="system-ui,sans-serif" font-size="13" font-weight="500" fill="#0F172A">CardioAI Diagnostic</text>
+<path d="M284 28 L289 32 L284 36" stroke="#CBD5E1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+<path d="M296 31 L296 38 L301 43 L308 36 L303 31 Z" stroke="#16A34A" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+<circle cx="301" cy="34" r="1.5" fill="#16A34A"/>
+<text x="314" y="40" font-family="monospace,sans-serif" font-size="13" font-weight="500" fill="#0F172A">v2.1.0</text>
+<path d="M352 31 L356 35 L360 31" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+<!-- breadcrumb: Documentation / SRS -->
+<text x="372" y="37" font-family="system-ui,sans-serif" font-size="13" fill="#475569">Documentation</text>
+<path d="M468 28 L473 32 L468 36" stroke="#CBD5E1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+<text x="480" y="37" font-family="system-ui,sans-serif" font-size="13" fill="#64748B">SRS</text>
+<!-- right side -->
+<rect x="1330" y="16" width="36" height="32" rx="8" fill="none"/>
+<path d="M1342 36 L1348 24 L1354 36 M1342 30 L1354 30" stroke="#64748B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+<circle cx="1388" cy="32" r="14" fill="#2563EB"/>
+<circle cx="1388" cy="28" r="4" fill="#FFFFFF"/>
+<path d="M1380 43 C1380 38 1396 38 1396 43" stroke="#FFFFFF" stroke-width="1.5" fill="none"/>
+<text x="1406" y="37" font-family="system-ui,sans-serif" font-size="12" font-weight="500" fill="#374151">Tech</text>
+<path d="M1430 29 L1434 33 L1438 29" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+
+<!-- PAGE CONTENT: max-w-5xl mx-auto p-6 -->
+<!-- max-w-5xl = 1024px, centered in 1440px → margin = 208px -->
+
+<!-- Back button: flex items-center gap-2 text-slate-600 mb-6 -->
+<path d="M216 90 L210 96 L216 102" stroke="#64748B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+<text x="222" y="99" font-family="system-ui,sans-serif" font-size="12" fill="#64748B">Back to Document Catalog</text>
+
+<!-- Document header card: bg-white rounded-xl border p-6 mb-6 -->
+<rect x="208" y="112" width="1024" height="198" rx="12" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1"/>
+
+<!-- Category icon area: w-12 h-12 rounded-xl bg-slate-100 -->
+<rect x="228" y="128" width="48" height="48" rx="10" fill="#F1F5F9"/>
+<!-- Code icon text-blue-600 centered -->
+<path d="M245 145 L239 152 L245 159" stroke="#2563EB" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+<path d="M255 145 L261 152 L255 159" stroke="#2563EB" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+
+<!-- Code badge + status badge + source badge -->
+<rect x="284" y="132" width="44" height="20" rx="5" fill="#F1F5F9" stroke="#E2E8F0" stroke-width="1"/>
+<text x="306" y="146" font-family="monospace,sans-serif" font-size="10" fill="#475569" text-anchor="middle">SRS</text>
+
+<!-- Current badge: rounded-full -->
+<rect x="334" y="132" width="76" height="20" rx="10" fill="#F0FDF4" stroke="#BBF7D0" stroke-width="1"/>
+<circle cx="346" cy="142" r="3.5" fill="#16A34A"/>
+<text x="354" y="147" font-family="system-ui,sans-serif" font-size="10" fill="#15803D">Current</text>
+
+<!-- Platform badge -->
+<rect x="418" y="132" width="72" height="20" rx="10" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="1"/>
+<text x="454" y="147" font-family="system-ui,sans-serif" font-size="10" fill="#64748B" text-anchor="middle">Platform</text>
+
+<!-- Title -->
+<text x="284" y="170" font-family="system-ui,sans-serif" font-size="18" font-weight="500" fill="#0F172A">Software Requirements Specification</text>
+<!-- Description -->
+<text x="284" y="190" font-family="system-ui,sans-serif" font-size="12" fill="#64748B">Complete set of software requirements including functional, non-functional, performance,</text>
+<text x="284" y="206" font-family="system-ui,sans-serif" font-size="12" fill="#64748B">and interface requirements.</text>
+
+<!-- Download buttons: right side of header -->
+<!-- PDF -->
+<rect x="1072" y="132" width="50" height="30" rx="7" fill="#FEE2E2" stroke="#FECACA" stroke-width="1"/>
+<text x="1097" y="151" font-family="system-ui,sans-serif" font-size="11" font-weight="500" fill="#B91C1C" text-anchor="middle">PDF</text>
+<!-- DOCX -->
+<rect x="1128" y="132" width="58" height="30" rx="7" fill="#DBEAFE" stroke="#BFDBFE" stroke-width="1"/>
+<text x="1157" y="151" font-family="system-ui,sans-serif" font-size="11" font-weight="500" fill="#1D4ED8" text-anchor="middle">DOCX</text>
+<!-- MD -->
+<rect x="1192" y="132" width="40" height="30" rx="7" fill="#F1F5F9" stroke="#E2E8F0" stroke-width="1"/>
+<text x="1212" y="151" font-family="system-ui,sans-serif" font-size="11" font-weight="500" fill="#475569" text-anchor="middle">MD</text>
+
+<!-- Meta grid: border-t border-slate-100 pt-4 grid-cols-4 -->
+<line x1="228" y1="224" x2="1212" y2="224" stroke="#F1F5F9" stroke-width="1"/>
+<!-- Version -->
+<text x="244" y="244" font-family="system-ui,sans-serif" font-size="10" fill="#94A3B8">Version</text>
+<text x="244" y="260" font-family="monospace,sans-serif" font-size="14" font-weight="600" fill="#0F172A">4.2</text>
+<!-- Last Generated -->
+<text x="450" y="244" font-family="system-ui,sans-serif" font-size="10" fill="#94A3B8">Last Generated</text>
+<text x="450" y="260" font-family="system-ui,sans-serif" font-size="13" font-weight="500" fill="#0F172A">2026-03-05</text>
+<!-- Pages -->
+<text x="680" y="244" font-family="system-ui,sans-serif" font-size="10" fill="#94A3B8">Pages</text>
+<text x="680" y="260" font-family="system-ui,sans-serif" font-size="13" font-weight="500" fill="#0F172A">52</text>
+<!-- Auto-Generate -->
+<text x="880" y="244" font-family="system-ui,sans-serif" font-size="10" fill="#94A3B8">Auto-Generate</text>
+<text x="880" y="260" font-family="system-ui,sans-serif" font-size="13" font-weight="500" fill="#15803D">Yes</text>
+
+<!-- 2-column grid: Regulatory References + Linked Artifacts -->
+<!-- grid-cols-1 lg:grid-cols-2 gap-6 -->
+
+<!-- Regulatory References card -->
+<rect x="208" y="322" width="498" height="110" rx="12" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1"/>
+<!-- Shield icon text-blue-600 -->
+<path d="M228 334 L228 348 C228 353 234 357 234 357 C234 357 240 353 240 348 L240 334 L234 331 Z" stroke="#2563EB" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+<text x="248" y="344" font-family="system-ui,sans-serif" font-size="13" font-weight="500" fill="#0F172A">Regulatory References</text>
+<!-- badges: px-2.5 py-1 rounded-lg bg-blue-50 text-blue-700 text-xs border-blue-100 -->
+<rect x="228" y="356" width="110" height="22" rx="6" fill="#EFF6FF" stroke="#BFDBFE" stroke-width="1"/>
+<text x="283" y="371" font-family="system-ui,sans-serif" font-size="10" fill="#1D4ED8" text-anchor="middle">IEC 62304 §5.2</text>
+<rect x="346" y="356" width="116" height="22" rx="6" fill="#EFF6FF" stroke="#BFDBFE" stroke-width="1"/>
+<text x="404" y="371" font-family="system-ui,sans-serif" font-size="10" fill="#1D4ED8" text-anchor="middle">IEC 82304-1 §6</text>
+<rect x="228" y="384" width="104" height="22" rx="6" fill="#EFF6FF" stroke="#BFDBFE" stroke-width="1"/>
+<text x="280" y="399" font-family="system-ui,sans-serif" font-size="10" fill="#1D4ED8" text-anchor="middle">IEC 62304 §5.3</text>
+<rect x="340" y="384" width="96" height="22" rx="6" fill="#EFF6FF" stroke="#BFDBFE" stroke-width="1"/>
+<text x="388" y="399" font-family="system-ui,sans-serif" font-size="10" fill="#1D4ED8" text-anchor="middle">ISO 13485 §7.3</text>
+
+<!-- Linked Artifacts card -->
+<rect x="730" y="322" width="502" height="110" rx="12" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1"/>
+<!-- Layers icon text-purple-600 -->
+<path d="M748 345 L756 341 L764 345 L756 349 Z" stroke="#9333EA" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
+<path d="M748 340 L756 336 L764 340" stroke="#9333EA" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+<text x="772" y="344" font-family="system-ui,sans-serif" font-size="13" font-weight="500" fill="#0F172A">Linked Artifacts</text>
+<!-- artifact badges -->
+<rect x="750" y="356" width="104" height="22" rx="6" fill="#F1F5F9" stroke="#E2E8F0" stroke-width="1"/>
+<text x="802" y="371" font-family="system-ui,sans-serif" font-size="10" fill="#475569" text-anchor="middle">Requirements</text>
+<rect x="862" y="356" width="148" height="22" rx="6" fill="#F1F5F9" stroke="#E2E8F0" stroke-width="1"/>
+<text x="936" y="371" font-family="system-ui,sans-serif" font-size="10" fill="#475569" text-anchor="middle">Traceability Matrix</text>
+<rect x="750" y="384" width="124" height="22" rx="6" fill="#F1F5F9" stroke="#E2E8F0" stroke-width="1"/>
+<text x="812" y="399" font-family="system-ui,sans-serif" font-size="10" fill="#475569" text-anchor="middle">System Architecture</text>
+
+<!-- REVISION HISTORY card: bg-white rounded-xl border p-5 mt-6 -->
+<rect x="208" y="444" width="1024" height="242" rx="12" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1"/>
+<!-- Clock icon text-slate-600 -->
+<circle cx="228" cy="462" r="8" fill="none" stroke="#475569" stroke-width="1.5"/>
+<path d="M228 457 L228 462 L232 466" stroke="#475569" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+<text x="244" y="467" font-family="system-ui,sans-serif" font-size="13" font-weight="500" fill="#0F172A">Revision History</text>
+
+<!-- Revision 4.2 — latest: bg-blue-50 border-blue-100 -->
+<rect x="224" y="480" width="992" height="58" rx="8" fill="#EFF6FF" stroke="#BFDBFE" stroke-width="1"/>
+<rect x="240" y="495" width="40" height="22" rx="4" fill="#FFFFFF" stroke="#BFDBFE" stroke-width="1"/>
+<text x="260" y="510" font-family="monospace,sans-serif" font-size="10" fill="#475569" text-anchor="middle">4.2</text>
+<text x="290" y="498" font-family="system-ui,sans-serif" font-size="12" font-weight="500" fill="#1E3A8A">Regenerated with latest requirement changes (MCCR-007) — 47 requirements tracked</text>
+<text x="290" y="516" font-family="system-ui,sans-serif" font-size="11" fill="#64748B">2026-03-05  ·  by System</text>
+
+<!-- Revision 4.1 — bg-slate-50 -->
+<rect x="224" y="546" width="992" height="58" rx="8" fill="#F8FAFC"/>
+<rect x="240" y="561" width="40" height="22" rx="4" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1"/>
+<text x="260" y="576" font-family="monospace,sans-serif" font-size="10" fill="#475569" text-anchor="middle">4.1</text>
+<text x="290" y="564" font-family="system-ui,sans-serif" font-size="12" fill="#475569">Added 3 new functional requirements for AI module patient data handling</text>
+<text x="290" y="582" font-family="system-ui,sans-serif" font-size="11" fill="#94A3B8">2026-02-20  ·  by System</text>
+
+<!-- Revision 4.0 -->
+<rect x="224" y="612" width="992" height="58" rx="8" fill="#F8FAFC"/>
+<rect x="240" y="627" width="40" height="22" rx="4" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1"/>
+<text x="260" y="642" font-family="monospace,sans-serif" font-size="10" fill="#475569" text-anchor="middle">4.0</text>
+<text x="290" y="630" font-family="system-ui,sans-serif" font-size="12" fill="#475569">Major revision — AI module requirements incorporated from MCCR-003</text>
+<text x="290" y="648" font-family="system-ui,sans-serif" font-size="11" fill="#94A3B8">2026-01-12  ·  by Dr. Elena Rossi</text>
+
+<!-- Action buttons: flex items-center gap-3 mt-6 -->
+<!-- Regenerate: bg-[#0052CC] text-white -->
+<rect x="208" y="700" width="160" height="38" rx="8" fill="#0052CC"/>
+<!-- RefreshCw icon -->
+<path d="M225 714 C225 710 229 707 233 707 C237 707 241 710 241 714" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+<path d="M241 714 L239 710 M241 714 L244 711" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+<text x="252" y="723" font-family="system-ui,sans-serif" font-size="13" font-weight="500" fill="#FFFFFF">Regenerate</text>
+
+<!-- Preview button: bg-white border text-slate-700 -->
+<rect x="376" y="700" width="120" height="38" rx="8" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1"/>
+<!-- Eye icon -->
+<path d="M392 719 C392 719 397 713 404 713 C411 713 416 719 416 719 C416 719 411 725 404 725 C397 725 392 719 392 719" stroke="#64748B" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+<circle cx="404" cy="719" r="2.5" fill="none" stroke="#64748B" stroke-width="1.3"/>
+<text x="422" y="723" font-family="system-ui,sans-serif" font-size="13" fill="#475569">Preview</text>
+
+</svg>

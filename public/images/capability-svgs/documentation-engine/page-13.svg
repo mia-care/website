@@ -1,0 +1,169 @@
+<svg width="1440" height="900" viewBox="0 0 1440 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="1440" height="900" fill="#F8FAFC"/>
+
+<!-- SIDEBAR -->
+<rect width="208" height="900" fill="#0F172A"/>
+<rect x="16" y="14" width="176" height="44" rx="8" fill="#1E293B"/>
+<rect x="26" y="22" width="32" height="26" rx="4" fill="#2563EB"/>
+<text x="66" y="33" font-family="system-ui,sans-serif" font-size="13" font-weight="700" fill="#F1F5F9">P4SaMD</text>
+<text x="66" y="49" font-family="system-ui,sans-serif" font-size="9" fill="#475569">Medical Device</text>
+<rect x="16" y="70" width="176" height="34" rx="6" fill="#1E293B"/>
+<rect x="26" y="79" width="14" height="14" rx="3" fill="#3B82F6"/>
+<text x="46" y="91" font-family="system-ui,sans-serif" font-size="11" fill="#CBD5E1">Mia-Care Dev</text>
+<text x="16" y="124" font-family="system-ui,sans-serif" font-size="9" font-weight="600" fill="#334155" letter-spacing="1">MAIN</text>
+<rect x="20" y="138" width="12" height="12" rx="2" fill="#334155"/>
+<text x="38" y="149" font-family="system-ui,sans-serif" font-size="12" fill="#64748B">Dashboard</text>
+<rect x="20" y="171" width="12" height="12" rx="2" fill="#334155"/>
+<text x="38" y="182" font-family="system-ui,sans-serif" font-size="12" fill="#64748B">Requirements</text>
+<rect x="20" y="204" width="12" height="12" rx="2" fill="#334155"/>
+<text x="38" y="215" font-family="system-ui,sans-serif" font-size="12" fill="#64748B">Risk Management</text>
+<rect x="20" y="237" width="12" height="12" rx="2" fill="#334155"/>
+<text x="38" y="248" font-family="system-ui,sans-serif" font-size="12" fill="#64748B">Verification</text>
+<rect x="8" y="262" width="192" height="30" rx="6" fill="#1E3A8A"/>
+<rect x="20" y="270" width="12" height="12" rx="2" fill="#60A5FA"/>
+<text x="38" y="281" font-family="system-ui,sans-serif" font-size="12" font-weight="600" fill="#FFFFFF">Documentation</text>
+<rect x="20" y="303" width="12" height="12" rx="2" fill="#334155"/>
+<text x="38" y="314" font-family="system-ui,sans-serif" font-size="12" fill="#64748B">AI Inventory</text>
+<rect x="20" y="336" width="12" height="12" rx="2" fill="#334155"/>
+<text x="38" y="347" font-family="system-ui,sans-serif" font-size="12" fill="#64748B">Change Requests</text>
+<rect x="20" y="369" width="12" height="12" rx="2" fill="#334155"/>
+<text x="38" y="380" font-family="system-ui,sans-serif" font-size="12" fill="#64748B">Post-Market</text>
+<line x1="16" y1="408" x2="192" y2="408" stroke="#1E293B" stroke-width="1"/>
+<text x="16" y="424" font-family="system-ui,sans-serif" font-size="9" font-weight="600" fill="#334155" letter-spacing="1">SYSTEM</text>
+<rect x="20" y="438" width="12" height="12" rx="2" fill="#334155"/>
+<text x="38" y="449" font-family="system-ui,sans-serif" font-size="12" fill="#64748B">Settings</text>
+<rect x="0" y="842" width="208" height="58" fill="#0A1628"/>
+<circle cx="28" cy="871" r="15" fill="#1E40AF"/>
+<text x="28" y="875" font-family="system-ui,sans-serif" font-size="10" font-weight="700" fill="#FFFFFF" text-anchor="middle">ER</text>
+<text x="52" y="865" font-family="system-ui,sans-serif" font-size="11" font-weight="500" fill="#E2E8F0">Dr. Elena Rossi</text>
+<text x="52" y="880" font-family="system-ui,sans-serif" font-size="10" fill="#64748B">Admin</text>
+
+<!-- TOP BAR -->
+<rect x="208" y="0" width="1232" height="60" fill="#FFFFFF"/>
+<line x1="208" y1="60" x2="1440" y2="60" stroke="#E2E8F0" stroke-width="1"/>
+<rect x="224" y="18" width="24" height="24" rx="6" fill="#EFF6FF"/>
+<text x="236" y="35" font-family="system-ui,sans-serif" font-size="11" fill="#1D4ED8" text-anchor="middle">D</text>
+<text x="256" y="35" font-family="system-ui,sans-serif" font-size="12" fill="#CBD5E1">/</text>
+<text x="268" y="35" font-family="system-ui,sans-serif" font-size="13" font-weight="600" fill="#0F172A">Documentation</text>
+<text x="386" y="35" font-family="system-ui,sans-serif" font-size="12" fill="#CBD5E1">/</text>
+<text x="398" y="35" font-family="system-ui,sans-serif" font-size="13" fill="#64748B">Variable Library</text>
+<rect x="1192" y="16" width="162" height="28" rx="6" fill="#F0FDF4" stroke="#BBF7D0" stroke-width="1"/>
+<circle cx="1210" cy="30" r="4" fill="#16A34A"/>
+<text x="1220" y="34" font-family="system-ui,sans-serif" font-size="11" fill="#166534">v2.1.0 — ACTIVE</text>
+<circle cx="1418" cy="30" r="14" fill="#1E40AF"/>
+<text x="1418" y="34" font-family="system-ui,sans-serif" font-size="10" font-weight="700" fill="#FFFFFF" text-anchor="middle">ER</text>
+
+<!-- Back button -->
+<path d="M234 80 L228 86 L234 92" stroke="#64748B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+<text x="240" y="90" font-family="system-ui,sans-serif" font-size="12" fill="#64748B">Back to Document Catalog</text>
+
+<!-- Page header -->
+<rect x="232" y="110" width="16" height="16" rx="3" fill="#EDE9FE"/>
+<text x="254" y="124" font-family="system-ui,sans-serif" font-size="20" font-weight="700" fill="#0F172A">Template Variable Library</text>
+<text x="232" y="148" font-family="system-ui,sans-serif" font-size="12" fill="#64748B">Use these variables in your custom Markdown templates. At generation time, each variable is replaced with live data from the current project context.</text>
+
+<!-- Search bar -->
+<rect x="232" y="168" width="560" height="38" rx="8" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1"/>
+<circle cx="256" cy="187" r="6" fill="none" stroke="#94A3B8" stroke-width="1.5"/>
+<line x1="260" y1="192" x2="265" y2="197" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round"/>
+<text x="274" y="191" font-family="system-ui,sans-serif" font-size="12" fill="#CBD5E1">Search variables by key, label, or category...</text>
+
+<!-- Variable group: Product -->
+<rect x="232" y="222" width="1184" height="36" rx="10" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="1"/>
+<rect x="232" y="240" width="1184" height="18" fill="#F8FAFC"/>
+<rect x="252" y="232" width="10" height="10" rx="2" fill="#94A3B8"/>
+<text x="268" y="244" font-family="system-ui,sans-serif" font-size="12" font-weight="600" fill="#475569">Product</text>
+<text x="328" y="244" font-family="system-ui,sans-serif" font-size="11" fill="#94A3B8">(7)</text>
+
+<!-- Variable rows: Product group -->
+<rect x="232" y="257" width="1184" height="36" fill="#FFFFFF" stroke="#F1F5F9" stroke-width="1"/>
+<rect x="252" y="267" width="200" height="16" rx="4" fill="#F5F3FF" stroke="#DDD6FE" stroke-width="1"/>
+<text x="352" y="279" font-family="monospace,sans-serif" font-size="10" fill="#7C3AED" text-anchor="middle">{{product.name}}</text>
+<text x="466" y="279" font-family="system-ui,sans-serif" font-size="12" fill="#475569">Product Name</text>
+<text x="900" y="279" font-family="system-ui,sans-serif" font-size="11" fill="#94A3B8">e.g. </text>
+<text x="920" y="279" font-family="monospace,sans-serif" font-size="11" fill="#64748B">CardioAI Diagnostic</text>
+
+<rect x="232" y="292" width="1184" height="36" fill="#F8FAFC" stroke="#F1F5F9" stroke-width="1"/>
+<rect x="252" y="302" width="200" height="16" rx="4" fill="#F5F3FF" stroke="#DDD6FE" stroke-width="1"/>
+<text x="352" y="314" font-family="monospace,sans-serif" font-size="10" fill="#7C3AED" text-anchor="middle">{{product.version}}</text>
+<text x="466" y="314" font-family="system-ui,sans-serif" font-size="12" fill="#475569">Product Version</text>
+<text x="900" y="314" font-family="system-ui,sans-serif" font-size="11" fill="#94A3B8">e.g. </text>
+<text x="920" y="314" font-family="monospace,sans-serif" font-size="11" fill="#64748B">v2.1.0</text>
+
+<rect x="232" y="327" width="1184" height="36" fill="#FFFFFF" stroke="#F1F5F9" stroke-width="1"/>
+<rect x="252" y="337" width="220" height="16" rx="4" fill="#F5F3FF" stroke="#DDD6FE" stroke-width="1"/>
+<text x="362" y="349" font-family="monospace,sans-serif" font-size="10" fill="#7C3AED" text-anchor="middle">{{product.classification}}</text>
+<text x="486" y="349" font-family="system-ui,sans-serif" font-size="12" fill="#475569">Device Classification</text>
+<text x="900" y="349" font-family="system-ui,sans-serif" font-size="11" fill="#94A3B8">e.g. </text>
+<text x="920" y="349" font-family="monospace,sans-serif" font-size="11" fill="#64748B">Class IIa</text>
+
+<rect x="232" y="362" width="1184" height="36" fill="#F8FAFC" stroke="#F1F5F9" stroke-width="1"/>
+<rect x="252" y="372" width="200" height="16" rx="4" fill="#F5F3FF" stroke="#DDD6FE" stroke-width="1"/>
+<text x="352" y="384" font-family="monospace,sans-serif" font-size="10" fill="#7C3AED" text-anchor="middle">{{product.manufacturer}}</text>
+<text x="466" y="384" font-family="system-ui,sans-serif" font-size="12" fill="#475569">Manufacturer Name</text>
+<text x="900" y="384" font-family="system-ui,sans-serif" font-size="11" fill="#94A3B8">e.g. </text>
+<text x="920" y="384" font-family="monospace,sans-serif" font-size="11" fill="#64748B">Mia-Care S.r.l.</text>
+
+<!-- Variable group: Requirements -->
+<rect x="232" y="412" width="1184" height="36" rx="10" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="1"/>
+<rect x="232" y="430" width="1184" height="18" fill="#F8FAFC"/>
+<rect x="252" y="422" width="10" height="10" rx="2" fill="#94A3B8"/>
+<text x="268" y="434" font-family="system-ui,sans-serif" font-size="12" font-weight="600" fill="#475569">Requirements</text>
+<text x="368" y="434" font-family="system-ui,sans-serif" font-size="11" fill="#94A3B8">(5)</text>
+
+<rect x="232" y="447" width="1184" height="36" fill="#FFFFFF" stroke="#F1F5F9" stroke-width="1"/>
+<rect x="252" y="457" width="196" height="16" rx="4" fill="#F5F3FF" stroke="#DDD6FE" stroke-width="1"/>
+<text x="350" y="469" font-family="monospace,sans-serif" font-size="10" fill="#7C3AED" text-anchor="middle">{{requirements.total}}</text>
+<text x="462" y="469" font-family="system-ui,sans-serif" font-size="12" fill="#475569">Total Requirements</text>
+<text x="900" y="469" font-family="system-ui,sans-serif" font-size="11" fill="#94A3B8">e.g. </text>
+<text x="920" y="469" font-family="monospace,sans-serif" font-size="11" fill="#64748B">47</text>
+
+<rect x="232" y="482" width="1184" height="36" fill="#F8FAFC" stroke="#F1F5F9" stroke-width="1"/>
+<rect x="252" y="492" width="208" height="16" rx="4" fill="#F5F3FF" stroke="#DDD6FE" stroke-width="1"/>
+<text x="356" y="504" font-family="monospace,sans-serif" font-size="10" fill="#7C3AED" text-anchor="middle">{{requirements.approved}}</text>
+<text x="474" y="504" font-family="system-ui,sans-serif" font-size="12" fill="#475569">Approved Requirements</text>
+<text x="900" y="504" font-family="system-ui,sans-serif" font-size="11" fill="#94A3B8">e.g. </text>
+<text x="920" y="504" font-family="monospace,sans-serif" font-size="11" fill="#64748B">41</text>
+
+<rect x="232" y="517" width="1184" height="36" fill="#FFFFFF" stroke="#F1F5F9" stroke-width="1"/>
+<rect x="252" y="527" width="180" height="16" rx="4" fill="#F5F3FF" stroke="#DDD6FE" stroke-width="1"/>
+<text x="342" y="539" font-family="monospace,sans-serif" font-size="10" fill="#7C3AED" text-anchor="middle">{{requirements.list}}</text>
+<text x="446" y="539" font-family="system-ui,sans-serif" font-size="12" fill="#475569">Full Requirements Table</text>
+<text x="900" y="539" font-family="monospace,sans-serif" font-size="11" fill="#64748B">[table]</text>
+
+<!-- Variable group: Risk Management -->
+<rect x="232" y="568" width="1184" height="36" rx="10" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="1"/>
+<rect x="232" y="586" width="1184" height="18" fill="#F8FAFC"/>
+<rect x="252" y="578" width="10" height="10" rx="2" fill="#94A3B8"/>
+<text x="268" y="590" font-family="system-ui,sans-serif" font-size="12" font-weight="600" fill="#475569">Risk Management</text>
+<text x="376" y="590" font-family="system-ui,sans-serif" font-size="11" fill="#94A3B8">(4)</text>
+
+<rect x="232" y="603" width="1184" height="36" fill="#FFFFFF" stroke="#F1F5F9" stroke-width="1"/>
+<rect x="252" y="613" width="168" height="16" rx="4" fill="#F5F3FF" stroke="#DDD6FE" stroke-width="1"/>
+<text x="336" y="625" font-family="monospace,sans-serif" font-size="10" fill="#7C3AED" text-anchor="middle">{{risks.total}}</text>
+<text x="434" y="625" font-family="system-ui,sans-serif" font-size="12" fill="#475569">Total Risks</text>
+<text x="900" y="625" font-family="system-ui,sans-serif" font-size="11" fill="#94A3B8">e.g. </text>
+<text x="920" y="625" font-family="monospace,sans-serif" font-size="11" fill="#64748B">15</text>
+
+<rect x="232" y="638" width="1184" height="36" fill="#F8FAFC" stroke="#F1F5F9" stroke-width="1"/>
+<rect x="252" y="648" width="200" height="16" rx="4" fill="#F5F3FF" stroke="#DDD6FE" stroke-width="1"/>
+<text x="352" y="660" font-family="monospace,sans-serif" font-size="10" fill="#7C3AED" text-anchor="middle">{{risks.unacceptable}}</text>
+<text x="466" y="660" font-family="system-ui,sans-serif" font-size="12" fill="#475569">Unacceptable Risks</text>
+<text x="900" y="660" font-family="system-ui,sans-serif" font-size="11" fill="#94A3B8">e.g. </text>
+<text x="920" y="660" font-family="monospace,sans-serif" font-size="11" fill="#64748B">2</text>
+
+<rect x="232" y="673" width="1184" height="36" fill="#FFFFFF" stroke="#F1F5F9" stroke-width="1"/>
+<rect x="252" y="683" width="164" height="16" rx="4" fill="#F5F3FF" stroke="#DDD6FE" stroke-width="1"/>
+<text x="334" y="695" font-family="monospace,sans-serif" font-size="10" fill="#7C3AED" text-anchor="middle">{{risks.matrix}}</text>
+<text x="430" y="695" font-family="system-ui,sans-serif" font-size="12" fill="#475569">Risk Matrix (5x5)</text>
+<text x="900" y="695" font-family="monospace,sans-serif" font-size="11" fill="#64748B">[matrix]</text>
+
+<!-- Info banner -->
+<rect x="232" y="726" width="1184" height="72" rx="10" fill="#EFF6FF" stroke="#BFDBFE" stroke-width="1"/>
+<circle cx="256" cy="750" r="9" fill="#BFDBFE"/>
+<text x="256" y="754" font-family="system-ui,sans-serif" font-size="11" font-weight="700" fill="#1E40AF" text-anchor="middle">i</text>
+<text x="276" y="748" font-family="system-ui,sans-serif" font-size="12" font-weight="500" fill="#1E3A8A">Variables are enclosed in double curly braces: {{variable.key}}</text>
+<rect x="636" y="736" width="120" height="20" rx="4" fill="#FFFFFF" stroke="#BFDBFE" stroke-width="1"/>
+<text x="696" y="750" font-family="monospace,sans-serif" font-size="10" fill="#1D4ED8" text-anchor="middle">{{variable.key}}</text>
+<text x="276" y="770" font-family="system-ui,sans-serif" font-size="11" fill="#3B82F6">Table and matrix variables (e.g. {{requirements.list}}) automatically render as formatted tables in the generated document.</text>
+</svg>
