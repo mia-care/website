@@ -120,10 +120,7 @@ export function WhoWeServe() {
               }}
             >
               <div style={{ color: "var(--text-muted)" }}>{seg.icon}</div>
-              <h3
-                className="heading-card"
-                style={{ color: "var(--text-primary)" }}
-              >
+              <h3 className="heading-card" style={{ color: "var(--text-primary)" }}>
                 {seg.title}
               </h3>
               <p

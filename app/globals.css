@@ -24,11 +24,11 @@
 
 :root {
   /* 4a. Backgrounds */
-  --bg-base: #0b0c10;
-  --bg-surface: #111318;
-  --bg-raised: #181a22;
-  --bg-border: rgba(255, 255, 255, 0.07);
-  --bg-border-strong: rgba(255, 255, 255, 0.12);
+  --bg-base: #0e0f16;
+  --bg-surface: #1c1e2a;
+  --bg-raised: #252838;
+  --bg-border: rgba(255, 255, 255, 0.09);
+  --bg-border-strong: rgba(255, 255, 255, 0.15);
 
   /* 4b. Brand colors */
   --brand-green: #00f096;

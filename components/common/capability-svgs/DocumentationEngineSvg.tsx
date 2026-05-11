@@ -173,7 +173,10 @@ export function DocumentationEngineSvg() {
       >
         <div style={{ minWidth: 0 }}>
           <div style={{ fontWeight: 700, fontSize: 14 }}>Documentation</div>
-          <div className="doc-subtitle" style={{ color: "#737373", fontSize: 9, marginTop: 2, lineHeight: 1.4 }}>
+          <div
+            className="doc-subtitle"
+            style={{ color: "#737373", fontSize: 9, marginTop: 2, lineHeight: 1.4 }}
+          >
             eQMS-compliant document catalog — generate, download, and manage your Technical
             Documentation File
           </div>
@@ -200,7 +203,10 @@ export function DocumentationEngineSvg() {
       </div>
 
       {/* ── Stat cards ── */}
-      <div className="doc-stat-grid" style={{ display: "grid", gridTemplateColumns: "repeat(6,1fr)", gap: 5 }}>
+      <div
+        className="doc-stat-grid"
+        style={{ display: "grid", gridTemplateColumns: "repeat(6,1fr)", gap: 5 }}
+      >
         {statCards.map((c) => (
           <div
             key={c.label}
@@ -341,7 +347,15 @@ export function DocumentationEngineSvg() {
           {["Code", "Document", "Status", "Ver.", "Last Updated", "Formats"].map((h, hi) => (
             <div
               key={h}
-              className={hi === 3 ? "doc-col-ver" : hi === 4 ? undefined : hi === 5 ? "doc-col-fmts" : undefined}
+              className={
+                hi === 3
+                  ? "doc-col-ver"
+                  : hi === 4
+                    ? undefined
+                    : hi === 5
+                      ? "doc-col-fmts"
+                      : undefined
+              }
               style={{ color: "#9CA3AF", fontSize: 9, fontWeight: 600 }}
             >
               {h}
@@ -450,7 +464,9 @@ export function DocumentationEngineSvg() {
                 </div>
 
                 {/* Version */}
-                <div className="doc-col-ver" style={{ fontSize: 10, color: "#525252" }}>{doc.version}</div>
+                <div className="doc-col-ver" style={{ fontSize: 10, color: "#525252" }}>
+                  {doc.version}
+                </div>
 
                 {/* Last Updated */}
                 <div style={{ fontSize: 9.5, color: "#525252" }}>{doc.updated}</div>

@@ -22,9 +22,7 @@ export function UseCasesGrid() {
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-10 md:mb-16">
           <PillTag className="mb-6">Use Cases</PillTag>
-          <h2 className="heading-section mb-4">
-            Built for every stage of the SaMD journey.
-          </h2>
+          <h2 className="heading-section mb-4">Built for every stage of the SaMD journey.</h2>
           <p className="max-w-xl mx-auto" style={{ color: "var(--text-secondary)" }}>
             Whether you're remediating legacy software, certifying an AI model, or building from
             scratch — P4SaMD has a proven path.
@@ -58,7 +56,9 @@ export function UseCasesGrid() {
                   aria-hidden="true"
                 />
                 <div className="p-6 flex flex-col flex-1 gap-4">
-                  <PillTag>{uc.segment}</PillTag>
+                  <span className="label-caps" style={{ color: "var(--text-muted)" }}>
+                    {uc.segment}
+                  </span>
                   <h3
                     className="font-display font-bold text-xl leading-snug"
                     style={{ color: "var(--text-primary)" }}

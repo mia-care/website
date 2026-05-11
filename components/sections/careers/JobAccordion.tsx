@@ -1,11 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import {
-  Sheet,
-  SheetContent,
-  SheetTrigger,
-} from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
 type JobSection = {
   heading: string;
@@ -50,10 +46,7 @@ function ChevronIcon({ open }: { open: boolean }) {
 function JobBadges({ job }: { job: Job }) {
   return (
     <div className="flex flex-wrap items-center gap-2 mb-1">
-      <span
-        className="font-display font-bold text-base"
-        style={{ color: "var(--text-primary)" }}
-      >
+      <span className="font-display font-bold text-base" style={{ color: "var(--text-primary)" }}>
         {job.title}
       </span>
       <span
@@ -105,9 +98,7 @@ function JobBody({ job }: { job: Job }) {
                   className="flex gap-2 text-sm"
                   style={{ color: "var(--text-secondary)", lineHeight: 1.7 }}
                 >
-                  <span style={{ color: "var(--text-muted)", flexShrink: 0, marginTop: 1 }}>
-                    —
-                  </span>
+                  <span style={{ color: "var(--text-muted)", flexShrink: 0, marginTop: 1 }}>—</span>
                   {item}
                 </li>
               ))}
@@ -145,9 +136,7 @@ function JobCard({ job }: { job: Job }) {
       {/* ── Mobile: header is a Sheet trigger ─────────────────────────── */}
       <div className="md:hidden">
         <Sheet>
-          <SheetTrigger
-            className="w-full flex items-start gap-4 px-6 py-5 text-left transition-colors hover:bg-white/[0.02]"
-          >
+          <SheetTrigger className="w-full flex items-start gap-4 px-6 py-5 text-left transition-colors hover:bg-white/[0.02]">
             <div className="flex-1 min-w-0">
               <JobBadges job={job} />
               <p className="text-sm" style={{ color: "var(--text-secondary)" }}>

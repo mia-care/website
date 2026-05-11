@@ -15,9 +15,7 @@ export function PlansBanner() {
     >
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <PillTag className="mb-4">Pricing</PillTag>
-        <h2 className="heading-sub mb-3">
-          Find the right plan for your team.
-        </h2>
+        <h2 className="heading-sub mb-3">Find the right plan for your team.</h2>
         <p className="text-sm mb-8 max-w-md mx-auto" style={{ color: "var(--text-secondary)" }}>
           From your first SaMD to enterprise-scale multi-product compliance — P4SaMD grows with you.
         </p>

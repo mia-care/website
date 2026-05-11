@@ -41,7 +41,7 @@ export function LogoMarquee() {
               Trusted by
             </p>
             <p className="label-caps mt-0.5" style={{ color: "var(--text-secondary)" }}>
-              healthcare organizations
+              healthcare organizations worldwide
             </p>
           </div>
 

@@ -43,9 +43,7 @@ export function RelatedPosts({ posts }: { posts: PostMeta[] }) {
               )}
               <div className="p-4 flex flex-col gap-2">
                 {post.categories[0] && (
-                  <PillTag variant="tag">
-                    {getCategoryName(post.categories[0])}
-                  </PillTag>
+                  <PillTag variant="tag">{getCategoryName(post.categories[0])}</PillTag>
                 )}
                 <h3
                   className="font-display font-bold text-sm leading-snug group-hover:text-brand-green transition-colors line-clamp-2"

@@ -104,7 +104,10 @@ export default function RequestDemoPage() {
                   >
                     {m.metric}
                   </div>
-                  <div className="text-[10px] sm:text-xs mt-1 leading-tight" style={{ color: "var(--text-muted)" }}>
+                  <div
+                    className="text-[10px] sm:text-xs mt-1 leading-tight"
+                    style={{ color: "var(--text-muted)" }}
+                  >
                     {m.label}
                   </div>
                 </div>

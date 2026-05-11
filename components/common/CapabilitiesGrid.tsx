@@ -110,9 +110,7 @@ export function CapabilitiesGrid() {
         {/* Header */}
         <div className="text-center mb-10 md:mb-16">
           <PillTag className="mb-6">Platform Capabilities</PillTag>
-          <h2 className="heading-section mb-4">
-            The full E2E in one platform.
-          </h2>
+          <h2 className="heading-section mb-4">The full E2E in one platform.</h2>
           <p className="max-w-xl mx-auto" style={{ color: "var(--text-secondary)" }}>
             P4SaMD orchestrates your entire SDLC — from requirements to release — with regulatory
             compliance enforced at every stage.

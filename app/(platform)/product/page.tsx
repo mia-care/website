@@ -206,9 +206,7 @@ export default function ProductPage() {
         style={{ background: "var(--bg-surface)", borderTop: "1px solid var(--bg-border)" }}
       >
         <div className="max-w-3xl mx-auto px-4 sm:px-6 text-center">
-          <h2 className="heading-sub mb-3">
-            Ready to see P4SaMD in action?
-          </h2>
+          <h2 className="heading-sub mb-3">Ready to see P4SaMD in action?</h2>
           <p className="mb-8 text-sm" style={{ color: "var(--text-secondary)", lineHeight: 1.75 }}>
             Schedule a live walkthrough and see how P4SaMD fits your stack in under 30 minutes.
           </p>
@@ -250,10 +248,7 @@ export default function ProductPage() {
           <div className="grid sm:grid-cols-3 gap-6 mb-12">
             {WHY.map((w) => (
               <div key={w.title}>
-                <h3
-                  className="heading-card mb-3"
-                  style={{ color: "var(--brand-green)" }}
-                >
+                <h3 className="heading-card mb-3" style={{ color: "var(--brand-green)" }}>
                   {w.title}
                 </h3>
                 <p className="text-sm" style={{ color: "var(--text-secondary)", lineHeight: 1.75 }}>

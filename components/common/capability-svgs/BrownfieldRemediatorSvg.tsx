@@ -32,15 +32,7 @@ const BETWEEN_MS = 750;
 const HOLD_MS = 2200;
 const RESET_MS = 500;
 
-function StepIcon({
-  icon,
-  done,
-  active,
-}: {
-  icon: string;
-  done: boolean;
-  active: boolean;
-}) {
+function StepIcon({ icon, done, active }: { icon: string; done: boolean; active: boolean }) {
   const bg = done || active ? "#2563EB" : "#E5E7EB";
   const color = done || active ? "white" : "#9CA3AF";
 
@@ -319,11 +311,7 @@ export function BrownfieldRemediatorSvg() {
                     "opacity 0.3s ease, transform 0.3s ease, background 0.3s, border-color 0.3s",
                 }}
               >
-                <StepIcon
-                  icon={step.icon}
-                  done={doneSteps[i]}
-                  active={activeStep === i}
-                />
+                <StepIcon icon={step.icon} done={doneSteps[i]} active={activeStep === i} />
                 <div style={{ minWidth: 0 }}>
                   <div style={{ fontWeight: 600, fontSize: 11, color: "#0A0A0A", marginBottom: 2 }}>
                     {step.title}

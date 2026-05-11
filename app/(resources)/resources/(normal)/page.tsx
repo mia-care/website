@@ -5,7 +5,7 @@ import { ResourceGrid } from "@/components/competence-center/ResourceGrid";
 import { getAllResources } from "@/lib/resources";
 
 export const metadata: Metadata = {
-  title: "Resources — Whitepapers & Videos | Mia-Care",
+  title: "Competence Center — Whitepapers & Videos | Mia-Care",
   description:
     "Access Mia-Care's library of whitepapers and expert videos on SaMD compliance, FHIR interoperability, telemedicine platforms, and cloud-native healthcare.",
 };
@@ -28,7 +28,7 @@ export default function ResourcesPage() {
             className="font-display font-bold mb-4 leading-tight"
             style={{ fontSize: "clamp(36px, 4.5vw, 58px)", letterSpacing: "-0.035em" }}
           >
-            Resource Library
+            Competence Center
           </h1>
           <p
             className="text-lg max-w-2xl"

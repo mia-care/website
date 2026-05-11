@@ -156,7 +156,17 @@ export function SdlcOrchestratorSvg() {
           {["Activity", "#", "Class", "Tool Integrations", "Compliance", ""].map((h, hi) => (
             <div
               key={h}
-              className={hi === 1 ? "orch-col-sec" : hi === 2 ? "orch-col-cls" : hi === 4 ? "orch-col-comp" : hi === 5 ? "orch-col-lock" : undefined}
+              className={
+                hi === 1
+                  ? "orch-col-sec"
+                  : hi === 2
+                    ? "orch-col-cls"
+                    : hi === 4
+                      ? "orch-col-comp"
+                      : hi === 5
+                        ? "orch-col-lock"
+                        : undefined
+              }
               style={{
                 color: "#525252",
                 fontWeight: 600,
@@ -210,7 +220,9 @@ export function SdlcOrchestratorSvg() {
               </div>
 
               {/* ID */}
-              <div className="orch-col-sec" style={{ color: "#737373", fontSize: 10 }}>{phase.id}</div>
+              <div className="orch-col-sec" style={{ color: "#737373", fontSize: 10 }}>
+                {phase.id}
+              </div>
 
               {/* Class */}
               <div className="orch-col-cls">

@@ -56,12 +56,7 @@ export default async function UseCasePage({ params }: { params: Promise<{ slug: 
   return (
     <>
       <JsonLd schema={useCaseSchema} />
-      <Breadcrumb
-        items={[
-          { label: "Use Cases", href: "/#use-cases" },
-          { label: uc.name },
-        ]}
-      />
+      <Breadcrumb items={[{ label: "Use Cases", href: "/#use-cases" }, { label: uc.name }]} />
       <UseCaseHero uc={uc} />
       <LogoMarquee />
       <NarrativeStory uc={uc} />

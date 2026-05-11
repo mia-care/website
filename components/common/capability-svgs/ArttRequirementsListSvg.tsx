@@ -159,9 +159,15 @@ export function ArttRequirementsListSvg() {
       >
         <span>ID</span>
         <span>Title</span>
-        <span className="artt-req-cnt" style={{ textAlign: "center" }}>Tests</span>
-        <span className="artt-req-cnt" style={{ textAlign: "center" }}>Risks</span>
-        <span className="artt-req-cnt" style={{ textAlign: "center" }}>Impl.</span>
+        <span className="artt-req-cnt" style={{ textAlign: "center" }}>
+          Tests
+        </span>
+        <span className="artt-req-cnt" style={{ textAlign: "center" }}>
+          Risks
+        </span>
+        <span className="artt-req-cnt" style={{ textAlign: "center" }}>
+          Impl.
+        </span>
         <span>Status</span>
       </div>
 

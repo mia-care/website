@@ -35,7 +35,8 @@ export function HeroBanner() {
           position: "absolute",
           inset: 0,
           zIndex: 1,
-          background: "linear-gradient(to bottom, rgba(0,0,0,0.78) 0%, rgba(0,0,0,0.45) 60%, transparent 88%)",
+          background:
+            "linear-gradient(to bottom, rgba(0,0,0,0.78) 0%, rgba(0,0,0,0.45) 60%, transparent 88%)",
           pointerEvents: "none",
         }}
       />
