@@ -85,11 +85,9 @@ function ProductMegaMenu({
           href={featured.href}
           role="menuitem"
           onClick={onClose}
-          className="flex items-center gap-4 px-4 py-3 rounded-xl mb-2 transition-colors hover:brightness-110 group"
-          style={{
-            background: "rgba(0,240,150,0.05)",
-            border: "1px solid rgba(0,240,150,0.12)",
-          }}
+          className="flex items-center gap-4 px-4 py-3 rounded-xl mb-2 transition-all duration-200 group
+            bg-[rgba(0,240,150,0.05)] border border-[rgba(0,240,150,0.12)]
+            hover:bg-[rgba(0,240,150,0.1)] hover:border-[rgba(0,240,150,0.28)] hover:shadow-[0_0_24px_rgba(0,240,150,0.08)]"
         >
           <span className="flex flex-col flex-1 min-w-0">
             <span
@@ -107,12 +105,16 @@ function ProductMegaMenu({
               </span>
             )}
           </span>
-          <span
-            className="inline-flex items-center gap-1 text-xs font-semibold shrink-0"
-            style={{ color: "var(--text-muted)" }}
-          >
+          <span className="inline-flex items-center gap-1 text-xs font-semibold shrink-0 text-[var(--text-muted)] transition-colors duration-200 group-hover:text-[var(--brand-green)]">
             Explore
-            <svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+            <svg
+              width="11"
+              height="11"
+              viewBox="0 0 12 12"
+              fill="none"
+              aria-hidden="true"
+              className="transition-transform duration-200 group-hover:translate-x-0.5"
+            >
               <path
                 d="M2 6h8M6 3l3 3-3 3"
                 stroke="currentColor"

@@ -410,7 +410,7 @@ export function OneSolutionInteractive() {
         >
           <p className="text-sm" style={{ color: "var(--text-secondary)", lineHeight: 1.8 }}>
             P4SaMD connects to your existing tools, orchestrates your workflows, and enforces
-            quality controls as a natural part of your SDLC — without asking your team to change how
+            quality controls as a natural part of your SDLC, without asking your team to change how
             they work.
           </p>
           <p className="text-sm" style={{ color: "var(--text-secondary)", lineHeight: 1.8 }}>

@@ -21,24 +21,41 @@ export function RelatedUseCases({ cap }: { cap: Capability }) {
             <Link
               key={uc.slug}
               href={`/use-cases/${uc.slug}`}
-              className="group rounded-card p-6 flex flex-col gap-3 transition-all hover:-translate-y-0.5"
+              className="group rounded-card p-8 flex flex-col gap-4 transition-all hover:-translate-y-1 hover:shadow-[0_8px_32px_rgba(0,0,0,0.25)]"
               style={{
                 background: "var(--bg-surface)",
                 border: "1px solid var(--bg-border)",
               }}
             >
-              <PillTag>{uc.segment}</PillTag>
+              <PillTag variant="tag">{uc.segment}</PillTag>
               <h3
-                className="heading-card leading-snug group-hover:text-brand-green transition-colors"
+                className="font-display font-bold text-lg leading-snug transition-colors group-hover:text-brand-green"
                 style={{ color: "var(--text-primary)" }}
               >
                 {uc.name}
               </h3>
-              <span
-                className="mt-auto text-xs font-semibold transition-colors group-hover:text-brand-green"
-                style={{ color: "var(--text-secondary)" }}
+              <p
+                className="text-sm flex-1"
+                style={{ color: "var(--text-secondary)", lineHeight: 1.75 }}
               >
-                Read Use Case →
+                {uc.tagline}
+              </p>
+              <span className="inline-flex items-center gap-1.5 text-xs font-semibold mt-2 transition-colors text-[var(--brand-green)] group-hover:gap-2.5">
+                Read Use Case
+                <svg
+                  width="12"
+                  height="12"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                  className="transition-transform duration-200 group-hover:translate-x-0.5"
+                >
+                  <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg>
               </span>
             </Link>
           ))}

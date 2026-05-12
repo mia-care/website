@@ -108,7 +108,6 @@ const DISTRIBUTION = [
       "Instant provisioning — ready in minutes",
       "Automatic platform updates and security patches",
       "Shared cloud infrastructure managed by Mia-Care",
-      "SOC 2-aligned environment",
     ],
   },
   {
@@ -120,7 +119,6 @@ const DISTRIBUTION = [
     points: [
       "Data never leaves your environment",
       "Private cloud or on-premise deployment",
-      "Supports air-gapped networks",
       "Custom security and compliance configurations",
     ],
   },
@@ -128,7 +126,7 @@ const DISTRIBUTION = [
 
 const FAQ = [
   {
-    q: "Do you offer a free trial?",
+    q: "Do you offer a trial?",
     a: "We offer guided evaluations tailored to your regulatory context rather than a generic trial. Request a demo to start with a scoped session with our team.",
   },
   {
@@ -138,10 +136,6 @@ const FAQ = [
   {
     q: "Is P4SaMD validated for Medical Device development?",
     a: "Yes. The platform is built and maintained following GAMP 5 principles, making it suitable for use in ISO 13485-controlled environments.",
-  },
-  {
-    q: "How does pricing work for the Unlimited plan?",
-    a: "Unlimited pricing is tailored to your organization's size, number of projects, integration requirements, and support needs. Contact our team for a custom quote.",
   },
 ];
 
@@ -159,7 +153,7 @@ export default function PlansPage() {
             The right plan for every stage of your SaMD journey.
           </h1>
           <p className="text-lg" style={{ color: "var(--text-secondary)" }}>
-            No hidden costs. All plans include direct access to our regulatory experts.
+            Built for regulated teams at every stage, from first submission to global scale.
           </p>
         </div>
       </section>

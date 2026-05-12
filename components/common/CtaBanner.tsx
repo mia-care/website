@@ -32,7 +32,7 @@ export function CtaBanner() {
           compliant software faster?
         </h2>
         <p className="text-lg mb-10" style={{ color: "var(--text-secondary)" }}>
-          Join the teams building the next generation of regulated medical software.
+          See how P4SaMD fits into your development workflow.
         </p>
         <Link
           href="/request-demo"
