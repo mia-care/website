@@ -67,9 +67,6 @@ export const metadata: Metadata = {
     description:
       "Compliance by design for Software as a Medical Device. EU MDR, FDA, ISO 13485, IEC 62304, EU AI Act.",
   },
-  icons: {
-    icon: [{ url: "/favicon.ico" }],
-  },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
