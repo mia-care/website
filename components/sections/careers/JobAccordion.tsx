@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Sheet, SheetClose, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
 type JobSection = {
   heading: string;
@@ -158,18 +158,47 @@ function JobCard({ job }: { job: Job }) {
 
           <SheetContent
             side="bottom"
+            showCloseButton={false}
             className="rounded-t-2xl border-0 p-0 max-h-[88vh] overflow-y-auto"
             style={{
               background: "var(--bg-surface)",
               borderTop: "1px solid var(--bg-border-strong)",
             }}
           >
-            {/* Drag handle */}
-            <div className="flex justify-center pt-3 pb-1">
-              <div
-                className="w-10 h-1 rounded-full"
-                style={{ background: "var(--bg-border-strong)" }}
-              />
+            {/* Sticky header: drag handle + close */}
+            <div
+              className="sticky top-0 z-10 flex items-center px-4 pt-3 pb-2"
+              style={{ background: "var(--bg-surface)" }}
+            >
+              <div className="flex-1 flex justify-center">
+                <div
+                  className="w-10 h-1 rounded-full"
+                  style={{ background: "var(--bg-border-strong)" }}
+                />
+              </div>
+              <SheetClose
+                render={
+                  <button
+                    type="button"
+                    className="flex items-center justify-center w-9 h-9 rounded-full transition-colors hover:bg-white/10"
+                    style={{ color: "white" }}
+                    aria-label="Close"
+                  />
+                }
+              >
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.2"
+                  strokeLinecap="round"
+                  aria-hidden="true"
+                >
+                  <path d="M18 6L6 18M6 6l12 12" />
+                </svg>
+              </SheetClose>
             </div>
 
             <div className="px-6 pb-8">

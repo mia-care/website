@@ -112,7 +112,7 @@ const DISTRIBUTION = [
   },
   {
     model: "Self-Hosted",
-    badge: "Unlimited plan",
+    badge: "Full Control",
     tagline: "Full control over your environment",
     description:
       "Deploy P4SaMD on your own infrastructure — private cloud or on-premise. Designed for organizations with strict data residency, sovereign cloud, or network isolation requirements.",

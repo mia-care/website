@@ -8,7 +8,7 @@ const LOGO_H = 52;
 
 const LOGO_FILTER = "brightness(0) invert(1)";
 
-const LOGOS: { src: string; alt: string }[] = [
+const LOGOS: { src: string; alt: string; filter?: string }[] = [
   { src: `${BASE_PATH}/images/clients/Bip.svg`, alt: "Bip" },
   { src: `${BASE_PATH}/images/clients/ItaliAssistenza.svg`, alt: "Itali Assistenza" },
   { src: `${BASE_PATH}/images/clients/GVM.svg`, alt: "GVM" },
@@ -17,7 +17,7 @@ const LOGOS: { src: string; alt: string }[] = [
   { src: `${BASE_PATH}/images/clients/MDConsierge.svg`, alt: "MD Consierge" },
   { src: `${BASE_PATH}/images/clients/Flex.svg`, alt: "Flex" },
   { src: `${BASE_PATH}/images/clients/youhealthy.svg`, alt: "YouHealthy" },
-  { src: `${BASE_PATH}/images/clients/iit.svg`, alt: "IIT" },
+  { src: `${BASE_PATH}/images/clients/iit.svg`, alt: "IIT", filter: "invert(1)" },
 ];
 
 // Duplicate for seamless loop: track scrolls exactly -50% of its total width → loops invisibly
@@ -81,7 +81,7 @@ export function LogoMarquee() {
                   className="w-[110px] sm:w-[149px]"
                   style={{
                     height: "auto",
-                    filter: LOGO_FILTER,
+                    filter: logo.filter ?? LOGO_FILTER,
                     opacity: 0.75,
                     flexShrink: 0,
                   }}

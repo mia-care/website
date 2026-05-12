@@ -259,18 +259,20 @@ export default function ProductPage() {
           </div>
 
           <div
-            className="flex flex-wrap items-center gap-4 pt-10"
+            className="flex flex-col sm:flex-row sm:items-center gap-3 pt-10"
             style={{ borderTop: "1px solid var(--bg-border)" }}
           >
             <Link
               href="/request-demo"
-              className="inline-flex items-center h-11 px-6 rounded-lg font-semibold text-sm bg-brand-gradient text-bg-base transition-opacity hover:opacity-90"
+              className="inline-flex items-center justify-center h-11 px-6 rounded-lg font-semibold text-sm bg-brand-gradient text-bg-base transition-opacity hover:opacity-90 w-full sm:w-auto"
             >
               Request a Demo →
             </Link>
             <Link
-              href="/about"
-              className="text-sm font-semibold transition-colors hover:opacity-80"
+              href="http://docs.mia-care.io/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center h-11 px-4 text-sm font-semibold transition-colors hover:opacity-80 w-full sm:w-auto"
               style={{ color: "var(--text-muted)" }}
             >
               Learn how we built it →

@@ -108,12 +108,11 @@ export function WhoWeServe() {
             Every company carries the weight of regulated software.
           </h2>
         </div>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-10">
           {SEGMENTS.map((seg) => (
-            <Link
+            <div
               key={seg.title}
-              href={seg.href}
-              className="group rounded-card p-6 flex flex-col gap-4 transition-all hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2"
+              className="rounded-card p-6 flex flex-col gap-4"
               style={{
                 background: "var(--bg-surface)",
                 border: "1px solid var(--bg-border)",
@@ -129,14 +128,26 @@ export function WhoWeServe() {
               >
                 {seg.description}
               </p>
-              <span
-                className="text-xs font-semibold mt-auto transition-colors group-hover:text-brand-green"
-                style={{ color: "var(--text-primary)" }}
-              >
-                Explore use case →
-              </span>
-            </Link>
+            </div>
           ))}
+        </div>
+        <div className="flex flex-col sm:flex-row justify-center gap-3">
+          <Link
+            href="/use-cases"
+            className="inline-flex items-center justify-center h-11 px-6 rounded-lg font-semibold text-sm transition-colors hover:opacity-80 w-full sm:w-auto"
+            style={{
+              border: "1px solid var(--bg-border-strong)",
+              color: "var(--text-primary)",
+            }}
+          >
+            Explore Use Cases →
+          </Link>
+          <Link
+            href="/product"
+            className="inline-flex items-center justify-center h-11 px-6 rounded-lg font-semibold text-sm bg-brand-gradient text-bg-base transition-opacity hover:opacity-90 w-full sm:w-auto"
+          >
+            Platform Overview →
+          </Link>
         </div>
       </div>
     </section>

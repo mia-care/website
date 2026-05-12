@@ -1,3 +1,4 @@
+import { GlobeHemisphereWest, Leaf, Scales } from "@phosphor-icons/react/dist/ssr";
 import type { Metadata } from "next";
 import { CtaBanner } from "@/components/common/CtaBanner";
 import { PillTag } from "@/components/common/PillTag";
@@ -10,17 +11,17 @@ export const metadata: Metadata = {
 
 const PILLARS = [
   {
-    icon: "⚖",
+    icon: <Scales size={24} weight="duotone" />,
     title: "Gender Equality & Inclusion",
     body: "The Mia Group, together with Mia-Care, is firmly committed to promoting and supporting an inclusive and equitable environment that values everyone's diversity. We are committed to gender equality, recognizing the significant gender gap in access to scientific fields such as information technology. Our internal policies framework for recruitment, compensation, promotion, and training ensures equal opportunities for all employees.",
   },
   {
-    icon: "🌍",
+    icon: <GlobeHemisphereWest size={24} weight="duotone" />,
     title: "UN 2030 Agenda",
     body: "The 2030 Agenda, adopted by the members of the United Nations to achieve 17 sustainability goals, is our first point of reference. We align our operations and strategic decisions with these global goals, ensuring that our growth as a company contributes positively to the broader mission of sustainable development.",
   },
   {
-    icon: "🏢",
+    icon: <Leaf size={24} weight="duotone" />,
     title: "Sustainable Company",
     body: "Our growth is based on sustainable development: the continuous search for a balance among the economic, environmental, and social pillars. The technology we write today can impact future generations, as well as all the decisions we make as individuals and as a company. We take this responsibility seriously.",
   },
@@ -82,10 +83,11 @@ export default function SustainabilityPage() {
               style={{ background: "var(--bg-surface)", border: "1px solid var(--bg-border)" }}
             >
               <div
-                className="flex-shrink-0 flex items-center justify-center w-12 h-12 rounded-xl text-xl"
+                className="flex-shrink-0 flex items-center justify-center w-12 h-12 rounded-xl"
                 style={{
                   background: "rgba(0,240,150,0.07)",
                   border: "1px solid rgba(0,240,150,0.15)",
+                  color: "var(--brand-green)",
                 }}
               >
                 {pillar.icon}
