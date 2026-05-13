@@ -4,6 +4,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { RelatedPosts } from "@/components/blog/RelatedPosts";
 import { TableOfContents } from "@/components/blog/TableOfContents";
+import { NewsletterSection } from "@/components/common/NewsletterSection";
 import { PillTag } from "@/components/common/PillTag";
 import { getAuthorBySlug } from "@/data/authors";
 import { getCategoryName } from "@/data/blog-categories";
@@ -192,6 +193,11 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           )}
         </div>
       </div>
+
+      {/* Newsletter */}
+      <section style={{ borderTop: "1px solid var(--bg-border)" }}>
+        <NewsletterSection />
+      </section>
 
       {/* Related posts */}
       <RelatedPosts posts={related} />

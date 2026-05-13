@@ -23,6 +23,32 @@ function decodeEntities(str: string): string {
 
 const CONTENT_DIR = path.join(process.cwd(), "content/blog");
 
+function deriveExcerpt(frontmatterExcerpt: string, content: string): string {
+  const isTruncated =
+    frontmatterExcerpt.trimEnd().endsWith("…") || frontmatterExcerpt.trimEnd().endsWith("...");
+  if (!isTruncated && frontmatterExcerpt.trim()) return frontmatterExcerpt;
+
+  // Find first non-empty paragraph that isn't a heading, HR, or HTML tag
+  const paragraphs = content.split(/\n\n+/);
+  for (const raw of paragraphs) {
+    const line = raw.trim();
+    if (!line) continue;
+    if (/^(#{1,6}\s|---|===|\*{3,}|_{3,}|<)/.test(line)) continue;
+    // Strip inline markdown: links, bold, italic, code, images
+    const clean = line
+      .replace(/!\[.*?\]\(.*?\)/g, "")
+      .replace(/\[([^\]]+)\]\(.*?\)/g, "$1")
+      .replace(/`{1,3}[^`]+`{1,3}/g, "")
+      .replace(/\*{1,3}([^*]+)\*{1,3}/g, "$1")
+      .replace(/_{1,3}([^_]+)_{1,3}/g, "$1")
+      .replace(/\n/g, " ")
+      .trim();
+    if (clean.length > 40) return clean;
+  }
+
+  return frontmatterExcerpt;
+}
+
 export type PostMeta = {
   title: string;
   slug: string;
@@ -83,7 +109,7 @@ export function getPostMeta(slug: string): PostMeta | null {
     categories: data.categories ?? [],
     featuredImage: data.featuredImage ?? "",
     featuredImageAlt: decodeEntities(data.featuredImageAlt ?? ""),
-    excerpt: decodeEntities(data.excerpt ?? ""),
+    excerpt: deriveExcerpt(decodeEntities(data.excerpt ?? ""), content),
     readingTime: stats.text,
     featured: data.featured ?? false,
   };
@@ -114,7 +140,7 @@ export async function getPost(slug: string): Promise<Post | null> {
     categories: data.categories ?? [],
     featuredImage: data.featuredImage ?? "",
     featuredImageAlt: decodeEntities(data.featuredImageAlt ?? ""),
-    excerpt: decodeEntities(data.excerpt ?? ""),
+    excerpt: deriveExcerpt(decodeEntities(data.excerpt ?? ""), content),
     readingTime: stats.text,
     content,
     contentHtml,

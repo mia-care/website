@@ -33,6 +33,9 @@ export type ThankYouPage = {
   ctaLabel?: string;
   ctaUrl?: string;
   contentHtml: string;
+  resourceTitle: string;
+  resourceType: ResourceType;
+  featuredImage?: string;
 };
 
 function extractHubSpotIds(snippet: string): { portalId: string; formId: string; region: string } {
@@ -126,6 +129,8 @@ export async function getThankYouPage(slug: string): Promise<ThankYouPage | null
 
   const processed = await remark().use(remarkHtml, { sanitize: false }).process(content);
 
+  const indexMeta = readIndexFrontmatter(slug);
+
   return {
     slug,
     title: (data.title as string) ?? "Thank you!",
@@ -135,5 +140,8 @@ export async function getThankYouPage(slug: string): Promise<ThankYouPage | null
     ctaLabel: data.ctaLabel as string | undefined,
     ctaUrl: data.ctaUrl as string | undefined,
     contentHtml: processed.toString(),
+    resourceTitle: (indexMeta?.data.title as string) ?? "",
+    resourceType: (indexMeta?.data.type as ResourceType) ?? "whitepaper",
+    featuredImage: indexMeta?.data.featuredImage as string | undefined,
   };
 }

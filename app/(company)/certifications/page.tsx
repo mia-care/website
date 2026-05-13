@@ -74,17 +74,25 @@ export default function CertificationsPage() {
         }}
       >
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-3">
+          <div className="grid grid-cols-1 sm:grid-cols-3">
             {CERTS.map((cert, i) => (
               <div
                 key={cert.id}
-                className="py-8 px-6 flex flex-col items-center gap-3 text-center"
-                style={{
-                  borderRight: i < CERTS.length - 1 ? "1px solid var(--bg-border)" : undefined,
-                }}
+                className={[
+                  "py-8 px-6 flex flex-col items-center gap-3 text-center",
+                  i < CERTS.length - 1
+                    ? "border-b border-[var(--bg-border)] sm:border-b-0 sm:border-r sm:border-r-[var(--bg-border)]"
+                    : "",
+                ].join(" ")}
               >
-                <div className="relative mx-auto" style={{ width: 220, height: 88 }}>
-                  <Image src={cert.image} alt={cert.name} fill style={{ objectFit: "contain" }} />
+                <div className="flex items-center justify-center" style={{ height: 80 }}>
+                  <Image
+                    src={cert.image}
+                    alt={cert.name}
+                    width={180}
+                    height={72}
+                    style={{ objectFit: "contain", width: 180, height: 72 }}
+                  />
                 </div>
                 <span
                   className="font-display font-bold text-sm"
@@ -107,21 +115,22 @@ export default function CertificationsPage() {
               className="rounded-2xl p-8"
               style={{ background: "var(--bg-surface)", border: "1px solid var(--bg-border)" }}
             >
-              <div className="flex items-start gap-6">
+              <div className="flex flex-col sm:flex-row items-start gap-6">
                 <div
-                  className="flex-shrink-0 relative rounded-xl overflow-hidden"
+                  className="flex-shrink-0 flex items-center justify-center rounded-xl w-full sm:w-[200px]"
                   style={{
-                    width: 200,
                     height: 120,
                     background: "rgba(255,255,255,0.04)",
                     border: "1px solid var(--bg-border)",
+                    padding: "16px",
                   }}
                 >
                   <Image
                     src={cert.image}
                     alt={cert.name}
-                    fill
-                    style={{ objectFit: "contain", padding: "12px" }}
+                    width={168}
+                    height={88}
+                    style={{ objectFit: "contain", width: "100%", height: "100%" }}
                   />
                 </div>
                 <div className="flex-1 min-w-0">

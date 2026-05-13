@@ -115,7 +115,6 @@ export function SecureSoftwareSvg() {
             n[i] = true;
             return n;
           });
-          // when a row with Acceptable residual appears, decrement unacceptable count
           if (row.residual === "Acceptable") {
             setUnacceptable((u) => Math.max(0, u - 1));
           }
@@ -151,6 +150,13 @@ export function SecureSoftwareSvg() {
           from { opacity: 0; transform: translateY(5px); }
           to   { opacity: 1; transform: translateY(0); }
         }
+        @media (max-width: 480px) {
+          .ss-search  { display: none !important; }
+          .ss-table   { display: none !important; }
+          .ss-cards   { display: flex !important; }
+          .ss-statnum { font-size: 16px !important; line-height: 1 !important; }
+          .ss-statbox { padding: 6px 8px !important; }
+        }
       `}</style>
 
       {/* ── Header ── */}
@@ -165,6 +171,7 @@ export function SecureSoftwareSvg() {
       {/* ── Stat cards ── */}
       <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 7 }}>
         <div
+          className="ss-statbox"
           style={{
             border: "1px solid #E5E7EB",
             borderRadius: 8,
@@ -183,10 +190,16 @@ export function SecureSoftwareSvg() {
             <span style={{ fontSize: 9, color: "#6B7280", fontWeight: 500 }}>Total Risks</span>
             <SyncIcon />
           </div>
-          <div style={{ fontWeight: 800, fontSize: 22, color: "#0A0A0A", lineHeight: 1 }}>12</div>
+          <div
+            className="ss-statnum"
+            style={{ fontWeight: 800, fontSize: 22, color: "#0A0A0A", lineHeight: 1 }}
+          >
+            12
+          </div>
         </div>
 
         <div
+          className="ss-statbox"
           style={{
             border: "1px solid #FDE68A",
             borderRadius: 8,
@@ -206,6 +219,7 @@ export function SecureSoftwareSvg() {
             <TargetIcon color="#D97706" />
           </div>
           <div
+            className="ss-statnum"
             style={{
               fontWeight: 800,
               fontSize: 22,
@@ -219,6 +233,7 @@ export function SecureSoftwareSvg() {
         </div>
 
         <div
+          className="ss-statbox"
           style={{
             border: "1px solid #FDE68A",
             borderRadius: 8,
@@ -237,12 +252,17 @@ export function SecureSoftwareSvg() {
             <span style={{ fontSize: 9, color: "#D97706", fontWeight: 500 }}>ALARP</span>
             <TargetIcon color="#D97706" />
           </div>
-          <div style={{ fontWeight: 800, fontSize: 22, color: "#D97706", lineHeight: 1 }}>1</div>
+          <div
+            className="ss-statnum"
+            style={{ fontWeight: 800, fontSize: 22, color: "#D97706", lineHeight: 1 }}
+          >
+            1
+          </div>
         </div>
       </div>
 
-      {/* ── Search + filters ── */}
-      <div style={{ display: "flex", gap: 6 }}>
+      {/* ── Search + filters (hidden on mobile) ── */}
+      <div className="ss-search" style={{ display: "flex", gap: 6 }}>
         <div
           style={{
             flex: 1,
@@ -278,8 +298,9 @@ export function SecureSoftwareSvg() {
         ))}
       </div>
 
-      {/* ── Table ── */}
+      {/* ── Desktop: table ── */}
       <div
+        className="ss-table"
         style={{
           flex: 1,
           border: "1px solid #E5E7EB",
@@ -417,6 +438,82 @@ export function SecureSoftwareSvg() {
             </div>
           ))}
         </div>
+      </div>
+
+      {/* ── Mobile: card list (hidden on desktop) ── */}
+      <div
+        className="ss-cards"
+        style={{
+          flex: 1,
+          display: "none",
+          flexDirection: "column",
+          gap: 5,
+          minHeight: 0,
+          overflow: "hidden",
+        }}
+      >
+        {ROWS.map((row, rowIndex) => (
+          <div
+            key={row.id}
+            style={{
+              flexShrink: 0,
+              border: "1px solid #E5E7EB",
+              borderRadius: 8,
+              padding: "8px 10px",
+              display: "flex",
+              flexDirection: "column",
+              gap: 5,
+              opacity: visibleRows[rowIndex] ? 1 : 0,
+              transform: visibleRows[rowIndex] ? "translateY(0)" : "translateY(5px)",
+              transition: "opacity 0.3s ease, transform 0.3s ease",
+            }}
+          >
+            {/* Title — 2 lines max */}
+            <div
+              style={{
+                fontWeight: 600,
+                fontSize: 10.5,
+                color: "#0A0A0A",
+                lineHeight: 1.3,
+                overflow: "hidden",
+                display: "-webkit-box",
+                WebkitLineClamp: 2,
+                WebkitBoxOrient: "vertical",
+              }}
+            >
+              {RISK_TITLE}
+            </div>
+
+            {/* Pills: Inherent → Residual */}
+            <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+              <span
+                style={{
+                  ...RISK_PILL[row.inherent],
+                  borderRadius: 20,
+                  padding: "2px 8px",
+                  fontSize: 9,
+                  fontWeight: 600,
+                  whiteSpace: "nowrap",
+                }}
+              >
+                {row.inherent}
+              </span>
+              <span style={{ fontSize: 9, color: "#9CA3AF", flexShrink: 0 }}>→</span>
+              <span
+                style={{
+                  ...RISK_PILL[row.residual],
+                  borderRadius: 20,
+                  padding: "2px 8px",
+                  fontSize: 9,
+                  fontWeight: 600,
+                  whiteSpace: "nowrap",
+                }}
+              >
+                {row.residual}
+              </span>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );

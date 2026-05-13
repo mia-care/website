@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { CookiePreferencesButton } from "@/components/common/CookiePreferencesButton";
+import { NewsletterSection } from "@/components/common/NewsletterSection";
 import { FOOTER_LINKS, SITE } from "@/data/site";
 import { BASE_PATH } from "@/lib/utils";
 
@@ -9,10 +10,16 @@ export function Footer() {
 
   return (
     <footer
-      className="border-t pt-16 pb-10"
+      className="border-t pb-10"
       style={{ borderColor: "var(--bg-border)", background: "var(--bg-surface)" }}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Newsletter */}
+      <NewsletterSection />
+
+      <div
+        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10"
+        style={{ borderTop: "1px solid var(--bg-border)" }}
+      >
         {/* Top grid */}
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-10 mb-14">
           {/* Brand col */}
@@ -165,6 +172,7 @@ export function Footer() {
           </div>
         </div>
       </div>
+      {/* max-w-7xl */}
     </footer>
   );
 }

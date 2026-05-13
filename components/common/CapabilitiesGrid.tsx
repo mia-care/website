@@ -328,11 +328,11 @@ export function CapabilitiesGrid() {
           {/* Content panel */}
           <div
             key={active}
-            className="flex-1 min-w-0 rounded-card p-6 lg:p-8 flex flex-col lg:flex-row gap-8 animate-fade-in-up"
+            className="flex-1 min-w-0 rounded-card p-6 lg:p-8 flex flex-col lg:flex-row gap-8 animate-fade-in-up h-[530px] lg:h-auto overflow-hidden lg:overflow-visible"
             style={{ background: "var(--bg-surface)", border: "1px solid var(--bg-border)" }}
           >
             {/* Text column */}
-            <div className="flex flex-col gap-5 lg:w-[42%] shrink-0">
+            <div className="flex flex-col gap-5 lg:w-[42%] shrink-0 overflow-hidden lg:overflow-visible">
               <div>
                 <span className="label-caps mb-2 block" style={{ color: "var(--text-muted)" }}>
                   {cap.code}

@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import type { Announcement } from "@/data/announcement";
 
 const STORAGE_KEY = "banner-dismissed-at";
-const BANNER_H = 40;
+const _BANNER_H = 40;
 const DISMISS_DAYS = 15;
 
 function isDismissed(): boolean {
@@ -22,6 +22,10 @@ function setBannerHeight(px: number) {
   document.documentElement.style.setProperty("--banner-h", `${px}px`);
 }
 
+function getActualHeight(el: HTMLElement): number {
+  return el.getBoundingClientRect().height;
+}
+
 export function AnnouncementBanner({ config }: { config: Announcement }) {
   const [visible, setVisible] = useState(false);
   const bannerRef = useRef<HTMLDivElement>(null);
@@ -29,14 +33,28 @@ export function AnnouncementBanner({ config }: { config: Announcement }) {
   const scrollShown = useRef(true);
   const dismissed = useRef(false);
 
+  // Effect 1: decide visibility
   useEffect(() => {
     if (!config.enabled || isDismissed()) {
       setBannerHeight(0);
       return;
     }
-
     setVisible(true);
-    setBannerHeight(BANNER_H);
+  }, [config.enabled]);
+
+  // Effect 2: wire up ResizeObserver + scroll once the banner is in the DOM
+  useEffect(() => {
+    if (!visible || !bannerRef.current) return;
+
+    const updateHeight = () => {
+      if (!bannerRef.current) return;
+      setBannerHeight(getActualHeight(bannerRef.current));
+    };
+
+    updateHeight();
+
+    const ro = new ResizeObserver(updateHeight);
+    ro.observe(bannerRef.current);
 
     const onScroll = () => {
       if (dismissed.current) return;
@@ -50,21 +68,25 @@ export function AnnouncementBanner({ config }: { config: Announcement }) {
         if (bannerRef.current) bannerRef.current.style.transform = "translateY(-100%)";
       } else if (!goingDown && !scrollShown.current) {
         scrollShown.current = true;
-        setBannerHeight(BANNER_H);
-        if (bannerRef.current) bannerRef.current.style.transform = "translateY(0)";
+        if (bannerRef.current) {
+          setBannerHeight(getActualHeight(bannerRef.current));
+          bannerRef.current.style.transform = "translateY(0)";
+        }
       }
     };
 
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, [config.enabled]);
+    return () => {
+      ro.disconnect();
+      window.removeEventListener("scroll", onScroll);
+    };
+  }, [visible]);
 
   const dismiss = () => {
     try {
       localStorage.setItem(STORAGE_KEY, String(Date.now()));
     } catch {}
     dismissed.current = true;
-    // Slide banner and navbar together, then unmount
     if (bannerRef.current) bannerRef.current.style.transform = "translateY(-100%)";
     setBannerHeight(0);
     setTimeout(() => setVisible(false), 310);
@@ -87,15 +109,14 @@ export function AnnouncementBanner({ config }: { config: Announcement }) {
   return (
     <div
       ref={bannerRef}
-      className="fixed inset-x-0 top-0 z-50 flex items-center justify-center px-10"
+      className="fixed inset-x-0 top-0 z-50 flex items-center justify-center px-10 py-2.5 min-h-[40px]"
       style={{
-        height: BANNER_H,
         background: "linear-gradient(90deg, var(--brand-green), var(--brand-cyan))",
         color: "#0a0b10",
         transition: "transform 300ms ease",
       }}
     >
-      <div className="text-sm font-medium">
+      <div className="text-sm font-medium text-center">
         {config.link ? (
           config.link.external ? (
             <a href={config.link.href} target="_blank" rel="noopener noreferrer">
