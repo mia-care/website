@@ -176,7 +176,7 @@ export function AiInActionSection() {
           <div
             key={active}
             style={wrapStyle}
-            className="h-[280px] sm:h-[340px] md:h-[400px] animate-fade-in-up"
+            className="h-[380px] sm:h-[400px] md:h-[460px] animate-fade-in-up"
           >
             <Component />
           </div>

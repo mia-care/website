@@ -176,7 +176,7 @@ export function BrownfieldInActionSection() {
           <div
             key={active}
             style={wrapStyle}
-            className="h-[260px] sm:h-[320px] md:h-[380px] animate-fade-in-up"
+            className="h-[380px] sm:h-[400px] md:h-[440px] animate-fade-in-up"
           >
             <Component />
           </div>

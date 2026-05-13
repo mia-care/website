@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { NAV_ICONS, PlatformShell } from "./PlatformShell";
 
 const GAPS = [
   {
@@ -103,174 +104,186 @@ export function BrownfieldGapAnalysisSvg() {
 
   const compliance = useCountUp(COMPLIANCE_TARGET, showSummary, 1100);
 
+  const BROWNFIELD_NAV = [
+    { label: "Import", icon: NAV_ICONS.import },
+    { label: "Gap Analysis", icon: NAV_ICONS.gapAnalysis, active: true },
+    { label: "Remediation Plan", icon: NAV_ICONS.remediationPlan },
+  ];
+
   return (
-    <div
-      style={{
-        background: "#F8F8F8",
-        height: "100%",
-        display: "flex",
-        flexDirection: "column",
-        fontFamily: "ui-sans-serif, system-ui, sans-serif",
-        fontSize: 12,
-        color: "#0A0A0A",
-        overflow: "hidden",
-      }}
+    <PlatformShell
+      breadcrumb={["Mia-Care Dev", "App Cardio-Monitor", "Gap Analysis"]}
+      topItem={{ label: "Dashboard", icon: NAV_ICONS.dashboard }}
+      sections={[{ title: "Brownfield", items: BROWNFIELD_NAV }]}
     >
-      {/* Header */}
       <div
         style={{
-          background: "white",
-          borderBottom: "1px solid #E5E5E5",
-          padding: "10px 20px",
+          background: "#F8F8F8",
+          height: "100%",
           display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          flexShrink: 0,
+          flexDirection: "column",
+          fontFamily: "ui-sans-serif, system-ui, sans-serif",
+          fontSize: 12,
+          color: "#0A0A0A",
+          overflow: "hidden",
         }}
       >
-        <div style={{ fontWeight: 700, fontSize: 14 }}>Gap Analysis</div>
-        <div style={{ display: "flex", gap: 8 }}>
-          {["IEC 62304 ▾", "ISO 13485 ▾"].map((label) => (
-            <span
-              key={label}
-              style={{
-                padding: "3px 10px",
-                borderRadius: 6,
-                border: "1px solid #E5E5E5",
-                background: "white",
-                color: "#737373",
-                fontSize: 11,
-                cursor: "default",
-              }}
-            >
-              {label}
-            </span>
-          ))}
-        </div>
-      </div>
-
-      {/* Column headers */}
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "84px 1fr 50px 110px",
-          padding: "6px 20px",
-          background: "#FAFAFA",
-          borderBottom: "1px solid #E5E5E5",
-          color: "#A3A3A3",
-          fontSize: 10,
-          fontWeight: 600,
-          gap: 8,
-          flexShrink: 0,
-        }}
-      >
-        <span>Severity</span>
-        <span>Description</span>
-        <span style={{ textAlign: "center" }}>Effort</span>
-        <span>Reference</span>
-      </div>
-
-      {/* Gap rows */}
-      <div style={{ flex: 1, overflow: "hidden" }}>
-        {GAPS.map((gap, i) => {
-          const visible = visibleGaps > i;
-          const s = SEVERITY_STYLE[gap.severity as keyof typeof SEVERITY_STYLE];
-          return (
-            <div
-              key={gap.title}
-              style={{
-                display: "grid",
-                gridTemplateColumns: "84px 1fr 50px 110px",
-                padding: "8px 20px",
-                gap: 8,
-                alignItems: "center",
-                background: "white",
-                borderBottom: "1px solid #F0F0F0",
-                opacity: visible ? 1 : 0,
-                transform: visible ? "translateY(0)" : "translateY(5px)",
-                transition: "opacity 0.25s ease, transform 0.25s ease",
-              }}
-            >
+        {/* Header */}
+        <div
+          style={{
+            background: "white",
+            borderBottom: "1px solid #E5E5E5",
+            padding: "10px 20px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            flexShrink: 0,
+          }}
+        >
+          <div style={{ fontWeight: 700, fontSize: 14 }}>Gap Analysis</div>
+          <div style={{ display: "flex", gap: 8 }}>
+            {["IEC 62304 ▾", "ISO 13485 ▾"].map((label) => (
               <span
+                key={label}
                 style={{
-                  background: s.bg,
-                  color: s.color,
-                  border: `1px solid ${s.border}`,
-                  borderRadius: 4,
-                  padding: "2px 5px",
-                  fontSize: 9,
-                  fontWeight: 700,
-                  letterSpacing: "0.02em",
-                }}
-              >
-                {gap.severity}
-              </span>
-              <span
-                style={{
+                  padding: "3px 10px",
+                  borderRadius: 6,
+                  border: "1px solid #E5E5E5",
+                  background: "white",
+                  color: "#737373",
                   fontSize: 11,
-                  overflow: "hidden",
-                  textOverflow: "ellipsis",
-                  whiteSpace: "nowrap",
+                  cursor: "default",
                 }}
               >
-                {gap.title}
+                {label}
               </span>
-              <span style={{ fontSize: 10, color: "#737373", textAlign: "center" }}>
-                {gap.effort}
-              </span>
-              <span style={{ fontSize: 10, color: "#00AFB6", fontFamily: "monospace" }}>
-                {gap.ref}
-              </span>
-            </div>
-          );
-        })}
-      </div>
-
-      {/* Summary footer */}
-      <div
-        style={{
-          padding: "8px 20px",
-          background: "white",
-          borderTop: "1px solid #E5E5E5",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          flexShrink: 0,
-          opacity: showSummary ? 1 : 0,
-          transition: "opacity 0.4s ease",
-        }}
-      >
-        <div style={{ display: "flex", gap: 14, fontSize: 10 }}>
-          <span style={{ color: "#DC2626", fontWeight: 600 }}>Critical: 4</span>
-          <span style={{ color: "#D97706", fontWeight: 600 }}>High: 8</span>
-          <span style={{ color: "#737373" }}>23 gaps total</span>
+            ))}
+          </div>
         </div>
-        <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-          <span style={{ fontSize: 10, color: "#737373" }}>Compliance</span>
-          <div
-            style={{
-              width: 64,
-              height: 6,
-              background: "#E5E5E5",
-              borderRadius: 3,
-              overflow: "hidden",
-            }}
-          >
+
+        {/* Column headers */}
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "84px 1fr 50px 110px",
+            padding: "6px 20px",
+            background: "#FAFAFA",
+            borderBottom: "1px solid #E5E5E5",
+            color: "#A3A3A3",
+            fontSize: 10,
+            fontWeight: 600,
+            gap: 8,
+            flexShrink: 0,
+          }}
+        >
+          <span>Severity</span>
+          <span>Description</span>
+          <span style={{ textAlign: "center" }}>Effort</span>
+          <span>Reference</span>
+        </div>
+
+        {/* Gap rows */}
+        <div style={{ flex: 1, overflow: "hidden" }}>
+          {GAPS.map((gap, i) => {
+            const visible = visibleGaps > i;
+            const s = SEVERITY_STYLE[gap.severity as keyof typeof SEVERITY_STYLE];
+            return (
+              <div
+                key={gap.title}
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "84px 1fr 50px 110px",
+                  padding: "8px 20px",
+                  gap: 8,
+                  alignItems: "center",
+                  background: "white",
+                  borderBottom: "1px solid #F0F0F0",
+                  opacity: visible ? 1 : 0,
+                  transform: visible ? "translateY(0)" : "translateY(5px)",
+                  transition: "opacity 0.25s ease, transform 0.25s ease",
+                }}
+              >
+                <span
+                  style={{
+                    background: s.bg,
+                    color: s.color,
+                    border: `1px solid ${s.border}`,
+                    borderRadius: 4,
+                    padding: "2px 5px",
+                    fontSize: 9,
+                    fontWeight: 700,
+                    letterSpacing: "0.02em",
+                  }}
+                >
+                  {gap.severity}
+                </span>
+                <span
+                  style={{
+                    fontSize: 11,
+                    overflow: "hidden",
+                    textOverflow: "ellipsis",
+                    whiteSpace: "nowrap",
+                  }}
+                >
+                  {gap.title}
+                </span>
+                <span style={{ fontSize: 10, color: "#737373", textAlign: "center" }}>
+                  {gap.effort}
+                </span>
+                <span style={{ fontSize: 10, color: "#00AFB6", fontFamily: "monospace" }}>
+                  {gap.ref}
+                </span>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Summary footer */}
+        <div
+          style={{
+            padding: "8px 20px",
+            background: "white",
+            borderTop: "1px solid #E5E5E5",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            flexShrink: 0,
+            opacity: showSummary ? 1 : 0,
+            transition: "opacity 0.4s ease",
+          }}
+        >
+          <div style={{ display: "flex", gap: 14, fontSize: 10 }}>
+            <span style={{ color: "#DC2626", fontWeight: 600 }}>Critical: 4</span>
+            <span style={{ color: "#D97706", fontWeight: 600 }}>High: 8</span>
+            <span style={{ color: "#737373" }}>23 gaps total</span>
+          </div>
+          <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+            <span style={{ fontSize: 10, color: "#737373" }}>Compliance</span>
             <div
               style={{
-                height: "100%",
-                width: `${compliance}%`,
-                background: "#00AFB6",
+                width: 64,
+                height: 6,
+                background: "#E5E5E5",
                 borderRadius: 3,
-                transition: "width 0.03s linear",
+                overflow: "hidden",
               }}
-            />
+            >
+              <div
+                style={{
+                  height: "100%",
+                  width: `${compliance}%`,
+                  background: "#00AFB6",
+                  borderRadius: 3,
+                  transition: "width 0.03s linear",
+                }}
+              />
+            </div>
+            <span style={{ fontSize: 11, fontWeight: 700, color: "#00AFB6", minWidth: 30 }}>
+              {compliance}%
+            </span>
           </div>
-          <span style={{ fontSize: 11, fontWeight: 700, color: "#00AFB6", minWidth: 30 }}>
-            {compliance}%
-          </span>
         </div>
       </div>
-    </div>
+    </PlatformShell>
   );
 }

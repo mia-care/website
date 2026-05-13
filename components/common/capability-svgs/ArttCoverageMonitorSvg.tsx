@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { NAV_ICONS, PlatformShell } from "./PlatformShell";
 
 const METRICS = [
   { label: "Requirements → Tests", pct: 94, color: "#2563EB", bg: "#EFF6FF" },
@@ -44,114 +45,129 @@ export function ArttCoverageMonitorSvg() {
   }, []);
 
   return (
-    <div
-      style={{
-        background: "white",
-        height: "100%",
-        display: "flex",
-        flexDirection: "column",
-        fontFamily: "ui-sans-serif, system-ui, sans-serif",
-        fontSize: 12,
-        color: "#0A0A0A",
-        overflow: "hidden",
-      }}
+    <PlatformShell
+      breadcrumb={["Mia-Care Dev", "App Cardio-Monitor", "Coverage Monitor"]}
+      topItem={{ label: "Dashboard", icon: NAV_ICONS.dashboard }}
+      sections={[
+        {
+          title: "ARTT",
+          items: [
+            { label: "Requirements", icon: NAV_ICONS.requirements },
+            { label: "Requirement Detail", icon: NAV_ICONS.requirementDetail },
+            { label: "Coverage Monitor", icon: NAV_ICONS.coverageMonitor, active: true },
+          ],
+        },
+      ]}
     >
-      <style>{`
+      <div
+        style={{
+          background: "white",
+          height: "100%",
+          display: "flex",
+          flexDirection: "column",
+          fontFamily: "ui-sans-serif, system-ui, sans-serif",
+          fontSize: 12,
+          color: "#0A0A0A",
+          overflow: "hidden",
+        }}
+      >
+        <style>{`
         @keyframes artt-cov-pulse {
           0%, 100% { opacity: 1; }
           50% { opacity: 0.35; }
         }
       `}</style>
 
-      {/* Header */}
-      <div
-        style={{
-          padding: "12px 20px",
-          borderBottom: "1px solid #E5E5E5",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          flexShrink: 0,
-        }}
-      >
-        <div style={{ fontWeight: 700, fontSize: 14 }}>Traceability Monitor</div>
+        {/* Header */}
         <div
           style={{
+            padding: "12px 20px",
+            borderBottom: "1px solid #E5E5E5",
             display: "flex",
             alignItems: "center",
-            gap: 6,
-            fontSize: 11,
-            color: running ? "#059669" : "#A3A3A3",
-            transition: "color 0.4s ease",
+            justifyContent: "space-between",
+            flexShrink: 0,
           }}
         >
-          <span
+          <div style={{ fontWeight: 700, fontSize: 14 }}>Traceability Monitor</div>
+          <div
             style={{
-              width: 8,
-              height: 8,
-              borderRadius: "50%",
-              background: running ? "#059669" : "#D4D4D4",
-              display: "inline-block",
-              transition: "background 0.4s ease",
-              animation: running ? "artt-cov-pulse 1.5s ease-in-out infinite" : "none",
+              display: "flex",
+              alignItems: "center",
+              gap: 6,
+              fontSize: 11,
+              color: running ? "#059669" : "#A3A3A3",
+              transition: "color 0.4s ease",
             }}
-          />
-          {running ? "Live" : "Idle"}
-        </div>
-      </div>
-
-      {/* Metrics */}
-      <div style={{ padding: "18px 20px 10px", flex: 1 }}>
-        {METRICS.map((m, i) => (
-          <CoverageBar
-            key={m.label}
-            label={m.label}
-            pct={m.pct}
-            color={m.color}
-            running={running}
-            delay={i * 200}
-            duration={BAR_DURATION_MS}
-          />
-        ))}
-
-        {/* Divider */}
-        <div style={{ height: 1, background: "#F0F0F0", margin: "4px 0 12px" }} />
-
-        {/* Alerts */}
-        <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-          {ALERTS.map((alert, i) => (
-            <div
-              key={alert.text}
+          >
+            <span
               style={{
-                display: "flex",
-                alignItems: "flex-start",
-                gap: 8,
-                padding: "8px 12px",
-                borderRadius: 8,
-                background: alert.type === "warn" ? "#FFFBEB" : "#F0FDF4",
-                border: `1px solid ${alert.type === "warn" ? "#FDE68A" : "#BBF7D0"}`,
-                opacity: showAlerts ? 1 : 0,
-                transform: showAlerts ? "translateY(0)" : "translateY(4px)",
-                transition: `opacity 0.35s ease ${i * 120}ms, transform 0.35s ease ${i * 120}ms`,
+                width: 8,
+                height: 8,
+                borderRadius: "50%",
+                background: running ? "#059669" : "#D4D4D4",
+                display: "inline-block",
+                transition: "background 0.4s ease",
+                animation: running ? "artt-cov-pulse 1.5s ease-in-out infinite" : "none",
               }}
-            >
-              <span style={{ fontSize: 13, lineHeight: 1.2, flexShrink: 0 }}>
-                {alert.type === "warn" ? "⚠" : "✓"}
-              </span>
-              <span
+            />
+            {running ? "Live" : "Idle"}
+          </div>
+        </div>
+
+        {/* Metrics */}
+        <div style={{ padding: "18px 20px 10px", flex: 1 }}>
+          {METRICS.map((m, i) => (
+            <CoverageBar
+              key={m.label}
+              label={m.label}
+              pct={m.pct}
+              color={m.color}
+              running={running}
+              delay={i * 200}
+              duration={BAR_DURATION_MS}
+            />
+          ))}
+
+          {/* Divider */}
+          <div style={{ height: 1, background: "#F0F0F0", margin: "4px 0 12px" }} />
+
+          {/* Alerts */}
+          <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+            {ALERTS.map((alert, i) => (
+              <div
+                key={alert.text}
                 style={{
-                  fontSize: 11,
-                  lineHeight: 1.4,
-                  color: alert.type === "warn" ? "#92400E" : "#166534",
+                  display: "flex",
+                  alignItems: "flex-start",
+                  gap: 8,
+                  padding: "8px 12px",
+                  borderRadius: 8,
+                  background: alert.type === "warn" ? "#FFFBEB" : "#F0FDF4",
+                  border: `1px solid ${alert.type === "warn" ? "#FDE68A" : "#BBF7D0"}`,
+                  opacity: showAlerts ? 1 : 0,
+                  transform: showAlerts ? "translateY(0)" : "translateY(4px)",
+                  transition: `opacity 0.35s ease ${i * 120}ms, transform 0.35s ease ${i * 120}ms`,
                 }}
               >
-                {alert.text}
-              </span>
-            </div>
-          ))}
+                <span style={{ fontSize: 13, lineHeight: 1.2, flexShrink: 0 }}>
+                  {alert.type === "warn" ? "⚠" : "✓"}
+                </span>
+                <span
+                  style={{
+                    fontSize: 11,
+                    lineHeight: 1.4,
+                    color: alert.type === "warn" ? "#92400E" : "#166534",
+                  }}
+                >
+                  {alert.text}
+                </span>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
-    </div>
+    </PlatformShell>
   );
 }
 

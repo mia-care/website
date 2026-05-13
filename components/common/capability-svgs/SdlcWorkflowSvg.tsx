@@ -1,35 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-
-const D = {
-  bg: "#F8FAFC",
-  surface: "#FFFFFF",
-  border: "#E2E8F0",
-  muted: "#62748E",
-  faint: "#90A1B9",
-  body: "#0F172B",
-  blue: "#155DFC",
-  blueFaint: "#EFF6FF",
-  blueBg: "#155DFC",
-  green: "#009966",
-  greenFaint: "#ECFDF5",
-  greenText: "#008236",
-  amber: "#E17100",
-  amberFaint: "#FFF7ED",
-  amberText: "#CA3500",
-  red: "#C10007",
-  redFaint: "#FEF2F2",
-  purple: "#7C3AED",
-};
-
-const NAV_ITEMS = [
-  { label: "Workflow Guide", icon: "📋" },
-  { label: "Requirements", icon: "📄" },
-  { label: "Software System", icon: "🗂" },
-  { label: "Verification", icon: "✅" },
-  { label: "Risk Analysis", icon: "⚠" },
-];
+import { D, NAV_ICONS, PlatformShell } from "./PlatformShell";
 
 const STATS = [
   { label: "Requirements", value: 68, sub: "42 Verified · 26 In Progress", color: D.blue },
@@ -98,107 +70,29 @@ export function SdlcWorkflowSvg() {
   }, []);
 
   return (
-    <div
-      style={{
-        background: D.bg,
-        height: "100%",
-        display: "flex",
-        fontFamily: "ui-sans-serif, system-ui, sans-serif",
-        fontSize: 12,
-        color: D.body,
-        overflow: "hidden",
-      }}
+    <PlatformShell
+      breadcrumb={["Mia-Care Dev", "App Cardio-Monitor", "Dashboard"]}
+      topItem={{ label: "Dashboard", icon: NAV_ICONS.dashboard, active: true }}
+      sections={[
+        {
+          title: "SDLC",
+          items: [
+            { label: "Workflow Guide", icon: NAV_ICONS.workflowGuide },
+            { label: "Requirements", icon: NAV_ICONS.requirements },
+            { label: "Software System", icon: NAV_ICONS.softwareSystem },
+            { label: "Verification", icon: NAV_ICONS.verification },
+            { label: "Risk Analysis", icon: NAV_ICONS.riskAnalysis },
+          ],
+        },
+        {
+          title: "Configuration",
+          items: [
+            { label: "Tool Integrations", icon: NAV_ICONS.toolIntegrations },
+            { label: "Audit Log", icon: NAV_ICONS.auditLog },
+          ],
+        },
+      ]}
     >
-      {/* Sidebar */}
-      <div
-        style={{
-          width: 170,
-          background: D.surface,
-          borderRight: `1px solid ${D.border}`,
-          display: "flex",
-          flexDirection: "column",
-          flexShrink: 0,
-          overflow: "hidden",
-        }}
-      >
-        {/* Logo */}
-        <div style={{ padding: "10px 14px 8px", borderBottom: `1px solid ${D.border}` }}>
-          <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-            <div
-              style={{
-                width: 26,
-                height: 26,
-                borderRadius: 6,
-                background: D.blue,
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                color: "white",
-                fontSize: 10,
-                fontWeight: 800,
-                fontFamily: "ui-monospace, monospace",
-                flexShrink: 0,
-              }}
-            >
-              {"</>"}
-            </div>
-            <div>
-              <div style={{ fontSize: 8.5, color: D.faint }}>Organization</div>
-              <div style={{ fontSize: 11, fontWeight: 700, color: D.body }}>Mia-Care Dev</div>
-            </div>
-          </div>
-        </div>
-
-        {/* Nav */}
-        <div style={{ padding: "6px 0", flex: 1, overflow: "hidden" }}>
-          {/* Dashboard */}
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: 7,
-              padding: "5px 14px",
-              background: D.blueFaint,
-              borderLeft: `2px solid ${D.blue}`,
-              marginBottom: 4,
-            }}
-          >
-            <span style={{ fontSize: 11 }}>⊞</span>
-            <span style={{ fontSize: 10, fontWeight: 600, color: D.blue }}>Dashboard</span>
-          </div>
-
-          {/* SDLC section */}
-          <div
-            style={{
-              padding: "4px 14px 3px",
-              fontSize: 8.5,
-              fontWeight: 700,
-              color: D.faint,
-              letterSpacing: "0.07em",
-              textTransform: "uppercase",
-            }}
-          >
-            SDLC
-          </div>
-          {NAV_ITEMS.map((item) => (
-            <div
-              key={item.label}
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: 7,
-                padding: "5px 14px",
-                cursor: "default",
-              }}
-            >
-              <span style={{ fontSize: 10, color: D.faint }}>{item.icon}</span>
-              <span style={{ fontSize: 10, color: D.muted }}>{item.label}</span>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Main content */}
       <div
         style={{
           flex: 1,
@@ -208,27 +102,6 @@ export function SdlcWorkflowSvg() {
           background: D.bg,
         }}
       >
-        {/* Breadcrumb */}
-        <div
-          style={{
-            padding: "8px 18px",
-            borderBottom: `1px solid ${D.border}`,
-            background: D.surface,
-            display: "flex",
-            alignItems: "center",
-            gap: 6,
-            fontSize: 10,
-            color: D.muted,
-            flexShrink: 0,
-          }}
-        >
-          <span>Mia-Care Dev</span>
-          <span style={{ color: D.faint }}>›</span>
-          <span style={{ fontWeight: 600, color: D.body }}>App Cardio-Monitor</span>
-          <span style={{ color: D.faint }}>›</span>
-          <span>dev</span>
-        </div>
-
         {/* Purple gradient banner */}
         <div
           style={{
@@ -423,6 +296,6 @@ export function SdlcWorkflowSvg() {
           ))}
         </div>
       </div>
-    </div>
+    </PlatformShell>
   );
 }

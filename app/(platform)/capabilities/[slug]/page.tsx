@@ -10,11 +10,13 @@ import { ArttInActionSection } from "@/components/sections/capability/ArttInActi
 import { BrownfieldInActionSection } from "@/components/sections/capability/BrownfieldInActionSection";
 import { CapabilityHero } from "@/components/sections/capability/CapabilityHero";
 import { CapabilityScreenshots } from "@/components/sections/capability/CapabilityScreenshots";
+import { DocumentationEngineInActionSection } from "@/components/sections/capability/DocumentationEngineInActionSection";
 import { FeatureCards } from "@/components/sections/capability/FeatureCards";
 import { GuidedWorkflowsInActionSection } from "@/components/sections/capability/GuidedWorkflowsInActionSection";
 import { RegulationsList } from "@/components/sections/capability/RegulationsList";
 import { RelatedUseCases } from "@/components/sections/capability/RelatedUseCases";
 import { SdlcInActionSection } from "@/components/sections/capability/SdlcInActionSection";
+import { SoftwareDevelopmentInActionSection } from "@/components/sections/capability/SoftwareDevelopmentInActionSection";
 import { WhisperDemoSection } from "@/components/sections/capability/WhisperDemoSection";
 import { capabilities, getCapabilityBySlug } from "@/data/capabilities";
 import { capabilityScreenshots } from "@/data/capability-screenshots";
@@ -101,7 +103,9 @@ export default async function CapabilityPage({ params }: { params: Promise<{ slu
       {cap.slug === "artt-traceability" && <ArttInActionSection />}
       {cap.slug === "brownfield-remediator" && <BrownfieldInActionSection />}
       {cap.slug === "sdlc-orchestrator" && <SdlcInActionSection />}
+      {cap.slug === "software-development" && <SoftwareDevelopmentInActionSection />}
       {cap.slug === "guided-workflows" && <GuidedWorkflowsInActionSection />}
+      {cap.slug === "documentation-engine" && <DocumentationEngineInActionSection />}
 
       {capabilityScreenshots[cap.slug] && (
         <CapabilityScreenshots screens={capabilityScreenshots[cap.slug]} />

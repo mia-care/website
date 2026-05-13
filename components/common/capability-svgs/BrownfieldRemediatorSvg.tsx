@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { NAV_ICONS, PlatformShell } from "./PlatformShell";
 
 const STEPPER_TABS = ["Overview", "Use case", "Target", "Technical Asset"];
 
@@ -136,21 +137,31 @@ export function BrownfieldRemediatorSvg() {
     return clear;
   }, []);
 
+  const BROWNFIELD_NAV = [
+    { label: "Import", icon: NAV_ICONS.import, active: true },
+    { label: "Gap Analysis", icon: NAV_ICONS.gapAnalysis },
+    { label: "Remediation Plan", icon: NAV_ICONS.remediationPlan },
+  ];
+
   return (
-    <div
-      style={{
-        background: "#F3F4F6",
-        borderRadius: 12,
-        fontFamily: "ui-sans-serif, system-ui, sans-serif",
-        height: "100%",
-        display: "flex",
-        flexDirection: "column",
-        overflow: "hidden",
-        fontSize: 12,
-        color: "#0A0A0A",
-      }}
+    <PlatformShell
+      breadcrumb={["Mia-Care Dev", "App Cardio-Monitor", "Import"]}
+      topItem={{ label: "Dashboard", icon: NAV_ICONS.dashboard }}
+      sections={[{ title: "Brownfield", items: BROWNFIELD_NAV }]}
     >
-      <style>{`
+      <div
+        style={{
+          background: "#F3F4F6",
+          fontFamily: "ui-sans-serif, system-ui, sans-serif",
+          height: "100%",
+          display: "flex",
+          flexDirection: "column",
+          overflow: "hidden",
+          fontSize: 12,
+          color: "#0A0A0A",
+        }}
+      >
+        <style>{`
         @keyframes bf-slide {
           from { opacity: 0; transform: translateY(6px); }
           to   { opacity: 1; transform: translateY(0); }
@@ -159,198 +170,201 @@ export function BrownfieldRemediatorSvg() {
         .bf-stepper::-webkit-scrollbar { display: none; }
       `}</style>
 
-      {/* ── Stepper ── */}
-      <div
-        className="bf-stepper"
-        style={{
-          background: "white",
-          borderBottom: "1px solid #E5E7EB",
-          padding: "10px 14px",
-          display: "flex",
-          alignItems: "center",
-          gap: 4,
-          flexShrink: 0,
-          overflowX: "auto",
-        }}
-      >
-        {STEPPER_TABS.map((tab, i) => {
-          const isCurrent = activeTab === i;
-          const isPast = activeTab > i;
-          return (
-            <div key={tab} style={{ display: "flex", alignItems: "center", gap: 4, minWidth: 0 }}>
-              <div style={{ display: "flex", alignItems: "center", gap: 5 }}>
-                <div
-                  style={{
-                    width: 18,
-                    height: 18,
-                    borderRadius: "50%",
-                    background: isCurrent ? "#2563EB" : isPast ? "#DCFCE7" : "#E5E7EB",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    flexShrink: 0,
-                    transition: "background 0.3s",
-                  }}
-                >
-                  {isPast ? (
-                    <svg width="9" height="9" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                      <path
-                        d="M3 8l4 4 6-7"
-                        stroke="#059669"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                  ) : (
-                    <span
-                      style={{
-                        fontSize: 9,
-                        fontWeight: 700,
-                        color: isCurrent ? "white" : "#9CA3AF",
-                      }}
-                    >
-                      {i + 1}
-                    </span>
-                  )}
-                </div>
-                <span
-                  style={{
-                    fontSize: 9.5,
-                    fontWeight: isCurrent ? 700 : 500,
-                    color: isCurrent ? "#2563EB" : isPast ? "#059669" : "#9CA3AF",
-                    whiteSpace: "nowrap",
-                    transition: "color 0.3s",
-                  }}
-                >
-                  {tab}
-                </span>
-              </div>
-              {i < STEPPER_TABS.length - 1 && (
-                <svg
-                  width="12"
-                  height="12"
-                  viewBox="0 0 16 16"
-                  fill="none"
-                  aria-hidden="true"
-                  style={{ flexShrink: 0 }}
-                >
-                  <path
-                    d="M5 3l6 5-6 5"
-                    stroke={activeTab > i ? "#059669" : "#D1D5DB"}
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    style={{ transition: "stroke 0.3s" }}
-                  />
-                </svg>
-              )}
-            </div>
-          );
-        })}
-      </div>
-
-      {/* ── Card ── */}
-      <div
-        style={{
-          flex: 1,
-          padding: "14px 14px 10px",
-          display: "flex",
-          flexDirection: "column",
-          gap: 10,
-          minHeight: 0,
-        }}
-      >
+        {/* ── Stepper ── */}
         <div
+          className="bf-stepper"
           style={{
             background: "white",
-            borderRadius: 10,
-            border: "1px solid #E5E7EB",
-            flex: 1,
+            borderBottom: "1px solid #E5E7EB",
+            padding: "10px 14px",
             display: "flex",
-            flexDirection: "column",
-            overflow: "hidden",
-            padding: "14px 16px 12px",
-            gap: 8,
+            alignItems: "center",
+            gap: 4,
+            flexShrink: 0,
+            overflowX: "auto",
           }}
         >
-          {/* Title */}
-          <div>
-            <div style={{ fontWeight: 800, fontSize: 16, color: "#0A0A0A", marginBottom: 3 }}>
-              Import Project
-            </div>
-            <div style={{ fontSize: 10, color: "#6B7280" }}>
-              Ready to dive in? Here&apos;s how to bring your project to life
-            </div>
-          </div>
+          {STEPPER_TABS.map((tab, i) => {
+            const isCurrent = activeTab === i;
+            const isPast = activeTab > i;
+            return (
+              <div key={tab} style={{ display: "flex", alignItems: "center", gap: 4, minWidth: 0 }}>
+                <div style={{ display: "flex", alignItems: "center", gap: 5 }}>
+                  <div
+                    style={{
+                      width: 18,
+                      height: 18,
+                      borderRadius: "50%",
+                      background: isCurrent ? "#2563EB" : isPast ? "#DCFCE7" : "#E5E7EB",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      flexShrink: 0,
+                      transition: "background 0.3s",
+                    }}
+                  >
+                    {isPast ? (
+                      <svg width="9" height="9" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                        <path
+                          d="M3 8l4 4 6-7"
+                          stroke="#059669"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                    ) : (
+                      <span
+                        style={{
+                          fontSize: 9,
+                          fontWeight: 700,
+                          color: isCurrent ? "white" : "#9CA3AF",
+                        }}
+                      >
+                        {i + 1}
+                      </span>
+                    )}
+                  </div>
+                  <span
+                    style={{
+                      fontSize: 9.5,
+                      fontWeight: isCurrent ? 700 : 500,
+                      color: isCurrent ? "#2563EB" : isPast ? "#059669" : "#9CA3AF",
+                      whiteSpace: "nowrap",
+                      transition: "color 0.3s",
+                    }}
+                  >
+                    {tab}
+                  </span>
+                </div>
+                {i < STEPPER_TABS.length - 1 && (
+                  <svg
+                    width="12"
+                    height="12"
+                    viewBox="0 0 16 16"
+                    fill="none"
+                    aria-hidden="true"
+                    style={{ flexShrink: 0 }}
+                  >
+                    <path
+                      d="M5 3l6 5-6 5"
+                      stroke={activeTab > i ? "#059669" : "#D1D5DB"}
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      style={{ transition: "stroke 0.3s" }}
+                    />
+                  </svg>
+                )}
+              </div>
+            );
+          })}
+        </div>
 
-          {/* Steps list */}
+        {/* ── Card ── */}
+        <div
+          style={{
+            flex: 1,
+            padding: "14px 14px 10px",
+            display: "flex",
+            flexDirection: "column",
+            gap: 10,
+            minHeight: 0,
+          }}
+        >
           <div
             style={{
+              background: "white",
+              borderRadius: 10,
+              border: "1px solid #E5E7EB",
               flex: 1,
               display: "flex",
               flexDirection: "column",
-              gap: 6,
-              overflowY: "hidden",
+              overflow: "hidden",
+              padding: "14px 16px 12px",
+              gap: 8,
             }}
           >
-            {STEPS.map((step, i) => (
-              <div
-                key={step.title}
-                style={{
-                  display: "flex",
-                  alignItems: "flex-start",
-                  gap: 10,
-                  padding: "8px 10px",
-                  background: activeStep === i ? "#EFF6FF" : doneSteps[i] ? "#F0FDF4" : "#FAFAFA",
-                  borderLeft: `3px solid ${activeStep === i ? "#2563EB" : doneSteps[i] ? "#22C55E" : "#E5E7EB"}`,
-                  borderRadius: "0 7px 7px 0",
-                  opacity: visibleSteps[i] ? 1 : 0,
-                  transform: visibleSteps[i] ? "translateY(0)" : "translateY(6px)",
-                  transition:
-                    "opacity 0.3s ease, transform 0.3s ease, background 0.3s, border-color 0.3s",
-                }}
-              >
-                <StepIcon icon={step.icon} done={doneSteps[i]} active={activeStep === i} />
-                <div style={{ minWidth: 0 }}>
-                  <div style={{ fontWeight: 600, fontSize: 11, color: "#0A0A0A", marginBottom: 2 }}>
-                    {step.title}
-                  </div>
-                  <div
-                    style={{
-                      fontSize: 9.5,
-                      color: "#6B7280",
-                      lineHeight: 1.45,
-                      overflow: "hidden",
-                      whiteSpace: "nowrap",
-                      textOverflow: "ellipsis",
-                    }}
-                  >
-                    {step.desc}
-                  </div>
-                </div>
+            {/* Title */}
+            <div>
+              <div style={{ fontWeight: 800, fontSize: 16, color: "#0A0A0A", marginBottom: 3 }}>
+                Import Project
               </div>
-            ))}
-          </div>
+              <div style={{ fontSize: 10, color: "#6B7280" }}>
+                Ready to dive in? Here&apos;s how to bring your project to life
+              </div>
+            </div>
 
-          {/* Footer */}
-          <div style={{ flexShrink: 0, paddingTop: 4, borderTop: "1px solid #F3F4F6" }}>
+            {/* Steps list */}
             <div
               style={{
-                display: "inline-block",
-                border: "1px solid #E5E7EB",
-                borderRadius: 7,
-                padding: "4px 12px",
-                fontSize: 10,
-                color: "#6B7280",
-                background: "white",
+                flex: 1,
+                display: "flex",
+                flexDirection: "column",
+                gap: 6,
+                overflowY: "hidden",
               }}
             >
-              Cancel
+              {STEPS.map((step, i) => (
+                <div
+                  key={step.title}
+                  style={{
+                    display: "flex",
+                    alignItems: "flex-start",
+                    gap: 10,
+                    padding: "8px 10px",
+                    background: activeStep === i ? "#EFF6FF" : doneSteps[i] ? "#F0FDF4" : "#FAFAFA",
+                    borderLeft: `3px solid ${activeStep === i ? "#2563EB" : doneSteps[i] ? "#22C55E" : "#E5E7EB"}`,
+                    borderRadius: "0 7px 7px 0",
+                    opacity: visibleSteps[i] ? 1 : 0,
+                    transform: visibleSteps[i] ? "translateY(0)" : "translateY(6px)",
+                    transition:
+                      "opacity 0.3s ease, transform 0.3s ease, background 0.3s, border-color 0.3s",
+                  }}
+                >
+                  <StepIcon icon={step.icon} done={doneSteps[i]} active={activeStep === i} />
+                  <div style={{ minWidth: 0 }}>
+                    <div
+                      style={{ fontWeight: 600, fontSize: 11, color: "#0A0A0A", marginBottom: 2 }}
+                    >
+                      {step.title}
+                    </div>
+                    <div
+                      style={{
+                        fontSize: 9.5,
+                        color: "#6B7280",
+                        lineHeight: 1.45,
+                        overflow: "hidden",
+                        whiteSpace: "nowrap",
+                        textOverflow: "ellipsis",
+                      }}
+                    >
+                      {step.desc}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Footer */}
+            <div style={{ flexShrink: 0, paddingTop: 4, borderTop: "1px solid #F3F4F6" }}>
+              <div
+                style={{
+                  display: "inline-block",
+                  border: "1px solid #E5E7EB",
+                  borderRadius: 7,
+                  padding: "4px 12px",
+                  fontSize: 10,
+                  color: "#6B7280",
+                  background: "white",
+                }}
+              >
+                Cancel
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </PlatformShell>
   );
 }

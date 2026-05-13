@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { NAV_ICONS, PlatformShell } from "./PlatformShell";
 
 type RowStatus = "idle" | "generating" | "current";
 
@@ -48,7 +49,18 @@ export function DocumentationEngineSvg() {
   const [rowStates, setRowStates] = useState<RowStatus[]>(["idle", "idle", "idle"]);
   const [currentCount, setCurrentCount] = useState(START_CURRENT);
   const [notGenCount, setNotGenCount] = useState(START_NOT_GEN);
+  const [compact, setCompact] = useState(false);
+  const wrapRef = useRef<HTMLDivElement>(null);
   const timers = useRef<ReturnType<typeof setTimeout>[]>([]);
+
+  useEffect(() => {
+    if (!wrapRef.current) return;
+    const ro = new ResizeObserver(([entry]) => {
+      setCompact(entry.contentRect.width < 480);
+    });
+    ro.observe(wrapRef.current);
+    return () => ro.disconnect();
+  }, []);
 
   useEffect(() => {
     const clear = () => timers.current.forEach(clearTimeout);
@@ -128,24 +140,38 @@ export function DocumentationEngineSvg() {
     { label: "From Templates", value: FROM_TEMPLATES, color: "#EA580C", bg: "white" },
   ];
 
+  const p = compact ? 8 : 14;
+  const gap = compact ? 6 : 10;
+
+  const DOC_NAV = [
+    { label: "Document Catalog", icon: NAV_ICONS.documentCatalog, active: true },
+    { label: "Document Detail", icon: NAV_ICONS.documentDetail },
+    { label: "Custom Templates", icon: NAV_ICONS.customTemplates },
+    { label: "Variable Library", icon: NAV_ICONS.variableLibrary },
+  ];
+
   return (
-    <div
-      style={{
-        background: "white",
-        borderRadius: 12,
-        border: "1px solid #E5E5E5",
-        fontFamily: "ui-sans-serif, system-ui, sans-serif",
-        fontSize: 12,
-        color: "#0A0A0A",
-        height: "100%",
-        display: "flex",
-        flexDirection: "column",
-        overflow: "hidden",
-        padding: "14px 16px 12px",
-        gap: 10,
-      }}
+    <PlatformShell
+      breadcrumb={["Mia-Care Dev", "App Cardio-Monitor", "Document Catalog"]}
+      topItem={{ label: "Dashboard", icon: NAV_ICONS.dashboard }}
+      sections={[{ title: "Documentation", items: DOC_NAV }]}
     >
-      <style>{`
+      <div
+        ref={wrapRef}
+        style={{
+          background: "white",
+          fontFamily: "ui-sans-serif, system-ui, sans-serif",
+          fontSize: compact ? 11 : 12,
+          color: "#0A0A0A",
+          height: "100%",
+          display: "flex",
+          flexDirection: "column",
+          overflow: "hidden",
+          padding: `${p}px ${p + 2}px ${p - 2}px`,
+          gap,
+        }}
+      >
+        <style>{`
         @keyframes doc-fade-in {
           from { opacity: 0; transform: translateY(4px); }
           to   { opacity: 1; transform: translateY(0);   }
@@ -154,346 +180,336 @@ export function DocumentationEngineSvg() {
           from { transform: rotate(0deg); }
           to   { transform: rotate(360deg); }
         }
-        @media (max-width: 420px) {
-          .doc-subtitle { display: none !important; }
-          .doc-stat-grid { grid-template-columns: repeat(3, 1fr) !important; }
-          .doc-table-col { grid-template-columns: 38px 1fr 82px 74px !important; }
-          .doc-col-ver, .doc-col-fmts { display: none !important; }
-        }
       `}</style>
 
-      {/* ── Header ── */}
-      <div
-        style={{
-          display: "flex",
-          alignItems: "flex-start",
-          justifyContent: "space-between",
-          gap: 8,
-        }}
-      >
-        <div style={{ minWidth: 0 }}>
-          <div style={{ fontWeight: 700, fontSize: 14 }}>Documentation</div>
-          <div
-            className="doc-subtitle"
-            style={{ color: "#737373", fontSize: 9, marginTop: 2, lineHeight: 1.4 }}
-          >
-            eQMS-compliant document catalog — generate, download, and manage your Technical
-            Documentation File
+        {/* ── Header ── */}
+        <div
+          style={{
+            display: "flex",
+            alignItems: "flex-start",
+            justifyContent: "space-between",
+            gap: 8,
+          }}
+        >
+          <div style={{ minWidth: 0 }}>
+            <div style={{ fontWeight: 700, fontSize: compact ? 13 : 14 }}>Documentation</div>
+            {!compact && (
+              <div style={{ color: "#737373", fontSize: 9, marginTop: 2, lineHeight: 1.4 }}>
+                eQMS-compliant document catalog — generate, download, and manage your Technical
+                Documentation File
+              </div>
+            )}
           </div>
-        </div>
-        <div style={{ display: "flex", gap: 5, flexShrink: 0 }}>
           <div
             style={{
               background: "#2563EB",
               color: "white",
-              border: "none",
               borderRadius: 7,
               padding: "4px 8px",
               fontSize: 9,
               fontWeight: 700,
-              display: "flex",
-              alignItems: "center",
-              gap: 3,
               whiteSpace: "nowrap",
+              flexShrink: 0,
             }}
           >
             ↓ Export (ZIP)
           </div>
         </div>
-      </div>
 
-      {/* ── Stat cards ── */}
-      <div
-        className="doc-stat-grid"
-        style={{ display: "grid", gridTemplateColumns: "repeat(6,1fr)", gap: 5 }}
-      >
-        {statCards.map((c) => (
-          <div
-            key={c.label}
-            style={{
-              border: "1px solid #E5E5E5",
-              borderRadius: 8,
-              padding: "6px 7px",
-              background: c.bg,
-              transition: "background 0.4s",
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "space-between",
-            }}
-          >
+        {/* ── Stat cards ── */}
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: `repeat(${compact ? 3 : 6}, 1fr)`,
+            gap: compact ? 4 : 5,
+          }}
+        >
+          {statCards.map((c) => (
             <div
+              key={c.label}
               style={{
-                color: c.color,
-                fontSize: 8,
-                lineHeight: 1.2,
-                fontWeight: 500,
+                border: "1px solid #E5E5E5",
+                borderRadius: 8,
+                padding: "6px 7px",
+                background: c.bg,
+                transition: "background 0.4s",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-between",
               }}
             >
-              {c.label}
+              <div
+                style={{
+                  color: c.color,
+                  fontSize: 8,
+                  lineHeight: 1.2,
+                  fontWeight: 500,
+                }}
+              >
+                {c.label}
+              </div>
+              <div
+                style={{
+                  fontWeight: 800,
+                  fontSize: 18,
+                  color: c.color,
+                  lineHeight: 1,
+                  transition: "color 0.3s",
+                  marginTop: 4,
+                }}
+              >
+                {c.value}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* ── Search bar ── */}
+        {!compact && (
+          <div style={{ display: "flex", gap: 6 }}>
+            <div
+              style={{
+                flex: 1,
+                border: "1px solid #E5E5E5",
+                borderRadius: 8,
+                padding: "5px 10px",
+                display: "flex",
+                alignItems: "center",
+                gap: 6,
+              }}
+            >
+              <svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <circle cx="7" cy="7" r="5" stroke="#9CA3AF" strokeWidth="1.3" />
+                <path d="M11 11l3 3" stroke="#9CA3AF" strokeWidth="1.3" strokeLinecap="round" />
+              </svg>
+              <span style={{ color: "#9CA3AF", fontSize: 10 }}>
+                Search by title, code, or standard…
+              </span>
             </div>
             <div
               style={{
-                fontWeight: 800,
-                fontSize: 18,
-                color: c.color,
-                lineHeight: 1,
-                transition: "color 0.3s",
-                marginTop: 4,
+                border: "1px solid #E5E5E5",
+                borderRadius: 8,
+                padding: "5px 10px",
+                fontSize: 10,
+                color: "#525252",
+                background: "white",
+                display: "flex",
+                alignItems: "center",
+                gap: 4,
+                whiteSpace: "nowrap",
               }}
             >
-              {c.value}
+              <svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <path
+                  d="M2 4h12M4 8h8M6 12h4"
+                  stroke="#525252"
+                  strokeWidth="1.3"
+                  strokeLinecap="round"
+                />
+              </svg>
+              Filters
             </div>
           </div>
-        ))}
-      </div>
+        )}
 
-      {/* ── Search bar ── */}
-      <div style={{ display: "flex", gap: 6 }}>
+        {/* ── Table ── */}
         <div
           style={{
             flex: 1,
             border: "1px solid #E5E5E5",
             borderRadius: 8,
-            padding: "5px 10px",
+            overflow: "hidden",
             display: "flex",
-            alignItems: "center",
-            gap: 6,
+            flexDirection: "column",
           }}
         >
-          <svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-            <circle cx="7" cy="7" r="5" stroke="#9CA3AF" strokeWidth="1.3" />
-            <path d="M11 11l3 3" stroke="#9CA3AF" strokeWidth="1.3" strokeLinecap="round" />
-          </svg>
-          <span style={{ color: "#9CA3AF", fontSize: 10 }}>
-            Search by title, code, or standard…
-          </span>
-        </div>
-        <div
-          style={{
-            border: "1px solid #E5E5E5",
-            borderRadius: 8,
-            padding: "5px 10px",
-            fontSize: 10,
-            color: "#525252",
-            background: "white",
-            display: "flex",
-            alignItems: "center",
-            gap: 4,
-            whiteSpace: "nowrap",
-          }}
-        >
-          <svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-            <path
-              d="M2 4h12M4 8h8M6 12h4"
-              stroke="#525252"
-              strokeWidth="1.3"
-              strokeLinecap="round"
-            />
-          </svg>
-          Filters
-        </div>
-      </div>
+          {/* Section header */}
+          <div
+            style={{
+              background: "#FAFAFA",
+              padding: "6px 10px",
+              borderBottom: "1px solid #E5E5E5",
+              display: "flex",
+              alignItems: "center",
+              gap: 6,
+              flexShrink: 0,
+            }}
+          >
+            <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
+              <path d="M2 3l3 4 3-4" stroke="#737373" strokeWidth="1.2" strokeLinecap="round" />
+            </svg>
+            <svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path
+                d="M6 2h4M4 6h8M4 10h8"
+                stroke="#2563EB"
+                strokeWidth="1.3"
+                strokeLinecap="round"
+              />
+            </svg>
+            <span style={{ fontWeight: 600, fontSize: 11 }}>Design &amp; Development</span>
+            <span style={{ color: "#737373", fontSize: 10 }}>(7 documents)</span>
+          </div>
 
-      {/* ── Table ── */}
-      <div
-        style={{
-          flex: 1,
-          border: "1px solid #E5E5E5",
-          borderRadius: 8,
-          overflow: "hidden",
-          display: "flex",
-          flexDirection: "column",
-        }}
-      >
-        {/* Section header */}
-        <div
-          style={{
-            background: "#FAFAFA",
-            padding: "6px 10px",
-            borderBottom: "1px solid #E5E5E5",
-            display: "flex",
-            alignItems: "center",
-            gap: 6,
-            flexShrink: 0,
-          }}
-        >
-          <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
-            <path d="M2 3l3 4 3-4" stroke="#737373" strokeWidth="1.2" strokeLinecap="round" />
-          </svg>
-          <svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-            <path
-              d="M6 2h4M4 6h8M4 10h8"
-              stroke="#2563EB"
-              strokeWidth="1.3"
-              strokeLinecap="round"
-            />
-          </svg>
-          <span style={{ fontWeight: 600, fontSize: 11 }}>Design &amp; Development</span>
-          <span style={{ color: "#737373", fontSize: 10 }}>(7 documents)</span>
-        </div>
+          {/* Column headers */}
+          <div
+            className="doc-table-col"
+            style={{
+              display: "grid",
+              gridTemplateColumns: compact ? "36px 1fr 76px" : "38px 1fr 82px 40px 74px 80px",
+              padding: "4px 10px",
+              background: "#F9FAFB",
+              borderBottom: "1px solid #E5E5E5",
+              flexShrink: 0,
+            }}
+          >
+            {(compact
+              ? ["Code", "Document", "Status"]
+              : ["Code", "Document", "Status", "Ver.", "Last Updated", "Formats"]
+            ).map((h) => (
+              <div key={h} style={{ color: "#9CA3AF", fontSize: 9, fontWeight: 600 }}>
+                {h}
+              </div>
+            ))}
+          </div>
 
-        {/* Column headers */}
-        <div
-          className="doc-table-col"
-          style={{
-            display: "grid",
-            gridTemplateColumns: "38px 1fr 82px 40px 74px 80px",
-            padding: "4px 10px",
-            background: "#F9FAFB",
-            borderBottom: "1px solid #E5E5E5",
-            flexShrink: 0,
-          }}
-        >
-          {["Code", "Document", "Status", "Ver.", "Last Updated", "Formats"].map((h, hi) => (
-            <div
-              key={h}
-              className={
-                hi === 3
-                  ? "doc-col-ver"
-                  : hi === 4
-                    ? undefined
-                    : hi === 5
-                      ? "doc-col-fmts"
-                      : undefined
-              }
-              style={{ color: "#9CA3AF", fontSize: 9, fontWeight: 600 }}
-            >
-              {h}
-            </div>
-          ))}
-        </div>
+          {/* Rows */}
+          <div style={{ flex: 1, overflowY: "hidden" }}>
+            {DOCS.map((doc, i) => {
+              const status = rowStates[i];
+              if (status === "idle") return null;
+              return (
+                <div
+                  key={doc.code}
+                  style={{
+                    display: "grid",
+                    gridTemplateColumns: compact ? "36px 1fr 76px" : "38px 1fr 82px 40px 74px 80px",
+                    padding: compact ? "5px 10px" : "7px 10px",
+                    borderBottom: "1px solid #F3F4F6",
+                    alignItems: "center",
+                    animation: "doc-fade-in 0.35s ease",
+                  }}
+                >
+                  {/* Code */}
+                  <div style={{ fontWeight: 700, fontSize: 11, color: "#0A0A0A" }}>{doc.code}</div>
 
-        {/* Rows */}
-        <div style={{ flex: 1, overflowY: "hidden" }}>
-          {DOCS.map((doc, i) => {
-            const status = rowStates[i];
-            if (status === "idle") return null;
-            return (
-              <div
-                key={doc.code}
-                className="doc-table-col"
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: "38px 1fr 82px 40px 74px 80px",
-                  padding: "7px 10px",
-                  borderBottom: "1px solid #F3F4F6",
-                  alignItems: "center",
-                  animation: "doc-fade-in 0.35s ease",
-                }}
-              >
-                {/* Code */}
-                <div style={{ fontWeight: 700, fontSize: 11, color: "#0A0A0A" }}>{doc.code}</div>
-
-                {/* Document name */}
-                <div style={{ minWidth: 0 }}>
-                  <div
-                    style={{
-                      fontSize: 10,
-                      color: "#0A0A0A",
-                      overflow: "hidden",
-                      whiteSpace: "nowrap",
-                      textOverflow: "ellipsis",
-                    }}
-                  >
-                    {doc.name}
+                  {/* Document name */}
+                  <div style={{ minWidth: 0 }}>
+                    <div
+                      style={{
+                        fontSize: 10,
+                        color: "#0A0A0A",
+                        overflow: "hidden",
+                        whiteSpace: "nowrap",
+                        textOverflow: "ellipsis",
+                      }}
+                    >
+                      {doc.name}
+                    </div>
+                    <div style={{ fontSize: 8.5, color: "#9CA3AF" }}>{doc.standard}</div>
                   </div>
-                  <div style={{ fontSize: 8.5, color: "#9CA3AF" }}>{doc.standard}</div>
-                </div>
 
-                {/* Status */}
-                <div>
-                  {status === "generating" ? (
-                    <span
-                      style={{
-                        display: "inline-flex",
-                        alignItems: "center",
-                        gap: 4,
-                        background: "#FEF9C3",
-                        color: "#CA8A04",
-                        borderRadius: 20,
-                        padding: "2px 7px",
-                        fontSize: 9,
-                        fontWeight: 600,
-                        whiteSpace: "nowrap",
-                      }}
-                    >
-                      <svg
-                        width="9"
-                        height="9"
-                        viewBox="0 0 16 16"
-                        fill="none"
-                        aria-hidden="true"
-                        style={{ animation: "doc-spin 0.8s linear infinite", flexShrink: 0 }}
-                      >
-                        <path
-                          d="M8 2a6 6 0 100 12A6 6 0 008 2z"
-                          stroke="#CA8A04"
-                          strokeWidth="1.5"
-                          strokeDasharray="20 10"
-                        />
-                      </svg>
-                      Generating…
-                    </span>
-                  ) : (
-                    <span
-                      style={{
-                        display: "inline-flex",
-                        alignItems: "center",
-                        gap: 4,
-                        background: "#DCFCE7",
-                        color: "#059669",
-                        border: "1px solid #A7F3D0",
-                        borderRadius: 20,
-                        padding: "2px 7px",
-                        fontSize: 9,
-                        fontWeight: 600,
-                        whiteSpace: "nowrap",
-                      }}
-                    >
-                      <svg width="9" height="9" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                        <path
-                          d="M3 8l4 4 6-6"
-                          stroke="#059669"
-                          strokeWidth="1.8"
-                          strokeLinecap="round"
-                        />
-                      </svg>
-                      Current
-                    </span>
-                  )}
-                </div>
-
-                {/* Version */}
-                <div className="doc-col-ver" style={{ fontSize: 10, color: "#525252" }}>
-                  {doc.version}
-                </div>
-
-                {/* Last Updated */}
-                <div style={{ fontSize: 9.5, color: "#525252" }}>{doc.updated}</div>
-
-                {/* Format badges */}
-                <div className="doc-col-fmts" style={{ display: "flex", gap: 3, flexWrap: "wrap" }}>
-                  {status === "current" &&
-                    doc.formats.map((f) => (
+                  {/* Status */}
+                  <div>
+                    {status === "generating" ? (
                       <span
-                        key={f}
                         style={{
-                          ...FORMAT_STYLE[f],
-                          borderRadius: 4,
-                          padding: "1px 5px",
-                          fontSize: 8.5,
-                          fontWeight: 700,
+                          display: "inline-flex",
+                          alignItems: "center",
+                          gap: 4,
+                          background: "#FEF9C3",
+                          color: "#CA8A04",
+                          borderRadius: 20,
+                          padding: "2px 7px",
+                          fontSize: 9,
+                          fontWeight: 600,
+                          whiteSpace: "nowrap",
                         }}
                       >
-                        {f}
+                        <svg
+                          width="9"
+                          height="9"
+                          viewBox="0 0 16 16"
+                          fill="none"
+                          aria-hidden="true"
+                          style={{ animation: "doc-spin 0.8s linear infinite", flexShrink: 0 }}
+                        >
+                          <path
+                            d="M8 2a6 6 0 100 12A6 6 0 008 2z"
+                            stroke="#CA8A04"
+                            strokeWidth="1.5"
+                            strokeDasharray="20 10"
+                          />
+                        </svg>
+                        Generating…
                       </span>
-                    ))}
+                    ) : (
+                      <span
+                        style={{
+                          display: "inline-flex",
+                          alignItems: "center",
+                          gap: 4,
+                          background: "#DCFCE7",
+                          color: "#059669",
+                          border: "1px solid #A7F3D0",
+                          borderRadius: 20,
+                          padding: "2px 7px",
+                          fontSize: 9,
+                          fontWeight: 600,
+                          whiteSpace: "nowrap",
+                        }}
+                      >
+                        <svg
+                          width="9"
+                          height="9"
+                          viewBox="0 0 16 16"
+                          fill="none"
+                          aria-hidden="true"
+                        >
+                          <path
+                            d="M3 8l4 4 6-6"
+                            stroke="#059669"
+                            strokeWidth="1.8"
+                            strokeLinecap="round"
+                          />
+                        </svg>
+                        Current
+                      </span>
+                    )}
+                  </div>
+
+                  {/* Version — hidden on compact */}
+                  {!compact && <div style={{ fontSize: 10, color: "#525252" }}>{doc.version}</div>}
+
+                  {/* Last Updated — hidden on compact */}
+                  {!compact && <div style={{ fontSize: 9.5, color: "#525252" }}>{doc.updated}</div>}
+
+                  {/* Format badges — hidden on compact */}
+                  {!compact && (
+                    <div style={{ display: "flex", gap: 3, flexWrap: "wrap" }}>
+                      {status === "current" &&
+                        doc.formats.map((f) => (
+                          <span
+                            key={f}
+                            style={{
+                              ...FORMAT_STYLE[f],
+                              borderRadius: 4,
+                              padding: "1px 5px",
+                              fontSize: 8.5,
+                              fontWeight: 700,
+                            }}
+                          >
+                            {f}
+                          </span>
+                        ))}
+                    </div>
+                  )}
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
       </div>
-    </div>
+    </PlatformShell>
   );
 }

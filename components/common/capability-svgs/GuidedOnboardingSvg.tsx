@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { NAV_ICONS, PlatformShell } from "./PlatformShell";
 
 const BLUE = "#2563EB";
 const PURPLE = "#7C3AED";
@@ -99,20 +100,31 @@ export function GuidedOnboardingSvg() {
   const overallPct = Math.round((doneTasks / totalTasks) * 100);
   const donePhases = PHASES.filter((p) => p.status === "done").length;
 
+  const GUIDED_NAV = [
+    { label: "Role View", icon: NAV_ICONS.roleView },
+    { label: "AI Guidance", icon: NAV_ICONS.aiGuidance },
+    { label: "Onboarding", icon: NAV_ICONS.onboarding, active: true },
+  ];
+
   return (
-    <div
-      style={{
-        background: "white",
-        fontFamily: "ui-sans-serif, system-ui, sans-serif",
-        fontSize: 12,
-        color: "#0A0A0A",
-        height: "100%",
-        display: "flex",
-        flexDirection: "column",
-        overflow: "hidden",
-      }}
+    <PlatformShell
+      breadcrumb={["Mia-Care Dev", "App Cardio-Monitor", "Onboarding"]}
+      topItem={{ label: "Dashboard", icon: NAV_ICONS.dashboard }}
+      sections={[{ title: "Guided Workflows", items: GUIDED_NAV }]}
     >
-      <style>{`
+      <div
+        style={{
+          background: "white",
+          fontFamily: "ui-sans-serif, system-ui, sans-serif",
+          fontSize: 12,
+          color: "#0A0A0A",
+          height: "100%",
+          display: "flex",
+          flexDirection: "column",
+          overflow: "hidden",
+        }}
+      >
+        <style>{`
         @keyframes go-slide {
           from { opacity: 0; transform: translateY(8px); }
           to   { opacity: 1; transform: translateY(0); }
@@ -127,289 +139,290 @@ export function GuidedOnboardingSvg() {
         }
       `}</style>
 
-      {/* Header */}
-      <div
-        style={{
-          padding: "11px 14px 10px",
-          borderBottom: "1px solid #E5E5E5",
-          flexShrink: 0,
-        }}
-      >
+        {/* Header */}
         <div
           style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            marginBottom: 6,
+            padding: "11px 14px 10px",
+            borderBottom: "1px solid #E5E5E5",
+            flexShrink: 0,
           }}
         >
-          <div>
-            <div style={{ fontWeight: 700, fontSize: 13 }}>SaMD Onboarding Path</div>
-            <div style={{ fontSize: 9, color: "#9CA3AF", marginTop: 1 }}>
-              Team: App Cardio-Monitor · 3 members
-            </div>
-          </div>
-          <div style={{ textAlign: "right" }}>
-            <div style={{ fontSize: 15, fontWeight: 800, color: BLUE }}>{overallPct}%</div>
-            <div style={{ fontSize: 8.5, color: "#9CA3AF" }}>
-              {donePhases} of {PHASES.length} phases
-            </div>
-          </div>
-        </div>
-        {/* Overall progress bar */}
-        <div style={{ height: 5, background: "#F3F4F6", borderRadius: 99, overflow: "hidden" }}>
           <div
             style={{
-              height: "100%",
-              width: `${overallPct}%`,
-              background: `linear-gradient(90deg, ${GREEN}, ${BLUE})`,
-              borderRadius: 99,
-              transition: "width 0.8s ease",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              marginBottom: 6,
             }}
-          />
-        </div>
-      </div>
-
-      {/* Phases list */}
-      <div
-        style={{
-          flex: 1,
-          overflowY: "hidden",
-          padding: "10px 12px",
-          display: "flex",
-          flexDirection: "column",
-          gap: 6,
-        }}
-      >
-        {PHASES.map((phase, i) => {
-          const visible = visiblePhases > i;
-          const isActive = phase.status === "active";
-          const isExpanded = isActive && expanded;
-
-          return (
+          >
+            <div>
+              <div style={{ fontWeight: 700, fontSize: 13 }}>SaMD Onboarding Path</div>
+              <div style={{ fontSize: 9, color: "#9CA3AF", marginTop: 1 }}>
+                Team: App Cardio-Monitor · 3 members
+              </div>
+            </div>
+            <div style={{ textAlign: "right" }}>
+              <div style={{ fontSize: 15, fontWeight: 800, color: BLUE }}>{overallPct}%</div>
+              <div style={{ fontSize: 8.5, color: "#9CA3AF" }}>
+                {donePhases} of {PHASES.length} phases
+              </div>
+            </div>
+          </div>
+          {/* Overall progress bar */}
+          <div style={{ height: 5, background: "#F3F4F6", borderRadius: 99, overflow: "hidden" }}>
             <div
-              key={phase.name}
               style={{
-                opacity: visible ? 1 : 0,
-                transform: visible ? "translateY(0)" : "translateY(8px)",
-                transition: "opacity 0.3s ease, transform 0.3s ease",
+                height: "100%",
+                width: `${overallPct}%`,
+                background: `linear-gradient(90deg, ${GREEN}, ${BLUE})`,
+                borderRadius: 99,
+                transition: "width 0.8s ease",
               }}
-            >
-              {/* Phase row */}
+            />
+          </div>
+        </div>
+
+        {/* Phases list */}
+        <div
+          style={{
+            flex: 1,
+            overflowY: "hidden",
+            padding: "10px 12px",
+            display: "flex",
+            flexDirection: "column",
+            gap: 6,
+          }}
+        >
+          {PHASES.map((phase, i) => {
+            const visible = visiblePhases > i;
+            const isActive = phase.status === "active";
+            const isExpanded = isActive && expanded;
+
+            return (
               <div
+                key={phase.name}
                 style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: 9,
-                  padding: "8px 10px",
-                  background: phase.bg,
-                  border: `1px solid ${phase.border}`,
-                  borderRadius: isExpanded ? "8px 8px 0 0" : 8,
-                  transition: "border-radius 0.2s",
-                  animation: visible ? "go-slide 0.3s ease" : "none",
-                  ...(isActive && { animation: "go-pulse 2.5s ease-in-out infinite" }),
+                  opacity: visible ? 1 : 0,
+                  transform: visible ? "translateY(0)" : "translateY(8px)",
+                  transition: "opacity 0.3s ease, transform 0.3s ease",
                 }}
               >
-                {/* Status icon */}
+                {/* Phase row */}
                 <div
                   style={{
-                    width: 20,
-                    height: 20,
-                    borderRadius: "50%",
-                    background:
-                      phase.status === "done"
-                        ? GREEN
-                        : phase.status === "active"
-                          ? BLUE
-                          : "#E5E7EB",
                     display: "flex",
                     alignItems: "center",
-                    justifyContent: "center",
-                    flexShrink: 0,
-                    fontSize: 9,
-                    color: "white",
-                    fontWeight: 700,
+                    gap: 9,
+                    padding: "8px 10px",
+                    background: phase.bg,
+                    border: `1px solid ${phase.border}`,
+                    borderRadius: isExpanded ? "8px 8px 0 0" : 8,
+                    transition: "border-radius 0.2s",
+                    animation: visible ? "go-slide 0.3s ease" : "none",
+                    ...(isActive && { animation: "go-pulse 2.5s ease-in-out infinite" }),
                   }}
                 >
-                  {phase.status === "done" ? "✓" : phase.status === "active" ? "▶" : `${i + 1}`}
-                </div>
-
-                <div style={{ flex: 1, minWidth: 0 }}>
+                  {/* Status icon */}
                   <div
                     style={{
-                      fontSize: 10.5,
-                      fontWeight: isActive ? 700 : 500,
-                      color: phase.status === "pending" ? "#9CA3AF" : "#0A0A0A",
+                      width: 20,
+                      height: 20,
+                      borderRadius: "50%",
+                      background:
+                        phase.status === "done"
+                          ? GREEN
+                          : phase.status === "active"
+                            ? BLUE
+                            : "#E5E7EB",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      flexShrink: 0,
+                      fontSize: 9,
+                      color: "white",
+                      fontWeight: 700,
                     }}
                   >
-                    {phase.name}
+                    {phase.status === "done" ? "✓" : phase.status === "active" ? "▶" : `${i + 1}`}
                   </div>
-                  <div style={{ fontSize: 8.5, color: "#9CA3AF", marginTop: 1 }}>
-                    {phase.days} · {phase.completedTasks}/{phase.tasks} tasks
-                  </div>
-                </div>
 
-                {/* Phase progress bar */}
-                <div
-                  style={{
-                    width: 60,
-                    height: 4,
-                    background: "#F3F4F6",
-                    borderRadius: 99,
-                    overflow: "hidden",
-                    flexShrink: 0,
-                  }}
-                >
-                  <div
-                    style={{
-                      height: "100%",
-                      width: `${(phase.completedTasks / phase.tasks) * 100}%`,
-                      background: phase.color,
-                      borderRadius: 99,
-                      transition: "width 0.6s ease",
-                    }}
-                  />
-                </div>
-
-                <span
-                  style={{
-                    fontSize: 8,
-                    fontWeight: 700,
-                    color: phase.color,
-                    flexShrink: 0,
-                    width: 28,
-                    textAlign: "right",
-                  }}
-                >
-                  {Math.round((phase.completedTasks / phase.tasks) * 100)}%
-                </span>
-              </div>
-
-              {/* Expanded milestones for active phase */}
-              {isExpanded && phase.milestones && (
-                <div
-                  style={{
-                    background: "#F8FAFF",
-                    border: `1px solid ${phase.border}`,
-                    borderTop: "none",
-                    borderRadius: "0 0 8px 8px",
-                    padding: "8px 10px 8px 18px",
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: 5,
-                    animation: "go-expand 0.35s ease",
-                    overflow: "hidden",
-                  }}
-                >
-                  {phase.milestones.map((m) => (
+                  <div style={{ flex: 1, minWidth: 0 }}>
                     <div
-                      key={m.label}
                       style={{
-                        display: "flex",
-                        alignItems: "center",
-                        gap: 7,
-                        padding: "3px 6px",
-                        borderRadius: 5,
-                        background: m.current ? "#DBEAFE" : "transparent",
-                        border: m.current ? `1px solid ${BLUE}40` : "1px solid transparent",
+                        fontSize: 10.5,
+                        fontWeight: isActive ? 700 : 500,
+                        color: phase.status === "pending" ? "#9CA3AF" : "#0A0A0A",
                       }}
                     >
+                      {phase.name}
+                    </div>
+                    <div style={{ fontSize: 8.5, color: "#9CA3AF", marginTop: 1 }}>
+                      {phase.days} · {phase.completedTasks}/{phase.tasks} tasks
+                    </div>
+                  </div>
+
+                  {/* Phase progress bar */}
+                  <div
+                    style={{
+                      width: 60,
+                      height: 4,
+                      background: "#F3F4F6",
+                      borderRadius: 99,
+                      overflow: "hidden",
+                      flexShrink: 0,
+                    }}
+                  >
+                    <div
+                      style={{
+                        height: "100%",
+                        width: `${(phase.completedTasks / phase.tasks) * 100}%`,
+                        background: phase.color,
+                        borderRadius: 99,
+                        transition: "width 0.6s ease",
+                      }}
+                    />
+                  </div>
+
+                  <span
+                    style={{
+                      fontSize: 8,
+                      fontWeight: 700,
+                      color: phase.color,
+                      flexShrink: 0,
+                      width: 28,
+                      textAlign: "right",
+                    }}
+                  >
+                    {Math.round((phase.completedTasks / phase.tasks) * 100)}%
+                  </span>
+                </div>
+
+                {/* Expanded milestones for active phase */}
+                {isExpanded && phase.milestones && (
+                  <div
+                    style={{
+                      background: "#F8FAFF",
+                      border: `1px solid ${phase.border}`,
+                      borderTop: "none",
+                      borderRadius: "0 0 8px 8px",
+                      padding: "8px 10px 8px 18px",
+                      display: "flex",
+                      flexDirection: "column",
+                      gap: 5,
+                      animation: "go-expand 0.35s ease",
+                      overflow: "hidden",
+                    }}
+                  >
+                    {phase.milestones.map((m) => (
                       <div
+                        key={m.label}
                         style={{
-                          width: 13,
-                          height: 13,
-                          borderRadius: 3,
-                          border: `1.5px solid ${m.done ? BLUE : m.current ? BLUE : "#D1D5DB"}`,
-                          background: m.done ? BLUE : "white",
                           display: "flex",
                           alignItems: "center",
-                          justifyContent: "center",
-                          flexShrink: 0,
-                          fontSize: 7,
-                          color: "white",
+                          gap: 7,
+                          padding: "3px 6px",
+                          borderRadius: 5,
+                          background: m.current ? "#DBEAFE" : "transparent",
+                          border: m.current ? `1px solid ${BLUE}40` : "1px solid transparent",
                         }}
                       >
-                        {m.done ? "✓" : ""}
-                      </div>
-                      <span
-                        style={{
-                          fontSize: 9.5,
-                          color: m.done ? "#374151" : m.current ? BLUE : "#9CA3AF",
-                          fontWeight: m.current ? 600 : 400,
-                        }}
-                      >
-                        {m.label}
-                      </span>
-                      {m.current && (
-                        <span
+                        <div
                           style={{
-                            marginLeft: "auto",
-                            background: "#DBEAFE",
-                            color: BLUE,
-                            border: `1px solid ${BLUE}40`,
-                            borderRadius: 4,
-                            padding: "0px 5px",
-                            fontSize: 7.5,
-                            fontWeight: 700,
+                            width: 13,
+                            height: 13,
+                            borderRadius: 3,
+                            border: `1.5px solid ${m.done ? BLUE : m.current ? BLUE : "#D1D5DB"}`,
+                            background: m.done ? BLUE : "white",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
                             flexShrink: 0,
+                            fontSize: 7,
+                            color: "white",
                           }}
                         >
-                          In progress
+                          {m.done ? "✓" : ""}
+                        </div>
+                        <span
+                          style={{
+                            fontSize: 9.5,
+                            color: m.done ? "#374151" : m.current ? BLUE : "#9CA3AF",
+                            fontWeight: m.current ? 600 : 400,
+                          }}
+                        >
+                          {m.label}
                         </span>
-                      )}
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
-          );
-        })}
-      </div>
+                        {m.current && (
+                          <span
+                            style={{
+                              marginLeft: "auto",
+                              background: "#DBEAFE",
+                              color: BLUE,
+                              border: `1px solid ${BLUE}40`,
+                              borderRadius: 4,
+                              padding: "0px 5px",
+                              fontSize: 7.5,
+                              fontWeight: 700,
+                              flexShrink: 0,
+                            }}
+                          >
+                            In progress
+                          </span>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            );
+          })}
+        </div>
 
-      {/* Footer */}
-      <div
-        style={{
-          padding: "8px 14px",
-          borderTop: "1px solid #E5E5E5",
-          display: "flex",
-          alignItems: "center",
-          gap: 7,
-          flexShrink: 0,
-        }}
-      >
-        <span style={{ fontSize: 9, color: "#9CA3AF" }}>Guided by</span>
-        <span
+        {/* Footer */}
+        <div
           style={{
-            background: "#EFF6FF",
-            color: BLUE,
-            border: "1px solid #BFDBFE",
-            borderRadius: 4,
-            padding: "1px 6px",
-            fontSize: 8.5,
-            fontFamily: "ui-monospace, monospace",
-            fontWeight: 600,
+            padding: "8px 14px",
+            borderTop: "1px solid #E5E5E5",
+            display: "flex",
+            alignItems: "center",
+            gap: 7,
+            flexShrink: 0,
           }}
         >
-          IEC 62304
-        </span>
-        <span
-          style={{
-            background: "#F5F3FF",
-            color: PURPLE,
-            border: "1px solid #C4B5FD",
-            borderRadius: 4,
-            padding: "1px 6px",
-            fontSize: 8.5,
-            fontFamily: "ui-monospace, monospace",
-            fontWeight: 600,
-          }}
-        >
-          ISO 13485
-        </span>
-        <span style={{ marginLeft: "auto", fontSize: 8.5, color: "#9CA3AF" }}>
-          {PHASES.filter((p) => p.status === "pending").length} phases remaining
-        </span>
+          <span style={{ fontSize: 9, color: "#9CA3AF" }}>Guided by</span>
+          <span
+            style={{
+              background: "#EFF6FF",
+              color: BLUE,
+              border: "1px solid #BFDBFE",
+              borderRadius: 4,
+              padding: "1px 6px",
+              fontSize: 8.5,
+              fontFamily: "ui-monospace, monospace",
+              fontWeight: 600,
+            }}
+          >
+            IEC 62304
+          </span>
+          <span
+            style={{
+              background: "#F5F3FF",
+              color: PURPLE,
+              border: "1px solid #C4B5FD",
+              borderRadius: 4,
+              padding: "1px 6px",
+              fontSize: 8.5,
+              fontFamily: "ui-monospace, monospace",
+              fontWeight: 600,
+            }}
+          >
+            ISO 13485
+          </span>
+          <span style={{ marginLeft: "auto", fontSize: 8.5, color: "#9CA3AF" }}>
+            {PHASES.filter((p) => p.status === "pending").length} phases remaining
+          </span>
+        </div>
       </div>
-    </div>
+    </PlatformShell>
   );
 }

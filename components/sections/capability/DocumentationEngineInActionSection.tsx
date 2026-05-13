@@ -1,36 +1,40 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { GuidedChatSvg } from "@/components/common/capability-svgs/GuidedChatSvg";
-import { GuidedOnboardingSvg } from "@/components/common/capability-svgs/GuidedOnboardingSvg";
-import { GuidedWorkflowsSvg } from "@/components/common/capability-svgs/GuidedWorkflowsSvg";
+import { DocumentationDetailSvg } from "@/components/common/capability-svgs/DocumentationDetailSvg";
+import { DocumentationEngineSvg } from "@/components/common/capability-svgs/DocumentationEngineSvg";
+import { DocumentationTemplatesSvg } from "@/components/common/capability-svgs/DocumentationTemplatesSvg";
+import { DocumentationVariablesSvg } from "@/components/common/capability-svgs/DocumentationVariablesSvg";
 import { PillTag } from "@/components/common/PillTag";
 
 const TABS = [
   {
-    label: "Role View",
+    label: "Document Catalog",
     caption:
-      "Role-based checklists — developer, QA, and regulatory affairs each see the exact scope they own. Tasks check off in real time as work is completed, with IEC 62304 section references and a contextual compliance hint after every phase.",
-    Component: GuidedWorkflowsSvg,
-    wrapStyle: {} as React.CSSProperties,
+      "Document catalog — all DHF records grouped by category, with live status, version tracking, and one-click export across PDF, DOCX, and MD formats.",
+    Component: DocumentationEngineSvg,
   },
   {
-    label: "AI Guidance",
+    label: "Document Detail",
     caption:
-      "Conversational compliance assistant — developers ask questions in plain English and get structured, regulation-referenced answers. No need to know IEC 62304 section numbers; the system maps every answer back to the standard automatically.",
-    Component: GuidedChatSvg,
-    wrapStyle: {} as React.CSSProperties,
+      "Document detail — full revision history, regulatory references, linked artifacts, and one-click regeneration from live project data.",
+    Component: DocumentationDetailSvg,
   },
   {
-    label: "Onboarding",
+    label: "Custom Templates",
     caption:
-      "Structured onboarding path — teams new to SaMD development follow a phase-by-phase learning track tied to IEC 62304 and ISO 13485. Milestones expand inline as each phase becomes active, compressing ramp-up from months to days.",
-    Component: GuidedOnboardingSvg,
-    wrapStyle: {} as React.CSSProperties,
+      "Custom templates — write Markdown templates with interpolated variables that pull live project data at generation time, for any document your process requires.",
+    Component: DocumentationTemplatesSvg,
+  },
+  {
+    label: "Variable Library",
+    caption:
+      "Variable library — browse all available template variables across product, requirements, risk, verification, AI/ML, and traceability data domains.",
+    Component: DocumentationVariablesSvg,
   },
 ];
 
-const AUTO_ROTATE_MS = 20_000;
+const AUTO_ROTATE_MS = 18_000;
 
 function PauseIcon() {
   return (
@@ -49,7 +53,7 @@ function PlayIcon() {
   );
 }
 
-export function GuidedWorkflowsInActionSection() {
+export function DocumentationEngineInActionSection() {
   const [active, setActive] = useState(0);
   const [isPlaying, setIsPlaying] = useState(true);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
@@ -168,30 +172,10 @@ export function GuidedWorkflowsInActionSection() {
         {/* SVG frame */}
         <div
           className="rounded-card overflow-hidden"
-          style={{
-            border: "1px solid var(--bg-border)",
-            background: "var(--bg-raised)",
-          }}
+          style={{ border: "1px solid var(--bg-border)", background: "var(--bg-raised)" }}
         >
-          <div key={active} className="h-[380px] sm:h-[420px] md:h-[500px] animate-fade-in-up">
-            {active === 0 ? (
-              <div
-                style={{
-                  height: "100%",
-                  background: "#F8FAFC",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  padding: "20px 40px",
-                }}
-              >
-                <div style={{ width: "100%", maxWidth: 520, height: "100%" }}>
-                  <Component />
-                </div>
-              </div>
-            ) : (
-              <Component />
-            )}
+          <div key={active} className="h-[380px] sm:h-[420px] md:h-[480px] animate-fade-in-up">
+            <Component />
           </div>
         </div>
 

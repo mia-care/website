@@ -185,7 +185,7 @@ export function SdlcInActionSection() {
           <div
             key={active}
             style={wrapStyle}
-            className="h-[300px] sm:h-[420px] md:h-[520px] animate-fade-in-up"
+            className="h-[380px] sm:h-[460px] md:h-[560px] animate-fade-in-up"
           >
             <Component />
           </div>

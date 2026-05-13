@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { NAV_ICONS, PlatformShell } from "./PlatformShell";
 
 const PROJECTS = [
   {
@@ -115,22 +116,32 @@ export function MasterAiComplianceSvg() {
     };
   }, []);
 
+  const AI_COMPLIANCE_NAV = [
+    { label: "AI Projects", icon: NAV_ICONS.aiProjects, active: true },
+    { label: "Model Logbook", icon: NAV_ICONS.modelLogbook },
+    { label: "PCCP Tracker", icon: NAV_ICONS.pccpTracker },
+  ];
+
   return (
-    <div
-      style={{
-        background: "#F5F5F5",
-        borderRadius: 12,
-        fontFamily: "ui-sans-serif, system-ui, sans-serif",
-        height: "100%",
-        display: "grid",
-        gridTemplateColumns: "1fr 1fr",
-        gridTemplateRows: "1fr 1fr",
-        gap: 10,
-        padding: 10,
-        overflow: "hidden",
-      }}
+    <PlatformShell
+      breadcrumb={["Mia-Care Dev", "App Cardio-Monitor", "AI Projects"]}
+      topItem={{ label: "Dashboard", icon: NAV_ICONS.dashboard }}
+      sections={[{ title: "AI Compliance", items: AI_COMPLIANCE_NAV }]}
     >
-      <style>{`
+      <div
+        style={{
+          background: "#F5F5F5",
+          fontFamily: "ui-sans-serif, system-ui, sans-serif",
+          height: "100%",
+          display: "grid",
+          gridTemplateColumns: "1fr 1fr",
+          gridTemplateRows: "1fr 1fr",
+          gap: 10,
+          padding: 10,
+          overflow: "hidden",
+        }}
+      >
+        <style>{`
         @keyframes mai-spin {
           to { transform: rotate(360deg); }
         }
@@ -144,200 +155,206 @@ export function MasterAiComplianceSvg() {
         }
       `}</style>
 
-      {PROJECTS.map((p, i) => {
-        const isActive = active === i;
-        const isDone = checked.has(i);
-        const color = scoreColor(p.score);
+        {PROJECTS.map((p, i) => {
+          const isActive = active === i;
+          const isDone = checked.has(i);
+          const color = scoreColor(p.score);
 
-        return (
-          <div
-            key={p.title}
-            style={{
-              background: "white",
-              borderRadius: 10,
-              border: `1.5px solid ${isActive ? "#0D9488" : "#E5E5E5"}`,
-              padding: "12px 14px",
-              display: "flex",
-              flexDirection: "column",
-              gap: 8,
-              transition: "border-color 0.35s",
-              animation: isActive ? "mai-glow 1.6s ease-in-out infinite" : "none",
-              position: "relative",
-              overflow: "hidden",
-            }}
-          >
-            {/* active overlay */}
-            {isActive && (
-              <div
-                style={{
-                  position: "absolute",
-                  inset: 0,
-                  pointerEvents: "none",
-                  background: "linear-gradient(135deg, rgba(13,148,136,0.05) 0%, transparent 55%)",
-                }}
-              />
-            )}
-
-            {/* ── Title row ── */}
+          return (
             <div
+              key={p.title}
               style={{
+                background: "white",
+                borderRadius: 10,
+                border: `1.5px solid ${isActive ? "#0D9488" : "#E5E5E5"}`,
+                padding: "12px 14px",
                 display: "flex",
-                alignItems: "center",
-                justifyContent: "space-between",
-                gap: 6,
+                flexDirection: "column",
+                gap: 8,
+                transition: "border-color 0.35s",
+                animation: isActive ? "mai-glow 1.6s ease-in-out infinite" : "none",
+                position: "relative",
+                overflow: "hidden",
               }}
             >
-              <div style={{ display: "flex", alignItems: "center", gap: 5, minWidth: 0 }}>
-                <span
-                  style={{
-                    fontWeight: 700,
-                    fontSize: 11,
-                    color: "#0A0A0A",
-                    overflow: "hidden",
-                    whiteSpace: "nowrap",
-                    textOverflow: "ellipsis",
-                  }}
-                >
-                  {p.title}
-                </span>
-                <SparkleIcon />
-              </div>
-              <div style={{ display: "flex", alignItems: "center", gap: 6, flexShrink: 0 }}>
-                {/* AI check indicator */}
-                {isActive ? (
-                  <svg
-                    width="13"
-                    height="13"
-                    viewBox="0 0 16 16"
-                    fill="none"
-                    aria-hidden="true"
-                    style={{ animation: "mai-spin 0.8s linear infinite" }}
-                  >
-                    <path
-                      d="M8 2a6 6 0 100 12A6 6 0 008 2z"
-                      stroke={color}
-                      strokeWidth="1.6"
-                      strokeDasharray="16 8"
-                    />
-                  </svg>
-                ) : isDone ? (
-                  p.score >= 85 ? (
-                    <svg
-                      width="13"
-                      height="13"
-                      viewBox="0 0 16 16"
-                      fill="none"
-                      aria-hidden="true"
-                      style={{ animation: "mai-checkin 0.2s ease" }}
-                    >
-                      <circle cx="8" cy="8" r="6" fill="#CCFBF1" />
-                      <path
-                        d="M5 8l2.5 2.5L11 5.5"
-                        stroke="#0D9488"
-                        strokeWidth="1.5"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                  ) : (
-                    <svg
-                      width="13"
-                      height="13"
-                      viewBox="0 0 16 16"
-                      fill="none"
-                      aria-hidden="true"
-                      style={{ animation: "mai-checkin 0.2s ease" }}
-                    >
-                      <circle
-                        cx="8"
-                        cy="8"
-                        r="6"
-                        fill="#FEF3C7"
-                        stroke="#F59E0B"
-                        strokeWidth="1.2"
-                      />
-                      <circle cx="8" cy="8" r="2.5" fill="#F59E0B" />
-                    </svg>
-                  )
-                ) : null}
-                <PinIcon active={isActive || isDone} />
-              </div>
-            </div>
-
-            {/* ── Description ── */}
-            <div style={{ fontSize: 9.5, color: "#737373", lineHeight: 1.5 }}>{p.desc}</div>
-
-            {/* ── Compliance score ── */}
-            <div style={{ display: "flex", flexDirection: "column", gap: 5 }}>
-              <div
-                style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline" }}
-              >
-                <span style={{ fontSize: 10, color: "#0A0A0A", fontWeight: 500 }}>
-                  Compliance score
-                </span>
-                <span
-                  style={{
-                    fontSize: 13,
-                    fontWeight: 800,
-                    color: color,
-                    transition: "color 0.3s",
-                  }}
-                >
-                  {p.score}%
-                </span>
-              </div>
-              <div
-                style={{ height: 6, background: "#E5E5E5", borderRadius: 99, overflow: "hidden" }}
-              >
+              {/* active overlay */}
+              {isActive && (
                 <div
                   style={{
-                    height: "100%",
-                    width: `${bars[i]}%`,
-                    background: color,
-                    borderRadius: 99,
-                    transition: "width 1.0s cubic-bezier(0.4,0,0.2,1), background 0.3s",
+                    position: "absolute",
+                    inset: 0,
+                    pointerEvents: "none",
+                    background:
+                      "linear-gradient(135deg, rgba(13,148,136,0.05) 0%, transparent 55%)",
                   }}
                 />
-              </div>
-            </div>
+              )}
 
-            {/* ── Pills ── */}
-            <div style={{ display: "flex", gap: 6 }}>
-              {[p.class_, p.framework].map((tag) => (
-                <span
-                  key={tag}
+              {/* ── Title row ── */}
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                  gap: 6,
+                }}
+              >
+                <div style={{ display: "flex", alignItems: "center", gap: 5, minWidth: 0 }}>
+                  <span
+                    style={{
+                      fontWeight: 700,
+                      fontSize: 11,
+                      color: "#0A0A0A",
+                      overflow: "hidden",
+                      whiteSpace: "nowrap",
+                      textOverflow: "ellipsis",
+                    }}
+                  >
+                    {p.title}
+                  </span>
+                  <SparkleIcon />
+                </div>
+                <div style={{ display: "flex", alignItems: "center", gap: 6, flexShrink: 0 }}>
+                  {/* AI check indicator */}
+                  {isActive ? (
+                    <svg
+                      width="13"
+                      height="13"
+                      viewBox="0 0 16 16"
+                      fill="none"
+                      aria-hidden="true"
+                      style={{ animation: "mai-spin 0.8s linear infinite" }}
+                    >
+                      <path
+                        d="M8 2a6 6 0 100 12A6 6 0 008 2z"
+                        stroke={color}
+                        strokeWidth="1.6"
+                        strokeDasharray="16 8"
+                      />
+                    </svg>
+                  ) : isDone ? (
+                    p.score >= 85 ? (
+                      <svg
+                        width="13"
+                        height="13"
+                        viewBox="0 0 16 16"
+                        fill="none"
+                        aria-hidden="true"
+                        style={{ animation: "mai-checkin 0.2s ease" }}
+                      >
+                        <circle cx="8" cy="8" r="6" fill="#CCFBF1" />
+                        <path
+                          d="M5 8l2.5 2.5L11 5.5"
+                          stroke="#0D9488"
+                          strokeWidth="1.5"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                    ) : (
+                      <svg
+                        width="13"
+                        height="13"
+                        viewBox="0 0 16 16"
+                        fill="none"
+                        aria-hidden="true"
+                        style={{ animation: "mai-checkin 0.2s ease" }}
+                      >
+                        <circle
+                          cx="8"
+                          cy="8"
+                          r="6"
+                          fill="#FEF3C7"
+                          stroke="#F59E0B"
+                          strokeWidth="1.2"
+                        />
+                        <circle cx="8" cy="8" r="2.5" fill="#F59E0B" />
+                      </svg>
+                    )
+                  ) : null}
+                  <PinIcon active={isActive || isDone} />
+                </div>
+              </div>
+
+              {/* ── Description ── */}
+              <div style={{ fontSize: 9.5, color: "#737373", lineHeight: 1.5 }}>{p.desc}</div>
+
+              {/* ── Compliance score ── */}
+              <div style={{ display: "flex", flexDirection: "column", gap: 5 }}>
+                <div
                   style={{
-                    background: "#CCFBF1",
-                    color: "#0D9488",
-                    border: "1px solid #99F6E4",
-                    borderRadius: 20,
-                    padding: "2px 8px",
-                    fontSize: 9,
-                    fontWeight: 600,
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "baseline",
                   }}
                 >
-                  {tag}
-                </span>
-              ))}
-            </div>
+                  <span style={{ fontSize: 10, color: "#0A0A0A", fontWeight: 500 }}>
+                    Compliance score
+                  </span>
+                  <span
+                    style={{
+                      fontSize: 13,
+                      fontWeight: 800,
+                      color: color,
+                      transition: "color 0.3s",
+                    }}
+                  >
+                    {p.score}%
+                  </span>
+                </div>
+                <div
+                  style={{ height: 6, background: "#E5E5E5", borderRadius: 99, overflow: "hidden" }}
+                >
+                  <div
+                    style={{
+                      height: "100%",
+                      width: `${bars[i]}%`,
+                      background: color,
+                      borderRadius: 99,
+                      transition: "width 1.0s cubic-bezier(0.4,0,0.2,1), background 0.3s",
+                    }}
+                  />
+                </div>
+              </div>
 
-            {/* ── Version ── */}
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: 5,
-                marginTop: "auto",
-                paddingTop: 4,
-                borderTop: "1px solid #F3F4F6",
-              }}
-            >
-              <ClockIcon />
-              <span style={{ fontSize: 9, color: "#9CA3AF" }}>Latest version {p.version}</span>
+              {/* ── Pills ── */}
+              <div style={{ display: "flex", gap: 6 }}>
+                {[p.class_, p.framework].map((tag) => (
+                  <span
+                    key={tag}
+                    style={{
+                      background: "#CCFBF1",
+                      color: "#0D9488",
+                      border: "1px solid #99F6E4",
+                      borderRadius: 20,
+                      padding: "2px 8px",
+                      fontSize: 9,
+                      fontWeight: 600,
+                    }}
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+
+              {/* ── Version ── */}
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 5,
+                  marginTop: "auto",
+                  paddingTop: 4,
+                  borderTop: "1px solid #F3F4F6",
+                }}
+              >
+                <ClockIcon />
+                <span style={{ fontSize: 9, color: "#9CA3AF" }}>Latest version {p.version}</span>
+              </div>
             </div>
-          </div>
-        );
-      })}
-    </div>
+          );
+        })}
+      </div>
+    </PlatformShell>
   );
 }

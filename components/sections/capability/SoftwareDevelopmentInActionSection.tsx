@@ -1,31 +1,39 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { GuidedChatSvg } from "@/components/common/capability-svgs/GuidedChatSvg";
-import { GuidedOnboardingSvg } from "@/components/common/capability-svgs/GuidedOnboardingSvg";
-import { GuidedWorkflowsSvg } from "@/components/common/capability-svgs/GuidedWorkflowsSvg";
+import { CveScanSvg } from "@/components/common/capability-svgs/CveScanSvg";
+import { SbomDashboardSvg } from "@/components/common/capability-svgs/SbomDashboardSvg";
+import { SecureComponentLibrarySvg } from "@/components/common/capability-svgs/SecureComponentLibrarySvg";
+import { SecureGuardrailsSvg } from "@/components/common/capability-svgs/SecureGuardrailsSvg";
 import { PillTag } from "@/components/common/PillTag";
 
 const TABS = [
   {
-    label: "Role View",
+    label: "SBOM",
     caption:
-      "Role-based checklists — developer, QA, and regulatory affairs each see the exact scope they own. Tasks check off in real time as work is completed, with IEC 62304 section references and a contextual compliance hint after every phase.",
-    Component: GuidedWorkflowsSvg,
+      "Software Bill of Materials — every third-party dependency tracked, versioned, and continuously checked against the NVD, GitHub Advisory, and OSV databases. One new CVE disclosure triggers an immediate alert across every affected project.",
+    Component: SbomDashboardSvg,
     wrapStyle: {} as React.CSSProperties,
   },
   {
-    label: "AI Guidance",
+    label: "CVE Scan",
     caption:
-      "Conversational compliance assistant — developers ask questions in plain English and get structured, regulation-referenced answers. No need to know IEC 62304 section numbers; the system maps every answer back to the standard automatically.",
-    Component: GuidedChatSvg,
+      "Vulnerability scanner — automated CVSS-scored findings across the full dependency graph, with patch-ready upgrade paths surfaced inline. Critical findings are mapped to their IEC 81001-5-1 compliance impact before the team even opens the ticket.",
+    Component: CveScanSvg,
     wrapStyle: {} as React.CSSProperties,
   },
   {
-    label: "Onboarding",
+    label: "Guardrails",
     caption:
-      "Structured onboarding path — teams new to SaMD development follow a phase-by-phase learning track tied to IEC 62304 and ISO 13485. Milestones expand inline as each phase becomes active, compressing ramp-up from months to days.",
-    Component: GuidedOnboardingSvg,
+      "CI/CD security check — every merge request passes through IEC 81001-5-1 compliance gates before code reaches the main branch. A dependency carrying a Critical or High CVE blocks the pipeline and surfaces the exact rule it violates.",
+    Component: SecureGuardrailsSvg,
+    wrapStyle: {} as React.CSSProperties,
+  },
+  {
+    label: "Component Library",
+    caption:
+      "Secure component library — pre-validated modules for authentication, cryptography, audit logging, and more, each carrying an IEC 81001-5-1 and IEC 62304 certification stamp. Teams drop in compliant building blocks instead of reimplementing foundational security from scratch.",
+    Component: SecureComponentLibrarySvg,
     wrapStyle: {} as React.CSSProperties,
   },
 ];
@@ -49,7 +57,7 @@ function PlayIcon() {
   );
 }
 
-export function GuidedWorkflowsInActionSection() {
+export function SoftwareDevelopmentInActionSection() {
   const [active, setActive] = useState(0);
   const [isPlaying, setIsPlaying] = useState(true);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
@@ -73,7 +81,7 @@ export function GuidedWorkflowsInActionSection() {
     setIsPlaying(false);
   };
 
-  const { caption, Component } = TABS[active];
+  const { caption, Component, wrapStyle } = TABS[active];
 
   return (
     <section
@@ -147,6 +155,7 @@ export function GuidedWorkflowsInActionSection() {
             </div>
           </div>
 
+          {/* Play/pause button */}
           <button
             type="button"
             onClick={() => setIsPlaying((p) => !p)}
@@ -173,25 +182,12 @@ export function GuidedWorkflowsInActionSection() {
             background: "var(--bg-raised)",
           }}
         >
-          <div key={active} className="h-[380px] sm:h-[420px] md:h-[500px] animate-fade-in-up">
-            {active === 0 ? (
-              <div
-                style={{
-                  height: "100%",
-                  background: "#F8FAFC",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  padding: "20px 40px",
-                }}
-              >
-                <div style={{ width: "100%", maxWidth: 520, height: "100%" }}>
-                  <Component />
-                </div>
-              </div>
-            ) : (
-              <Component />
-            )}
+          <div
+            key={active}
+            style={wrapStyle}
+            className="h-[380px] sm:h-[460px] md:h-[560px] animate-fade-in-up"
+          >
+            <Component />
           </div>
         </div>
 
