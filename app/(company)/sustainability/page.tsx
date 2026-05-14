@@ -108,6 +108,109 @@ export default function SustainabilityPage() {
         </div>
       </section>
 
+      {/* Global Footprint */}
+      <section className="py-20" style={{ borderTop: "1px solid var(--bg-border)" }}>
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2
+            className="font-display font-bold text-2xl mb-3"
+            style={{ color: "var(--text-primary)", letterSpacing: "-0.025em" }}
+          >
+            A Responsible Global Presence
+          </h2>
+          <p
+            className="text-base mb-8"
+            style={{ color: "var(--text-secondary)", lineHeight: 1.75, maxWidth: "60ch" }}
+          >
+            From our European roots to the US market, we carry the same standards of responsible
+            development to every regulated environment we serve.
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {/* Italy */}
+            <div
+              className="rounded-2xl p-6"
+              style={{ background: "var(--bg-raised)", border: "1px solid var(--bg-border)" }}
+            >
+              <div
+                className="inline-flex items-center justify-center w-9 h-9 rounded-xl mb-4"
+                style={{
+                  background: "rgba(0,240,150,0.08)",
+                  border: "1px solid rgba(0,240,150,0.15)",
+                }}
+              >
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="var(--brand-green)"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" />
+                  <circle cx="12" cy="9" r="2.5" />
+                </svg>
+              </div>
+              <p
+                className="font-display font-bold text-base mb-0.5"
+                style={{ color: "var(--text-primary)" }}
+              >
+                Italy
+              </p>
+              <p className="text-xs font-semibold mb-3" style={{ color: "var(--text-muted)" }}>
+                Headquarters
+              </p>
+              <p className="text-sm" style={{ color: "var(--text-secondary)", lineHeight: 1.7 }}>
+                Via Leopardi, 8<br />
+                20123 Milan
+              </p>
+            </div>
+
+            {/* United States */}
+            <div
+              className="rounded-2xl p-6"
+              style={{ background: "var(--bg-raised)", border: "1px solid var(--bg-border)" }}
+            >
+              <div
+                className="inline-flex items-center justify-center w-9 h-9 rounded-xl mb-4"
+                style={{
+                  background: "rgba(0,240,150,0.08)",
+                  border: "1px solid rgba(0,240,150,0.15)",
+                }}
+              >
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="var(--brand-green)"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" />
+                  <circle cx="12" cy="9" r="2.5" />
+                </svg>
+              </div>
+              <p
+                className="font-display font-bold text-base mb-0.5"
+                style={{ color: "var(--text-primary)" }}
+              >
+                United States
+              </p>
+              <p className="text-xs font-semibold mb-3" style={{ color: "var(--text-muted)" }}>
+                Representatives
+              </p>
+              <p className="text-sm" style={{ color: "var(--text-secondary)", lineHeight: 1.7 }}>
+                Austin, TX
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Certification highlight */}
       <section
         className="py-16"

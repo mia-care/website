@@ -7,6 +7,7 @@ import { LogoMarquee } from "@/components/common/LogoCarousel";
 import { PlansBanner } from "@/components/common/PlansBanner";
 import { HeroBanner } from "@/components/sections/home/HeroBanner";
 import { ProblemSection } from "@/components/sections/home/ProblemSection";
+import { SolutionSection } from "@/components/sections/home/SolutionSection";
 import { StatsRow } from "@/components/sections/home/StatsRow";
 import { UseCasesGrid } from "@/components/sections/home/UseCasesGrid";
 import { WhoWeServe } from "@/components/sections/home/WhoWeServe";
@@ -61,6 +62,7 @@ export default function HomePage() {
       <LogoMarquee />
       <StatsRow />
       <ProblemSection />
+      <SolutionSection />
       <CapabilitiesGrid />
       <ComplianceStrip />
       <UseCasesGrid />

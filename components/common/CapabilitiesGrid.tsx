@@ -357,23 +357,15 @@ export function CapabilitiesGrid() {
                 {cap.features.slice(0, 3).map((f) => (
                   <li key={f.label} className="flex gap-3 items-start">
                     <span
-                      className="mt-1.5 w-1.5 h-1.5 rounded-full shrink-0"
-                      style={{ background: "var(--text-muted)" }}
+                      className="mt-[7px] w-1.5 h-1.5 rounded-full shrink-0"
+                      style={{ background: "var(--brand-green)", opacity: 0.6 }}
                     />
-                    <div>
-                      <span
-                        className="label-caps block mb-0.5"
-                        style={{ color: "var(--text-muted)" }}
-                      >
-                        {f.label}
-                      </span>
-                      <span
-                        className="text-sm font-semibold"
-                        style={{ color: "var(--text-primary)" }}
-                      >
-                        {f.title}
-                      </span>
-                    </div>
+                    <span
+                      className="text-sm font-semibold leading-snug"
+                      style={{ color: "var(--text-primary)" }}
+                    >
+                      {f.title}
+                    </span>
                   </li>
                 ))}
               </ul>
