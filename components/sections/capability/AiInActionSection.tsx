@@ -1,32 +1,29 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { AiModelLogbookSvg } from "@/components/common/capability-svgs/AiModelLogbookSvg";
-import { AiPccpTrackerSvg } from "@/components/common/capability-svgs/AiPccpTrackerSvg";
 import { MasterAiComplianceSvg } from "@/components/common/capability-svgs/MasterAiComplianceSvg";
 import { PillTag } from "@/components/common/PillTag";
 
-const TABS = [
+type ScreenId = 0 | 1 | 2;
+
+const TABS: { label: string; caption: string; screen: ScreenId }[] = [
   {
-    label: "AI Projects",
+    label: "System Design",
     caption:
-      "AI compliance dashboard — every AI-enabled SaMD project monitored in real time. Compliance scores update as models evolve, flagging regressions before they become audit findings.",
-    Component: MasterAiComplianceSvg,
-    wrapStyle: {} as React.CSSProperties,
+      "System Design — component hierarchy of the AI Diagnostic Tool, with ML Anomaly Detection auto-identified as an AI Agent requiring a dedicated compliance lifecycle under EU AI Act and IEC 62304.",
+    screen: 0,
   },
   {
-    label: "Model Logbook",
+    label: "AI Inventory",
     caption:
-      "Model logbook — automated tracking of every model state: training data characteristics, version history, accuracy metrics, AUC-ROC, and bias assessment results. The continuous record EU AI Act Annex IV and GMLP require.",
-    Component: AiModelLogbookSvg,
-    wrapStyle: {} as React.CSSProperties,
+      "AI Inventory — every AI model and dataset registered with version, ownership, and provenance. The continuous record required by EU AI Act Annex IV, FDA GMLP, and ISO 13485.",
+    screen: 1,
   },
   {
-    label: "PCCP Tracker",
+    label: "Arrhythmia Classifier",
     caption:
-      "PCCP tracker — validate proposed model updates against the pre-approved FDA change envelope. When all deltas stay within bounds, no new submission is required. Changes outside bounds are blocked before they reach production.",
-    Component: AiPccpTrackerSvg,
-    wrapStyle: {} as React.CSSProperties,
+      "Arrhythmia Classifier v2 — xAI robustness auditing with Faithfulness Tests. Explainability services assessed for fit-for-purpose against EU AI Act Art. 13 and MDR Annex I, powered by Quantus.",
+    screen: 2,
   },
 ];
 
@@ -73,7 +70,7 @@ export function AiInActionSection() {
     setIsPlaying(false);
   };
 
-  const { caption, Component, wrapStyle } = TABS[active];
+  const { caption, screen } = TABS[active];
 
   return (
     <section
@@ -173,12 +170,8 @@ export function AiInActionSection() {
             background: "var(--bg-raised)",
           }}
         >
-          <div
-            key={active}
-            style={wrapStyle}
-            className="h-[380px] sm:h-[400px] md:h-[460px] animate-fade-in-up"
-          >
-            <Component />
+          <div key={active} className="h-[420px] sm:h-[480px] md:h-[540px] animate-fade-in-up">
+            <MasterAiComplianceSvg lockedScreen={screen} />
           </div>
         </div>
 

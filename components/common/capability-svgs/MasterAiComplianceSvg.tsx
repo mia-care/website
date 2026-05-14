@@ -711,12 +711,17 @@ function ClassifierDetailScreen() {
 }
 
 // ── Main export ───────────────────────────────────────────────────────────────
-export function MasterAiComplianceSvg() {
-  const [screen, setScreen] = useState<ScreenId>(0);
+interface MasterAiComplianceSvgProps {
+  lockedScreen?: ScreenId;
+}
+
+export function MasterAiComplianceSvg({ lockedScreen }: MasterAiComplianceSvgProps = {}) {
+  const [screen, setScreen] = useState<ScreenId>(lockedScreen ?? 0);
   const [opacity, setOpacity] = useState(1);
   const timers = useRef<ReturnType<typeof setTimeout>[]>([]);
 
   useEffect(() => {
+    if (lockedScreen !== undefined) return;
     const clear = () => timers.current.forEach(clearTimeout);
     const later = (fn: () => void, ms: number) => {
       const t = setTimeout(fn, ms);
@@ -734,7 +739,7 @@ export function MasterAiComplianceSvg() {
 
     later(cycle, SCREEN_MS);
     return clear;
-  }, []);
+  }, [lockedScreen]);
 
   return (
     <PlatformShell
