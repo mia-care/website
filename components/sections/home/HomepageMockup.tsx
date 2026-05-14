@@ -415,7 +415,7 @@ export function HomepageMockup() {
             User authentication flow
           </text>
           <text x="40" y="205" fill="#484F58" fontSize="8.5" fontFamily="system-ui,sans-serif">
-            USR-001
+            URS-001
           </text>
           <g className="hm-b1">
             <rect x="244" y="184" width="52" height="17" rx="4" fill="rgba(147,51,234,0.15)" />
@@ -431,7 +431,7 @@ export function HomepageMockup() {
             </text>
           </g>
           <text x="352" y="196" fill="#8B949E" fontSize="10" fontFamily="system-ui,sans-serif">
-            USR
+            URS
           </text>
           <text x="448" y="196" fill="#8B949E" fontSize="10" fontFamily="system-ui,sans-serif">
             Auth
@@ -446,7 +446,7 @@ export function HomepageMockup() {
               fontFamily="system-ui,sans-serif"
               textAnchor="middle"
             >
-              USR
+              URS
             </text>
           </g>
           <g className="hm-b3">
@@ -581,7 +581,7 @@ export function HomepageMockup() {
               fontFamily="system-ui,sans-serif"
               textAnchor="middle"
             >
-              USR
+              URS
             </text>
           </g>
           <g className="hm-b4">

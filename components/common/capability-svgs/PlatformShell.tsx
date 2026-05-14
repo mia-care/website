@@ -175,6 +175,7 @@ export function PlatformShell({ breadcrumb, topItem, sections, children }: Platf
       <style>{`
         .ps-sidebar { display: flex; }
         @media (max-width: 480px) { .ps-sidebar { display: none !important; } }
+        .hide-ps-sidebar .ps-sidebar { display: none !important; }
       `}</style>
 
       {/* ── Sidebar ── */}

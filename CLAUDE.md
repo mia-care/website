@@ -22,3 +22,6 @@ When adding a new static page (`page.tsx` without dynamic segments):
 # Resources: thank-you.md is mandatory
 Every resource folder in `content/resources/[slug]/` MUST contain both `index.md` and `thank-you.md` before the resource is published. Run `npm run validate:resources` to verify.
 - Ask if should be indexed or not indexed
+
+# Website copy guidelines
+Avoid em dashes. Write in a natural, human tone — steer clear of patterns that sound AI-generated.

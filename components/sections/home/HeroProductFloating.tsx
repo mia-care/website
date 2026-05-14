@@ -83,6 +83,15 @@ function RiskRow() {
         gap: 10,
       }}
     >
+      <style>{`
+        @keyframes ecg-draw {
+          0%   { stroke-dashoffset: 24; opacity: 0.25; }
+          12%  { opacity: 1; }
+          55%  { stroke-dashoffset: 0; opacity: 1; }
+          75%  { stroke-dashoffset: 0; opacity: 1; }
+          100% { stroke-dashoffset: 24; opacity: 0.25; }
+        }
+      `}</style>
       {/* Left: title + meta */}
       <div style={{ flex: 1, minWidth: 0 }}>
         <div
@@ -114,7 +123,7 @@ function RiskRow() {
           <span style={{ fontSize: 9, color: "#9CA3AF", fontFamily: "ui-monospace,monospace" }}>
             MCRISK-001
           </span>
-          {/* activity icon */}
+          {/* ECG waveform — draws itself on loop */}
           <svg width="9" height="9" viewBox="0 0 16 16" fill="none" aria-hidden="true">
             <polyline
               points="1,8 4,4 7,10 10,6 13,8 15,5"
@@ -123,6 +132,9 @@ function RiskRow() {
               strokeLinecap="round"
               strokeLinejoin="round"
               fill="none"
+              strokeDasharray="24"
+              strokeDashoffset="24"
+              style={{ animation: "ecg-draw 2.4s ease-in-out infinite" }}
             />
           </svg>
           <span style={{ fontSize: 9, color: "#EF4444", fontWeight: 600 }}>Patient</span>
@@ -130,18 +142,6 @@ function RiskRow() {
       </div>
       {/* Right: status badges + counter */}
       <div style={{ display: "flex", alignItems: "center", gap: 5, flexShrink: 0 }}>
-        <span
-          style={{
-            background: "#FEF3C7",
-            color: "#D97706",
-            borderRadius: 20,
-            padding: "2px 8px",
-            fontSize: 9,
-            fontWeight: 700,
-          }}
-        >
-          ALARP
-        </span>
         <span
           style={{
             background: "#DCFCE7",
@@ -182,103 +182,6 @@ function RiskRow() {
           Controlled
         </span>
       </div>
-    </div>
-  );
-}
-
-// ── Requirement Row ───────────────────────────────────────────────────
-function RequirementRow() {
-  return (
-    <div
-      style={{
-        background: "white",
-        border: "1px solid #E5E5E5",
-        borderRadius: 10,
-        padding: "10px 14px",
-        display: "flex",
-        alignItems: "center",
-        gap: 8,
-        boxShadow: "0 6px 28px rgba(0,0,0,0.12),0 1px 4px rgba(0,0,0,0.06)",
-        overflow: "hidden",
-      }}
-    >
-      <span
-        style={{
-          background: "#EDE9FE",
-          color: "#7C3AED",
-          borderRadius: 20,
-          padding: "2px 8px",
-          fontSize: 9.5,
-          fontWeight: 700,
-          whiteSpace: "nowrap",
-          flexShrink: 0,
-        }}
-      >
-        v2.1.0
-      </span>
-      <span
-        style={{
-          fontSize: 11,
-          fontWeight: 600,
-          color: "#0A0A0A",
-          whiteSpace: "nowrap",
-          overflow: "hidden",
-          textOverflow: "ellipsis",
-          flex: 1,
-          minWidth: 0,
-        }}
-      >
-        ID to link patient &amp; ECGs
-      </span>
-      <span
-        style={{
-          display: "flex",
-          alignItems: "center",
-          gap: 3,
-          fontSize: 10,
-          color: "#525252",
-          flexShrink: 0,
-        }}
-      >
-        <svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-          <circle cx="8" cy="8" r="7" stroke="#2563EB" strokeWidth="1.2" />
-          <path d="M5 8l2.5 2.5L11 5.5" stroke="#2563EB" strokeWidth="1.2" strokeLinecap="round" />
-        </svg>
-        High
-      </span>
-      {[
-        { label: "USR", bg: "#CCFBF1", c: "#0D9488" },
-        { label: "Data", bg: "#DBEAFE", c: "#2563EB" },
-      ].map((t) => (
-        <span
-          key={t.label}
-          style={{
-            background: t.bg,
-            color: t.c,
-            borderRadius: 20,
-            padding: "2px 7px",
-            fontSize: 9.5,
-            fontWeight: 700,
-            flexShrink: 0,
-          }}
-        >
-          {t.label}
-        </span>
-      ))}
-      <span
-        style={{
-          background: "#DCFCE7",
-          color: "#059669",
-          border: "1px solid #A7F3D0",
-          borderRadius: 20,
-          padding: "2px 8px",
-          fontSize: 9.5,
-          fontWeight: 700,
-          flexShrink: 0,
-        }}
-      >
-        Closed
-      </span>
     </div>
   );
 }
@@ -559,7 +462,6 @@ export function HeroProductFloating() {
 
   const d1 = useDrag();
   const d2 = useDrag();
-  const d3 = useDrag();
   const d4 = useDrag();
   const d5 = useDrag();
 
@@ -600,7 +502,7 @@ export function HeroProductFloating() {
     <div
       style={{
         position: "relative",
-        height: 460,
+        height: 415,
         fontFamily: "var(--font-inter, 'Inter', ui-sans-serif, system-ui, sans-serif)",
       }}
     >
@@ -609,30 +511,22 @@ export function HeroProductFloating() {
       {/* Row 2 – Risk */}
       {card(
         d2,
-        { top: 91, left: 0, right: 0 },
+        { top: 108, left: 0, right: 0 },
         "5.5s 0.7s ease-in-out infinite",
         "0.5s",
         <RiskRow />,
       )}
-      {/* Row 3 – Requirement */}
-      {card(
-        d3,
-        { top: 186, left: 0, right: 0 },
-        "5s 1.4s ease-in-out infinite",
-        "0.7s",
-        <RequirementRow />,
-      )}
-      {/* Row 4 – two columns: Whisper (left) + Compliance (right) */}
+      {/* Row 3 – two columns: Whisper (left) + Compliance (right) */}
       {card(
         d5,
-        { top: 252, left: 0, width: 215 },
+        { top: 196, left: 0, width: 215 },
         "5.2s 1.8s ease-in-out infinite",
         "0.9s",
         <WhisperCard />,
       )}
       {card(
         d4,
-        { top: 252, right: 0, width: 248 },
+        { top: 196, right: 0, width: 248 },
         "4.5s 2.1s ease-in-out infinite",
         "1.1s",
         <ComplianceCard />,

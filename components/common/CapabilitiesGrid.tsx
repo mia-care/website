@@ -388,7 +388,7 @@ export function CapabilitiesGrid() {
               }}
             >
               {ScreenshotSvg ? (
-                <div className="w-full h-full">
+                <div className="w-full h-full hide-ps-sidebar">
                   <ScreenshotSvg />
                 </div>
               ) : (

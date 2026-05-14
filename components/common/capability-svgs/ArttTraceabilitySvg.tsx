@@ -3,9 +3,9 @@
 import { useEffect, useRef, useState } from "react";
 import { NAV_ICONS, PlatformShell } from "./PlatformShell";
 
-const SOFTWARE_TARGET = 47;
-const RISK_TARGET = 94;
-const TASKS_TOTAL = 18;
+const SOFTWARE_ITEMS = 3;
+const RISK_TARGET = 4;
+const TESTS_TARGET = 12;
 const LINK_DURATION_MS = 2800;
 const HOLD_MS = 1800;
 const RESET_DELAY_MS = 600;
@@ -34,9 +34,8 @@ export function ArttTraceabilitySvg() {
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const linking = phase === "linking" || phase === "hold";
-  const softwareCount = useCountUp(SOFTWARE_TARGET, linking);
-  const riskPct = useCountUp(RISK_TARGET, linking, 35);
-  const tasksDone = useCountUp(TASKS_TOTAL, linking, 60);
+  const riskCount = useCountUp(RISK_TARGET, linking, 200);
+  const testsDone = useCountUp(TESTS_TARGET, linking, 60);
 
   useEffect(() => {
     const run = () => {
@@ -138,7 +137,7 @@ export function ArttTraceabilitySvg() {
                 fontWeight: 700,
               }}
             >
-              USR
+              URS
             </span>
           </div>
           <div>
@@ -254,44 +253,10 @@ export function ArttTraceabilitySvg() {
             }}
           >
             Traceability
-            {phase === "linking" && (
-              <span
-                style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: 4,
-                  background: "#DCFCE7",
-                  color: "#059669",
-                  borderRadius: 20,
-                  padding: "1px 7px",
-                  fontSize: 9,
-                  fontWeight: 700,
-                  animation: "artt-pulse 1.2s ease-in-out infinite",
-                }}
-              >
-                <span
-                  style={{
-                    width: 5,
-                    height: 5,
-                    borderRadius: "50%",
-                    background: "#059669",
-                    display: "inline-block",
-                  }}
-                />
-                Linking…
-              </span>
-            )}
           </div>
 
-          <style>{`
-          @keyframes artt-pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-          }
-        `}</style>
-
           <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 6 }}>
-            {/* Software items */}
+            {/* Card 1 — Implemented by */}
             <div
               style={{
                 background: "#EFF6FF",
@@ -321,17 +286,17 @@ export function ArttTraceabilitySvg() {
                   />
                   <circle cx="3" cy="8" r="2" stroke="#2563EB" strokeWidth="1.1" />
                 </svg>
-                Software items
+                Implemented by
               </div>
               <div style={{ fontWeight: 800, fontSize: 22, color: "#2563EB", lineHeight: 1 }}>
-                {softwareCount}
+                {SOFTWARE_ITEMS}
               </div>
               <div style={{ color: "#2563EB", fontSize: 9, marginTop: 3, opacity: 0.8 }}>
-                Linked items
+                Software items
               </div>
             </div>
 
-            {/* Risks */}
+            {/* Card 2 — Mitigates */}
             <div
               style={{
                 background: "#FEF2F2",
@@ -365,21 +330,21 @@ export function ArttTraceabilitySvg() {
                     strokeLinecap="round"
                   />
                 </svg>
-                Risks
+                Mitigates
               </div>
               <div style={{ fontWeight: 800, fontSize: 22, color: "#DC2626", lineHeight: 1 }}>
-                {riskPct}%
+                {riskCount}
               </div>
               <div style={{ color: "#EF4444", fontSize: 9, marginTop: 3, opacity: 0.8 }}>
-                Risk coverage
+                Risk items
               </div>
             </div>
 
-            {/* Tasks */}
+            {/* Card 3 — Verified by tests */}
             <div
               style={{
-                background: "#FAFAFA",
-                border: "1px solid #D4D4D4",
+                background: "#F0FDF4",
+                border: "1px solid #86EFAC",
                 borderRadius: 8,
                 padding: "8px 10px",
               }}
@@ -389,28 +354,28 @@ export function ArttTraceabilitySvg() {
                   display: "flex",
                   alignItems: "center",
                   gap: 5,
-                  color: "#737373",
+                  color: "#16A34A",
                   fontSize: 10,
                   fontWeight: 600,
                   marginBottom: 6,
                 }}
               >
                 <svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                  <circle cx="8" cy="8" r="6" stroke="#737373" strokeWidth="1.2" />
+                  <circle cx="8" cy="8" r="6" stroke="#16A34A" strokeWidth="1.2" />
                   <path
                     d="M5.5 8l2 2L11 6"
-                    stroke="#737373"
+                    stroke="#16A34A"
                     strokeWidth="1.2"
                     strokeLinecap="round"
                   />
                 </svg>
-                Tasks
+                Verified by
               </div>
-              <div style={{ fontWeight: 800, fontSize: 22, color: "#525252", lineHeight: 1 }}>
-                {tasksDone}/{TASKS_TOTAL}
+              <div style={{ fontWeight: 800, fontSize: 22, color: "#16A34A", lineHeight: 1 }}>
+                {testsDone}
               </div>
-              <div style={{ color: "#737373", fontSize: 9, marginTop: 3, opacity: 0.8 }}>
-                Completed
+              <div style={{ color: "#16A34A", fontSize: 9, marginTop: 3, opacity: 0.8 }}>
+                Test cases
               </div>
             </div>
           </div>
