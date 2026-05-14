@@ -106,7 +106,7 @@ function ChevronIcon() {
 
 export function SecureSoftwareSvg() {
   const [visibleRows, setVisibleRows] = useState<boolean[]>(ROWS.map(() => false));
-  const [openCount, setOpenCount] = useState(4);
+  const [openCount, setOpenCount] = useState(6);
   const timers = useRef<ReturnType<typeof setTimeout>[]>([]);
 
   useEffect(() => {
@@ -120,7 +120,7 @@ export function SecureSoftwareSvg() {
       clear();
       timers.current = [];
       setVisibleRows(ROWS.map(() => false));
-      setOpenCount(4);
+      setOpenCount(6);
 
       ROWS.forEach((row, i) => {
         later(
