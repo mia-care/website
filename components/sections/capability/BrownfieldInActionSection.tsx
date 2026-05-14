@@ -10,21 +10,21 @@ const TABS = [
   {
     label: "Import",
     caption:
-      "Import wizard — ingest any codebase regardless of language or documentation maturity. Word SRS, Excel risk registers, Git repositories, and test exports all flow into P4SaMD's unified compliance model without manual migration.",
+      "Import wizard — ingest the full legacy estate: documentation (requirement analyses, specs, architecture, test plans, test reports), technical assets (source code, DB schemas, SBOMs), and data from any format. Everything flows into P4SaMD's unified compliance model without manual migration.",
     Component: BrownfieldRemediatorSvg,
     wrapStyle: {} as React.CSSProperties,
   },
   {
     label: "Gap Analysis",
     caption:
-      "Gap analysis — every deviation from IEC 62304 and ISO 13485 surfaced automatically, with severity classification, remediation effort estimate, and the exact regulatory clause it maps to.",
+      "Gap analysis — every deviation from the applicable regulatory framework surfaced automatically, with severity classification, remediation effort estimate, and the exact clause it maps to.",
     Component: BrownfieldGapAnalysisSvg,
     wrapStyle: {} as React.CSSProperties,
   },
   {
     label: "Remediation Plan",
     caption:
-      "Remediation backlog — sprint-ready tasks organized by regulatory priority and effort estimate. Export directly to Jira or any ALM tool and start executing the same day.",
+      "Remediation plan — a structured, prioritized task list organized by regulatory priority and effort estimate, ready to import into any ALM tool and begin executing immediately.",
     Component: BrownfieldRemediationPlanSvg,
     wrapStyle: {} as React.CSSProperties,
   },

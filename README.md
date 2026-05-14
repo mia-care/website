@@ -23,8 +23,8 @@ Traditional SaMD development treats compliance as a phase that happens *after* e
 | 02 | **Automated Real-time Traceability (ARTT)** | Maps every requirement, risk, code commit, and test automatically. The traceability matrix is always current. |
 | 03 | **Documentation Engine** | Continuously assembles DHF, Technical Files, and audit packages from live development data. |
 | 04 | **Smart Assistant (Whisper)** | In-workflow regulatory intelligence aligned with MDR, IEC 62304, FDA, and EU AI Act. |
-| 05 | **Master AI for Compliance** | EU AI Act Annex IV, GMLP, and FDA PCCP enforcement for AI-enabled SaMD — model logbooks, bias reports, and PCCP change control built in. |
-| 06 | **Brownfield Remediator** | Ingests any legacy codebase, runs automated gap analysis, and generates a sprint-ready remediation backlog. |
+| 05 | **Master AI for Compliance** | EU AI Act Annex IV, GMLP, and FDA PCCP enforcement for AI-enabled SaMD — audit records, bias reports, and PCCP change control built in. |
+| 06 | **Brownfield Remediator** | Ingests any legacy estate, runs automated gap analysis, and generates a prioritized remediation task list. |
 | 07 | **Secure Software Development** | Continuous SBOM management, CVE scanning, and IEC 81001-5-1 guardrails embedded in the development toolchain. |
 | 08 | **Guided Workflows** | Step-by-step compliance guardrails for every developer — no deep regulatory expertise required. |
 

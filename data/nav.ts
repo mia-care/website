@@ -31,7 +31,7 @@ export const navItems: NavItem[] = [
       {
         label: "Documentation Engine",
         href: "/capabilities/documentation-engine",
-        description: "Auto-generated DHF & Technical Files",
+        description: "Technical File & DHF",
       },
       {
         label: "Smart Assistant",

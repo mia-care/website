@@ -18,7 +18,7 @@ const TABS = [
   {
     label: "Integrations",
     caption:
-      "Tool integrations — Jira, GitHub, Mia-Platform Console and Kubernetes clusters connected in minutes. P4SaMD pulls work items, commits, and runtime signals into a single IEC 62304-aligned audit trail automatically.",
+      "Tool integrations — task managers, Git repositories, Mia-Platform Console and Kubernetes clusters connected in minutes. P4SaMD pulls work items, commits, and runtime signals into a single IEC 62304-aligned audit trail automatically.",
     Component: SdlcBlueprintSvg,
     wrapStyle: {} as React.CSSProperties,
   },
