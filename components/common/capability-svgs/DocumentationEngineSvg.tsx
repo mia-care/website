@@ -348,7 +348,6 @@ export function DocumentationEngineSvg() {
               />
             </svg>
             <span style={{ fontWeight: 600, fontSize: 11 }}>Design &amp; Development</span>
-            <span style={{ color: "#737373", fontSize: 10 }}>(7 documents)</span>
           </div>
 
           {/* Column headers */}

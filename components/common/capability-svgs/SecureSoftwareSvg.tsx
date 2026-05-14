@@ -2,66 +2,86 @@
 
 import { useEffect, useRef, useState } from "react";
 
-const RISK_TITLE = "Incorrect arrhythmia classification leading to missed diagnosis";
-
 const ROWS = [
   {
     id: "r0",
-    code: "MCRISK-001",
-    version: null,
-    inherent: "Unacceptable",
-    residual: "ALARP",
-    cls: "3",
+    cve: "CVE-2025-47152",
+    version: "0.2.1",
+    score: "5.3",
+    severity: "High",
+    library: "axios 0.27.2",
+    status: "Accepted",
   },
   {
     id: "r1",
-    code: "MCRISK-001",
-    version: "v2.1.0",
-    inherent: "ALARP",
-    residual: "Acceptable",
-    cls: "3",
+    cve: "CVE-2023-45857",
+    version: "0.2.1",
+    score: "6.5",
+    severity: "Medium",
+    library: "axios 0.27.2",
+    status: "Accepted",
   },
   {
     id: "r2",
-    code: "MCRISK-001",
-    version: null,
-    inherent: "ALARP",
-    residual: "Acceptable",
-    cls: "3",
+    cve: "CVE-2025-5889",
+    version: "—",
+    score: "3.1",
+    severity: "Low",
+    library: "brace-expansion 1.1.11",
+    status: "Open",
   },
   {
     id: "r3",
-    code: "MCRISK-001",
-    version: null,
-    inherent: "ALARP",
-    residual: "Acceptable",
-    cls: "3",
+    cve: "CVE-2025-5889",
+    version: "0.2.2",
+    score: "3.1",
+    severity: "Low",
+    library: "brace-expansion 1.1.11",
+    status: "Open",
+  },
+  {
+    id: "r4",
+    cve: "CVE-2024-47764",
+    version: "latest",
+    score: "3.7",
+    severity: "Low",
+    library: "cookie 0.5.0",
+    status: "Accepted",
+  },
+  {
+    id: "r5",
+    cve: "CVE-2024-47764",
+    version: "0.2.2",
+    score: "3.7",
+    severity: "Low",
+    library: "cookie 0.5.0",
+    status: "Accepted",
   },
 ];
 
-const RISK_PILL: Record<string, React.CSSProperties> = {
-  Unacceptable: { background: "#FEF3C7", color: "#D97706", border: "1px solid #FDE68A" },
-  ALARP: { background: "#FEF3C7", color: "#D97706", border: "1px solid #FDE68A" },
-  Acceptable: { background: "#DCFCE7", color: "#16A34A", border: "1px solid #A7F3D0" },
+const SEVERITY_STYLE: Record<string, React.CSSProperties> = {
+  High: { background: "#FEE2E2", color: "#DC2626", border: "1px solid #FECACA" },
+  Medium: { background: "#FEF3C7", color: "#D97706", border: "1px solid #FDE68A" },
+  Low: { background: "#DBEAFE", color: "#2563EB", border: "1px solid #BFDBFE" },
 };
 
-const BETWEEN_MS = 800;
-const REVEAL_MS = 500;
-const HOLD_MS = 2200;
+const BETWEEN_MS = 700;
+const REVEAL_MS = 400;
+const HOLD_MS = 2400;
 const RESET_MS = 500;
 
-function SyncIcon() {
+function RefreshIcon() {
   return (
-    <svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+    <svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true">
       <path
         d="M13 3A6 6 0 003 8M3 13a6 6 0 0010-5"
-        stroke="#3B82F6"
+        stroke="#6B7280"
         strokeWidth="1.4"
         strokeLinecap="round"
       />
       <path
         d="M11 1l2 2-2 2M5 15l-2-2 2-2"
-        stroke="#3B82F6"
+        stroke="#6B7280"
         strokeWidth="1.4"
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -70,28 +90,23 @@ function SyncIcon() {
   );
 }
 
-function TargetIcon({ color }: { color: string }) {
+function ChevronIcon() {
   return (
-    <svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-      <circle cx="8" cy="8" r="6" stroke={color} strokeWidth="1.3" />
-      <circle cx="8" cy="8" r="3" stroke={color} strokeWidth="1.3" />
-      <circle cx="8" cy="8" r="1" fill={color} />
-    </svg>
-  );
-}
-
-function SearchIcon() {
-  return (
-    <svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-      <circle cx="7" cy="7" r="5" stroke="#9CA3AF" strokeWidth="1.3" />
-      <path d="M11 11l3 3" stroke="#9CA3AF" strokeWidth="1.3" strokeLinecap="round" />
+    <svg width="8" height="8" viewBox="0 0 10 10" fill="none" aria-hidden="true">
+      <path
+        d="M2.5 4L5 6.5 7.5 4"
+        stroke="#9CA3AF"
+        strokeWidth="1.3"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
     </svg>
   );
 }
 
 export function SecureSoftwareSvg() {
-  const [visibleRows, setVisibleRows] = useState<boolean[]>([false, false, false, false]);
-  const [unacceptable, setUnacceptable] = useState(5);
+  const [visibleRows, setVisibleRows] = useState<boolean[]>(ROWS.map(() => false));
+  const [openCount, setOpenCount] = useState(4);
   const timers = useRef<ReturnType<typeof setTimeout>[]>([]);
 
   useEffect(() => {
@@ -104,21 +119,23 @@ export function SecureSoftwareSvg() {
     const run = () => {
       clear();
       timers.current = [];
-      setVisibleRows([false, false, false, false]);
-      setUnacceptable(5);
+      setVisibleRows(ROWS.map(() => false));
+      setOpenCount(4);
 
       ROWS.forEach((row, i) => {
-        const at = REVEAL_MS + i * BETWEEN_MS;
-        later(() => {
-          setVisibleRows((v) => {
-            const n = [...v];
-            n[i] = true;
-            return n;
-          });
-          if (row.residual === "Acceptable") {
-            setUnacceptable((u) => Math.max(0, u - 1));
-          }
-        }, at);
+        later(
+          () => {
+            setVisibleRows((v) => {
+              const n = [...v];
+              n[i] = true;
+              return n;
+            });
+            if (row.status === "Accepted") {
+              setOpenCount((c) => Math.max(0, c - 1));
+            }
+          },
+          REVEAL_MS + i * BETWEEN_MS,
+        );
       });
 
       later(run, REVEAL_MS + ROWS.length * BETWEEN_MS + HOLD_MS + RESET_MS);
@@ -146,30 +163,26 @@ export function SecureSoftwareSvg() {
       }}
     >
       <style>{`
-        @keyframes rm-slide {
-          from { opacity: 0; transform: translateY(5px); }
-          to   { opacity: 1; transform: translateY(0); }
-        }
         @media (max-width: 480px) {
-          .ss-search  { display: none !important; }
-          .ss-table   { display: none !important; }
-          .ss-cards   { display: flex !important; }
+          .ss-table { display: none !important; }
+          .ss-cards { display: flex !important; }
           .ss-statnum { font-size: 16px !important; line-height: 1 !important; }
           .ss-statbox { padding: 6px 8px !important; }
         }
       `}</style>
 
-      {/* ── Header ── */}
-      <div>
-        <div style={{ fontWeight: 800, fontSize: 15, color: "#0A0A0A" }}>Risk Management</div>
-        <div style={{ fontSize: 9, color: "#6B7280", marginTop: 2, lineHeight: 1.4 }}>
-          Hazard identification, risk estimation, control &amp; residual risk evaluation per ISO
-          14971
-        </div>
+      {/* ── Breadcrumb ── */}
+      <div style={{ fontSize: 9, color: "#9CA3AF", display: "flex", alignItems: "center", gap: 4 }}>
+        <span>Software System</span>
+        <span style={{ color: "#D1D5DB" }}>›</span>
+        <span>0.2.0</span>
+        <span style={{ color: "#D1D5DB" }}>›</span>
+        <span style={{ color: "#374151", fontWeight: 600 }}>mobile-bff 0.2.1</span>
       </div>
 
       {/* ── Stat cards ── */}
       <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 7 }}>
+        {/* Total */}
         <div
           className="ss-statbox"
           style={{
@@ -179,25 +192,37 @@ export function SecureSoftwareSvg() {
             background: "#FAFAFA",
           }}
         >
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
-              marginBottom: 4,
-            }}
-          >
-            <span style={{ fontSize: 9, color: "#6B7280", fontWeight: 500 }}>Total Risks</span>
-            <SyncIcon />
+          <div style={{ fontSize: 9, color: "#6B7280", fontWeight: 500, marginBottom: 4 }}>
+            Total CVEs
           </div>
           <div
             className="ss-statnum"
             style={{ fontWeight: 800, fontSize: 22, color: "#0A0A0A", lineHeight: 1 }}
           >
-            12
+            46
           </div>
         </div>
-
+        {/* High */}
+        <div
+          className="ss-statbox"
+          style={{
+            border: "1px solid #FECACA",
+            borderRadius: 8,
+            padding: "8px 10px",
+            background: "#FFF5F5",
+          }}
+        >
+          <div style={{ fontSize: 9, color: "#DC2626", fontWeight: 500, marginBottom: 4 }}>
+            High / Critical
+          </div>
+          <div
+            className="ss-statnum"
+            style={{ fontWeight: 800, fontSize: 22, color: "#DC2626", lineHeight: 1 }}
+          >
+            2
+          </div>
+        </div>
+        {/* Open */}
         <div
           className="ss-statbox"
           style={{
@@ -207,16 +232,8 @@ export function SecureSoftwareSvg() {
             background: "#FFFBEB",
           }}
         >
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
-              marginBottom: 4,
-            }}
-          >
-            <span style={{ fontSize: 9, color: "#D97706", fontWeight: 500 }}>Unacceptable</span>
-            <TargetIcon color="#D97706" />
+          <div style={{ fontSize: 9, color: "#D97706", fontWeight: 500, marginBottom: 4 }}>
+            Open
           </div>
           <div
             className="ss-statnum"
@@ -228,74 +245,44 @@ export function SecureSoftwareSvg() {
               transition: "color 0.3s",
             }}
           >
-            {unacceptable}
-          </div>
-        </div>
-
-        <div
-          className="ss-statbox"
-          style={{
-            border: "1px solid #FDE68A",
-            borderRadius: 8,
-            padding: "8px 10px",
-            background: "#FFFBEB",
-          }}
-        >
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
-              marginBottom: 4,
-            }}
-          >
-            <span style={{ fontSize: 9, color: "#D97706", fontWeight: 500 }}>ALARP</span>
-            <TargetIcon color="#D97706" />
-          </div>
-          <div
-            className="ss-statnum"
-            style={{ fontWeight: 800, fontSize: 22, color: "#D97706", lineHeight: 1 }}
-          >
-            1
+            {openCount}
           </div>
         </div>
       </div>
 
-      {/* ── Search + filters (hidden on mobile) ── */}
-      <div className="ss-search" style={{ display: "flex", gap: 6 }}>
-        <div
-          style={{
-            flex: 1,
-            border: "1px solid #E5E7EB",
-            borderRadius: 7,
-            padding: "5px 9px",
-            display: "flex",
-            alignItems: "center",
-            gap: 6,
-          }}
-        >
-          <SearchIcon />
-          <span style={{ fontSize: 9.5, color: "#9CA3AF" }}>Search requirements…</span>
+      {/* ── Header row ── */}
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+          <span style={{ fontWeight: 700, fontSize: 12 }}>Vulnerabilities</span>
+          <RefreshIcon />
         </div>
-        {["Status", "Severity"].map((f) => (
+        <div style={{ display: "flex", alignItems: "center", gap: 5 }}>
           <div
-            key={f}
             style={{
-              border: "1px solid #E5E7EB",
-              borderRadius: 7,
-              padding: "5px 9px",
-              fontSize: 9.5,
-              color: "#374151",
               display: "flex",
               alignItems: "center",
               gap: 3,
-              whiteSpace: "nowrap",
-              background: "white",
+              border: "1px solid #E5E7EB",
+              borderRadius: 5,
+              padding: "3px 7px",
+              fontSize: 9,
+              color: "#374151",
             }}
           >
-            {f} <span style={{ fontSize: 8, color: "#9CA3AF" }}>▾</span>
+            Refresh rate: Off <ChevronIcon />
           </div>
-        ))}
+          <div
+            style={{
+              border: "1px solid #E5E7EB",
+              borderRadius: 5,
+              padding: "3px 6px",
+              display: "flex",
+              alignItems: "center",
+            }}
+          >
+            <RefreshIcon />
+          </div>
+        </div>
       </div>
 
       {/* ── Desktop: table ── */}
@@ -315,15 +302,15 @@ export function SecureSoftwareSvg() {
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "2fr 84px 84px 20px",
+            gridTemplateColumns: "2.2fr 0.7fr 1fr 1.4fr 1fr",
             padding: "5px 10px",
             background: "#F9FAFB",
             borderBottom: "1px solid #E5E7EB",
-            gap: 8,
+            gap: 6,
             flexShrink: 0,
           }}
         >
-          {["Risk / Hazard", "Inherent Risk", "Residual Risk", "C"].map((h) => (
+          {["Vulnerability name", "Version", "CVSS", "Affected library", "Status"].map((h) => (
             <div key={h} style={{ fontSize: 9, color: "#6B7280", fontWeight: 600 }}>
               {h}
             </div>
@@ -332,115 +319,147 @@ export function SecureSoftwareSvg() {
 
         {/* Rows */}
         <div style={{ flex: 1, overflowY: "hidden" }}>
-          {ROWS.map((row, rowIndex) => (
+          {ROWS.map((row, i) => (
             <div
               key={row.id}
               style={{
                 display: "grid",
-                gridTemplateColumns: "2fr 84px 84px 20px",
-                padding: "7px 10px",
+                gridTemplateColumns: "2.2fr 0.7fr 1fr 1.4fr 1fr",
+                padding: "6px 10px",
                 borderBottom: "1px solid #F3F4F6",
-                gap: 8,
-                alignItems: "start",
-                opacity: visibleRows[rowIndex] ? 1 : 0,
-                transform: visibleRows[rowIndex] ? "translateY(0)" : "translateY(5px)",
+                gap: 6,
+                alignItems: "center",
+                opacity: visibleRows[i] ? 1 : 0,
+                transform: visibleRows[i] ? "translateY(0)" : "translateY(5px)",
                 transition: "opacity 0.3s ease, transform 0.3s ease",
               }}
             >
-              {/* Risk / Hazard */}
-              <div style={{ minWidth: 0 }}>
-                <div
+              {/* CVE name */}
+              <div
+                style={{
+                  fontWeight: 600,
+                  fontSize: 9.5,
+                  color: "#2563EB",
+                  fontFamily: "ui-monospace, monospace",
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
+                  whiteSpace: "nowrap",
+                }}
+              >
+                {row.cve}
+              </div>
+
+              {/* Version */}
+              <div style={{ fontSize: 9, color: "#6B7280", fontFamily: "ui-monospace, monospace" }}>
+                {row.version}
+              </div>
+
+              {/* CVSS */}
+              <div style={{ display: "flex", alignItems: "center", gap: 4 }}>
+                <span style={{ fontSize: 9.5, fontWeight: 700, color: "#0A0A0A" }}>
+                  {row.score}
+                </span>
+                <span
                   style={{
-                    fontWeight: 600,
-                    fontSize: 10,
-                    color: "#0A0A0A",
-                    lineHeight: 1.35,
-                    marginBottom: 3,
+                    ...SEVERITY_STYLE[row.severity],
+                    borderRadius: 4,
+                    padding: "1px 5px",
+                    fontSize: 8,
+                    fontWeight: 700,
+                    whiteSpace: "nowrap",
                   }}
                 >
-                  {RISK_TITLE}
-                </div>
-                <div style={{ display: "flex", alignItems: "center", gap: 4, flexWrap: "wrap" }}>
-                  {row.version && (
-                    <span
-                      style={{
-                        background: "#EFF6FF",
-                        color: "#2563EB",
-                        border: "1px solid #BFDBFE",
-                        borderRadius: 4,
-                        padding: "1px 5px",
-                        fontSize: 8,
-                        fontWeight: 700,
-                        fontFamily: "ui-monospace,monospace",
-                      }}
-                    >
-                      {row.version}
-                    </span>
-                  )}
+                  {row.severity}
+                </span>
+              </div>
+
+              {/* Library */}
+              <div
+                style={{
+                  fontSize: 9,
+                  color: "#374151",
+                  fontFamily: "ui-monospace, monospace",
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
+                  whiteSpace: "nowrap",
+                }}
+              >
+                {row.library}
+              </div>
+
+              {/* Status */}
+              <div>
+                {row.status === "Accepted" ? (
                   <span
                     style={{
-                      fontSize: 8.5,
-                      color: "#6B7280",
-                      fontFamily: "ui-monospace,monospace",
-                    }}
-                  >
-                    {row.code}
-                  </span>
-                  <span
-                    style={{
-                      background: "#F3F4F6",
-                      color: "#6B7280",
+                      background: "#DCFCE7",
+                      color: "#16A34A",
+                      border: "1px solid #A7F3D0",
                       borderRadius: 20,
-                      padding: "1px 6px",
+                      padding: "2px 7px",
                       fontSize: 8,
-                      fontWeight: 500,
+                      fontWeight: 600,
+                      whiteSpace: "nowrap",
                     }}
                   >
-                    Patient
+                    ✓ Accepted
                   </span>
-                </div>
+                ) : (
+                  <span
+                    style={{
+                      background: "white",
+                      color: "#6B7280",
+                      border: "1px solid #D1D5DB",
+                      borderRadius: 20,
+                      padding: "2px 7px",
+                      fontSize: 8,
+                      fontWeight: 600,
+                      whiteSpace: "nowrap",
+                    }}
+                  >
+                    ↗ Open
+                  </span>
+                )}
               </div>
-
-              {/* Inherent Risk */}
-              <div>
-                <span
-                  style={{
-                    ...RISK_PILL[row.inherent],
-                    borderRadius: 20,
-                    padding: "2px 7px",
-                    fontSize: 8.5,
-                    fontWeight: 600,
-                    whiteSpace: "nowrap",
-                  }}
-                >
-                  {row.inherent}
-                </span>
-              </div>
-
-              {/* Residual Risk */}
-              <div>
-                <span
-                  style={{
-                    ...RISK_PILL[row.residual],
-                    borderRadius: 20,
-                    padding: "2px 7px",
-                    fontSize: 8.5,
-                    fontWeight: 600,
-                    whiteSpace: "nowrap",
-                  }}
-                >
-                  {row.residual}
-                </span>
-              </div>
-
-              {/* Class */}
-              <div style={{ fontSize: 9.5, color: "#6B7280", textAlign: "center" }}>{row.cls}</div>
             </div>
           ))}
         </div>
+
+        {/* Pagination */}
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "flex-end",
+            gap: 4,
+            padding: "5px 10px",
+            borderTop: "1px solid #F3F4F6",
+            flexShrink: 0,
+          }}
+        >
+          <span style={{ fontSize: 8.5, color: "#9CA3AF", marginRight: 6 }}>46 in total</span>
+          {["‹", "1", "2", "3", "4", "5", "›"].map((p) => (
+            <span
+              key={p}
+              style={{
+                fontSize: 8.5,
+                fontWeight: p === "2" ? 700 : 500,
+                color: p === "2" ? "white" : "#6B7280",
+                background: p === "2" ? "#2563EB" : "transparent",
+                borderRadius: 3,
+                padding: "1px 5px",
+                minWidth: 16,
+                textAlign: "center",
+              }}
+            >
+              {p}
+            </span>
+          ))}
+          <span style={{ fontSize: 8.5, color: "#9CA3AF", marginLeft: 4 }}>10 / page</span>
+        </div>
       </div>
 
-      {/* ── Mobile: card list (hidden on desktop) ── */}
+      {/* ── Mobile: card list ── */}
       <div
         className="ss-cards"
         style={{
@@ -452,7 +471,7 @@ export function SecureSoftwareSvg() {
           overflow: "hidden",
         }}
       >
-        {ROWS.map((row, rowIndex) => (
+        {ROWS.slice(0, 4).map((row, i) => (
           <div
             key={row.id}
             style={{
@@ -461,56 +480,67 @@ export function SecureSoftwareSvg() {
               borderRadius: 8,
               padding: "8px 10px",
               display: "flex",
-              flexDirection: "column",
-              gap: 5,
-              opacity: visibleRows[rowIndex] ? 1 : 0,
-              transform: visibleRows[rowIndex] ? "translateY(0)" : "translateY(5px)",
+              alignItems: "center",
+              justifyContent: "space-between",
+              gap: 8,
+              opacity: visibleRows[i] ? 1 : 0,
+              transform: visibleRows[i] ? "translateY(0)" : "translateY(5px)",
               transition: "opacity 0.3s ease, transform 0.3s ease",
             }}
           >
-            {/* Title — 2 lines max */}
-            <div
-              style={{
-                fontWeight: 600,
-                fontSize: 10.5,
-                color: "#0A0A0A",
-                lineHeight: 1.3,
-                overflow: "hidden",
-                display: "-webkit-box",
-                WebkitLineClamp: 2,
-                WebkitBoxOrient: "vertical",
-              }}
-            >
-              {RISK_TITLE}
+            <div>
+              <div
+                style={{
+                  fontWeight: 600,
+                  fontSize: 10,
+                  color: "#2563EB",
+                  fontFamily: "ui-monospace, monospace",
+                }}
+              >
+                {row.cve}
+              </div>
+              <div style={{ fontSize: 9, color: "#9CA3AF", marginTop: 2 }}>{row.library}</div>
             </div>
-
-            {/* Pills: Inherent → Residual */}
-            <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 5 }}>
               <span
                 style={{
-                  ...RISK_PILL[row.inherent],
-                  borderRadius: 20,
-                  padding: "2px 8px",
-                  fontSize: 9,
-                  fontWeight: 600,
-                  whiteSpace: "nowrap",
+                  ...SEVERITY_STYLE[row.severity],
+                  borderRadius: 4,
+                  padding: "2px 6px",
+                  fontSize: 8.5,
+                  fontWeight: 700,
                 }}
               >
-                {row.inherent}
+                {row.severity}
               </span>
-              <span style={{ fontSize: 9, color: "#9CA3AF", flexShrink: 0 }}>→</span>
-              <span
-                style={{
-                  ...RISK_PILL[row.residual],
-                  borderRadius: 20,
-                  padding: "2px 8px",
-                  fontSize: 9,
-                  fontWeight: 600,
-                  whiteSpace: "nowrap",
-                }}
-              >
-                {row.residual}
-              </span>
+              {row.status === "Accepted" ? (
+                <span
+                  style={{
+                    background: "#DCFCE7",
+                    color: "#16A34A",
+                    border: "1px solid #A7F3D0",
+                    borderRadius: 20,
+                    padding: "2px 7px",
+                    fontSize: 8.5,
+                    fontWeight: 600,
+                  }}
+                >
+                  ✓
+                </span>
+              ) : (
+                <span
+                  style={{
+                    border: "1px solid #D1D5DB",
+                    borderRadius: 20,
+                    padding: "2px 7px",
+                    fontSize: 8.5,
+                    color: "#6B7280",
+                    fontWeight: 600,
+                  }}
+                >
+                  ↗
+                </span>
+              )}
             </div>
           </div>
         ))}

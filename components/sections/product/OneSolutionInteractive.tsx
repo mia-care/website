@@ -69,7 +69,7 @@ const TOOLS = [
 ];
 
 export function OneSolutionInteractive() {
-  const [mode, setMode] = useState<"traditional" | "p4samd">("traditional");
+  const [mode, setMode] = useState<"traditional" | "p4samd">("p4samd");
   const [cycleKey, setCycleKey] = useState(0);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const isP4 = mode === "p4samd";
@@ -138,7 +138,7 @@ export function OneSolutionInteractive() {
             width: "fit-content",
           }}
         >
-          {(["traditional", "p4samd"] as const).map((m) => {
+          {(["p4samd", "traditional"] as const).map((m) => {
             const isActive = mode === m;
             const label = m === "traditional" ? "Traditional" : "With P4SaMD";
             return (

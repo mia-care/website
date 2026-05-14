@@ -47,10 +47,13 @@ const PHASES = [
   { id: "3", name: "Detailed Design", section: "§5.4", tools: ["Git", "ALM", "eQMS"] },
   { id: "4", name: "Implementation", section: "§5.5", tools: ["Git", "ALM", "IDP"] },
   { id: "5", name: "Unit Testing", section: "§5.5", tools: ["Git", "IDP"] },
+  { id: "6", name: "Integration Testing", section: "§5.6", tools: ["Git", "ALM", "IDP"] },
+  { id: "7", name: "System Testing", section: "§5.7", tools: ["ALM", "eQMS", "IDP"] },
 ];
 
-const ROW_DURATION_MS = 1100;
+const ROW_DURATION_MS = 1200;
 
+// ── Main component ────────────────────────────────────────────────────
 export function SdlcOrchestratorSvg() {
   const [hoveredRow, setHoveredRow] = useState<number | null>(null);
   const [loopRow, setLoopRow] = useState(0);
@@ -79,16 +82,17 @@ export function SdlcOrchestratorSvg() {
         height: "100%",
         display: "flex",
         flexDirection: "column",
-        gap: 10,
+        gap: 6,
         minWidth: 0,
       }}
     >
       <style>{`
         @media (max-width: 480px) {
           .orch-row { grid-template-columns: 1fr 1fr !important; }
-          .orch-col-sec, .orch-col-cls, .orch-col-comp, .orch-col-lock { display: none !important; }
+          .orch-col-sec, .orch-col-lock { display: none !important; }
         }
       `}</style>
+
       {/* ── Tool cards ── */}
       <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 6 }}>
         {TOOLS.map((tool) => {
@@ -133,46 +137,28 @@ export function SdlcOrchestratorSvg() {
       </div>
 
       {/* ── Table ── */}
-      <div
-        style={{
-          border: "1px solid #E5E5E5",
-          borderRadius: 8,
-          overflow: "hidden",
-          flex: 1,
-        }}
-      >
+      <div style={{ border: "1px solid #E5E5E5", borderRadius: 8, overflow: "hidden", flex: 1 }}>
         {/* Header */}
         <div
           className="orch-row"
           style={{
             display: "grid",
-            gridTemplateColumns: "1fr 18px 54px 1fr 76px 22px",
+            gridTemplateColumns: "1fr 18px 1fr 22px",
             background: "#E5E5E5",
             padding: "5px 10px",
             gap: 8,
             alignItems: "center",
           }}
         >
-          {["Activity", "#", "Class", "Tool Integrations", "Compliance", ""].map((h, hi) => (
+          {(["Activity", "#", "Tool Integrations", ""] as const).map((h, hi) => (
             <div
-              key={h}
-              className={
-                hi === 1
-                  ? "orch-col-sec"
-                  : hi === 2
-                    ? "orch-col-cls"
-                    : hi === 4
-                      ? "orch-col-comp"
-                      : hi === 5
-                        ? "orch-col-lock"
-                        : undefined
-              }
+              key={String(hi)}
+              className={hi === 1 ? "orch-col-sec" : hi === 3 ? "orch-col-lock" : undefined}
               style={{
                 color: "#525252",
                 fontWeight: 600,
                 fontSize: 10,
                 letterSpacing: "0.02em",
-                overflow: "hidden",
                 whiteSpace: "nowrap",
               }}
             >
@@ -192,7 +178,7 @@ export function SdlcOrchestratorSvg() {
               className="orch-row"
               style={{
                 display: "grid",
-                gridTemplateColumns: "1fr 18px 54px 1fr 76px 22px",
+                gridTemplateColumns: "1fr 18px 1fr 22px",
                 padding: "6px 10px",
                 gap: 8,
                 borderTop: "1px solid #E5E5E5",
@@ -224,23 +210,6 @@ export function SdlcOrchestratorSvg() {
                 {phase.id}
               </div>
 
-              {/* Class */}
-              <div className="orch-col-cls">
-                <span
-                  style={{
-                    background: "#DCFCE7",
-                    color: "#16A34A",
-                    borderRadius: 20,
-                    padding: "2px 6px",
-                    fontSize: 9.5,
-                    fontWeight: 600,
-                    whiteSpace: "nowrap",
-                  }}
-                >
-                  Class B
-                </span>
-              </div>
-
               {/* Tool pills */}
               <div style={{ display: "flex", gap: 4, flexWrap: "wrap", minWidth: 0 }}>
                 {phase.tools.map((toolKey) => {
@@ -262,24 +231,6 @@ export function SdlcOrchestratorSvg() {
                     </span>
                   );
                 })}
-              </div>
-
-              {/* Compliance */}
-              <div className="orch-col-comp">
-                <span
-                  style={{
-                    background: "#F0FDF4",
-                    color: "#059669",
-                    border: "1px solid #A7F3D0",
-                    borderRadius: 20,
-                    padding: "2px 6px",
-                    fontSize: 9.5,
-                    fontWeight: 600,
-                    whiteSpace: "nowrap",
-                  }}
-                >
-                  IEC 62304
-                </span>
               </div>
 
               {/* Lock */}
