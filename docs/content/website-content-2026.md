@@ -35,7 +35,7 @@ Carousel loghi clienti
 
 ## The gap between engineering and compliance is costing you.
 
-Most organizations still rely on a fragmented "tool soup": Jira or any ALMs for tasks, Word for documentation, Excel for traceability, GitHub for code… Every handoff between these disconnected systems is a manual, error-prone process that costs days and gradually increases audit risk.
+Most organizations still rely on a fragmented "tool soup": Jira for tasks, ALMs for specifications management, Word for documentation, Excel for traceability, GitHub for code… Every handoff between these disconnected systems is a manual, error-prone process that costs days and gradually increases audit risk.
 
 The result: compliance becomes a last-minute effort rather than an ongoing discipline, and product launches slip by months.
 
@@ -387,16 +387,16 @@ Integrated Lifecycle Management
 
 # SDLC Workflow Orchestrator & Blueprint
 
-From fragmented tools to a single compliant workflow.  
-Connects and orchestrates existing best-of-breed SDLC tools (Git, ALM, eQMS, IDPs) for the implementation of a fully IEC 62304-compliant SDLC. No rip-and-replace. No disruption to engineering culture. Just compliance, built into how your team already works.
+One platform. Every tool. One source of truth.  
+Connects and orchestrates existing best-of-breed toolchain (Git Repositories, ALM, eQMS, Internal Developer Platforms) into a single unified workspace. No rip-and-replace. No disruption to engineering culture. Just compliance, built into how your team already works.
 
 What It Does
 
-## Your tools. Your stack. Compliance guaranteed.
+## Your tools, connected. Your data, unified.
 
-Most teams already have the tools they rely on: GitHub for code, Jira or other ALMss for task management, an eQMS for quality records. The problem is that these tools rarely speak the same language as a regulatory auditor. P4SaMD bridges that gap without asking your team to change the way they work.
+Engineering teams already work with the tools they trust: Git repositories for code, Jira for tasks, ALMs for specifications management, an eQMS for quality records. The problem is that these tools store data in silos — and no single system holds the full picture.
 
-Beyond connecting your existing toolchain, P4SaMD enforces the correct workflow sequence across the entire development lifecycle: requirements before design, design before implementation, implementation before verification. Skipping a mandated step does not become an overlooked risk. It becomes structurally impossible.
+P4SaMD sits at the center, ingesting data from every connected tool and maintaining a live, unified record of the entire development lifecycle. Every change, every approval, every artifact is captured in one place — so your team always works from the same source of truth, and nothing falls through the cracks between systems. The compliant workflow structure embedded across all connected tools meets IEC 62304 requirements without disrupting the way your team works.
 
 ## Key features
 
@@ -408,17 +408,17 @@ Tool Orchestration
 
 P4SaMD integrates with your existing Git repositories, ALM tools, and eQMS without requiring migration to a proprietary system. Your team keeps their tools; the platform adds the compliance layer on top.
 
-Blueprint Engine
+Guided SDLC Workflow
 
-### IEC 62304 workflow templates
+### IEC 62304 workflow template
 
-Pre-built workflow blueprints for each software safety class (A, B, C) encode the correct IEC 62304 lifecycle phases and required artifacts, so teams always know what to do next, and auditors always find what they expect.
+IEC 62304-compliant lifecycle workflows for every software safety class (A, B, C) are built into P4SaMD and guide teams through the correct phases and required artifacts, so every team always knows what to do next and auditors always find what they expect.
 
-Config Management
+Single Source of Truth
 
-### End-to-end change control
+### All your data, in one place
 
-Every configuration item is tracked with full change history, approval records, and version lineage. When a regulator asks "who approved this change and what was the impact assessment?", the answer is instant.
+P4SaMD continuously ingests data from your connected tools and maintains a unified, live record of every requirement, risk, design output, code change, and approval — so your team always works from a single, consistent picture of the project, regardless of which tool they used to create it.
 
 Seamless Integration
 
@@ -475,17 +475,19 @@ Automated Traceability
 
 # ARTT — Automated Real-time Traceability
 
-Every requirement. Every risk. Every line of code. Connected.
+Every requirement. Every risk. Every artifact. Connected.
 
-Guarantees end-to-end traceability from requirements and risks to design, implementation, and verification by integrating directly with ALM systems and SDLC toolchains in real time. No manual updates. No reconciliation sprints before audits.
+ARTT guarantees end-to-end traceability from requirements and risks to design, implementation, and verification in real time; even from different sources by integrating ALM systems, external sources and files. Traceability isn't just a compliance artifact — it drives your development forward, surfaces gaps before they become findings, and continuously assembles a complete, consistent Technical File.
 
 What It Does
 
 ## Traceability that builds itself, continuously.
 
-Manual traceability is the silent killer of regulated software projects. It starts as a spreadsheet, requirements on one tab, risks on another, tests somewhere else; and ends as an audit risk. By the time the project is ready for review, the traceability matrix is already out of date. ARTT eliminates this problem at the architectural level.
+Manual, segmented traceability is the silent killer of regulated software projects. It starts as a spreadsheet and ends as an audit risk. By the time the project is ready for review, the matrix is out of date and the reconciliation effort delays release.
 
-By integrating directly with your ALM, Git repositories, tools and risk management toolchain, ARTT maps every requirement to its design output, every design output to its implementation, and every implementation to its verification evidence in real time, automatically, every time something changes. When your auditor opens the traceability matrix, it represents the current state of the system. Always.
+ARTT integrates directly with your ALM, Git repositories, and risk management toolchain to map every requirement to its design output, every design output to its implementation, and every implementation to its verification evidence — in real time, every time something changes. The traceability graph doesn't just record what happened: it drives development forward, detecting gaps as they open so teams stay focused on design and delivery rather than documentation maintenance.
+
+Traceability matrices are continuously tailored to IEC 62304, ISO 14971, and your own plans and quality SOPs — providing a complete, consistent, and correct Technical File at every point in the lifecycle.
 
 ## Everything ARTT tracks.
 
@@ -509,9 +511,9 @@ Each risk item is automatically linked to its mitigating software items and the 
 
 Gap Detection
 
-### Missing links surfaced before audits find them
+### Missing links surfaced during development, not just before audits
 
-ARTT continuously monitors the traceability graph and alerts when a requirement has no linked test, a risk has no linked control, or a change has no impact assessment. Gaps are found during development, not during audits.
+ARTT continuously monitors the traceability graph and surfaces gaps as they open — a requirement without verification, an uncontrolled risk, a change with no impact assessment — keeping development on track rather than catching problems at audit time.
 
 Regulations Addressed
 
@@ -563,7 +565,7 @@ Request a Demo →
 
 Your audit package, assembled automatically.
 
-P4SaMD automatically generates DHF records, risk evidence, verification reports, audit trails, and submission-ready documentation,  ensuring constant audit readiness from the first commit to the final release. 
+P4SaMD automatically generates Technical File, DHF records, risk evidence, verification reports, audit trails, and submission-ready documentation,  ensuring constant audit readiness from the first commit to the final release. 
 
 What It Does
 
@@ -571,15 +573,15 @@ What It Does
 
 The Documentation Engine lets your SaMD team focus on what they do best: building great software. Instead of pulling engineers, quality managers, and regulatory affairs specialists away from high-value work with documentation, it handles the entire docs process in the background, continuously and automatically.
 
-By connecting directly to your SDLC tools and pulling live development data in real time, the Documentation Engine compiles the Design History File, Technical File, and all required regulatory evidence on its own: in your own templates, using your terminology, ready for submission at any point in the development cycle.
+By connecting directly to your SDLC tools and pulling live development data in real time, the Documentation Engine compiles the Technical File, Design History File, and all required regulatory evidence on its own: in your own templates, using your terminology, ready for submission at any point in the development cycle.
 
 ## Everything the engine generates
 
-Auto-generated DHF
+Technical File & DHF
 
-### Continuous Design History File compilation
+### Continuous Technical File and DHF compilation
 
-The DHF is compiled continuously from live development data (requirements, risks, design, implementation, and verification) so the document always reflects the current system state.
+The Technical File and DHF are compiled continuously from live development data — requirements, risks, design, implementation, and verification — so both documents always reflect the current system state.
 
 Technical File Generation
 
@@ -641,7 +643,7 @@ Request a Demo →
 
 Regulatory expertise, always available in your workflow.
 
-A regulatory intelligence engine aligned with MDR, ISO 13485, IEC 62304, FDA guidance, EU AI Act, GMLP, and PCCP requirements. Whisper enforces deterministic rules, evaluates complex compliance policies, and surfaces proactive guidance exactly when developers need it, without requiring a RA/QA specialist for every decision.
+A deterministic rule and LLM-based policy engine for regulatory compliance. Whisper is aligned with MDR, ISO 13485, IEC 62304, ISO 14971, FDA, and AI regulatory frameworks (EU AI Act, GMLP, PCCP). It delivers active, pre-configured regulatory intelligence throughout the SDLC and performs AI-driven assessments of requirement quality and test coverage — identifying blind spots before they become audit findings.
 
 What It Does
 
@@ -651,7 +653,7 @@ The traditional model of regulatory compliance concentrates all expertise in a s
 
 At a certain scale, that model reaches its limits. Developers need faster answers. Specialists find themselves stretched across routine reviews, with less time for the high-judgment work only they can do.
 
-Whisper is designed for this challenge. A regulatory intelligence engine aligned with MDR, ISO 13485, IEC 62304, FDA guidance, EU AI Act, GMLP, and PCCP, it enforces hard rules, evaluates nuanced compliance policies, and proactively flags issues before they become audit findings. Routine decisions are handled at the point of engineering. RA/QA teams stay focused on where their expertise has the most impact.
+Whisper is a regulatory intelligence engine aligned with MDR, ISO 13485, IEC 62304, ISO 14971, FDA, and the latest AI-related regulations and guidances (EU AI Act, GMLP, and PCCP). It enforces hard rules, evaluates nuanced compliance policies, and performs AI-driven assessments of quality. It addresses compliance gaps and targets 100% verified software by surfacing blind spots in the verification process before they become audit findings. Routine decisions are handled at the point of engineering. RA/QA teams stay focused on where their expertise has the most impact.
 
 Key Features
 
@@ -663,7 +665,7 @@ Deterministic Rule Enforcement
 
 Whisper applies a curated, versioned regulatory ruleset where every enforcement action is traceable to a specific requirement. Binary compliance checks, software classification boundaries, mandatory documentation triggers: all handled consistently, every time.
 
-Policy Evaluation
+Directive Evaluation
 
 ### Compliance judgment for the decisions that are never black and white
 
@@ -701,6 +703,7 @@ Regulations Addressed
 
 ISO 13485  
 IEC 62304  
+ISO 14971  
 EU MDR 2017/745  
 FDA  
 EU AI Act  
@@ -741,15 +744,15 @@ Request a Demo →
 
 Ship AI-enabled medical software with full regulatory clarity
 
-A dedicated feature set that enforces the specific regulatory requirements of AI-enabled medical software: transparency, explainability, audit logbooks, and data quality. It supports design inputs, regulatory review, implementation adherence, quality assurance, and documentation for AI-enabled components across EU AI Act, GMLP, and FDA PCCP frameworks.
+A dedicated feature set that enforces specific AI regulatory requirements — transparency, explainability, audit records, and data quality — while supporting design inputs, regulatory review, implementation adherence, quality assurance, and documentation for AI-enabled components. Covers the full compliance lifecycle for AI components, agents, and models in SaMD products.
 
 What It Does
 
 ## The compliance infrastructure for AI-enabled SaMD.
 
-AI components are a genuine opportunity for SaMD products. They enable smarter diagnostics, adaptive workflows, and better patient outcomes. But they also introduce a new layer of regulatory complexity: the EU AI Act, FDA GMLP guidance, and PCCP frameworks demand documentation and control practices that standard QMS systems were never designed to support.
+AI components, agents, and models are transforming SaMD products — enabling smarter diagnostics, adaptive workflows, and better patient outcomes. But they introduce a regulatory complexity that standard QMS systems were never designed to handle: the EU AI Act, FDA GMLP, and PCCP frameworks demand transparency, explainability, audit records, and data quality controls that go far beyond traditional software compliance.
 
-Master AI for Compliance adds a dedicated layer within P4SaMD that enforces transparency, explainability, and logbook requirements while supporting the structured documentation of AI training data, model versions, performance metrics, and PCCP change control plans. Regulators get the evidence they need to evaluate AI-enabled components with full confidence.
+Master AI for Compliance adds a dedicated layer within P4SaMD that manages the full compliance lifecycle of AI components — from design inputs and regulatory review through implementation adherence, quality assurance, and documentation. It enforces transparency, explainability, and audit record requirements while supporting structured documentation of AI training data, model versions, performance metrics, and PCCP change control plans.
 
 ## Everything the AI compliance enforces.
 
@@ -765,11 +768,11 @@ PCCP Support
 
 Structured support for FDA Predetermined Change Control Plans, enabling teams to plan and execute model updates within pre-approved boundaries, avoiding the cost and delay of a new regulatory submission for every algorithm iteration.
 
-Model Logbooks
+AI Component Audit Records
 
 ### Automated tracking of every model state
 
-Automated logbooks track training data characteristics, model versions, performance benchmarks, validation results, and bias assessments; creating the continuous record that regulators and notified bodies require for AI-enabled SaMD.  
+Automated audit records track the full lifecycle of every AI component, agent, and model: training data characteristics, version history, performance benchmarks, validation results, and bias assessments — creating the continuous record that regulators and notified bodies require for AI-enabled SaMD.  
 AI Risk Management
 
 ### ISO 14971 extended for AI failure modes
@@ -818,7 +821,7 @@ Request a Demo →
 
 Certify what you already built,  without rebuilding it.
 
-Provides dedicated capabilities to ingest existing applications of any codebase, run automated gap analysis against reference standards and generate custom remediation plans that move legacy software toward certification without a full redevelopment.
+Provides dedicated capabilities to ingest the full legacy software estate — documentation (requirement analyses, specs, architecture designs, test plans, test reports, project plans) and technical assets (source code, DB schemas, SBOMs, configuration files) — run automated gap analysis against the applicable regulatory framework, and generate custom remediation plans that bring legacy software to audit readiness without a full redevelopment.
 
 What It Does
 
@@ -826,33 +829,33 @@ What It Does
 
 Millions of lines of code in the medical device industry were written before IEC 62304 was a consideration, before EU MDR 2017/745 came into force, and before "traceability matrix" was part of any engineering team's vocabulary. This software still works. It still creates value. But it cannot be certified, updated, or brought to new markets without first satisfying the regulatory frameworks it predates.
 
-The Brownfield Remediator ingests your existing software regardless of programming language or documentation maturity, then uses P4SaMD's compliance engine to automate the gap analysis, reconstruct traceability from disconnected artifacts, and generate a structured, sprint-ready remediation backlog.
+The Brownfield Remediator ingests your full legacy estate regardless of format, language, or documentation maturity. It automates gap analysis against the regulatory framework of your choice, maps what exists to what is required, and generates a structured, prioritized task list — turning a scattered legacy archive into an audit-ready compliance record.
 
 ## Everything the remediator automates.
 
 Automated Ingestion
 
-### Import any codebase, any format
+### Import any documentation, any technical asset
 
-Imports heterogeneous workitems (requirements from Word, risks from Excel, tests from any test management tool, code from any Git repository) into P4SaMD's unified compliance model without manual migration.
+Ingests the full legacy estate into P4SaMD's unified compliance model: documentation (requirement analyses, specs, architecture designs, test plans, test reports, project plans) and technical assets (source code, DB schemas, SBOMs, configuration files) — no manual migration required.
 
 Gap Analysis
 
-### Deviations from IEC 62304 and ISO 13485, surfaced automatically
+### Gaps against the applicable regulatory framework, surfaced automatically
 
-The P4SaMD Compliance Engine maps existing artifacts to reference standards and identifies every gap (what's missing, what's incomplete, what's non-conformant) with prioritized remediation effort estimates.
+The P4SaMD Compliance Engine maps existing artifacts to the regulatory framework of your choice — IEC 62304, ISO 13485, EU MDR, FDA, ISO 14971, or any newly applicable regulation — and identifies every gap: what's missing, incomplete, or non-conformant, with prioritized remediation effort estimates.
 
-Traceability Reconstruction
+Legacy Remediation
 
-### ARTT rebuilds what was never built
+### From compliance gaps to audit-ready evidence
 
-Using ARTT, the Brownfield Remediator reconstructs end-to-end traceability from existing artifacts even when no explicit traceability was ever defined. Requirements linked to code are linked to tests automatically.
+Translates the gap analysis output into a structured remediation path: missing documentation is scaffolded, non-conformant artifacts are flagged with corrective actions, and partial traceability is extended — producing the evidence package that auditors and notified bodies require.
 
 Remediation Planning
 
-### Sprint-ready backlog of prioritized compliance tasks
+### Structured, prioritized task list for compliance remediation
 
-Generates a structured remediation backlog  (organized by regulatory priority and effort) that engineering teams can import directly into Jira or any ALM tool and begin executing immediately.
+Generates a structured, prioritized remediation task list organized by regulatory priority and effort that teams can import into any ALM tool and begin executing immediately.
 
 Regulations Addressed
 
@@ -860,8 +863,10 @@ Regulations Addressed
 
 IEC 62304  
 ISO 13485  
+ISO 14971  
 EU MDR 2017/745  
-FDA
+FDA  
+Custom Frameworks
 
 Related Use Cases
 
@@ -895,7 +900,7 @@ Request a Demo →
 
 Secure by design. From the first line of code.
 
-Supports Software Item implementation, including to ready-to-use modules and software components, while implementing Secure by Design principles by continuously scanning for vulnerabilities and managing software supply chain security per IEC 81001-5-1.
+Supports Software Item implementation with full design control at every stage — from specification to code — while enforcing continuous implementation verification and managing the full software supply chain through dependency control and vulnerability management per IEC 81001-5-1.
 
 What It Does
 
@@ -903,27 +908,27 @@ What It Does
 
 Medical software is an increasingly targeted attack surface. A vulnerability in a device software component is not just a security incident; it's a patient safety event and a regulatory failure. IEC 81001-5-1 sets the standard for health software cybersecurity, but satisfying it requires far more than a security audit at release time.
 
-P4SaMD's Secure Software Development capability embeds IEC 81001-5-1 requirements directly into the development workflow, maintaining an up-to-date Software Bill of Materials, continuously scanning dependencies for known CVEs, and enforcing secure coding guardrails that prevent vulnerable components from entering the codebase in the first place.
+P4SaMD's Secure Software Development capability embeds security and compliance controls directly into the development workflow: keeping design files aligned with implementation at every stage, detecting anomalies between software specifications and actual code early, and managing the full dependency and vulnerability lifecycle — from detection to approval and documentation.
 
 ## Everything the dev module enforces.
 
-Secure Component Library
+Implementation Verification
 
-### Pre-validated modules for regulated development
+### Continuous checks of implementation against software specifications
 
-A curated library of software components pre-validated against IEC 81001-5-1 security requirements, reducing development time while guaranteeing that foundational components meet the standard from the first import.
+Automatic controls guarantee constant verification of implementation against software specifications at every level — design files, code, and test artifacts — enabling early detection of anomalies before they propagate into the compliance record.
 
 SBOM Management
 
-### Continuous Software Bill of Materials
+### Dependency detection, approval, and documentation
 
-Automatically generates and maintains a Software Bill of Materials for every software item enabling real-time tracking of all third-party dependencies and instant response when a new CVE affects your product.
+Plug-and-play dependency detection automatically generates and maintains the Software Bill of Materials for every software item. Every dependency is tracked, approved, and documented — giving teams full visibility into their software supply chain with minimal setup.
 
-Vulnerability Scanning
+Vulnerability Management
 
 ### Automated CVE detection with risk impact assessment
 
-Continuously scans dependencies and infrastructure for known vulnerabilities, assessing each finding against its compliance impact, distinguishing between a low-severity dependency update and a finding that requires an immediate risk management response.
+Covers the full vulnerability lifecycle: automated detection, risk-based mitigation planning, approval workflow, and documentation — distinguishing between a minor dependency update and a finding requiring an immediate risk management response under IEC 81001-5-1.
 
 Secure Development Guardrails
 
@@ -970,7 +975,7 @@ Request a Demo →
 
 Compliance guardrails for every developer on your team.
 
-Provides guided, step-by-step workflow assistance and conversational support that keeps engineering teams on the right path through every phase of the SDLC, without requiring deep regulatory expertise to stay compliant.
+Provides guided, step-by-step workflow assistance and a conversational AI compliance assistant that keeps engineering teams on the right path through every phase of the SDLC — combining deep regulatory framework indexing with real-time access to project data, without requiring deep regulatory expertise.
 
 What It Does
 
@@ -978,7 +983,7 @@ What It Does
 
 Even experienced engineering teams building SaMD face the same structural risk: without clear guardrails, compliant processes drift. Steps get skipped under delivery pressure. Artifacts get documented after the fact. Decisions that should follow a defined path get made informally.
 
-Guided Workflows addresses this directly. It provides step-by-step, contextual structure through every phase of the IEC 62304 lifecycle, keeping teams on the correct path regardless of their regulatory background. A conversational interface answers compliance questions in plain language. Role-specific workflows surface the right scope for each contributor. And an onboarding accelerator brings new teams up to speed in days rather than months.
+Guided Workflows addresses this directly. It provides step-by-step, contextual structure through every phase of the IEC 62304 lifecycle, keeping teams on the correct path regardless of their regulatory background. A specialized compliance assistant acts as the project's knowledge core — combining deep indexing of the applicable regulatory framework with real-time access to uploaded documentation, integrated tools, and implementation data. Role-specific workflows surface the right scope for each contributor. And an onboarding accelerator brings new teams up to speed in days rather than months.
 
 ## Everything guided workflows enable.
 
@@ -988,11 +993,11 @@ Step-by-step Process Guidance
 
 Guides teams through each SDLC lifecycle phase with contextual instructions, decision prompts, and required artifact checklists, so the correct process is always the path of least resistance.
 
-Conversational Interface
+Compliance assistant
 
-### Ask in plain language, get regulatory answers
+### Project-aware compliance intelligence, always in context
 
-A natural language interface for compliance questions. Developers ask what they need to do, the system responds with specific, actionable, compliance answers without requiring them to know precisely the underlying regulations.
+A specialized conversational AI engine that combines deep indexing of the applicable regulatory framework (IEC 62304, MDR, ISO 14971, and others) with real-time access to project data — uploaded documentation, integrated tools, and implementation. Supports complex cross-entity queries and delivers context-specific guidance that ensures project-wide consistency and compliance.
 
 Role-based Guidance
 
@@ -1136,7 +1141,7 @@ The Problem
 
 AI-based clinical software evolves dynamically, yet traditional compliance models assume requirements are static from the outset. Every update to an AI model risks triggering a complex cascade of rework across risk management files, verification documents, and regulatory submissions, creating a compliance drag that slows innovation to a halt.
 
-Proving that an opaque algorithm is safe for life-critical decisions requires a new kind of evidence: transparency reports, bias assessments, logbooks, and PCCP documentation that most QMS systems were never designed to generate.
+Proving that an opaque algorithm is safe for life-critical decisions requires a new kind of evidence: transparency reports, bias assessments, audit records, and PCCP documentation that most QMS systems were never designed to generate.
 
 The Need
 
@@ -1148,7 +1153,7 @@ The Solution
 
 ## Multi-framework compliance. One platform.
 
-Mia-Care P4SaMD streamlines building and leveraging AI components while managing all compliance aspects (transparency, explainability, security, logbooks) effectively abstracting developers from the complexity of regulatory mandates.
+Mia-Care P4SaMD streamlines building and leveraging AI components while managing all compliance aspects (transparency, explainability, security, audit records) effectively abstracting developers from the complexity of regulatory mandates.
 
 The platform handles multi-framework compliance (MDR, EU AI Act, GMLP) within a single unified system. Your team is never forced to choose between shipping a model improvement or maintaining your compliance posture.
 

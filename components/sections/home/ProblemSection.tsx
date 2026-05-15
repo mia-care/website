@@ -76,9 +76,10 @@ export function ProblemSection() {
             <p>
               Building software-as-a-medical-device means navigating regulations, design control,
               risk traceability, and audit documentation, all while shipping on time. Most teams
-              manage this across disconnected tools: Jira for tasks, GitHub for code, Word for
-              documentation, Excel for traceability matrices. Every handoff between these systems is
-              manual, error-prone, and invisible to auditors until it's too late.
+              manage this across disconnected tools: Jira for tasks, an ALM for specifications,
+              GitHub for code, Word for documentation, Excel for traceability matrices. Every
+              handoff between these systems is manual, error-prone, and invisible to auditors until
+              it's too late.
             </p>
             <p>
               The result is predictable. Compliance becomes a last-minute scramble, releases slip,

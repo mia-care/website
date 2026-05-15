@@ -30,9 +30,9 @@ const TABS = [
     wrapStyle: {} as React.CSSProperties,
   },
   {
-    label: "Component Library",
+    label: "Implementation Verification",
     caption:
-      "Secure component library — pre-validated modules for authentication, cryptography, audit logging, and more, each carrying an IEC 81001-5-1 and IEC 62304 certification stamp. Teams drop in compliant building blocks instead of reimplementing foundational security from scratch.",
+      "Continuous verification of implementation against software specifications at every level — design files, code, and test artifacts — enabling early detection of anomalies before they propagate into the compliance record.",
     Component: SecureComponentLibrarySvg,
     wrapStyle: {} as React.CSSProperties,
   },

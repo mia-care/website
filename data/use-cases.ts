@@ -87,7 +87,7 @@ export const useCases: UseCase[] = [
       "AI-based clinical software evolves dynamically, but traditional compliance models assume requirements are static. P4SaMD decouples your engineering velocity from regulatory rigidity.",
     problem: {
       heading: "Unreadable AI, untraceable compliance.",
-      body: "AI-based clinical software evolves dynamically, yet traditional compliance models assume requirements are static from the outset. Every update to an AI model risks triggering a complex cascade of rework across risk management files, verification documents, and regulatory submissions, creating a compliance drag that slows innovation to a halt.\n\nProving that an opaque algorithm is safe for life-critical decisions requires a new kind of evidence: transparency reports, bias assessments, logbooks, and PCCP documentation that most QMS systems were never designed to generate.",
+      body: "AI-based clinical software evolves dynamically, yet traditional compliance models assume requirements are static from the outset. Every update to an AI model risks triggering a complex cascade of rework across risk management files, verification documents, and regulatory submissions, creating a compliance drag that slows innovation to a halt.\n\nProving that an opaque algorithm is safe for life-critical decisions requires a new kind of evidence: transparency reports, bias assessments, audit records, and PCCP documentation that most QMS systems were never designed to generate.",
     },
     need: {
       heading: "Compliance that keeps pace with your model updates.",
@@ -95,7 +95,7 @@ export const useCases: UseCase[] = [
     },
     solution: {
       heading: "Multi-framework compliance. One platform.",
-      body: "Mia-Care P4SaMD streamlines building and leveraging AI components while managing all compliance aspects (transparency, explainability, security, logbooks), effectively abstracting developers from the complexity of regulatory mandates.\n\nThe platform handles multi-framework compliance (MDR, EU AI Act, GMLP) within a single unified system. Your team is never forced to choose between shipping a model improvement or maintaining your compliance posture.",
+      body: "Mia-Care P4SaMD streamlines building and leveraging AI components while managing all compliance aspects (transparency, explainability, security, audit records), effectively abstracting developers from the complexity of regulatory mandates.\n\nThe platform handles multi-framework compliance (MDR, EU AI Act, GMLP) within a single unified system. Your team is never forced to choose between shipping a model improvement or maintaining your compliance posture.",
     },
     caseStudy: {
       label: "Case Study // CDSS Provider",
@@ -120,7 +120,7 @@ export const useCases: UseCase[] = [
     seo: {
       title: "Building High-Risk AI Software (CDSS) | Use Case | Mia-Care P4SaMD",
       description:
-        "Ship AI-enabled clinical software with EU AI Act, GMLP, and MDR compliance in a single platform. Automated logbooks, PCCP support, and multi-framework gap detection.",
+        "Ship AI-enabled clinical software with EU AI Act, GMLP, and MDR compliance in a single platform. Automated audit records, PCCP support, and multi-framework gap detection.",
     },
   },
   {
@@ -139,7 +139,7 @@ export const useCases: UseCase[] = [
     },
     solution: {
       heading: "From legacy to audit-ready. Without rebuilding.",
-      body: "Mia-Care P4SaMD ingests existing codebases in any language, along with existing documentation, and leverages agentic AI to automate legacy assessments and identify gaps against IEC 62304, ISO 13485, and EU MDR / FDA.\n\nThe platform generates custom remediation plans, automates traceability reconstruction using ARTT, and produces audit-ready documentation in your own templates. What typically takes years of manual effort is compressed into a structured, actionable remediation backlog your engineering team can execute immediately.",
+      body: "Mia-Care P4SaMD ingests existing codebases in any language, along with existing documentation, and leverages agentic AI to automate legacy assessments and identify gaps against IEC 62304, ISO 13485, and EU MDR / FDA.\n\nThe platform generates custom remediation plans, automates gap analysis against the applicable regulatory framework, and produces audit-ready documentation in your own templates. What typically takes years of manual effort is compressed into a structured, prioritized task list your engineering team can execute immediately.",
     },
     caseStudy: {
       label: "Case Study // Consumer Health Enterprise",
@@ -147,7 +147,7 @@ export const useCases: UseCase[] = [
         "A global leader in the consumer health and lifestyle sector, with annual revenues exceeding several billion euros, operating across numerous countries through several globally recognized consumer brands.",
       scope: [
         "Automated ingestion of heterogeneous workitems: requirements, risks, tests, and existing code",
-        "Traceability reconstruction via ARTT: generating the complete end-to-end traceability matrix",
+        "Gap analysis and legacy remediation: generating a complete compliance evidence package",
         "Gap analysis against MDR and IEC 62304, with prioritized remediation tasks",
         "Dynamic generation of audit-ready MDR Technical Files using client templates",
       ],
