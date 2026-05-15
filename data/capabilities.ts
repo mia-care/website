@@ -190,7 +190,15 @@ export const capabilities: Capability[] = [
           "Whisper surfaces enforcement and suggestions based on what the developer is currently working on. Implementing a Class B software item triggers IEC 62304 5.3 guidance, not a generic reminder.",
       },
     ],
-    regulations: ["ISO 13485", "IEC 62304", "ISO 14971", "EU MDR 2017/745", "FDA", "EU AI Act", "GMLP"],
+    regulations: [
+      "ISO 13485",
+      "IEC 62304",
+      "ISO 14971",
+      "EU MDR 2017/745",
+      "FDA",
+      "EU AI Act",
+      "GMLP",
+    ],
     relatedUseCases: ["high-risk-ai-cdss", "greenfield-samd", "legacy-remediation"],
     seo: {
       title: "Smart Assistant Whisper | P4SaMD Capability | Mia-Care",
@@ -280,7 +288,14 @@ export const capabilities: Capability[] = [
           "Generates a structured, prioritized remediation task list organized by regulatory priority and effort that teams can import into any ALM tool and begin executing immediately.",
       },
     ],
-    regulations: ["IEC 62304", "ISO 13485", "ISO 14971", "EU MDR 2017/745", "FDA", "Custom Frameworks"],
+    regulations: [
+      "IEC 62304",
+      "ISO 13485",
+      "ISO 14971",
+      "EU MDR 2017/745",
+      "FDA",
+      "Custom Frameworks",
+    ],
     relatedUseCases: ["legacy-remediation", "high-risk-ai-cdss", "greenfield-samd"],
     seo: {
       title: "Brownfield Remediator | P4SaMD Capability | Mia-Care",

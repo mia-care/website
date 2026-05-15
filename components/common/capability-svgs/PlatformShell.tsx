@@ -12,6 +12,7 @@ import {
   Files,
   FileText,
   Folders,
+  Gear,
   GraduationCap,
   ListBullets,
   ListChecks,
@@ -23,6 +24,7 @@ import {
   Shield,
   ShieldWarning,
   SquaresFour,
+  Tag,
   UsersThree,
   Warning,
   Wrench,
@@ -80,6 +82,8 @@ export const NAV_ICONS = {
   vulnScan: <ShieldWarning size={ICON_SIZE} weight="regular" />,
   guardrails: <Shield size={ICON_SIZE} weight="regular" />,
   componentLibrary: <Cube size={ICON_SIZE} weight="regular" />,
+  productMetadata: <Tag size={ICON_SIZE} weight="regular" />,
+  settings: <Gear size={ICON_SIZE} weight="regular" />,
 } as const;
 
 export interface NavItem {

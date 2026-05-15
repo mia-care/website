@@ -3,99 +3,219 @@
 import { useEffect, useRef, useState } from "react";
 import { NAV_ICONS, PlatformShell } from "./PlatformShell";
 
-const TURNS = [
-  {
-    id: "q1",
-    role: "user" as const,
-    text: "What artifacts does IEC 62304 §5.5 require from me?",
-  },
-  {
-    id: "a1",
-    role: "ai" as const,
-    intro: "For §5.5 Unit Implementation you need to produce:",
-    items: [
-      { label: "Software Item design document", icon: "📄" },
-      { label: "Source code with documented standards compliance", icon: "💻" },
-      { label: "Unit test plan & recorded results", icon: "🧪" },
-      { label: "Traceability to SRS requirements", icon: "🔗" },
-    ],
-    tags: ["IEC 62304 §5.5", "Class B · mandatory"],
-  },
-  {
-    id: "q2",
-    role: "user" as const,
-    text: "Which of these are missing for 'auth-module'?",
-  },
-  {
-    id: "a2",
-    role: "ai" as const,
-    intro: "For auth-module, current status:",
-    issues: [
-      { status: "ok", label: "Software Item design document — complete" },
-      { status: "ok", label: "Coding standards documented" },
-      { status: "warn", label: "Unit test results not yet uploaded" },
-      { status: "warn", label: "Traceability to REQ-AUTH-003 missing" },
-    ],
-    tags: ["2 actions required"],
-  },
+type PhaseStatus = "completed" | "in-progress" | "current" | "locked";
+
+interface Phase {
+  id: number;
+  name: string;
+  status: PhaseStatus;
+  tasks: number;
+  total: number;
+}
+
+const BASE_PHASES: Phase[] = [
+  { id: 1, name: "Planning & Quality Governance", status: "completed", tasks: 4, total: 4 },
+  { id: 2, name: "Requirements & Risk Analysis", status: "in-progress", tasks: 3, total: 4 },
+  { id: 3, name: "Architecture & Detailed Design", status: "current", tasks: 1, total: 5 },
+  { id: 4, name: "Implementation & Continuous Verification", status: "locked", tasks: 0, total: 6 },
+  { id: 5, name: "System Testing & Final Validation", status: "locked", tasks: 0, total: 6 },
+  { id: 6, name: "Release & Post-Market Maintenance", status: "locked", tasks: 0, total: 4 },
 ];
 
-const BLUE = "#2563EB";
-const PURPLE = "#7C3AED";
+const TOTAL_TASKS = BASE_PHASES.reduce((s, p) => s + p.total, 0);
+const TASK_MS = 1300;
+const HOLD_MS = 1800;
+
+const SDLC_NAV = [
+  { label: "Workflow Guide", icon: NAV_ICONS.workflowGuide, active: true },
+  { label: "Requirements", icon: NAV_ICONS.requirements },
+  { label: "Software System", icon: NAV_ICONS.softwareSystem },
+  { label: "Verification", icon: NAV_ICONS.verification },
+  { label: "Risk Analysis", icon: NAV_ICONS.riskAnalysis },
+];
+
+const CONFIG_NAV = [
+  { label: "Product Metadata", icon: NAV_ICONS.productMetadata },
+  { label: "Regulatory Framework", icon: NAV_ICONS.guardrails },
+  { label: "AI Agents", icon: NAV_ICONS.aiProjects },
+  { label: "Users", icon: NAV_ICONS.roleView },
+  { label: "Settings", icon: NAV_ICONS.settings },
+];
+
+const STATUS_LABEL: Record<PhaseStatus, string> = {
+  completed: "Completed",
+  "in-progress": "In Progress",
+  current: "Current Stage",
+  locked: "Locked",
+};
+
+const STATUS_COLOR: Record<PhaseStatus, string> = {
+  completed: "#059669",
+  "in-progress": "#2563EB",
+  current: "#0891B2",
+  locked: "#9CA3AF",
+};
+
+function DonutProgress({ pct }: { pct: number }) {
+  const R = 18;
+  const C = 2 * Math.PI * R;
+  const filled = (pct / 100) * C;
+  return (
+    <svg
+      width="52"
+      height="52"
+      viewBox="0 0 52 52"
+      aria-label={`${pct}% complete`}
+      style={{ flexShrink: 0 }}
+    >
+      <circle cx="26" cy="26" r={R} fill="none" stroke="#E5E7EB" strokeWidth="4" />
+      <circle
+        cx="26"
+        cy="26"
+        r={R}
+        fill="none"
+        stroke="#2563EB"
+        strokeWidth="4"
+        strokeLinecap="round"
+        strokeDasharray={`${filled} ${C - filled}`}
+        transform="rotate(-90 26 26)"
+        style={{ transition: "stroke-dasharray 0.6s ease" }}
+      />
+      <text
+        x="26"
+        y="30"
+        textAnchor="middle"
+        fontSize="11"
+        fontWeight="800"
+        fill="#0A0A0A"
+        fontFamily="ui-sans-serif, system-ui, sans-serif"
+      >
+        {pct}%
+      </text>
+    </svg>
+  );
+}
+
+function PhaseIcon({ status }: { status: PhaseStatus }) {
+  if (status === "completed") {
+    return (
+      <div
+        style={{
+          width: 22,
+          height: 22,
+          borderRadius: "50%",
+          background: "#059669",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          flexShrink: 0,
+        }}
+      >
+        <svg width="10" height="10" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path
+            d="M3 8l3.5 3.5L13 5"
+            stroke="white"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      </div>
+    );
+  }
+  if (status === "in-progress") {
+    return (
+      <div
+        style={{
+          width: 22,
+          height: 22,
+          borderRadius: "50%",
+          border: "2px solid #2563EB",
+          background: "white",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          flexShrink: 0,
+        }}
+      >
+        <div style={{ width: 8, height: 8, borderRadius: "50%", background: "#2563EB" }} />
+      </div>
+    );
+  }
+  if (status === "current") {
+    return (
+      <div
+        style={{
+          width: 22,
+          height: 22,
+          borderRadius: "50%",
+          border: "2px solid #0891B2",
+          background: "#E0F2FE",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          flexShrink: 0,
+        }}
+      >
+        <div style={{ width: 7, height: 7, borderRadius: "50%", background: "#0891B2" }} />
+      </div>
+    );
+  }
+  return (
+    <div
+      style={{
+        width: 22,
+        height: 22,
+        borderRadius: "50%",
+        border: "1.5px solid #D1D5DB",
+        background: "white",
+        flexShrink: 0,
+      }}
+    />
+  );
+}
 
 export function GuidedChatSvg() {
-  const [visibleTurns, setVisibleTurns] = useState(0);
-  const [thinking, setThinking] = useState(false);
-  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const turnTimers = useRef<ReturnType<typeof setTimeout>[]>([]);
+  const [phase3Tasks, setPhase3Tasks] = useState(1);
+  const timers = useRef<ReturnType<typeof setTimeout>[]>([]);
 
   useEffect(() => {
-    const clearAll = () => {
-      if (timerRef.current) clearTimeout(timerRef.current);
-      turnTimers.current.forEach(clearTimeout);
-      turnTimers.current = [];
+    const clear = () => timers.current.forEach(clearTimeout);
+    const later = (fn: () => void, ms: number) => {
+      const t = setTimeout(fn, ms);
+      timers.current.push(t);
     };
 
     const run = () => {
-      setVisibleTurns(0);
-      setThinking(false);
-
-      timerRef.current = setTimeout(() => {
-        setThinking(true);
-        TURNS.forEach((_turn, i) => {
-          const delay = 400 + i * 1100;
-          const t1 = setTimeout(() => {
-            setThinking(false);
-            setVisibleTurns(i + 1);
-          }, delay);
-          const t2 = setTimeout(() => {
-            if (i < TURNS.length - 1) setThinking(true);
-          }, delay + 200);
-          turnTimers.current.push(t1, t2);
-        });
-        const total = 400 + TURNS.length * 1100 + 2500;
-        timerRef.current = setTimeout(() => {
-          clearAll();
-          timerRef.current = setTimeout(run, 400);
-        }, total);
-      }, 300);
+      clear();
+      timers.current = [];
+      setPhase3Tasks(1);
+      [2, 3, 4, 5].forEach((n, i) => {
+        later(() => setPhase3Tasks(n), (i + 1) * TASK_MS);
+      });
+      later(run, 4 * TASK_MS + HOLD_MS);
     };
 
     run();
-    return clearAll;
+    return clear;
   }, []);
 
-  const GUIDED_NAV = [
-    { label: "Role View", icon: NAV_ICONS.roleView },
-    { label: "AI Guidance", icon: NAV_ICONS.aiGuidance, active: true },
-    { label: "Onboarding", icon: NAV_ICONS.onboarding },
-  ];
+  const doneTasks = 4 + 3 + phase3Tasks;
+  const pct = Math.round((doneTasks / TOTAL_TASKS) * 100);
+  const phase3Done = phase3Tasks >= BASE_PHASES[2].total;
+
+  const phases: Phase[] = BASE_PHASES.map((p) =>
+    p.id === 3 ? { ...p, tasks: phase3Tasks, status: phase3Done ? "completed" : "current" } : p,
+  );
 
   return (
     <PlatformShell
-      breadcrumb={["Mia-Care Dev", "App Cardio-Monitor", "AI Guidance"]}
+      breadcrumb={["Mia-Care Dev", "AI Diagnostic Tool", "SDLC Phases"]}
       topItem={{ label: "Dashboard", icon: NAV_ICONS.dashboard }}
-      sections={[{ title: "Guided Workflows", items: GUIDED_NAV }]}
+      sections={[
+        { title: "SDLC", items: SDLC_NAV },
+        { title: "Configuration", items: CONFIG_NAV },
+      ]}
     >
       <div
         style={{
@@ -107,298 +227,147 @@ export function GuidedChatSvg() {
           display: "flex",
           flexDirection: "column",
           overflow: "hidden",
+          padding: "14px 16px 12px",
+          gap: 10,
         }}
       >
         <style>{`
-        @keyframes gc-slide {
-          from { opacity: 0; transform: translateY(6px); }
-          to   { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes gc-dot {
-          0%, 80%, 100% { transform: scale(0.6); opacity: 0.3; }
-          40%           { transform: scale(1);   opacity: 1;   }
-        }
-      `}</style>
+          @keyframes gw-fade {
+            from { opacity: 0; transform: translateY(3px); }
+            to   { opacity: 1; transform: translateY(0); }
+          }
+        `}</style>
 
-        {/* Header */}
-        <div
-          style={{
-            padding: "11px 14px 9px",
-            borderBottom: "1px solid #E5E5E5",
-            flexShrink: 0,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-          }}
-        >
-          <div style={{ display: "flex", alignItems: "center", gap: 7 }}>
-            <span style={{ fontSize: 14 }}>✨</span>
-            <span
+        {/* Project header */}
+        <div style={{ display: "flex", alignItems: "flex-start", gap: 12, flexShrink: 0 }}>
+          <DonutProgress pct={pct} />
+          <div style={{ flex: 1, minWidth: 0 }}>
+            <div style={{ fontWeight: 700, fontSize: 13, color: "#0A0A0A" }}>
+              AI Diagnostic Tool
+            </div>
+            <div style={{ fontSize: 9, color: "#6B7280", marginTop: 2, lineHeight: 1.4 }}>
+              Phase {phase3Done ? "4" : "3"} of 6 &middot; {doneTasks} of {TOTAL_TASKS} tasks
+              completed
+            </div>
+            <div
               style={{
-                fontWeight: 700,
-                fontSize: 13,
-                background: `linear-gradient(90deg, ${PURPLE}, ${BLUE})`,
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
+                display: "flex",
+                alignItems: "center",
+                gap: 6,
+                marginTop: 6,
+                flexWrap: "wrap",
               }}
             >
-              AI Compliance Guide
-            </span>
-          </div>
-          <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
-            <span
-              style={{
-                background: "#F0FDF4",
-                color: "#166534",
-                border: "1px solid #BBF7D0",
-                borderRadius: 4,
-                padding: "1px 7px",
-                fontSize: 8.5,
-                fontWeight: 600,
-              }}
-            >
-              ● IEC 62304
-            </span>
-            <span style={{ fontSize: 9, color: "#9CA3AF" }}>auth-module</span>
+              <span
+                style={{
+                  background: "#EFF6FF",
+                  color: "#2563EB",
+                  border: "1px solid #BFDBFE",
+                  borderRadius: 20,
+                  padding: "2px 8px",
+                  fontSize: 8.5,
+                  fontWeight: 600,
+                  whiteSpace: "nowrap",
+                }}
+              >
+                In Development
+              </span>
+              <span
+                style={{
+                  color: "#6B7280",
+                  fontSize: 8.5,
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 2,
+                  whiteSpace: "nowrap",
+                }}
+              >
+                IEC 62304 Glossary
+                <svg width="8" height="8" viewBox="0 0 10 10" fill="none" aria-hidden="true">
+                  <path
+                    d="M2 8L8 2M8 2H4M8 2v4"
+                    stroke="#6B7280"
+                    strokeWidth="1.3"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </span>
+            </div>
           </div>
         </div>
 
-        {/* Messages */}
+        {/* Section label */}
+        <div
+          style={{
+            fontSize: 8.5,
+            fontWeight: 700,
+            color: "#9CA3AF",
+            letterSpacing: "0.08em",
+            textTransform: "uppercase",
+            flexShrink: 0,
+          }}
+        >
+          SDLC Phases
+        </div>
+
+        {/* Phase list */}
         <div
           style={{
             flex: 1,
-            overflowY: "hidden",
-            padding: "12px 14px",
             display: "flex",
             flexDirection: "column",
-            gap: 10,
+            gap: 4,
+            overflowY: "hidden",
           }}
         >
-          {TURNS.slice(0, visibleTurns).map((turn) => (
-            <div
-              key={turn.id}
-              style={{
-                animation: "gc-slide 0.3s ease",
-                display: "flex",
-                flexDirection: "column",
-                gap: 0,
-              }}
-            >
-              {turn.role === "user" ? (
-                <div style={{ display: "flex", justifyContent: "flex-end" }}>
+          {phases.map((phase) => {
+            const isLocked = phase.status === "locked";
+            const isCurrent = phase.status === "current";
+            const isCompleted = phase.status === "completed";
+            const color = STATUS_COLOR[phase.status];
+
+            return (
+              <div
+                key={phase.id}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 9,
+                  padding: "7px 9px",
+                  borderRadius: 8,
+                  background: isCurrent ? "#E0F9FF" : isCompleted ? "#F0FDF4" : "transparent",
+                  border: isCurrent
+                    ? "1px solid #BAE6FD"
+                    : isCompleted
+                      ? "1px solid #BBF7D0"
+                      : "1px solid transparent",
+                  opacity: isLocked ? 0.55 : 1,
+                  transition: "background 0.4s, border-color 0.4s, opacity 0.4s",
+                  animation: isCurrent ? "gw-fade 0.35s ease" : "none",
+                }}
+              >
+                <PhaseIcon status={phase.status} />
+                <div style={{ flex: 1, minWidth: 0 }}>
                   <div
                     style={{
-                      background: BLUE,
-                      color: "white",
-                      borderRadius: "12px 12px 4px 12px",
-                      padding: "8px 12px",
-                      fontSize: 10.5,
-                      maxWidth: "76%",
-                      lineHeight: 1.45,
-                    }}
-                  >
-                    {turn.text}
-                  </div>
-                </div>
-              ) : (
-                <div style={{ display: "flex", gap: 8, alignItems: "flex-start" }}>
-                  <div
-                    style={{
-                      width: 22,
-                      height: 22,
-                      borderRadius: "50%",
-                      background: `linear-gradient(135deg, ${PURPLE}, ${BLUE})`,
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
                       fontSize: 10,
-                      flexShrink: 0,
-                      marginTop: 2,
+                      fontWeight: isLocked ? 400 : 600,
+                      color: isLocked ? "#9CA3AF" : "#0A0A0A",
+                      overflow: "hidden",
+                      whiteSpace: "nowrap",
+                      textOverflow: "ellipsis",
                     }}
                   >
-                    ✨
+                    {phase.name}
                   </div>
-                  <div
-                    style={{
-                      background: "#F9FAFB",
-                      border: "1px solid #E5E7EB",
-                      borderRadius: "4px 12px 12px 12px",
-                      padding: "9px 12px",
-                      flex: 1,
-                      fontSize: 10.5,
-                      lineHeight: 1.5,
-                    }}
-                  >
-                    {"intro" in turn && (
-                      <div style={{ color: "#374151", marginBottom: 7, fontWeight: 500 }}>
-                        {turn.intro}
-                      </div>
-                    )}
-                    {"items" in turn && turn.items && (
-                      <div
-                        style={{
-                          display: "flex",
-                          flexDirection: "column",
-                          gap: 4,
-                          marginBottom: 7,
-                        }}
-                      >
-                        {turn.items.map((item) => (
-                          <div
-                            key={item.label}
-                            style={{ display: "flex", alignItems: "center", gap: 6 }}
-                          >
-                            <span style={{ fontSize: 10 }}>{item.icon}</span>
-                            <span style={{ fontSize: 10, color: "#374151" }}>{item.label}</span>
-                          </div>
-                        ))}
-                      </div>
-                    )}
-                    {"issues" in turn && turn.issues && (
-                      <div
-                        style={{
-                          display: "flex",
-                          flexDirection: "column",
-                          gap: 4,
-                          marginBottom: 7,
-                        }}
-                      >
-                        {turn.issues.map((issue) => (
-                          <div
-                            key={issue.label}
-                            style={{ display: "flex", alignItems: "center", gap: 6 }}
-                          >
-                            <span
-                              style={{
-                                fontSize: 10,
-                                color: issue.status === "ok" ? "#16A34A" : "#DC2626",
-                              }}
-                            >
-                              {issue.status === "ok" ? "✓" : "⚠"}
-                            </span>
-                            <span
-                              style={{
-                                fontSize: 10,
-                                color: issue.status === "ok" ? "#374151" : "#DC2626",
-                              }}
-                            >
-                              {issue.label}
-                            </span>
-                          </div>
-                        ))}
-                      </div>
-                    )}
-                    {"tags" in turn && turn.tags && (
-                      <div style={{ display: "flex", gap: 5, flexWrap: "wrap" }}>
-                        {turn.tags.map((tag) => (
-                          <span
-                            key={tag}
-                            style={{
-                              background: "#EFF6FF",
-                              border: "1px solid #BFDBFE",
-                              color: BLUE,
-                              borderRadius: 4,
-                              padding: "1px 6px",
-                              fontSize: 8.5,
-                              fontFamily: "ui-monospace, monospace",
-                              fontWeight: 600,
-                            }}
-                          >
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-                    )}
+                  <div style={{ fontSize: 8.5, color, marginTop: 1 }}>
+                    {STATUS_LABEL[phase.status]} &middot; {phase.tasks}/{phase.total} tasks
                   </div>
                 </div>
-              )}
-            </div>
-          ))}
-
-          {/* Typing dots */}
-          {thinking && (
-            <div style={{ display: "flex", gap: 8, alignItems: "flex-start" }}>
-              <div
-                style={{
-                  width: 22,
-                  height: 22,
-                  borderRadius: "50%",
-                  background: `linear-gradient(135deg, ${PURPLE}, ${BLUE})`,
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  fontSize: 10,
-                  flexShrink: 0,
-                }}
-              >
-                ✨
               </div>
-              <div
-                style={{
-                  background: "#F9FAFB",
-                  border: "1px solid #E5E7EB",
-                  borderRadius: "4px 12px 12px 12px",
-                  padding: "10px 14px",
-                  display: "flex",
-                  gap: 4,
-                  alignItems: "center",
-                }}
-              >
-                {[0, 1, 2].map((j) => (
-                  <div
-                    key={j}
-                    style={{
-                      width: 5,
-                      height: 5,
-                      borderRadius: "50%",
-                      background: "#a78bfa",
-                      animation: `gc-dot 1.2s ease-in-out ${j * 0.2}s infinite`,
-                    }}
-                  />
-                ))}
-              </div>
-            </div>
-          )}
-        </div>
-
-        {/* Input */}
-        <div style={{ padding: "8px 12px", borderTop: "1px solid #E5E5E5", flexShrink: 0 }}>
-          <div
-            style={{
-              background: "#F9FAFB",
-              border: "1px solid #E5E5E5",
-              borderRadius: 8,
-              padding: "7px 10px",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
-              gap: 8,
-            }}
-          >
-            <span style={{ fontSize: 9.5, color: "#9CA3AF" }}>Ask a compliance question…</span>
-            <div
-              style={{
-                width: 24,
-                height: 24,
-                borderRadius: 6,
-                background: BLUE,
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                flexShrink: 0,
-              }}
-            >
-              <svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                <path
-                  d="M3 8h10M9 4l4 4-4 4"
-                  stroke="white"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </div>
-          </div>
+            );
+          })}
         </div>
       </div>
     </PlatformShell>

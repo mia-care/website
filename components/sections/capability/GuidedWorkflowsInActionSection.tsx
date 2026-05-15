@@ -2,30 +2,22 @@
 
 import { useEffect, useRef, useState } from "react";
 import { GuidedChatSvg } from "@/components/common/capability-svgs/GuidedChatSvg";
-import { GuidedOnboardingSvg } from "@/components/common/capability-svgs/GuidedOnboardingSvg";
 import { GuidedWorkflowsSvg } from "@/components/common/capability-svgs/GuidedWorkflowsSvg";
 import { PillTag } from "@/components/common/PillTag";
 
 const TABS = [
   {
-    label: "Role View",
+    label: "Workflow Guide",
     caption:
-      "Role-based checklists — developer, QA, and regulatory affairs each see the exact scope they own. Tasks check off in real time as work is completed, with IEC 62304 section references and a contextual compliance hint after every phase.",
+      "Real-time compliance dashboard — priority blockers and overdue tasks surface automatically with IEC 62304 section references. Critical issues are resolved in place, keeping the whole team aligned without leaving the workflow.",
     Component: GuidedWorkflowsSvg,
     wrapStyle: {} as React.CSSProperties,
   },
   {
-    label: "AI Guidance",
+    label: "SDLC Phases",
     caption:
-      "Conversational compliance assistant — developers ask questions in plain English and get structured, regulation-referenced answers. No need to know IEC 62304 section numbers; the system maps every answer back to the standard automatically.",
+      "Phase-by-phase progress tracking — each SDLC stage shows its completion status, task count, and current bottleneck at a glance. The active phase updates in real time as work advances, giving the whole team a shared view of where the project stands against IEC 62304.",
     Component: GuidedChatSvg,
-    wrapStyle: {} as React.CSSProperties,
-  },
-  {
-    label: "Onboarding",
-    caption:
-      "Structured onboarding path — teams new to SaMD development follow a phase-by-phase learning track tied to IEC 62304 and ISO 13485. Milestones expand inline as each phase becomes active, compressing ramp-up from months to days.",
-    Component: GuidedOnboardingSvg,
     wrapStyle: {} as React.CSSProperties,
   },
 ];
@@ -73,7 +65,8 @@ export function GuidedWorkflowsInActionSection() {
     setIsPlaying(false);
   };
 
-  const { caption, Component } = TABS[active];
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  const { caption, Component } = TABS[active]!;
 
   return (
     <section
@@ -174,24 +167,7 @@ export function GuidedWorkflowsInActionSection() {
           }}
         >
           <div key={active} className="h-[380px] sm:h-[420px] md:h-[500px] animate-fade-in-up">
-            {active === 0 ? (
-              <div
-                style={{
-                  height: "100%",
-                  background: "#F8FAFC",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  padding: "20px 40px",
-                }}
-              >
-                <div style={{ width: "100%", maxWidth: 520, height: "100%" }}>
-                  <Component />
-                </div>
-              </div>
-            ) : (
-              <Component />
-            )}
+            <Component />
           </div>
         </div>
 
