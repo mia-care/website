@@ -16,15 +16,15 @@ interface Phase {
 const BASE_PHASES: Phase[] = [
   { id: 1, name: "Planning & Quality Governance", status: "completed", tasks: 4, total: 4 },
   { id: 2, name: "Requirements & Risk Analysis", status: "in-progress", tasks: 3, total: 4 },
-  { id: 3, name: "Architecture & Detailed Design", status: "current", tasks: 1, total: 5 },
+  { id: 3, name: "Architecture & Detailed Design", status: "locked", tasks: 0, total: 5 },
   { id: 4, name: "Implementation & Continuous Verification", status: "locked", tasks: 0, total: 6 },
   { id: 5, name: "System Testing & Final Validation", status: "locked", tasks: 0, total: 6 },
   { id: 6, name: "Release & Post-Market Maintenance", status: "locked", tasks: 0, total: 4 },
 ];
 
 const TOTAL_TASKS = BASE_PHASES.reduce((s, p) => s + p.total, 0);
-const TASK_MS = 1300;
-const HOLD_MS = 1800;
+const TASK_MS = 1100;
+const HOLD_MS = 1600;
 
 const SDLC_NAV = [
   { label: "Workflow Guide", icon: NAV_ICONS.workflowGuide, active: true },
@@ -176,7 +176,8 @@ function PhaseIcon({ status }: { status: PhaseStatus }) {
 }
 
 export function GuidedChatSvg() {
-  const [phase3Tasks, setPhase3Tasks] = useState(1);
+  const [phase2Tasks, setPhase2Tasks] = useState(3);
+  const [phase3Tasks, setPhase3Tasks] = useState(0);
   const timers = useRef<ReturnType<typeof setTimeout>[]>([]);
 
   useEffect(() => {
@@ -189,24 +190,46 @@ export function GuidedChatSvg() {
     const run = () => {
       clear();
       timers.current = [];
-      setPhase3Tasks(1);
+      // Reset: phase 2 in-progress at 3/4, phase 3 locked
+      setPhase2Tasks(3);
+      setPhase3Tasks(0);
+
+      // Step 1: phase 2 completes (3→4)
+      later(() => setPhase2Tasks(4), TASK_MS);
+
+      // Step 2: phase 3 unlocks and becomes current (1/5)
+      later(() => setPhase3Tasks(1), TASK_MS + 500);
+
+      // Step 3: phase 3 fills up (2→5)
       [2, 3, 4, 5].forEach((n, i) => {
-        later(() => setPhase3Tasks(n), (i + 1) * TASK_MS);
+        later(() => setPhase3Tasks(n), TASK_MS + 500 + (i + 1) * TASK_MS);
       });
-      later(run, 4 * TASK_MS + HOLD_MS);
+
+      later(run, TASK_MS + 500 + 4 * TASK_MS + HOLD_MS);
     };
 
     run();
     return clear;
   }, []);
 
-  const doneTasks = 4 + 3 + phase3Tasks;
-  const pct = Math.round((doneTasks / TOTAL_TASKS) * 100);
+  const phase2Done = phase2Tasks >= BASE_PHASES[1].total;
   const phase3Done = phase3Tasks >= BASE_PHASES[2].total;
+  const phase3Active = phase3Tasks > 0;
 
-  const phases: Phase[] = BASE_PHASES.map((p) =>
-    p.id === 3 ? { ...p, tasks: phase3Tasks, status: phase3Done ? "completed" : "current" } : p,
-  );
+  const doneTasks = 4 + phase2Tasks + phase3Tasks;
+  const pct = Math.round((doneTasks / TOTAL_TASKS) * 100);
+
+  const phases: Phase[] = BASE_PHASES.map((p) => {
+    if (p.id === 2)
+      return { ...p, tasks: phase2Tasks, status: phase2Done ? "completed" : "in-progress" };
+    if (p.id === 3)
+      return {
+        ...p,
+        tasks: phase3Tasks,
+        status: phase3Done ? "completed" : phase3Active ? "current" : "locked",
+      };
+    return p;
+  });
 
   return (
     <PlatformShell
@@ -246,8 +269,8 @@ export function GuidedChatSvg() {
               AI Diagnostic Tool
             </div>
             <div style={{ fontSize: 9, color: "#6B7280", marginTop: 2, lineHeight: 1.4 }}>
-              Phase {phase3Done ? "4" : "3"} of 6 &middot; {doneTasks} of {TOTAL_TASKS} tasks
-              completed
+              Phase {phase3Done ? "4" : phase3Active ? "3" : "2"} of 6 &middot; {doneTasks} of{" "}
+              {TOTAL_TASKS} tasks completed
             </div>
             <div
               style={{

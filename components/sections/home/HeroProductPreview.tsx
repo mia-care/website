@@ -117,6 +117,8 @@ export function HeroProductPreview() {
                 aria-hidden="true"
                 width={908}
                 height={908}
+                // biome-ignore lint/suspicious/noExplicitAny: fetchPriority not in Next.js Image types
+                fetchPriority={"high" as any}
                 style={{
                   width: "100%",
                   display: "block",

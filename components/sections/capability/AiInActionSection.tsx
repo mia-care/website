@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { MasterAiComplianceSvg } from "@/components/common/capability-svgs/MasterAiComplianceSvg";
 import { PillTag } from "@/components/common/PillTag";
 
-type ScreenId = 0 | 1 | 2;
+type ScreenId = 0 | 1;
 
 const TABS: { label: string; caption: string; screen: ScreenId }[] = [
   {
@@ -14,16 +14,10 @@ const TABS: { label: string; caption: string; screen: ScreenId }[] = [
     screen: 0,
   },
   {
-    label: "AI Inventory",
+    label: "AI & Transparency",
     caption:
-      "AI Inventory — every AI model and dataset registered with version, ownership, and provenance. The continuous record required by EU AI Act Annex IV, FDA GMLP, and ISO 13485.",
+      "Arrhythmia Classifier — xAI robustness auditing with Faithfulness Tests. Explainability services assessed for fit-for-purpose against EU AI Act Art. 13 and MDR Annex I.",
     screen: 1,
-  },
-  {
-    label: "Arrhythmia Classifier",
-    caption:
-      "Arrhythmia Classifier v2 — xAI robustness auditing with Faithfulness Tests. Explainability services assessed for fit-for-purpose against EU AI Act Art. 13 and MDR Annex I, powered by Quantus.",
-    screen: 2,
   },
 ];
 

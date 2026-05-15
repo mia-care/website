@@ -3,15 +3,14 @@
 import { useEffect, useRef, useState } from "react";
 import { NAV_ICONS, PlatformShell } from "./PlatformShell";
 
-type ScreenId = 0 | 1 | 2;
+type ScreenId = 0 | 1;
 
 const SCREEN_MS = 4500;
 const FADE_MS = 300;
 
 const BREADCRUMBS: [string, string, string][] = [
   ["Mia-Care Dev", "AI Diagnostic Tool", "Software System"],
-  ["AI Diagnostic Tool", "Software System", "AI Inventory"],
-  ["Software System", "AI Inventory", "Arrhythmia Classifier v2"],
+  ["AI Diagnostic Tool", "Software System", "Arrhythmia Classifier"],
 ];
 
 const SDLC_NAV = [
@@ -37,45 +36,6 @@ const TREE_ITEMS = [
   { depth: 2, label: "ML Anomaly Detection", badge: "AI Agent" },
   { depth: 1, label: "Data Storage Layer", badge: null },
   { depth: 1, label: "Frontend Application", badge: null },
-];
-
-const AI_MODELS = [
-  {
-    id: "arr",
-    name: "Arrhythmia Classifier v2",
-    version: "v2.3.1",
-    desc: "Deep learning classifier for 12-lead ECG arrhythmia detection",
-    thirdParty: false,
-    color: "#6366F1",
-    bg: "#EEF2FF",
-  },
-  {
-    id: "ecg",
-    name: "ECG Signal Denoiser",
-    version: "v1.1.0",
-    desc: "Signal denoising model based on WaveNet architecture",
-    thirdParty: true,
-    color: "#D97706",
-    bg: "#FFFBEB",
-  },
-  {
-    id: "crd",
-    name: "CardioData Clinical ECG v3",
-    version: "v3.0.2",
-    desc: "Proprietary clinical ECG data collected from 12 participants",
-    thirdParty: false,
-    color: "#0891B2",
-    bg: "#E0F2FE",
-  },
-  {
-    id: "mit",
-    name: "MIT-BiH Gold Standard",
-    version: "v1.0.0",
-    desc: "MIT-BiH Arrhythmia Database — gold standard public dataset",
-    thirdParty: false,
-    color: "#059669",
-    bg: "#F0FDF4",
-  },
 ];
 
 // ── Screen 0: System Design ──────────────────────────────────────────────────
@@ -275,17 +235,38 @@ function SystemDesignScreen() {
   );
 }
 
-// ── Screen 1: AI Inventory ────────────────────────────────────────────────────
-function AiInventoryScreen() {
-  const [count, setCount] = useState(0);
+// ── Screen 1: Arrhythmia Classifier detail ────────────────────────────────────
+const FAITHFULNESS_CARDS = [
+  {
+    id: "stability",
+    title: "Stability Test",
+    desc: "Do explanations remain stable under minor input perturbations?",
+    status: "passed" as const,
+  },
+  {
+    id: "faithfulness",
+    title: "Faithfulness Test",
+    desc: "Do saliency maps/SHAP values reflect actual model decision boundaries?",
+    status: "passed" as const,
+  },
+  {
+    id: "consistency",
+    title: "Consistency Test",
+    desc: "Are explanations consistent across similar inputs?",
+    status: "warning" as const,
+  },
+];
+
+function ClassifierDetailScreen() {
+  const [revealed, setRevealed] = useState(0);
   const timers = useRef<ReturnType<typeof setTimeout>[]>([]);
 
   useEffect(() => {
     const clear = () => timers.current.forEach(clearTimeout);
     clear();
     timers.current = [];
-    AI_MODELS.forEach((_, i) => {
-      const t = setTimeout(() => setCount(i + 1), 300 + i * 420);
+    FAITHFULNESS_CARDS.forEach((_, i) => {
+      const t = setTimeout(() => setRevealed(i + 1), 300 + i * 500);
       timers.current.push(t);
     });
     return clear;
@@ -301,189 +282,16 @@ function AiInventoryScreen() {
         overflow: "hidden",
       }}
     >
-      <div
-        style={{ fontSize: 8.5, color: "#9CA3AF", display: "flex", alignItems: "center", gap: 4 }}
-      >
-        <span>System Design</span>
-        <span style={{ color: "#D1D5DB" }}>›</span>
-        <span style={{ color: "#374151", fontWeight: 600 }}>AI Inventory</span>
-      </div>
-
-      <div>
-        <div style={{ fontWeight: 700, fontSize: 14, color: "#0A0A0A", lineHeight: 1.2 }}>
-          AI Inventory
-        </div>
-        <div style={{ fontSize: 9, color: "#6B7280", marginTop: 2 }}>
-          Models and Datasets with dedicated lifecycle
-        </div>
-      </div>
-
-      <div style={{ display: "flex", gap: 7, alignItems: "center" }}>
-        <div
-          style={{
-            border: "1px solid #E5E7EB",
-            borderRadius: 8,
-            padding: "5px 10px",
-            background: "white",
-            display: "flex",
-            alignItems: "baseline",
-            gap: 5,
-            flexShrink: 0,
-          }}
-        >
-          <span style={{ fontWeight: 800, fontSize: 18, color: "#0A0A0A", lineHeight: 1 }}>4</span>
-          <span style={{ fontSize: 8.5, color: "#6B7280" }}>Total AI Items</span>
-        </div>
-        <div
-          style={{
-            flex: 1,
-            border: "1px solid #E5E7EB",
-            borderRadius: 7,
-            padding: "5px 9px",
-            display: "flex",
-            alignItems: "center",
-            gap: 5,
-            background: "white",
-          }}
-        >
-          <svg width="10" height="10" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-            <circle cx="7" cy="7" r="5" stroke="#9CA3AF" strokeWidth="1.3" />
-            <path d="M11 11l3 3" stroke="#9CA3AF" strokeWidth="1.3" strokeLinecap="round" />
-          </svg>
-          <span style={{ fontSize: 9, color: "#9CA3AF" }}>Search AI Items…</span>
-        </div>
-      </div>
-
-      <div
-        style={{ flex: 1, overflow: "hidden", display: "flex", flexDirection: "column", gap: 5 }}
-      >
-        <div style={{ fontSize: 9.5, fontWeight: 600, color: "#0A0A0A" }}>All AI Items (4)</div>
-        {AI_MODELS.map((model, i) => (
-          <div
-            key={model.id}
-            style={{
-              border: "1px solid #E5E7EB",
-              borderRadius: 7,
-              padding: "6px 9px",
-              background: "white",
-              display: "flex",
-              alignItems: "flex-start",
-              gap: 8,
-              opacity: count > i ? 1 : 0,
-              transform: count > i ? "translateY(0)" : "translateY(4px)",
-              transition: "opacity 0.3s ease, transform 0.3s ease",
-            }}
-          >
-            <div
-              style={{
-                width: 24,
-                height: 24,
-                borderRadius: 6,
-                background: model.bg,
-                border: `1px solid ${model.color}40`,
-                flexShrink: 0,
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                <rect
-                  x="3"
-                  y="3"
-                  width="10"
-                  height="10"
-                  rx="2"
-                  stroke={model.color}
-                  strokeWidth="1.3"
-                />
-                <path
-                  d="M6 8h4M8 6v4"
-                  stroke={model.color}
-                  strokeWidth="1.3"
-                  strokeLinecap="round"
-                />
-              </svg>
-            </div>
-            <div style={{ flex: 1, minWidth: 0 }}>
-              <div style={{ display: "flex", alignItems: "center", gap: 5, flexWrap: "wrap" }}>
-                <span style={{ fontSize: 9.5, fontWeight: 600, color: "#0A0A0A" }}>
-                  {model.name}
-                </span>
-                <span
-                  style={{ fontSize: 8, color: "#6B7280", fontFamily: "ui-monospace, monospace" }}
-                >
-                  {model.version}
-                </span>
-                {model.thirdParty && (
-                  <span
-                    style={{
-                      background: "#FFFBEB",
-                      color: "#D97706",
-                      border: "1px solid #FDE68A",
-                      borderRadius: 20,
-                      padding: "1px 5px",
-                      fontSize: 7.5,
-                      fontWeight: 600,
-                    }}
-                  >
-                    3rd party
-                  </span>
-                )}
-              </div>
-              <div
-                style={{
-                  fontSize: 8.5,
-                  color: "#9CA3AF",
-                  marginTop: 2,
-                  overflow: "hidden",
-                  whiteSpace: "nowrap",
-                  textOverflow: "ellipsis",
-                }}
-              >
-                {model.desc}
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-// ── Screen 2: Arrhythmia Classifier v2 detail ────────────────────────────────
-function ClassifierDetailScreen() {
-  const [testState, setTestState] = useState<"idle" | "running" | "passed">("idle");
-  const timers = useRef<ReturnType<typeof setTimeout>[]>([]);
-
-  useEffect(() => {
-    const clear = () => timers.current.forEach(clearTimeout);
-    clear();
-    timers.current = [];
-    const t1 = setTimeout(() => setTestState("running"), 500);
-    const t2 = setTimeout(() => setTestState("passed"), 1700);
-    timers.current = [t1, t2];
-    return clear;
-  }, []);
-
-  return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        gap: 8,
-        height: "100%",
-        overflow: "hidden",
-      }}
-    >
+      {/* Breadcrumb */}
       <div
         style={{ fontSize: 8.5, color: "#9CA3AF", display: "flex", alignItems: "center", gap: 4 }}
       >
         <span>Software System</span>
         <span style={{ color: "#D1D5DB" }}>›</span>
-        <span style={{ color: "#374151", fontWeight: 600 }}>Arrhythmia Classifier v2</span>
+        <span style={{ color: "#374151", fontWeight: 600 }}>Arrhythmia Classifier</span>
       </div>
 
+      {/* Title row */}
       <div style={{ display: "flex", alignItems: "flex-start", gap: 10 }}>
         <div
           style={{
@@ -511,7 +319,7 @@ function ClassifierDetailScreen() {
         </div>
         <div>
           <div style={{ fontWeight: 700, fontSize: 12.5, color: "#0A0A0A", lineHeight: 1.2 }}>
-            Arrhythmia Classifier v2
+            Arrhythmia Classifier
           </div>
           <div style={{ fontSize: 8.5, color: "#6B7280", marginTop: 2 }}>
             Deep learning classifier for 12-lead ECG clinical dataset.
@@ -526,6 +334,7 @@ function ClassifierDetailScreen() {
         </div>
       </div>
 
+      {/* Tabs */}
       <div style={{ display: "flex", borderBottom: "1px solid #E5E7EB" }}>
         {["Overview", "Datasets", "Performance"].map((tab) => {
           const active = tab === "Overview";
@@ -547,142 +356,140 @@ function ClassifierDetailScreen() {
         })}
       </div>
 
+      {/* Faithfulness section */}
       <div
         style={{ flex: 1, overflow: "hidden", display: "flex", flexDirection: "column", gap: 7 }}
       >
-        <div>
-          <div style={{ fontWeight: 700, fontSize: 11, color: "#0A0A0A" }}>
-            Transparency &amp; xAI Robustness Auditing
-          </div>
-          <div style={{ fontSize: 8.5, color: "#9CA3AF", marginTop: 2 }}>
-            Assessment of explainability services and transparency methods
-          </div>
-        </div>
-
-        <div style={{ border: "1px solid #E5E7EB", borderRadius: 8, overflow: "hidden" }}>
-          <div
-            style={{
-              background: "#F9FAFB",
-              padding: "5px 10px",
-              borderBottom: "1px solid #E5E7EB",
-              display: "flex",
-              alignItems: "center",
-              gap: 6,
-            }}
-          >
-            <svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-              <circle cx="8" cy="8" r="6" stroke="#6366F1" strokeWidth="1.3" />
+        {/* Section header with Run Audit button */}
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+            {/* Eye icon */}
+            <svg width="13" height="13" viewBox="0 0 20 20" fill="none" aria-hidden="true">
               <path
-                d="M5 8l2.5 2.5L11 6"
+                d="M1 10s3.5-7 9-7 9 7 9 7-3.5 7-9 7-9-7-9-7z"
                 stroke="#6366F1"
                 strokeWidth="1.5"
                 strokeLinecap="round"
                 strokeLinejoin="round"
               />
+              <circle cx="10" cy="10" r="2.5" stroke="#6366F1" strokeWidth="1.5" />
             </svg>
-            <span style={{ fontWeight: 600, fontSize: 10, color: "#0A0A0A" }}>
+            <span style={{ fontWeight: 700, fontSize: 11, color: "#0A0A0A" }}>
               Faithfulness Tests
             </span>
           </div>
-
+          {/* Run Audit button */}
           <div
             style={{
-              padding: "8px 10px",
               display: "flex",
-              alignItems: "flex-start",
-              gap: 8,
-              background: testState === "passed" ? "#F0FDF4" : "white",
-              transition: "background 0.5s ease",
+              alignItems: "center",
+              gap: 5,
+              background: "#4F46E5",
+              borderRadius: 6,
+              padding: "4px 9px",
+              cursor: "default",
             }}
           >
-            {testState === "running" ? (
-              <div
-                style={{
-                  width: 18,
-                  height: 18,
-                  borderRadius: "50%",
-                  border: "2px solid #FEF3C7",
-                  borderTop: "2px solid #D97706",
-                  flexShrink: 0,
-                  animation: "mai-spin 0.7s linear infinite",
-                }}
+            <svg width="10" height="10" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <circle cx="8" cy="8" r="6" stroke="white" strokeWidth="1.4" />
+              <path
+                d="M6 8l2-2 2 2"
+                stroke="white"
+                strokeWidth="1.3"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               />
-            ) : testState === "passed" ? (
-              <div
-                style={{
-                  width: 18,
-                  height: 18,
-                  borderRadius: "50%",
-                  background: "#059669",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  flexShrink: 0,
-                  animation: "mai-pop 0.3s ease",
-                }}
-              >
-                <svg width="9" height="9" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                  <path
-                    d="M3 8l3.5 3.5L13 5"
-                    stroke="white"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </div>
-            ) : (
-              <div
-                style={{
-                  width: 18,
-                  height: 18,
-                  borderRadius: "50%",
-                  border: "1.5px solid #D1D5DB",
-                  flexShrink: 0,
-                }}
-              />
-            )}
-            <div style={{ flex: 1 }}>
-              <div style={{ fontSize: 10, fontWeight: 600, color: "#0A0A0A" }}>Stability Test</div>
-              <div style={{ fontSize: 8.5, color: "#9CA3AF", marginTop: 2 }}>
-                Do explanations remain stable under minor input perturbations?
-              </div>
-            </div>
-            {testState === "passed" && (
-              <span
-                style={{
-                  background: "#DCFCE7",
-                  color: "#059669",
-                  border: "1px solid #BBF7D0",
-                  borderRadius: 20,
-                  padding: "1px 6px",
-                  fontSize: 8,
-                  fontWeight: 600,
-                  flexShrink: 0,
-                  animation: "mai-fade 0.3s ease",
-                }}
-              >
-                Passed
-              </span>
-            )}
+            </svg>
+            <span style={{ fontSize: 9, fontWeight: 600, color: "white", whiteSpace: "nowrap" }}>
+              Run Audit
+            </span>
           </div>
         </div>
 
-        <div
-          style={{
-            background: "#FFFBEB",
-            border: "1px solid #FDE68A",
-            borderRadius: 7,
-            padding: "7px 9px",
-            fontSize: 8.5,
-            color: "#374151",
-            lineHeight: 1.5,
-          }}
-        >
-          <span style={{ fontWeight: 700 }}>Note:</span> Explainable AI (xAI) is context-dependent,
-          guiding whether chosen explainability methods are fit-for-purpose.
+        {/* 3 cards */}
+        <div style={{ display: "flex", gap: 7 }}>
+          {FAITHFULNESS_CARDS.map((card, i) => {
+            const isWarning = card.status === "warning";
+            const visible = revealed > i;
+            return (
+              <div
+                key={card.id}
+                style={{
+                  flex: 1,
+                  border: `1.5px solid ${isWarning ? "#FDE68A" : "#6EE7B7"}`,
+                  borderRadius: 10,
+                  padding: "10px 11px",
+                  background: isWarning ? "#FFFBEB" : "#F0FDF4",
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: 6,
+                  minWidth: 0,
+                  opacity: visible ? 1 : 0,
+                  transform: visible ? "translateY(0)" : "translateY(6px)",
+                  transition: "opacity 0.35s ease, transform 0.35s ease",
+                }}
+              >
+                {/* Icon + title */}
+                <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+                  {isWarning ? (
+                    <svg
+                      width="14"
+                      height="14"
+                      viewBox="0 0 16 16"
+                      fill="none"
+                      aria-hidden="true"
+                      style={{ flexShrink: 0 }}
+                    >
+                      <path
+                        d="M8 2L14.5 14H1.5L8 2z"
+                        fill="#FEF3C7"
+                        stroke="#D97706"
+                        strokeWidth="1.2"
+                        strokeLinejoin="round"
+                      />
+                      <path d="M8 6.5v3" stroke="#D97706" strokeWidth="1.3" strokeLinecap="round" />
+                      <circle cx="8" cy="12" r="0.7" fill="#D97706" />
+                    </svg>
+                  ) : (
+                    <svg
+                      width="14"
+                      height="14"
+                      viewBox="0 0 16 16"
+                      fill="none"
+                      aria-hidden="true"
+                      style={{ flexShrink: 0 }}
+                    >
+                      <circle
+                        cx="8"
+                        cy="8"
+                        r="6.5"
+                        fill="#D1FAE5"
+                        stroke="#059669"
+                        strokeWidth="1.2"
+                      />
+                      <path
+                        d="M5 8l2.2 2.2 3.8-4"
+                        stroke="#059669"
+                        strokeWidth="1.4"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  )}
+                  <span
+                    style={{ fontSize: 10, fontWeight: 700, color: "#111827", lineHeight: 1.2 }}
+                  >
+                    {card.title}
+                  </span>
+                </div>
+                {/* Description */}
+                <div style={{ fontSize: 9, color: "#4B5563", lineHeight: 1.5 }}>{card.desc}</div>
+              </div>
+            );
+          })}
         </div>
 
+        {/* Ref tags */}
         <div style={{ display: "flex", flexWrap: "wrap", gap: 5, alignItems: "center" }}>
           <span style={{ fontSize: 8.5, color: "#9CA3AF" }}>Ref:</span>
           {["EU AI Act Art. 13", "MDR Annex I"].map((ref) => (
@@ -701,9 +508,6 @@ function ClassifierDetailScreen() {
               {ref}
             </span>
           ))}
-          <span style={{ fontSize: 8.5, color: "#9CA3AF", marginLeft: 2 }}>
-            Powered by: <span style={{ color: "#374151", fontWeight: 600 }}>Quantus</span>
-          </span>
         </div>
       </div>
     </div>
@@ -731,7 +535,7 @@ export function MasterAiComplianceSvg({ lockedScreen }: MasterAiComplianceSvgPro
     const cycle = () => {
       setOpacity(0);
       later(() => {
-        setScreen((s) => ((s + 1) % 3) as ScreenId);
+        setScreen((s) => ((s + 1) % 2) as ScreenId);
         setOpacity(1);
         later(cycle, SCREEN_MS);
       }, FADE_MS);
@@ -782,8 +586,7 @@ export function MasterAiComplianceSvg({ lockedScreen }: MasterAiComplianceSvgPro
         `}</style>
 
         {screen === 0 && <SystemDesignScreen />}
-        {screen === 1 && <AiInventoryScreen />}
-        {screen === 2 && <ClassifierDetailScreen />}
+        {screen === 1 && <ClassifierDetailScreen />}
       </div>
     </PlatformShell>
   );

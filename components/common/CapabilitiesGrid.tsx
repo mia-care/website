@@ -6,7 +6,7 @@ import { ArttTraceabilitySvg } from "@/components/common/capability-svgs/ArttTra
 import { BrownfieldRemediatorSvg } from "@/components/common/capability-svgs/BrownfieldRemediatorSvg";
 import { CapabilityPlaceholder } from "@/components/common/capability-svgs/CapabilityPlaceholder";
 import { DocumentationEngineSvg } from "@/components/common/capability-svgs/DocumentationEngineSvg";
-import { GuidedWorkflowsSvg } from "@/components/common/capability-svgs/GuidedWorkflowsSvg";
+import { GuidedChatSvg } from "@/components/common/capability-svgs/GuidedChatSvg";
 import { MasterAiComplianceSvg } from "@/components/common/capability-svgs/MasterAiComplianceSvg";
 import { SdlcOrchestratorSvg } from "@/components/common/capability-svgs/SdlcOrchestratorSvg";
 import { SecureSoftwareSvg } from "@/components/common/capability-svgs/SecureSoftwareSvg";
@@ -22,7 +22,7 @@ const SVG_MAP: Record<string, React.ComponentType> = {
   "ai-compliance": MasterAiComplianceSvg,
   "brownfield-remediator": BrownfieldRemediatorSvg,
   "software-development": SecureSoftwareSvg,
-  "guided-workflows": GuidedWorkflowsSvg,
+  "guided-workflows": GuidedChatSvg,
 };
 
 const AUTOPLAY_MS = 20_000;

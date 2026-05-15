@@ -15,13 +15,13 @@ const VARIABLES = [
 const TEMPLATES = [
   {
     name: "Internal Release Note",
-    author: "Dr. Elena Rossi",
+    author: "Elena Rossi",
     modified: "2026-02-20",
     vars: 6,
     selected: true,
   },
   {
-    name: "Notified Body Submission Cover",
+    name: "Software Test Report",
     author: "Marco Bianchi",
     modified: "2026-01-10",
     vars: 6,
@@ -29,87 +29,24 @@ const TEMPLATES = [
   },
   {
     name: "AI Performance Summary",
-    author: "Dr. Sara Verdi",
+    author: "Sara Verdi",
     modified: "2026-03-01",
     vars: 4,
     selected: false,
   },
-];
-
-const LINES: { id: string; text: React.ReactNode; varIdx?: number }[] = [
   {
-    id: "title",
-    text: (
-      <>
-        <span style={{ color: "#60A5FA" }}># Release Note — </span>
-        <span className="tpl-var" data-idx="0">
-          {"{{product.name}}"}
-        </span>
-        <span style={{ color: "#60A5FA" }}> </span>
-        <span className="tpl-var" data-idx="1">
-          {"{{product.version}}"}
-        </span>
-      </>
-    ),
+    name: "Risk Analysis",
+    author: "Elena Rossi",
+    modified: "2026-04-05",
+    vars: 5,
+    selected: false,
   },
   {
-    id: "date",
-    text: (
-      <>
-        <span style={{ color: "#94A3B8" }}>{"**Date:** "}</span>
-        <span className="tpl-var" data-idx="4">
-          {"{{meta.date}}"}
-        </span>
-      </>
-    ),
-  },
-  { id: "h-summary", text: <span style={{ color: "#34D399" }}>{"## Summary"}</span> },
-  {
-    id: "summary-body",
-    text: (
-      <>
-        <span style={{ color: "#94A3B8" }}>This release covers </span>
-        <span className="tpl-var" data-idx="0">
-          {"{{product.name}}"}
-        </span>
-        <span style={{ color: "#94A3B8" }}> version </span>
-        <span className="tpl-var" data-idx="1">
-          {"{{product.version}}"}
-        </span>
-      </>
-    ),
-  },
-  { id: "h-quality", text: <span style={{ color: "#34D399" }}>{"## Quality Metrics"}</span> },
-  {
-    id: "pass-rate",
-    text: (
-      <>
-        <span style={{ color: "#94A3B8" }}>{"- Test Pass Rate: "}</span>
-        <span className="tpl-var" data-idx="2">
-          {"{{tests.passRate}}"}
-        </span>
-      </>
-    ),
-  },
-  {
-    id: "risks",
-    text: (
-      <>
-        <span style={{ color: "#94A3B8" }}>{"- Unacceptable Risks: "}</span>
-        <span className="tpl-var" data-idx="3">
-          {"{{risks.unacceptable}}"}
-        </span>
-      </>
-    ),
-  },
-  { id: "h-changes", text: <span style={{ color: "#34D399" }}>{"## Changes"}</span> },
-  {
-    id: "changes-body",
-    text: (
-      <span className="tpl-var" data-idx="5">
-        {"{{changes.list}}"}
-      </span>
-    ),
+    name: "Software Bill of Materials",
+    author: "Marco Bianchi",
+    modified: "2026-04-18",
+    vars: 3,
+    selected: false,
   },
 ];
 
@@ -161,7 +98,6 @@ export function DocumentationTemplatesSvg() {
     { label: "Document Catalog", icon: NAV_ICONS.documentCatalog },
     { label: "Document Detail", icon: NAV_ICONS.documentDetail },
     { label: "Custom Templates", icon: NAV_ICONS.customTemplates, active: true },
-    { label: "Variable Library", icon: NAV_ICONS.variableLibrary },
   ];
 
   return (
@@ -310,93 +246,7 @@ export function DocumentationTemplatesSvg() {
             </div>
           ))}
         </div>
-
-        {/* Markdown preview */}
-        <div
-          style={{
-            flex: 1,
-            borderRadius: 8,
-            background: "#0F172A",
-            overflow: "hidden",
-            display: "flex",
-            flexDirection: "column",
-          }}
-        >
-          <div
-            style={{
-              padding: "5px 10px",
-              background: "#1E293B",
-              borderBottom: "1px solid #334155",
-              display: "flex",
-              alignItems: "center",
-              gap: 6,
-              flexShrink: 0,
-            }}
-          >
-            <span style={{ fontSize: 9.5, color: "#94A3B8" }}>Markdown Preview</span>
-            {!compact && (
-              <span style={{ fontSize: 9.5, color: "#475569" }}>— Internal Release Note</span>
-            )}
-          </div>
-          <div
-            style={{
-              flex: 1,
-              padding: "8px 12px",
-              overflow: "hidden",
-              display: "flex",
-              flexDirection: "column",
-              gap: compact ? 2 : 4,
-            }}
-          >
-            {(compact ? LINES.slice(0, 5) : LINES).map((line) => (
-              <div
-                key={line.id}
-                style={{
-                  fontFamily: "ui-monospace, monospace",
-                  fontSize: compact ? 9 : 10,
-                  lineHeight: 1.5,
-                  color: "#94A3B8",
-                }}
-              >
-                <LineRenderer line={line} activeVar={activeVar} />
-              </div>
-            ))}
-          </div>
-        </div>
       </div>
     </PlatformShell>
   );
-}
-
-function LineRenderer({ line, activeVar }: { line: (typeof LINES)[0]; activeVar: number | null }) {
-  // Re-render the line with highlighted variables
-  const content = line.text;
-  if (activeVar === null) return <>{content}</>;
-
-  // We need to walk the JSX and highlight matching var spans
-  // Since we can't easily traverse React elements, we use a string-based approach for the preview
-  const varStr = VARIABLES[activeVar];
-  return <HighlightedLine content={content} varStr={varStr} />;
-}
-
-function HighlightedLine({ content, varStr }: { content: React.ReactNode; varStr: string }) {
-  // Clone children and highlight matching text
-  function highlight(node: React.ReactNode): React.ReactNode {
-    if (typeof node === "string") {
-      if (node === varStr) {
-        return (
-          <span
-            style={{ background: "#4C1D95", color: "#C4B5FD", borderRadius: 3, padding: "0 2px" }}
-          >
-            {node}
-          </span>
-        );
-      }
-      return node;
-    }
-    // biome-ignore lint/suspicious/noArrayIndexKey: arbitrary ReactNode array, no stable id
-    if (Array.isArray(node)) return node.map((n, i) => <span key={i}>{highlight(n)}</span>);
-    return node;
-  }
-  return <>{highlight(content)}</>;
 }

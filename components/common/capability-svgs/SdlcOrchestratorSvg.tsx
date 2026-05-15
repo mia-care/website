@@ -89,7 +89,7 @@ export function SdlcOrchestratorSvg() {
       <style>{`
         @media (max-width: 480px) {
           .orch-row { grid-template-columns: 1fr 1fr !important; }
-          .orch-col-sec, .orch-col-lock { display: none !important; }
+          .orch-col-sec { display: none !important; }
         }
       `}</style>
 
@@ -143,17 +143,17 @@ export function SdlcOrchestratorSvg() {
           className="orch-row"
           style={{
             display: "grid",
-            gridTemplateColumns: "1fr 18px 1fr 22px",
+            gridTemplateColumns: "1fr 18px 1fr",
             background: "#E5E5E5",
             padding: "5px 10px",
             gap: 8,
             alignItems: "center",
           }}
         >
-          {(["Activity", "#", "Tool Integrations", ""] as const).map((h, hi) => (
+          {(["Activity", "#", "Tool Integrations"] as const).map((h, hi) => (
             <div
               key={String(hi)}
-              className={hi === 1 ? "orch-col-sec" : hi === 3 ? "orch-col-lock" : undefined}
+              className={hi === 1 ? "orch-col-sec" : undefined}
               style={{
                 color: "#525252",
                 fontWeight: 600,
@@ -178,7 +178,7 @@ export function SdlcOrchestratorSvg() {
               className="orch-row"
               style={{
                 display: "grid",
-                gridTemplateColumns: "1fr 18px 1fr 22px",
+                gridTemplateColumns: "1fr 18px 1fr",
                 padding: "6px 10px",
                 gap: 8,
                 borderTop: "1px solid #E5E5E5",
@@ -231,30 +231,6 @@ export function SdlcOrchestratorSvg() {
                     </span>
                   );
                 })}
-              </div>
-
-              {/* Lock */}
-              <div className="orch-col-lock" style={{ display: "flex", justifyContent: "center" }}>
-                <svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                  <rect
-                    x="3"
-                    y="7"
-                    width="10"
-                    height="8"
-                    rx="1.5"
-                    fill="#E5E5E5"
-                    stroke="#D1D5DB"
-                    strokeWidth="1"
-                  />
-                  <path
-                    d="M5.5 7V5.5a2.5 2.5 0 015 0V7"
-                    stroke="#9CA3AF"
-                    strokeWidth="1.2"
-                    strokeLinecap="round"
-                    fill="none"
-                  />
-                  <circle cx="8" cy="11" r="1" fill="#9CA3AF" />
-                </svg>
               </div>
             </div>
           );

@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from "react";
 import { DocumentationDetailSvg } from "@/components/common/capability-svgs/DocumentationDetailSvg";
 import { DocumentationEngineSvg } from "@/components/common/capability-svgs/DocumentationEngineSvg";
 import { DocumentationTemplatesSvg } from "@/components/common/capability-svgs/DocumentationTemplatesSvg";
-import { DocumentationVariablesSvg } from "@/components/common/capability-svgs/DocumentationVariablesSvg";
 import { PillTag } from "@/components/common/PillTag";
 
 const TABS = [
@@ -25,12 +24,6 @@ const TABS = [
     caption:
       "Custom templates — write Markdown templates with interpolated variables that pull live project data at generation time, for any document your process requires.",
     Component: DocumentationTemplatesSvg,
-  },
-  {
-    label: "Variable Library",
-    caption:
-      "Variable library — browse all available template variables across product, requirements, risk, verification, AI/ML, and traceability data domains.",
-    Component: DocumentationVariablesSvg,
   },
 ];
 

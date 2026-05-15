@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { CveScanSvg } from "@/components/common/capability-svgs/CveScanSvg";
 import { SbomDashboardSvg } from "@/components/common/capability-svgs/SbomDashboardSvg";
 import { SecureComponentLibrarySvg } from "@/components/common/capability-svgs/SecureComponentLibrarySvg";
-import { SecureGuardrailsSvg } from "@/components/common/capability-svgs/SecureGuardrailsSvg";
+import { SecureSoftwareItemsSvg } from "@/components/common/capability-svgs/SecureSoftwareItemsSvg";
 import { PillTag } from "@/components/common/PillTag";
 
 const TABS = [
@@ -23,17 +23,17 @@ const TABS = [
     wrapStyle: {} as React.CSSProperties,
   },
   {
-    label: "Guardrails",
-    caption:
-      "CI/CD security check — every merge request passes through IEC 81001-5-1 compliance gates before code reaches the main branch. A dependency carrying a Critical or High CVE blocks the pipeline and surfaces the exact rule it violates.",
-    Component: SecureGuardrailsSvg,
-    wrapStyle: {} as React.CSSProperties,
-  },
-  {
     label: "Implementation Verification",
     caption:
       "Continuous verification of implementation against software specifications at every level — design files, code, and test artifacts — enabling early detection of anomalies before they propagate into the compliance record.",
     Component: SecureComponentLibrarySvg,
+    wrapStyle: {} as React.CSSProperties,
+  },
+  {
+    label: "Software Items",
+    caption:
+      "Software item traceability — every component in the system hierarchy verified against its specification. The platform confirms each item is documented, tested, and compliant before it can advance through the IEC 62304 lifecycle.",
+    Component: SecureSoftwareItemsSvg,
     wrapStyle: {} as React.CSSProperties,
   },
 ];

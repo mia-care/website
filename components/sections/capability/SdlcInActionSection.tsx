@@ -3,7 +3,6 @@
 import { useEffect, useRef, useState } from "react";
 import { SdlcBlueprintSvg } from "@/components/common/capability-svgs/SdlcBlueprintSvg";
 import { SdlcConfigLogSvg } from "@/components/common/capability-svgs/SdlcConfigLogSvg";
-import { SdlcWorkflowGuideSvg } from "@/components/common/capability-svgs/SdlcWorkflowGuideSvg";
 import { SdlcWorkflowSvg } from "@/components/common/capability-svgs/SdlcWorkflowSvg";
 import { PillTag } from "@/components/common/PillTag";
 
@@ -27,13 +26,6 @@ const TABS = [
     caption:
       "Audit log — every requirement change, risk update, and approval decision recorded with actor, timestamp, and role. Exportable as CSV for notified-body submissions and internal QMS reviews.",
     Component: SdlcConfigLogSvg,
-    wrapStyle: {} as React.CSSProperties,
-  },
-  {
-    label: "Workflow Guide",
-    caption:
-      "Workflow guide — live task queue surfacing every IEC 62304 blocker by phase, severity, and effort estimate. The circular progress tracker shows exactly how far the project is through its safety-class lifecycle.",
-    Component: SdlcWorkflowGuideSvg,
     wrapStyle: {} as React.CSSProperties,
   },
 ];
