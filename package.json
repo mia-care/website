@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "prebuild": "node scripts/generate-redirects.js",
     "build": "next build",
     "start": "next start",
     "type-check": "tsc --noEmit",
