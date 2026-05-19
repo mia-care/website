@@ -8,7 +8,7 @@ const LOGO_H = 52;
 
 const LOGO_FILTER = "brightness(0) invert(1)";
 
-const LOGOS: { src: string; alt: string; filter?: string }[] = [
+const LOGOS: { src: string; alt: string; filter?: string; className?: string }[] = [
   { src: `${BASE_PATH}/images/clients/Bip.svg`, alt: "Bip" },
   { src: `${BASE_PATH}/images/clients/ItaliAssistenza.svg`, alt: "Itali Assistenza" },
   { src: `${BASE_PATH}/images/clients/GVM.svg`, alt: "GVM" },
@@ -18,7 +18,7 @@ const LOGOS: { src: string; alt: string; filter?: string }[] = [
   { src: `${BASE_PATH}/images/clients/Flex.svg`, alt: "Flex" },
   { src: `${BASE_PATH}/images/clients/youhealthy.svg`, alt: "YouHealthy" },
   { src: `${BASE_PATH}/images/clients/iit.svg`, alt: "IIT", filter: "invert(1)" },
-  { src: `${BASE_PATH}/images/clients/aindo.svg`, alt: "Aindo" },
+  { src: `${BASE_PATH}/images/clients/aindo.svg`, alt: "Aindo", className: "w-[72px] sm:w-[96px]" },
 ];
 
 // Duplicate for seamless loop: track scrolls exactly -50% of its total width → loops invisibly
@@ -79,7 +79,7 @@ export function LogoMarquee() {
                   aria-hidden={i >= LOGOS.length ? true : undefined}
                   width={LOGO_W}
                   height={LOGO_H}
-                  className="w-[110px] sm:w-[149px]"
+                  className={logo.className ?? "w-[110px] sm:w-[149px]"}
                   style={{
                     height: "auto",
                     filter: logo.filter ?? LOGO_FILTER,
