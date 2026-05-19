@@ -1,10 +1,10 @@
 export const announcement = {
   enabled: true,
   icon: "🎉",
-  message: "This is a test banner — come say hi!",
+  message: "P4SaMD v3 is here!",
   link: {
-    label: "Learn more",
-    href: "/resources/events",
+    label: "Check it out",
+    href: "https://docs.mia-care.io/docs/p4samd/release-notes/v3.0",
   },
 } satisfies Announcement;
 
