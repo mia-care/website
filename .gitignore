@@ -44,3 +44,30 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# generated redirect pages (written to out/ at build time, not committed)
+/public/blog/index.html
+/public/about-us/
+/public/accelerators/
+/public/careers/
+/public/certifications/
+/public/competence-center/index.html
+/public/composable-technology/
+/public/digital-health-tales-podcast/
+/public/healthcare-applications-builder/
+/public/healthcare-data-platform/
+/public/industry/
+/public/industry-key-insights/
+/public/international-standards/
+/public/it/
+/public/lp-newsletter/
+/public/newsroom/
+/public/partners-collaboration/
+/public/samd-event-milan-march-2025/
+/public/services/
+/public/software-as-a-medical-device/
+/public/solutions/
+/public/success-cases/
+/public/sustainability/
+/public/technology-application/
+/public/webinar-su-precision-medicine/

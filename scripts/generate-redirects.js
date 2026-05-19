@@ -26,7 +26,7 @@ let count = 0;
 
 for (const [from, to] of Object.entries(redirects)) {
   const fromPath = from.endsWith("/") ? from : `${from}/`;
-  const dir = path.join(__dirname, "../public", fromPath);
+  const dir = path.join(__dirname, "../out", fromPath);
 
   fs.mkdirSync(dir, { recursive: true });
   fs.writeFileSync(path.join(dir, "index.html"), buildRedirectHtml(to));
