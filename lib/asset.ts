@@ -1,6 +1,6 @@
-const BASE = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+import { BASE_PATH } from "./utils";
 
 export function assetPath(path: string): string {
   if (!path || path.startsWith("http")) return path;
-  return `${BASE}${path}`;
+  return `${BASE_PATH}${path}`;
 }
