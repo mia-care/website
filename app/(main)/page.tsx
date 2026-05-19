@@ -60,7 +60,7 @@ export default function HomePage() {
       {/* Preload LCP image so the browser can fetch it before JS hydration */}
       <link
         rel="preload"
-        href="/website/images/capability-svgs/heroHomepage.svg"
+        href="/images/capability-svgs/heroHomepage.svg"
         as="image"
         // @ts-expect-error fetchpriority is valid HTML but not yet in TS types
         fetchpriority="high"

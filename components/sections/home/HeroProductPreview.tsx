@@ -112,7 +112,7 @@ export function HeroProductPreview() {
             <div style={{ position: "relative", overflow: "hidden" }}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="/website/images/capability-svgs/heroHomepage.svg"
+                src="/images/capability-svgs/heroHomepage.svg"
                 alt=""
                 aria-hidden="true"
                 width={908}
