@@ -3,7 +3,7 @@ const path = require("node:path");
 
 const redirects = JSON.parse(fs.readFileSync(path.join(__dirname, "redirects.json"), "utf-8"));
 
-const BASE_URL = "https://www.mia-care.io";
+const BASE_URL = "https://mia-care.io";
 
 function buildRedirectHtml(destination) {
   const dest = destination.replace(/\/$/, "");
