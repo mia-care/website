@@ -6,7 +6,8 @@ const redirects = JSON.parse(fs.readFileSync(path.join(__dirname, "redirects.jso
 const BASE_URL = "https://www.mia-care.io";
 
 function buildRedirectHtml(destination) {
-  const destUrl = destination.startsWith("http") ? destination : `${BASE_URL}${destination}`;
+  const dest = destination.replace(/\/$/, "");
+  const destUrl = dest.startsWith("http") ? dest : `${BASE_URL}${dest}`;
   return `<!DOCTYPE html>
 <html>
 <head>
