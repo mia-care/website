@@ -18,6 +18,7 @@ const LOGOS: { src: string; alt: string; filter?: string }[] = [
   { src: `${BASE_PATH}/images/clients/Flex.svg`, alt: "Flex" },
   { src: `${BASE_PATH}/images/clients/youhealthy.svg`, alt: "YouHealthy" },
   { src: `${BASE_PATH}/images/clients/iit.svg`, alt: "IIT", filter: "invert(1)" },
+  { src: `${BASE_PATH}/images/clients/aindo.svg`, alt: "Aindo" },
 ];
 
 // Duplicate for seamless loop: track scrolls exactly -50% of its total width → loops invisibly

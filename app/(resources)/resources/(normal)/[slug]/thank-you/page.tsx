@@ -32,14 +32,6 @@ const TYPE_LABELS: Record<ResourceType, string> = {
   report: "Report",
 };
 
-const DOWNLOAD_LABELS: Record<ResourceType, string> = {
-  whitepaper: "Download Whitepaper (PDF)",
-  guide: "Download Guide (PDF)",
-  report: "Download Report (PDF)",
-  "case-study": "Download Case Study (PDF)",
-  video: "Download",
-};
-
 export default async function ThankYouPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const page = await getThankYouPage(slug);
@@ -92,25 +84,6 @@ export default async function ThankYouPage({ params }: { params: Promise<{ slug:
           )}
         </div>
       </section>
-
-      {/* Download CTA */}
-      {page.downloadUrl && (
-        <section className="pb-4">
-          <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-center">
-            <a
-              href={assetPath(page.downloadUrl)}
-              download
-              className="inline-flex items-center gap-2 px-8 py-3 rounded-lg text-sm font-semibold transition-all hover:-translate-y-px"
-              style={{
-                background: "linear-gradient(90deg, var(--brand-green), var(--brand-cyan))",
-                color: "#0b0c10",
-              }}
-            >
-              {DOWNLOAD_LABELS[page.resourceType]} ↓
-            </a>
-          </div>
-        </section>
-      )}
 
       {/* Video embed */}
       {page.videoEmbedUrl && (
