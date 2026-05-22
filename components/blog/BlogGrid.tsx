@@ -1,6 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
+import { SearchBar } from "@/components/common/SearchBar";
 import type { BlogCategory } from "@/data/blog-categories";
 import type { PostMeta } from "@/lib/blog";
 import { BlogCard } from "./BlogCard";
@@ -8,23 +10,62 @@ import { BlogCard } from "./BlogCard";
 const POSTS_PER_PAGE = 9;
 
 export function BlogGrid({ posts, categories }: { posts: PostMeta[]; categories: BlogCategory[] }) {
-  const [activeCategory, setActiveCategory] = useState<string>("all");
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
+  const activeCategory = searchParams.get("category") ?? "all";
+  const query = searchParams.get("q") ?? "";
   const [page, setPage] = useState(1);
 
-  const filtered =
-    activeCategory === "all" ? posts : posts.filter((p) => p.categories.includes(activeCategory));
+  // biome-ignore lint/correctness/useExhaustiveDependencies: intentionally reset page when filters change
+  useEffect(() => {
+    setPage(1);
+  }, [query, activeCategory]);
 
-  const totalPages = Math.ceil(filtered.length / POSTS_PER_PAGE);
-  const paginated = filtered.slice(0, page * POSTS_PER_PAGE);
-  const hasMore = page < totalPages;
+  function setParam(key: string, value: string | null) {
+    const params = new URLSearchParams(searchParams.toString());
+    if (!value) {
+      params.delete(key);
+    } else {
+      params.set(key, value);
+    }
+    const qs = params.toString();
+    router.replace(`${pathname}${qs ? `?${qs}` : ""}`, { scroll: false });
+  }
 
   function handleCategory(slug: string) {
-    setActiveCategory(slug);
-    setPage(1);
+    setParam("category", slug === "all" ? null : slug);
   }
+
+  const filtered = posts.filter((p) => {
+    const matchesCategory = activeCategory === "all" || p.categories.includes(activeCategory);
+    const q = query.toLowerCase().trim();
+    const matchesQuery =
+      !q || p.title.toLowerCase().includes(q) || p.description.toLowerCase().includes(q);
+    return matchesCategory && matchesQuery;
+  });
+
+  const paginated = filtered.slice(0, page * POSTS_PER_PAGE);
+  const hasMore = page * POSTS_PER_PAGE < filtered.length;
+
+  const searchItems = posts.map((p) => ({
+    title: p.title,
+    href: `/resources/blog/${p.slug}`,
+  }));
 
   return (
     <div>
+      {/* Search bar */}
+      <div className="mb-6">
+        <SearchBar
+          items={searchItems}
+          defaultValue={query}
+          onSearch={(v) => setParam("q", v || null)}
+          placeholder="Search articles..."
+        />
+      </div>
+
       {/* Category filters */}
       <div className="flex flex-wrap gap-2 mb-10">
         <button
@@ -34,10 +75,7 @@ export function BlogGrid({ posts, categories }: { posts: PostMeta[]; categories:
           className="px-4 py-2 rounded-full text-sm font-semibold transition-all"
           style={
             activeCategory === "all"
-              ? {
-                  background: "var(--brand-green)",
-                  color: "#0b0c10",
-                }
+              ? { background: "var(--brand-green)", color: "#0b0c10" }
               : {
                   background: "var(--bg-raised)",
                   color: "var(--text-secondary)",
@@ -56,10 +94,7 @@ export function BlogGrid({ posts, categories }: { posts: PostMeta[]; categories:
             className="px-4 py-2 rounded-full text-sm font-semibold transition-all"
             style={
               activeCategory === cat.slug
-                ? {
-                    background: "var(--brand-green)",
-                    color: "#0b0c10",
-                  }
+                ? { background: "var(--brand-green)", color: "#0b0c10" }
                 : {
                     background: "var(--bg-raised)",
                     color: "var(--text-secondary)",
@@ -74,7 +109,7 @@ export function BlogGrid({ posts, categories }: { posts: PostMeta[]; categories:
 
       {filtered.length === 0 ? (
         <p className="text-center py-20" style={{ color: "var(--text-muted)" }}>
-          No articles in this category yet.
+          {query ? `No articles found for "${query}".` : "No articles in this category yet."}
         </p>
       ) : (
         <>

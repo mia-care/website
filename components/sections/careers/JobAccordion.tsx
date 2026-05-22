@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Sheet, SheetClose, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
 type JobSection = {
@@ -9,6 +9,7 @@ type JobSection = {
 };
 
 export type Job = {
+  slug: string;
   title: string;
   type: string;
   location: string;
@@ -125,17 +126,58 @@ function JobBody({ job }: { job: Job }) {
 
 function JobCard({ job }: { job: Job }) {
   const [open, setOpen] = useState(false);
+  const [sheetOpen, setSheetOpen] = useState(false);
+  const cardRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (window.location.hash === `#${job.slug}`) {
+      setOpen(true);
+      setSheetOpen(true);
+      setTimeout(() => {
+        cardRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 120);
+    }
+  }, [job.slug]);
+
+  function setHash(value: string | null) {
+    history.replaceState(null, "", value ? `#${value}` : location.pathname + location.search);
+  }
+
+  function handleDesktopToggle() {
+    const next = !open;
+    setOpen(next);
+    if (next) {
+      setHash(job.slug);
+    } else if (window.location.hash === `#${job.slug}`) {
+      setHash(null);
+    }
+  }
+
+  function handleSheetChange(next: boolean) {
+    setSheetOpen(next);
+    if (next) {
+      setHash(job.slug);
+    } else if (window.location.hash === `#${job.slug}`) {
+      setHash(null);
+    }
+  }
 
   const cardStyle = {
     background: "var(--bg-surface)",
     border: open ? "1px solid rgba(0,240,150,0.25)" : "1px solid var(--bg-border)",
+    scrollMarginTop: "calc(var(--banner-h, 40px) + 5rem)",
   };
 
   return (
-    <div className="rounded-2xl overflow-hidden transition-all duration-200" style={cardStyle}>
+    <div
+      id={job.slug}
+      ref={cardRef}
+      className="rounded-2xl overflow-hidden transition-all duration-200"
+      style={cardStyle}
+    >
       {/* ── Mobile: header is a Sheet trigger ─────────────────────────── */}
       <div className="md:hidden">
-        <Sheet>
+        <Sheet open={sheetOpen} onOpenChange={handleSheetChange}>
           <SheetTrigger className="w-full flex items-start gap-4 px-6 py-5 text-left transition-colors hover:bg-white/[0.02]">
             <div className="flex-1 min-w-0">
               <JobBadges job={job} />
@@ -220,7 +262,7 @@ function JobCard({ job }: { job: Job }) {
       <div className="hidden md:block">
         <button
           type="button"
-          onClick={() => setOpen((v) => !v)}
+          onClick={handleDesktopToggle}
           className="w-full flex items-start gap-4 px-6 py-5 text-left transition-colors hover:bg-white/[0.02]"
           aria-expanded={open}
         >
@@ -249,7 +291,7 @@ export function JobAccordion({ jobs }: { jobs: Job[] }) {
   return (
     <div className="space-y-4">
       {jobs.map((job) => (
-        <JobCard key={job.title} job={job} />
+        <JobCard key={job.slug} job={job} />
       ))}
     </div>
   );

@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import type { Metadata } from "next";
 import { BlogGrid } from "@/components/blog/BlogGrid";
 import { FeaturedPost } from "@/components/blog/FeaturedPost";
@@ -9,6 +10,9 @@ export const metadata: Metadata = {
   title: "Blog — Insights on SaMD, Compliance & MedTech",
   description:
     "Expert articles on Software as a Medical Device, IEC 62304, EU MDR, AI Act compliance, and modern MedTech engineering from the Mia-Care team.",
+  alternates: {
+    canonical: "/resources/blog",
+  },
 };
 
 export default function BlogArchivePage() {
@@ -40,7 +44,9 @@ export default function BlogArchivePage() {
       <section className="py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col gap-12">
           {featuredPost && <FeaturedPost post={featuredPost} />}
-          <BlogGrid posts={gridPosts} categories={BLOG_CATEGORIES} />
+          <Suspense fallback={<div className="h-64" />}>
+            <BlogGrid posts={gridPosts} categories={BLOG_CATEGORIES} />
+          </Suspense>
         </div>
       </section>
     </>

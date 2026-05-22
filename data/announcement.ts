@@ -5,6 +5,7 @@ export const announcement = {
   link: {
     label: "Check it out",
     href: "https://docs.mia-care.io/docs/p4samd/release-notes/v3.0",
+    external: true,
   },
 } satisfies Announcement;
 

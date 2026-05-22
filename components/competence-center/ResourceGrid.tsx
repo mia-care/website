@@ -2,8 +2,9 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { assetPath } from "@/lib/asset";
+import { SearchBar } from "@/components/common/SearchBar";
 import type { ResourceMeta, ResourceType } from "@/lib/resources";
 
 const TYPE_LABELS: Record<ResourceType | "all", string> = {
@@ -90,19 +91,60 @@ function FeaturedCard({ resource }: { resource: ResourceMeta }) {
 }
 
 export function ResourceGrid({ resources }: { resources: ResourceMeta[] }) {
-  const [active, setActive] = useState<ResourceType | "all">("all");
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
+  const active = (searchParams.get("type") ?? "all") as ResourceType | "all";
+  const query = searchParams.get("q") ?? "";
+
+  function setParam(key: string, value: string | null) {
+    const params = new URLSearchParams(searchParams.toString());
+    if (!value) {
+      params.delete(key);
+    } else {
+      params.set(key, value);
+    }
+    const qs = params.toString();
+    router.replace(`${pathname}${qs ? `?${qs}` : ""}`, { scroll: false });
+  }
 
   const featured = resources.find((r) => r.featured);
   const rest = resources.filter((r) => !r.featured);
 
   const availableTypes = ["all", ...new Set(rest.map((r) => r.type))] as (ResourceType | "all")[];
 
-  const filtered = active === "all" ? rest : rest.filter((r) => r.type === active);
+  const q = query.toLowerCase().trim();
+  const isSearching = q.length > 0;
+
+  const filtered = (isSearching ? resources : rest).filter((r) => {
+    const matchesType = active === "all" || r.type === active;
+    const matchesQuery =
+      !q ||
+      r.title.toLowerCase().includes(q) ||
+      r.description.toLowerCase().includes(q);
+    return matchesType && matchesQuery;
+  });
+
+  const searchItems = resources.map((r) => ({
+    title: r.title,
+    href: `/resources/${r.slug}`,
+  }));
 
   return (
     <>
-      {/* Featured hero card */}
-      {featured && <FeaturedCard resource={featured} />}
+      {/* Featured hero card — shown only when not searching */}
+      {featured && !isSearching && <FeaturedCard resource={featured} />}
+
+      {/* Search bar */}
+      <div className="mb-6">
+        <SearchBar
+          items={searchItems}
+          defaultValue={query}
+          onSearch={(v) => setParam("q", v || null)}
+          placeholder="Search resources..."
+        />
+      </div>
 
       {/* Filters */}
       <div className="flex flex-wrap gap-2 mb-10">
@@ -110,7 +152,7 @@ export function ResourceGrid({ resources }: { resources: ResourceMeta[] }) {
           <button
             key={type}
             type="button"
-            onClick={() => setActive(type)}
+            onClick={() => setParam("type", type === "all" ? null : type)}
             aria-pressed={active === type}
             className="px-4 py-1.5 rounded-full text-sm font-medium transition-all"
             style={
@@ -132,65 +174,71 @@ export function ResourceGrid({ resources }: { resources: ResourceMeta[] }) {
       </div>
 
       {/* Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {filtered.map((resource) => (
-          <Link
-            key={resource.slug}
-            href={`/resources/${resource.slug}`}
-            className="group flex flex-col rounded-2xl overflow-hidden transition-all hover:-translate-y-1"
-            style={{ background: "var(--bg-surface)", border: "1px solid var(--bg-border)" }}
-          >
-            {/* Cover */}
-            <div
-              className="relative h-44 overflow-hidden"
-              style={{ background: "var(--bg-raised)" }}
+      {filtered.length === 0 ? (
+        <p className="text-center py-20" style={{ color: "var(--text-muted)" }}>
+          {query ? `No resources found for "${query}".` : "No resources in this category yet."}
+        </p>
+      ) : (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {filtered.map((resource) => (
+            <Link
+              key={resource.slug}
+              href={`/resources/${resource.slug}`}
+              className="group flex flex-col rounded-2xl overflow-hidden transition-all hover:-translate-y-1"
+              style={{ background: "var(--bg-surface)", border: "1px solid var(--bg-border)" }}
             >
-              {resource.featuredImage && (
-                <Image
-                  src={assetPath(resource.featuredImage)}
-                  alt=""
-                  fill
-                  className="object-cover transition-transform duration-300 group-hover:scale-105"
-                  unoptimized
-                />
-              )}
-              <span
-                className="absolute top-3 left-3 text-xs px-2 py-0.5 rounded-full font-semibold capitalize"
-                style={{
-                  background: "rgba(11,12,16,0.75)",
-                  border: "1px solid rgba(255,255,255,0.15)",
-                  color: "var(--text-secondary)",
-                  backdropFilter: "blur(6px)",
-                }}
+              {/* Cover */}
+              <div
+                className="relative h-44 overflow-hidden"
+                style={{ background: "var(--bg-raised)" }}
               >
-                {TYPE_LABELS[resource.type]}
-              </span>
-            </div>
+                {resource.featuredImage && (
+                  <Image
+                    src={assetPath(resource.featuredImage)}
+                    alt=""
+                    fill
+                    className="object-cover transition-transform duration-300 group-hover:scale-105"
+                    unoptimized
+                  />
+                )}
+                <span
+                  className="absolute top-3 left-3 text-xs px-2 py-0.5 rounded-full font-semibold capitalize"
+                  style={{
+                    background: "rgba(11,12,16,0.75)",
+                    border: "1px solid rgba(255,255,255,0.15)",
+                    color: "var(--text-secondary)",
+                    backdropFilter: "blur(6px)",
+                  }}
+                >
+                  {TYPE_LABELS[resource.type]}
+                </span>
+              </div>
 
-            {/* Body */}
-            <div className="flex flex-col flex-1 p-5">
-              <h3
-                className="font-display font-bold text-base mb-2 leading-snug"
-                style={{ color: "var(--text-primary)" }}
-              >
-                {resource.title}
-              </h3>
-              <p
-                className="text-sm flex-1"
-                style={{ color: "var(--text-secondary)", lineHeight: 1.6 }}
-              >
-                {resource.description}
-              </p>
-              <span
-                className="mt-4 inline-flex items-center gap-1.5 text-xs font-semibold"
-                style={{ color: "var(--text-secondary)" }}
-              >
-                {CTA_LABELS[resource.type]}
-              </span>
-            </div>
-          </Link>
-        ))}
-      </div>
+              {/* Body */}
+              <div className="flex flex-col flex-1 p-5">
+                <h3
+                  className="font-display font-bold text-base mb-2 leading-snug"
+                  style={{ color: "var(--text-primary)" }}
+                >
+                  {resource.title}
+                </h3>
+                <p
+                  className="text-sm flex-1"
+                  style={{ color: "var(--text-secondary)", lineHeight: 1.6 }}
+                >
+                  {resource.description}
+                </p>
+                <span
+                  className="mt-4 inline-flex items-center gap-1.5 text-xs font-semibold"
+                  style={{ color: "var(--text-secondary)" }}
+                >
+                  {CTA_LABELS[resource.type]}
+                </span>
+              </div>
+            </Link>
+          ))}
+        </div>
+      )}
     </>
   );
 }

@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import type { Metadata } from "next";
 import { CtaBanner } from "@/components/common/CtaBanner";
 import { PillTag } from "@/components/common/PillTag";
@@ -8,6 +9,9 @@ export const metadata: Metadata = {
   title: "Competence Center — Whitepapers & Videos | Mia-Care",
   description:
     "Access Mia-Care's library of whitepapers and expert videos on SaMD compliance, FHIR interoperability, telemedicine platforms, and cloud-native healthcare.",
+  alternates: {
+    canonical: "/resources",
+  },
 };
 
 export default function ResourcesPage() {
@@ -42,7 +46,9 @@ export default function ResourcesPage() {
 
       <section className="py-16" style={{ borderTop: "1px solid var(--bg-border)" }}>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <ResourceGrid resources={resources} />
+          <Suspense fallback={<div className="h-64" />}>
+            <ResourceGrid resources={resources} />
+          </Suspense>
         </div>
       </section>
 

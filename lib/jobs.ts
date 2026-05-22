@@ -46,6 +46,7 @@ export function getAllJobs(): Job[] {
       const { role, sections } = parseJobBody(content);
 
       return {
+        slug: filename.replace(/\.md$/, ""),
         title: fm.title ?? "",
         type: fm.type ?? "",
         location: fm.location ?? "",
