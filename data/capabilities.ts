@@ -187,7 +187,7 @@ export const capabilities: Capability[] = [
         label: "Contextual Guidance",
         title: "Right guidance at the right moment",
         description:
-          "Whisper surfaces enforcement and suggestions based on what the developer is currently working on. Implementing a Class B software item triggers IEC 62304 5.3 guidance, not a generic reminder.",
+          "Whisper surfaces enforcement and suggestions based on what the developer is currently working on. Implementing a Class B software item triggers the specific IEC 62304 guidance for that safety class, not a generic reminder.",
       },
     ],
     regulations: [
