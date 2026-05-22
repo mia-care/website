@@ -1,5 +1,5 @@
-import { Suspense } from "react";
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { CtaBanner } from "@/components/common/CtaBanner";
 import { PillTag } from "@/components/common/PillTag";
 import { ResourceGrid } from "@/components/competence-center/ResourceGrid";

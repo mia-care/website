@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { CtaBanner } from "@/components/common/CtaBanner";
 import { PillTag } from "@/components/common/PillTag";
+import { BASE_PATH } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: "About Us — Mia-Care",
@@ -268,6 +270,66 @@ export default function AboutUsPage() {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Mia-Platform */}
+      <section className="py-20" style={{ borderTop: "1px solid var(--bg-border)" }}>
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <PillTag className="mb-6">Part of the Group</PillTag>
+          <a
+            href="https://mia-platform.eu"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group flex flex-col sm:flex-row items-start sm:items-center gap-8 p-8 rounded-2xl transition-colors"
+            style={{ background: "var(--bg-surface)", border: "1px solid var(--bg-border)" }}
+          >
+            <div
+              className="shrink-0 flex items-center justify-center rounded-2xl p-5"
+              style={{
+                background: "var(--bg-raised)",
+                border: "1px solid var(--bg-border-strong)",
+              }}
+            >
+              <Image
+                src={`${BASE_PATH}/images/logo/Horizontal_Lockup_Full Color.svg`}
+                alt="Mia-Platform"
+                width={130}
+                height={46}
+                style={{ filter: "brightness(0) invert(1)" }}
+              />
+            </div>
+            <div className="flex-1">
+              <p
+                className="text-sm leading-relaxed mb-4"
+                style={{ color: "var(--text-secondary)", lineHeight: 1.8 }}
+              >
+                Mia-Care is a company of the Mia-Platform group. Mia-Platform is the AI-Native
+                Developer Platform trusted by large enterprises worldwide to build and run
+                cloud-native AI-governed products at scale, recognised by a global IT research and
+                advisory firm and mentioned in 40+ independent IT reports.
+              </p>
+              <span
+                className="inline-flex items-center gap-1.5 text-xs font-semibold transition-colors group-hover:text-brand-green"
+                style={{ color: "var(--text-muted)" }}
+              >
+                Visit mia-platform.eu
+                <svg
+                  width="12"
+                  height="12"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg>
+              </span>
+            </div>
+          </a>
         </div>
       </section>
 

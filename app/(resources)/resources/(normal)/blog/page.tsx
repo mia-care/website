@@ -1,5 +1,5 @@
-import { Suspense } from "react";
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { BlogGrid } from "@/components/blog/BlogGrid";
 import { FeaturedPost } from "@/components/blog/FeaturedPost";
 import { PillTag } from "@/components/common/PillTag";

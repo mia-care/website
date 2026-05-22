@@ -3,8 +3,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { assetPath } from "@/lib/asset";
 import { SearchBar } from "@/components/common/SearchBar";
+import { assetPath } from "@/lib/asset";
 import type { ResourceMeta, ResourceType } from "@/lib/resources";
 
 const TYPE_LABELS: Record<ResourceType | "all", string> = {
@@ -120,9 +120,7 @@ export function ResourceGrid({ resources }: { resources: ResourceMeta[] }) {
   const filtered = (isSearching ? resources : rest).filter((r) => {
     const matchesType = active === "all" || r.type === active;
     const matchesQuery =
-      !q ||
-      r.title.toLowerCase().includes(q) ||
-      r.description.toLowerCase().includes(q);
+      !q || r.title.toLowerCase().includes(q) || r.description.toLowerCase().includes(q);
     return matchesType && matchesQuery;
   });
 

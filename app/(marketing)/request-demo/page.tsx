@@ -3,6 +3,16 @@ import { HubSpotForm } from "@/components/common/HubSpotForm";
 import { PillTag } from "@/components/common/PillTag";
 import { COMPLIANCE_STANDARDS } from "@/data/nav";
 
+const FEATURED_STANDARDS = [
+  "EU MDR 2017/745",
+  "IVDR 2017/746",
+  "FDA",
+  "ISO 13485",
+  "IEC 62304",
+  "EU AI Act",
+];
+const REMAINING_STANDARDS_COUNT = COMPLIANCE_STANDARDS.length - FEATURED_STANDARDS.length;
+
 export const metadata: Metadata = {
   title: "Request a Demo — See Compliance by Design in Your Context",
   description:
@@ -28,8 +38,8 @@ export default function RequestDemoPage() {
     <section className="py-20" style={{ background: "var(--bg-base)" }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-start">
-          {/* Left col: social proof — second on mobile, first on desktop */}
-          <div className="order-2 lg:order-1">
+          {/* Left col: value props — first on mobile and desktop */}
+          <div>
             <PillTag className="mb-6">Request a Demo</PillTag>
             <h1
               className="font-display font-bold mb-4 leading-tight"
@@ -81,9 +91,10 @@ export default function RequestDemoPage() {
                 Standards covered in the demo
               </h2>
               <div className="flex flex-wrap gap-2">
-                {COMPLIANCE_STANDARDS.map((std) => (
+                {FEATURED_STANDARDS.map((std) => (
                   <PillTag key={std}>{std}</PillTag>
                 ))}
+                <PillTag>+{REMAINING_STANDARDS_COUNT} more</PillTag>
               </div>
             </div>
 
@@ -115,9 +126,9 @@ export default function RequestDemoPage() {
             </div>
           </div>
 
-          {/* Right col — HubSpot form: first on mobile, second on desktop */}
+          {/* Right col — HubSpot form: second on mobile and desktop */}
           <div
-            className="order-1 lg:order-2 rounded-card p-8"
+            className="rounded-card p-8"
             style={{
               background: "var(--bg-surface)",
               border: "1px solid var(--bg-border)",

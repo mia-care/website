@@ -349,28 +349,41 @@ function ComplianceCard() {
     const timers: ReturnType<typeof setTimeout>[] = [];
     const intervals: ReturnType<typeof setInterval>[] = [];
 
-    timers.push(setTimeout(() => {
-      setBar(78);
-      let n = 0;
-      const iv = setInterval(() => {
-        n += 1;
-        setCount(n);
-        if (n >= 78) clearInterval(iv);
-      }, Math.round(1400 / 78));
-      intervals.push(iv);
-    }, 900));
+    timers.push(
+      setTimeout(() => {
+        setBar(78);
+        let n = 0;
+        const iv = setInterval(
+          () => {
+            n += 1;
+            setCount(n);
+            if (n >= 78) clearInterval(iv);
+          },
+          Math.round(1400 / 78),
+        );
+        intervals.push(iv);
+      }, 900),
+    );
 
-    timers.push(setTimeout(() => {
-      setBar(100);
-      setDone(true);
-      let n = 78;
-      const iv = setInterval(() => {
-        n += 1;
-        setCount(n);
-        if (n >= 100) clearInterval(iv);
-      }, Math.round(1400 / 22));
-      intervals.push(iv);
-    }, 900 + 1600 + 600));
+    timers.push(
+      setTimeout(
+        () => {
+          setBar(100);
+          setDone(true);
+          let n = 78;
+          const iv = setInterval(
+            () => {
+              n += 1;
+              setCount(n);
+              if (n >= 100) clearInterval(iv);
+            },
+            Math.round(1400 / 22),
+          );
+          intervals.push(iv);
+        },
+        900 + 1600 + 600,
+      ),
+    );
 
     return () => {
       timers.forEach(clearTimeout);
@@ -426,7 +439,16 @@ function ComplianceCard() {
           }}
         >
           <span style={{ fontSize: 10, color: "#0A0A0A", fontWeight: 500 }}>Compliance score</span>
-          <span style={{ fontSize: 14, fontWeight: 800, color: done ? "#16A34A" : "#F59E0B", transition: "color 0.4s ease" }}>{count}%</span>
+          <span
+            style={{
+              fontSize: 14,
+              fontWeight: 800,
+              color: done ? "#16A34A" : "#F59E0B",
+              transition: "color 0.4s ease",
+            }}
+          >
+            {count}%
+          </span>
         </div>
         <div style={{ height: 6, background: "#E5E5E5", borderRadius: 99, overflow: "hidden" }}>
           <div

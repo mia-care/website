@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { SITE } from "@/data/site";
 
 // Injected directly into the HubSpot iframe via cssRequired —
@@ -54,6 +54,8 @@ declare global {
           region: string;
           target: string;
           cssRequired?: string;
+          onFormReady?: () => void;
+          onFormSubmitted?: () => void;
         }) => void;
       };
     };
@@ -66,6 +68,21 @@ type Props = {
   region?: string;
 };
 
+function FormSkeleton() {
+  return (
+    <div className="space-y-4 animate-pulse" aria-hidden="true">
+      <div className="grid grid-cols-2 gap-3">
+        <div className="h-10 rounded-lg" style={{ background: "rgba(255,255,255,0.06)" }} />
+        <div className="h-10 rounded-lg" style={{ background: "rgba(255,255,255,0.06)" }} />
+      </div>
+      <div className="h-10 rounded-lg" style={{ background: "rgba(255,255,255,0.06)" }} />
+      <div className="h-10 rounded-lg" style={{ background: "rgba(255,255,255,0.06)" }} />
+      <div className="h-10 rounded-lg" style={{ background: "rgba(255,255,255,0.06)" }} />
+      <div className="h-12 rounded-lg mt-2" style={{ background: "rgba(0,240,150,0.12)" }} />
+    </div>
+  );
+}
+
 export function HubSpotForm({
   portalId = SITE.hubspot.portalId,
   formId = SITE.hubspot.formId,
@@ -73,6 +90,7 @@ export function HubSpotForm({
 }: Props) {
   const containerRef = useRef<HTMLDivElement>(null);
   const loaded = useRef(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     if (loaded.current) return;
@@ -91,6 +109,7 @@ export function HubSpotForm({
           region,
           target: `#${targetId}`,
           cssRequired: IFRAME_CSS,
+          onFormReady: () => setIsLoading(false),
         });
       }
     };
@@ -111,5 +130,14 @@ export function HubSpotForm({
     };
   }, [portalId, formId, region]);
 
-  return <div ref={containerRef} className="hs-form-wrapper" style={{ minHeight: 400 }} />;
+  return (
+    <div style={{ minHeight: 400 }}>
+      {isLoading && <FormSkeleton />}
+      <div
+        ref={containerRef}
+        className="hs-form-wrapper"
+        style={isLoading ? { display: "none" } : undefined}
+      />
+    </div>
+  );
 }

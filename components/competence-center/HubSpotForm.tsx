@@ -3,6 +3,20 @@
 import { useEffect, useRef, useState } from "react";
 import { assetPath } from "@/lib/asset";
 
+function FormSkeleton() {
+  return (
+    <div className="space-y-4 animate-pulse" aria-hidden="true">
+      <div className="grid grid-cols-2 gap-3">
+        <div className="h-10 rounded-lg" style={{ background: "rgba(255,255,255,0.06)" }} />
+        <div className="h-10 rounded-lg" style={{ background: "rgba(255,255,255,0.06)" }} />
+      </div>
+      <div className="h-10 rounded-lg" style={{ background: "rgba(255,255,255,0.06)" }} />
+      <div className="h-10 rounded-lg" style={{ background: "rgba(255,255,255,0.06)" }} />
+      <div className="h-12 rounded-lg mt-2" style={{ background: "rgba(0,240,150,0.12)" }} />
+    </div>
+  );
+}
+
 type Props = {
   portalId: string;
   formId: string;
@@ -22,6 +36,7 @@ export function HubSpotForm({
 }: Props) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [submitted, setSubmitted] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const scriptId = "hs-forms-script";
@@ -38,6 +53,7 @@ export function HubSpotForm({
           portalId,
           formId,
           target: "#hs-form-container",
+          onFormReady: () => setIsLoading(false),
           onFormSubmitted: () => {
             if (redirectUrl) {
               window.location.href = redirectUrl;
@@ -120,5 +136,15 @@ export function HubSpotForm({
     );
   }
 
-  return <div id="hs-form-container" ref={containerRef} className="hs-form-wrapper" />;
+  return (
+    <div>
+      {isLoading && <FormSkeleton />}
+      <div
+        id="hs-form-container"
+        ref={containerRef}
+        className="hs-form-wrapper"
+        style={isLoading ? { display: "none" } : undefined}
+      />
+    </div>
+  );
 }
