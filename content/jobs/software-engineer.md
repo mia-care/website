@@ -3,7 +3,7 @@ title: "Software Engineer"
 type: "Full time"
 location: "Milan"
 summary: "We are looking for a Software Engineer passionate about building scalable, cloud-native healthcare products in a regulated environment."
-applyEmail: "info@mia-care.io"
+applyEmail: "career@mia-care.io"
 order: 4
 published: true
 ---

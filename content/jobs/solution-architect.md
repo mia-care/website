@@ -3,7 +3,7 @@ title: "Solution Architect"
 type: "Full time"
 location: "Milan"
 summary: "We seek talents who translate business needs into tailored IT solutions."
-applyEmail: "info@mia-care.io"
+applyEmail: "career@mia-care.io"
 order: 1
 published: true
 ---

@@ -3,7 +3,7 @@ title: "AI Engineer"
 type: "Full time"
 location: "Milan"
 summary: "You'll own the intelligence layer of our LLM-powered compliance platform — from model selection and fine-tuning to production deployment and cost optimization."
-applyEmail: "info@mia-care.io"
+applyEmail: "career@mia-care.io"
 order: 5
 published: true
 ---

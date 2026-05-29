@@ -139,7 +139,7 @@ export default function CareersPage() {
               </p>
             </div>
             <a
-              href="mailto:info@mia-care.io?subject=Spontaneous Application"
+              href="mailto:career@mia-care.io?subject=Spontaneous Application"
               className="shrink-0 inline-flex items-center gap-2 px-6 py-2.5 rounded-lg text-sm font-semibold transition-all hover:-translate-y-px"
               style={{
                 background: "#ffffff",

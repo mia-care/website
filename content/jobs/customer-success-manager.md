@@ -3,7 +3,7 @@ title: "Customer Success Manager"
 type: "Full time"
 location: "Milan"
 summary: "We are looking for a Customer Success Manager to join our Mia-Care Team."
-applyEmail: "info@mia-care.io"
+applyEmail: "career@mia-care.io"
 order: 2
 published: false
 ---

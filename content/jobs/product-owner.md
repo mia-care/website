@@ -3,7 +3,7 @@ title: "Product Owner"
 type: "Full time"
 location: "Milan"
 summary: "We are looking for a Product Owner to manage medium/large IT projects in digital healthcare."
-applyEmail: "info@mia-care.io"
+applyEmail: "career@mia-care.io"
 order: 3
 published: false
 ---
