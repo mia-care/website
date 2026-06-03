@@ -133,7 +133,7 @@ export default function CertificationsPage() {
                     alt={cert.name}
                     width={168}
                     height={88}
-                    style={{ objectFit: "contain", width: "100%", height: "100%" }}
+                    style={{ objectFit: "contain", width: "100%", height: "100%", borderRadius: 8 }}
                   />
                 </div>
                 <div className="flex-1 min-w-0">
@@ -194,16 +194,22 @@ export default function CertificationsPage() {
             style={{ background: "var(--bg-raised)", border: "1px solid var(--bg-border)" }}
           >
             <div
-              className="flex-shrink-0 flex items-center justify-center w-16 h-16 rounded-xl font-display font-bold text-sm text-center leading-tight"
+              className="flex-shrink-0 flex items-center justify-center rounded-xl overflow-hidden"
               style={{
+                width: 96,
+                height: 96,
                 background: "rgba(255,255,255,0.06)",
                 border: "1px solid var(--bg-border-strong)",
-                color: "var(--text-primary)",
+                padding: "16px",
               }}
             >
-              UNI/PdR
-              <br />
-              125
+              <Image
+                src={`${BASE_PATH}/images/certifications/LogoPDR125.jpg`}
+                alt="UNI/PdR 125:2022 Gender Equality Certification"
+                width={72}
+                height={72}
+                style={{ objectFit: "contain", width: "100%", height: "100%", borderRadius: 8 }}
+              />
             </div>
             <div className="flex-1 min-w-0">
               <h2
