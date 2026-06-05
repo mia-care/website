@@ -2,6 +2,7 @@
 title: "Mia-Care Product Demo – Platform for Software as a Medical Device"
 description: "Take a tour of Mia-Care Platform for Software as a Medical Device, the microservice-based software suite to build compliant medical software."
 type: video
+date: "2026-05-04"
 published: true
 featured: true
 featuredImage: /competence-center/mia-care-product-demo.jpg

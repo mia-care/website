@@ -65,4 +65,3 @@ In conclusion, by breaking down complex systems into manageable components, deve
 
 However, it is not easy to cope with this technology due to its high complexity. Here is where Mia-Care takes over and becomes the best software suite to get rid of complexity when developing microservice-based telemedicine Apps.
 
-[![](https://mia-care.io/wp-content/uploads/2024/04/Paper_Telemedicine_Banner.svg)](https://mia-care.io/competence-center/whitepaper/create-your-telmedicine-platform-with-cloud-native-technology/)

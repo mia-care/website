@@ -70,4 +70,3 @@ Within the IDP’s embedded Marketplace, Feature Teams access a trove of ready-t
 
 As healthcare embarks on a digital transformation, Composable Architectures and Digital Health Platforms emerge as a revolutionary innovative model, reshaping patient outcomes, care delivery, and data-driven practices. Relying on Mia-Care, healthcare providers stand at the forefront of a harmonious future, **delivering exceptional care in a digitally empowered ecosystem and integrated among the stakeholders.**
 
-![](https://mia-care.io/wp-content/uploads/2023/10/Paper_DHP_Banner.svg)

@@ -78,4 +78,4 @@ The healthcare industry was born to help, support, and take care of people. To a
 
 Are you curious to know more about how Mia-Care created a digital patient journey for hospital structures?
 
-[Click here](https://mia-care.io/paper/the-digitization-of-patient-journey-with-a-microservices-based-platform/) and download the paper.
+[Download the Patient Journey Digitization paper](https://mia-care.io/paper/the-digitization-of-patient-journey-with-a-microservices-based-platform/).

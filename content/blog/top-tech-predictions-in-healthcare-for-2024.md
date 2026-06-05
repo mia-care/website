@@ -66,4 +66,3 @@ The integration of these digital technologies with personalized medicine is revo
 
 Below there is a **graphic representation of the studies made on diffusion and penetration rate of the tech trends** analyzed for 2024.
 
-![](https://mia-care.io/wp-content/uploads/2023/11/Frame-1202.svg)

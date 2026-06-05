@@ -52,6 +52,7 @@ export default async function ResourcePage({ params }: { params: Promise<{ slug:
         "@type": "VideoObject",
         name: resource.title,
         description: resource.description,
+        uploadDate: resource.date,
         url: resourceUrl,
         thumbnailUrl: coverImageUrl,
         publisher: {

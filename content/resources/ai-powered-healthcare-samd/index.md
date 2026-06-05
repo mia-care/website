@@ -2,6 +2,7 @@
 title: "AI-Powered Healthcare Software: Accelerating Innovation While Ensuring Compliance"
 description: "Discover how to build regulated intelligent solutions like Software as a Medical Device (SaMD) smarter, faster, safer."
 type: video
+date: "2026-05-04"
 published: true
 featuredImage: /competence-center/ai-powered-healthcare-samd.png
 hubspotEmbed: |

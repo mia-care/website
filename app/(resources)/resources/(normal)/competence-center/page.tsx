@@ -1,10 +1,5 @@
-import type { Metadata } from "next";
-import { CompetenceCenterRedirect } from "./redirect";
-
-export const metadata: Metadata = {
-  robots: { index: false, follow: false },
-};
+import { redirect } from "next/navigation";
 
 export default function Page() {
-  return <CompetenceCenterRedirect />;
+  redirect("/resources");
 }

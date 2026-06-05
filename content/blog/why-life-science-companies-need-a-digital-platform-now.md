@@ -55,4 +55,3 @@ Investment in technology is certainly a cost but enables rapid value generation 
 - Increased capacity for innovation. **By abandoning monolithic architectures**, Pharma and Life Science companies will have much more control and ability to act when it comes to innovating to create new care delivery experiences;
 - Efficiency in collecting, sorting, and **using clinical data to create efficient data flows** that can be used for different scopes.
 
-[![](https://mia-care.io/wp-content/uploads/2023/02/Paper_CMD_Banner.svg)](https://mia-care.io/paper/business-case-connected-medical-device/)

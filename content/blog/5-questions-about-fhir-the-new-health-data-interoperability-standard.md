@@ -68,4 +68,3 @@ Security and privacy compliance rely on FHIR capabilities to ensure that patient
 
 It is undoubtedly clear the direction towards which the industry is evolving. The digitalization wave coming from other relevant sectors such as banking, insurance, and transportation will soon run over healthcare. Institutions, **organizations, and providers must be ready to surf the wave as the demand from citizens for omnichannel services will increase massively.** One of the main pillars of this strategy will surely be data interoperability. Namely, leveraging the FHIR data model standard as the main technology for data exchange: in Italy, as well as all over Europe.
 
-[![](https://mia-care.io/wp-content/uploads/2023/03/Paper_FHIR_Banner.svg)](https://mia-care.io/paper/enable-fhir-based-digital-services-for-data-interoperability/)

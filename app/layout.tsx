@@ -32,7 +32,7 @@ const styreneB = localFont({
 });
 
 const GTM_ID = "GTM-5N5DWRS";
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.mia-care.io";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://mia-care.io";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),

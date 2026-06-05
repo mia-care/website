@@ -1,6 +1,6 @@
 export const SITE = {
   name: "Mia-Care P4SaMD",
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.mia-care.io",
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://mia-care.io",
   company: {
     name: "Mia Care srl",
     address: "Via Leopardi, 8 — 20123 Milan, Italy",
@@ -35,7 +35,7 @@ export const FOOTER_LINKS = {
     { label: "Legacy Remediation", href: "/use-cases/legacy-remediation" },
   ],
   resources: [
-    { label: "Competence Center", href: "/resources/competence-center" },
+    { label: "Competence Center", href: "/resources" },
     { label: "Blog", href: "/resources/blog" },
     { label: "Docs", href: "http://docs.mia-care.io/" },
   ],

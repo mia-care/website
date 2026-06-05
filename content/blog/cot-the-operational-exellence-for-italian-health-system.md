@@ -86,4 +86,3 @@ The use of cloud-native technologies for the development of new applications and
 
 Mia-Care is currently helping some institutional stakeholders to address the creation of event-driven architectures dedicated to creating COTs that are not only centers of territorial care but also holders and guarantors of clinical data shared by patients.
 
-[![](https://mia-care.io/wp-content/uploads/2023/03/Paper_FHIR_Banner.svg)](https://mia-care.io/competence-center/whitepaper/enable-fhir-based-digital-services-for-data-interoperability/)

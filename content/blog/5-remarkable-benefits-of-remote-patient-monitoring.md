@@ -62,4 +62,3 @@ Mia-Care, enhanced by the excellence of [Mia-Platform](https://mia-platform.eu/)
 
 Remote patient monitoring offers several benefits that revolutionize the way healthcare is delivered today. From improved access to timely interventions and cost savings, this innovation has the potential to enhance patient outcomes and transform the healthcare landscape. Adopting the Mia-Care software suite to enhance the healthcare companies that work on remote patient monitoring led to **deep interoperability among the stakeholders operating in the care space**. It finally led to a higher quality in terms of the effectiveness of medical device use and adherence to therapy by patients.
 
-[![](https://mia-care.io/wp-content/uploads/2023/02/Paper_CMD_Banner.svg)](https://mia-care.io/competence-center/business-case/business-case-connected-medical-device/)

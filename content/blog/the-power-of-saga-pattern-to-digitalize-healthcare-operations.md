@@ -106,4 +106,3 @@ These were just two examples of the great potential of the Flow Manager. In fact
 
 Imagine how much time you can save customizing this ready-to-use tool according to your hospital requirements, instead of starting from scratch.
 
-[![](https://mia-care.io/wp-content/uploads/2023/02/Paper_DPJ_Banner.svg)](https://mia-care.io/paper/the-digitization-of-patient-journey-with-a-microservices-based-platform/)

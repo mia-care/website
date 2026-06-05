@@ -13,6 +13,7 @@ export type ResourceMeta = {
   title: string;
   description: string;
   type: ResourceType;
+  date?: string;
   featuredImage?: string;
   featured?: boolean;
   portalId: string;
@@ -86,6 +87,7 @@ export function getResourceMeta(slug: string): ResourceMeta | null {
     title: (data.title as string) ?? "",
     description: (data.description as string) ?? "",
     type: (data.type as ResourceType) ?? "whitepaper",
+    date: data.date as string | undefined,
     featuredImage: data.featuredImage as string | undefined,
     featured: data.featured === true,
     portalId,
@@ -112,6 +114,7 @@ export async function getResourcePage(slug: string): Promise<ResourcePage | null
     title: (data.title as string) ?? "",
     description: (data.description as string) ?? "",
     type: (data.type as ResourceType) ?? "whitepaper",
+    date: data.date as string | undefined,
     featuredImage: data.featuredImage as string | undefined,
     portalId,
     formId,

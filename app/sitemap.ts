@@ -6,7 +6,7 @@ import { getAllResources } from "@/lib/resources";
 
 export const dynamic = "force-static";
 
-const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.mia-care.io";
+const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://mia-care.io";
 
 // Update these dates manually when page content changes significantly.
 // Format: YYYY-MM-DD. Never use new Date() — it marks every page as modified on every build.
