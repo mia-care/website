@@ -1,32 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-
-// ── Drag hook ─────────────────────────────────────────────────────────
-function useDrag() {
-  const [pos, setPos] = useState({ x: 0, y: 0 });
-  const [dragging, setDragging] = useState(false);
-  const origin = useRef<{ mx: number; my: number; ox: number; oy: number } | null>(null);
-
-  function onPointerDown(e: React.PointerEvent) {
-    (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
-    origin.current = { mx: e.clientX, my: e.clientY, ox: pos.x, oy: pos.y };
-    setDragging(true);
-  }
-  function onPointerMove(e: React.PointerEvent) {
-    if (!origin.current) return;
-    setPos({
-      x: origin.current.ox + e.clientX - origin.current.mx,
-      y: origin.current.oy + e.clientY - origin.current.my,
-    });
-  }
-  function onPointerUp() {
-    origin.current = null;
-    setDragging(false);
-  }
-
-  return { pos, dragging, handlers: { onPointerDown, onPointerMove, onPointerUp } };
-}
+import { useEffect, useState } from "react";
 
 // ── KPI Stat Bar ──────────────────────────────────────────────────────
 function StatBar() {
@@ -512,34 +486,17 @@ export function HeroProductFloating() {
     return () => clearTimeout(t);
   }, []);
 
-  const d1 = useDrag();
-  const d2 = useDrag();
-  const d4 = useDrag();
-  const d5 = useDrag();
-
   function card(
-    drag: ReturnType<typeof useDrag>,
     placement: React.CSSProperties,
     floatSpec: string,
     opacityDelay: string,
     children: React.ReactNode,
   ) {
     return (
-      <div
-        style={{
-          position: "absolute",
-          ...placement,
-          transform: `translate(${drag.pos.x}px, ${drag.pos.y}px)`,
-          cursor: drag.dragging ? "grabbing" : "grab",
-          userSelect: "none",
-          touchAction: "none",
-          zIndex: drag.dragging ? 10 : 1,
-        }}
-        {...drag.handlers}
-      >
+      <div style={{ position: "absolute", ...placement, userSelect: "none" }}>
         <div
           style={{
-            animation: drag.dragging ? "none" : `heroFloat ${floatSpec}`,
+            animation: `heroFloat ${floatSpec}`,
             opacity: entered ? 1 : 0,
             transition: `opacity 0.6s ease-out ${opacityDelay}`,
           }}
@@ -559,25 +516,17 @@ export function HeroProductFloating() {
       }}
     >
       {/* Row 1 – Stats */}
-      {card(d1, { top: 0, left: 0, right: 0 }, "6s 0s ease-in-out infinite", "0.3s", <StatBar />)}
+      {card({ top: 0, left: 0, right: 0 }, "6s 0s ease-in-out infinite", "0.3s", <StatBar />)}
       {/* Row 2 – Risk */}
-      {card(
-        d2,
-        { top: 108, left: 0, right: 0 },
-        "5.5s 0.7s ease-in-out infinite",
-        "0.5s",
-        <RiskRow />,
-      )}
+      {card({ top: 108, left: 0, right: 0 }, "5.5s 0.7s ease-in-out infinite", "0.5s", <RiskRow />)}
       {/* Row 3 – two columns: Whisper (left) + Compliance (right) */}
       {card(
-        d5,
         { top: 196, left: 0, width: 215 },
         "5.2s 1.8s ease-in-out infinite",
         "0.9s",
         <WhisperCard />,
       )}
       {card(
-        d4,
         { top: 196, right: 0, width: 248 },
         "4.5s 2.1s ease-in-out infinite",
         "1.1s",

@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { PillTag } from "@/components/common/PillTag";
 import { HelixCanvas } from "./HelixCanvas";
 import { HeroProductFloating } from "./HeroProductFloating";
 
@@ -53,17 +52,6 @@ export function HeroBanner() {
         <div className="flex flex-col lg:flex-row lg:items-center lg:gap-12">
           {/* Left: copy */}
           <div className="flex-1 min-w-0 text-center lg:text-left">
-            {/* Eyebrow badge */}
-            <div className="flex justify-center lg:justify-start mb-8 animate-fade-in-up">
-              <PillTag>
-                <span
-                  className="inline-block w-1.5 h-1.5 rounded-full animate-pulse-dot"
-                  style={{ background: "var(--brand-green)" }}
-                />
-                AI-Native SaMD Platform
-              </PillTag>
-            </div>
-
             {/* H1 — each word is independently repulsable */}
             <h1
               className="font-display font-bold leading-tight mb-8 animate-fade-in-up"

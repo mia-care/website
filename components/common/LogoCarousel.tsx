@@ -79,6 +79,7 @@ export function LogoMarquee() {
                   aria-hidden={i >= LOGOS.length ? true : undefined}
                   width={LOGO_W}
                   height={LOGO_H}
+                  draggable={false}
                   className={logo.className ?? "w-[110px] sm:w-[149px]"}
                   style={{
                     height: "auto",
