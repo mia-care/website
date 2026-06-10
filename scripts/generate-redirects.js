@@ -13,6 +13,7 @@ function buildRedirectHtml(destination) {
 <head>
   <meta charset="utf-8">
   <title>Redirecting...</title>
+  <meta name="robots" content="noindex, follow">
   <meta http-equiv="refresh" content="0; url=${destUrl}">
   <link rel="canonical" href="${destUrl}">
 </head>
