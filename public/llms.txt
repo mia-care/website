@@ -1,28 +1,46 @@
-# Mia-Care P4SaMD
+# P4SaMD by Mia-Care
 
-## Overview
+> P4SaMD is an AI-native platform for Software as a Medical Device (SaMD) development, built by Mia Care srl (Milan, Italy). It embeds IEC 62304, EU MDR, FDA, and EU AI Act compliance directly into software development lifecycles, eliminating the documentation bottleneck that delays medical device manufacturers from bringing products to market.
 
-P4SaMD is an AI-native platform for Software as a Medical Device (SaMD) development, built by Mia Care srl (Milan, Italy).
+P4SaMD connects and orchestrates SDLC tools (Git, ALM, eQMS) into compliant workflows, generates real-time traceability from requirements to code, automatically compiles Design History Files and Technical Files, and provides in-workflow regulatory guidance via the Whisper smart assistant.
 
-The platform embeds regulatory compliance directly into software development lifecycles, eliminating the documentation bottleneck that delays medical device manufacturers from bringing products to market.
+Regulatory standards covered: EU MDR 2017/745, IVDR 2017/746, FDA 21 CFR Part 820, ISO 13485, ISO 14971, IEC 62304, IEC 82304-1, IEC 62366-1, IEC 81001-5-1, EU AI Act, GMLP, PCCP, GDPR, HIPAA.
 
-## What P4SaMD does
+## Product
 
-- Connects and orchestrates SDLC tools (Git, ALM, eQMS) into IEC 62304-compliant workflows
-- Generates and maintains real-time traceability from requirements to code (ARTT)
-- Automatically compiles Design History Files, Technical Files, and audit evidence
-- Provides in-workflow regulatory guidance via the Whisper smart assistant
-- Enforces EU AI Act, GMLP, and PCCP requirements for AI-enabled SaMD
-- Remediates legacy software against IEC 62304 and EU MDR standards
-- Implements IEC 81001-5-1 cybersecurity requirements by design
-- Guides teams through every lifecycle phase via conversational step-by-step workflows
+- [P4SaMD Platform Overview](https://www.mia-care.io/product): Mia-Care P4SaMD unifies eQMS, ALM, and DevOps into a single platform, embedding regulatory compliance directly into your SDLC.
+- [Plans and Pricing](https://www.mia-care.io/plans): Choose how you adopt P4SaMD. Standard, Professional, or Unlimited — flexible plans for every stage of your SaMD journey.
+- [Request a Demo](https://www.mia-care.io/request-demo): Get a live P4SaMD session scoped to your regulatory context. No pre-recorded walk-through. Real answers for EU MDR, FDA, ISO 13485, IEC 62304, and EU AI Act.
 
-## Regulatory coverage
+## Capabilities
 
-EU MDR 2017/745, IVDR 2017/746, FDA, ISO 13485, ISO 14971, 21 CFR Part 820, IEC 62304, IEC 82304-1, IEC 62366-1, IEC 81001-5-1, EU AI Act, GMLP, PCCP, GDPR, HIPAA
+- [SDLC Workflow Orchestrator](https://www.mia-care.io/capabilities/sdlc-orchestrator): Connect your Git, ALM, and eQMS into a single IEC 62304-compliant SDLC workflow. No rip-and-replace. Compliance built into how your team already works.
+- [Automated Real-time Traceability (ARTT)](https://www.mia-care.io/capabilities/artt-traceability): End-to-end traceability from requirements to code, automatically maintained in real time. No reconciliation sprints. No gaps before audits.
+- [Documentation Engine](https://www.mia-care.io/capabilities/documentation-engine): Automatically generate DHF records, Technical Files, and audit trails from live development data. Audit-ready documentation without manual effort.
+- [Smart Assistant (Whisper)](https://www.mia-care.io/capabilities/smart-assistant): Deterministic regulatory guidance embedded in your SDLC. Whisper enforces compliance rules and surfaces proactive suggestions aligned with IEC 62304, MDR, FDA, and EU AI Act.
+- [Master AI for Compliance](https://www.mia-care.io/capabilities/ai-compliance): Enforce EU AI Act, GMLP, and FDA PCCP requirements for AI-enabled SaMD. Automated audit records, transparency reports, and PCCP-aligned change management.
+- [Brownfield Remediator](https://www.mia-care.io/capabilities/brownfield-remediator): Certify legacy medical software without rebuilding it. Automated gap analysis, full estate ingestion, and prioritized remediation plans for IEC 62304, EU MDR, and more.
+- [Secure Software Development](https://www.mia-care.io/capabilities/software-development): Embed IEC 81001-5-1 cybersecurity compliance into your medical device SDLC. Implementation verification, dependency control, and full vulnerability lifecycle management.
+- [Guided Workflows](https://www.mia-care.io/capabilities/guided-workflows): Step-by-step compliance guidance for every developer, regardless of regulatory background. Role-based workflows aligned with IEC 62304 and ISO 13485.
 
-## Contact
+## Use Cases
 
-- Website: https://www.mia-care.io
-- Company: Mia Care srl, Via Leopardi 8, 20123 Milan, Italy
-- VAT: IT 11504530962
+- [SaMD Greenfield Development](https://www.mia-care.io/use-cases/greenfield-samd): Build your first SaMD with compliance embedded from the first line of code. Eliminate the pre-launch documentation sprint. Ship a compliant MVP in weeks, not months.
+- [Building High-Risk AI Software (CDSS)](https://www.mia-care.io/use-cases/high-risk-ai-cdss): Ship AI-enabled clinical software with EU AI Act, GMLP, and MDR compliance in a single platform. Automated audit records, PCCP support, and multi-framework gap detection.
+- [Legacy Regulated Software Remediation](https://www.mia-care.io/use-cases/legacy-remediation): Certify legacy medical software without rebuilding it. Automated gap analysis, traceability reconstruction, and audit-ready MDR Technical Files for IEC 62304 and EU MDR.
+
+## Resources
+
+- [Blog](https://www.mia-care.io/resources/blog): Expert articles on Software as a Medical Device, IEC 62304, EU MDR, AI Act compliance, and modern MedTech engineering from the Mia-Care team.
+- [Success Cases](https://www.mia-care.io/resources/success-cases): Discover how healthcare organizations use Mia-Care to build compliant, high-quality medical software — faster.
+
+## Company
+
+- [About Mia-Care](https://www.mia-care.io/about-us): Mia Care is a health tech company headquartered in Milan, Italy, building the AI-native compliance platform for Software as a Medical Device.
+- [Certifications](https://www.mia-care.io/certifications): Mia-Care holds ISO 13485, ISO 27001 and ISO 9001 certifications, demonstrating our commitment to quality, information security, and medical software compliance.
+- [Newsroom](https://www.mia-care.io/newsroom): Company news, press releases, and announcements from Mia-Care.
+- [Careers](https://www.mia-care.io/careers): Open positions at Mia-Care in Milan. Join the team building the AI-native compliance platform for Software as a Medical Device.
+
+## Optional
+
+- [Sustainability](https://www.mia-care.io/sustainability): Mia-Care's commitment to sustainable development across economic, environmental, and social pillars, aligned with the UN 2030 Agenda.
