@@ -89,9 +89,8 @@ export default function ProductPage() {
                 className="text-lg mb-8"
                 style={{ color: "var(--text-secondary)", lineHeight: 1.75, maxWidth: "34rem" }}
               >
-                Mia-Care P4SaMD unifies eQMS, ALM, and DevOps into a single platform, embedding
-                regulatory compliance directly into your SDLC. Your team ships faster, stays
-                audit-ready, and achieves both engineering velocity and regulatory confidence.
+                Mia-Care P4SaMD unifies eQMS, ALM, and DevOps in one platform, embedding compliance
+                directly into your SDLC. Ship faster. Stay audit-ready.
               </p>
 
               {/* CTAs */}

@@ -10,19 +10,19 @@ const TABS = [
   {
     label: "Document Catalog",
     caption:
-      "Document catalog — all DHF records grouped by category, with live status, version tracking, and one-click export across PDF, DOCX, and MD formats.",
+      "Document catalog: all DHF records grouped by category, with live status, version tracking, and one-click export across PDF, DOCX, and MD formats.",
     Component: DocumentationEngineSvg,
   },
   {
     label: "Document Detail",
     caption:
-      "Document detail — full revision history, regulatory references, linked artifacts, and one-click regeneration from live project data.",
+      "Document detail: full revision history, regulatory references, linked artifacts, and one-click regeneration from live project data.",
     Component: DocumentationDetailSvg,
   },
   {
     label: "Custom Templates",
     caption:
-      "Custom templates — write Markdown templates with interpolated variables that pull live project data at generation time, for any document your process requires.",
+      "Custom templates: write Markdown templates with interpolated variables that pull live project data at generation time, for any document your process requires.",
     Component: DocumentationTemplatesSvg,
   },
 ];

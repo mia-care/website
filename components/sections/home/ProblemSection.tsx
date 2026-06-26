@@ -1,8 +1,29 @@
 "use client";
 
+import { AlertTriangle, Clock, Layers } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { PillTag } from "@/components/common/PillTag";
+
+const problems = [
+  {
+    icon: Layers,
+    title: "Fragmented tools",
+    description: "Jira, ALM, GitHub, Word, Excel... every team operates in its own silo.",
+  },
+  {
+    icon: AlertTriangle,
+    title: "Manual handoffs",
+    description:
+      "Every transfer between systems is manual, error-prone, and invisible to auditors.",
+  },
+  {
+    icon: Clock,
+    title: "Last-minute compliance",
+    description:
+      "Releases slip and regulatory submissions arrive with gaps that take weeks to resolve.",
+  },
+];
 
 function useReveal(delay = 0) {
   const ref = useRef<HTMLDivElement>(null);
@@ -19,7 +40,7 @@ function useReveal(delay = 0) {
           setTimeout(() => setVisible(true), delay);
         }
       },
-      { threshold: 0.2 },
+      { threshold: 0.15 },
     );
     obs.observe(el);
     return () => obs.disconnect();
@@ -28,15 +49,86 @@ function useReveal(delay = 0) {
   return { ref, visible };
 }
 
-export function ProblemSection() {
-  const left = useReveal(0);
-  const right = useReveal(150);
+function ProblemCard({
+  icon: Icon,
+  title,
+  description,
+  delay,
+}: {
+  icon: React.ElementType;
+  title: string;
+  description: string;
+  delay: number;
+}) {
+  const { ref, visible } = useReveal(delay);
+  const [hovered, setHovered] = useState(false);
 
-  const revealStyle = (visible: boolean): React.CSSProperties => ({
-    opacity: visible ? 1 : 0,
-    transform: visible ? "translateY(0)" : "translateY(14px)",
-    transition: "opacity 0.5s ease-out, transform 0.5s ease-out",
-  });
+  return (
+    <div
+      ref={ref}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      style={{
+        opacity: visible ? 1 : 0,
+        transform: !visible ? "translateY(16px)" : hovered ? "translateY(-4px)" : "translateY(0)",
+        transition:
+          "opacity 0.5s ease-out, transform 0.3s ease-out, border-color 0.25s ease, box-shadow 0.25s ease",
+        background: "var(--bg-surface)",
+        border: `1px solid ${hovered ? "rgba(0, 240, 150, 0.3)" : "var(--bg-border)"}`,
+        borderRadius: "16px",
+        padding: "28px",
+        boxShadow: hovered ? "0 8px 32px rgba(0, 240, 150, 0.08)" : "none",
+        display: "flex",
+        flexDirection: "column",
+        gap: "16px",
+      }}
+    >
+      <div
+        style={{
+          width: 44,
+          height: 44,
+          borderRadius: "10px",
+          background: "rgba(0, 240, 150, 0.1)",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          transform: hovered ? "scale(1.1)" : "scale(1)",
+          transition: "transform 0.25s ease",
+          flexShrink: 0,
+        }}
+      >
+        <Icon size={22} style={{ color: "var(--brand-green)" }} strokeWidth={1.75} />
+      </div>
+      <div>
+        <h3
+          style={{
+            color: "var(--text-primary)",
+            fontWeight: 600,
+            fontSize: "1rem",
+            marginBottom: "8px",
+            margin: "0 0 8px 0",
+          }}
+        >
+          {title}
+        </h3>
+        <p
+          style={{
+            color: "var(--text-secondary)",
+            fontSize: "0.9375rem",
+            lineHeight: 1.7,
+            margin: 0,
+          }}
+        >
+          {description}
+        </p>
+      </div>
+    </div>
+  );
+}
+
+export function ProblemSection() {
+  const header = useReveal(0);
+  const cta = useReveal(500);
 
   return (
     <section
@@ -52,48 +144,45 @@ export function ProblemSection() {
         }}
       />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-16 items-start">
-          {/* Left: label + headline */}
-          <div ref={left.ref} style={revealStyle(left.visible)}>
-            <PillTag className="mb-6">The Problem</PillTag>
-            <h2 className="heading-section">
-              Compliance is slowing your team down.
-              <br />
-              It shouldn't.
-            </h2>
-          </div>
+        <div
+          ref={header.ref}
+          className="text-center mb-12"
+          style={{
+            opacity: header.visible ? 1 : 0,
+            transform: header.visible ? "translateY(0)" : "translateY(14px)",
+            transition: "opacity 0.5s ease-out, transform 0.5s ease-out",
+          }}
+        >
+          <PillTag className="mb-6">The Problem</PillTag>
+          <h2 className="heading-section">
+            Compliance is slowing your team down.
+            <br />
+            It shouldn&apos;t.
+          </h2>
+        </div>
 
-          {/* Right: description */}
-          <div
-            ref={right.ref}
-            className="space-y-4 text-base lg:pt-2"
-            style={{
-              color: "var(--text-secondary)",
-              lineHeight: 1.75,
-              ...revealStyle(right.visible),
-            }}
+        <div className="grid md:grid-cols-3 gap-6 mb-10">
+          {problems.map((p, i) => (
+            <ProblemCard key={p.title} {...p} delay={i * 150} />
+          ))}
+        </div>
+
+        <div
+          ref={cta.ref}
+          className="text-center"
+          style={{
+            opacity: cta.visible ? 1 : 0,
+            transform: cta.visible ? "translateY(0)" : "translateY(8px)",
+            transition: "opacity 0.5s ease-out, transform 0.5s ease-out",
+          }}
+        >
+          <Link
+            href="/product"
+            className="inline-flex items-center gap-1 text-sm font-semibold transition-colors hover:text-brand-green"
+            style={{ color: "var(--text-primary)" }}
           >
-            <p>
-              Building software-as-a-medical-device means navigating regulations, design control,
-              risk traceability, and audit documentation, all while shipping on time. Most teams
-              manage this across disconnected tools: Jira for tasks, an ALM for specifications,
-              GitHub for code, Word for documentation, Excel for traceability matrices. Every
-              handoff between these systems is manual, error-prone, and invisible to auditors until
-              it's too late.
-            </p>
-            <p>
-              The result is predictable. Compliance becomes a last-minute scramble, releases slip,
-              and regulatory submissions arrive with gaps that take weeks to resolve. Speed and
-              compliance feel like a tradeoff.
-            </p>
-            <Link
-              href="/product"
-              className="inline-flex items-center gap-1 text-sm font-semibold transition-colors hover:text-brand-green"
-              style={{ color: "var(--text-primary)" }}
-            >
-              See how P4SaMD fixes this →
-            </Link>
-          </div>
+            See how P4SaMD fixes this →
+          </Link>
         </div>
       </div>
     </section>

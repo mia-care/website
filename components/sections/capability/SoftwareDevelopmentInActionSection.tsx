@@ -11,28 +11,28 @@ const TABS = [
   {
     label: "SBOM",
     caption:
-      "Software Bill of Materials — every third-party dependency tracked, versioned, and continuously checked against the NVD, GitHub Advisory, and OSV databases. One new CVE disclosure triggers an immediate alert across every affected project.",
+      "Software Bill of Materials: every third-party dependency tracked, versioned, and continuously checked against the NVD, GitHub Advisory, and OSV databases. One new CVE disclosure triggers an immediate alert across every affected project.",
     Component: SbomDashboardSvg,
     wrapStyle: {} as React.CSSProperties,
   },
   {
     label: "CVE Scan",
     caption:
-      "Vulnerability scanner — automated CVSS-scored findings across the full dependency graph, with patch-ready upgrade paths surfaced inline. Critical findings are mapped to their IEC 81001-5-1 compliance impact before the team even opens the ticket.",
+      "Vulnerability scanner: automated CVSS-scored findings across the full dependency graph, with patch-ready upgrade paths surfaced inline. Critical findings are mapped to their IEC 81001-5-1 compliance impact before the team even opens the ticket.",
     Component: CveScanSvg,
     wrapStyle: {} as React.CSSProperties,
   },
   {
     label: "Implementation Verification",
     caption:
-      "Continuous verification of implementation against software specifications at every level — design files, code, and test artifacts — enabling early detection of anomalies before they propagate into the compliance record.",
+      "Continuous verification of implementation against software specifications at every level (design files, code, and test artifacts), enabling early detection of anomalies before they propagate into the compliance record.",
     Component: SecureComponentLibrarySvg,
     wrapStyle: {} as React.CSSProperties,
   },
   {
     label: "Software Items",
     caption:
-      "Software item traceability — every component in the system hierarchy verified against its specification. The platform confirms each item is documented, tested, and compliant before it can advance through the IEC 62304 lifecycle.",
+      "Software item traceability: every component in the system hierarchy verified against its specification. The platform confirms each item is documented, tested, and compliant before it can advance through the IEC 62304 lifecycle.",
     Component: SecureSoftwareItemsSvg,
     wrapStyle: {} as React.CSSProperties,
   },

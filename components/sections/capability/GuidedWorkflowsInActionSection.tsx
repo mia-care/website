@@ -9,14 +9,14 @@ const TABS = [
   {
     label: "Workflow Guide",
     caption:
-      "Real-time compliance dashboard — priority blockers and overdue tasks surface automatically with IEC 62304 section references. Critical issues are resolved in place, keeping the whole team aligned without leaving the workflow.",
+      "Real-time compliance dashboard: priority blockers and overdue tasks surface automatically with IEC 62304 section references. Critical issues are resolved in place, keeping the whole team aligned without leaving the workflow.",
     Component: GuidedWorkflowsSvg,
     wrapStyle: {} as React.CSSProperties,
   },
   {
     label: "SDLC Phases",
     caption:
-      "Phase-by-phase progress tracking — each SDLC stage shows its completion status, task count, and current bottleneck at a glance. The active phase updates in real time as work advances, giving the whole team a shared view of where the project stands against IEC 62304.",
+      "Phase-by-phase progress tracking: each SDLC stage shows its completion status, task count, and current bottleneck at a glance. The active phase updates in real time, giving the whole team a shared view of where the project stands against IEC 62304.",
     Component: GuidedChatSvg,
     wrapStyle: {} as React.CSSProperties,
   },

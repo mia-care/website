@@ -22,7 +22,7 @@ const FEATURES = [
       </svg>
     ),
     title: "Connected Workflows Across Your Toolchain",
-    body: "P4SaMD connects natively with Jira, GitHub, GitLab, and your ALM of choice. Tasks, code commits, test results, and change records flow into a single traceability layer automatically. No manual exports. No reconciliation at audit time.",
+    body: "Jira, GitHub, GitLab, and your ALM feed a single traceability layer automatically. No manual exports. No reconciliation at audit time.",
   },
   {
     icon: (
@@ -43,7 +43,7 @@ const FEATURES = [
       </svg>
     ),
     title: "AI Copilot for Compliant Development",
-    body: "An embedded AI copilot guides engineers through IEC 62304 requirements in real time, flagging gaps, suggesting risk mitigations, and keeping development artifacts aligned with your QMS as code is written.",
+    body: "An embedded AI copilot flags gaps and suggests risk mitigations in real time, keeping artifacts aligned with your QMS while code is written, not after.",
   },
   {
     icon: (
@@ -66,7 +66,7 @@ const FEATURES = [
       </svg>
     ),
     title: "Automated Regulatory Documentation",
-    body: "P4SaMD auto-generates IEC 62304-compliant documentation directly from your development activity: software development plans, architecture descriptions, verification and validation records, and traceability matrices.",
+    body: "IEC 62304-compliant docs generated directly from your development activity: plans, architecture, V&V records, and traceability matrices. All automatic.",
   },
 ];
 

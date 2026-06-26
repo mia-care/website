@@ -5,8 +5,7 @@ const SEGMENTS = [
   {
     title: "MedTech Giants",
     href: "/use-cases/legacy-remediation",
-    description:
-      "Enterprise organizations modernizing fragmented legacy software estates into a unified, compliant digital health platform.",
+    description: "Modernize legacy software estates into a unified, compliant platform.",
     icon: (
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
         <rect x="3" y="9" width="18" height="13" rx="1.5" stroke="currentColor" strokeWidth="1.5" />
@@ -32,7 +31,7 @@ const SEGMENTS = [
     title: "Life Sciences Enterprises",
     href: "/use-cases/legacy-remediation",
     description:
-      "Global pharma and biotech companies launching digital companions and Patient Support Programs alongside drug releases.",
+      "Pharma and biotech launching digital companions and PSPs alongside drug releases.",
     icon: (
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
         <path
@@ -52,7 +51,7 @@ const SEGMENTS = [
     title: "AI-Native Scaleups",
     href: "/use-cases/high-risk-ai-cdss",
     description:
-      "Series B to IPO-stage companies building and continuously improving clinical AI models without sacrificing engineering velocity.",
+      "Series B to IPO-stage teams shipping clinical AI models without slowing engineering velocity.",
     icon: (
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
         <rect x="7" y="7" width="10" height="10" rx="2" stroke="currentColor" strokeWidth="1.5" />
@@ -75,8 +74,7 @@ const SEGMENTS = [
   {
     title: "Pre-Market Startups",
     href: "/use-cases/greenfield-samd",
-    description:
-      "Seed-to-Series A teams building their Design History File and first regulated product on the path to FDA clearance.",
+    description: "Seed to Series A teams building their first DHF on the path to FDA clearance.",
     icon: (
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
         <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="1.5" />

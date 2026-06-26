@@ -30,23 +30,23 @@ export const useCases: UseCase[] = [
       "Building a SaMD from scratch means two simultaneous challenges: writing the software and satisfying the regulator. P4SaMD makes them the same phase.",
     problem: {
       heading: "The 3–6 month documentation sprint that kills launch momentum.",
-      body: "Conventional SaMD development hits a bottleneck because engineering and documentation are usually done by different teams on disconnected timelines. Engineers code; quality teams document. The result is a painful, expensive documentation effort before market entry, often taking 3–6 months and delaying revenue.\n\nBy the time the documentation begins, the system has changed since the last design review, traceability is broken, and the quality team is under enormous pressure to produce artifacts that should have been generated incrementally throughout the project.",
+      body: "Engineering and documentation run on disconnected timelines: by the time quality teams start documenting, traceability is already broken and the system has changed. The result is a 3 to 6 month documentation sprint that delays revenue and pressures the quality team to reconstruct artifacts that were never captured incrementally.",
     },
     need: {
       heading: "Compliance as a continuous output of normal engineering work.",
-      body: "A framework that eliminates the friction between engineering speed and regulatory requirements, integrating compliance directly into the SDLC so teams maintain maximum release velocity while building software that's audit-ready at every increment, not just at the finish line.",
+      body: "A framework that eliminates friction between engineering speed and regulatory requirements, integrating compliance directly into the SDLC so teams build software that's audit-ready at every increment, not just at the finish line.",
     },
     solution: {
       heading: "From first commit to compliant MVP, in one motion.",
-      body: "P4SaMD enables continuous compliance orchestration by monitoring the development environment in real time. As code evolves, quality documentation is automatically synchronized.\n\nThe team builds their product; P4SaMD builds the regulatory file alongside it, making audit-readiness the default output of normal engineering work.",
+      body: "P4SaMD enables continuous compliance orchestration by monitoring the development environment in real time. As code evolves, quality documentation is automatically synchronized.\n\nThe team builds their product. P4SaMD builds the regulatory file alongside it, making audit-readiness the default output of normal engineering work.",
     },
     caseStudy: {
       label: "Case Study // Digital Health Startup",
       quote:
-        "A highly innovative Digital Health startup focused on personalized metabolic health management and clinical support platforms, combining medical expertise with cutting-edge technology.",
+        "A Digital Health startup focused on personalized metabolic health management and clinical support platforms, combining medical expertise with advanced technology.",
       scope: [
         "API developed on P4SaMD connected with a regional EHR",
-        "Full greenfield SaMD development with continuous compliance orchestration from first development",
+        "Full greenfield SaMD development with continuous compliance orchestration from day one",
         "Automated traceability matrix maintained with zero manual effort throughout development",
         "Complete Design History File generated continuously alongside engineering work",
       ],
@@ -95,12 +95,12 @@ export const useCases: UseCase[] = [
     },
     solution: {
       heading: "Multi-framework compliance. One platform.",
-      body: "Mia-Care P4SaMD streamlines building and leveraging AI components while managing all compliance aspects (transparency, explainability, security, audit records), effectively abstracting developers from the complexity of regulatory mandates.\n\nThe platform handles multi-framework compliance (MDR, EU AI Act, GMLP) within a single unified system. Your team is never forced to choose between shipping a model improvement or maintaining your compliance posture.",
+      body: "Mia-Care P4SaMD manages AI compliance in full (transparency, explainability, security, audit records) across MDR, EU AI Act, and GMLP in a single system. Your team ships model improvements without choosing between velocity and compliance posture.",
     },
     caseStudy: {
       label: "Case Study // CDSS Provider",
       quote:
-        "A premier CDSS provider leveraging Generative AI and high-fidelity synthetic data to empower clinicians with precision diagnostics and tailored therapeutic strategies.",
+        "A leading CDSS provider using Generative AI and high-fidelity synthetic data to support clinicians with precision diagnostics and tailored therapeutic strategies.",
       scope: [
         "Multi-framework compliance management: MDR + EU AI Act + GMLP in a single unified system",
         "Real-time gap detection via the Compliance Engine across all three regulatory frameworks",
@@ -128,27 +128,26 @@ export const useCases: UseCase[] = [
     segment: "For MedTech Giants & Life Sciences Enterprises",
     name: "Legacy Regulated Software Remediation",
     tagline:
-      "Many organizations hold valuable legacy software trapped by regulatory debt. P4SaMD provides a structured path to certification without rebuilding from scratch.",
+      "Regulatory debt is locking your legacy software. P4SaMD clears the path to certification, without rebuilding from scratch.",
     problem: {
       heading: "Valuable software, trapped by regulatory debt.",
       body: "Many organizations hold valuable legacy software not designed under ISO 13485 QMS or in alignment with IEC 62304. Often, these systems also face technical obsolescence. Manual remediation attempts are expensive, slow, and frequently fail audit review because they lack systematic traceability reconstruction.\n\nThe instinct to rebuild from scratch is costly and time-consuming. But without a structured remediation path, the legacy software remains locked, unable to be updated, re-certified, or legally distributed as a medical device in new markets.",
     },
     need: {
       heading: "A path to certification that doesn't start from zero.",
-      body: "A solution designed to ingest and evaluate legacy systems, establishing a clear pathway for regulatory certification that bypasses full-scale redevelopment and that accelerates re-platforming initiatives with a structured, evidence-based remediation plan that maps gaps to specific standards.",
+      body: "A solution that ingests and evaluates legacy systems, establishes a clear certification pathway without full-scale redevelopment, and delivers a structured, evidence-based remediation plan that maps gaps to specific standards.",
     },
     solution: {
       heading: "From legacy to audit-ready. Without rebuilding.",
-      body: "Mia-Care P4SaMD ingests existing codebases in any language, along with existing documentation, and leverages agentic AI to automate legacy assessments and identify gaps against IEC 62304, ISO 13485, and EU MDR / FDA.\n\nThe platform generates custom remediation plans, automates gap analysis against the applicable regulatory framework, and produces audit-ready documentation in your own templates. What typically takes years of manual effort is compressed into a structured, prioritized task list your engineering team can execute immediately.",
+      body: "Mia-Care P4SaMD ingests codebases in any language and existing documentation, then uses agentic AI to automate legacy assessments and identify gaps against IEC 62304, ISO 13485, and EU MDR / FDA.\n\nThe platform generates custom remediation plans and produces audit-ready documentation in your own templates. What typically takes years of manual effort is compressed into a structured, prioritized task list your engineering team can execute immediately.",
     },
     caseStudy: {
       label: "Case Study // Consumer Health Enterprise",
       quote:
-        "A global leader in the consumer health and lifestyle sector, with annual revenues exceeding several billion euros, operating across numerous countries through several globally recognized consumer brands.",
+        "A global leader in the consumer health and lifestyle sector, with revenues exceeding several billion euros and operations across numerous countries through internationally recognized consumer brands.",
       scope: [
         "Automated ingestion of heterogeneous workitems: requirements, risks, tests, and existing code",
-        "Gap analysis and legacy remediation: generating a complete compliance evidence package",
-        "Gap analysis against MDR and IEC 62304, with prioritized remediation tasks",
+        "Gap analysis against MDR and IEC 62304, generating a complete compliance evidence package with prioritized remediation tasks",
         "Dynamic generation of audit-ready MDR Technical Files using client templates",
       ],
       results: [

@@ -10,13 +10,13 @@ const TABS: { label: string; caption: string; screen: ScreenId }[] = [
   {
     label: "System Design",
     caption:
-      "System Design — component hierarchy of the AI Diagnostic Tool, with ML Anomaly Detection auto-identified as an AI Agent requiring a dedicated compliance lifecycle under EU AI Act and IEC 62304.",
+      "System Design: component hierarchy of the AI Diagnostic Tool, with ML Anomaly Detection auto-identified as an AI Agent requiring a dedicated compliance lifecycle under EU AI Act and IEC 62304.",
     screen: 0,
   },
   {
     label: "AI & Transparency",
     caption:
-      "Arrhythmia Classifier — xAI robustness auditing with Faithfulness Tests. Explainability services assessed for fit-for-purpose against EU AI Act Art. 13 and MDR Annex I.",
+      "Arrhythmia Classifier: xAI robustness auditing with Faithfulness Tests. Explainability services assessed for fit-for-purpose against EU AI Act Art. 13 and MDR Annex I.",
     screen: 1,
   },
 ];

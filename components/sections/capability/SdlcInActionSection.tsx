@@ -10,21 +10,21 @@ const TABS = [
   {
     label: "Dashboard",
     caption:
-      "Project dashboard — every active SDLC project summarised in one view. Tasks blocking the next phase are surfaced automatically with severity and effort estimates, so teams unblock themselves before auditors ask why.",
+      "Project dashboard: every active SDLC project in one view. Blocking tasks surfaced automatically with severity and effort estimates, so teams stay ahead of audits.",
     Component: SdlcWorkflowSvg,
     wrapStyle: {} as React.CSSProperties,
   },
   {
     label: "Integrations",
     caption:
-      "Tool integrations — task managers, Git repositories, Mia-Platform Console and Kubernetes clusters connected in minutes. P4SaMD pulls work items, commits, and runtime signals into a single IEC 62304-aligned audit trail automatically.",
+      "Tool integrations: task managers, Git repositories, Mia-Platform Console, and Kubernetes clusters connected in minutes. Work items, commits, and runtime signals flow into a single IEC 62304-aligned audit trail automatically.",
     Component: SdlcBlueprintSvg,
     wrapStyle: {} as React.CSSProperties,
   },
   {
     label: "Audit Log",
     caption:
-      "Audit log — every requirement change, risk update, and approval decision recorded with actor, timestamp, and role. Exportable as CSV for notified-body submissions and internal QMS reviews.",
+      "Audit log: every requirement change, risk update, and approval decision recorded with actor, timestamp, and role. Exportable as CSV for notified-body submissions and internal QMS reviews.",
     Component: SdlcConfigLogSvg,
     wrapStyle: {} as React.CSSProperties,
   },

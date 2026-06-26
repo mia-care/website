@@ -10,21 +10,21 @@ const TABS = [
   {
     label: "Import",
     caption:
-      "Import wizard — ingest the full legacy estate: documentation (requirement analyses, specs, architecture, test plans, test reports), technical assets (source code, DB schemas, SBOMs), and data from any format. Everything flows into P4SaMD's unified compliance model without manual migration.",
+      "Import wizard: ingest the full legacy estate including documentation (requirement analyses, specs, architecture, test plans, test reports), technical assets (source code, DB schemas, SBOMs), and files in any format. Everything flows into P4SaMD's unified compliance model without manual migration.",
     Component: BrownfieldRemediatorSvg,
     wrapStyle: {} as React.CSSProperties,
   },
   {
     label: "Gap Analysis",
     caption:
-      "Gap analysis — every deviation from the applicable regulatory framework surfaced automatically, with severity classification, remediation effort estimate, and the exact clause it maps to.",
+      "Gap analysis: every deviation from the applicable regulatory framework surfaced automatically, with severity classification, remediation effort estimate, and the exact clause it maps to.",
     Component: BrownfieldGapAnalysisSvg,
     wrapStyle: {} as React.CSSProperties,
   },
   {
     label: "Remediation Plan",
     caption:
-      "Remediation plan — a structured, prioritized task list organized by regulatory priority and effort estimate, ready to import into any ALM tool and begin executing immediately.",
+      "Remediation plan: a structured, prioritized task list organized by regulatory priority and effort estimate, ready to import into any ALM tool and begin executing immediately.",
     Component: BrownfieldRemediationPlanSvg,
     wrapStyle: {} as React.CSSProperties,
   },

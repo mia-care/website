@@ -24,7 +24,7 @@ export function ArttInActionSection() {
 
         {/* Caption */}
         <p className="mt-4 text-sm text-center" style={{ color: "var(--text-muted)" }}>
-          Traceability matrix — live coverage across requirements, changes, and risks mitigated.
+          Traceability matrix: live coverage across requirements, changes, and risks mitigated.
           Every link is maintained automatically as the project evolves.
         </p>
       </div>
