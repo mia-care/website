@@ -75,7 +75,7 @@ export function GenderEqualityCertification() {
                 Certified by
               </span>
               <Image
-                src={`${BASE_PATH}/images/certifications/CertLogo.bmp`}
+                src={`${BASE_PATH}/images/certifications/CertLogo.png`}
                 alt="Dasa-Rägister"
                 width={70}
                 height={70}
