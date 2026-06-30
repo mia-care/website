@@ -83,8 +83,6 @@ export function GenderEqualityCertification() {
                   objectFit: "contain",
                   height: 56,
                   width: "auto",
-                  filter: "brightness(0) invert(1)",
-                  opacity: 0.85,
                 }}
               />
             </div>
