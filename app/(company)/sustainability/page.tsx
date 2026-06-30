@@ -257,6 +257,27 @@ export default function SustainabilityPage() {
                 covers design, development, testing, marketing, production and maintenance of cloud
                 software for the healthcare and life sciences sector.
               </p>
+              <div
+                className="flex items-center gap-3 mt-4 pt-4"
+                style={{ borderTop: "1px solid var(--bg-border)" }}
+              >
+                <span className="text-xs font-medium" style={{ color: "var(--text-muted)" }}>
+                  Certified by
+                </span>
+                <Image
+                  src={`${BASE_PATH}/images/certifications/logo-dasa-raegister-inverted.png`}
+                  alt="Dasa-Rägister"
+                  width={70}
+                  height={70}
+                  style={{
+                    objectFit: "contain",
+                    height: 56,
+                    width: "auto",
+                    filter: "brightness(0) invert(1)",
+                    opacity: 0.85,
+                  }}
+                />
+              </div>
             </div>
           </div>
         </div>
