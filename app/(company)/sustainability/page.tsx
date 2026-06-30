@@ -1,9 +1,8 @@
 import { GlobeHemisphereWest, Leaf, Scales } from "@phosphor-icons/react/dist/ssr";
 import type { Metadata } from "next";
-import Image from "next/image";
 import { CtaBanner } from "@/components/common/CtaBanner";
+import { GenderEqualityCertification } from "@/components/common/GenderEqualityCertification";
 import { PillTag } from "@/components/common/PillTag";
-import { BASE_PATH } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: "Sustainability — Our Commitment to Responsible Technology | Mia-Care",
@@ -213,75 +212,7 @@ export default function SustainabilityPage() {
         </div>
       </section>
 
-      {/* Certification highlight */}
-      <section
-        className="py-16"
-        style={{ background: "var(--bg-surface)", borderTop: "1px solid var(--bg-border)" }}
-      >
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div
-            className="rounded-2xl p-8 flex flex-col md:flex-row items-start md:items-center gap-6"
-            style={{
-              background: "var(--bg-raised)",
-              border: "1px solid var(--bg-border)",
-            }}
-          >
-            <div
-              className="flex-shrink-0 flex items-center justify-center rounded-xl overflow-hidden"
-              style={{
-                width: 96,
-                height: 96,
-                background: "rgba(255,255,255,0.06)",
-                border: "1px solid var(--bg-border-strong)",
-                padding: "16px",
-              }}
-            >
-              <Image
-                src={`${BASE_PATH}/images/certifications/LogoPDR125.jpg`}
-                alt="UNI/PdR 125:2022 Gender Equality Certification"
-                width={72}
-                height={72}
-                style={{ objectFit: "contain", width: "100%", height: "100%", borderRadius: 8 }}
-              />
-            </div>
-            <div>
-              <h3
-                className="font-display font-bold text-lg mb-2"
-                style={{ color: "var(--text-primary)" }}
-              >
-                UNI/PdR 125:2022 — Gender Equality Certification
-              </h3>
-              <p className="text-sm" style={{ color: "var(--text-secondary)", lineHeight: 1.8 }}>
-                Mia-Care has been certified for being in compliance with the standard requirements
-                UNI/PdR 125:2022, which guarantee gender equality in the workplace. The assessment
-                covers design, development, testing, marketing, production and maintenance of cloud
-                software for the healthcare and life sciences sector.
-              </p>
-              <div
-                className="flex items-center gap-3 mt-4 pt-4"
-                style={{ borderTop: "1px solid var(--bg-border)" }}
-              >
-                <span className="text-xs font-medium" style={{ color: "var(--text-muted)" }}>
-                  Certified by
-                </span>
-                <Image
-                  src={`${BASE_PATH}/images/certifications/logo-dasa-raegister-inverted.png`}
-                  alt="Dasa-Rägister"
-                  width={70}
-                  height={70}
-                  style={{
-                    objectFit: "contain",
-                    height: 56,
-                    width: "auto",
-                    filter: "brightness(0) invert(1)",
-                    opacity: 0.85,
-                  }}
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <GenderEqualityCertification />
 
       <CtaBanner />
     </>
