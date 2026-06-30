@@ -83,6 +83,7 @@ export function GenderEqualityCertification() {
                   objectFit: "contain",
                   height: 56,
                   width: "auto",
+                  filter: "invert(1)",
                 }}
               />
             </div>
