@@ -78,7 +78,7 @@ export const navItems: NavItem[] = [
     dropdown: [
       { label: "Competence Center", href: "/resources" },
       { label: "Blog", href: "/resources/blog" },
-      { label: "Docs", href: "http://docs.mia-care.io/", external: true },
+      { label: "Docs", href: "https://docs.mia-care.io/", external: true },
     ],
   },
   {

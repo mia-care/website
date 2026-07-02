@@ -268,7 +268,7 @@ export default function ProductPage() {
               Request a Demo →
             </Link>
             <Link
-              href="http://docs.mia-care.io/"
+              href="https://docs.mia-care.io/"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center h-11 px-4 text-sm font-semibold transition-colors hover:opacity-80 w-full sm:w-auto"

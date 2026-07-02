@@ -3,3 +3,6 @@ Allow: /
 Disallow: /downloads/
 
 Sitemap: https://www.mia-care.io/sitemap.xml
+
+# LLM-friendly content index: https://llmstxt.org
+# Note: not a standardized robots.txt directive, but many AI crawlers check for it
