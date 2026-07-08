@@ -4,6 +4,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { RelatedPosts } from "@/components/blog/RelatedPosts";
 import { TableOfContents } from "@/components/blog/TableOfContents";
+import { JsonLd } from "@/components/common/JsonLd";
 import { PillTag } from "@/components/common/PillTag";
 import { getAuthorBySlug } from "@/data/authors";
 import { getCategoryName } from "@/data/blog-categories";
@@ -85,19 +86,37 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     },
   };
 
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Blog", item: `${SITE.url}/resources/blog` },
+      ...(post.categories[0]
+        ? [
+            {
+              "@type": "ListItem",
+              position: 2,
+              name: getCategoryName(post.categories[0]),
+            },
+          ]
+        : []),
+    ],
+  };
+
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
+      <JsonLd schema={breadcrumbSchema} />
 
       {/* Hero */}
       <section className="py-16" style={{ borderBottom: "1px solid var(--bg-border)" }}>
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Breadcrumb */}
           <nav
-            className="flex items-center gap-2 text-sm mb-8"
+            className="flex items-center gap-2 text-xs mb-8"
             style={{ color: "var(--text-muted)" }}
           >
             <Link href="/resources/blog" className="hover:text-brand-green transition-colors">

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
+import { Breadcrumb } from "@/components/common/Breadcrumb";
 import { CtaBanner } from "@/components/common/CtaBanner";
 import { JsonLd } from "@/components/common/JsonLd";
 import { PillTag } from "@/components/common/PillTag";
@@ -78,6 +79,7 @@ export default async function ResourcePage({ params }: { params: Promise<{ slug:
   return (
     <>
       <JsonLd schema={resourceSchema} />
+      <Breadcrumb items={[{ label: "Resources", href: "/resources" }, { label: resource.title }]} />
       <section
         className="pt-20 pb-16"
         style={{
