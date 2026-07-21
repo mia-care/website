@@ -21,7 +21,11 @@ function decodeEntities(str: string): string {
     .replace(/&[a-z]+;/gi, (entity) => HTML_ENTITIES[entity] ?? entity);
 }
 
-const CONTENT_DIR = path.join(process.cwd(), "content/blog");
+export type Locale = "en" | "it";
+
+function contentDir(locale: Locale = "en"): string {
+  return path.join(process.cwd(), locale === "it" ? "content/it/blog" : "content/blog");
+}
 
 function deriveExcerpt(frontmatterExcerpt: string, content: string): string {
   const isTruncated =
@@ -80,23 +84,24 @@ export type Heading = {
   level: 2 | 3;
 };
 
-export function getAllPostSlugs(): string[] {
-  if (!fs.existsSync(CONTENT_DIR)) return [];
+export function getAllPostSlugs(locale: Locale = "en"): string[] {
+  const dir = contentDir(locale);
+  if (!fs.existsSync(dir)) return [];
   return fs
-    .readdirSync(CONTENT_DIR)
+    .readdirSync(dir)
     .filter((f) => f.endsWith(".md"))
     .map((f) => f.replace(/\.md$/, ""));
 }
 
-export function getAllPosts(): PostMeta[] {
-  return getAllPostSlugs()
-    .map((slug) => getPostMeta(slug))
+export function getAllPosts(locale: Locale = "en"): PostMeta[] {
+  return getAllPostSlugs(locale)
+    .map((slug) => getPostMeta(slug, locale))
     .filter(Boolean)
     .sort((a, b) => (a!.date < b!.date ? 1 : -1)) as PostMeta[];
 }
 
-export function getPostMeta(slug: string): PostMeta | null {
-  const fullPath = path.join(CONTENT_DIR, `${slug}.md`);
+export function getPostMeta(slug: string, locale: Locale = "en"): PostMeta | null {
+  const fullPath = path.join(contentDir(locale), `${slug}.md`);
   if (!fs.existsSync(fullPath)) return null;
   const raw = fs.readFileSync(fullPath, "utf8");
   const { data, content } = matter(raw);
@@ -118,8 +123,8 @@ export function getPostMeta(slug: string): PostMeta | null {
   };
 }
 
-export async function getPost(slug: string): Promise<Post | null> {
-  const fullPath = path.join(CONTENT_DIR, `${slug}.md`);
+export async function getPost(slug: string, locale: Locale = "en"): Promise<Post | null> {
+  const fullPath = path.join(contentDir(locale), `${slug}.md`);
   if (!fs.existsSync(fullPath)) return null;
   const raw = fs.readFileSync(fullPath, "utf8");
   const { data, content } = matter(raw);
@@ -157,6 +162,19 @@ export function getRelatedPosts(slug: string, categories: string[], limit = 3): 
   return getAllPosts()
     .filter((p) => p.slug !== slug && p.categories.some((c) => categories.includes(c)))
     .slice(0, limit);
+}
+
+// Resolves a public URL slug (frontmatter `slug`, may differ from the pairing-key
+// filename — see "Localized slug" in CONTEXT.md) to its post, for a given locale.
+export async function getPostBySlug(
+  publicSlug: string,
+  locale: Locale = "en",
+): Promise<Post | null> {
+  const pairingKey = getAllPostSlugs(locale).find((filename) => {
+    const meta = getPostMeta(filename, locale);
+    return meta?.slug === publicSlug;
+  });
+  return pairingKey ? getPost(pairingKey, locale) : null;
 }
 
 function stripInlineMarkdown(text: string): string {

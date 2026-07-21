@@ -2,7 +2,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { BASE_PATH } from "@/lib/utils";
 
-export function GatedNavbar() {
+export function GatedNavbar({ locale = "en" }: { locale?: "en" | "it" }) {
+  const homeHref = locale === "it" ? "/it" : "/";
+  const homeAria = locale === "it" ? "Torna alla home" : "Back to homepage";
   return (
     <header
       className="fixed inset-x-0 top-0 z-40 h-16 flex items-center"
@@ -15,7 +17,7 @@ export function GatedNavbar() {
       }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex items-center justify-center">
-        <Link href="/" aria-label="Back to homepage">
+        <Link href={homeHref} aria-label={homeAria}>
           <Image
             src={`${BASE_PATH}/images/logo/Horizontal_Lockup_White.svg`}
             alt="Mia-Care P4SaMD"

@@ -5,8 +5,28 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
-import { navItems } from "@/data/nav";
+import { navItems as navItemsEn } from "@/data/nav";
+import { navItems as navItemsIt } from "@/data/nav.it";
 import { BASE_PATH } from "@/lib/utils";
+
+const COPY = {
+  en: {
+    openMenu: "Open menu",
+    closeMenu: "Close menu",
+    navTitle: "Navigation menu",
+    homeAria: "Mia-Care P4SaMD home",
+    cta: "Request a Demo →",
+    homeHref: "/",
+  },
+  it: {
+    openMenu: "Apri il menu",
+    closeMenu: "Chiudi il menu",
+    navTitle: "Menu di navigazione",
+    homeAria: "Mia-Care P4SaMD, torna alla home",
+    cta: "Richiedi una Demo →",
+    homeHref: "/it",
+  },
+};
 
 function ChevronIcon({ open }: { open: boolean }) {
   return (
@@ -33,8 +53,10 @@ function ChevronIcon({ open }: { open: boolean }) {
   );
 }
 
-export function MobileMenu() {
+export function MobileMenu({ locale = "en" }: { locale?: "en" | "it" }) {
   const pathname = usePathname();
+  const navItems = locale === "it" ? navItemsIt : navItemsEn;
+  const t = COPY[locale];
   const [open, setOpen] = useState(false);
 
   const isItemActive = (item: {
@@ -71,7 +93,7 @@ export function MobileMenu() {
   return (
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger
-        aria-label="Open menu"
+        aria-label={t.openMenu}
         aria-expanded={open}
         aria-controls="mobile-nav-drawer"
         className="md:hidden inline-flex items-center justify-center rounded-lg transition-colors hover:bg-white/5"
@@ -90,14 +112,14 @@ export function MobileMenu() {
         className="w-full max-w-sm p-0 border-0 flex flex-col"
         style={{ background: "var(--bg-surface)" }}
       >
-        <SheetTitle className="sr-only">Navigation menu</SheetTitle>
+        <SheetTitle className="sr-only">{t.navTitle}</SheetTitle>
 
         {/* Drawer header */}
         <div
           className="flex items-center justify-between px-5 py-4"
           style={{ borderBottom: "1px solid var(--bg-border)" }}
         >
-          <Link href="/" onClick={() => setOpen(false)} aria-label="Mia-Care P4SaMD home">
+          <Link href={t.homeHref} onClick={() => setOpen(false)} aria-label={t.homeAria}>
             <Image
               src={`${BASE_PATH}/images/logo/Horizontal_Lockup_White.svg`}
               alt="Mia-Care P4SaMD"
@@ -109,7 +131,7 @@ export function MobileMenu() {
           <button
             type="button"
             onClick={() => setOpen(false)}
-            aria-label="Close menu"
+            aria-label={t.closeMenu}
             className="inline-flex items-center justify-center rounded-lg transition-colors hover:bg-white/5"
             style={{ width: 44, height: 44, color: "var(--text-muted)" }}
           >
@@ -243,7 +265,7 @@ export function MobileMenu() {
         {/* CTA footer */}
         <div className="px-4 pb-8 pt-4" style={{ borderTop: "1px solid var(--bg-border)" }}>
           <Link
-            href="/request-demo"
+            href={locale === "it" ? "/it/richiedi-demo" : "/request-demo"}
             onClick={() => setOpen(false)}
             className="flex items-center justify-center w-full rounded-xl text-sm font-semibold text-bg-base transition-transform hover:-translate-y-px active:translate-y-0"
             style={{
@@ -252,7 +274,7 @@ export function MobileMenu() {
               boxShadow: "0 0 20px rgba(0,240,150,0.2)",
             }}
           >
-            Request a Demo&nbsp;→
+            {t.cta}
           </Link>
         </div>
       </SheetContent>

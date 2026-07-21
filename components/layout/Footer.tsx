@@ -2,11 +2,40 @@ import Image from "next/image";
 import Link from "next/link";
 import { CookiePreferencesButton } from "@/components/common/CookiePreferencesButton";
 import { NewsletterSection } from "@/components/common/NewsletterSection";
-import { FOOTER_LINKS, SITE } from "@/data/site";
+import { FOOTER_LINKS as FOOTER_LINKS_EN, SITE as SITE_EN } from "@/data/site";
+import { FOOTER_LINKS as FOOTER_LINKS_IT, SITE as SITE_IT } from "@/data/site.it";
 import { BASE_PATH } from "@/lib/utils";
 
-export function Footer() {
+const COPY = {
+  en: {
+    tagline:
+      "AI-native platform for Software as a Medical Device. Compliance built into your SDLC.",
+    product: "Product",
+    useCases: "Use Cases",
+    resources: "Resources",
+    company: "Company",
+    aPrefix: "A",
+    companySuffix: "Company",
+    homeHref: "/",
+  },
+  it: {
+    tagline:
+      "Piattaforma AI-native per Software as a Medical Device. Compliance integrata nel tuo SDLC.",
+    product: "Prodotto",
+    useCases: "Casi d'Uso",
+    resources: "Risorse",
+    company: "Azienda",
+    aPrefix: "Parte di",
+    companySuffix: "",
+    homeHref: "/it",
+  },
+};
+
+export function Footer({ locale = "en" }: { locale?: "en" | "it" }) {
   const year = new Date().getFullYear();
+  const FOOTER_LINKS = locale === "it" ? FOOTER_LINKS_IT : FOOTER_LINKS_EN;
+  const SITE = locale === "it" ? SITE_IT : SITE_EN;
+  const t = COPY[locale];
 
   return (
     <footer
@@ -24,7 +53,7 @@ export function Footer() {
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-10 mb-14">
           {/* Brand col */}
           <div className="col-span-2 md:col-span-3 lg:col-span-1">
-            <Link href="/" className="inline-block mb-4">
+            <Link href={t.homeHref} className="inline-block mb-4">
               <Image
                 src={`${BASE_PATH}/images/logo/Horizontal_Lockup_White.svg`}
                 alt="Mia-Care P4SaMD"
@@ -33,7 +62,7 @@ export function Footer() {
               />
             </Link>
             <p className="text-sm leading-relaxed max-w-xs" style={{ color: "var(--text-muted)" }}>
-              AI-native platform for Software as a Medical Device. Compliance built into your SDLC.
+              {t.tagline}
             </p>
             <a
               href={SITE.social.linkedin}
@@ -57,7 +86,7 @@ export function Footer() {
 
           {/* Product */}
           <div>
-            <h3 className="label-caps mb-4">Product</h3>
+            <h3 className="label-caps mb-4">{t.product}</h3>
             <ul className="space-y-2.5">
               {FOOTER_LINKS.product.map((link) => (
                 <li key={link.href}>
@@ -75,7 +104,7 @@ export function Footer() {
 
           {/* Use Cases */}
           <div>
-            <h3 className="label-caps mb-4">Use Cases</h3>
+            <h3 className="label-caps mb-4">{t.useCases}</h3>
             <ul className="space-y-2.5">
               {FOOTER_LINKS.useCases.map((link) => (
                 <li key={link.href}>
@@ -90,7 +119,7 @@ export function Footer() {
               ))}
             </ul>
 
-            <h3 className="label-caps mb-4 mt-8">Resources</h3>
+            <h3 className="label-caps mb-4 mt-8">{t.resources}</h3>
             <ul className="space-y-2.5">
               {FOOTER_LINKS.resources.map((link) => (
                 <li key={link.href}>
@@ -108,7 +137,7 @@ export function Footer() {
 
           {/* Company */}
           <div>
-            <h3 className="label-caps mb-4">Company</h3>
+            <h3 className="label-caps mb-4">{t.company}</h3>
             <ul className="space-y-2.5">
               {FOOTER_LINKS.company.map((link) => (
                 <li key={link.href}>
@@ -131,7 +160,7 @@ export function Footer() {
           style={{ borderColor: "var(--bg-border)" }}
         >
           <span className="text-xs" style={{ color: "var(--text-muted)" }}>
-            A
+            {t.aPrefix}
           </span>
           <a
             href="https://mia-platform.eu"
@@ -147,9 +176,11 @@ export function Footer() {
               style={{ filter: "brightness(0) invert(1)" }}
             />
           </a>
-          <span className="text-xs" style={{ color: "var(--text-muted)" }}>
-            Company
-          </span>
+          {t.companySuffix && (
+            <span className="text-xs" style={{ color: "var(--text-muted)" }}>
+              {t.companySuffix}
+            </span>
+          )}
         </div>
 
         {/* Bottom bar */}

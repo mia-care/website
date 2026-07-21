@@ -5,6 +5,55 @@ import { useEffect, useId, useRef, useState } from "react";
 
 const COOKIE_NAME = "mc-cookie-consent";
 
+const COPY = {
+  en: {
+    dialogAria: "Cookie consent",
+    intro: "We use cookies to improve your experience.",
+    cookiePolicyLabel: "Cookie Policy",
+    cookiePolicyHref: "/privacy-policy#cookies",
+    customize: "Customize",
+    hideSettings: "Hide settings",
+    declineAll: "Decline all",
+    acceptAll: "Accept all",
+    savePreferences: "Save preferences",
+    technical: {
+      label: "Technical cookies",
+      description: "Required for the site to function. Cannot be disabled.",
+    },
+    performance: {
+      label: "Performance cookies",
+      description: "Help us understand how visitors use the site (analytics).",
+    },
+    profiling: {
+      label: "Profiling cookies",
+      description: "Used to show you personalised advertising.",
+    },
+  },
+  it: {
+    dialogAria: "Consenso cookie",
+    intro: "Utilizziamo i cookie per migliorare la tua esperienza.",
+    cookiePolicyLabel: "Informativa Cookie",
+    cookiePolicyHref: "/it/informativa-privacy#cookie",
+    customize: "Personalizza",
+    hideSettings: "Nascondi impostazioni",
+    declineAll: "Rifiuta tutto",
+    acceptAll: "Accetta tutto",
+    savePreferences: "Salva preferenze",
+    technical: {
+      label: "Cookie tecnici",
+      description: "Necessari al funzionamento del sito. Non possono essere disabilitati.",
+    },
+    performance: {
+      label: "Cookie di performance",
+      description: "Ci aiutano a capire come i visitatori usano il sito (analytics).",
+    },
+    profiling: {
+      label: "Cookie di profilazione",
+      description: "Usati per mostrarti pubblicità personalizzata.",
+    },
+  },
+};
+
 type Preferences = {
   performance: boolean;
   profiling: boolean;
@@ -43,7 +92,8 @@ function pushConsent(prefs: Preferences) {
   });
 }
 
-export function CookieBanner() {
+export function CookieBanner({ locale = "en" }: { locale?: "en" | "it" }) {
+  const t = COPY[locale];
   const [visible, setVisible] = useState(false);
   const [expanded, setExpanded] = useState(false);
   const [prefs, setPrefs] = useState<Preferences>({ performance: false, profiling: false });
@@ -83,7 +133,7 @@ export function CookieBanner() {
       tabIndex={-1}
       className="fixed bottom-0 left-0 right-0 z-50 p-4 md:p-6 focus:outline-none"
       role="dialog"
-      aria-label="Cookie consent"
+      aria-label={t.dialogAria}
       aria-modal="true"
     >
       <div
@@ -92,13 +142,13 @@ export function CookieBanner() {
       >
         <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
           <p className="flex-1 text-sm" style={{ color: "var(--text-secondary)" }}>
-            We use cookies to improve your experience.{" "}
+            {t.intro}{" "}
             <Link
-              href="/privacy-policy#cookies"
+              href={t.cookiePolicyHref}
               className="underline"
               style={{ color: "var(--brand-green)" }}
             >
-              Cookie Policy
+              {t.cookiePolicyLabel}
             </Link>
           </p>
           <div className="flex gap-3 shrink-0 flex-wrap">
@@ -108,7 +158,7 @@ export function CookieBanner() {
               className="px-4 py-2 text-sm rounded-md border transition-colors"
               style={{ borderColor: "rgba(255,255,255,0.28)", color: "var(--text-primary)" }}
             >
-              {expanded ? "Hide settings" : "Customize"}
+              {expanded ? t.hideSettings : t.customize}
             </button>
             <button
               type="button"
@@ -116,14 +166,14 @@ export function CookieBanner() {
               className="px-4 py-2 text-sm rounded-md border transition-colors"
               style={{ borderColor: "rgba(255,255,255,0.28)", color: "var(--text-primary)" }}
             >
-              Decline all
+              {t.declineAll}
             </button>
             <button
               type="button"
               onClick={() => save({ performance: true, profiling: true })}
               className="px-4 py-2 text-sm font-semibold rounded-md bg-brand-gradient text-bg-base transition-opacity hover:opacity-90"
             >
-              Accept all
+              {t.acceptAll}
             </button>
           </div>
         </div>
@@ -134,21 +184,21 @@ export function CookieBanner() {
             style={{ borderColor: "var(--bg-border-strong)" }}
           >
             <ConsentRow
-              label="Technical cookies"
-              description="Required for the site to function. Cannot be disabled."
+              label={t.technical.label}
+              description={t.technical.description}
               checked={true}
               disabled={true}
               onChange={() => {}}
             />
             <ConsentRow
-              label="Performance cookies"
-              description="Help us understand how visitors use the site (analytics)."
+              label={t.performance.label}
+              description={t.performance.description}
               checked={prefs.performance}
               onChange={(v) => setPrefs((p) => ({ ...p, performance: v }))}
             />
             <ConsentRow
-              label="Profiling cookies"
-              description="Used to show you personalised advertising."
+              label={t.profiling.label}
+              description={t.profiling.description}
               checked={prefs.profiling}
               onChange={(v) => setPrefs((p) => ({ ...p, profiling: v }))}
             />
@@ -158,7 +208,7 @@ export function CookieBanner() {
                 onClick={() => save(prefs)}
                 className="px-4 py-2 text-sm font-semibold rounded-md bg-brand-gradient text-bg-base transition-opacity hover:opacity-90"
               >
-                Save preferences
+                {t.savePreferences}
               </button>
             </div>
           </div>

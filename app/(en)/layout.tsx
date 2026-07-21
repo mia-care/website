@@ -4,7 +4,7 @@ import localFont from "next/font/local";
 import Script from "next/script";
 import { CookieBanner } from "@/components/common/CookieBanner";
 import { announcement } from "@/data/announcement";
-import "./globals.css";
+import "../globals.css";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -14,9 +14,9 @@ const inter = Inter({
 
 const styreneA = localFont({
   src: [
-    { path: "../public/fonts/StyreneA-Regular.otf", weight: "400", style: "normal" },
-    { path: "../public/fonts/StyreneA-Medium.otf", weight: "500", style: "normal" },
-    { path: "../public/fonts/StyreneA-Bold.otf", weight: "700", style: "normal" },
+    { path: "../../public/fonts/StyreneA-Regular.otf", weight: "400", style: "normal" },
+    { path: "../../public/fonts/StyreneA-Medium.otf", weight: "500", style: "normal" },
+    { path: "../../public/fonts/StyreneA-Bold.otf", weight: "700", style: "normal" },
   ],
   variable: "--font-sa",
   display: "swap",
@@ -24,8 +24,8 @@ const styreneA = localFont({
 
 const styreneB = localFont({
   src: [
-    { path: "../public/fonts/StyreneB-Regular.otf", weight: "400", style: "normal" },
-    { path: "../public/fonts/StyreneB-Medium.otf", weight: "500", style: "normal" },
+    { path: "../../public/fonts/StyreneB-Regular.otf", weight: "400", style: "normal" },
+    { path: "../../public/fonts/StyreneB-Medium.otf", weight: "500", style: "normal" },
   ],
   variable: "--font-sb",
   display: "swap",

@@ -4,7 +4,11 @@ import matter from "gray-matter";
 import { remark } from "remark";
 import remarkHtml from "remark-html";
 
-const RESOURCES_DIR = path.join(process.cwd(), "content/resources");
+export type Locale = "en" | "it";
+
+function resourcesDir(locale: Locale = "en"): string {
+  return path.join(process.cwd(), locale === "it" ? "content/it/resources" : "content/resources");
+}
 
 export type ResourceType = "whitepaper" | "video" | "guide" | "case-study" | "report";
 
@@ -50,31 +54,33 @@ function extractHubSpotIds(snippet: string): { portalId: string; formId: string;
   };
 }
 
-function getAllSlugs(): string[] {
-  if (!fs.existsSync(RESOURCES_DIR)) return [];
+function getAllSlugs(locale: Locale = "en"): string[] {
+  const dir = resourcesDir(locale);
+  if (!fs.existsSync(dir)) return [];
   return fs
-    .readdirSync(RESOURCES_DIR)
-    .filter(
-      (name) => name !== "README.md" && fs.statSync(path.join(RESOURCES_DIR, name)).isDirectory(),
-    );
+    .readdirSync(dir)
+    .filter((name) => name !== "README.md" && fs.statSync(path.join(dir, name)).isDirectory());
 }
 
-function readIndexFrontmatter(slug: string): { data: Record<string, unknown> } | null {
-  const indexPath = path.join(RESOURCES_DIR, slug, "index.md");
+function readIndexFrontmatter(
+  slug: string,
+  locale: Locale = "en",
+): { data: Record<string, unknown> } | null {
+  const indexPath = path.join(resourcesDir(locale), slug, "index.md");
   if (!fs.existsSync(indexPath)) return null;
   const raw = fs.readFileSync(indexPath, "utf8");
   const { data } = matter(raw);
   return { data };
 }
 
-export function getAllResources(): ResourceMeta[] {
-  return getAllSlugs()
-    .map((slug) => getResourceMeta(slug))
+export function getAllResources(locale: Locale = "en"): ResourceMeta[] {
+  return getAllSlugs(locale)
+    .map((slug) => getResourceMeta(slug, locale))
     .filter((r): r is ResourceMeta => r !== null);
 }
 
-export function getResourceMeta(slug: string): ResourceMeta | null {
-  const result = readIndexFrontmatter(slug);
+export function getResourceMeta(slug: string, locale: Locale = "en"): ResourceMeta | null {
+  const result = readIndexFrontmatter(slug, locale);
   if (!result) return null;
   const { data } = result;
 
@@ -96,8 +102,11 @@ export function getResourceMeta(slug: string): ResourceMeta | null {
   };
 }
 
-export async function getResourcePage(slug: string): Promise<ResourcePage | null> {
-  const indexPath = path.join(RESOURCES_DIR, slug, "index.md");
+export async function getResourcePage(
+  slug: string,
+  locale: Locale = "en",
+): Promise<ResourcePage | null> {
+  const indexPath = path.join(resourcesDir(locale), slug, "index.md");
   if (!fs.existsSync(indexPath)) return null;
 
   const raw = fs.readFileSync(indexPath, "utf8");
@@ -123,8 +132,11 @@ export async function getResourcePage(slug: string): Promise<ResourcePage | null
   };
 }
 
-export async function getThankYouPage(slug: string): Promise<ThankYouPage | null> {
-  const tyPath = path.join(RESOURCES_DIR, slug, "thank-you.md");
+export async function getThankYouPage(
+  slug: string,
+  locale: Locale = "en",
+): Promise<ThankYouPage | null> {
+  const tyPath = path.join(resourcesDir(locale), slug, "thank-you.md");
   if (!fs.existsSync(tyPath)) return null;
 
   const raw = fs.readFileSync(tyPath, "utf8");
@@ -132,7 +144,7 @@ export async function getThankYouPage(slug: string): Promise<ThankYouPage | null
 
   const processed = await remark().use(remarkHtml, { sanitize: false }).process(content);
 
-  const indexMeta = readIndexFrontmatter(slug);
+  const indexMeta = readIndexFrontmatter(slug, locale);
 
   return {
     slug,

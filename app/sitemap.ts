@@ -28,7 +28,35 @@ const DATA_LAST_MODIFIED = "2026-04-26";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticPages: MetadataRoute.Sitemap = [
-    { url: BASE, lastModified: PAGE_DATES["/"], changeFrequency: "weekly", priority: 1 },
+    {
+      url: BASE,
+      lastModified: PAGE_DATES["/"],
+      changeFrequency: "weekly",
+      priority: 1,
+      // Only the homepage has a real /it counterpart so far — see Batch 0
+      // in docs/adr/0001-italian-locale-subdirectory-mirrored-layouts.md.
+      // Add alternates to other entries only once their /it page exists.
+      alternates: {
+        languages: {
+          en: BASE,
+          it: `${BASE}/it`,
+          "x-default": BASE,
+        },
+      },
+    },
+    {
+      url: `${BASE}/it`,
+      lastModified: PAGE_DATES["/"],
+      changeFrequency: "weekly",
+      priority: 1,
+      alternates: {
+        languages: {
+          en: BASE,
+          it: `${BASE}/it`,
+          "x-default": BASE,
+        },
+      },
+    },
     {
       url: `${BASE}/product`,
       lastModified: PAGE_DATES["/product"],

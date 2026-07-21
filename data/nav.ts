@@ -10,12 +10,14 @@ export type NavItem = {
   href: string;
   activeRoot?: string;
   dropdown?: NavDropdownItem[];
+  megaMenu?: boolean;
 };
 
 export const navItems: NavItem[] = [
   {
     label: "Product",
     href: "/product",
+    megaMenu: true,
     dropdown: [
       { label: "Platform Overview", href: "/product", description: "The AI-native SaMD platform" },
       {

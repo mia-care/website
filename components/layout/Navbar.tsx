@@ -4,9 +4,21 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { navItems } from "@/data/nav";
+import { navItems as navItemsEn } from "@/data/nav";
+import { navItems as navItemsIt } from "@/data/nav.it";
 import { BASE_PATH } from "@/lib/utils";
+import { LanguageSwitcher } from "./LanguageSwitcher";
 import { MobileMenu } from "./MobileMenu";
+
+const CTA = {
+  en: { label: "Request a Demo →", href: "/request-demo" },
+  it: { label: "Richiedi una Demo →", href: "/it/richiedi-demo" },
+};
+
+const MEGA_MENU_COPY = {
+  en: { platform: "Platform", explore: "Explore", capabilities: "Capabilities" },
+  it: { platform: "Piattaforma", explore: "Scopri", capabilities: "Funzionalità" },
+};
 
 function SimpleDropdown({
   items,
@@ -61,9 +73,11 @@ function SimpleDropdown({
 function ProductMegaMenu({
   items,
   onClose,
+  copy,
 }: {
   items: { label: string; href: string; description?: string }[];
   onClose: () => void;
+  copy: { platform: string; explore: string; capabilities: string };
 }) {
   const [featured, ...capabilities] = items;
   return (
@@ -94,7 +108,7 @@ function ProductMegaMenu({
               className="text-xs font-bold uppercase tracking-widest mb-0.5"
               style={{ color: "var(--text-muted)", letterSpacing: "0.12em" }}
             >
-              Platform
+              {copy.platform}
             </span>
             <span className="text-sm font-semibold" style={{ color: "var(--text-primary)" }}>
               {featured.label}
@@ -106,7 +120,7 @@ function ProductMegaMenu({
             )}
           </span>
           <span className="inline-flex items-center gap-1 text-xs font-semibold shrink-0 text-[var(--text-muted)] transition-colors duration-200 group-hover:text-[var(--brand-green)]">
-            Explore
+            {copy.explore}
             <svg
               width="11"
               height="11"
@@ -131,7 +145,7 @@ function ProductMegaMenu({
           className="block text-xs font-bold uppercase tracking-widest px-2 pb-1.5"
           style={{ color: "var(--text-muted)", letterSpacing: "0.12em" }}
         >
-          Capabilities
+          {copy.capabilities}
         </span>
 
         {/* 2-column grid */}
@@ -180,8 +194,11 @@ function ProductMegaMenu({
   );
 }
 
-export function Navbar() {
+export function Navbar({ locale = "en" }: { locale?: "en" | "it" }) {
   const pathname = usePathname();
+  const navItems = locale === "it" ? navItemsIt : navItemsEn;
+  const cta = CTA[locale];
+  const megaMenuCopy = MEGA_MENU_COPY[locale];
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const headerRef = useRef<HTMLElement>(null);
@@ -243,7 +260,7 @@ export function Navbar() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex items-center relative">
         {/* Logo */}
-        <Link href="/" className="shrink-0 flex items-center">
+        <Link href={locale === "it" ? "/it" : "/"} className="shrink-0 flex items-center">
           <Image
             src={`${BASE_PATH}/images/logo/Horizontal_Lockup_White.svg`}
             alt="Mia-Care P4SaMD"
@@ -337,8 +354,12 @@ export function Navbar() {
 
                 {item.dropdown &&
                   open &&
-                  (item.label === "Product" ? (
-                    <ProductMegaMenu items={item.dropdown} onClose={closeImmediate} />
+                  (item.megaMenu ? (
+                    <ProductMegaMenu
+                      items={item.dropdown}
+                      onClose={closeImmediate}
+                      copy={megaMenuCopy}
+                    />
                   ) : (
                     <SimpleDropdown items={item.dropdown} onClose={closeImmediate} />
                   ))}
@@ -347,21 +368,26 @@ export function Navbar() {
           })}
         </nav>
 
+        {/* Language switcher */}
+        <div className="hidden md:block ml-auto mr-4 shrink-0">
+          <LanguageSwitcher locale={locale} />
+        </div>
+
         {/* CTA */}
         <Link
-          href="/request-demo"
-          className="hidden md:flex items-center h-9 px-4 rounded-lg text-sm font-semibold text-bg-base shrink-0 ml-auto transition-transform hover:-translate-y-px active:translate-y-0 relative z-10"
+          href={cta.href}
+          className="hidden md:flex items-center h-9 px-4 rounded-lg text-sm font-semibold text-bg-base shrink-0 transition-transform hover:-translate-y-px active:translate-y-0 relative z-10"
           style={{
             background: "linear-gradient(90deg, var(--brand-green), var(--brand-cyan))",
             boxShadow: "0 0 18px rgba(0,240,150,0.22), 0 2px 8px rgba(0,0,0,0.35)",
           }}
         >
-          Request a Demo →
+          {cta.label}
         </Link>
 
         {/* Mobile */}
         <div className="ml-auto md:hidden">
-          <MobileMenu />
+          <MobileMenu locale={locale} />
         </div>
       </div>
     </header>

@@ -1,9 +1,12 @@
 import Link from "next/link";
 import { CookiePreferencesButton } from "@/components/common/CookiePreferencesButton";
-import { FOOTER_LINKS, SITE } from "@/data/site";
+import { FOOTER_LINKS as FOOTER_LINKS_EN, SITE as SITE_EN } from "@/data/site";
+import { FOOTER_LINKS as FOOTER_LINKS_IT, SITE as SITE_IT } from "@/data/site.it";
 
-export function GatedFooter() {
+export function GatedFooter({ locale = "en" }: { locale?: "en" | "it" }) {
   const year = new Date().getFullYear();
+  const FOOTER_LINKS = locale === "it" ? FOOTER_LINKS_IT : FOOTER_LINKS_EN;
+  const SITE = locale === "it" ? SITE_IT : SITE_EN;
 
   return (
     <footer
