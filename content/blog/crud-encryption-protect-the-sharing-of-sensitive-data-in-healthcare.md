@@ -1,11 +1,11 @@
 ---
 title: "CRUD Encryption: protect the sharing of sensitive data in healthcare"
 slug: "crud-encryption-protect-the-sharing-of-sensitive-data-in-healthcare"
-description: "Blog post originally published on Mia-Platform's blog. The concern of sensitive data management and protection in healthcare has always raised [&hell"
-seoTitle: "CRUD Encryption: protect the sharing of sensitive data in…"
+description: "Sharing sensitive health data under GDPR requires strong safeguards. Learn how CRUD Encryption protects patient information without limiting access."
+seoTitle: "CRUD Encryption: Protecting Sensitive Health Data"
 date: "2023-01-17"
 modified: "2023-03-06"
-author: "mia-care"
+author: "dario-esposito"
 categories: ["technology-application"]
 featuredImage: "/blog/images/crud-encryption-protect-the-sharing-of-sensitive-data-in-healthcare.webp"
 featuredImageAlt: "CRUD Encryption: protect the sharing of sensitive data in healthcare"

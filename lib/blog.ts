@@ -69,7 +69,10 @@ export type Post = PostMeta & {
   content: string;
   contentHtml: string;
   headings: Heading[];
+  faqs: Faq[];
 };
+
+export type Faq = { q: string; a: string };
 
 export type Heading = {
   id: string;
@@ -128,6 +131,7 @@ export async function getPost(slug: string): Promise<Post | null> {
     .replace(/src="(\/[^"]*)"/g, (_, p) => `src="${assetPath(p)}"`)
     .replace(/<img /g, '<img loading="lazy" ');
   const headings = extractHeadings(content);
+  const faqs = extractFaqs(content);
 
   return {
     title: decodeEntities(data.title ?? ""),
@@ -145,6 +149,7 @@ export async function getPost(slug: string): Promise<Post | null> {
     content,
     contentHtml,
     headings,
+    faqs,
   };
 }
 
@@ -180,6 +185,37 @@ function extractHeadings(markdown: string): Heading[] {
     }
   }
   return headings;
+}
+
+// Extracts Q&A pairs from posts structured as "### N. **Question?**" followed by
+// the answer paragraph(s) — the pattern used by FAQ-style guides (e.g. IEC 62304).
+// Posts without this pattern simply yield an empty array.
+function extractFaqs(markdown: string): Faq[] {
+  const lines = markdown.split("\n");
+  const faqs: Faq[] = [];
+  let current: { q: string; answerLines: string[] } | null = null;
+
+  const flush = () => {
+    if (current) {
+      const answer = stripInlineMarkdown(current.answerLines.join(" ").replace(/\s+/g, " ").trim());
+      if (current.q && answer) faqs.push({ q: current.q, a: answer });
+    }
+    current = null;
+  };
+
+  for (const line of lines) {
+    const question = line.match(/^### \d+\.\s+\*\*(.+?)\*\*\s*$/);
+    if (question) {
+      flush();
+      current = { q: stripInlineMarkdown(question[1].trim()), answerLines: [] };
+    } else if (/^#{1,6}\s/.test(line)) {
+      flush();
+    } else if (current) {
+      current.answerLines.push(line.trim());
+    }
+  }
+  flush();
+  return faqs;
 }
 
 function slugifyHeading(text: string): string {

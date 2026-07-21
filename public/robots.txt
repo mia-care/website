@@ -2,7 +2,30 @@ User-agent: *
 Allow: /
 Disallow: /downloads/
 
-Sitemap: https://www.mia-care.io/sitemap.xml
+# AI search crawlers — explicitly allowed so we can be cited in AI answers.
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+# Common Crawl — training-data only, not a citation-enabled search bot.
+User-agent: CCBot
+Disallow: /
+
+Sitemap: https://mia-care.io/sitemap.xml
 
 # LLM-friendly content index: https://llmstxt.org
 # Note: not a standardized robots.txt directive, but many AI crawlers check for it

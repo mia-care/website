@@ -1,11 +1,11 @@
 ---
 title: "Third-Party Administrator: How does TPA digitalize health operations in Insurance?"
 slug: "third-party-administrator-how-does-tpa-digitalize-health-operations-in-insurance"
-description: "Third-Party Administrators support insurance corporations with reimbursement processes and claims management. Their job is usually under the radar but has "
-seoTitle: "Third-Party Administrator: How does TPA digitalize health…"
+description: "Third-Party Administrators handle claims and reimbursements behind the scenes. Discover how digitalization is transforming their role in insurance."
+seoTitle: "How TPAs Digitalize Health Operations in Insurance"
 date: "2023-06-08"
 modified: "2023-09-05"
-author: "mia-care"
+author: "roberta-egoriti"
 categories: ["industry-key-insights", "technology-application"]
 featuredImage: "/blog/images/third-party-administrator-how-does-tpa-digitalize-health-operations-in-insurance.webp"
 featuredImageAlt: "Third-Party Administrator: How does TPA digitalize health operations in Insurance?"

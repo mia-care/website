@@ -1,11 +1,11 @@
 ---
 title: "The Power Of Saga Pattern To Digitalize Healthcare Operations"
 slug: "the-power-of-saga-pattern-to-digitalize-healthcare-operations"
-description: "Leveraging cloud-based architectures is the next big step when it is time to manage digital health services. New care solutions …"
-seoTitle: "The Power Of Saga Pattern To Digitalize Healthcare Operat…"
+description: "Distributed transactions need consistency across every touchpoint. See how the Saga Pattern helps healthcare platforms manage errors and data flow."
+seoTitle: "The Power of Saga Pattern in Healthcare Operations"
 date: "2022-07-15"
 modified: "2023-02-16"
-author: "mia-care"
+author: "dario-esposito"
 categories: ["technology-application"]
 featuredImage: "/blog/images/the-power-of-saga-pattern-to-digitalize-healthcare-operations.webp"
 featuredImageAlt: "The Power Of Saga Pattern To Digitalize Healthcare Operations"

@@ -1,11 +1,11 @@
 ---
 title: "The Role of Artificial Intelligence in Improving Care Quality"
 slug: "the-role-of-artificial-intelligence-in-improving-care-quality"
-description: "With advancements in machine learning algorithms and access to vast amounts of data, AI can analyze complex medical information and …"
-seoTitle: "The Role of Artificial Intelligence in Improving Care Qua…"
+description: "AI can analyze complex medical data in minutes. Discover how it's improving diagnosis, patient monitoring, and care quality across healthcare."
+seoTitle: "The Role of AI in Improving Care Quality"
 date: "2024-02-22"
 modified: "2024-04-19"
-author: "mia-care"
+author: "marzio-ghezzi"
 categories: ["industry-key-insights"]
 featuredImage: "/blog/images/the-role-of-artificial-intelligence-in-improving-care-quality.webp"
 featuredImageAlt: "The Role of Artificial Intelligence in Improving Care Quality"

@@ -1,8 +1,8 @@
 ---
 title: "Territorial Operative Center (COT): the future of the Italian healthcare system"
 slug: "cot-the-operational-exellence-for-italian-health-system"
-description: "Italy aims to reform the national healthcare system by implementing a territorial care model that brings people and their care …"
-seoTitle: "Territorial Operative Center (COT): the future of the Ita…"
+description: "Italy's Territorial Operative Centers (COT) aim to unify home care, hospitals, and prevention. Here's how the model works and why it matters."
+seoTitle: "COT: The Future of the Italian Healthcare System"
 date: "2023-04-05"
 modified: "2023-11-08"
 author: "mia-care"

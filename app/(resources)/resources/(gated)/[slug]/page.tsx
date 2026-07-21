@@ -25,6 +25,7 @@ export async function generateMetadata({
   return {
     title: `${resource.title} | Mia-Care`,
     description: resource.description,
+    alternates: { canonical: `/resources/${slug}` },
   };
 }
 
@@ -120,7 +121,7 @@ export default async function ResourcePage({ params }: { params: Promise<{ slug:
                 >
                   <Image
                     src={assetPath(resource.featuredImage)}
-                    alt=""
+                    alt={resource.title}
                     fill
                     className="object-cover"
                     unoptimized

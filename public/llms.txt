@@ -10,6 +10,7 @@ Regulatory standards covered: EU MDR 2017/745, IVDR 2017/746, FDA 21 CFR Part 82
 
 - [P4SaMD Platform Overview](https://www.mia-care.io/product): Mia-Care P4SaMD unifies eQMS, ALM, and DevOps into a single platform, embedding regulatory compliance directly into your SDLC.
 - [Plans and Pricing](https://www.mia-care.io/plans): Choose how you adopt P4SaMD. Standard, Professional, or Unlimited — flexible plans for every stage of your SaMD journey.
+- [Pricing (plain text)](https://www.mia-care.io/pricing.md): Machine-readable tier structure and features for AI agents comparing products programmatically.
 - [Request a Demo](https://www.mia-care.io/request-demo): Get a live P4SaMD session scoped to your regulatory context. No pre-recorded walk-through. Real answers for EU MDR, FDA, ISO 13485, IEC 62304, and EU AI Act.
 
 ## Capabilities
@@ -32,7 +33,6 @@ Regulatory standards covered: EU MDR 2017/745, IVDR 2017/746, FDA 21 CFR Part 82
 ## Resources
 
 - [Blog](https://www.mia-care.io/resources/blog): Expert articles on Software as a Medical Device, IEC 62304, EU MDR, AI Act compliance, and modern MedTech engineering from the Mia-Care team.
-- [Success Cases](https://www.mia-care.io/resources/success-cases): Discover how healthcare organizations use Mia-Care to build compliant, high-quality medical software — faster.
 
 ## Company
 

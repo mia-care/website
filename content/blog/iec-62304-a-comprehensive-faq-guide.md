@@ -1,11 +1,11 @@
 ---
 title: "IEC 62304: A Comprehensive FAQ Guide"
 slug: "iec-62304-a-comprehensive-faq-guide"
-description: "The software life cycle is long, often slow and tangled across all its phases. The life cycle of software as …"
+description: "The IEC 62304 software life cycle can be confusing. This FAQ guide answers the most common questions on classification, risk, and compliance."
 seoTitle: "IEC 62304: A Comprehensive FAQ Guide"
 date: "2025-12-04"
 modified: "2025-12-23"
-author: "mia-care"
+author: "dario-esposito"
 categories: ["international-standards"]
 featuredImage: "/blog/images/iec-62304-a-comprehensive-faq-guide.webp"
 featuredImageAlt: "IEC 62304: A Comprehensive FAQ Guide"

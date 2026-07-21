@@ -17,6 +17,7 @@ export const metadata: Metadata = {
   title: "Request a Demo — See Compliance by Design in Your Context",
   description:
     "Get a live P4SaMD session scoped to your regulatory context. No pre-recorded walk-through. Real answers for EU MDR, FDA, ISO 13485, IEC 62304, and EU AI Act.",
+  alternates: { canonical: "/request-demo" },
 };
 
 const VALUE_PROPS = [

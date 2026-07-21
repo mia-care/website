@@ -2,6 +2,7 @@
 title: "Build Certified SaMD with a Regulated Healthcare Developer Platform"
 description: "Explore the SaMD examples, regulatory requirements, and the challenges associated with software component development."
 type: video
+date: "2026-05-04"
 published: true
 featuredImage: /competence-center/build-certified-samd.jpg
 hubspotEmbed: |

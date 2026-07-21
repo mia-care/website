@@ -1,11 +1,11 @@
 ---
 title: "The Top 5 Upcoming Trends in 2026 Digital Health"
 slug: "top-5-upcoming-trends-2026-digital-health"
-description: "The global digital healthcare landscape is living a flourishing time, so much so that organizations are investing in digital solutions …"
+description: "AI, interoperability, and remote monitoring are shaping digital health in 2026. Discover the top 5 trends and what they mean for the Italian market."
 seoTitle: "The Top 5 Upcoming Trends in 2026 Digital Health"
 date: "2025-11-06"
 modified: "2025-11-11"
-author: "mia-care"
+author: "marzio-ghezzi"
 categories: ["industry-key-insights", "technology-application"]
 featuredImage: "/blog/images/top-5-upcoming-trends-2026-digital-health.webp"
 featuredImageAlt: "The Top 5 Upcoming Trends in 2026 Digital Health"

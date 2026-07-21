@@ -1,11 +1,11 @@
 ---
 title: "The &#8220;Compliance Tax&#8221; in SaMD Development: From Burden to Unrivaled Quality Gain"
 slug: "the-compliance-tax-in-samd-development"
-description: "Overview The software development realm is more dynamic than ever, constantly evolving, yet ambiguously poised between promising innovation and frightening"
-seoTitle: "The &#8220;Compliance Tax&#8221; in SaMD Development: Fro…"
+description: "Compliance can feel like an expensive tax on SaMD development. Discover how to turn that burden into a driver of quality with the right tools."
+seoTitle: "The Compliance Tax in SaMD Development: From Burden to Gain"
 date: "2025-10-02"
 modified: "2025-11-05"
-author: "mia-care"
+author: "roberta-egoriti"
 categories: ["industry-key-insights"]
 featuredImage: "/blog/images/the-compliance-tax-in-samd-development.webp"
 featuredImageAlt: "The &#8220;Compliance Tax&#8221; in SaMD Development: From Burden to Unrivaled Quality Gain"

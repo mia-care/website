@@ -1,11 +1,11 @@
 ---
 title: "5 Remarkable Benefits of Remote Patient Monitoring"
 slug: "5-remarkable-benefits-of-remote-patient-monitoring"
-description: "Remote patient monitoring is a technology-driven approach that enables healthcare providers to monitor patients outside the traditional clinical setting. T"
+description: "Remote patient monitoring lets healthcare providers track patients outside the clinic. See five key benefits, from better outcomes to lower costs."
 seoTitle: "5 Remarkable Benefits of Remote Patient Monitoring"
 date: "2024-01-22"
 modified: "2024-02-22"
-author: "mia-care"
+author: "roberta-egoriti"
 categories: ["industry-key-insights"]
 featuredImage: "/blog/images/5-remarkable-benefits-of-remote-patient-monitoring.webp"
 featuredImageAlt: "5 Remarkable Benefits of Remote Patient Monitoring"

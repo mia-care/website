@@ -1,12 +1,12 @@
 ---
 title: "Brownfield Assessment & Remediation: Reviving Legacy Medical Software"
 slug: "brownfield-assessment-remediation"
-description: "Key Takeaways Introduction For MedTech leaders, legacy software is a double-edged sword. It powers vital operations, yet its foundation is …"
-seoTitle: "Brownfield Assessment & Remediation: Reviving Legacy Medi…"
+description: "Legacy medical software is a double-edged sword. Learn how brownfield assessment and remediation balance modernization with regulatory compliance."
+seoTitle: "Brownfield Assessment & Remediation for Legacy SaMD"
 date: "2026-04-20"
 modified: "2026-04-20"
 featured: true
-author: "mia-care"
+author: "roberta-egoriti"
 categories: ["technology-application"]
 featuredImage: "/blog/images/brownfield-assessment-remediation.webp"
 featuredImageAlt: "Brownfield Assessment & Remediation: Reviving Legacy Medical Software"

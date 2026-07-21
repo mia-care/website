@@ -21,6 +21,7 @@ export const metadata: Metadata = {
   title: "Platform Overview | The AI-native Platform for SaMD",
   description:
     "Mia-Care P4SaMD unifies eQMS, ALM, and DevOps into a single platform, embedding regulatory compliance directly into your SDLC.",
+  alternates: { canonical: "/product" },
 };
 
 const BENEFITS = [

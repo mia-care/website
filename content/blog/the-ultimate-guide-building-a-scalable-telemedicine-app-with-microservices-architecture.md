@@ -1,11 +1,11 @@
 ---
 title: "The Ultimate Guide: Building a Scalable Telemedicine App with Microservices Architecture"
 slug: "the-ultimate-guide-building-a-scalable-telemedicine-app-with-microservices-architecture"
-description: "Telemedicine apps have revolutionized the way healthcare services are delivered to patients. These apps provide a convenient and efficient tool …"
-seoTitle: "The Ultimate Guide: Building a Scalable Telemedicine App …"
+description: "Microservices architecture is reshaping telemedicine app development. Learn the benefits, challenges, and best practices for building at scale."
+seoTitle: "Building a Scalable Telemedicine App with Microservices"
 date: "2024-04-19"
 modified: "2024-04-19"
-author: "mia-care"
+author: "dario-esposito"
 categories: ["technology-application"]
 featuredImage: "/blog/images/the-ultimate-guide-building-a-scalable-telemedicine-app-with-microservices-architecture.webp"
 featuredImageAlt: "The Ultimate Guide: Building a Scalable Telemedicine App with Microservices Architecture"

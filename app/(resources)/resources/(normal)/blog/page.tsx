@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Suspense } from "react";
 import { BlogGrid } from "@/components/blog/BlogGrid";
 import { FeaturedPost } from "@/components/blog/FeaturedPost";
 import { PillTag } from "@/components/common/PillTag";
@@ -44,9 +43,7 @@ export default function BlogArchivePage() {
       <section className="py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col gap-12">
           {featuredPost && <FeaturedPost post={featuredPost} />}
-          <Suspense fallback={<div className="h-64" />}>
-            <BlogGrid posts={gridPosts} categories={BLOG_CATEGORIES} />
-          </Suspense>
+          <BlogGrid posts={gridPosts} categories={BLOG_CATEGORIES} />
         </div>
       </section>
     </>

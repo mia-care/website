@@ -1,11 +1,11 @@
 ---
 title: "The Value Of Composable Technology In Healthcare &#8211; Watch The Video!"
 slug: "the-value-of-composable-technology-in-healthcare-watch-the-video"
-description: "Mia-Care and Vonage, a global leader in cloud communication services, hosted the &#8220;Building a Healthcare Platform in 2022&#8221; event. The goal "
-seoTitle: "The Value Of Composable Technology In Healthcare &#8211; …"
+description: "Mia-Care and Vonage hosted a discussion on building modern healthcare platforms. Watch the video for key insights on composable technology."
+seoTitle: "The Value of Composable Technology in Healthcare"
 date: "2022-06-13"
 modified: "2023-02-16"
-author: "mia-care"
+author: "marzio-ghezzi"
 categories: ["composable-technology"]
 featuredImage: "/blog/images/the-value-of-composable-technology-in-healthcare-watch-the-video.webp"
 featuredImageAlt: "The Value Of Composable Technology In Healthcare &#8211; Watch The Video!"

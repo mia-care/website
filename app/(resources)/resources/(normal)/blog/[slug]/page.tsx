@@ -103,6 +103,22 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     ],
   };
 
+  const faqSchema =
+    post.faqs.length > 0
+      ? {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: post.faqs.map((faq) => ({
+            "@type": "Question",
+            name: faq.q,
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: faq.a,
+            },
+          })),
+        }
+      : null;
+
   return (
     <>
       <script
@@ -110,6 +126,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <JsonLd schema={breadcrumbSchema} />
+      {faqSchema && <JsonLd schema={faqSchema} />}
 
       {/* Hero */}
       <section className="py-16" style={{ borderBottom: "1px solid var(--bg-border)" }}>

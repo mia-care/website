@@ -1,11 +1,11 @@
 ---
 title: "Why Life Science Companies Need A Digital Platform Now"
 slug: "why-life-science-companies-need-a-digital-platform-now"
-description: "The urgency given by the recent pandemic emergency has helped focus attention on the effectiveness of the traditional processes that …"
+description: "The pandemic exposed the limits of traditional Pharma processes. Discover why Life Science companies need a cloud-native digital platform now."
 seoTitle: "Why Life Science Companies Need A Digital Platform Now"
 date: "2022-11-24"
 modified: "2024-04-16"
-author: "mia-care"
+author: "roberta-egoriti"
 categories: ["composable-technology"]
 featuredImage: "/blog/images/why-life-science-companies-need-a-digital-platform-now.webp"
 featuredImageAlt: "Why Life Science Companies Need A Digital Platform Now"

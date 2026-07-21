@@ -2,7 +2,8 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import { SearchBar } from "@/components/common/SearchBar";
 import { assetPath } from "@/lib/asset";
 import type { ResourceMeta, ResourceType } from "@/lib/resources";
@@ -43,7 +44,7 @@ function FeaturedCard({ resource }: { resource: ResourceMeta }) {
         {resource.featuredImage && (
           <Image
             src={assetPath(resource.featuredImage)}
-            alt=""
+            alt={resource.title}
             fill
             className="object-cover transition-transform duration-500 group-hover:scale-105"
             unoptimized
@@ -93,13 +94,21 @@ function FeaturedCard({ resource }: { resource: ResourceMeta }) {
 export function ResourceGrid({ resources }: { resources: ResourceMeta[] }) {
   const router = useRouter();
   const pathname = usePathname();
-  const searchParams = useSearchParams();
 
-  const active = (searchParams.get("type") ?? "all") as ResourceType | "all";
-  const query = searchParams.get("q") ?? "";
+  // Default to unfiltered (not read via useSearchParams): that hook forces this whole
+  // component out of the static HTML during export. Filter state is synced from the
+  // URL client-side after mount, so search/filter deep-links still work post-hydration.
+  const [active, setActive] = useState<ResourceType | "all">("all");
+  const [query, setQuery] = useState("");
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    setActive((params.get("type") as ResourceType | "all") ?? "all");
+    setQuery(params.get("q") ?? "");
+  }, []);
 
   function setParam(key: string, value: string | null) {
-    const params = new URLSearchParams(searchParams.toString());
+    const params = new URLSearchParams(window.location.search);
     if (!value) {
       params.delete(key);
     } else {
@@ -107,6 +116,8 @@ export function ResourceGrid({ resources }: { resources: ResourceMeta[] }) {
     }
     const qs = params.toString();
     router.replace(`${pathname}${qs ? `?${qs}` : ""}`, { scroll: false });
+    if (key === "type") setActive((value as ResourceType | "all") ?? "all");
+    if (key === "q") setQuery(value ?? "");
   }
 
   const featured = resources.find((r) => r.featured);
@@ -193,7 +204,7 @@ export function ResourceGrid({ resources }: { resources: ResourceMeta[] }) {
                 {resource.featuredImage && (
                   <Image
                     src={assetPath(resource.featuredImage)}
-                    alt=""
+                    alt={resource.title}
                     fill
                     className="object-cover transition-transform duration-300 group-hover:scale-105"
                     unoptimized

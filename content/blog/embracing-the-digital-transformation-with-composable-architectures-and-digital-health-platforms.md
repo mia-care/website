@@ -1,11 +1,11 @@
 ---
 title: "Embracing the Digital Transformation with Composable Architectures and Digital Health Platforms"
 slug: "embracing-the-digital-transformation-with-composable-architectures-and-digital-health-platforms"
-description: "Healthcare IT managers and CIOs face a monumental challenge: enhancing technology performance while managing costs effectively. Digital transformation has "
-seoTitle: "Embracing the Digital Transformation with Composable Arch…"
+description: "Healthcare IT leaders must modernize without ballooning costs. Discover how composable architecture and Digital Health Platforms make it possible."
+seoTitle: "Composable Architectures for Digital Health Platforms"
 date: "2023-09-01"
 modified: "2023-11-20"
-author: "mia-care"
+author: "marzio-ghezzi"
 categories: ["composable-technology"]
 featuredImage: "/blog/images/embracing-the-digital-transformation-with-composable-architectures-and-digital-health-platforms.webp"
 featuredImageAlt: "Embracing the Digital Transformation with Composable Architectures and Digital Health Platforms"

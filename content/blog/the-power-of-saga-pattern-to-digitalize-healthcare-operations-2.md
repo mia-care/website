@@ -1,7 +1,7 @@
 ---
 title: "Augmented Reality and Cloud Platforms for Healthcare 4.0"
 slug: "the-power-of-saga-pattern-to-digitalize-healthcare-operations-2"
-description: "Healthcare 4.0 enabling technologies The technological landscape that enables Healthcare 4.0 is wide and constantly evolving: Big Data Analytics, the [&hel"
+description: "Healthcare 4.0 relies on a wide range of enabling technologies. Discover how Mia-Care and JoinPad combine digital platforms with Augmented Reality."
 seoTitle: "Augmented Reality and Cloud Platforms for Healthcare 4.0"
 date: "2022-05-10"
 modified: "2023-11-08"

@@ -14,9 +14,10 @@ import { WhoWeServe } from "@/components/sections/home/WhoWeServe";
 import { SITE } from "@/data/site";
 
 export const metadata: Metadata = {
-  title: "P4SaMD: Compliant SaMD Development Platform — Mia-Care",
+  title: { absolute: "P4SaMD: Compliant SaMD Development Platform — Mia-Care" },
   description:
     "P4SaMD embeds IEC 62304, EU MDR, EU AI Act, and GAMP 5 compliance directly into your SDLC. Build, certify, and evolve regulated medical software up to 3x faster.",
+  alternates: { canonical: "/" },
 };
 
 const organizationId = `${SITE.url}/#organization`;

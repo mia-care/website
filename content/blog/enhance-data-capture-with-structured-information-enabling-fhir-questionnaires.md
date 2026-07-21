@@ -1,11 +1,11 @@
 ---
 title: "Enhance Data Capture with Structured Information: Enabling FHIR Questionnaires  "
 slug: "enhance-data-capture-with-structured-information-enabling-fhir-questionnaires"
-description: "FHIR questionnaires and structured data capture tools are crucial in standardizing healthcare data exchange and promoting interoperability. By adhering to "
-seoTitle: "Enhance Data Capture with Structured Information: Enablin…"
+description: "FHIR questionnaires standardize how healthcare data is captured and exchanged. Learn the benefits and best practices for structured data capture."
+seoTitle: "Enhance Data Capture with FHIR Questionnaires"
 date: "2024-03-27"
 modified: "2024-04-16"
-author: "mia-care"
+author: "dario-esposito"
 categories: ["technology-application"]
 featuredImage: "/blog/images/enhance-data-capture-with-structured-information-enabling-fhir-questionnaires.svg"
 featuredImageAlt: "Enhance Data Capture with Structured Information: Enabling FHIR Questionnaires  "

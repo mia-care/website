@@ -1,11 +1,11 @@
 ---
 title: "From Classification to Compliance: A Comprehensive Guide for SaMD Development"
 slug: "from-classification-to-compliance-a-comprehensive-guide-for-samd-development"
-description: "Developing Software as a Medical Device (SaMD) requires a well-structured approach that begins with classification and extends through a complex …"
-seoTitle: "From Classification to Compliance: A Comprehensive Guide …"
+description: "SaMD development starts with classification and ends with certification. This guide walks through the key steps, from IEC 62304 to EU MDR classes."
+seoTitle: "From Classification to Compliance: A SaMD Guide"
 date: "2023-09-15"
 modified: "2024-06-04"
-author: "mia-care"
+author: "dario-esposito"
 categories: ["technology-application"]
 featuredImage: "/blog/images/from-classification-to-compliance-a-comprehensive-guide-for-samd-development.webp"
 featuredImageAlt: "From Classification to Compliance: A Comprehensive Guide for SaMD Development"

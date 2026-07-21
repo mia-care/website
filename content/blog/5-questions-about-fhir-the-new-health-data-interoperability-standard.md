@@ -1,11 +1,11 @@
 ---
 title: "5 Questions about FHIR: the new health data interoperability standard"
 slug: "5-questions-about-fhir-the-new-health-data-interoperability-standard"
-description: "In a world more interconnected and digitalized, the value of an ecosystem that enables interaction among stakeholders is unprecedently relevant. …"
-seoTitle: "5 Questions about FHIR: the new health data interoperabil…"
+description: "FHIR is transforming healthcare data exchange. Discover what it is, its real-world benefits and challenges, and how Italy is adopting it through FSE 2.0."
+seoTitle: "5 Questions About FHIR: The New Interoperability Standard"
 date: "2023-03-06"
 modified: "2023-09-05"
-author: "mia-care"
+author: "dario-esposito"
 categories: ["technology-application"]
 featuredImage: "/blog/images/5-questions-about-fhir-the-new-health-data-interoperability-standard.webp"
 featuredImageAlt: "5 Questions about FHIR: the new health data interoperability standard"

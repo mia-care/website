@@ -1,6 +1,6 @@
 "use client";
 
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { SearchBar } from "@/components/common/SearchBar";
 import type { BlogCategory } from "@/data/blog-categories";
@@ -12,11 +12,19 @@ const POSTS_PER_PAGE = 9;
 export function BlogGrid({ posts, categories }: { posts: PostMeta[]; categories: BlogCategory[] }) {
   const router = useRouter();
   const pathname = usePathname();
-  const searchParams = useSearchParams();
 
-  const activeCategory = searchParams.get("category") ?? "all";
-  const query = searchParams.get("q") ?? "";
+  // Default to unfiltered (not read via useSearchParams): that hook forces this whole
+  // component out of the static HTML during export. Filter state is synced from the
+  // URL client-side after mount, so search/filter deep-links still work post-hydration.
+  const [activeCategory, setActiveCategory] = useState("all");
+  const [query, setQuery] = useState("");
   const [page, setPage] = useState(1);
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    setActiveCategory(params.get("category") ?? "all");
+    setQuery(params.get("q") ?? "");
+  }, []);
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: intentionally reset page when filters change
   useEffect(() => {
@@ -24,7 +32,7 @@ export function BlogGrid({ posts, categories }: { posts: PostMeta[]; categories:
   }, [query, activeCategory]);
 
   function setParam(key: string, value: string | null) {
-    const params = new URLSearchParams(searchParams.toString());
+    const params = new URLSearchParams(window.location.search);
     if (!value) {
       params.delete(key);
     } else {
@@ -32,6 +40,8 @@ export function BlogGrid({ posts, categories }: { posts: PostMeta[]; categories:
     }
     const qs = params.toString();
     router.replace(`${pathname}${qs ? `?${qs}` : ""}`, { scroll: false });
+    if (key === "category") setActiveCategory(value ?? "all");
+    if (key === "q") setQuery(value ?? "");
   }
 
   function handleCategory(slug: string) {

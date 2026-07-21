@@ -1,14 +1,17 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { CtaBanner } from "@/components/common/CtaBanner";
+import { JsonLd } from "@/components/common/JsonLd";
 import { PillTag } from "@/components/common/PillTag";
 
 export const metadata: Metadata = {
-  title: "Plans — P4SaMD",
+  title: { absolute: "Plans — P4SaMD" },
+  alternates: { canonical: "/plans" },
   description:
     "Choose how you adopt P4SaMD. Standard, Professional, or Unlimited — flexible plans for every stage of your SaMD journey.",
 };
 
+// Keep public/pricing.md in sync if these tiers change — it's a plain-text mirror for AI agents.
 const TIERS = [
   {
     name: "Standard",
@@ -139,9 +142,23 @@ const FAQ = [
   },
 ];
 
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: FAQ.map((item) => ({
+    "@type": "Question",
+    name: item.q,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: item.a,
+    },
+  })),
+};
+
 export default function PlansPage() {
   return (
     <>
+      <JsonLd schema={faqSchema} />
       {/* Hero */}
       <section className="pt-20 pb-16" style={{ background: "var(--bg-base)" }}>
         <div className="max-w-3xl mx-auto px-4 sm:px-6 text-center">

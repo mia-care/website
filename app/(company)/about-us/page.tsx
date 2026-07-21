@@ -6,7 +6,8 @@ import { PillTag } from "@/components/common/PillTag";
 import { BASE_PATH } from "@/lib/utils";
 
 export const metadata: Metadata = {
-  title: "About Us — Mia-Care",
+  title: { absolute: "About Us — Mia-Care" },
+  alternates: { canonical: "/about-us" },
   description:
     "Mia Care is a health tech company headquartered in Milan, Italy, building the AI-native compliance platform for Software as a Medical Device.",
 };

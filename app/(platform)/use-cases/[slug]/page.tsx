@@ -26,8 +26,9 @@ export async function generateMetadata({
   const uc = getUseCaseBySlug(slug);
   if (!uc) return {};
   return {
-    title: uc.seo.title,
+    title: { absolute: uc.seo.title },
     description: uc.seo.description,
+    alternates: { canonical: `/use-cases/${uc.slug}` },
     openGraph: {
       title: uc.seo.title,
       description: uc.seo.description,

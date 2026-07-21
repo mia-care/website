@@ -14,16 +14,13 @@ const PAGE_DATES: Record<string, string> = {
   "/": "2026-04-26",
   "/product": "2026-04-26",
   "/plans": "2026-05-08",
-  "/pricing": "2026-04-26",
   "/request-demo": "2026-04-26",
   "/about-us": "2026-04-26",
-  "/newsroom": "2026-04-26",
   "/careers": "2026-04-26",
   "/certifications": "2026-04-26",
   "/sustainability": "2026-04-26",
   "/resources": "2026-04-26",
   "/resources/blog": "2026-04-26",
-  "/resources/docs": "2026-04-26",
 };
 
 // Capabilities, use-cases, competence-center: update when data in /data/*.ts changes
@@ -45,12 +42,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     {
-      url: `${BASE}/pricing`,
-      lastModified: PAGE_DATES["/pricing"],
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
-    {
       url: `${BASE}/request-demo`,
       lastModified: PAGE_DATES["/request-demo"],
       changeFrequency: "monthly",
@@ -61,12 +52,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: PAGE_DATES["/about-us"],
       changeFrequency: "monthly",
       priority: 0.6,
-    },
-    {
-      url: `${BASE}/newsroom`,
-      lastModified: PAGE_DATES["/newsroom"],
-      changeFrequency: "weekly",
-      priority: 0.5,
     },
     {
       url: `${BASE}/careers`,
@@ -97,12 +82,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: PAGE_DATES["/resources/blog"],
       changeFrequency: "weekly",
       priority: 0.6,
-    },
-    {
-      url: `${BASE}/resources/docs`,
-      lastModified: PAGE_DATES["/resources/docs"],
-      changeFrequency: "weekly",
-      priority: 0.7,
     },
   ];
 

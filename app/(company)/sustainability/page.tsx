@@ -5,7 +5,8 @@ import { GenderEqualityCertification } from "@/components/common/GenderEqualityC
 import { PillTag } from "@/components/common/PillTag";
 
 export const metadata: Metadata = {
-  title: "Sustainability — Our Commitment to Responsible Technology | Mia-Care",
+  title: { absolute: "Sustainability — Our Commitment to Responsible Technology | Mia-Care" },
+  alternates: { canonical: "/sustainability" },
   description:
     "Discover Mia-Care's commitment to sustainable development across economic, environmental, and social pillars, aligned with the UN 2030 Agenda.",
 };

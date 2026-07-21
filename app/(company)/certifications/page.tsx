@@ -6,7 +6,8 @@ import { PillTag } from "@/components/common/PillTag";
 import { BASE_PATH } from "@/lib/utils";
 
 export const metadata: Metadata = {
-  title: "Certifications — Digital Products Made in Quality | Mia-Care",
+  title: { absolute: "Certifications — Digital Products Made in Quality | Mia-Care" },
+  alternates: { canonical: "/certifications" },
   description:
     "Mia-Care holds ISO 13485, ISO 27001 and ISO 9001 certifications, demonstrating our commitment to quality, information security, and medical software compliance.",
 };

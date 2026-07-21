@@ -1,8 +1,8 @@
 ---
 title: "New digital technologies that are disrupting Life Science industry"
 slug: "key-insights-from-digital-innovation-observatories-congress-on-life-science"
-description: "In July, we participated in the Digital Innovation Observatories Congress with the title “Life Science: cavalcare l’onda dell’innovazione”. This Observator"
-seoTitle: "New digital technologies that are disrupting Life Science…"
+description: "From Digital Therapeutics to biosensors, discover the technologies reshaping Life Science, based on insights from the Digital Innovation Observatory."
+seoTitle: "New Digital Technologies Disrupting Life Science"
 date: "2022-07-28"
 modified: "2023-02-16"
 author: "mia-care"

@@ -129,17 +129,7 @@ export function WhoWeServe() {
             </div>
           ))}
         </div>
-        <div className="flex flex-col sm:flex-row justify-center gap-3">
-          <Link
-            href="/use-cases"
-            className="inline-flex items-center justify-center h-11 px-6 rounded-lg font-semibold text-sm transition-colors hover:opacity-80 w-full sm:w-auto"
-            style={{
-              border: "1px solid var(--bg-border-strong)",
-              color: "var(--text-primary)",
-            }}
-          >
-            Explore Use Cases →
-          </Link>
+        <div className="flex justify-center">
           <Link
             href="/product"
             className="inline-flex items-center justify-center h-11 px-6 rounded-lg font-semibold text-sm bg-brand-gradient text-bg-base transition-opacity hover:opacity-90 w-full sm:w-auto"

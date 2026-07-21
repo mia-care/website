@@ -1,11 +1,11 @@
 ---
 title: "Top Tech Predictions in Healthcare for 2024"
 slug: "top-tech-predictions-in-healthcare-for-2024"
-description: "In the ever-evolving landscape of healthcare, the year 2024 promises to be a critical turning point for a confluence of …"
+description: "From telemedicine to digital twins, discover the technologies set to define healthcare in 2024 and what they mean for patient care and access."
 seoTitle: "Top Tech Predictions in Healthcare for 2024"
 date: "2023-11-14"
 modified: "2024-02-22"
-author: "mia-care"
+author: "marzio-ghezzi"
 categories: ["industry-key-insights"]
 featuredImage: "/blog/images/top-tech-predictions-in-healthcare-for-2024.svg"
 featuredImageAlt: "Top Tech Predictions in Healthcare for 2024"

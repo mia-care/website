@@ -142,7 +142,7 @@ export default async function ThankYouPage({ params }: { params: Promise<{ slug:
                     {r.featuredImage && (
                       <Image
                         src={assetPath(r.featuredImage)}
-                        alt=""
+                        alt={r.title}
                         fill
                         className="object-cover transition-transform duration-300 group-hover:scale-105"
                         unoptimized

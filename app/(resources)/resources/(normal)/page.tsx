@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Suspense } from "react";
 import { CtaBanner } from "@/components/common/CtaBanner";
 import { PillTag } from "@/components/common/PillTag";
 import { ResourceGrid } from "@/components/competence-center/ResourceGrid";
@@ -46,9 +45,7 @@ export default function ResourcesPage() {
 
       <section className="py-16" style={{ borderTop: "1px solid var(--bg-border)" }}>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <Suspense fallback={<div className="h-64" />}>
-            <ResourceGrid resources={resources} />
-          </Suspense>
+          <ResourceGrid resources={resources} />
         </div>
       </section>
 

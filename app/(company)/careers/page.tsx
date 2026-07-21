@@ -5,9 +5,10 @@ import { JobAccordion } from "@/components/sections/careers/JobAccordion";
 import { getAllJobs } from "@/lib/jobs";
 
 export const metadata: Metadata = {
-  title: "Careers — Join the Healthcare Revolution | Mia-Care",
+  title: { absolute: "Careers — Join the Healthcare Revolution | Mia-Care" },
+  alternates: { canonical: "/careers" },
   description:
-    "Join Mia-Care and help build the AI-native compliance platform for Software as a Medical Device. Open positions in Milan: Solution Architect, CSM, Product Owner, Software Engineer.",
+    "Join Mia-Care and help build the AI-native compliance platform for Software as a Medical Device. Open roles in Milan across engineering and product.",
 };
 
 const VALUES = [

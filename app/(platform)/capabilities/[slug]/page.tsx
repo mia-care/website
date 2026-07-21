@@ -35,8 +35,9 @@ export async function generateMetadata({
   const cap = getCapabilityBySlug(slug);
   if (!cap) return {};
   return {
-    title: cap.seo.title,
+    title: { absolute: cap.seo.title },
     description: cap.seo.description,
+    alternates: { canonical: `/capabilities/${cap.slug}` },
     openGraph: {
       title: cap.seo.title,
       description: cap.seo.description,

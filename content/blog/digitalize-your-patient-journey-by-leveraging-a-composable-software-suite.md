@@ -1,11 +1,11 @@
 ---
 title: "Digitalize Your Patient Journey By Leveraging A Composable Software Suite"
 slug: "digitalize-your-patient-journey-by-leveraging-a-composable-software-suite"
-description: "Building an efficient digital structure to manage the patient journey is not easy. Healthcare providers need to analyze processes, understand …"
-seoTitle: "Digitalize Your Patient Journey By Leveraging A Composabl…"
+description: "A connected patient journey needs the right digital foundation. See how a composable software suite helps healthcare providers build one."
+seoTitle: "Digitalize the Patient Journey with Composable Software"
 date: "2022-09-08"
 modified: "2023-02-16"
-author: "mia-care"
+author: "roberta-egoriti"
 categories: ["composable-technology"]
 featuredImage: "/blog/images/digitalize-your-patient-journey-by-leveraging-a-composable-software-suite.webp"
 featuredImageAlt: "Digitalize Your Patient Journey By Leveraging A Composable Software Suite"

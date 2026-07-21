@@ -1,11 +1,11 @@
 ---
 title: "The rise of Healthcare Digital Platforms &#8211; thoughts from our CEO"
 slug: "the-rise-of-healthcare-digital-platforms"
-description: "There is no doubt about it: Digitalization has transformed our day-to-day lives. Hardly an hour goes by when we do …"
-seoTitle: "The rise of Healthcare Digital Platforms &#8211; thoughts…"
+description: "Digital platforms are reshaping how healthcare is delivered. Mia-Care's CEO shares his view on where the industry is headed next."
+seoTitle: "The Rise of Healthcare Digital Platforms"
 date: "2022-06-05"
 modified: "2023-02-10"
-author: "mia-care"
+author: "marzio-ghezzi"
 categories: ["industry-key-insights"]
 featuredImage: "/blog/images/the-rise-of-healthcare-digital-platforms.webp"
 featuredImageAlt: "The rise of Healthcare Digital Platforms &#8211; thoughts from our CEO"

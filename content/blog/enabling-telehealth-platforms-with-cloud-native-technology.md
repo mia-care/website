@@ -1,11 +1,11 @@
 ---
 title: "Enabling Telehealth Platforms with Cloud‑Native Technology"
 slug: "enabling-telehealth-platforms-with-cloud-native-technology"
-description: "The rapid adoption of cloud-native technology has accelerated the diffusion of telehealth, as healthcare providers and patients sought safe, remote [&helli"
+description: "Cloud-native technology is powering the growth of telehealth. See how microservices architecture makes remote care platforms scalable and resilient."
 seoTitle: "Enabling Telehealth Platforms with Cloud‑Native Technology"
 date: "2024-05-24"
 modified: "2024-05-24"
-author: "mia-care"
+author: "dario-esposito"
 categories: ["technology-application"]
 featuredImage: "/blog/images/enabling-telehealth-platforms-with-cloud-native-technology.webp"
 featuredImageAlt: "Enabling Telehealth Platforms with Cloud‑Native Technology"
