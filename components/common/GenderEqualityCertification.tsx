@@ -1,7 +1,21 @@
 import Image from "next/image";
 import { BASE_PATH } from "@/lib/utils";
 
-export function GenderEqualityCertification() {
+const COPY = {
+  en: {
+    title: "UNI/PdR 125:2022 — Gender Equality Certification",
+    body: "Mia-Care has been certified for being in compliance with the standard requirements UNI/PdR 125:2022, which guarantee gender equality in the workplace. The assessment covers design, development, testing, marketing, production and maintenance of cloud software for the healthcare and life sciences sector.",
+    viewCertificate: "View Certificate",
+  },
+  it: {
+    title: "UNI/PdR 125:2022 — Certificazione sulla Parità di Genere",
+    body: "Mia-Care è certificata per la conformità ai requisiti dello standard UNI/PdR 125:2022, che garantisce la parità di genere sul luogo di lavoro. La valutazione copre progettazione, sviluppo, testing, marketing, produzione e manutenzione di software cloud per il settore sanitario e delle life science.",
+    viewCertificate: "Visualizza Certificato",
+  },
+};
+
+export function GenderEqualityCertification({ locale = "en" }: { locale?: "en" | "it" }) {
+  const t = COPY[locale];
   return (
     <section
       className="py-16"
@@ -16,16 +30,13 @@ export function GenderEqualityCertification() {
             className="font-display font-bold text-lg mb-2"
             style={{ color: "var(--text-primary)" }}
           >
-            UNI/PdR 125:2022 — Gender Equality Certification
+            {t.title}
           </h3>
           <p
             className="text-sm mb-4 max-w-lg"
             style={{ color: "var(--text-secondary)", lineHeight: 1.8 }}
           >
-            Mia-Care has been certified for being in compliance with the standard requirements
-            UNI/PdR 125:2022, which guarantee gender equality in the workplace. The assessment
-            covers design, development, testing, marketing, production and maintenance of cloud
-            software for the healthcare and life sciences sector.
+            {t.body}
           </p>
           <a
             href="/downloads/certifications/Certificato UNI PdR 125.pdf"
@@ -34,7 +45,7 @@ export function GenderEqualityCertification() {
             className="inline-flex items-center gap-1.5 text-xs font-semibold"
             style={{ color: "var(--brand-green)" }}
           >
-            View Certificate
+            {t.viewCertificate}
             <svg
               width="12"
               height="12"

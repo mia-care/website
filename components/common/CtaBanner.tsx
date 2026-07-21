@@ -1,6 +1,32 @@
 import Link from "next/link";
 
-export function CtaBanner() {
+const COPY = {
+  en: {
+    heading: (
+      <>
+        Ready to ship <br />
+        compliant software faster?
+      </>
+    ),
+    body: "See how P4SaMD fits into your development workflow.",
+    cta: "Request a Demo →",
+    ctaHref: "/request-demo",
+  },
+  it: {
+    heading: (
+      <>
+        Pronto a spedire <br />
+        software conforme più velocemente?
+      </>
+    ),
+    body: "Scopri come P4SaMD si integra nel tuo workflow di sviluppo.",
+    cta: "Richiedi una Demo →",
+    ctaHref: "/it/richiedi-demo",
+  },
+};
+
+export function CtaBanner({ locale = "en" }: { locale?: "en" | "it" }) {
+  const t = COPY[locale];
   return (
     <section
       className="relative overflow-hidden py-14 md:py-24"
@@ -27,19 +53,16 @@ export function CtaBanner() {
       />
 
       <div className="relative max-w-3xl mx-auto px-4 sm:px-6 text-center">
-        <h2 className="heading-section mb-4">
-          Ready to ship <br />
-          compliant software faster?
-        </h2>
+        <h2 className="heading-section mb-4">{t.heading}</h2>
         <p className="text-lg mb-10" style={{ color: "var(--text-secondary)" }}>
-          See how P4SaMD fits into your development workflow.
+          {t.body}
         </p>
         <Link
-          href="/request-demo"
+          href={t.ctaHref}
           className="inline-flex items-center h-13 px-8 rounded-lg font-semibold text-base bg-brand-gradient text-bg-base transition-opacity hover:opacity-90"
           style={{ height: 52 }}
         >
-          Request a Demo →
+          {t.cta}
         </Link>
       </div>
     </section>

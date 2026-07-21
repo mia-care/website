@@ -26,79 +26,69 @@ const PAGE_DATES: Record<string, string> = {
 // Capabilities, use-cases, competence-center: update when data in /data/*.ts changes
 const DATA_LAST_MODIFIED = "2026-04-26";
 
+type Entry = MetadataRoute.Sitemap[number];
+
+// A static page and its /it counterpart, both already built — see the
+// pairing rule in CONTEXT.md and docs/adr/0001-*.md. Only pair entries
+// whose /it page actually exists; an unbuilt one would hreflang to a 404.
+function localePair(
+  enPath: string,
+  itPath: string,
+  opts: { lastModified: string; changeFrequency: Entry["changeFrequency"]; priority: number },
+): Entry[] {
+  const enUrl = enPath === "/" ? BASE : `${BASE}${enPath}`;
+  const itUrl = `${BASE}${itPath}`;
+  const alternates = { languages: { en: enUrl, it: itUrl, "x-default": enUrl } };
+  return [
+    { url: enUrl, ...opts, alternates },
+    { url: itUrl, ...opts, alternates },
+  ];
+}
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticPages: MetadataRoute.Sitemap = [
-    {
-      url: BASE,
+    ...localePair("/", "/it", {
       lastModified: PAGE_DATES["/"],
       changeFrequency: "weekly",
       priority: 1,
-      // Only the homepage has a real /it counterpart so far — see Batch 0
-      // in docs/adr/0001-italian-locale-subdirectory-mirrored-layouts.md.
-      // Add alternates to other entries only once their /it page exists.
-      alternates: {
-        languages: {
-          en: BASE,
-          it: `${BASE}/it`,
-          "x-default": BASE,
-        },
-      },
-    },
-    {
-      url: `${BASE}/it`,
-      lastModified: PAGE_DATES["/"],
-      changeFrequency: "weekly",
-      priority: 1,
-      alternates: {
-        languages: {
-          en: BASE,
-          it: `${BASE}/it`,
-          "x-default": BASE,
-        },
-      },
-    },
+    }),
     {
       url: `${BASE}/product`,
       lastModified: PAGE_DATES["/product"],
       changeFrequency: "monthly",
       priority: 0.9,
     },
-    {
-      url: `${BASE}/plans`,
+    ...localePair("/plans", "/it/piani", {
       lastModified: PAGE_DATES["/plans"],
       changeFrequency: "monthly",
       priority: 0.8,
-    },
-    {
-      url: `${BASE}/request-demo`,
+    }),
+    ...localePair("/request-demo", "/it/richiedi-demo", {
       lastModified: PAGE_DATES["/request-demo"],
       changeFrequency: "monthly",
       priority: 0.9,
-    },
-    {
-      url: `${BASE}/about-us`,
+    }),
+    ...localePair("/about-us", "/it/chi-siamo", {
       lastModified: PAGE_DATES["/about-us"],
       changeFrequency: "monthly",
       priority: 0.6,
-    },
+    }),
     {
       url: `${BASE}/careers`,
       lastModified: PAGE_DATES["/careers"],
       changeFrequency: "weekly",
       priority: 0.5,
     },
-    {
-      url: `${BASE}/certifications`,
+    ...localePair("/certifications", "/it/certificazioni", {
       lastModified: PAGE_DATES["/certifications"],
       changeFrequency: "monthly",
       priority: 0.5,
-    },
-    {
-      url: `${BASE}/sustainability`,
+    }),
+    ...localePair("/sustainability", "/it/sostenibilita", {
       lastModified: PAGE_DATES["/sustainability"],
       changeFrequency: "monthly",
       priority: 0.4,
-    },
+    }),
     {
       url: `${BASE}/resources`,
       lastModified: PAGE_DATES["/resources"],
