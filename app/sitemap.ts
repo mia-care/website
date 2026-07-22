@@ -102,19 +102,21 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ];
 
-  const capabilityPages: MetadataRoute.Sitemap = capabilities.map((cap) => ({
-    url: `${BASE}/capabilities/${cap.slug}`,
-    lastModified: DATA_LAST_MODIFIED,
-    changeFrequency: "monthly" as const,
-    priority: 0.85,
-  }));
+  const capabilityPages: MetadataRoute.Sitemap = capabilities.flatMap((cap) =>
+    localePair(`/capabilities/${cap.slug}`, `/it/capabilities/${cap.slug}`, {
+      lastModified: DATA_LAST_MODIFIED,
+      changeFrequency: "monthly",
+      priority: 0.85,
+    }),
+  );
 
-  const useCasePages: MetadataRoute.Sitemap = useCases.map((uc) => ({
-    url: `${BASE}/use-cases/${uc.slug}`,
-    lastModified: DATA_LAST_MODIFIED,
-    changeFrequency: "monthly" as const,
-    priority: 0.8,
-  }));
+  const useCasePages: MetadataRoute.Sitemap = useCases.flatMap((uc) =>
+    localePair(`/use-cases/${uc.slug}`, `/it/use-cases/${uc.slug}`, {
+      lastModified: DATA_LAST_MODIFIED,
+      changeFrequency: "monthly",
+      priority: 0.8,
+    }),
+  );
 
   const resourcePages: MetadataRoute.Sitemap = getAllResources().map((r) => ({
     url: `${BASE}/resources/${r.slug}`,

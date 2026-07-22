@@ -4,83 +4,202 @@ import { useEffect, useRef, useState } from "react";
 import { NAV_ICONS, PlatformShell } from "@/components/common/capability-svgs/PlatformShell";
 import { PillTag } from "@/components/common/PillTag";
 
-const REQS = [
-  {
-    id: "SRS-001",
-    text: "The system shall continuously monitor ECG data and classify cardiac rhythms using an AI inference model.",
-    issue: false,
-  },
-  {
-    id: "SRS-002",
-    text: "The system shall alert clinicians within 3 seconds of detecting a life-threatening arrhythmia event.",
-    issue: true,
-  },
-  {
-    id: "SRS-003",
-    text: "The AI model shall log all inference outputs with a UTC timestamp and a confidence score.",
-    issue: false,
-  },
-  {
-    id: "SRS-004",
-    text: "The system shall support FHIR-compliant export of diagnostic reports to connected EHR systems.",
-    issue: true,
-  },
-  {
-    id: "SRS-005",
-    text: "The AI model shall achieve a minimum sensitivity of 97% on the clinical validation dataset.",
-    issue: true,
-  },
-];
+const REQS = {
+  en: [
+    {
+      id: "SRS-001",
+      text: "The system shall continuously monitor ECG data and classify cardiac rhythms using an AI inference model.",
+      issue: false,
+    },
+    {
+      id: "SRS-002",
+      text: "The system shall alert clinicians within 3 seconds of detecting a life-threatening arrhythmia event.",
+      issue: true,
+    },
+    {
+      id: "SRS-003",
+      text: "The AI model shall log all inference outputs with a UTC timestamp and a confidence score.",
+      issue: false,
+    },
+    {
+      id: "SRS-004",
+      text: "The system shall support FHIR-compliant export of diagnostic reports to connected EHR systems.",
+      issue: true,
+    },
+    {
+      id: "SRS-005",
+      text: "The AI model shall achieve a minimum sensitivity of 97% on the clinical validation dataset.",
+      issue: true,
+    },
+  ],
+  it: [
+    {
+      id: "SRS-001",
+      text: "Il sistema deve monitorare continuamente i dati ECG e classificare i ritmi cardiaci usando un modello di inferenza AI.",
+      issue: false,
+    },
+    {
+      id: "SRS-002",
+      text: "Il sistema deve avvisare i clinici entro 3 secondi dal rilevamento di un evento aritmico life-threatening.",
+      issue: true,
+    },
+    {
+      id: "SRS-003",
+      text: "Il modello AI deve registrare tutti gli output di inferenza con timestamp UTC e un punteggio di confidenza.",
+      issue: false,
+    },
+    {
+      id: "SRS-004",
+      text: "Il sistema deve supportare l'export conforme FHIR dei referti diagnostici verso sistemi EHR connessi.",
+      issue: true,
+    },
+    {
+      id: "SRS-005",
+      text: "Il modello AI deve raggiungere una sensibilità minima del 97% sul dataset di validazione clinica.",
+      issue: true,
+    },
+  ],
+};
 
-const FINDINGS = [
-  {
-    icon: "⊗",
-    color: "#EF4444",
-    bg: "#FEF2F2",
-    border: "#FECACA",
-    borderLeft: "#EF4444",
-    reqId: "SRS-002",
-    title: "Missing upstream traceability",
-    body: "No linked system-level requirement found. IEC 62304 §5.2.1 mandates traceability from every software requirement to a system specification.",
-    tags: ["IEC 62304 §5.2.1", "ISO 13485 §7.3.3"],
-  },
-  {
-    icon: "⚠",
-    color: "#EA580C",
-    bg: "#FFF7ED",
-    border: "#FED7AA",
-    borderLeft: "#F97316",
-    reqId: "SRS-004",
-    title: "Incomplete acceptance criteria",
-    body: "FHIR export scope must specify the supported version (R4/R5) and validation profile. Ambiguous wording makes verification planning impossible.",
-    tags: ["IEC 62304 §5.2.2"],
-  },
-  {
-    icon: "⚠",
-    color: "#D97706",
-    bg: "#FFFBEB",
-    border: "#FDE68A",
-    borderLeft: "#F59E0B",
-    reqId: "SRS-005",
-    title: "Performance threshold unverifiable",
-    body: "97% sensitivity must reference the test dataset, confidence interval, and the ISO 14971 risk control it satisfies. Current wording cannot be objectively verified.",
-    tags: ["ISO 14971 §5.5", "IEC 62304 §5.2.5"],
-  },
-];
+const FINDINGS = {
+  en: [
+    {
+      icon: "⊗",
+      color: "#EF4444",
+      bg: "#FEF2F2",
+      border: "#FECACA",
+      borderLeft: "#EF4444",
+      reqId: "SRS-002",
+      title: "Missing upstream traceability",
+      body: "No linked system-level requirement found. IEC 62304 §5.2.1 mandates traceability from every software requirement to a system specification.",
+      tags: ["IEC 62304 §5.2.1", "ISO 13485 §7.3.3"],
+    },
+    {
+      icon: "⚠",
+      color: "#EA580C",
+      bg: "#FFF7ED",
+      border: "#FED7AA",
+      borderLeft: "#F97316",
+      reqId: "SRS-004",
+      title: "Incomplete acceptance criteria",
+      body: "FHIR export scope must specify the supported version (R4/R5) and validation profile. Ambiguous wording makes verification planning impossible.",
+      tags: ["IEC 62304 §5.2.2"],
+    },
+    {
+      icon: "⚠",
+      color: "#D97706",
+      bg: "#FFFBEB",
+      border: "#FDE68A",
+      borderLeft: "#F59E0B",
+      reqId: "SRS-005",
+      title: "Performance threshold unverifiable",
+      body: "97% sensitivity must reference the test dataset, confidence interval, and the ISO 14971 risk control it satisfies. Current wording cannot be objectively verified.",
+      tags: ["ISO 14971 §5.5", "IEC 62304 §5.2.5"],
+    },
+  ],
+  it: [
+    {
+      icon: "⊗",
+      color: "#EF4444",
+      bg: "#FEF2F2",
+      border: "#FECACA",
+      borderLeft: "#EF4444",
+      reqId: "SRS-002",
+      title: "Tracciabilità a monte mancante",
+      body: "Nessun requisito di sistema collegato trovato. IEC 62304 §5.2.1 impone la tracciabilità da ogni requisito software a una specifica di sistema.",
+      tags: ["IEC 62304 §5.2.1", "ISO 13485 §7.3.3"],
+    },
+    {
+      icon: "⚠",
+      color: "#EA580C",
+      bg: "#FFF7ED",
+      border: "#FED7AA",
+      borderLeft: "#F97316",
+      reqId: "SRS-004",
+      title: "Criteri di accettazione incompleti",
+      body: "L'ambito dell'export FHIR deve specificare la versione supportata (R4/R5) e il profilo di validazione. Una formulazione ambigua rende impossibile la pianificazione della verifica.",
+      tags: ["IEC 62304 §5.2.2"],
+    },
+    {
+      icon: "⚠",
+      color: "#D97706",
+      bg: "#FFFBEB",
+      border: "#FDE68A",
+      borderLeft: "#F59E0B",
+      reqId: "SRS-005",
+      title: "Soglia di performance non verificabile",
+      body: "La sensibilità del 97% deve fare riferimento al dataset di test, all'intervallo di confidenza e al controllo di rischio ISO 14971 che soddisfa. La formulazione attuale non può essere verificata oggettivamente.",
+      tags: ["ISO 14971 §5.5", "IEC 62304 §5.2.5"],
+    },
+  ],
+};
 
-const SDLC_NAV = [
-  { label: "Workflow Guide", icon: NAV_ICONS.workflowGuide },
-  { label: "Requirements", icon: NAV_ICONS.requirements, active: true },
-  { label: "Software System", icon: NAV_ICONS.softwareSystem },
-  { label: "Risk Management", icon: NAV_ICONS.riskAnalysis },
-];
+const SDLC_NAV = {
+  en: [
+    { label: "Workflow Guide", icon: NAV_ICONS.workflowGuide },
+    { label: "Requirements", icon: NAV_ICONS.requirements, active: true },
+    { label: "Software System", icon: NAV_ICONS.softwareSystem },
+    { label: "Risk Management", icon: NAV_ICONS.riskAnalysis },
+  ],
+  it: [
+    { label: "Guida al Workflow", icon: NAV_ICONS.workflowGuide },
+    { label: "Requisiti", icon: NAV_ICONS.requirements, active: true },
+    { label: "Sistema Software", icon: NAV_ICONS.softwareSystem },
+    { label: "Risk Management", icon: NAV_ICONS.riskAnalysis },
+  ],
+};
+
+const COPY = {
+  en: {
+    pill: "Whisper in Action",
+    heading: "Compliance intelligence at the point of engineering",
+    body: "Whisper reads your requirements as you write them, surfacing regulatory gaps before they become audit findings.",
+    breadcrumb: ["Mia-Care Dev", "App Cardio-Monitor", "Requirements"] as [string, string, string],
+    dashboard: "Dashboard",
+    docTitle: "Software Requirements Specification",
+    docMeta: "Cardio-Monitor App · v2.1 · IEC 62304 §5.2",
+    statusFound: (n: number) => `Whisper — ${n} issue${n !== 1 ? "s" : ""} found`,
+    statusAnalyzing: (id: string) => `Whisper is analyzing ${id}…`,
+    statusInit: "Initializing Whisper…",
+    contextualSuggestions: "Contextual suggestions",
+    model: "Model: GPT-4",
+    envLabel: "Cardio-Monitor · dev",
+    reading: "Reading requirements…",
+    flagged: (n: number) => `${n} issue${n !== 1 ? "s" : ""} flagged for review`,
+    askWhisper: "Ask Whisper…",
+  },
+  it: {
+    pill: "Whisper in Azione",
+    heading: "Intelligenza di compliance nel punto stesso dell'engineering",
+    body: "Whisper legge i tuoi requisiti mentre li scrivi, facendo emergere le lacune regolatorie prima che diventino non conformità in audit.",
+    breadcrumb: ["Mia-Care Dev", "App Cardio-Monitor", "Requisiti"] as [string, string, string],
+    dashboard: "Dashboard",
+    docTitle: "Specifica dei Requisiti Software",
+    docMeta: "App Cardio-Monitor · v2.1 · IEC 62304 §5.2",
+    statusFound: (n: number) =>
+      `Whisper — ${n} problem${n !== 1 ? "i" : "a"} trovat${n !== 1 ? "i" : "o"}`,
+    statusAnalyzing: (id: string) => `Whisper sta analizzando ${id}…`,
+    statusInit: "Inizializzazione di Whisper…",
+    contextualSuggestions: "Suggerimenti contestuali",
+    model: "Modello: GPT-4",
+    envLabel: "Cardio-Monitor · dev",
+    reading: "Lettura dei requisiti…",
+    flagged: (n: number) =>
+      `${n} problem${n !== 1 ? "i" : "a"} segnalat${n !== 1 ? "i" : "o"} per revisione`,
+    askWhisper: "Chiedi a Whisper…",
+  },
+};
 
 const SCAN_MS = 1000;
 const ISSUE_EXTRA_MS = 600;
 const HOLD_MS = 2500;
 const RESET_MS = 600;
 
-export function WhisperDemoSection() {
+export function WhisperDemoSection({ locale = "en" }: { locale?: "en" | "it" }) {
+  const t = COPY[locale];
+  const reqs = REQS[locale];
+  const findingsData = FINDINGS[locale];
+  const sdlcNav = SDLC_NAV[locale];
   const [scanIdx, setScanIdx] = useState<number>(-1);
   const [doneSet, setDoneSet] = useState<Set<number>>(new Set());
   const [flagSet, setFlagSet] = useState<Set<number>>(new Set());
@@ -91,8 +210,8 @@ export function WhisperDemoSection() {
   useEffect(() => {
     const clear = () => timers.current.forEach(clearTimeout);
     const later = (fn: () => void, ms: number) => {
-      const t = setTimeout(fn, ms);
-      timers.current.push(t);
+      const timer = setTimeout(fn, ms);
+      timers.current.push(timer);
     };
 
     const run = () => {
@@ -106,7 +225,7 @@ export function WhisperDemoSection() {
 
       let cursor = 300;
 
-      REQS.forEach((req, i) => {
+      reqs.forEach((req, i) => {
         later(() => setScanIdx(i), cursor);
         cursor += SCAN_MS;
 
@@ -131,7 +250,7 @@ export function WhisperDemoSection() {
 
     run();
     return clear;
-  }, []);
+  }, [reqs]);
 
   const rowState = (i: number) => {
     if (scanIdx === i) return "scanning";
@@ -159,16 +278,15 @@ export function WhisperDemoSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section header */}
         <div className="max-w-2xl mb-12">
-          <PillTag className="mb-6">Whisper in Action</PillTag>
+          <PillTag className="mb-6">{t.pill}</PillTag>
           <h2
             className="font-display font-bold mb-4"
             style={{ fontSize: "clamp(26px, 3vw, 40px)", letterSpacing: "-0.025em" }}
           >
-            Compliance intelligence at the point of engineering
+            {t.heading}
           </h2>
           <p className="text-base" style={{ color: "var(--text-secondary)", lineHeight: 1.75 }}>
-            Whisper reads your requirements as you write them, surfacing regulatory gaps before they
-            become audit findings.
+            {t.body}
           </p>
         </div>
 
@@ -178,9 +296,9 @@ export function WhisperDemoSection() {
           style={{ border: "1px solid var(--bg-border)" }}
         >
           <PlatformShell
-            breadcrumb={["Mia-Care Dev", "App Cardio-Monitor", "Requirements"]}
-            topItem={{ label: "Dashboard", icon: NAV_ICONS.dashboard }}
-            sections={[{ title: "SDLC", items: SDLC_NAV }]}
+            breadcrumb={t.breadcrumb}
+            topItem={{ label: t.dashboard, icon: NAV_ICONS.dashboard }}
+            sections={[{ title: "SDLC", items: sdlcNav }]}
           >
             <div style={{ display: "flex", height: "100%", overflow: "hidden" }}>
               {/* ── Main content area ── */}
@@ -208,11 +326,9 @@ export function WhisperDemoSection() {
                       <div
                         style={{ fontWeight: 700, fontSize: 14, color: "#0A0A0A", marginBottom: 2 }}
                       >
-                        Software Requirements Specification
+                        {t.docTitle}
                       </div>
-                      <div style={{ fontSize: 10, color: "#6B7280" }}>
-                        Cardio-Monitor App · v2.1 · IEC 62304 §5.2
-                      </div>
+                      <div style={{ fontSize: 10, color: "#6B7280" }}>{t.docMeta}</div>
                       <div style={{ marginTop: 12, height: 1, background: "#F3F4F6" }} />
                     </div>
 
@@ -273,16 +389,16 @@ export function WhisperDemoSection() {
                         }}
                       >
                         {isDone
-                          ? `Whisper — ${findings} issue${findings !== 1 ? "s" : ""} found`
+                          ? t.statusFound(findings)
                           : scanIdx >= 0
-                            ? `Whisper is analyzing ${REQS[scanIdx]?.id}…`
-                            : "Initializing Whisper…"}
+                            ? t.statusAnalyzing(reqs[scanIdx]?.id ?? "")
+                            : t.statusInit}
                       </span>
                     </div>
 
                     {/* Requirements list */}
                     <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
-                      {REQS.map((req, i) => {
+                      {reqs.map((req, i) => {
                         const state = rowState(i);
                         const s = {
                           scanning: {
@@ -468,7 +584,7 @@ export function WhisperDemoSection() {
                     </div>
                   </div>
                   <div style={{ fontSize: 9.5, color: "#737373", marginBottom: 8 }}>
-                    Contextual suggestions
+                    {t.contextualSuggestions}
                   </div>
                   <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
                     <div
@@ -484,7 +600,7 @@ export function WhisperDemoSection() {
                         gap: 3,
                       }}
                     >
-                      Model: GPT-4 <span style={{ fontSize: 7 }}>▾</span>
+                      {t.model} <span style={{ fontSize: 7 }}>▾</span>
                     </div>
                     <div
                       style={{
@@ -504,7 +620,7 @@ export function WhisperDemoSection() {
                           display: "inline-block",
                         }}
                       />
-                      Cardio-Monitor · dev
+                      {t.envLabel}
                     </div>
                   </div>
                 </div>
@@ -538,11 +654,11 @@ export function WhisperDemoSection() {
                           />
                         ))}
                       </div>
-                      <span style={{ fontSize: 10, color: "#9CA3AF" }}>Reading requirements…</span>
+                      <span style={{ fontSize: 10, color: "#9CA3AF" }}>{t.reading}</span>
                     </div>
                   )}
 
-                  {FINDINGS.slice(0, findings).map((f) => (
+                  {findingsData.slice(0, findings).map((f) => (
                     <div
                       key={f.reqId}
                       style={{
@@ -652,7 +768,7 @@ export function WhisperDemoSection() {
                         />
                       </svg>
                       <span style={{ fontSize: 10, color: "#059669", fontWeight: 500 }}>
-                        {findings} issue{findings !== 1 ? "s" : ""} flagged for review
+                        {t.flagged(findings)}
                       </span>
                     </div>
                   )}
@@ -672,7 +788,7 @@ export function WhisperDemoSection() {
                       gap: 8,
                     }}
                   >
-                    <span style={{ fontSize: 9.5, color: "#9CA3AF" }}>Ask Whisper…</span>
+                    <span style={{ fontSize: 9.5, color: "#9CA3AF" }}>{t.askWhisper}</span>
                     <div
                       style={{
                         width: 20,

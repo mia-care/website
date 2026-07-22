@@ -2,7 +2,13 @@ import { PillTag } from "@/components/common/PillTag";
 import type { UseCase } from "@/data/use-cases";
 import { ResultsGrid } from "./ResultsGrid";
 
-export function CaseStudyBlock({ uc }: { uc: UseCase }) {
+const COPY = {
+  en: { pill: "Case Study", scope: "Scope", outcomes: "Measured outcomes from the field." },
+  it: { pill: "Case Study", scope: "Ambito", outcomes: "Risultati misurati sul campo." },
+};
+
+export function CaseStudyBlock({ uc, locale = "en" }: { uc: UseCase; locale?: "en" | "it" }) {
+  const t = COPY[locale];
   const { caseStudy } = uc;
 
   return (
@@ -11,7 +17,7 @@ export function CaseStudyBlock({ uc }: { uc: UseCase }) {
       style={{ background: "var(--bg-surface)", borderTop: "1px solid var(--bg-border)" }}
     >
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        <PillTag className="mb-8">Case Study</PillTag>
+        <PillTag className="mb-8">{t.pill}</PillTag>
 
         {/* Quote */}
         <div
@@ -42,7 +48,7 @@ export function CaseStudyBlock({ uc }: { uc: UseCase }) {
             className="font-display font-semibold text-xl mb-5"
             style={{ color: "var(--text-primary)" }}
           >
-            Scope
+            {t.scope}
           </h3>
           <ul className="space-y-3">
             {caseStudy.scope.map((item) => (
@@ -67,7 +73,7 @@ export function CaseStudyBlock({ uc }: { uc: UseCase }) {
             className="font-display font-semibold text-xl mb-6"
             style={{ color: "var(--text-primary)" }}
           >
-            Measured outcomes from the field.
+            {t.outcomes}
           </h3>
           <ResultsGrid results={caseStudy.results} />
         </div>

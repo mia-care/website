@@ -1,11 +1,13 @@
 import { PillTag } from "@/components/common/PillTag";
 import type { Capability } from "@/data/capabilities";
 
-export function FeatureCards({ cap }: { cap: Capability }) {
+const PILL = { en: "Key Features", it: "Funzionalità Principali" };
+
+export function FeatureCards({ cap, locale = "en" }: { cap: Capability; locale?: "en" | "it" }) {
   return (
     <section className="py-20" style={{ background: "var(--bg-base)" }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <PillTag className="mb-8">Key Features</PillTag>
+        <PillTag className="mb-8">{PILL[locale]}</PillTag>
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {cap.features.map((feat) => (
             <div

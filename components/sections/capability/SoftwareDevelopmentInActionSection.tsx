@@ -7,36 +7,77 @@ import { SecureComponentLibrarySvg } from "@/components/common/capability-svgs/S
 import { SecureSoftwareItemsSvg } from "@/components/common/capability-svgs/SecureSoftwareItemsSvg";
 import { PillTag } from "@/components/common/PillTag";
 
-const TABS = [
-  {
-    label: "SBOM",
-    caption:
-      "Software Bill of Materials: every third-party dependency tracked, versioned, and continuously checked against the NVD, GitHub Advisory, and OSV databases. One new CVE disclosure triggers an immediate alert across every affected project.",
-    Component: SbomDashboardSvg,
-    wrapStyle: {} as React.CSSProperties,
+const TABS = {
+  en: [
+    {
+      label: "SBOM",
+      caption:
+        "Software Bill of Materials: every third-party dependency tracked, versioned, and continuously checked against the NVD, GitHub Advisory, and OSV databases. One new CVE disclosure triggers an immediate alert across every affected project.",
+      Component: SbomDashboardSvg,
+      wrapStyle: {} as React.CSSProperties,
+    },
+    {
+      label: "CVE Scan",
+      caption:
+        "Vulnerability scanner: automated CVSS-scored findings across the full dependency graph, with patch-ready upgrade paths surfaced inline. Critical findings are mapped to their IEC 81001-5-1 compliance impact before the team even opens the ticket.",
+      Component: CveScanSvg,
+      wrapStyle: {} as React.CSSProperties,
+    },
+    {
+      label: "Implementation Verification",
+      caption:
+        "Continuous verification of implementation against software specifications at every level (design files, code, and test artifacts), enabling early detection of anomalies before they propagate into the compliance record.",
+      Component: SecureComponentLibrarySvg,
+      wrapStyle: {} as React.CSSProperties,
+    },
+    {
+      label: "Software Items",
+      caption:
+        "Software item traceability: every component in the system hierarchy verified against its specification. The platform confirms each item is documented, tested, and compliant before it can advance through the IEC 62304 lifecycle.",
+      Component: SecureSoftwareItemsSvg,
+      wrapStyle: {} as React.CSSProperties,
+    },
+  ],
+  it: [
+    {
+      label: "SBOM",
+      caption:
+        "Software Bill of Materials: ogni dipendenza di terze parti tracciata, versionata e verificata continuamente rispetto ai database NVD, GitHub Advisory e OSV. Una nuova disclosure CVE attiva un alert immediato su tutti i progetti interessati.",
+      Component: SbomDashboardSvg,
+      wrapStyle: {} as React.CSSProperties,
+    },
+    {
+      label: "CVE Scan",
+      caption:
+        "Scanner delle vulnerabilità: risultati automatizzati con punteggio CVSS su tutto il grafo delle dipendenze, con percorsi di upgrade pronti da applicare mostrati in linea. I risultati critici sono mappati al loro impatto di compliance IEC 81001-5-1 ancora prima che il team apra il ticket.",
+      Component: CveScanSvg,
+      wrapStyle: {} as React.CSSProperties,
+    },
+    {
+      label: "Verifica dell'Implementazione",
+      caption:
+        "Verifica continua dell'implementazione rispetto alle specifiche software a ogni livello (file di design, codice e artefatti di test), permettendo il rilevamento precoce delle anomalie prima che si propaghino nel record di compliance.",
+      Component: SecureComponentLibrarySvg,
+      wrapStyle: {} as React.CSSProperties,
+    },
+    {
+      label: "Software Item",
+      caption:
+        "Tracciabilità dei software item: ogni componente nella gerarchia di sistema verificato rispetto alla propria specifica. La piattaforma conferma che ogni item sia documentato, testato e conforme prima di poter avanzare nel ciclo di vita IEC 62304.",
+      Component: SecureSoftwareItemsSvg,
+      wrapStyle: {} as React.CSSProperties,
+    },
+  ],
+};
+
+const COPY = {
+  en: { pill: "In Action", pauseAria: "Pause autoplay", resumeAria: "Resume autoplay" },
+  it: {
+    pill: "In Azione",
+    pauseAria: "Metti in pausa l'autoplay",
+    resumeAria: "Riprendi l'autoplay",
   },
-  {
-    label: "CVE Scan",
-    caption:
-      "Vulnerability scanner: automated CVSS-scored findings across the full dependency graph, with patch-ready upgrade paths surfaced inline. Critical findings are mapped to their IEC 81001-5-1 compliance impact before the team even opens the ticket.",
-    Component: CveScanSvg,
-    wrapStyle: {} as React.CSSProperties,
-  },
-  {
-    label: "Implementation Verification",
-    caption:
-      "Continuous verification of implementation against software specifications at every level (design files, code, and test artifacts), enabling early detection of anomalies before they propagate into the compliance record.",
-    Component: SecureComponentLibrarySvg,
-    wrapStyle: {} as React.CSSProperties,
-  },
-  {
-    label: "Software Items",
-    caption:
-      "Software item traceability: every component in the system hierarchy verified against its specification. The platform confirms each item is documented, tested, and compliant before it can advance through the IEC 62304 lifecycle.",
-    Component: SecureSoftwareItemsSvg,
-    wrapStyle: {} as React.CSSProperties,
-  },
-];
+};
 
 const AUTO_ROTATE_MS = 20_000;
 
@@ -57,7 +98,9 @@ function PlayIcon() {
   );
 }
 
-export function SoftwareDevelopmentInActionSection() {
+export function SoftwareDevelopmentInActionSection({ locale = "en" }: { locale?: "en" | "it" }) {
+  const t = COPY[locale];
+  const tabs = TABS[locale];
   const [active, setActive] = useState(0);
   const [isPlaying, setIsPlaying] = useState(true);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
@@ -69,19 +112,19 @@ export function SoftwareDevelopmentInActionSection() {
       return;
     }
     intervalRef.current = setInterval(() => {
-      setActive((prev) => (prev + 1) % TABS.length);
+      setActive((prev) => (prev + 1) % tabs.length);
     }, AUTO_ROTATE_MS);
     return () => {
       if (intervalRef.current) clearInterval(intervalRef.current);
     };
-  }, [isPlaying]);
+  }, [isPlaying, tabs.length]);
 
   const handleTabClick = (i: number) => {
     setActive(i);
     setIsPlaying(false);
   };
 
-  const { caption, Component, wrapStyle } = TABS[active];
+  const { caption, Component, wrapStyle } = tabs[active];
 
   return (
     <section
@@ -95,7 +138,7 @@ export function SoftwareDevelopmentInActionSection() {
         }
       `}</style>
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <PillTag className="mb-8">In Action</PillTag>
+        <PillTag className="mb-8">{t.pill}</PillTag>
 
         {/* Tab strip + play/pause */}
         <div className="mb-8 flex items-center gap-2">
@@ -118,9 +161,9 @@ export function SoftwareDevelopmentInActionSection() {
                 minWidth: "100%",
               }}
             >
-              {TABS.map((t, i) => (
+              {tabs.map((tab, i) => (
                 <button
-                  key={t.label}
+                  key={tab.label}
                   type="button"
                   onClick={() => handleTabClick(i)}
                   className="shrink-0 px-4 rounded-lg text-sm font-medium transition-all"
@@ -133,10 +176,10 @@ export function SoftwareDevelopmentInActionSection() {
                     boxShadow: active === i ? "0 1px 3px rgba(0,0,0,0.12)" : "none",
                   }}
                 >
-                  {t.label}
+                  {tab.label}
                   {active === i && isPlaying && (
                     <div
-                      key={t.label}
+                      key={tab.label}
                       style={{
                         position: "absolute",
                         bottom: 0,
@@ -159,7 +202,7 @@ export function SoftwareDevelopmentInActionSection() {
           <button
             type="button"
             onClick={() => setIsPlaying((p) => !p)}
-            aria-label={isPlaying ? "Pause autoplay" : "Resume autoplay"}
+            aria-label={isPlaying ? t.pauseAria : t.resumeAria}
             className="shrink-0 flex items-center justify-center transition-colors"
             style={{
               width: 44,

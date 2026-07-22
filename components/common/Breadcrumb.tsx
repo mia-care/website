@@ -7,7 +7,15 @@ type BreadcrumbItem = {
   href?: string;
 };
 
-export function Breadcrumb({ items }: { items: BreadcrumbItem[] }) {
+const ARIA_LABEL = { en: "Breadcrumb", it: "Percorso di navigazione" };
+
+export function Breadcrumb({
+  items,
+  locale = "en",
+}: {
+  items: BreadcrumbItem[];
+  locale?: "en" | "it";
+}) {
   const breadcrumbSchema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -23,7 +31,7 @@ export function Breadcrumb({ items }: { items: BreadcrumbItem[] }) {
     <>
       <JsonLd schema={breadcrumbSchema} />
       <nav
-        aria-label="Breadcrumb"
+        aria-label={ARIA_LABEL[locale]}
         className="border-b"
         style={{ borderColor: "var(--bg-border)", background: "var(--bg-base)" }}
       >

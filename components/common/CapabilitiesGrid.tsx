@@ -51,8 +51,7 @@ const COPY = {
     pauseAria: "Metti in pausa l'autoplay",
     resumeAria: "Riprendi l'autoplay",
     ofLabel: "di",
-    // TODO: point to /it/capabilities once detail pages are built (not in Batch 1 scope)
-    capabilitiesPrefix: "/capabilities",
+    capabilitiesPrefix: "/it/capabilities",
   },
 };
 

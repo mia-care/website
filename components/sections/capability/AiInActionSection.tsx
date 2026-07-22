@@ -6,20 +6,45 @@ import { PillTag } from "@/components/common/PillTag";
 
 type ScreenId = 0 | 1;
 
-const TABS: { label: string; caption: string; screen: ScreenId }[] = [
-  {
-    label: "System Design",
-    caption:
-      "System Design: component hierarchy of the AI Diagnostic Tool, with ML Anomaly Detection auto-identified as an AI Agent requiring a dedicated compliance lifecycle under EU AI Act and IEC 62304.",
-    screen: 0,
+const TABS: Record<"en" | "it", { label: string; caption: string; screen: ScreenId }[]> = {
+  en: [
+    {
+      label: "System Design",
+      caption:
+        "System Design: component hierarchy of the AI Diagnostic Tool, with ML Anomaly Detection auto-identified as an AI Agent requiring a dedicated compliance lifecycle under EU AI Act and IEC 62304.",
+      screen: 0,
+    },
+    {
+      label: "AI & Transparency",
+      caption:
+        "Arrhythmia Classifier: xAI robustness auditing with Faithfulness Tests. Explainability services assessed for fit-for-purpose against EU AI Act Art. 13 and MDR Annex I.",
+      screen: 1,
+    },
+  ],
+  it: [
+    {
+      label: "System Design",
+      caption:
+        "System Design: gerarchia dei componenti dell'AI Diagnostic Tool, con ML Anomaly Detection identificato automaticamente come AI Agent che richiede un ciclo di vita di compliance dedicato secondo EU AI Act e IEC 62304.",
+      screen: 0,
+    },
+    {
+      label: "AI & Trasparenza",
+      caption:
+        "Arrhythmia Classifier: audit di robustezza xAI con Faithfulness Test. Servizi di explainability valutati per l'idoneità allo scopo rispetto a EU AI Act Art. 13 e MDR Annex I.",
+      screen: 1,
+    },
+  ],
+};
+
+const COPY = {
+  en: { pill: "In Action", pauseAria: "Pause autoplay", resumeAria: "Resume autoplay" },
+  it: {
+    pill: "In Azione",
+    pauseAria: "Metti in pausa l'autoplay",
+    resumeAria: "Riprendi l'autoplay",
   },
-  {
-    label: "AI & Transparency",
-    caption:
-      "Arrhythmia Classifier: xAI robustness auditing with Faithfulness Tests. Explainability services assessed for fit-for-purpose against EU AI Act Art. 13 and MDR Annex I.",
-    screen: 1,
-  },
-];
+};
 
 const AUTO_ROTATE_MS = 20_000;
 
@@ -40,7 +65,9 @@ function PlayIcon() {
   );
 }
 
-export function AiInActionSection() {
+export function AiInActionSection({ locale = "en" }: { locale?: "en" | "it" }) {
+  const t = COPY[locale];
+  const tabs = TABS[locale];
   const [active, setActive] = useState(0);
   const [isPlaying, setIsPlaying] = useState(true);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
@@ -52,19 +79,19 @@ export function AiInActionSection() {
       return;
     }
     intervalRef.current = setInterval(() => {
-      setActive((prev) => (prev + 1) % TABS.length);
+      setActive((prev) => (prev + 1) % tabs.length);
     }, AUTO_ROTATE_MS);
     return () => {
       if (intervalRef.current) clearInterval(intervalRef.current);
     };
-  }, [isPlaying]);
+  }, [isPlaying, tabs.length]);
 
   const handleTabClick = (i: number) => {
     setActive(i);
     setIsPlaying(false);
   };
 
-  const { caption, screen } = TABS[active];
+  const { caption, screen } = tabs[active];
 
   return (
     <section
@@ -78,7 +105,7 @@ export function AiInActionSection() {
         }
       `}</style>
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <PillTag className="mb-8">In Action</PillTag>
+        <PillTag className="mb-8">{t.pill}</PillTag>
 
         {/* Tab strip + play/pause */}
         <div className="mb-8 flex items-center gap-2">
@@ -101,9 +128,9 @@ export function AiInActionSection() {
                 minWidth: "100%",
               }}
             >
-              {TABS.map((t, i) => (
+              {tabs.map((tab, i) => (
                 <button
-                  key={t.label}
+                  key={tab.label}
                   type="button"
                   onClick={() => handleTabClick(i)}
                   className="shrink-0 px-4 rounded-lg text-sm font-medium transition-all"
@@ -116,10 +143,10 @@ export function AiInActionSection() {
                     boxShadow: active === i ? "0 1px 3px rgba(0,0,0,0.12)" : "none",
                   }}
                 >
-                  {t.label}
+                  {tab.label}
                   {active === i && isPlaying && (
                     <div
-                      key={t.label}
+                      key={tab.label}
                       style={{
                         position: "absolute",
                         bottom: 0,
@@ -141,7 +168,7 @@ export function AiInActionSection() {
           <button
             type="button"
             onClick={() => setIsPlaying((p) => !p)}
-            aria-label={isPlaying ? "Pause autoplay" : "Resume autoplay"}
+            aria-label={isPlaying ? t.pauseAria : t.resumeAria}
             className="shrink-0 flex items-center justify-center transition-colors"
             style={{
               width: 44,

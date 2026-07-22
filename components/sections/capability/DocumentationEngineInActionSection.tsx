@@ -6,26 +6,57 @@ import { DocumentationEngineSvg } from "@/components/common/capability-svgs/Docu
 import { DocumentationTemplatesSvg } from "@/components/common/capability-svgs/DocumentationTemplatesSvg";
 import { PillTag } from "@/components/common/PillTag";
 
-const TABS = [
-  {
-    label: "Document Catalog",
-    caption:
-      "Document catalog: all DHF records grouped by category, with live status, version tracking, and one-click export across PDF, DOCX, and MD formats.",
-    Component: DocumentationEngineSvg,
+const TABS = {
+  en: [
+    {
+      label: "Document Catalog",
+      caption:
+        "Document catalog: all DHF records grouped by category, with live status, version tracking, and one-click export across PDF, DOCX, and MD formats.",
+      Component: DocumentationEngineSvg,
+    },
+    {
+      label: "Document Detail",
+      caption:
+        "Document detail: full revision history, regulatory references, linked artifacts, and one-click regeneration from live project data.",
+      Component: DocumentationDetailSvg,
+    },
+    {
+      label: "Custom Templates",
+      caption:
+        "Custom templates: write Markdown templates with interpolated variables that pull live project data at generation time, for any document your process requires.",
+      Component: DocumentationTemplatesSvg,
+    },
+  ],
+  it: [
+    {
+      label: "Catalogo Documenti",
+      caption:
+        "Catalogo documenti: tutti i record DHF raggruppati per categoria, con stato live, versionamento e export in un click nei formati PDF, DOCX e MD.",
+      Component: DocumentationEngineSvg,
+    },
+    {
+      label: "Dettaglio Documento",
+      caption:
+        "Dettaglio documento: storico completo delle revisioni, riferimenti normativi, artefatti collegati e rigenerazione in un click a partire dai dati live di progetto.",
+      Component: DocumentationDetailSvg,
+    },
+    {
+      label: "Template Personalizzati",
+      caption:
+        "Template personalizzati: scrivi template Markdown con variabili interpolate che recuperano i dati live di progetto al momento della generazione, per qualsiasi documento richieda il tuo processo.",
+      Component: DocumentationTemplatesSvg,
+    },
+  ],
+};
+
+const COPY = {
+  en: { pill: "In Action", pauseAria: "Pause autoplay", resumeAria: "Resume autoplay" },
+  it: {
+    pill: "In Azione",
+    pauseAria: "Metti in pausa l'autoplay",
+    resumeAria: "Riprendi l'autoplay",
   },
-  {
-    label: "Document Detail",
-    caption:
-      "Document detail: full revision history, regulatory references, linked artifacts, and one-click regeneration from live project data.",
-    Component: DocumentationDetailSvg,
-  },
-  {
-    label: "Custom Templates",
-    caption:
-      "Custom templates: write Markdown templates with interpolated variables that pull live project data at generation time, for any document your process requires.",
-    Component: DocumentationTemplatesSvg,
-  },
-];
+};
 
 const AUTO_ROTATE_MS = 18_000;
 
@@ -46,7 +77,9 @@ function PlayIcon() {
   );
 }
 
-export function DocumentationEngineInActionSection() {
+export function DocumentationEngineInActionSection({ locale = "en" }: { locale?: "en" | "it" }) {
+  const t = COPY[locale];
+  const tabs = TABS[locale];
   const [active, setActive] = useState(0);
   const [isPlaying, setIsPlaying] = useState(true);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
@@ -58,19 +91,19 @@ export function DocumentationEngineInActionSection() {
       return;
     }
     intervalRef.current = setInterval(() => {
-      setActive((prev) => (prev + 1) % TABS.length);
+      setActive((prev) => (prev + 1) % tabs.length);
     }, AUTO_ROTATE_MS);
     return () => {
       if (intervalRef.current) clearInterval(intervalRef.current);
     };
-  }, [isPlaying]);
+  }, [isPlaying, tabs.length]);
 
   const handleTabClick = (i: number) => {
     setActive(i);
     setIsPlaying(false);
   };
 
-  const { caption, Component } = TABS[active];
+  const { caption, Component } = tabs[active];
 
   return (
     <section
@@ -84,7 +117,7 @@ export function DocumentationEngineInActionSection() {
         }
       `}</style>
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <PillTag className="mb-8">In Action</PillTag>
+        <PillTag className="mb-8">{t.pill}</PillTag>
 
         {/* Tab strip + play/pause */}
         <div className="mb-8 flex items-center gap-2">
@@ -107,9 +140,9 @@ export function DocumentationEngineInActionSection() {
                 minWidth: "100%",
               }}
             >
-              {TABS.map((t, i) => (
+              {tabs.map((tab, i) => (
                 <button
-                  key={t.label}
+                  key={tab.label}
                   type="button"
                   onClick={() => handleTabClick(i)}
                   className="shrink-0 px-4 rounded-lg text-sm font-medium transition-all"
@@ -122,10 +155,10 @@ export function DocumentationEngineInActionSection() {
                     boxShadow: active === i ? "0 1px 3px rgba(0,0,0,0.12)" : "none",
                   }}
                 >
-                  {t.label}
+                  {tab.label}
                   {active === i && isPlaying && (
                     <div
-                      key={t.label}
+                      key={tab.label}
                       style={{
                         position: "absolute",
                         bottom: 0,
@@ -147,7 +180,7 @@ export function DocumentationEngineInActionSection() {
           <button
             type="button"
             onClick={() => setIsPlaying((p) => !p)}
-            aria-label={isPlaying ? "Pause autoplay" : "Resume autoplay"}
+            aria-label={isPlaying ? t.pauseAria : t.resumeAria}
             className="shrink-0 flex items-center justify-center transition-colors"
             style={{
               width: 44,

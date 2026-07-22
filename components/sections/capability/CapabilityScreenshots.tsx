@@ -5,7 +5,15 @@ import { PillTag } from "@/components/common/PillTag";
 import type { CapabilityScreen } from "@/data/capability-screenshots";
 import { BASE_PATH } from "@/lib/utils";
 
-export function CapabilityScreenshots({ screens }: { screens: CapabilityScreen[] }) {
+const PILL = { en: "In Action", it: "In Azione" };
+
+export function CapabilityScreenshots({
+  screens,
+  locale = "en",
+}: {
+  screens: CapabilityScreen[];
+  locale?: "en" | "it";
+}) {
   const [active, setActive] = useState(0);
   const screen = screens[active];
 
@@ -15,7 +23,7 @@ export function CapabilityScreenshots({ screens }: { screens: CapabilityScreen[]
       style={{ background: "var(--bg-surface)", borderTop: "1px solid var(--bg-border)" }}
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <PillTag className="mb-8">In Action</PillTag>
+        <PillTag className="mb-8">{PILL[locale]}</PillTag>
 
         {/* Tab strip */}
         <div className="mb-8">

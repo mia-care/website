@@ -5,13 +5,41 @@ import { useEffect, useRef, useState } from "react";
 import { PillTag } from "@/components/common/PillTag";
 import type { UseCase } from "@/data/use-cases";
 
-const STEPS = [
-  { key: "problem" as const, label: "The Problem", short: "Problem", bg: "var(--bg-surface)" },
-  { key: "need" as const, label: "The Need", short: "Need", bg: "var(--bg-base)" },
-  { key: "solution" as const, label: "The Solution", short: "Solution", bg: "var(--bg-surface)" },
-] as const;
+const STEPS = {
+  en: [
+    { key: "problem" as const, label: "The Problem", short: "Problem", bg: "var(--bg-surface)" },
+    { key: "need" as const, label: "The Need", short: "Need", bg: "var(--bg-base)" },
+    {
+      key: "solution" as const,
+      label: "The Solution",
+      short: "Solution",
+      bg: "var(--bg-surface)",
+    },
+  ],
+  it: [
+    { key: "problem" as const, label: "Il Problema", short: "Problema", bg: "var(--bg-surface)" },
+    { key: "need" as const, label: "L'Esigenza", short: "Esigenza", bg: "var(--bg-base)" },
+    {
+      key: "solution" as const,
+      label: "La Soluzione",
+      short: "Soluzione",
+      bg: "var(--bg-surface)",
+    },
+  ],
+};
 
-export function NarrativeStory({ uc }: { uc: UseCase }) {
+const COPY = {
+  en: { cta: "Request a Demo →", ctaHref: "/request-demo", watch: "Watch Product Demo" },
+  it: {
+    cta: "Richiedi una Demo →",
+    ctaHref: "/it/richiedi-demo",
+    watch: "Guarda la Demo del Prodotto",
+  },
+};
+
+export function NarrativeStory({ uc, locale = "en" }: { uc: UseCase; locale?: "en" | "it" }) {
+  const t = COPY[locale];
+  const steps = STEPS[locale];
   const [activeStep, setActiveStep] = useState(0);
   const sectionRefs = useRef<(HTMLElement | null)[]>([null, null, null]);
 
@@ -48,7 +76,7 @@ export function NarrativeStory({ uc }: { uc: UseCase }) {
       >
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center h-10">
-            {STEPS.map((step, i) => (
+            {steps.map((step, i) => (
               <button
                 key={step.key}
                 type="button"
@@ -76,7 +104,7 @@ export function NarrativeStory({ uc }: { uc: UseCase }) {
       </div>
 
       {/* Sections with timeline */}
-      {STEPS.map((step, i) => (
+      {steps.map((step, i) => (
         <section
           key={step.key}
           ref={(el) => {
@@ -134,7 +162,7 @@ export function NarrativeStory({ uc }: { uc: UseCase }) {
                 {step.key === "solution" && (
                   <div className="flex flex-wrap gap-3 mt-10">
                     <Link
-                      href="/request-demo"
+                      href={t.ctaHref}
                       className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold transition-transform hover:-translate-y-px active:translate-y-0"
                       style={{
                         background: "linear-gradient(90deg, var(--brand-green), var(--brand-cyan))",
@@ -142,8 +170,9 @@ export function NarrativeStory({ uc }: { uc: UseCase }) {
                         boxShadow: "0 0 18px rgba(0,240,150,0.22), 0 2px 8px rgba(0,0,0,0.35)",
                       }}
                     >
-                      Request a Demo →
+                      {t.cta}
                     </Link>
+                    {/* TODO(Batch 4): point to the Italian resource slug once resources are translated */}
                     <Link
                       href="/resources/mia-care-product-demo"
                       className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold transition-colors hover:text-brand-green"
@@ -161,7 +190,7 @@ export function NarrativeStory({ uc }: { uc: UseCase }) {
                       >
                         <path d="M3 2l9 5-9 5V2z" />
                       </svg>
-                      Watch Product Demo
+                      {t.watch}
                     </Link>
                   </div>
                 )}

@@ -3,7 +3,13 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
-export function StickyDemoPill() {
+const COPY = {
+  en: { label: "Watch Demo", aria: "Watch the P4SaMD product demo" },
+  it: { label: "Guarda la Demo", aria: "Guarda la demo del prodotto P4SaMD" },
+};
+
+export function StickyDemoPill({ locale = "en" }: { locale?: "en" | "it" }) {
+  const t = COPY[locale];
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -25,12 +31,12 @@ export function StickyDemoPill() {
         transform: visible ? "translateY(0) scale(1)" : "translateY(16px) scale(0.95)",
         pointerEvents: visible ? "auto" : "none",
       }}
-      aria-label="Watch the P4SaMD product demo"
+      aria-label={t.aria}
     >
       <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor" aria-hidden="true">
         <path d="M3 2l9 5-9 5V2z" />
       </svg>
-      Watch Demo
+      {t.label}
     </Link>
   );
 }

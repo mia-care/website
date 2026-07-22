@@ -1,26 +1,44 @@
 import Link from "next/link";
 import { PillTag } from "@/components/common/PillTag";
-import { capabilities } from "@/data/capabilities";
+import { capabilities as capabilitiesEn } from "@/data/capabilities";
+import { capabilities as capabilitiesIt } from "@/data/capabilities.it";
 import type { UseCase } from "@/data/use-cases";
 
-export function CapabilitiesInvolved({ uc }: { uc: UseCase }) {
+const COPY = {
+  en: {
+    pill: "Capabilities Involved",
+    heading: "The P4SaMD capabilities that power this use case.",
+    explore: "Explore →",
+    hrefPrefix: "/capabilities",
+  },
+  it: {
+    pill: "Capability Coinvolte",
+    heading: "Le capability P4SaMD che alimentano questo caso d'uso.",
+    explore: "Esplora →",
+    hrefPrefix: "/it/capabilities",
+  },
+};
+
+export function CapabilitiesInvolved({ uc, locale = "en" }: { uc: UseCase; locale?: "en" | "it" }) {
+  const t = COPY[locale];
+  const capabilities = locale === "it" ? capabilitiesIt : capabilitiesEn;
   const involved = capabilities.filter((c) => uc.capabilities.includes(c.slug));
 
   return (
     <section className="py-20" style={{ background: "var(--bg-base)" }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <PillTag className="mb-8">Capabilities Involved</PillTag>
+        <PillTag className="mb-8">{t.pill}</PillTag>
         <h2
           className="font-display font-bold mb-10"
           style={{ fontSize: "clamp(24px, 3vw, 36px)", letterSpacing: "-0.02em" }}
         >
-          The P4SaMD capabilities that power this use case.
+          {t.heading}
         </h2>
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {involved.map((cap) => (
             <Link
               key={cap.slug}
-              href={`/capabilities/${cap.slug}`}
+              href={`${t.hrefPrefix}/${cap.slug}`}
               className="group rounded-card p-5 flex flex-col gap-2 transition-all hover:-translate-y-0.5"
               style={{
                 background: "var(--bg-surface)",
@@ -40,7 +58,7 @@ export function CapabilitiesInvolved({ uc }: { uc: UseCase }) {
                 className="text-xs font-semibold mt-auto transition-colors group-hover:text-brand-green"
                 style={{ color: "var(--text-muted)" }}
               >
-                Explore →
+                {t.explore}
               </span>
             </Link>
           ))}

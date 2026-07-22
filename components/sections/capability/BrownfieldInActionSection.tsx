@@ -6,29 +6,63 @@ import { BrownfieldRemediationPlanSvg } from "@/components/common/capability-svg
 import { BrownfieldRemediatorSvg } from "@/components/common/capability-svgs/BrownfieldRemediatorSvg";
 import { PillTag } from "@/components/common/PillTag";
 
-const TABS = [
-  {
-    label: "Import",
-    caption:
-      "Import wizard: ingest the full legacy estate including documentation (requirement analyses, specs, architecture, test plans, test reports), technical assets (source code, DB schemas, SBOMs), and files in any format. Everything flows into P4SaMD's unified compliance model without manual migration.",
-    Component: BrownfieldRemediatorSvg,
-    wrapStyle: {} as React.CSSProperties,
+const TABS = {
+  en: [
+    {
+      label: "Import",
+      caption:
+        "Import wizard: ingest the full legacy estate including documentation (requirement analyses, specs, architecture, test plans, test reports), technical assets (source code, DB schemas, SBOMs), and files in any format. Everything flows into P4SaMD's unified compliance model without manual migration.",
+      Component: BrownfieldRemediatorSvg,
+      wrapStyle: {} as React.CSSProperties,
+    },
+    {
+      label: "Gap Analysis",
+      caption:
+        "Gap analysis: every deviation from the applicable regulatory framework surfaced automatically, with severity classification, remediation effort estimate, and the exact clause it maps to.",
+      Component: BrownfieldGapAnalysisSvg,
+      wrapStyle: {} as React.CSSProperties,
+    },
+    {
+      label: "Remediation Plan",
+      caption:
+        "Remediation plan: a structured, prioritized task list organized by regulatory priority and effort estimate, ready to import into any ALM tool and begin executing immediately.",
+      Component: BrownfieldRemediationPlanSvg,
+      wrapStyle: {} as React.CSSProperties,
+    },
+  ],
+  it: [
+    {
+      label: "Import",
+      caption:
+        "Wizard di import: acquisisce l'intero estate legacy, inclusa documentazione (analisi dei requisiti, specifiche, architettura, piani di test, report di test), asset tecnici (codice sorgente, schemi DB, SBOM) e file in qualsiasi formato. Tutto confluisce nel modello di compliance unificato di P4SaMD senza migrazione manuale.",
+      Component: BrownfieldRemediatorSvg,
+      wrapStyle: {} as React.CSSProperties,
+    },
+    {
+      label: "Gap Analysis",
+      caption:
+        "Gap analysis: ogni deviazione dal framework regolatorio applicabile emerge automaticamente, con classificazione di severità, stima dello sforzo di remediation e la clausola esatta a cui si riferisce.",
+      Component: BrownfieldGapAnalysisSvg,
+      wrapStyle: {} as React.CSSProperties,
+    },
+    {
+      label: "Piano di Remediation",
+      caption:
+        "Piano di remediation: una task list strutturata e prioritizzata per priorità regolatoria e stima dello sforzo, pronta da importare in qualsiasi strumento ALM e iniziare a eseguire immediatamente.",
+      Component: BrownfieldRemediationPlanSvg,
+      wrapStyle: {} as React.CSSProperties,
+    },
+  ],
+};
+
+const COPY = {
+  en: { pill: "In Action", pauseAria: "Pause autoplay", resumeAria: "Resume autoplay" },
+  it: {
+    pill: "In Azione",
+    pauseAria: "Metti in pausa l'autoplay",
+    resumeAria: "Riprendi l'autoplay",
   },
-  {
-    label: "Gap Analysis",
-    caption:
-      "Gap analysis: every deviation from the applicable regulatory framework surfaced automatically, with severity classification, remediation effort estimate, and the exact clause it maps to.",
-    Component: BrownfieldGapAnalysisSvg,
-    wrapStyle: {} as React.CSSProperties,
-  },
-  {
-    label: "Remediation Plan",
-    caption:
-      "Remediation plan: a structured, prioritized task list organized by regulatory priority and effort estimate, ready to import into any ALM tool and begin executing immediately.",
-    Component: BrownfieldRemediationPlanSvg,
-    wrapStyle: {} as React.CSSProperties,
-  },
-];
+};
 
 const AUTO_ROTATE_MS = 20_000;
 
@@ -49,7 +83,9 @@ function PlayIcon() {
   );
 }
 
-export function BrownfieldInActionSection() {
+export function BrownfieldInActionSection({ locale = "en" }: { locale?: "en" | "it" }) {
+  const t = COPY[locale];
+  const tabs = TABS[locale];
   const [active, setActive] = useState(0);
   const [isPlaying, setIsPlaying] = useState(true);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
@@ -61,19 +97,19 @@ export function BrownfieldInActionSection() {
       return;
     }
     intervalRef.current = setInterval(() => {
-      setActive((prev) => (prev + 1) % TABS.length);
+      setActive((prev) => (prev + 1) % tabs.length);
     }, AUTO_ROTATE_MS);
     return () => {
       if (intervalRef.current) clearInterval(intervalRef.current);
     };
-  }, [isPlaying]);
+  }, [isPlaying, tabs.length]);
 
   const handleTabClick = (i: number) => {
     setActive(i);
     setIsPlaying(false);
   };
 
-  const { caption, Component, wrapStyle } = TABS[active];
+  const { caption, Component, wrapStyle } = tabs[active];
 
   return (
     <section
@@ -87,7 +123,7 @@ export function BrownfieldInActionSection() {
         }
       `}</style>
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <PillTag className="mb-8">In Action</PillTag>
+        <PillTag className="mb-8">{t.pill}</PillTag>
 
         {/* Tab strip + play/pause */}
         <div className="mb-8 flex items-center gap-2">
@@ -110,9 +146,9 @@ export function BrownfieldInActionSection() {
                 minWidth: "100%",
               }}
             >
-              {TABS.map((t, i) => (
+              {tabs.map((tab, i) => (
                 <button
-                  key={t.label}
+                  key={tab.label}
                   type="button"
                   onClick={() => handleTabClick(i)}
                   className="shrink-0 px-4 rounded-lg text-sm font-medium transition-all"
@@ -125,10 +161,10 @@ export function BrownfieldInActionSection() {
                     boxShadow: active === i ? "0 1px 3px rgba(0,0,0,0.12)" : "none",
                   }}
                 >
-                  {t.label}
+                  {tab.label}
                   {active === i && isPlaying && (
                     <div
-                      key={t.label}
+                      key={tab.label}
                       style={{
                         position: "absolute",
                         bottom: 0,
@@ -150,7 +186,7 @@ export function BrownfieldInActionSection() {
           <button
             type="button"
             onClick={() => setIsPlaying((p) => !p)}
-            aria-label={isPlaying ? "Pause autoplay" : "Resume autoplay"}
+            aria-label={isPlaying ? t.pauseAria : t.resumeAria}
             className="shrink-0 flex items-center justify-center transition-colors"
             style={{
               width: 44,

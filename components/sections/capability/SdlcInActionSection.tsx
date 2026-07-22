@@ -6,29 +6,63 @@ import { SdlcConfigLogSvg } from "@/components/common/capability-svgs/SdlcConfig
 import { SdlcWorkflowSvg } from "@/components/common/capability-svgs/SdlcWorkflowSvg";
 import { PillTag } from "@/components/common/PillTag";
 
-const TABS = [
-  {
-    label: "Dashboard",
-    caption:
-      "Project dashboard: every active SDLC project in one view. Blocking tasks surfaced automatically with severity and effort estimates, so teams stay ahead of audits.",
-    Component: SdlcWorkflowSvg,
-    wrapStyle: {} as React.CSSProperties,
+const TABS = {
+  en: [
+    {
+      label: "Dashboard",
+      caption:
+        "Project dashboard: every active SDLC project in one view. Blocking tasks surfaced automatically with severity and effort estimates, so teams stay ahead of audits.",
+      Component: SdlcWorkflowSvg,
+      wrapStyle: {} as React.CSSProperties,
+    },
+    {
+      label: "Integrations",
+      caption:
+        "Tool integrations: task managers, Git repositories, Mia-Platform Console, and Kubernetes clusters connected in minutes. Work items, commits, and runtime signals flow into a single IEC 62304-aligned audit trail automatically.",
+      Component: SdlcBlueprintSvg,
+      wrapStyle: {} as React.CSSProperties,
+    },
+    {
+      label: "Audit Log",
+      caption:
+        "Audit log: every requirement change, risk update, and approval decision recorded with actor, timestamp, and role. Exportable as CSV for notified-body submissions and internal QMS reviews.",
+      Component: SdlcConfigLogSvg,
+      wrapStyle: {} as React.CSSProperties,
+    },
+  ],
+  it: [
+    {
+      label: "Dashboard",
+      caption:
+        "Dashboard di progetto: ogni progetto SDLC attivo in un'unica vista. I task bloccanti emergono automaticamente con severità e stime di sforzo, così i team restano avanti rispetto agli audit.",
+      Component: SdlcWorkflowSvg,
+      wrapStyle: {} as React.CSSProperties,
+    },
+    {
+      label: "Integrazioni",
+      caption:
+        "Integrazioni di strumenti: task manager, repository Git, Mia-Platform Console e cluster Kubernetes connessi in pochi minuti. Work item, commit e segnali runtime confluiscono automaticamente in un unico audit trail allineato a IEC 62304.",
+      Component: SdlcBlueprintSvg,
+      wrapStyle: {} as React.CSSProperties,
+    },
+    {
+      label: "Audit Log",
+      caption:
+        "Audit log: ogni modifica ai requisiti, aggiornamento di rischio e decisione di approvazione registrati con attore, timestamp e ruolo. Esportabile in CSV per submission agli organismi notificati e review QMS interne.",
+      Component: SdlcConfigLogSvg,
+      wrapStyle: {} as React.CSSProperties,
+    },
+  ],
+};
+
+const COPY = {
+  en: { pill: "In Action", pauseAria: "Pause autoplay", resumeAria: "Resume autoplay" },
+  it: {
+    pill: "In Azione",
+    pauseAria: "Metti in pausa l'autoplay",
+    resumeAria: "Riprendi l'autoplay",
   },
-  {
-    label: "Integrations",
-    caption:
-      "Tool integrations: task managers, Git repositories, Mia-Platform Console, and Kubernetes clusters connected in minutes. Work items, commits, and runtime signals flow into a single IEC 62304-aligned audit trail automatically.",
-    Component: SdlcBlueprintSvg,
-    wrapStyle: {} as React.CSSProperties,
-  },
-  {
-    label: "Audit Log",
-    caption:
-      "Audit log: every requirement change, risk update, and approval decision recorded with actor, timestamp, and role. Exportable as CSV for notified-body submissions and internal QMS reviews.",
-    Component: SdlcConfigLogSvg,
-    wrapStyle: {} as React.CSSProperties,
-  },
-];
+};
 
 const AUTO_ROTATE_MS = 20_000;
 
@@ -49,7 +83,9 @@ function PlayIcon() {
   );
 }
 
-export function SdlcInActionSection() {
+export function SdlcInActionSection({ locale = "en" }: { locale?: "en" | "it" }) {
+  const t = COPY[locale];
+  const tabs = TABS[locale];
   const [active, setActive] = useState(0);
   const [isPlaying, setIsPlaying] = useState(true);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
@@ -61,19 +97,19 @@ export function SdlcInActionSection() {
       return;
     }
     intervalRef.current = setInterval(() => {
-      setActive((prev) => (prev + 1) % TABS.length);
+      setActive((prev) => (prev + 1) % tabs.length);
     }, AUTO_ROTATE_MS);
     return () => {
       if (intervalRef.current) clearInterval(intervalRef.current);
     };
-  }, [isPlaying]);
+  }, [isPlaying, tabs.length]);
 
   const handleTabClick = (i: number) => {
     setActive(i);
     setIsPlaying(false);
   };
 
-  const { caption, Component, wrapStyle } = TABS[active];
+  const { caption, Component, wrapStyle } = tabs[active];
 
   return (
     <section
@@ -87,7 +123,7 @@ export function SdlcInActionSection() {
         }
       `}</style>
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <PillTag className="mb-8">In Action</PillTag>
+        <PillTag className="mb-8">{t.pill}</PillTag>
 
         {/* Tab strip + play/pause */}
         <div className="mb-8 flex items-center gap-2">
@@ -110,9 +146,9 @@ export function SdlcInActionSection() {
                 minWidth: "100%",
               }}
             >
-              {TABS.map((t, i) => (
+              {tabs.map((tab, i) => (
                 <button
-                  key={t.label}
+                  key={tab.label}
                   type="button"
                   onClick={() => handleTabClick(i)}
                   className="shrink-0 px-4 rounded-lg text-sm font-medium transition-all"
@@ -125,10 +161,10 @@ export function SdlcInActionSection() {
                     boxShadow: active === i ? "0 1px 3px rgba(0,0,0,0.12)" : "none",
                   }}
                 >
-                  {t.label}
+                  {tab.label}
                   {active === i && isPlaying && (
                     <div
-                      key={t.label}
+                      key={tab.label}
                       style={{
                         position: "absolute",
                         bottom: 0,
@@ -151,7 +187,7 @@ export function SdlcInActionSection() {
           <button
             type="button"
             onClick={() => setIsPlaying((p) => !p)}
-            aria-label={isPlaying ? "Pause autoplay" : "Resume autoplay"}
+            aria-label={isPlaying ? t.pauseAria : t.resumeAria}
             className="shrink-0 flex items-center justify-center transition-colors"
             style={{
               width: 44,

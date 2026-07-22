@@ -16,8 +16,7 @@ const COPY = {
     heading: "Costruito per ogni fase del percorso SaMD.",
     body: "Che tu stia facendo remediation su software legacy, certificando un modello AI o costruendo da zero — P4SaMD ha un percorso comprovato.",
     readCase: "Leggi il Caso →",
-    // TODO: point to /it/use-cases once detail pages are built (not in Batch 1 scope)
-    hrefPrefix: "/use-cases",
+    hrefPrefix: "/it/use-cases",
   },
 };
 

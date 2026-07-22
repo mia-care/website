@@ -2,7 +2,13 @@ import Link from "next/link";
 import { PillTag } from "@/components/common/PillTag";
 import type { Capability } from "@/data/capabilities";
 
-export function CapabilityHero({ cap }: { cap: Capability }) {
+const COPY = {
+  en: { cta: "Request a Demo →", ctaHref: "/request-demo", watch: "Watch Demo" },
+  it: { cta: "Richiedi una Demo →", ctaHref: "/it/richiedi-demo", watch: "Guarda la Demo" },
+};
+
+export function CapabilityHero({ cap, locale = "en" }: { cap: Capability; locale?: "en" | "it" }) {
+  const t = COPY[locale];
   return (
     <section
       className="relative overflow-hidden pt-20 pb-16"
@@ -30,11 +36,12 @@ export function CapabilityHero({ cap }: { cap: Capability }) {
         </p>
         <div className="flex flex-col sm:flex-row sm:items-center gap-3">
           <Link
-            href="/request-demo"
+            href={t.ctaHref}
             className="inline-flex items-center justify-center h-11 px-6 rounded-lg font-semibold text-sm bg-brand-gradient text-bg-base transition-opacity hover:opacity-90 w-full sm:w-auto"
           >
-            Request a Demo →
+            {t.cta}
           </Link>
+          {/* TODO(Batch 4): point to the Italian resource slug once resources are translated */}
           <Link
             href="/resources/mia-care-product-demo"
             className="inline-flex items-center justify-center gap-2 h-11 px-6 rounded-lg font-semibold text-sm transition-colors hover:opacity-80 w-full sm:w-auto"
@@ -47,7 +54,7 @@ export function CapabilityHero({ cap }: { cap: Capability }) {
               <circle cx="7" cy="7" r="6.5" stroke="currentColor" />
               <path d="M5.5 4.5l5 2.5-5 2.5V4.5z" fill="currentColor" />
             </svg>
-            Watch Demo
+            {t.watch}
           </Link>
         </div>
       </div>

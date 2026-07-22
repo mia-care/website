@@ -115,28 +115,28 @@ const SEGMENTS = {
   it: [
     {
       title: "Grandi Gruppi MedTech",
-      href: "/use-cases/legacy-remediation",
+      href: "/it/use-cases/legacy-remediation",
       description:
         "Modernizza estate software legacy in un'unica piattaforma conforme e unificata.",
       icon: <Icon1 />,
     },
     {
       title: "Enterprise Life Sciences",
-      href: "/use-cases/legacy-remediation",
+      href: "/it/use-cases/legacy-remediation",
       description:
         "Pharma e biotech che lanciano digital companion e PSP in parallelo ai rilasci dei farmaci.",
       icon: <Icon2 />,
     },
     {
       title: "Scaleup AI-Native",
-      href: "/use-cases/high-risk-ai-cdss",
+      href: "/it/use-cases/high-risk-ai-cdss",
       description:
         "Team da Serie B a IPO che distribuiscono modelli AI clinici senza rallentare la velocità di engineering.",
       icon: <Icon3 />,
     },
     {
       title: "Startup Pre-Market",
-      href: "/use-cases/greenfield-samd",
+      href: "/it/use-cases/greenfield-samd",
       description:
         "Team da Seed a Serie A che costruiscono il loro primo DHF verso l'FDA clearance.",
       icon: <Icon4 />,

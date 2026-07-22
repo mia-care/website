@@ -5,22 +5,49 @@ import { GuidedChatSvg } from "@/components/common/capability-svgs/GuidedChatSvg
 import { GuidedWorkflowsSvg } from "@/components/common/capability-svgs/GuidedWorkflowsSvg";
 import { PillTag } from "@/components/common/PillTag";
 
-const TABS = [
-  {
-    label: "Workflow Guide",
-    caption:
-      "Real-time compliance dashboard: priority blockers and overdue tasks surface automatically with IEC 62304 section references. Critical issues are resolved in place, keeping the whole team aligned without leaving the workflow.",
-    Component: GuidedWorkflowsSvg,
-    wrapStyle: {} as React.CSSProperties,
+const TABS = {
+  en: [
+    {
+      label: "Workflow Guide",
+      caption:
+        "Real-time compliance dashboard: priority blockers and overdue tasks surface automatically with IEC 62304 section references. Critical issues are resolved in place, keeping the whole team aligned without leaving the workflow.",
+      Component: GuidedWorkflowsSvg,
+      wrapStyle: {} as React.CSSProperties,
+    },
+    {
+      label: "SDLC Phases",
+      caption:
+        "Phase-by-phase progress tracking: each SDLC stage shows its completion status, task count, and current bottleneck at a glance. The active phase updates in real time, giving the whole team a shared view of where the project stands against IEC 62304.",
+      Component: GuidedChatSvg,
+      wrapStyle: {} as React.CSSProperties,
+    },
+  ],
+  it: [
+    {
+      label: "Guida al Workflow",
+      caption:
+        "Dashboard di compliance in tempo reale: blocchi prioritari e task in ritardo emergono automaticamente con riferimenti alle sezioni IEC 62304. I problemi critici vengono risolti sul posto, mantenendo l'intero team allineato senza uscire dal workflow.",
+      Component: GuidedWorkflowsSvg,
+      wrapStyle: {} as React.CSSProperties,
+    },
+    {
+      label: "Fasi SDLC",
+      caption:
+        "Tracciamento dell'avanzamento fase per fase: ogni stadio dell'SDLC mostra a colpo d'occhio il proprio stato di completamento, il numero di task e il collo di bottiglia attuale. La fase attiva si aggiorna in tempo reale, dando all'intero team una visione condivisa di dove si trova il progetto rispetto a IEC 62304.",
+      Component: GuidedChatSvg,
+      wrapStyle: {} as React.CSSProperties,
+    },
+  ],
+};
+
+const COPY = {
+  en: { pill: "In Action", pauseAria: "Pause autoplay", resumeAria: "Resume autoplay" },
+  it: {
+    pill: "In Azione",
+    pauseAria: "Metti in pausa l'autoplay",
+    resumeAria: "Riprendi l'autoplay",
   },
-  {
-    label: "SDLC Phases",
-    caption:
-      "Phase-by-phase progress tracking: each SDLC stage shows its completion status, task count, and current bottleneck at a glance. The active phase updates in real time, giving the whole team a shared view of where the project stands against IEC 62304.",
-    Component: GuidedChatSvg,
-    wrapStyle: {} as React.CSSProperties,
-  },
-];
+};
 
 const AUTO_ROTATE_MS = 20_000;
 
@@ -41,7 +68,9 @@ function PlayIcon() {
   );
 }
 
-export function GuidedWorkflowsInActionSection() {
+export function GuidedWorkflowsInActionSection({ locale = "en" }: { locale?: "en" | "it" }) {
+  const t = COPY[locale];
+  const tabs = TABS[locale];
   const [active, setActive] = useState(0);
   const [isPlaying, setIsPlaying] = useState(true);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
@@ -53,12 +82,12 @@ export function GuidedWorkflowsInActionSection() {
       return;
     }
     intervalRef.current = setInterval(() => {
-      setActive((prev) => (prev + 1) % TABS.length);
+      setActive((prev) => (prev + 1) % tabs.length);
     }, AUTO_ROTATE_MS);
     return () => {
       if (intervalRef.current) clearInterval(intervalRef.current);
     };
-  }, [isPlaying]);
+  }, [isPlaying, tabs.length]);
 
   const handleTabClick = (i: number) => {
     setActive(i);
@@ -66,7 +95,7 @@ export function GuidedWorkflowsInActionSection() {
   };
 
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  const { caption, Component } = TABS[active]!;
+  const { caption, Component } = tabs[active]!;
 
   return (
     <section
@@ -80,7 +109,7 @@ export function GuidedWorkflowsInActionSection() {
         }
       `}</style>
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <PillTag className="mb-8">In Action</PillTag>
+        <PillTag className="mb-8">{t.pill}</PillTag>
 
         {/* Tab strip + play/pause */}
         <div className="mb-8 flex items-center gap-2">
@@ -103,9 +132,9 @@ export function GuidedWorkflowsInActionSection() {
                 minWidth: "100%",
               }}
             >
-              {TABS.map((t, i) => (
+              {tabs.map((tab, i) => (
                 <button
-                  key={t.label}
+                  key={tab.label}
                   type="button"
                   onClick={() => handleTabClick(i)}
                   className="shrink-0 px-4 rounded-lg text-sm font-medium transition-all"
@@ -118,10 +147,10 @@ export function GuidedWorkflowsInActionSection() {
                     boxShadow: active === i ? "0 1px 3px rgba(0,0,0,0.12)" : "none",
                   }}
                 >
-                  {t.label}
+                  {tab.label}
                   {active === i && isPlaying && (
                     <div
-                      key={t.label}
+                      key={tab.label}
                       style={{
                         position: "absolute",
                         bottom: 0,
@@ -143,7 +172,7 @@ export function GuidedWorkflowsInActionSection() {
           <button
             type="button"
             onClick={() => setIsPlaying((p) => !p)}
-            aria-label={isPlaying ? "Pause autoplay" : "Resume autoplay"}
+            aria-label={isPlaying ? t.pauseAria : t.resumeAria}
             className="shrink-0 flex items-center justify-center transition-colors"
             style={{
               width: 44,
