@@ -158,8 +158,13 @@ export async function getPost(slug: string, locale: Locale = "en"): Promise<Post
   };
 }
 
-export function getRelatedPosts(slug: string, categories: string[], limit = 3): PostMeta[] {
-  return getAllPosts()
+export function getRelatedPosts(
+  slug: string,
+  categories: string[],
+  limit = 3,
+  locale: Locale = "en",
+): PostMeta[] {
+  return getAllPosts(locale)
     .filter((p) => p.slug !== slug && p.categories.some((c) => categories.includes(c)))
     .slice(0, limit);
 }

@@ -1,13 +1,27 @@
 import Image from "next/image";
 import Link from "next/link";
 import { PillTag } from "@/components/common/PillTag";
-import { getCategoryName } from "@/data/blog-categories";
+import { getCategoryName as getCategoryNameEn } from "@/data/blog-categories";
+import { getCategoryName as getCategoryNameIt } from "@/data/blog-categories.it";
 import { assetPath } from "@/lib/asset";
 import type { PostMeta } from "@/lib/blog";
 import { formatDate } from "@/lib/format";
 
-export function RelatedPosts({ posts }: { posts: PostMeta[] }) {
+const COPY = {
+  en: { heading: "Related Articles", hrefPrefix: "/resources/blog" },
+  it: { heading: "Articoli Correlati", hrefPrefix: "/it/risorse/blog" },
+};
+
+export function RelatedPosts({
+  posts,
+  locale = "en",
+}: {
+  posts: PostMeta[];
+  locale?: "en" | "it";
+}) {
   if (posts.length === 0) return null;
+  const t = COPY[locale];
+  const getCategoryName = locale === "it" ? getCategoryNameIt : getCategoryNameEn;
 
   return (
     <section className="py-16" style={{ borderTop: "1px solid var(--bg-border)" }}>
@@ -16,13 +30,13 @@ export function RelatedPosts({ posts }: { posts: PostMeta[] }) {
           className="font-display font-bold text-2xl mb-8"
           style={{ color: "var(--text-primary)" }}
         >
-          Related Articles
+          {t.heading}
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {posts.map((post) => (
             <Link
               key={post.slug}
-              href={`/resources/blog/${post.slug}`}
+              href={`${t.hrefPrefix}/${post.slug}`}
               className="group flex flex-col rounded-xl overflow-hidden border transition-colors"
               style={{
                 background: "var(--bg-surface)",
@@ -56,7 +70,7 @@ export function RelatedPosts({ posts }: { posts: PostMeta[] }) {
                   style={{ color: "var(--text-muted)" }}
                   dateTime={post.date}
                 >
-                  {formatDate(post.date)}
+                  {formatDate(post.date, locale)}
                 </time>
               </div>
             </Link>

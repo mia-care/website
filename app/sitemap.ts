@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 import { capabilities } from "@/data/capabilities";
 import { useCases } from "@/data/use-cases";
-import { getAllPosts } from "@/lib/blog";
+import { getAllPostSlugs, getPostMeta } from "@/lib/blog";
 import { getAllResources } from "@/lib/resources";
 
 export const dynamic = "force-static";
@@ -42,6 +42,29 @@ function localePair(
   return [
     { url: enUrl, ...opts, alternates },
     { url: itUrl, ...opts, alternates },
+  ];
+}
+
+// Blog posts pair by pairing key (shared filename), not by slug — EN and IT
+// localized slugs differ on purpose (see CONTEXT.md). Falls back to an
+// EN-only entry when the IT translation doesn't exist yet.
+function blogLocalePair(
+  pairingKey: string,
+  opts: { changeFrequency: Entry["changeFrequency"]; priority: number },
+): Entry[] {
+  const enMeta = getPostMeta(pairingKey, "en");
+  if (!enMeta) return [];
+  const enUrl = `${BASE}/resources/blog/${enMeta.slug}`;
+  const enEntry = { lastModified: enMeta.modified ?? enMeta.date, ...opts };
+
+  const itMeta = getPostMeta(pairingKey, "it");
+  if (!itMeta) return [{ url: enUrl, ...enEntry }];
+
+  const itUrl = `${BASE}/it/risorse/blog/${itMeta.slug}`;
+  const alternates = { languages: { en: enUrl, it: itUrl, "x-default": enUrl } };
+  return [
+    { url: enUrl, ...enEntry, alternates },
+    { url: itUrl, lastModified: itMeta.modified ?? itMeta.date, ...opts, alternates },
   ];
 }
 
@@ -93,12 +116,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly",
       priority: 0.6,
     },
-    {
-      url: `${BASE}/resources/blog`,
+    ...localePair("/resources/blog", "/it/risorse/blog", {
       lastModified: PAGE_DATES["/resources/blog"],
       changeFrequency: "weekly",
       priority: 0.6,
-    },
+    }),
   ];
 
   const capabilityPages: MetadataRoute.Sitemap = capabilities.flatMap((cap) =>
@@ -124,14 +146,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  const blogPosts = getAllPosts();
-  const blogPages: MetadataRoute.Sitemap = blogPosts.map((post) => ({
-    url: `${BASE}/resources/blog/${post.slug}`,
-    // date = first publication, modified = last meaningful content update
-    lastModified: post.modified ?? post.date,
-    changeFrequency: "monthly" as const,
-    priority: 0.75,
-  }));
+  const blogPages: MetadataRoute.Sitemap = getAllPostSlugs().flatMap((pairingKey) =>
+    blogLocalePair(pairingKey, { changeFrequency: "monthly", priority: 0.75 }),
+  );
 
   return [...staticPages, ...capabilityPages, ...useCasePages, ...resourcePages, ...blogPages];
 }

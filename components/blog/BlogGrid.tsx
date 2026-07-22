@@ -9,7 +9,33 @@ import { BlogCard } from "./BlogCard";
 
 const POSTS_PER_PAGE = 9;
 
-export function BlogGrid({ posts, categories }: { posts: PostMeta[]; categories: BlogCategory[] }) {
+const COPY = {
+  en: {
+    searchPlaceholder: "Search articles...",
+    all: "All",
+    noResultsQuery: (q: string) => `No articles found for "${q}".`,
+    noResults: "No articles in this category yet.",
+    loadMore: "Load more",
+  },
+  it: {
+    searchPlaceholder: "Cerca articoli...",
+    all: "Tutti",
+    noResultsQuery: (q: string) => `Nessun articolo trovato per "${q}".`,
+    noResults: "Ancora nessun articolo in questa categoria.",
+    loadMore: "Carica altri",
+  },
+};
+
+export function BlogGrid({
+  posts,
+  categories,
+  locale = "en",
+}: {
+  posts: PostMeta[];
+  categories: BlogCategory[];
+  locale?: "en" | "it";
+}) {
+  const t = COPY[locale];
   const router = useRouter();
   const pathname = usePathname();
 
@@ -59,9 +85,10 @@ export function BlogGrid({ posts, categories }: { posts: PostMeta[]; categories:
   const paginated = filtered.slice(0, page * POSTS_PER_PAGE);
   const hasMore = page * POSTS_PER_PAGE < filtered.length;
 
+  const hrefPrefix = locale === "it" ? "/it/risorse/blog" : "/resources/blog";
   const searchItems = posts.map((p) => ({
     title: p.title,
-    href: `/resources/blog/${p.slug}`,
+    href: `${hrefPrefix}/${p.slug}`,
   }));
 
   return (
@@ -72,7 +99,7 @@ export function BlogGrid({ posts, categories }: { posts: PostMeta[]; categories:
           items={searchItems}
           defaultValue={query}
           onSearch={(v) => setParam("q", v || null)}
-          placeholder="Search articles..."
+          placeholder={t.searchPlaceholder}
         />
       </div>
 
@@ -93,7 +120,7 @@ export function BlogGrid({ posts, categories }: { posts: PostMeta[]; categories:
                 }
           }
         >
-          All
+          {t.all}
         </button>
         {categories.map((cat) => (
           <button
@@ -119,13 +146,13 @@ export function BlogGrid({ posts, categories }: { posts: PostMeta[]; categories:
 
       {filtered.length === 0 ? (
         <p className="text-center py-20" style={{ color: "var(--text-muted)" }}>
-          {query ? `No articles found for "${query}".` : "No articles in this category yet."}
+          {query ? t.noResultsQuery(query) : t.noResults}
         </p>
       ) : (
         <>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {paginated.map((post) => (
-              <BlogCard key={post.slug} post={post} />
+              <BlogCard key={post.slug} post={post} locale={locale} />
             ))}
           </div>
 
@@ -149,7 +176,7 @@ export function BlogGrid({ posts, categories }: { posts: PostMeta[]; categories:
                   (e.currentTarget as HTMLElement).style.color = "var(--text-primary)";
                 }}
               >
-                Load more
+                {t.loadMore}
               </button>
             </div>
           )}

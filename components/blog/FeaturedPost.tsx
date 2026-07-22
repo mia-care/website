@@ -3,15 +3,27 @@
 import Image from "next/image";
 import Link from "next/link";
 import { PillTag } from "@/components/common/PillTag";
-import { getCategoryName } from "@/data/blog-categories";
+import { getCategoryName as getCategoryNameEn } from "@/data/blog-categories";
+import { getCategoryName as getCategoryNameIt } from "@/data/blog-categories.it";
 import { assetPath } from "@/lib/asset";
 import type { PostMeta } from "@/lib/blog";
 import { formatDate } from "@/lib/format";
 
-export function FeaturedPost({ post }: { post: PostMeta }) {
+const COPY = {
+  en: { featured: "Featured", readArticle: "Read article →", hrefPrefix: "/resources/blog" },
+  it: {
+    featured: "In Evidenza",
+    readArticle: "Leggi l'articolo →",
+    hrefPrefix: "/it/risorse/blog",
+  },
+};
+
+export function FeaturedPost({ post, locale = "en" }: { post: PostMeta; locale?: "en" | "it" }) {
+  const t = COPY[locale];
+  const getCategoryName = locale === "it" ? getCategoryNameIt : getCategoryNameEn;
   return (
     <Link
-      href={`/resources/blog/${post.slug}`}
+      href={`${t.hrefPrefix}/${post.slug}`}
       className="group grid lg:grid-cols-2 rounded-2xl overflow-hidden border transition-all duration-300"
       style={{
         background: "var(--bg-surface)",
@@ -51,7 +63,7 @@ export function FeaturedPost({ post }: { post: PostMeta }) {
               letterSpacing: "0.08em",
             }}
           >
-            Featured
+            {t.featured}
           </span>
           {post.categories.slice(0, 2).map((cat) => (
             <PillTag key={cat} variant="tag">
@@ -83,14 +95,14 @@ export function FeaturedPost({ post }: { post: PostMeta }) {
             borderTop: "1px solid var(--bg-border)",
           }}
         >
-          <time dateTime={post.date}>{formatDate(post.date)}</time>
+          <time dateTime={post.date}>{formatDate(post.date, locale)}</time>
           <span>·</span>
           <span>{post.readingTime}</span>
           <span
             className="ml-auto font-semibold text-sm transition-colors group-hover:text-brand-green"
             style={{ color: "var(--text-secondary)" }}
           >
-            Read article →
+            {t.readArticle}
           </span>
         </div>
       </div>

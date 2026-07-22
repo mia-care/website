@@ -3,7 +3,19 @@
 import { useEffect, useState } from "react";
 import type { Heading } from "@/lib/blog";
 
-export function TableOfContents({ headings }: { headings: Heading[] }) {
+const COPY = {
+  en: { aria: "Table of contents", onThisPage: "On this page" },
+  it: { aria: "Indice dei contenuti", onThisPage: "In questa pagina" },
+};
+
+export function TableOfContents({
+  headings,
+  locale = "en",
+}: {
+  headings: Heading[];
+  locale?: "en" | "it";
+}) {
+  const t = COPY[locale];
   const [activeId, setActiveId] = useState<string>("");
 
   useEffect(() => {
@@ -28,12 +40,12 @@ export function TableOfContents({ headings }: { headings: Heading[] }) {
   if (headings.length === 0) return null;
 
   return (
-    <nav aria-label="Table of contents">
+    <nav aria-label={t.aria}>
       <p
         className="text-xs font-semibold uppercase tracking-widest mb-4"
         style={{ color: "var(--text-muted)" }}
       >
-        On this page
+        {t.onThisPage}
       </p>
       <ol className="space-y-1">
         {headings.map((h) => (

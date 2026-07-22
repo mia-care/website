@@ -1,15 +1,18 @@
 import Image from "next/image";
 import Link from "next/link";
 import { PillTag } from "@/components/common/PillTag";
-import { getCategoryName } from "@/data/blog-categories";
+import { getCategoryName as getCategoryNameEn } from "@/data/blog-categories";
+import { getCategoryName as getCategoryNameIt } from "@/data/blog-categories.it";
 import { assetPath } from "@/lib/asset";
 import type { PostMeta } from "@/lib/blog";
 import { formatDate } from "@/lib/format";
 
-export function BlogCard({ post }: { post: PostMeta }) {
+export function BlogCard({ post, locale = "en" }: { post: PostMeta; locale?: "en" | "it" }) {
+  const getCategoryName = locale === "it" ? getCategoryNameIt : getCategoryNameEn;
+  const hrefPrefix = locale === "it" ? "/it/risorse/blog" : "/resources/blog";
   return (
     <Link
-      href={`/resources/blog/${post.slug}`}
+      href={`${hrefPrefix}/${post.slug}`}
       className="group flex flex-col rounded-2xl overflow-hidden border transition-all duration-300"
       style={{
         background: "var(--bg-surface)",
@@ -66,7 +69,7 @@ export function BlogCard({ post }: { post: PostMeta }) {
             borderTop: "1px solid var(--bg-border)",
           }}
         >
-          <time dateTime={post.date}>{formatDate(post.date)}</time>
+          <time dateTime={post.date}>{formatDate(post.date, locale)}</time>
           <span>·</span>
           <span>{post.readingTime}</span>
         </div>
