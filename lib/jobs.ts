@@ -3,7 +3,11 @@ import path from "node:path";
 import matter from "gray-matter";
 import type { Job } from "@/components/sections/careers/JobAccordion";
 
-const JOBS_DIR = path.join(process.cwd(), "content/jobs");
+export type Locale = "en" | "it";
+
+function jobsDir(locale: Locale = "en"): string {
+  return path.join(process.cwd(), locale === "it" ? "content/it/jobs" : "content/jobs");
+}
 
 type JobFrontmatter = {
   title: string;
@@ -30,14 +34,15 @@ function parseJobBody(content: string): { role: string; sections: Job["sections"
   return { role, sections };
 }
 
-export function getAllJobs(): Job[] {
-  if (!fs.existsSync(JOBS_DIR)) return [];
+export function getAllJobs(locale: Locale = "en"): Job[] {
+  const dir = jobsDir(locale);
+  if (!fs.existsSync(dir)) return [];
 
   return fs
-    .readdirSync(JOBS_DIR)
+    .readdirSync(dir)
     .filter((f) => f.endsWith(".md") && f !== "README.md")
     .map((filename) => {
-      const raw = fs.readFileSync(path.join(JOBS_DIR, filename), "utf8");
+      const raw = fs.readFileSync(path.join(dir, filename), "utf8");
       const { data, content } = matter(raw);
       const fm = data as JobFrontmatter;
 

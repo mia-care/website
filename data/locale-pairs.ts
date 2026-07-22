@@ -12,6 +12,7 @@ export const LOCALE_PAIRS: { en: string; it: string }[] = [
   { en: "/request-demo", it: "/it/richiedi-demo" },
   { en: "/privacy-policy", it: "/it/informativa-privacy" },
   { en: "/cookie-policy", it: "/it/informativa-cookie" },
+  { en: "/careers", it: "/it/lavora-con-noi" },
   // Capabilities and use cases share the same slug across locales (decision
   // deferred in Batch 1b — see CONTEXT.md); only the /it/ prefix changes.
   { en: "/capabilities/sdlc-orchestrator", it: "/it/capabilities/sdlc-orchestrator" },

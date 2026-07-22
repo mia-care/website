@@ -72,12 +72,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.6,
     }),
-    {
-      url: `${BASE}/careers`,
+    ...localePair("/careers", "/it/lavora-con-noi", {
       lastModified: PAGE_DATES["/careers"],
       changeFrequency: "weekly",
       priority: 0.5,
-    },
+    }),
     ...localePair("/certifications", "/it/certificazioni", {
       lastModified: PAGE_DATES["/certifications"],
       changeFrequency: "monthly",

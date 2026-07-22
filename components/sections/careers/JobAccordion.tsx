@@ -74,7 +74,13 @@ function JobBadges({ job }: { job: Job }) {
   );
 }
 
-function JobBody({ job }: { job: Job }) {
+const COPY = {
+  en: { applySubject: "Application", apply: "Apply for this role →", close: "Close" },
+  it: { applySubject: "Candidatura", apply: "Candidati per questo ruolo →", close: "Chiudi" },
+};
+
+function JobBody({ job, locale = "en" }: { job: Job; locale?: "en" | "it" }) {
+  const t = COPY[locale];
   return (
     <>
       <div className="pt-5 pb-4">
@@ -110,21 +116,22 @@ function JobBody({ job }: { job: Job }) {
 
       <div className="mt-7">
         <a
-          href={`mailto:${job.applyEmail}?subject=Application: ${encodeURIComponent(job.title)}`}
+          href={`mailto:${job.applyEmail}?subject=${t.applySubject}: ${encodeURIComponent(job.title)}`}
           className="inline-flex items-center gap-2 px-6 py-2.5 rounded-lg text-sm font-semibold transition-all hover:-translate-y-px"
           style={{
             background: "linear-gradient(90deg, var(--brand-green), var(--brand-cyan))",
             color: "#0b0c10",
           }}
         >
-          Apply for this role →
+          {t.apply}
         </a>
       </div>
     </>
   );
 }
 
-function JobCard({ job }: { job: Job }) {
+function JobCard({ job, locale = "en" }: { job: Job; locale?: "en" | "it" }) {
+  const t = COPY[locale];
   const [open, setOpen] = useState(false);
   const [sheetOpen, setSheetOpen] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
@@ -224,7 +231,7 @@ function JobCard({ job }: { job: Job }) {
                     type="button"
                     className="flex items-center justify-center w-9 h-9 rounded-full transition-colors hover:bg-white/10"
                     style={{ color: "white" }}
-                    aria-label="Close"
+                    aria-label={t.close}
                   />
                 }
               >
@@ -252,7 +259,7 @@ function JobCard({ job }: { job: Job }) {
                 </p>
               </div>
 
-              <JobBody job={job} />
+              <JobBody job={job} locale={locale} />
             </div>
           </SheetContent>
         </Sheet>
@@ -279,7 +286,7 @@ function JobCard({ job }: { job: Job }) {
 
         {open && (
           <div className="px-6 pb-6" style={{ borderTop: "1px solid var(--bg-border)" }}>
-            <JobBody job={job} />
+            <JobBody job={job} locale={locale} />
           </div>
         )}
       </div>
@@ -287,11 +294,11 @@ function JobCard({ job }: { job: Job }) {
   );
 }
 
-export function JobAccordion({ jobs }: { jobs: Job[] }) {
+export function JobAccordion({ jobs, locale = "en" }: { jobs: Job[]; locale?: "en" | "it" }) {
   return (
     <div className="space-y-4">
       {jobs.map((job) => (
-        <JobCard key={job.slug} job={job} />
+        <JobCard key={job.slug} job={job} locale={locale} />
       ))}
     </div>
   );
