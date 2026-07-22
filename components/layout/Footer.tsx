@@ -15,6 +15,7 @@ const COPY = {
     useCases: "Use Cases",
     resources: "Resources",
     company: "Company",
+    language: "Language",
     aPrefix: "A",
     companySuffix: "Company",
     homeHref: "/",
@@ -26,6 +27,7 @@ const COPY = {
     useCases: "Casi d'Uso",
     resources: "Risorse",
     company: "Azienda",
+    language: "Lingua",
     aPrefix: "Parte di",
     companySuffix: "",
     homeHref: "/it",
@@ -153,6 +155,12 @@ export function Footer({ locale = "en" }: { locale?: "en" | "it" }) {
               ))}
             </ul>
           </div>
+
+          {/* Language */}
+          <div>
+            <h3 className="label-caps mb-4">{t.language}</h3>
+            <LanguageSwitcher locale={locale} />
+          </div>
         </div>
 
         {/* Mia-Platform strip */}
@@ -201,7 +209,6 @@ export function Footer({ locale = "en" }: { locale?: "en" | "it" }) {
               </Link>
             ))}
             <CookiePreferencesButton />
-            <LanguageSwitcher locale={locale} />
           </div>
         </div>
       </div>
