@@ -1,6 +1,8 @@
 import type { MetadataRoute } from "next";
 import { capabilities } from "@/data/capabilities";
+import { capabilities as capabilitiesIt } from "@/data/capabilities.it";
 import { useCases } from "@/data/use-cases";
+import { useCases as useCasesIt } from "@/data/use-cases.it";
 import { getAllPostSlugs, getPostMeta } from "@/lib/blog";
 import { getAllResources } from "@/lib/resources";
 
@@ -43,6 +45,21 @@ function localePair(
     { url: enUrl, ...opts, alternates },
     { url: itUrl, ...opts, alternates },
   ];
+}
+
+// Same-slug pairing (capabilities, use-cases, competence-center resources): the
+// path is identical in both locales, only the /it prefix changes. Falls back to
+// an EN-only entry when the IT translation doesn't exist yet — same safety net
+// as blogLocalePair, just keyed on "does this slug exist in the IT list" rather
+// than on a pairing-key file lookup.
+function sameSlugLocalePair(
+  enPath: string,
+  itPath: string,
+  itExists: boolean,
+  opts: { lastModified: string; changeFrequency: Entry["changeFrequency"]; priority: number },
+): Entry[] {
+  if (itExists) return localePair(enPath, itPath, opts);
+  return [{ url: `${BASE}${enPath}`, ...opts }];
 }
 
 // Blog posts pair by pairing key (shared filename), not by slug — EN and IT
@@ -123,38 +140,34 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }),
   ];
 
+  const itCapabilitySlugs = new Set(capabilitiesIt.map((c) => c.slug));
   const capabilityPages: MetadataRoute.Sitemap = capabilities.flatMap((cap) =>
-    localePair(`/capabilities/${cap.slug}`, `/it/capabilities/${cap.slug}`, {
-      lastModified: DATA_LAST_MODIFIED,
-      changeFrequency: "monthly",
-      priority: 0.85,
-    }),
+    sameSlugLocalePair(
+      `/capabilities/${cap.slug}`,
+      `/it/capabilities/${cap.slug}`,
+      itCapabilitySlugs.has(cap.slug),
+      { lastModified: DATA_LAST_MODIFIED, changeFrequency: "monthly", priority: 0.85 },
+    ),
   );
 
+  const itUseCaseSlugs = new Set(useCasesIt.map((uc) => uc.slug));
   const useCasePages: MetadataRoute.Sitemap = useCases.flatMap((uc) =>
-    localePair(`/use-cases/${uc.slug}`, `/it/use-cases/${uc.slug}`, {
-      lastModified: DATA_LAST_MODIFIED,
-      changeFrequency: "monthly",
-      priority: 0.8,
-    }),
+    sameSlugLocalePair(
+      `/use-cases/${uc.slug}`,
+      `/it/use-cases/${uc.slug}`,
+      itUseCaseSlugs.has(uc.slug),
+      { lastModified: DATA_LAST_MODIFIED, changeFrequency: "monthly", priority: 0.8 },
+    ),
   );
 
   const itResourceSlugs = new Set(getAllResources("it").map((r) => r.slug));
   const resourcePages: MetadataRoute.Sitemap = getAllResources().flatMap((r) =>
-    itResourceSlugs.has(r.slug)
-      ? localePair(`/resources/${r.slug}`, `/it/risorse/${r.slug}`, {
-          lastModified: DATA_LAST_MODIFIED,
-          changeFrequency: "monthly",
-          priority: 0.7,
-        })
-      : [
-          {
-            url: `${BASE}/resources/${r.slug}`,
-            lastModified: DATA_LAST_MODIFIED,
-            changeFrequency: "monthly" as const,
-            priority: 0.7,
-          },
-        ],
+    sameSlugLocalePair(
+      `/resources/${r.slug}`,
+      `/it/risorse/${r.slug}`,
+      itResourceSlugs.has(r.slug),
+      { lastModified: DATA_LAST_MODIFIED, changeFrequency: "monthly", priority: 0.7 },
+    ),
   );
 
   const blogPages: MetadataRoute.Sitemap = getAllPostSlugs().flatMap((pairingKey) =>
