@@ -7,7 +7,6 @@ import { useEffect, useRef, useState } from "react";
 import { navItems as navItemsEn } from "@/data/nav";
 import { navItems as navItemsIt } from "@/data/nav.it";
 import { BASE_PATH } from "@/lib/utils";
-import { LanguageSwitcher } from "./LanguageSwitcher";
 import { MobileMenu } from "./MobileMenu";
 
 const CTA = {
@@ -368,15 +367,10 @@ export function Navbar({ locale = "en" }: { locale?: "en" | "it" }) {
           })}
         </nav>
 
-        {/* Language switcher */}
-        <div className="hidden md:block ml-auto mr-4 shrink-0">
-          <LanguageSwitcher locale={locale} />
-        </div>
-
         {/* CTA */}
         <Link
           href={cta.href}
-          className="hidden md:flex items-center h-9 px-4 rounded-lg text-sm font-semibold text-bg-base shrink-0 transition-transform hover:-translate-y-px active:translate-y-0 relative z-10"
+          className="hidden md:flex items-center h-9 px-4 rounded-lg text-sm font-semibold text-bg-base shrink-0 ml-auto transition-transform hover:-translate-y-px active:translate-y-0 relative z-10"
           style={{
             background: "linear-gradient(90deg, var(--brand-green), var(--brand-cyan))",
             boxShadow: "0 0 18px rgba(0,240,150,0.22), 0 2px 8px rgba(0,0,0,0.35)",

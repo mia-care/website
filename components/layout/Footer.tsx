@@ -5,6 +5,7 @@ import { NewsletterSection } from "@/components/common/NewsletterSection";
 import { FOOTER_LINKS as FOOTER_LINKS_EN, SITE as SITE_EN } from "@/data/site";
 import { FOOTER_LINKS as FOOTER_LINKS_IT, SITE as SITE_IT } from "@/data/site.it";
 import { BASE_PATH } from "@/lib/utils";
+import { LanguageSwitcher } from "./LanguageSwitcher";
 
 const COPY = {
   en: {
@@ -200,6 +201,7 @@ export function Footer({ locale = "en" }: { locale?: "en" | "it" }) {
               </Link>
             ))}
             <CookiePreferencesButton />
+            <LanguageSwitcher locale={locale} />
           </div>
         </div>
       </div>
