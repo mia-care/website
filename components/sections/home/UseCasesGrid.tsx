@@ -1,8 +1,29 @@
 import Link from "next/link";
 import { PillTag } from "@/components/common/PillTag";
-import { useCases } from "@/data/use-cases";
+import { useCases as useCasesEn } from "@/data/use-cases";
+import { useCases as useCasesIt } from "@/data/use-cases.it";
 
-export function UseCasesGrid() {
+const COPY = {
+  en: {
+    pill: "Use Cases",
+    heading: "Built for every stage of the SaMD journey.",
+    body: "Whether you're remediating legacy software, certifying an AI model, or building from scratch — P4SaMD has a proven path.",
+    readCase: "Read Use Case →",
+    hrefPrefix: "/use-cases",
+  },
+  it: {
+    pill: "Casi d'Uso",
+    heading: "Costruito per ogni fase del percorso SaMD.",
+    body: "Che tu stia facendo remediation su software legacy, certificando un modello AI o costruendo da zero — P4SaMD ha un percorso comprovato.",
+    readCase: "Leggi il Caso →",
+    // TODO: point to /it/use-cases once detail pages are built (not in Batch 1 scope)
+    hrefPrefix: "/use-cases",
+  },
+};
+
+export function UseCasesGrid({ locale = "en" }: { locale?: "en" | "it" }) {
+  const t = COPY[locale];
+  const useCases = locale === "it" ? useCasesIt : useCasesEn;
   return (
     <section
       className="relative py-14 md:py-24 overflow-hidden"
@@ -21,11 +42,10 @@ export function UseCasesGrid() {
       />
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-10 md:mb-16">
-          <PillTag className="mb-6">Use Cases</PillTag>
-          <h2 className="heading-section mb-4">Built for every stage of the SaMD journey.</h2>
+          <PillTag className="mb-6">{t.pill}</PillTag>
+          <h2 className="heading-section mb-4">{t.heading}</h2>
           <p className="max-w-xl mx-auto" style={{ color: "var(--text-secondary)" }}>
-            Whether you're remediating legacy software, certifying an AI model, or building from
-            scratch — P4SaMD has a proven path.
+            {t.body}
           </p>
         </div>
 
@@ -88,11 +108,11 @@ export function UseCasesGrid() {
                     </div>
                   )}
                   <Link
-                    href={`/use-cases/${uc.slug}`}
+                    href={`${t.hrefPrefix}/${uc.slug}`}
                     className="uc-card-cta mt-2 text-sm font-semibold transition-colors"
                     style={{ color: "var(--text-primary)" }}
                   >
-                    Read Use Case →
+                    {t.readCase}
                   </Link>
                 </div>
               </div>

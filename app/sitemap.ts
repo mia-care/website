@@ -52,12 +52,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly",
       priority: 1,
     }),
-    {
-      url: `${BASE}/product`,
+    ...localePair("/product", "/it/prodotto", {
       lastModified: PAGE_DATES["/product"],
       changeFrequency: "monthly",
       priority: 0.9,
-    },
+    }),
     ...localePair("/plans", "/it/piani", {
       lastModified: PAGE_DATES["/plans"],
       changeFrequency: "monthly",

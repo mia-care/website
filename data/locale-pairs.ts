@@ -4,6 +4,7 @@
 // "no link if missing" rule in CONTEXT.md.
 export const LOCALE_PAIRS: { en: string; it: string }[] = [
   { en: "/", it: "/it" },
+  { en: "/product", it: "/it/prodotto" },
   { en: "/about-us", it: "/it/chi-siamo" },
   { en: "/certifications", it: "/it/certificazioni" },
   { en: "/sustainability", it: "/it/sostenibilita" },

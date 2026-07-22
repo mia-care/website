@@ -5,70 +5,171 @@ import { PillTag } from "@/components/common/PillTag";
 
 const CYCLE_MS = 20_000;
 
-const TOOLS = [
-  {
-    code: "eQMS",
-    name: "Quality Management",
-    traditional: {
-      status: "Manual",
-      items: [
-        "SOPs compiled in Word/PDF",
-        "Offline audit trail",
-        "Compliance sprint before every audit",
-      ],
+const TOOLS = {
+  en: [
+    {
+      code: "eQMS",
+      name: "Quality Management",
+      traditional: {
+        status: "Manual",
+        items: [
+          "SOPs compiled in Word/PDF",
+          "Offline audit trail",
+          "Compliance sprint before every audit",
+        ],
+      },
+      unified: {
+        status: "Automated",
+        items: [
+          "Records auto-generated from SDLC",
+          "Real-time, immutable audit trail",
+          "Continuously audit-ready",
+        ],
+      },
     },
-    unified: {
-      status: "Automated",
-      items: [
-        "Records auto-generated from SDLC",
-        "Real-time, immutable audit trail",
-        "Continuously audit-ready",
-      ],
+    {
+      code: "ALM",
+      name: "Application Lifecycle",
+      traditional: {
+        status: "Disconnected",
+        items: [
+          "Requirements in spreadsheets",
+          "No link to quality records",
+          "Manual traceability reconciliation",
+        ],
+      },
+      unified: {
+        status: "Connected",
+        items: [
+          "Requirements traced in real time",
+          "Risks linked to mitigations & tests",
+          "Living traceability matrix",
+        ],
+      },
     },
-  },
-  {
-    code: "ALM",
-    name: "Application Lifecycle",
-    traditional: {
-      status: "Disconnected",
-      items: [
-        "Requirements in spreadsheets",
-        "No link to quality records",
-        "Manual traceability reconciliation",
-      ],
+    {
+      code: "DevOps",
+      name: "Development & CI/CD",
+      traditional: {
+        status: "Unguarded",
+        items: [
+          "No compliance checks at commit",
+          "Release notes written manually",
+          "Documentation created post-hoc",
+        ],
+      },
+      unified: {
+        status: "Compliant",
+        items: [
+          "Guardrails enforced at every commit",
+          "Release notes auto-generated",
+          "DHF compiled continuously",
+        ],
+      },
     },
-    unified: {
-      status: "Connected",
-      items: [
-        "Requirements traced in real time",
-        "Risks linked to mitigations & tests",
-        "Living traceability matrix",
-      ],
+  ],
+  it: [
+    {
+      code: "eQMS",
+      name: "Quality Management",
+      traditional: {
+        status: "Manuale",
+        items: [
+          "SOP compilate in Word/PDF",
+          "Audit trail offline",
+          "Sprint di compliance prima di ogni audit",
+        ],
+      },
+      unified: {
+        status: "Automatizzato",
+        items: [
+          "Record generati automaticamente dall'SDLC",
+          "Audit trail immutabile in tempo reale",
+          "Pronto per l'audit in modo continuo",
+        ],
+      },
     },
-  },
-  {
-    code: "DevOps",
-    name: "Development & CI/CD",
-    traditional: {
-      status: "Unguarded",
-      items: [
-        "No compliance checks at commit",
-        "Release notes written manually",
-        "Documentation created post-hoc",
-      ],
+    {
+      code: "ALM",
+      name: "Application Lifecycle",
+      traditional: {
+        status: "Disconnesso",
+        items: [
+          "Requisiti in fogli di calcolo",
+          "Nessun collegamento ai record di qualità",
+          "Riconciliazione manuale della tracciabilità",
+        ],
+      },
+      unified: {
+        status: "Connesso",
+        items: [
+          "Requisiti tracciati in tempo reale",
+          "Rischi collegati a mitigazioni e test",
+          "Matrice di tracciabilità sempre viva",
+        ],
+      },
     },
-    unified: {
-      status: "Compliant",
-      items: [
-        "Guardrails enforced at every commit",
-        "Release notes auto-generated",
-        "DHF compiled continuously",
-      ],
+    {
+      code: "DevOps",
+      name: "Sviluppo & CI/CD",
+      traditional: {
+        status: "Senza Controlli",
+        items: [
+          "Nessun controllo di compliance al commit",
+          "Release notes scritte manualmente",
+          "Documentazione creata a posteriori",
+        ],
+      },
+      unified: {
+        status: "Conforme",
+        items: [
+          "Guardrail applicati a ogni commit",
+          "Release notes generate automaticamente",
+          "DHF compilato continuamente",
+        ],
+      },
     },
-  },
-];
+  ],
+};
 
-export function OneSolutionInteractive() {
+const COPY = {
+  en: {
+    pill: "One Solution. End-to-end.",
+    heading: "Most organizations treat compliance as a layer on top of engineering.",
+    toggleTraditional: "Traditional",
+    toggleP4: "With P4SaMD",
+    barLabel: "Regulatory Intelligence Layer",
+    tags: ["Auto-tracing", "Auto-evidence", "Auto-DHF"],
+    captionP4: "All systems governed and audit-ready in real time — no manual effort.",
+    captionTraditional: "Manual reconciliation required between every system, before every audit.",
+    supporting: [
+      "P4SaMD connects to your existing tools, orchestrates your workflows, and enforces quality controls as a natural part of your SDLC, without asking your team to change how they work.",
+      "It integrates your IDP, your Catalog, and a Compliance Engine into a single cohesive execution environment, with P4SaMD as the regulatory intelligence layer that governs all of it.",
+      "Every requirement tracked. Every risk mapped. Every release documented. Continuously, automatically, in real time.",
+    ],
+  },
+  it: {
+    pill: "Un'unica soluzione. End-to-end.",
+    heading:
+      "La maggior parte delle organizzazioni tratta la compliance come uno strato sopra l'engineering.",
+    toggleTraditional: "Tradizionale",
+    toggleP4: "Con P4SaMD",
+    barLabel: "Livello di Intelligenza Regolatoria",
+    tags: ["Auto-tracciamento", "Auto-evidenza", "Auto-DHF"],
+    captionP4:
+      "Tutti i sistemi governati e pronti per l'audit in tempo reale — zero sforzo manuale.",
+    captionTraditional: "Riconciliazione manuale richiesta tra ogni sistema, prima di ogni audit.",
+    supporting: [
+      "P4SaMD si collega ai tuoi strumenti esistenti, orchestra i tuoi workflow e applica controlli di qualità come parte naturale del tuo SDLC, senza chiedere al tuo team di cambiare il modo in cui lavora.",
+      "Integra il tuo IDP, il tuo Catalog e un Compliance Engine in un unico ambiente di esecuzione coeso, con P4SaMD come livello di intelligenza regolatoria che governa il tutto.",
+      "Ogni requisito tracciato. Ogni rischio mappato. Ogni rilascio documentato. Continuamente, automaticamente, in tempo reale.",
+    ],
+  },
+};
+
+export function OneSolutionInteractive({ locale = "en" }: { locale?: "en" | "it" }) {
+  const t = COPY[locale];
+  const tools = TOOLS[locale];
   const [mode, setMode] = useState<"traditional" | "p4samd">("p4samd");
   const [cycleKey, setCycleKey] = useState(0);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
@@ -115,7 +216,7 @@ export function OneSolutionInteractive() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section header */}
-        <PillTag className="mb-5">One Solution. End-to-end.</PillTag>
+        <PillTag className="mb-5">{t.pill}</PillTag>
         <h2
           className="font-display font-bold mb-8"
           style={{
@@ -124,7 +225,7 @@ export function OneSolutionInteractive() {
             maxWidth: "32rem",
           }}
         >
-          Most organizations treat compliance as a layer on top of engineering.
+          {t.heading}
         </h2>
 
         {/* Toggle — left aligned */}
@@ -140,7 +241,7 @@ export function OneSolutionInteractive() {
         >
           {(["p4samd", "traditional"] as const).map((m) => {
             const isActive = mode === m;
-            const label = m === "traditional" ? "Traditional" : "With P4SaMD";
+            const label = m === "traditional" ? t.toggleTraditional : t.toggleP4;
             return (
               <button
                 key={m}
@@ -238,11 +339,11 @@ export function OneSolutionInteractive() {
                       P4SaMD
                     </span>
                     <p className="text-sm font-semibold" style={{ color: "var(--text-primary)" }}>
-                      Regulatory Intelligence Layer
+                      {t.barLabel}
                     </p>
                   </div>
                   <div className="flex flex-wrap gap-2">
-                    {["Auto-tracing", "Auto-evidence", "Auto-DHF"].map((tag) => (
+                    {t.tags.map((tag) => (
                       <span
                         key={tag}
                         style={{
@@ -291,7 +392,7 @@ export function OneSolutionInteractive() {
 
           {/* Tool cards — always same structure, content transitions */}
           <div className="grid sm:grid-cols-3 gap-0 sm:gap-4">
-            {TOOLS.map((tool) => {
+            {tools.map((tool) => {
               const data = isP4 ? tool.unified : tool.traditional;
               return (
                 <div
@@ -386,9 +487,7 @@ export function OneSolutionInteractive() {
                 transition: "color 0.35s ease",
               }}
             >
-              {isP4
-                ? "All systems governed and audit-ready in real time — no manual effort."
-                : "Manual reconciliation required between every system, before every audit."}
+              {isP4 ? t.captionP4 : t.captionTraditional}
             </p>
             <span
               style={{
@@ -408,20 +507,15 @@ export function OneSolutionInteractive() {
           className="mt-10 grid lg:grid-cols-3 gap-6 pt-8"
           style={{ borderTop: "1px solid var(--bg-border)" }}
         >
-          <p className="text-sm" style={{ color: "var(--text-secondary)", lineHeight: 1.8 }}>
-            P4SaMD connects to your existing tools, orchestrates your workflows, and enforces
-            quality controls as a natural part of your SDLC, without asking your team to change how
-            they work.
-          </p>
-          <p className="text-sm" style={{ color: "var(--text-secondary)", lineHeight: 1.8 }}>
-            It integrates your IDP, your Catalog, and a Compliance Engine into a single cohesive
-            execution environment, with P4SaMD as the regulatory intelligence layer that governs all
-            of it.
-          </p>
-          <p className="text-sm" style={{ color: "var(--text-secondary)", lineHeight: 1.8 }}>
-            Every requirement tracked. Every risk mapped. Every release documented. Continuously,
-            automatically, in real time.
-          </p>
+          {t.supporting.map((paragraph) => (
+            <p
+              key={paragraph}
+              className="text-sm"
+              style={{ color: "var(--text-secondary)", lineHeight: 1.8 }}
+            >
+              {paragraph}
+            </p>
+          ))}
         </div>
       </div>
     </section>

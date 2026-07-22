@@ -80,12 +80,22 @@ function MarqueeRow({ reverse, delay }: { reverse?: boolean; delay?: string }) {
   );
 }
 
-export function LogoMarquee() {
+const COPY = {
+  en: { aria: "Our clients", line1: "Trusted by", line2: "healthcare organizations worldwide" },
+  it: {
+    aria: "I nostri clienti",
+    line1: "La fiducia di",
+    line2: "organizzazioni sanitarie in tutto il mondo",
+  },
+};
+
+export function LogoMarquee({ locale = "en" }: { locale?: "en" | "it" }) {
+  const t = COPY[locale];
   return (
     <section
       className="w-full border-y"
       style={{ borderColor: "var(--bg-border)" }}
-      aria-label="Our clients"
+      aria-label={t.aria}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div
@@ -95,10 +105,10 @@ export function LogoMarquee() {
           {/* Label — fixed width on desktop, full row on mobile */}
           <div className="pt-5 pb-3 sm:py-0 sm:pr-5 shrink-0 sm:w-[260px]">
             <p className="label-caps" style={{ color: "var(--text-muted)" }}>
-              Trusted by
+              {t.line1}
             </p>
             <p className="label-caps mt-0.5" style={{ color: "var(--text-secondary)" }}>
-              healthcare organizations worldwide
+              {t.line2}
             </p>
           </div>
 

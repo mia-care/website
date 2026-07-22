@@ -5,25 +5,71 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { PillTag } from "@/components/common/PillTag";
 
-const problems = [
-  {
-    icon: Layers,
-    title: "Fragmented tools",
-    description: "Jira, ALM, GitHub, Word, Excel... every team operates in its own silo.",
+const PROBLEMS = {
+  en: [
+    {
+      icon: Layers,
+      title: "Fragmented tools",
+      description: "Jira, ALM, GitHub, Word, Excel... every team operates in its own silo.",
+    },
+    {
+      icon: AlertTriangle,
+      title: "Manual handoffs",
+      description:
+        "Every transfer between systems is manual, error-prone, and invisible to auditors.",
+    },
+    {
+      icon: Clock,
+      title: "Last-minute compliance",
+      description:
+        "Releases slip and regulatory submissions arrive with gaps that take weeks to resolve.",
+    },
+  ],
+  it: [
+    {
+      icon: Layers,
+      title: "Strumenti frammentati",
+      description: "Jira, ALM, GitHub, Word, Excel... ogni team opera nel proprio silo.",
+    },
+    {
+      icon: AlertTriangle,
+      title: "Passaggi manuali",
+      description:
+        "Ogni trasferimento tra sistemi è manuale, incline all'errore e invisibile agli auditor.",
+    },
+    {
+      icon: Clock,
+      title: "Compliance dell'ultimo minuto",
+      description:
+        "I rilasci slittano e le submission regolatorie arrivano con lacune che richiedono settimane per essere risolte.",
+    },
+  ],
+};
+
+const COPY = {
+  en: {
+    pill: "The Problem",
+    heading: (
+      <>
+        Compliance is slowing your team down.
+        <br />
+        It shouldn&apos;t.
+      </>
+    ),
+    cta: { label: "See how P4SaMD fixes this →", href: "/product" },
   },
-  {
-    icon: AlertTriangle,
-    title: "Manual handoffs",
-    description:
-      "Every transfer between systems is manual, error-prone, and invisible to auditors.",
+  it: {
+    pill: "Il Problema",
+    heading: (
+      <>
+        La compliance sta rallentando il tuo team.
+        <br />
+        Non dovrebbe.
+      </>
+    ),
+    cta: { label: "Scopri come P4SaMD lo risolve →", href: "/it/prodotto" },
   },
-  {
-    icon: Clock,
-    title: "Last-minute compliance",
-    description:
-      "Releases slip and regulatory submissions arrive with gaps that take weeks to resolve.",
-  },
-];
+};
 
 function useReveal(delay = 0) {
   const ref = useRef<HTMLDivElement>(null);
@@ -126,7 +172,9 @@ function ProblemCard({
   );
 }
 
-export function ProblemSection() {
+export function ProblemSection({ locale = "en" }: { locale?: "en" | "it" }) {
+  const t = COPY[locale];
+  const problems = PROBLEMS[locale];
   const header = useReveal(0);
   const cta = useReveal(500);
 
@@ -153,12 +201,8 @@ export function ProblemSection() {
             transition: "opacity 0.5s ease-out, transform 0.5s ease-out",
           }}
         >
-          <PillTag className="mb-6">The Problem</PillTag>
-          <h2 className="heading-section">
-            Compliance is slowing your team down.
-            <br />
-            It shouldn&apos;t.
-          </h2>
+          <PillTag className="mb-6">{t.pill}</PillTag>
+          <h2 className="heading-section">{t.heading}</h2>
         </div>
 
         <div className="grid md:grid-cols-3 gap-6 mb-10">
@@ -177,11 +221,11 @@ export function ProblemSection() {
           }}
         >
           <Link
-            href="/product"
+            href={t.cta.href}
             className="inline-flex items-center gap-1 text-sm font-semibold transition-colors hover:text-brand-green"
             style={{ color: "var(--text-primary)" }}
           >
-            See how P4SaMD fixes this →
+            {t.cta.label}
           </Link>
         </div>
       </div>

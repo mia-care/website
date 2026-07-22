@@ -2,14 +2,29 @@
 
 import { useEffect, useState } from "react";
 
-const STEPS = [
-  { label: "Requirements traceability", meta: "24 / 24 linked", type: "done" as const },
-  { label: "Risk management", meta: "12 / 12 mitigated", type: "done" as const },
-  { label: "Unit testing", meta: "98.7% pass rate", type: "done" as const },
-  { label: "Integration testing", meta: "", type: "running" as const },
-  { label: "DHF compilation", meta: "queued", type: "pending" as const },
-  { label: "Technical File", meta: "queued", type: "pending" as const },
-];
+const STEPS_BY_LOCALE = {
+  en: [
+    { label: "Requirements traceability", meta: "24 / 24 linked", type: "done" as const },
+    { label: "Risk management", meta: "12 / 12 mitigated", type: "done" as const },
+    { label: "Unit testing", meta: "98.7% pass rate", type: "done" as const },
+    { label: "Integration testing", meta: "", type: "running" as const },
+    { label: "DHF compilation", meta: "queued", type: "pending" as const },
+    { label: "Technical File", meta: "queued", type: "pending" as const },
+  ],
+  it: [
+    { label: "Tracciabilità dei requisiti", meta: "24 / 24 collegati", type: "done" as const },
+    { label: "Risk management", meta: "12 / 12 mitigati", type: "done" as const },
+    { label: "Unit testing", meta: "98.7% di successo", type: "done" as const },
+    { label: "Integration testing", meta: "", type: "running" as const },
+    { label: "Compilazione DHF", meta: "in coda", type: "pending" as const },
+    { label: "Technical File", meta: "in coda", type: "pending" as const },
+  ],
+};
+
+const COPY = {
+  en: { live: "Live", confidence: "Compliance confidence", onRelease: "→ 100% on release" },
+  it: { live: "Live", confidence: "Affidabilità di compliance", onRelease: "→ 100% al rilascio" },
+};
 
 function DoneIcon() {
   return (
@@ -55,7 +70,9 @@ function SpinnerIcon() {
   );
 }
 
-export function HeroCompliancePipeline() {
+export function HeroCompliancePipeline({ locale = "en" }: { locale?: "en" | "it" }) {
+  const t = COPY[locale];
+  const STEPS = STEPS_BY_LOCALE[locale];
   const [revealed, setRevealed] = useState(0);
   const [testProgress, setTestProgress] = useState(0);
   const [confidence, setConfidence] = useState(0);
@@ -68,7 +85,7 @@ export function HeroCompliancePipeline() {
     timers.push(setTimeout(() => setTestProgress(89), 1600));
     timers.push(setTimeout(() => setConfidence(72), 700));
     return () => timers.forEach(clearTimeout);
-  }, []);
+  }, [STEPS]);
 
   return (
     <div
@@ -171,7 +188,7 @@ export function HeroCompliancePipeline() {
                 background: "#4ade80",
               }}
             />
-            Live
+            {t.live}
           </span>
         </div>
 
@@ -262,12 +279,10 @@ export function HeroCompliancePipeline() {
               marginBottom: 8,
             }}
           >
-            <span style={{ fontSize: 10, color: "#555", fontWeight: 500 }}>
-              Compliance confidence
-            </span>
+            <span style={{ fontSize: 10, color: "#555", fontWeight: 500 }}>{t.confidence}</span>
             <span style={{ fontSize: 13, fontWeight: 700, color: "#00f096" }}>
               {confidence}%
-              <span style={{ fontSize: 9, color: "#444", marginLeft: 5 }}>→ 100% on release</span>
+              <span style={{ fontSize: 9, color: "#444", marginLeft: 5 }}>{t.onRelease}</span>
             </span>
           </div>
           <div style={{ height: 4, background: "#1a1a1a", borderRadius: 99, overflow: "hidden" }}>

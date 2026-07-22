@@ -12,7 +12,8 @@ import { SdlcOrchestratorSvg } from "@/components/common/capability-svgs/SdlcOrc
 import { SecureSoftwareSvg } from "@/components/common/capability-svgs/SecureSoftwareSvg";
 import { SmartAssistantSvg } from "@/components/common/capability-svgs/SmartAssistantSvg";
 import { PillTag } from "@/components/common/PillTag";
-import { capabilities } from "@/data/capabilities";
+import { capabilities as capabilitiesEn } from "@/data/capabilities";
+import { capabilities as capabilitiesIt } from "@/data/capabilities.it";
 
 const SVG_MAP: Record<string, React.ComponentType> = {
   "sdlc-orchestrator": SdlcOrchestratorSvg,
@@ -26,6 +27,34 @@ const SVG_MAP: Record<string, React.ComponentType> = {
 };
 
 const AUTOPLAY_MS = 20_000;
+
+const COPY = {
+  en: {
+    pill: "Platform Capabilities",
+    heading: "The full E2E in one platform.",
+    body: "P4SaMD orchestrates your entire SDLC — from requirements to release — with regulatory compliance enforced at every stage.",
+    explore: "Explore capability →",
+    pause: "Pause",
+    resume: "Resume",
+    pauseAria: "Pause autoplay",
+    resumeAria: "Resume autoplay",
+    ofLabel: "of",
+    capabilitiesPrefix: "/capabilities",
+  },
+  it: {
+    pill: "Capability della Piattaforma",
+    heading: "L'intero E2E in un'unica piattaforma.",
+    body: "P4SaMD orchestra l'intero SDLC — dai requisiti al rilascio — con la compliance regolatoria applicata in ogni fase.",
+    explore: "Esplora la capability →",
+    pause: "Pausa",
+    resume: "Riprendi",
+    pauseAria: "Metti in pausa l'autoplay",
+    resumeAria: "Riprendi l'autoplay",
+    ofLabel: "di",
+    // TODO: point to /it/capabilities once detail pages are built (not in Batch 1 scope)
+    capabilitiesPrefix: "/capabilities",
+  },
+};
 
 function PauseIcon() {
   return (
@@ -44,7 +73,9 @@ function PlayIcon() {
   );
 }
 
-export function CapabilitiesGrid() {
+export function CapabilitiesGrid({ locale = "en" }: { locale?: "en" | "it" }) {
+  const t = COPY[locale];
+  const capabilities = locale === "it" ? capabilitiesIt : capabilitiesEn;
   const [active, setActive] = useState(0);
   const [isPlaying, setIsPlaying] = useState(true);
   const [hoveredTab, setHoveredTab] = useState<number | null>(null);
@@ -68,7 +99,7 @@ export function CapabilitiesGrid() {
     return () => {
       if (intervalRef.current) clearInterval(intervalRef.current);
     };
-  }, [isPlaying]);
+  }, [isPlaying, capabilities.length]);
 
   // Mobile: scroll active tab within the strip — never touches page scroll
   useEffect(() => {
@@ -109,11 +140,10 @@ export function CapabilitiesGrid() {
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-10 md:mb-16">
-          <PillTag className="mb-6">Platform Capabilities</PillTag>
-          <h2 className="heading-section mb-4">The full E2E in one platform.</h2>
+          <PillTag className="mb-6">{t.pill}</PillTag>
+          <h2 className="heading-section mb-4">{t.heading}</h2>
           <p className="max-w-xl mx-auto" style={{ color: "var(--text-secondary)" }}>
-            P4SaMD orchestrates your entire SDLC — from requirements to release — with regulatory
-            compliance enforced at every stage.
+            {t.body}
           </p>
         </div>
 
@@ -183,7 +213,7 @@ export function CapabilitiesGrid() {
               <button
                 type="button"
                 onClick={togglePlay}
-                aria-label={isPlaying ? "Pause autoplay" : "Resume autoplay"}
+                aria-label={isPlaying ? t.pauseAria : t.resumeAria}
                 className="shrink-0 flex items-center justify-center transition-colors"
                 style={{
                   width: 44,
@@ -217,12 +247,15 @@ export function CapabilitiesGrid() {
 
             {/* Screen reader position announcement */}
             <span className="sr-only" aria-live="polite" aria-atomic="true">
-              {cap.name}, {active + 1} of {capabilities.length}
+              {cap.name}, {active + 1} {t.ofLabel} {capabilities.length}
             </span>
           </div>
 
           {/* Desktop: vertical tabs sidebar */}
-          <nav className="hidden lg:flex flex-col w-52 shrink-0 gap-0.5" aria-label="Capabilities">
+          <nav
+            className="hidden lg:flex flex-col w-52 shrink-0 gap-0.5"
+            aria-label={locale === "it" ? "Capability" : "Capabilities"}
+          >
             {capabilities.map((c, i) => (
               <button
                 key={c.slug}
@@ -289,7 +322,7 @@ export function CapabilitiesGrid() {
             <button
               type="button"
               onClick={togglePlay}
-              aria-label={isPlaying ? "Pause autoplay" : "Resume autoplay"}
+              aria-label={isPlaying ? t.pauseAria : t.resumeAria}
               className="mt-2 flex items-center gap-2 px-4 py-2 rounded-lg transition-all text-left"
               style={{
                 color: "var(--text-muted)",
@@ -320,7 +353,7 @@ export function CapabilitiesGrid() {
                 {isPlaying ? <PauseIcon /> : <PlayIcon />}
               </span>
               <span className="text-xs" style={{ color: "var(--text-muted)" }}>
-                {isPlaying ? "Pause" : "Resume"}
+                {isPlaying ? t.pause : t.resume}
               </span>
             </button>
           </nav>
@@ -371,11 +404,11 @@ export function CapabilitiesGrid() {
               </ul>
 
               <Link
-                href={`/capabilities/${cap.slug}`}
+                href={`${t.capabilitiesPrefix}/${cap.slug}`}
                 className="mt-auto text-sm font-semibold inline-flex items-center gap-1 transition-colors hover:text-brand-green"
                 style={{ color: "var(--text-primary)" }}
               >
-                Explore capability →
+                {t.explore}
               </Link>
             </div>
 

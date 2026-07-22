@@ -7,7 +7,33 @@ import { HeroProductFloating } from "./HeroProductFloating";
 // Words in the H1: ["The", "compliance", "bottleneck", "ends", "here."]
 // "ends here." gets text-brand-gradient, rest plain
 
-export function HeroBanner() {
+const COPY = {
+  en: {
+    subtitle: (
+      <>
+        Organizations developing <strong>Software as a Medical Device</strong> spend 6–12 months in
+        regulatory validation for every release. P4SaMD embeds compliance directly into your
+        workflow; making audit-readiness the default, not the deadline.
+      </>
+    ),
+    ctaDemo: { label: "Request a Demo →", href: "/request-demo" },
+    ctaExplore: { label: "Explore the Platform →", href: "/product" },
+  },
+  it: {
+    subtitle: (
+      <>
+        Le organizzazioni che sviluppano <strong>Software as a Medical Device</strong> passano 6-12
+        mesi in validazione regolatoria per ogni rilascio. P4SaMD integra la compliance direttamente
+        nel tuo workflow, rendendo l'audit-readiness la norma, non la scadenza.
+      </>
+    ),
+    ctaDemo: { label: "Richiedi una Demo →", href: "/it/richiedi-demo" },
+    ctaExplore: { label: "Esplora la Piattaforma →", href: "/it/prodotto" },
+  },
+};
+
+export function HeroBanner({ locale = "en" }: { locale?: "en" | "it" }) {
+  const t = COPY[locale];
   function wordSpan(_index: number, text: string, extraStyle?: React.CSSProperties) {
     return <span style={{ display: "inline-block", ...extraStyle }}>{text}</span>;
   }
@@ -61,19 +87,43 @@ export function HeroBanner() {
                 animationDelay: "80ms",
               }}
             >
-              {wordSpan(0, "The")} {wordSpan(1, "compliance")} {wordSpan(2, "bottleneck")}{" "}
-              {wordSpan(3, "ends", {
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text",
-                backgroundImage: "var(--brand-gradient, linear-gradient(90deg,#00f096,#00f0f0))",
-              })}{" "}
-              {wordSpan(4, "here.", {
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text",
-                backgroundImage: "var(--brand-gradient, linear-gradient(90deg,#00f096,#00f0f0))",
-              })}
+              {locale === "it" ? (
+                <>
+                  {wordSpan(0, "Il collo di bottiglia")} {wordSpan(1, "della compliance")}{" "}
+                  {wordSpan(2, "finisce", {
+                    WebkitBackgroundClip: "text",
+                    WebkitTextFillColor: "transparent",
+                    backgroundClip: "text",
+                    backgroundImage:
+                      "var(--brand-gradient, linear-gradient(90deg,#00f096,#00f0f0))",
+                  })}{" "}
+                  {wordSpan(3, "qui.", {
+                    WebkitBackgroundClip: "text",
+                    WebkitTextFillColor: "transparent",
+                    backgroundClip: "text",
+                    backgroundImage:
+                      "var(--brand-gradient, linear-gradient(90deg,#00f096,#00f0f0))",
+                  })}
+                </>
+              ) : (
+                <>
+                  {wordSpan(0, "The")} {wordSpan(1, "compliance")} {wordSpan(2, "bottleneck")}{" "}
+                  {wordSpan(3, "ends", {
+                    WebkitBackgroundClip: "text",
+                    WebkitTextFillColor: "transparent",
+                    backgroundClip: "text",
+                    backgroundImage:
+                      "var(--brand-gradient, linear-gradient(90deg,#00f096,#00f0f0))",
+                  })}{" "}
+                  {wordSpan(4, "here.", {
+                    WebkitBackgroundClip: "text",
+                    WebkitTextFillColor: "transparent",
+                    backgroundClip: "text",
+                    backgroundImage:
+                      "var(--brand-gradient, linear-gradient(90deg,#00f096,#00f0f0))",
+                  })}
+                </>
+              )}
             </h1>
 
             {/* Subtitle */}
@@ -87,9 +137,7 @@ export function HeroBanner() {
                 animationDelay: "160ms",
               }}
             >
-              Organizations developing <strong>Software as a Medical Device</strong> spend 6–12
-              months in regulatory validation for every release. P4SaMD embeds compliance directly
-              into your workflow; making audit-readiness the default, not the deadline.
+              {t.subtitle}
             </p>
 
             {/* CTAs */}
@@ -98,20 +146,20 @@ export function HeroBanner() {
               style={{ animationDelay: "240ms" }}
             >
               <Link
-                href="/request-demo"
+                href={t.ctaDemo.href}
                 className="inline-flex items-center h-12 px-8 rounded-lg font-semibold text-sm bg-brand-gradient text-bg-base transition-opacity hover:opacity-90"
               >
-                Request a Demo →
+                {t.ctaDemo.label}
               </Link>
               <Link
-                href="/product"
+                href={t.ctaExplore.href}
                 className="inline-flex items-center h-12 px-8 rounded-lg font-semibold text-sm border transition-colors hover:bg-white/5"
                 style={{
                   borderColor: "rgba(255,255,255,0.28)",
                   color: "var(--text-primary)",
                 }}
               >
-                Explore the Platform →
+                {t.ctaExplore.label}
               </Link>
             </div>
           </div>

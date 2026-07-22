@@ -1,11 +1,20 @@
-const STATS = [
-  { value: "3×", label: "Faster Time-To-Market" },
-  { value: "50%", label: "Development Cost Reduction" },
-  { value: "100%", label: "Audit-Ready" },
-  { value: "90%", label: "Less Manual Documentation" },
-];
+const STATS = {
+  en: [
+    { value: "3×", label: "Faster Time-To-Market" },
+    { value: "50%", label: "Development Cost Reduction" },
+    { value: "100%", label: "Audit-Ready" },
+    { value: "90%", label: "Less Manual Documentation" },
+  ],
+  it: [
+    { value: "3×", label: "Time-To-Market più rapido" },
+    { value: "50%", label: "Riduzione dei costi di sviluppo" },
+    { value: "100%", label: "Audit-Ready" },
+    { value: "90%", label: "Documentazione manuale in meno" },
+  ],
+};
 
-export function StatsRow() {
+export function StatsRow({ locale = "en" }: { locale?: "en" | "it" }) {
+  const stats = STATS[locale];
   return (
     <section
       className="border-y py-10"
@@ -13,7 +22,7 @@ export function StatsRow() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
-          {STATS.map((stat) => (
+          {stats.map((stat) => (
             <div key={stat.label} className="text-center">
               <div
                 className="font-display font-bold mb-1"
