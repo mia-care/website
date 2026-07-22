@@ -26,6 +26,7 @@ export const LOCALE_PAIRS: { en: string; it: string }[] = [
   { en: "/use-cases/greenfield-samd", it: "/it/use-cases/greenfield-samd" },
   { en: "/use-cases/high-risk-ai-cdss", it: "/it/use-cases/high-risk-ai-cdss" },
   { en: "/use-cases/legacy-remediation", it: "/it/use-cases/legacy-remediation" },
+  { en: "/resources/blog", it: "/it/risorse/blog" },
   // Blog posts: EN and IT localized slugs differ on purpose (see CONTEXT.md),
   // so each pair is listed explicitly rather than derived from a shared slug.
   {
@@ -123,6 +124,35 @@ export const LOCALE_PAIRS: { en: string; it: string }[] = [
   {
     en: "/resources/blog/why-life-science-companies-need-a-digital-platform-now",
     it: "/it/risorse/blog/perche-il-life-science-ha-bisogno-di-una-piattaforma-digitale-componibile",
+  },
+  // Competence-center resources: same slug both locales (like capabilities/use-cases).
+  { en: "/resources", it: "/it/risorse" },
+  { en: "/resources/ai-powered-healthcare-samd", it: "/it/risorse/ai-powered-healthcare-samd" },
+  { en: "/resources/build-certified-samd", it: "/it/risorse/build-certified-samd" },
+  {
+    en: "/resources/composable-architecture-digital-health",
+    it: "/it/risorse/composable-architecture-digital-health",
+  },
+  {
+    en: "/resources/enable-cloud-native-healthcare-platform",
+    it: "/it/risorse/enable-cloud-native-healthcare-platform",
+  },
+  {
+    en: "/resources/enable-fhir-data-interoperability",
+    it: "/it/risorse/enable-fhir-data-interoperability",
+  },
+  {
+    en: "/resources/how-to-develop-certified-samd",
+    it: "/it/risorse/how-to-develop-certified-samd",
+  },
+  { en: "/resources/mia-care-product-demo", it: "/it/risorse/mia-care-product-demo" },
+  {
+    en: "/resources/telemedicine-platform-cloud-native",
+    it: "/it/risorse/telemedicine-platform-cloud-native",
+  },
+  {
+    en: "/resources/unlocking-remote-patient-monitoring",
+    it: "/it/risorse/unlocking-remote-patient-monitoring",
   },
 ];
 

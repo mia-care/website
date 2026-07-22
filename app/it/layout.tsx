@@ -3,9 +3,6 @@ import { Inter } from "next/font/google";
 import localFont from "next/font/local";
 import Script from "next/script";
 import { CookieBanner } from "@/components/common/CookieBanner";
-import { AnnouncementBanner } from "@/components/layout/AnnouncementBanner";
-import { Footer } from "@/components/layout/Footer";
-import { Navbar } from "@/components/layout/Navbar";
 import { announcement } from "@/data/announcement.it";
 import "../globals.css";
 
@@ -126,8 +123,6 @@ export default function ItalianRootLayout({ children }: Readonly<{ children: Rea
         >
           Salta al contenuto principale
         </a>
-        <AnnouncementBanner config={announcement} />
-        <Navbar locale="it" />
         <main
           id="main-content"
           className="flex-1"
@@ -135,7 +130,6 @@ export default function ItalianRootLayout({ children }: Readonly<{ children: Rea
         >
           {children}
         </main>
-        <Footer locale="it" />
         <CookieBanner locale="it" />
       </body>
     </html>

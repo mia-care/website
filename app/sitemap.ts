@@ -139,12 +139,23 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }),
   );
 
-  const resourcePages: MetadataRoute.Sitemap = getAllResources().map((r) => ({
-    url: `${BASE}/resources/${r.slug}`,
-    lastModified: DATA_LAST_MODIFIED,
-    changeFrequency: "monthly" as const,
-    priority: 0.7,
-  }));
+  const itResourceSlugs = new Set(getAllResources("it").map((r) => r.slug));
+  const resourcePages: MetadataRoute.Sitemap = getAllResources().flatMap((r) =>
+    itResourceSlugs.has(r.slug)
+      ? localePair(`/resources/${r.slug}`, `/it/risorse/${r.slug}`, {
+          lastModified: DATA_LAST_MODIFIED,
+          changeFrequency: "monthly",
+          priority: 0.7,
+        })
+      : [
+          {
+            url: `${BASE}/resources/${r.slug}`,
+            lastModified: DATA_LAST_MODIFIED,
+            changeFrequency: "monthly" as const,
+            priority: 0.7,
+          },
+        ],
+  );
 
   const blogPages: MetadataRoute.Sitemap = getAllPostSlugs().flatMap((pairingKey) =>
     blogLocalePair(pairingKey, { changeFrequency: "monthly", priority: 0.75 }),

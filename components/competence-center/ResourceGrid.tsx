@@ -8,27 +8,71 @@ import { SearchBar } from "@/components/common/SearchBar";
 import { assetPath } from "@/lib/asset";
 import type { ResourceMeta, ResourceType } from "@/lib/resources";
 
-const TYPE_LABELS: Record<ResourceType | "all", string> = {
-  all: "All",
-  whitepaper: "Whitepaper",
-  video: "Video",
-  guide: "Guide",
-  "case-study": "Case Study",
-  report: "Report",
+const TYPE_LABELS: Record<"en" | "it", Record<ResourceType | "all", string>> = {
+  en: {
+    all: "All",
+    whitepaper: "Whitepaper",
+    video: "Video",
+    guide: "Guide",
+    "case-study": "Case Study",
+    report: "Report",
+  },
+  it: {
+    all: "Tutti",
+    whitepaper: "Whitepaper",
+    video: "Video",
+    guide: "Guida",
+    "case-study": "Case Study",
+    report: "Report",
+  },
 };
 
-const CTA_LABELS: Record<ResourceType, string> = {
-  whitepaper: "Download →",
-  video: "Watch →",
-  guide: "Download →",
-  "case-study": "Read →",
-  report: "Download →",
+const CTA_LABELS: Record<"en" | "it", Record<ResourceType, string>> = {
+  en: {
+    whitepaper: "Download →",
+    video: "Watch →",
+    guide: "Download →",
+    "case-study": "Read →",
+    report: "Download →",
+  },
+  it: {
+    whitepaper: "Scarica →",
+    video: "Guarda →",
+    guide: "Scarica →",
+    "case-study": "Leggi →",
+    report: "Scarica →",
+  },
 };
 
-function FeaturedCard({ resource }: { resource: ResourceMeta }) {
+const COPY = {
+  en: {
+    featured: "Featured",
+    searchPlaceholder: "Search resources...",
+    noResultsQuery: (q: string) => `No resources found for "${q}".`,
+    noResults: "No resources in this category yet.",
+  },
+  it: {
+    featured: "In evidenza",
+    searchPlaceholder: "Cerca risorse...",
+    noResultsQuery: (q: string) => `Nessuna risorsa trovata per "${q}".`,
+    noResults: "Ancora nessuna risorsa in questa categoria.",
+  },
+};
+
+function FeaturedCard({
+  resource,
+  locale = "en",
+}: {
+  resource: ResourceMeta;
+  locale?: "en" | "it";
+}) {
+  const typeLabels = TYPE_LABELS[locale];
+  const ctaLabels = CTA_LABELS[locale];
+  const t = COPY[locale];
+  const hrefPrefix = locale === "it" ? "/it/risorse" : "/resources";
   return (
     <Link
-      href={`/resources/${resource.slug}`}
+      href={`${hrefPrefix}/${resource.slug}`}
       className="group flex flex-col sm:flex-row rounded-2xl overflow-hidden mb-12 transition-all hover:-translate-y-0.5"
       style={{
         background: "var(--bg-surface)",
@@ -59,14 +103,14 @@ function FeaturedCard({ resource }: { resource: ResourceMeta }) {
             backdropFilter: "blur(6px)",
           }}
         >
-          {TYPE_LABELS[resource.type]}
+          {typeLabels[resource.type]}
         </span>
       </div>
 
       {/* Body */}
       <div className="flex flex-col justify-center gap-4 p-7 sm:p-10">
         <span className="label-caps" style={{ color: "var(--brand-green)" }}>
-          Featured
+          {t.featured}
         </span>
         <h3
           className="font-display font-bold leading-snug"
@@ -84,14 +128,24 @@ function FeaturedCard({ resource }: { resource: ResourceMeta }) {
             color: "#0b0c10",
           }}
         >
-          {CTA_LABELS[resource.type]}
+          {ctaLabels[resource.type]}
         </span>
       </div>
     </Link>
   );
 }
 
-export function ResourceGrid({ resources }: { resources: ResourceMeta[] }) {
+export function ResourceGrid({
+  resources,
+  locale = "en",
+}: {
+  resources: ResourceMeta[];
+  locale?: "en" | "it";
+}) {
+  const typeLabels = TYPE_LABELS[locale];
+  const ctaLabels = CTA_LABELS[locale];
+  const t = COPY[locale];
+  const hrefPrefix = locale === "it" ? "/it/risorse" : "/resources";
   const router = useRouter();
   const pathname = usePathname();
 
@@ -137,13 +191,13 @@ export function ResourceGrid({ resources }: { resources: ResourceMeta[] }) {
 
   const searchItems = resources.map((r) => ({
     title: r.title,
-    href: `/resources/${r.slug}`,
+    href: `${hrefPrefix}/${r.slug}`,
   }));
 
   return (
     <>
       {/* Featured hero card — shown only when not searching */}
-      {featured && !isSearching && <FeaturedCard resource={featured} />}
+      {featured && !isSearching && <FeaturedCard resource={featured} locale={locale} />}
 
       {/* Search bar */}
       <div className="mb-6">
@@ -151,7 +205,7 @@ export function ResourceGrid({ resources }: { resources: ResourceMeta[] }) {
           items={searchItems}
           defaultValue={query}
           onSearch={(v) => setParam("q", v || null)}
-          placeholder="Search resources..."
+          placeholder={t.searchPlaceholder}
         />
       </div>
 
@@ -177,7 +231,7 @@ export function ResourceGrid({ resources }: { resources: ResourceMeta[] }) {
                   }
             }
           >
-            {TYPE_LABELS[type]}
+            {typeLabels[type]}
           </button>
         ))}
       </div>
@@ -185,14 +239,14 @@ export function ResourceGrid({ resources }: { resources: ResourceMeta[] }) {
       {/* Grid */}
       {filtered.length === 0 ? (
         <p className="text-center py-20" style={{ color: "var(--text-muted)" }}>
-          {query ? `No resources found for "${query}".` : "No resources in this category yet."}
+          {query ? t.noResultsQuery(query) : t.noResults}
         </p>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {filtered.map((resource) => (
             <Link
               key={resource.slug}
-              href={`/resources/${resource.slug}`}
+              href={`${hrefPrefix}/${resource.slug}`}
               className="group flex flex-col rounded-2xl overflow-hidden transition-all hover:-translate-y-1"
               style={{ background: "var(--bg-surface)", border: "1px solid var(--bg-border)" }}
             >
@@ -219,7 +273,7 @@ export function ResourceGrid({ resources }: { resources: ResourceMeta[] }) {
                     backdropFilter: "blur(6px)",
                   }}
                 >
-                  {TYPE_LABELS[resource.type]}
+                  {typeLabels[resource.type]}
                 </span>
               </div>
 
@@ -241,7 +295,7 @@ export function ResourceGrid({ resources }: { resources: ResourceMeta[] }) {
                   className="mt-4 inline-flex items-center gap-1.5 text-xs font-semibold"
                   style={{ color: "var(--text-secondary)" }}
                 >
-                  {CTA_LABELS[resource.type]}
+                  {ctaLabels[resource.type]}
                 </span>
               </div>
             </Link>

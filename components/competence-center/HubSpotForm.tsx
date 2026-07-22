@@ -17,6 +17,22 @@ function FormSkeleton() {
   );
 }
 
+const COPY = {
+  en: {
+    thankYou: "Thank you!",
+    confirmedWithFile: "Your access has been confirmed. You can now download the resource below.",
+    confirmedNoFile: "You will receive the resource in your inbox shortly.",
+    download: "Download PDF ↓",
+  },
+  it: {
+    thankYou: "Grazie!",
+    confirmedWithFile:
+      "Il tuo accesso è stato confermato. Ora puoi scaricare la risorsa qui sotto.",
+    confirmedNoFile: "Riceverai la risorsa nella tua casella di posta a breve.",
+    download: "Scarica il PDF ↓",
+  },
+};
+
 type Props = {
   portalId: string;
   formId: string;
@@ -24,6 +40,7 @@ type Props = {
   redirectUrl?: string;
   fileUrl?: string;
   videoEmbedUrl?: string;
+  locale?: "en" | "it";
 };
 
 export function HubSpotForm({
@@ -33,7 +50,9 @@ export function HubSpotForm({
   redirectUrl,
   fileUrl,
   videoEmbedUrl,
+  locale = "en",
 }: Props) {
+  const t = COPY[locale];
   const containerRef = useRef<HTMLDivElement>(null);
   const [submitted, setSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -94,10 +113,10 @@ export function HubSpotForm({
             className="font-display font-bold text-xl mb-2"
             style={{ color: "var(--text-primary)" }}
           >
-            Thank you!
+            {t.thankYou}
           </p>
           <p className="text-sm" style={{ color: "var(--text-secondary)" }}>
-            Your access has been confirmed. You can now download the resource below.
+            {t.confirmedWithFile}
           </p>
         </div>
 
@@ -111,7 +130,7 @@ export function HubSpotForm({
               color: "#0b0c10",
             }}
           >
-            Download PDF ↓
+            {t.download}
           </a>
         )}
 
@@ -129,7 +148,7 @@ export function HubSpotForm({
 
         {!fileUrl && !videoEmbedUrl && (
           <p className="text-sm" style={{ color: "var(--text-muted)" }}>
-            You will receive the resource in your inbox shortly.
+            {t.confirmedNoFile}
           </p>
         )}
       </div>
