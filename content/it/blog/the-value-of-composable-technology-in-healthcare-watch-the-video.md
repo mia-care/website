@@ -40,9 +40,11 @@ Sei curioso di scoprire gli insight e le conclusioni raccolte durante la discuss
 - **L'integrazione dei dati è indispensabile per soddisfare le aspettative di qualità degli esiti clinici**  
   Creare servizi in cui pazienti e medici possano trovare nuovi modi di collaborare è oggi essenziale. Mia-Care è in grado di abilitare facilmente la collaborazione attraverso API e [connettori basati su FHIR](https://docs.mia-platform.eu/docs/runtime_suite/mia-fhir-server/overview_and_usage).
 
-- **La flessibilità è oggi strategica perché le esigenze cambiano rapidamente**La flessibilità non riguarda esclusivamente il lato business, ma anche il pattern architetturale. Diventa strategico mantenere la capacità di creare nuovi componenti e includerli rapidamente in una meta-architettura attraverso una configurazione veloce.
+- **La flessibilità è oggi strategica perché le esigenze cambiano rapidamente**  
+  La flessibilità non riguarda esclusivamente il lato business, ma anche il pattern architetturale. Diventa strategico mantenere la capacità di creare nuovi componenti e includerli rapidamente in una meta-architettura attraverso una configurazione veloce.
 
-- **Costruire un'esperienza personalizzata e su misura con un approccio componibile**Anche all'interno dello stesso paese, o di una grande area come l'Europa, ognuno vuole essere leggermente diverso. Per ottenere questo, la modularità è un ottimo modo di operare, perché permette di selezionare i partner migliori per il miglior risultato in uno specifico contesto.
+- **Costruire un'esperienza personalizzata e su misura con un approccio componibile**  
+  Anche all'interno dello stesso paese, o di una grande area come l'Europa, ognuno vuole essere leggermente diverso. Per ottenere questo, la modularità è un ottimo modo di operare, perché permette di selezionare i partner migliori per il miglior risultato in uno specifico contesto.
 
 ## Conclusioni
 

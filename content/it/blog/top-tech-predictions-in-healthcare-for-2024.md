@@ -59,8 +59,6 @@ La Medicina Personalizzata è un approccio innovativo alla sanità che adatta il
 - **Clinical Decision Support Systems**: i CDSS integrano dati dei pazienti, conoscenze mediche e best practice per aiutare i fornitori di servizi sanitari a prendere decisioni basate sull'evidenza. Questi sistemi possono aiutare a personalizzare i piani di trattamento in base ai dati individuali dei pazienti.
 - **Strumenti di Farmacogenomica:** questi strumenti analizzano le informazioni genetiche per prevedere come un individuo potrebbe rispondere a farmaci specifici. Queste informazioni aiutano a evitare reazioni avverse e a selezionare il trattamento più efficace.
 
-L'integrazione di queste tecnologie digitali con la medicina personalizzata sta rivoluzionando il modo in cui viene erogata la sanità. **Consente ai fornitori di servizi sanitari di prendere decisioni basate sui dati, offrire trattamenti su misura**, e migliorare gli esiti per i pazienti riducendo gli effetti avversi e i costi sanitari.  
-  
 L'integrazione di queste tecnologie digitali con la medicina personalizzata sta rivoluzionando il modo in cui viene erogata la sanità. **Consente ai fornitori di servizi sanitari di prendere decisioni basate sui dati, offrire trattamenti su misura**, e migliorare gli esiti per i pazienti riducendo gli effetti avversi e i costi sanitari.
 
 ## Previsioni Finali

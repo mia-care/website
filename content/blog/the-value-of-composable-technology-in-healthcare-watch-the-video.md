@@ -40,9 +40,11 @@ Are you curious about the insights and findings gathered from the discussion on 
 - **Data integration is mandatory to meet quality expectations of clinical outcomes**  
   Creating services where patients and doctors can find new means of collaboration is essential today. Mia-Care can easily enable collaboration through APIs and [FHIR-based connectors](https://docs.mia-platform.eu/docs/runtime_suite/mia-fhir-server/overview_and_usage).
 
-- **Flexibility is strategic today since the needs change quickly**Flexibility is not intended exclusively on the business side but also in the architectural pattern. It becomes strategic to leave the ability to create new components and promptly include these into a meta-architecture by a fast configuration.
+- **Flexibility is strategic today since the needs change quickly**  
+  Flexibility is not intended exclusively on the business side but also in the architectural pattern. It becomes strategic to leave the ability to create new components and promptly include these into a meta-architecture by a fast configuration.
 
-- **Build custom and personal experience with a composable approach**Within the same country, within a large zone like Europe, everybody wants to be slightly different. To achieve this, modularity is a great way to operate as you can select the best partners for the best result in a specific environment.
+- **Build custom and personal experience with a composable approach**  
+  Within the same country, within a large zone like Europe, everybody wants to be slightly different. To achieve this, modularity is a great way to operate as you can select the best partners for the best result in a specific environment.
 
 ## Conclusions
 
