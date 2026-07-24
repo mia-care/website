@@ -5,10 +5,11 @@ import { Breadcrumb } from "@/components/common/Breadcrumb";
 import { CtaBanner } from "@/components/common/CtaBanner";
 import { JsonLd } from "@/components/common/JsonLd";
 import { PillTag } from "@/components/common/PillTag";
-import { HubSpotForm } from "@/components/competence-center/HubSpotForm";
+import { HubSpotForm } from "@/components/sections/competence-center/HubSpotForm";
 import { SITE } from "@/data/site";
 import { assetPath } from "@/lib/asset";
 import { getAllResources, getResourcePage } from "@/lib/resources";
+import { localeAlternates } from "@/lib/seo";
 
 export function generateStaticParams() {
   return getAllResources().map((r) => ({ slug: r.slug }));
@@ -25,7 +26,10 @@ export async function generateMetadata({
   return {
     title: `${resource.title} | Mia-Care`,
     description: resource.description,
-    alternates: { canonical: `/resources/${slug}` },
+    alternates: {
+      canonical: `/resources/${slug}`,
+      languages: localeAlternates(`/resources/${slug}`),
+    },
   };
 }
 

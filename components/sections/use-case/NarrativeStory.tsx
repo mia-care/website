@@ -29,11 +29,17 @@ const STEPS = {
 };
 
 const COPY = {
-  en: { cta: "Request a Demo →", ctaHref: "/request-demo", watch: "Watch Product Demo" },
+  en: {
+    cta: "Request a Demo →",
+    ctaHref: "/request-demo",
+    watch: "Watch Product Demo",
+    watchHref: "/resources/mia-care-product-demo",
+  },
   it: {
     cta: "Richiedi una Demo →",
     ctaHref: "/it/richiedi-demo",
     watch: "Guarda la Demo del Prodotto",
+    watchHref: "/it/risorse/mia-care-product-demo",
   },
 };
 
@@ -172,9 +178,8 @@ export function NarrativeStory({ uc, locale = "en" }: { uc: UseCase; locale?: "e
                     >
                       {t.cta}
                     </Link>
-                    {/* TODO(Batch 4): point to the Italian resource slug once resources are translated */}
                     <Link
-                      href="/resources/mia-care-product-demo"
+                      href={t.watchHref}
                       className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold transition-colors hover:text-brand-green"
                       style={{
                         color: "var(--text-secondary)",

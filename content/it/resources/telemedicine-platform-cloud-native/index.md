@@ -5,12 +5,12 @@ type: whitepaper
 published: true
 featuredImage: /competence-center/telemedicine-platform-cloud-native.png
 hubspotEmbed: |
-  <script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/embed/v2.js"></script>
+  <script charset="utf-8" type="text/javascript" src="//js-eu1.hsforms.net/forms/embed/v2.js"></script>
   <script>
     hbspt.forms.create({
-      region: "eu1",
       portalId: "5308597",
-      formId: "1cef3971-070a-47cf-95fc-1fadc7b46f86"
+      formId: "5d92b96a-7ef3-4a3a-98f1-ba9aa3d1a306",
+      region: "eu1"
     });
   </script>
 ---

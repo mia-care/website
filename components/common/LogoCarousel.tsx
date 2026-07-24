@@ -84,8 +84,8 @@ const COPY = {
   en: { aria: "Our clients", line1: "Trusted by", line2: "healthcare organizations worldwide" },
   it: {
     aria: "I nostri clienti",
-    line1: "La fiducia di",
-    line2: "organizzazioni sanitarie in tutto il mondo",
+    line1: "Aziende da tutto il mondo si fidano di noi",
+    line2: "",
   },
 };
 

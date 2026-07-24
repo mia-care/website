@@ -6,12 +6,12 @@ date: "2026-05-04"
 published: true
 featuredImage: /competence-center/build-certified-samd.jpg
 hubspotEmbed: |
-  <script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/embed/v2.js"></script>
+  <script charset="utf-8" type="text/javascript" src="//js-eu1.hsforms.net/forms/embed/v2.js"></script>
   <script>
     hbspt.forms.create({
-      region: "eu1",
       portalId: "5308597",
-      formId: "90fa4ee4-771e-4841-a966-9b5400e1abb8"
+      formId: "b3571035-93b4-4251-b78e-b9081b57e397",
+      region: "eu1"
     });
   </script>
 ---

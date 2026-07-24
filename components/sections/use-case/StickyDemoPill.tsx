@@ -4,8 +4,16 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 
 const COPY = {
-  en: { label: "Watch Demo", aria: "Watch the P4SaMD product demo" },
-  it: { label: "Guarda la Demo", aria: "Guarda la demo del prodotto P4SaMD" },
+  en: {
+    label: "Watch Demo",
+    aria: "Watch the P4SaMD product demo",
+    href: "/resources/mia-care-product-demo",
+  },
+  it: {
+    label: "Guarda la Demo",
+    aria: "Guarda la demo del prodotto P4SaMD",
+    href: "/it/risorse/mia-care-product-demo",
+  },
 };
 
 export function StickyDemoPill({ locale = "en" }: { locale?: "en" | "it" }) {
@@ -20,7 +28,7 @@ export function StickyDemoPill({ locale = "en" }: { locale?: "en" | "it" }) {
 
   return (
     <Link
-      href="/resources/mia-care-product-demo"
+      href={t.href}
       className="fixed bottom-6 right-6 z-50 flex items-center gap-2 px-4 py-3 rounded-full text-sm font-semibold transition-all duration-300"
       style={{
         background: "rgba(0,240,150,0.08)",

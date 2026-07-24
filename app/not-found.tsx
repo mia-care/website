@@ -1,5 +1,11 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { PillTag } from "@/components/common/PillTag";
+
+export const metadata: Metadata = {
+  title: "Page Not Found | Mia-Care",
+  robots: { index: false, follow: false },
+};
 
 export default function NotFound() {
   return (

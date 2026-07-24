@@ -85,6 +85,25 @@ export default async function ThankYouPage({ params }: { params: Promise<{ slug:
         </div>
       </section>
 
+      {/* Download CTA */}
+      {page.downloadUrl && (
+        <section className="pb-4">
+          <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-center">
+            <a
+              href={page.downloadUrl}
+              download
+              className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg text-sm font-semibold transition-all hover:-translate-y-px"
+              style={{
+                background: "linear-gradient(90deg, var(--brand-green), var(--brand-cyan))",
+                color: "#0b0c10",
+              }}
+            >
+              Download the whitepaper ↓
+            </a>
+          </div>
+        </section>
+      )}
+
       {/* Video embed */}
       {page.videoEmbedUrl && (
         <section className="pb-4">

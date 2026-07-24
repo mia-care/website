@@ -3,8 +3,18 @@ import { PillTag } from "@/components/common/PillTag";
 import type { Capability } from "@/data/capabilities";
 
 const COPY = {
-  en: { cta: "Request a Demo →", ctaHref: "/request-demo", watch: "Watch Demo" },
-  it: { cta: "Richiedi una Demo →", ctaHref: "/it/richiedi-demo", watch: "Guarda la Demo" },
+  en: {
+    cta: "Request a Demo →",
+    ctaHref: "/request-demo",
+    watch: "Watch Demo",
+    watchHref: "/resources/mia-care-product-demo",
+  },
+  it: {
+    cta: "Richiedi una Demo →",
+    ctaHref: "/it/richiedi-demo",
+    watch: "Guarda la Demo",
+    watchHref: "/it/risorse/mia-care-product-demo",
+  },
 };
 
 export function CapabilityHero({ cap, locale = "en" }: { cap: Capability; locale?: "en" | "it" }) {
@@ -41,9 +51,8 @@ export function CapabilityHero({ cap, locale = "en" }: { cap: Capability; locale
           >
             {t.cta}
           </Link>
-          {/* TODO(Batch 4): point to the Italian resource slug once resources are translated */}
           <Link
-            href="/resources/mia-care-product-demo"
+            href={t.watchHref}
             className="inline-flex items-center justify-center gap-2 h-11 px-6 rounded-lg font-semibold text-sm transition-colors hover:opacity-80 w-full sm:w-auto"
             style={{
               border: "1px solid var(--bg-border-strong)",

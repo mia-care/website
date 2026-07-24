@@ -5,12 +5,12 @@ type: whitepaper
 published: true
 featuredImage: /competence-center/enable-cloud-native-healthcare-platform.png
 hubspotEmbed: |
-  <script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/embed/v2.js"></script>
+  <script charset="utf-8" type="text/javascript" src="//js-eu1.hsforms.net/forms/embed/v2.js"></script>
   <script>
     hbspt.forms.create({
-      region: "eu1",
       portalId: "5308597",
-      formId: "9e254df9-78db-4825-882d-16f6881c99f6"
+      formId: "1f02c4e8-8b07-49ab-99f8-78df30074b42",
+      region: "eu1"
     });
   </script>
 ---

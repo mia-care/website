@@ -5,12 +5,12 @@ type: whitepaper
 published: true
 featuredImage: /competence-center/unlocking-remote-patient-monitoring.png
 hubspotEmbed: |
-  <script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/embed/v2.js"></script>
+  <script charset="utf-8" type="text/javascript" src="//js-eu1.hsforms.net/forms/embed/v2.js"></script>
   <script>
     hbspt.forms.create({
-      region: "eu1",
       portalId: "5308597",
-      formId: "5e52ca36-ddd7-4daa-8952-b561052251f4"
+      formId: "3c3deff9-1367-473a-8634-6ef6bc1d6b84",
+      region: "eu1"
     });
   </script>
 ---

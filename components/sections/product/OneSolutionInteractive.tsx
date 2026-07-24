@@ -151,13 +151,13 @@ const COPY = {
   it: {
     pill: "Un'unica soluzione. End-to-end.",
     heading:
-      "La maggior parte delle organizzazioni tratta la compliance come uno strato sopra l'engineering.",
+      "La maggior parte delle organizzazioni tratta la compliance come un livello esterno all'engineering.",
     toggleTraditional: "Tradizionale",
     toggleP4: "Con P4SaMD",
     barLabel: "Livello di Intelligenza Regolatoria",
-    tags: ["Auto-tracciamento", "Auto-evidenza", "Auto-DHF"],
+    tags: ["Tracciamento automatico", "Evidenza automatica", "DHF automatico"],
     captionP4:
-      "Tutti i sistemi governati e pronti per l'audit in tempo reale — zero sforzo manuale.",
+      "Tutti i sistemi governati e pronti per l'audit in tempo reale, zero sforzo manuale.",
     captionTraditional: "Riconciliazione manuale richiesta tra ogni sistema, prima di ogni audit.",
     supporting: [
       "P4SaMD si collega ai tuoi strumenti esistenti, orchestra i tuoi workflow e applica controlli di qualità come parte naturale del tuo SDLC, senza chiedere al tuo team di cambiare il modo in cui lavora.",

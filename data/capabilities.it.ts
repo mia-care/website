@@ -52,10 +52,10 @@ export const capabilities: Capability[] = [
     name: "Automated Real-time Traceability",
     tagline: "Ogni requisito. Ogni rischio. Ogni artefatto. Connessi.",
     description:
-      "ARTT garantisce la tracciabilità end-to-end da requisiti e rischi a design, implementazione e verifica in tempo reale, attraverso sistemi ALM, fonti esterne e file. La tracciabilità non è solo un artefatto di compliance: guida lo sviluppo, fa emergere le lacune prima che diventino non conformità e assembla continuamente un Technical File completo.",
+      "ARTT garantisce la tracciabilità end-to-end da requisiti e rischi a design, implementazione e verifica in tempo reale, attraverso sistemi ALM, fonti esterne e file. La tracciabilità guida lo sviluppo, fa emergere le lacune prima che diventino non conformità e assembla continuamente un Technical File completo.",
     whatItDoes: {
       heading: "Tracciabilità che si costruisce da sola, continuamente.",
-      body: "La tracciabilità manuale e frammentata è il killer silenzioso dei progetti software regolamentati. Inizia come un foglio di calcolo e finisce come un rischio in audit. Quando il progetto è pronto per la review, la matrice è già obsoleta e lo sforzo di riconciliazione ritarda il rilascio.\n\nARTT si integra direttamente con il tuo ALM, i repository Git e la toolchain di risk management per mappare ogni requisito al suo output di design, ogni output di design alla sua implementazione, e ogni implementazione alla sua evidenza di verifica, in tempo reale. Il grafo di tracciabilità rileva le lacune non appena si aprono, mantenendo i team concentrati su design e delivery piuttosto che sulla manutenzione documentale.\n\nLe matrici di tracciabilità sono costantemente allineate a IEC 62304, ISO 14971 e alle tue SOP di qualità, fornendo un Technical File completo in ogni punto del ciclo di vita.",
+      body: "La tracciabilità manuale e frammentata è il rischio nascosto dei progetti software regolamentati. Inizia come un foglio di calcolo e finisce come un rischio in audit. Quando il progetto è pronto per la review, la matrice è già obsoleta e lo sforzo di riconciliazione ritarda il rilascio.\n\nARTT si integra direttamente con il tuo ALM, i repository Git e la toolchain di risk management per mappare ogni requisito al suo output di design, ogni output di design alla sua implementazione, e ogni implementazione alla sua evidenza di verifica, in tempo reale. Il grafo di tracciabilità rileva le lacune non appena si aprono, mantenendo i team concentrati su design e delivery piuttosto che sulla manutenzione documentale.\n\nLe matrici di tracciabilità sono costantemente allineate a IEC 62304, ISO 14971 e alle tue SOP di qualità, fornendo un Technical File completo in ogni punto del ciclo di vita.",
     },
     features: [
       {
@@ -97,7 +97,7 @@ export const capabilities: Capability[] = [
     name: "Documentation Engine",
     tagline: "Il tuo pacchetto di audit, assemblato automaticamente.",
     description:
-      "P4SaMD genera automaticamente Technical File, record DHF, evidenze di rischio, report di verifica e audit trail, garantendo l'audit-readiness dal primo commit al rilascio finale.",
+      "P4SaMD genera automaticamente Technical File, record DHF, evidenze di rischio, report di verifica e audit trail, ed è sempre pronto per l'audit dal primo commit al rilascio finale.",
     whatItDoes: {
       heading: "Documentazione che si scrive da sola, a partire dal tuo lavoro.",
       body: "Il Documentation Engine permette al tuo team SaMD di concentrarsi su ciò che sa fare meglio: costruire ottimo software. Collegato direttamente ai tuoi strumenti SDLC, acquisisce dati di sviluppo live in tempo reale e compila continuamente il Technical File, il DHF e tutte le evidenze regolatorie richieste. I tuoi template, la tua terminologia, pronti per la submission in qualsiasi momento del ciclo.",
@@ -107,13 +107,13 @@ export const capabilities: Capability[] = [
         label: "Technical File & DHF",
         title: "Compilazione continua di Technical File e DHF",
         description:
-          "Il Technical File e il DHF sono compilati continuamente a partire dai dati di sviluppo live (requisiti, rischi, design, implementazione e verifica), riflettendo sempre lo stato attuale del sistema.",
+          "Il Technical File e il DHF sono compilati continuamente a partire dai dati di sviluppo live (requisiti, rischi, design, implementazione e verifica) e riflettono sempre lo stato attuale del sistema.",
       },
       {
         label: "Technical File Generation",
         title: "Technical File EU MDR pronti per la submission",
         description:
-          "Produce technical file pronti per la submission regolatoria usando i tuoi template e il tuo branding, coprendo automaticamente tutti i requisiti a partire dai dati strutturati della piattaforma.",
+          "Produce technical file pronti per la submission regolatoria usando i tuoi template e il tuo branding, e copre automaticamente tutti i requisiti a partire dai dati strutturati della piattaforma.",
       },
       {
         label: "Release Notes",
@@ -164,7 +164,7 @@ export const capabilities: Capability[] = [
         label: "Proactive Suggestions",
         title: "Intercetta i problemi prima che diventino non conformità",
         description:
-          "Whisper comprende il contesto completo di ciò che si sta costruendo, identificando rischi a valle, segnalando opportunità di ottimizzazione e raccomandando azioni che riducono il debito di compliance prima che si accumuli.",
+          "Whisper comprende il contesto completo di ciò che si sta costruendo: identifica i rischi a valle, segnala opportunità di ottimizzazione e raccomanda azioni per ridurre il debito di compliance prima che si accumuli.",
       },
       {
         label: "Contextual Guidance",
@@ -198,7 +198,7 @@ export const capabilities: Capability[] = [
       "Un set di funzionalità dedicato per SaMD abilitati dall'AI che applica requisiti di trasparenza, spiegabilità, audit record e qualità dei dati lungo l'intero ciclo di vita di compliance di componenti, agenti e modelli AI.",
     whatItDoes: {
       heading: "L'infrastruttura di compliance per SaMD abilitati dall'AI.",
-      body: "Componenti, agenti e modelli AI stanno trasformando i prodotti SaMD, abilitando diagnostica più intelligente, workflow adattivi e migliori outcome per i pazienti. Ma introducono una complessità regolatoria che i sistemi QMS standard non sono mai stati progettati per gestire: i framework EU AI Act, FDA GMLP e PCCP richiedono trasparenza, spiegabilità, audit record e controlli sulla qualità dei dati che vanno ben oltre la compliance software tradizionale.\n\nMaster AI for Compliance aggiunge uno strato dedicato all'interno di P4SaMD che gestisce l'intero ciclo di vita di compliance dei componenti AI, dagli input di design e la review regolatoria fino all'adesione all'implementazione, il quality assurance e la documentazione. Applica requisiti di trasparenza, spiegabilità e audit record, e supporta la documentazione strutturata dei dati di training AI, delle versioni dei modelli, delle metriche di performance e dei piani di change control PCCP.",
+      body: "Componenti, agenti e modelli AI stanno trasformando i prodotti SaMD: abilitano diagnostica più intelligente, workflow adattivi e migliori risultati per i pazienti. Ma introducono una complessità regolatoria che i sistemi QMS standard non sono mai stati progettati per gestire: i framework EU AI Act, FDA GMLP e PCCP richiedono trasparenza, spiegabilità, audit record e controlli sulla qualità dei dati che vanno ben oltre la compliance software tradizionale.\n\nMaster AI for Compliance aggiunge uno strato dedicato all'interno di P4SaMD che gestisce l'intero ciclo di vita di compliance dei componenti AI, dagli input di design e la review regolatoria fino all'adesione all'implementazione, il quality assurance e la documentazione. Applica requisiti di trasparenza, spiegabilità e audit record, e supporta la documentazione strutturata dei dati di training AI, delle versioni dei modelli, delle metriche di performance e dei piani di change control PCCP.",
     },
     features: [
       {
@@ -243,7 +243,7 @@ export const capabilities: Capability[] = [
       "Acquisisce l'intero estate software legacy (documentazione e asset tecnici), esegue una gap analysis automatizzata rispetto a IEC 62304 e EU MDR, e genera un piano di remediation prioritizzato. Nessuno sviluppo completo da zero richiesto.",
     whatItDoes: {
       heading: "Da software legacy a evidenza pronta per l'audit.",
-      body: "Milioni di righe di software per dispositivi medici sono state scritte prima che IEC 62304 fosse una considerazione e prima dell'entrata in vigore dell'EU MDR. Questo software funziona ancora e crea valore, ma non può essere certificato, aggiornato o portato su nuovi mercati senza soddisfare i framework regolatori a cui è precedente.\n\nIl Brownfield Remediator acquisisce l'intero estate legacy indipendentemente da formato, linguaggio o maturità della documentazione. Automatizza la gap analysis rispetto al framework regolatorio scelto, mappa ciò che esiste rispetto a ciò che è richiesto, e genera una task list strutturata e prioritizzata. Un archivio legacy disperso diventa un record di compliance pronto per l'audit.",
+      body: "Milioni di righe di software per dispositivi medici sono state scritte prima ancora che esistesse lo standard IEC 62304 e prima dell'entrata in vigore dell'EU MDR. Questo software funziona ancora e crea valore, ma non può essere certificato, aggiornato o portato su nuovi mercati senza soddisfare framework regolatori successivi alla sua scrittura.\n\nIl Brownfield Remediator acquisisce l'intero estate legacy indipendentemente da formato, linguaggio o maturità della documentazione. Automatizza la gap analysis rispetto al framework regolatorio scelto, mappa ciò che esiste rispetto a ciò che è richiesto, e genera una task list strutturata e prioritizzata. Un archivio legacy disperso diventa un record di compliance pronto per l'audit.",
     },
     features: [
       {
@@ -295,20 +295,20 @@ export const capabilities: Capability[] = [
       "Controllo di design completo dalla specifica al codice, verifica continua dell'implementazione e gestione della supply chain software tramite controllo delle dipendenze e vulnerability management secondo IEC 81001-5-1.",
     whatItDoes: {
       heading: "Sicurezza e compliance integrate nella toolchain di sviluppo.",
-      body: "Il software medicale è una superficie di attacco sempre più presa di mira. Una vulnerabilità in un componente software di un dispositivo non è solo un incidente di sicurezza, è un evento di patient safety e un fallimento regolatorio. IEC 81001-5-1 stabilisce lo standard per la cybersecurity del software sanitario, ma soddisfarlo richiede molto più di un audit di sicurezza al momento del rilascio.\n\nControlli di sicurezza e compliance integrati direttamente nel workflow: allineamento del design, rilevamento delle anomalie e gestione completa del ciclo di vita di dipendenze e vulnerabilità, dal rilevamento all'approvazione e alla documentazione.",
+      body: "Il software medicale è una superficie di attacco sempre più presa di mira. Una vulnerabilità in un componente software di un dispositivo è un evento di patient safety e un fallimento regolatorio, non solo un incidente di sicurezza. IEC 81001-5-1 stabilisce lo standard per la cybersecurity del software sanitario, ma soddisfarlo richiede molto più di un audit di sicurezza al momento del rilascio.\n\nControlli di sicurezza e compliance integrati direttamente nel workflow: allineamento del design, rilevamento delle anomalie e gestione completa del ciclo di vita di dipendenze e vulnerabilità, dal rilevamento all'approvazione e alla documentazione.",
     },
     features: [
       {
         label: "Implementation Verification",
         title: "Controlli continui dell'implementazione rispetto alle specifiche software",
         description:
-          "Controlli automatici verificano l'implementazione rispetto alle specifiche software a ogni livello (file di design, codice e artefatti di test), permettendo il rilevamento precoce delle anomalie prima che si propaghino nel record di compliance.",
+          "Controlli automatici verificano l'implementazione rispetto alle specifiche software a ogni livello (file di design, codice e artefatti di test): le anomalie vengono rilevate prima di propagarsi nel record di compliance.",
       },
       {
         label: "SBOM Management",
         title: "Rilevamento, approvazione e documentazione delle dipendenze",
         description:
-          "Il rilevamento plug-and-play delle dipendenze genera e mantiene automaticamente il Software Bill of Materials per ogni software item. Ogni dipendenza è tracciata, approvata e documentata, dando ai team piena visibilità sulla propria supply chain software con una configurazione minima.",
+          "Il rilevamento plug-and-play delle dipendenze genera e mantiene automaticamente il Software Bill of Materials per ogni software item. Ogni dipendenza è tracciata, approvata e documentata: i team hanno piena visibilità sulla propria supply chain software con una configurazione minima.",
       },
       {
         label: "Vulnerability Management",
@@ -320,7 +320,7 @@ export const capabilities: Capability[] = [
         label: "Secure Development Guardrails",
         title: "Impedisce l'ingresso di codice vulnerabile nella build",
         description:
-          "Applica standard di codifica sicura e blocca l'introduzione nel codebase di dipendenze con vulnerabilità critiche note, rendendo il percorso non sicuro strutturalmente indisponibile durante lo sviluppo.",
+          "Applica standard di codifica sicura e blocca l'introduzione nel codebase di dipendenze con vulnerabilità critiche note: il percorso non sicuro resta strutturalmente indisponibile durante lo sviluppo.",
       },
     ],
     regulations: ["IEC 81001-5-1", "IEC 62304", "ISO 13485"],
@@ -340,7 +340,7 @@ export const capabilities: Capability[] = [
       "Guida passo dopo passo ai workflow e un assistente AI conversazionale per la compliance in ogni fase dell'SDLC, combinando l'indicizzazione dei framework regolatori con dati di progetto in tempo reale. Nessuna competenza regolatoria approfondita richiesta.",
     whatItDoes: {
       heading: "La struttura che mantiene sui binari lo sviluppo conforme.",
-      body: "Anche i team di engineering più esperti che costruiscono SaMD affrontano lo stesso rischio strutturale: senza guardrail chiari, i processi conformi tendono a deragliare. I passaggi vengono saltati sotto la pressione della delivery. Gli artefatti vengono documentati a posteriori.\n\nGuided Workflows fornisce una struttura contestuale, passo dopo passo, attraverso ogni fase del ciclo di vita IEC 62304, mantenendo i team sul percorso corretto indipendentemente dal loro background regolatorio. Un assistente di compliance specializzato agisce come il nucleo di conoscenza del progetto, combinando l'indicizzazione dei framework regolatori con l'accesso in tempo reale a documentazione caricata, strumenti integrati e dati di implementazione. Workflow specifici per ruolo fanno emergere l'ambito giusto per ogni contributore.",
+      body: "Anche i team di engineering più esperti che costruiscono SaMD affrontano lo stesso rischio strutturale: senza guardrail chiari, i processi conformi tendono a deragliare. I passaggi vengono saltati sotto la pressione della delivery. Gli artefatti vengono documentati a posteriori.\n\nGuided Workflows fornisce una struttura contestuale, passo dopo passo, attraverso ogni fase del ciclo di vita IEC 62304 e mantiene i team sul percorso corretto indipendentemente dal loro background regolatorio. Un assistente di compliance specializzato è il nucleo di conoscenza del progetto: combina l'indicizzazione dei framework regolatori con l'accesso in tempo reale a documentazione caricata, strumenti integrati e dati di implementazione. Workflow specifici per ruolo fanno emergere l'ambito giusto per ogni contributore.",
     },
     features: [
       {

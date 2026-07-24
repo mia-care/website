@@ -8,7 +8,7 @@ const STATS = {
   it: [
     { value: "3×", label: "Time-To-Market più rapido" },
     { value: "50%", label: "Riduzione dei costi di sviluppo" },
-    { value: "100%", label: "Audit-Ready" },
+    { value: "100%", label: "Pronto per l'audit" },
     { value: "90%", label: "Documentazione manuale in meno" },
   ],
 };

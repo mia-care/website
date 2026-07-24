@@ -114,7 +114,7 @@ const SEGMENTS = {
   ],
   it: [
     {
-      title: "Grandi Gruppi MedTech",
+      title: "Grandi gruppi MedTech",
       href: "/it/use-cases/legacy-remediation",
       description:
         "Modernizza estate software legacy in un'unica piattaforma conforme e unificata.",
@@ -135,7 +135,7 @@ const SEGMENTS = {
       icon: <Icon3 />,
     },
     {
-      title: "Startup Pre-Market",
+      title: "Startup pre-market",
       href: "/it/use-cases/greenfield-samd",
       description:
         "Team da Seed a Serie A che costruiscono il loro primo DHF verso l'FDA clearance.",

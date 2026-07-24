@@ -12,6 +12,7 @@ import { StickyDemoPill } from "@/components/sections/use-case/StickyDemoPill";
 import { UseCaseHero } from "@/components/sections/use-case/UseCaseHero";
 import { SITE } from "@/data/site";
 import { getUseCaseBySlug, useCases } from "@/data/use-cases";
+import { localeAlternates } from "@/lib/seo";
 
 export function generateStaticParams() {
   return useCases.map((uc) => ({ slug: uc.slug }));
@@ -28,7 +29,10 @@ export async function generateMetadata({
   return {
     title: { absolute: uc.seo.title },
     description: uc.seo.description,
-    alternates: { canonical: `/use-cases/${uc.slug}` },
+    alternates: {
+      canonical: `/use-cases/${uc.slug}`,
+      languages: localeAlternates(`/use-cases/${uc.slug}`),
+    },
     openGraph: {
       title: uc.seo.title,
       description: uc.seo.description,

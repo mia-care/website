@@ -3,10 +3,11 @@ import { CtaBanner } from "@/components/common/CtaBanner";
 import { PillTag } from "@/components/common/PillTag";
 import { JobAccordion } from "@/components/sections/careers/JobAccordion";
 import { getAllJobs } from "@/lib/jobs";
+import { localeAlternates } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: { absolute: "Careers — Join the Healthcare Revolution | Mia-Care" },
-  alternates: { canonical: "/careers" },
+  alternates: { canonical: "/careers", languages: localeAlternates("/careers") },
   description:
     "Join Mia-Care and help build the AI-native compliance platform for Software as a Medical Device. Open roles in Milan across engineering and product.",
 };

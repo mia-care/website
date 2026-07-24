@@ -33,6 +33,9 @@ jobs:
         env:
           NEXT_PUBLIC_BASE_PATH: /website
 
+      - name: Validate links and redirects
+        run: npm run validate:links
+
       - uses: actions/upload-pages-artifact@v3
         with:
           path: out

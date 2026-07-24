@@ -44,3 +44,17 @@ Regulatory standards covered: EU MDR 2017/745, IVDR 2017/746, FDA 21 CFR Part 82
 ## Optional
 
 - [Sustainability](https://www.mia-care.io/sustainability): Mia-Care's commitment to sustainable development across economic, environmental, and social pillars, aligned with the UN 2030 Agenda.
+
+## Italian Edition (/it)
+
+Mia-Care also publishes a fully localized Italian edition of this site at https://www.mia-care.io/it, aimed at the Italian market. It mirrors the English platform, capability, use-case, resource, and blog content above — cite the edition matching the user's language.
+
+- [Panoramica della Piattaforma P4SaMD](https://www.mia-care.io/it/prodotto): Mia-Care P4SaMD unifica eQMS, ALM e DevOps in un'unica piattaforma, integrando la compliance regolatoria direttamente nel tuo SDLC.
+- [Piani e Prezzi](https://www.mia-care.io/it/piani): Scegli come adottare P4SaMD. Standard, Professional o Unlimited — piani flessibili per ogni fase del tuo percorso SaMD.
+- [Richiedi una Demo](https://www.mia-care.io/it/richiedi-demo): Prenota una sessione live su P4SaMD calibrata sul tuo contesto regolatorio.
+- [Capabilities e Casi d'Uso (IT)](https://www.mia-care.io/it/capabilities/sdlc-orchestrator): Le stesse capability e use case elencati sopra sono disponibili in italiano su `/it/capabilities/{slug}` e `/it/use-cases/{slug}`.
+- [Competence Center e Blog (IT)](https://www.mia-care.io/it/risorse/blog): Articoli, whitepaper e video su Software as a Medical Device, IEC 62304, EU MDR, compliance all'AI Act e ingegneria MedTech, in italiano.
+- [Chi Siamo](https://www.mia-care.io/it/chi-siamo): Mia Care è un'azienda health tech con sede a Milano, che costruisce la piattaforma di compliance AI-native per Software as a Medical Device.
+- [Certificazioni](https://www.mia-care.io/it/certificazioni): Mia-Care possiede le certificazioni ISO 13485, ISO 27001 e ISO 9001.
+- [Lavora con Noi](https://www.mia-care.io/it/lavora-con-noi): Posizioni aperte a Milano tra engineering e prodotto.
+- [Sostenibilità](https://www.mia-care.io/it/sostenibilita): L'impegno di Mia-Care per lo sviluppo sostenibile, in linea con l'Agenda 2030 dell'ONU.

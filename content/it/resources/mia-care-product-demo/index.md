@@ -7,12 +7,12 @@ published: true
 featured: true
 featuredImage: /competence-center/mia-care-product-demo.jpg
 hubspotEmbed: |
-  <script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/embed/v2.js"></script>
+  <script charset="utf-8" type="text/javascript" src="//js-eu1.hsforms.net/forms/embed/v2.js"></script>
   <script>
     hbspt.forms.create({
-      region: "eu1",
       portalId: "5308597",
-      formId: "deeb2d9f-1669-4098-b533-bfe998874bba"
+      formId: "adfbc9d4-0359-4c44-aa30-b6e9d255de6f",
+      region: "eu1"
     });
   </script>
 ---

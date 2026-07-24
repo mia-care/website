@@ -3,10 +3,11 @@ import type { Metadata } from "next";
 import { CtaBanner } from "@/components/common/CtaBanner";
 import { GenderEqualityCertification } from "@/components/common/GenderEqualityCertification";
 import { PillTag } from "@/components/common/PillTag";
+import { localeAlternates } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: { absolute: "Sustainability — Our Commitment to Responsible Technology | Mia-Care" },
-  alternates: { canonical: "/sustainability" },
+  alternates: { canonical: "/sustainability", languages: localeAlternates("/sustainability") },
   description:
     "Discover Mia-Care's commitment to sustainable development across economic, environmental, and social pillars, aligned with the UN 2030 Agenda.",
 };
@@ -25,7 +26,7 @@ const PILLARS = [
   {
     icon: <Leaf size={24} weight="duotone" />,
     title: "Sustainable Company",
-    body: "Our growth is based on sustainable development: the continuous search for a balance among the economic, environmental, and social pillars. The technology we write today can impact future generations, as well as all the decisions we make as individuals and as a company. We take this responsibility seriously.",
+    body: "We integrate sustainability into everyday decisions, from technology choices to how we manage internal resources. We track the impact of our work across these three pillars and update our practices accordingly, so we grow responsibly over time.",
   },
 ];
 

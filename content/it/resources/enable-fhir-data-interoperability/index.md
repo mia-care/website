@@ -5,12 +5,12 @@ type: whitepaper
 published: true
 featuredImage: /competence-center/enable-fhir-data-interoperability.png
 hubspotEmbed: |
-  <script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/embed/v2.js"></script>
+  <script charset="utf-8" type="text/javascript" src="//js-eu1.hsforms.net/forms/embed/v2.js"></script>
   <script>
     hbspt.forms.create({
-      region: "eu1",
       portalId: "5308597",
-      formId: "f7560e33-a3eb-493d-89e2-d6b982e64bdc"
+      formId: "0bd0b2d7-a5f2-469c-918a-4cd91fa85c0c",
+      region: "eu1"
     });
   </script>
 ---

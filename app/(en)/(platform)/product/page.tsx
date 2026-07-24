@@ -7,6 +7,7 @@ import { PillTag } from "@/components/common/PillTag";
 import { PlansBanner } from "@/components/common/PlansBanner";
 import { HeroCompliancePipeline } from "@/components/sections/product/HeroCompliancePipeline";
 import { OneSolutionInteractive } from "@/components/sections/product/OneSolutionInteractive";
+import { localeAlternates } from "@/lib/seo";
 
 const HERO_STANDARDS = [
   "EU MDR 2017/745",
@@ -18,10 +19,10 @@ const HERO_STANDARDS = [
 ];
 
 export const metadata: Metadata = {
-  title: "Platform Overview | The AI-native Platform for SaMD",
+  title: { absolute: "Platform Overview | The AI-native Platform for SaMD | Mia-Care" },
   description:
     "Mia-Care P4SaMD unifies eQMS, ALM, and DevOps into a single platform, embedding regulatory compliance directly into your SDLC.",
-  alternates: { canonical: "/product" },
+  alternates: { canonical: "/product", languages: localeAlternates("/product") },
 };
 
 const BENEFITS = [
@@ -199,38 +200,6 @@ export default function ProductPage() {
       </section>
 
       <CapabilitiesGrid />
-
-      {/* Mid-page CTA — contextual follow-up after capabilities exploration */}
-      <section
-        className="py-16"
-        style={{ background: "var(--bg-surface)", borderTop: "1px solid var(--bg-border)" }}
-      >
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 text-center">
-          <h2 className="heading-sub mb-3">Ready to see P4SaMD in action?</h2>
-          <p className="mb-8 text-sm" style={{ color: "var(--text-secondary)", lineHeight: 1.75 }}>
-            Schedule a live walkthrough and see how P4SaMD fits your stack in under 30 minutes.
-          </p>
-          <div className="flex flex-wrap gap-3 justify-center">
-            <Link
-              href="/request-demo"
-              className="inline-flex items-center h-12 px-7 rounded-lg font-semibold text-sm bg-brand-gradient text-bg-base transition-opacity hover:opacity-90"
-            >
-              Request a Demo →
-            </Link>
-            <Link
-              href="/resources/mia-care-product-demo"
-              className="inline-flex items-center gap-2 h-12 px-6 rounded-lg font-semibold text-sm transition-colors hover:opacity-80"
-              style={{ border: "1px solid rgba(255,255,255,0.28)", color: "var(--text-primary)" }}
-            >
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-                <circle cx="7" cy="7" r="6.5" stroke="currentColor" />
-                <path d="M5.5 4.5l5 2.5-5 2.5V4.5z" fill="currentColor" />
-              </svg>
-              Watch Demo
-            </Link>
-          </div>
-        </div>
-      </section>
 
       {/* Why section */}
       <section

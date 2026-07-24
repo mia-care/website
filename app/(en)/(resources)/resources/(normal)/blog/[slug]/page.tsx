@@ -2,15 +2,16 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { RelatedPosts } from "@/components/blog/RelatedPosts";
-import { TableOfContents } from "@/components/blog/TableOfContents";
 import { JsonLd } from "@/components/common/JsonLd";
 import { PillTag } from "@/components/common/PillTag";
+import { RelatedPosts } from "@/components/sections/blog/RelatedPosts";
+import { TableOfContents } from "@/components/sections/blog/TableOfContents";
 import { getAuthorBySlug } from "@/data/authors";
 import { getCategoryName } from "@/data/blog-categories";
 import { SITE } from "@/data/site";
 import { assetPath } from "@/lib/asset";
 import { formatDate, getAllPostSlugs, getPost, getRelatedPosts } from "@/lib/blog";
+import { localeAlternates } from "@/lib/seo";
 
 export function generateStaticParams() {
   return getAllPostSlugs().map((slug) => ({ slug }));
@@ -26,12 +27,13 @@ export async function generateMetadata({
   if (!post) return {};
 
   const seoTitle = post.seoTitle ?? `${post.title} | Mia-Care`;
-  const canonicalUrl = `${SITE.url}/resources/blog/${post.slug}`;
+  const pathname = `/resources/blog/${post.slug}`;
+  const canonicalUrl = `${SITE.url}${pathname}`;
 
   return {
     title: seoTitle,
     description: post.description,
-    alternates: { canonical: canonicalUrl },
+    alternates: { canonical: canonicalUrl, languages: localeAlternates(pathname) },
     openGraph: {
       type: "article",
       title: seoTitle,

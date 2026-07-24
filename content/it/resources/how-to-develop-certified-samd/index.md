@@ -5,12 +5,12 @@ type: whitepaper
 published: true
 featuredImage: /competence-center/how-to-develop-certified-samd.jpg
 hubspotEmbed: |
-  <script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/embed/v2.js"></script>
+  <script charset="utf-8" type="text/javascript" src="//js-eu1.hsforms.net/forms/embed/v2.js"></script>
   <script>
     hbspt.forms.create({
-      region: "eu1",
       portalId: "5308597",
-      formId: "9ac4839c-73fc-47ae-9a2f-b96152b45802"
+      formId: "df1fb157-9181-482c-9af6-f0819404ca91",
+      region: "eu1"
     });
   </script>
 ---

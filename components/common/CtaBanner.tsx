@@ -15,7 +15,7 @@ const COPY = {
   it: {
     heading: (
       <>
-        Pronto a spedire <br />
+        Pronto a rilasciare <br />
         software conforme più velocemente?
       </>
     ),

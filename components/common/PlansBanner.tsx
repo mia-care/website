@@ -24,7 +24,7 @@ const COPY = {
   it: {
     pill: "Prezzi",
     heading: "Trova il piano giusto per il tuo team.",
-    body: "Dal tuo primo SaMD alla compliance multi-prodotto a scala enterprise — P4SaMD cresce con te.",
+    body: "Dal tuo primo SaMD alla compliance multi-prodotto a scala enterprise, P4SaMD cresce con te.",
     cta: { label: "Vedi tutti i piani →", href: "/it/piani" },
   },
 };

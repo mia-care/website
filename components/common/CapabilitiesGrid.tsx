@@ -42,9 +42,9 @@ const COPY = {
     capabilitiesPrefix: "/capabilities",
   },
   it: {
-    pill: "Capability della Piattaforma",
+    pill: "Capability della piattaforma",
     heading: "L'intero E2E in un'unica piattaforma.",
-    body: "P4SaMD orchestra l'intero SDLC — dai requisiti al rilascio — con la compliance regolatoria applicata in ogni fase.",
+    body: "P4SaMD orchestra l'intero SDLC, dai requisiti al rilascio, con la compliance regolatoria applicata in ogni fase.",
     explore: "Esplora la capability →",
     pause: "Pausa",
     resume: "Riprendi",

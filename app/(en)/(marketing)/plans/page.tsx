@@ -3,10 +3,11 @@ import Link from "next/link";
 import { CtaBanner } from "@/components/common/CtaBanner";
 import { JsonLd } from "@/components/common/JsonLd";
 import { PillTag } from "@/components/common/PillTag";
+import { localeAlternates } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: { absolute: "Plans — P4SaMD" },
-  alternates: { canonical: "/plans" },
+  alternates: { canonical: "/plans", languages: localeAlternates("/plans") },
   description:
     "Choose how you adopt P4SaMD. Standard, Professional, or Unlimited — flexible plans for every stage of your SaMD journey.",
 };

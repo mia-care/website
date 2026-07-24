@@ -21,6 +21,7 @@ import { WhisperDemoSection } from "@/components/sections/capability/WhisperDemo
 import { capabilities, getCapabilityBySlug } from "@/data/capabilities";
 import { capabilityScreenshots } from "@/data/capability-screenshots";
 import { SITE } from "@/data/site";
+import { localeAlternates } from "@/lib/seo";
 
 export function generateStaticParams() {
   return capabilities.map((cap) => ({ slug: cap.slug }));
@@ -37,7 +38,10 @@ export async function generateMetadata({
   return {
     title: { absolute: cap.seo.title },
     description: cap.seo.description,
-    alternates: { canonical: `/capabilities/${cap.slug}` },
+    alternates: {
+      canonical: `/capabilities/${cap.slug}`,
+      languages: localeAlternates(`/capabilities/${cap.slug}`),
+    },
     openGraph: {
       title: cap.seo.title,
       description: cap.seo.description,

@@ -3,21 +3,21 @@ import type { UseCase } from "./use-cases";
 export const useCases: UseCase[] = [
   {
     slug: "greenfield-samd",
-    segment: "Per Startup e Scaleup Pre-Market",
+    segment: "Per startup e scaleup pre-market",
     name: "Sviluppo SaMD Greenfield",
     tagline:
       "Costruire un SaMD da zero significa affrontare due sfide simultanee: scrivere il software e soddisfare il regolatore. P4SaMD le rende la stessa fase.",
     problem: {
       heading: "Lo sprint documentale di 3-6 mesi che uccide lo slancio del lancio.",
-      body: "Engineering e documentazione seguono timeline disconnesse: quando i team di qualità iniziano a documentare, la tracciabilità è già rotta e il sistema è cambiato. Il risultato è uno sprint documentale di 3-6 mesi che ritarda i ricavi e mette pressione sul team di qualità per ricostruire artefatti che non sono mai stati catturati in modo incrementale.",
+      body: "Engineering e documentazione seguono timeline disconnesse: quando i team di qualità iniziano a documentare, la tracciabilità è già rotta e il sistema è cambiato. Il risultato è uno sprint documentale di 3-6 mesi che ritarda i ricavi e mette sotto pressione il team di qualità, costretto a ricostruire artefatti che non sono mai stati catturati in modo incrementale.",
     },
     need: {
       heading: "Compliance come output continuo del normale lavoro di engineering.",
       body: "Un framework che elimina l'attrito tra velocità di engineering e requisiti regolatori, integrando la compliance direttamente nell'SDLC così i team costruiscono software pronto per l'audit a ogni incremento, non solo al traguardo finale.",
     },
     solution: {
-      heading: "Dal primo commit all'MVP conforme, in un unico movimento.",
-      body: "P4SaMD abilita l'orchestrazione continua della compliance monitorando l'ambiente di sviluppo in tempo reale. Man mano che il codice evolve, la documentazione di qualità viene sincronizzata automaticamente.\n\nIl team costruisce il proprio prodotto. P4SaMD costruisce il fascicolo regolatorio in parallelo, rendendo l'audit-readiness l'output predefinito del normale lavoro di engineering.",
+      heading: "Dal primo commit all'MVP conforme, in un solo passaggio.",
+      body: "P4SaMD orchestra la compliance in continuo, monitorando l'ambiente di sviluppo in tempo reale. Man mano che il codice evolve, la documentazione di qualità viene sincronizzata automaticamente.\n\nIl team costruisce il proprio prodotto. P4SaMD costruisce il fascicolo regolatorio in parallelo: l'audit-readiness diventa così l'output predefinito del normale lavoro di engineering.",
     },
     caseStudy: {
       label: "Case Study // Startup Digital Health",
@@ -60,17 +60,17 @@ export const useCases: UseCase[] = [
   },
   {
     slug: "high-risk-ai-cdss",
-    segment: "Per Enterprise SaMD AI-Native",
-    name: "Costruire Software AI ad Alto Rischio (CDSS)",
+    segment: "Per enterprise SaMD AI-native",
+    name: "Costruire software AI ad alto rischio (CDSS)",
     tagline:
       "Il software clinico basato su AI evolve dinamicamente, ma i modelli di compliance tradizionali assumono che i requisiti siano statici. P4SaMD disaccoppia la tua velocità di engineering dalla rigidità regolatoria.",
     problem: {
       heading: "AI illeggibile, compliance non tracciabile.",
-      body: "Il software clinico basato su AI evolve dinamicamente, eppure i modelli di compliance tradizionali assumono che i requisiti siano statici fin dall'inizio. Ogni aggiornamento a un modello AI rischia di innescare una cascata complessa di rework su risk management file, documenti di verifica e submission regolatorie, creando un freno alla compliance che rallenta l'innovazione fino a fermarla.\n\nProvare che un algoritmo opaco è sicuro per decisioni life-critical richiede un nuovo tipo di evidenza: report di trasparenza, valutazioni del bias, audit record e documentazione PCCP che la maggior parte dei sistemi QMS non è mai stata progettata per generare.",
+      body: "Il software clinico basato su AI evolve dinamicamente, eppure i modelli di compliance tradizionali assumono che i requisiti siano statici fin dall'inizio. Ogni aggiornamento a un modello AI rischia di innescare una cascata complessa di rework su risk management file, documenti di verifica e submission regolatorie. Il risultato è un freno alla compliance: nei casi peggiori, l'innovazione si ferma del tutto.\n\nProvare che un algoritmo opaco è sicuro per decisioni life-critical richiede un nuovo tipo di evidenza: report di trasparenza, valutazioni del bias, audit record e documentazione PCCP che la maggior parte dei sistemi QMS non è mai stata progettata per generare.",
     },
     need: {
       heading: "Compliance che sta al passo con gli aggiornamenti dei tuoi modelli.",
-      body: "Rendere a prova di futuro i dispositivi medici abilitati dall'AI sincronizzando il rigore regolatorio con lo sviluppo tecnico ad alta velocità. Un framework che gestisce le sfide uniche della compliance AI (trasparenza, spiegabilità, bias dei dati, PCCP) senza richiedere un nuovo 510(k) per ogni iterazione del modello.",
+      body: "Rendi i dispositivi medici basati su AI pronti al futuro, allineando il rigore regolatorio allo sviluppo tecnico ad alta velocità. Un framework che gestisce le sfide uniche della compliance AI (trasparenza, spiegabilità, bias dei dati, PCCP) senza richiedere un nuovo 510(k) per ogni iterazione del modello.",
     },
     solution: {
       heading: "Compliance multi-framework. Un'unica piattaforma.",
@@ -79,12 +79,12 @@ export const useCases: UseCase[] = [
     caseStudy: {
       label: "Case Study // Fornitore CDSS",
       quote:
-        "Un fornitore CDSS leader che utilizza Generative AI e dati sintetici ad alta fedeltà per supportare i clinici con diagnostica di precisione e strategie terapeutiche su misura.",
+        "Un fornitore CDSS che utilizza Generative AI e dati sintetici ad alta fedeltà per supportare i clinici con diagnostica di precisione e terapie personalizzate.",
       scope: [
         "Gestione della compliance multi-framework: MDR + EU AI Act + GMLP in un unico sistema unificato",
         "Rilevamento delle lacune in tempo reale via Compliance Engine su tutti e tre i framework regolatori",
         "Model card e report di valutazione del bias automatizzati per ogni versione del modello",
-        "Change management allineato al PCCP che abilita aggiornamenti dei modelli senza nuova submission completa",
+        "Change management allineato al PCCP che permette aggiornamenti dei modelli senza nuova submission completa",
       ],
       results: [
         {
@@ -103,13 +103,13 @@ export const useCases: UseCase[] = [
     seo: {
       title: "Costruire Software AI ad Alto Rischio (CDSS) | Use Case | Mia-Care P4SaMD",
       description:
-        "Distribuisci software clinico abilitato dall'AI con compliance EU AI Act, GMLP e MDR in un'unica piattaforma. Audit record automatizzati, supporto PCCP e rilevamento lacune multi-framework.",
+        "Distribuisci software clinico basato su AI con compliance EU AI Act, GMLP e MDR in un'unica piattaforma. Audit record automatizzati, supporto PCCP e rilevamento lacune multi-framework.",
     },
   },
   {
     slug: "legacy-remediation",
-    segment: "Per Grandi Gruppi MedTech e Life Sciences Enterprise",
-    name: "Remediation di Software Legacy Regolamentato",
+    segment: "Per grandi gruppi MedTech e Life Sciences enterprise",
+    name: "Remediation di software legacy regolamentato",
     tagline:
       "Il debito regolatorio sta bloccando il tuo software legacy. P4SaMD libera il percorso verso la certificazione, senza ricostruire da zero.",
     problem: {
@@ -127,7 +127,7 @@ export const useCases: UseCase[] = [
     caseStudy: {
       label: "Case Study // Enterprise Consumer Health",
       quote:
-        "Un leader globale nel settore consumer health e lifestyle, con ricavi che superano diversi miliardi di euro e operazioni in numerosi paesi attraverso marchi consumer riconosciuti a livello internazionale.",
+        "Una grande azienda internazionale nel settore consumer health e lifestyle, con ricavi che superano diversi miliardi di euro e marchi noti in numerosi paesi.",
       scope: [
         "Acquisizione automatizzata di workitem eterogenei: requisiti, rischi, test e codice esistente",
         "Gap analysis rispetto a MDR e IEC 62304, con generazione di un pacchetto completo di evidenza di compliance con task di remediation prioritizzate",

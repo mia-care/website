@@ -1,11 +1,11 @@
 import type { BlogCategory } from "./blog-categories";
 
 export const BLOG_CATEGORIES: BlogCategory[] = [
-  { slug: "technology-application", name: "Applicazione Tecnologica" },
-  { slug: "industry-key-insights", name: "Approfondimenti di Settore" },
-  { slug: "composable-technology", name: "Tecnologia Componibile" },
-  { slug: "international-standards", name: "Standard Internazionali" },
-  { slug: "partners-collaboration", name: "Collaborazione con i Partner" },
+  { slug: "technology-application", name: "Applicazione tecnologica" },
+  { slug: "industry-key-insights", name: "Approfondimenti di settore" },
+  { slug: "composable-technology", name: "Tecnologia componibile" },
+  { slug: "international-standards", name: "Standard internazionali" },
+  { slug: "partners-collaboration", name: "Collaborazione con i partner" },
 ];
 
 export function getCategoryName(slug: string): string {

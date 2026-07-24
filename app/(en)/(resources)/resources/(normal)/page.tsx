@@ -1,15 +1,17 @@
 import type { Metadata } from "next";
 import { CtaBanner } from "@/components/common/CtaBanner";
 import { PillTag } from "@/components/common/PillTag";
-import { ResourceGrid } from "@/components/competence-center/ResourceGrid";
+import { ResourceGrid } from "@/components/sections/competence-center/ResourceGrid";
 import { getAllResources } from "@/lib/resources";
+import { localeAlternates } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  title: "Competence Center — Whitepapers & Videos | Mia-Care",
+  title: { absolute: "Competence Center — Whitepapers & Videos | Mia-Care" },
   description:
     "Access Mia-Care's library of whitepapers and expert videos on SaMD compliance, FHIR interoperability, telemedicine platforms, and cloud-native healthcare.",
   alternates: {
     canonical: "/resources",
+    languages: localeAlternates("/resources"),
   },
 };
 

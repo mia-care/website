@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { HubSpotForm } from "@/components/common/HubSpotForm";
 import { PillTag } from "@/components/common/PillTag";
 import { COMPLIANCE_STANDARDS } from "@/data/nav";
+import { localeAlternates } from "@/lib/seo";
 
 const FEATURED_STANDARDS = [
   "EU MDR 2017/745",
@@ -14,10 +15,10 @@ const FEATURED_STANDARDS = [
 const REMAINING_STANDARDS_COUNT = COMPLIANCE_STANDARDS.length - FEATURED_STANDARDS.length;
 
 export const metadata: Metadata = {
-  title: "Request a Demo — See Compliance by Design in Your Context",
+  title: { absolute: "Request a Demo — See Compliance by Design in Your Context | Mia-Care" },
   description:
     "Get a live P4SaMD session scoped to your regulatory context. No pre-recorded walk-through. Real answers for EU MDR, FDA, ISO 13485, IEC 62304, and EU AI Act.",
-  alternates: { canonical: "/request-demo" },
+  alternates: { canonical: "/request-demo", languages: localeAlternates("/request-demo") },
 };
 
 const VALUE_PROPS = [

@@ -3,11 +3,12 @@ import Image from "next/image";
 import { CtaBanner } from "@/components/common/CtaBanner";
 import { GenderEqualityCertification } from "@/components/common/GenderEqualityCertification";
 import { PillTag } from "@/components/common/PillTag";
+import { localeAlternates } from "@/lib/seo";
 import { BASE_PATH } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: { absolute: "Certifications — Digital Products Made in Quality | Mia-Care" },
-  alternates: { canonical: "/certifications" },
+  alternates: { canonical: "/certifications", languages: localeAlternates("/certifications") },
   description:
     "Mia-Care holds ISO 13485, ISO 27001 and ISO 9001 certifications, demonstrating our commitment to quality, information security, and medical software compliance.",
 };

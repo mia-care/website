@@ -1,16 +1,18 @@
 import type { Metadata } from "next";
-import { BlogGrid } from "@/components/blog/BlogGrid";
-import { FeaturedPost } from "@/components/blog/FeaturedPost";
 import { PillTag } from "@/components/common/PillTag";
+import { BlogGrid } from "@/components/sections/blog/BlogGrid";
+import { FeaturedPost } from "@/components/sections/blog/FeaturedPost";
 import { BLOG_CATEGORIES } from "@/data/blog-categories";
 import { getAllPosts } from "@/lib/blog";
+import { localeAlternates } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  title: "Blog — Insights on SaMD, Compliance & MedTech",
+  title: { absolute: "Blog — Insights on SaMD, Compliance & MedTech | Mia-Care" },
   description:
     "Expert articles on Software as a Medical Device, IEC 62304, EU MDR, AI Act compliance, and modern MedTech engineering from the Mia-Care team.",
   alternates: {
     canonical: "/resources/blog",
+    languages: localeAlternates("/resources/blog"),
   },
 };
 

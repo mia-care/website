@@ -5,12 +5,12 @@ type: whitepaper
 published: true
 featuredImage: /competence-center/composable-architecture-digital-health.jpg
 hubspotEmbed: |
-  <script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/embed/v2.js"></script>
+  <script charset="utf-8" type="text/javascript" src="//js-eu1.hsforms.net/forms/embed/v2.js"></script>
   <script>
     hbspt.forms.create({
-      region: "eu1",
       portalId: "5308597",
-      formId: "9c27479e-859e-47c1-acc4-161317f662d6"
+      formId: "55b235ec-5e86-4be1-98fc-e8b4569fc7b7",
+      region: "eu1"
     });
   </script>
 ---

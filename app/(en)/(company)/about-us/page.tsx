@@ -3,11 +3,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { CtaBanner } from "@/components/common/CtaBanner";
 import { PillTag } from "@/components/common/PillTag";
+import { localeAlternates } from "@/lib/seo";
 import { BASE_PATH } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: { absolute: "About Us — Mia-Care" },
-  alternates: { canonical: "/about-us" },
+  alternates: { canonical: "/about-us", languages: localeAlternates("/about-us") },
   description:
     "Mia Care is a health tech company headquartered in Milan, Italy, building the AI-native compliance platform for Software as a Medical Device.",
 };

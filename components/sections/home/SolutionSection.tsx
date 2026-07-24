@@ -85,17 +85,17 @@ const FEATURES = {
   it: [
     {
       icon: <Icon1 />,
-      title: "Workflow Connessi Attraverso la Tua Toolchain",
+      title: "Workflow connessi attraverso la tua toolchain",
       body: "Jira, GitHub, GitLab e il tuo ALM alimentano automaticamente un unico strato di tracciabilità. Nessuna esportazione manuale. Nessuna riconciliazione al momento dell'audit.",
     },
     {
       icon: <Icon2 />,
-      title: "AI Copilot per lo Sviluppo Conforme",
+      title: "AI Copilot per lo sviluppo conforme",
       body: "Un AI copilot integrato segnala le lacune e suggerisce mitigazioni del rischio in tempo reale, mantenendo gli artefatti allineati al tuo QMS mentre il codice viene scritto, non dopo.",
     },
     {
       icon: <Icon3 />,
-      title: "Documentazione Regolatoria Automatizzata",
+      title: "Documentazione regolatoria automatizzata",
       body: "Documenti conformi a IEC 62304 generati direttamente dalla tua attività di sviluppo: piani, architettura, record V&V e matrici di tracciabilità. Tutto automatico.",
     },
   ],
