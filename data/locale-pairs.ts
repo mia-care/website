@@ -82,6 +82,10 @@ export const LOCALE_PAIRS: { en: string; it: string }[] = [
     it: "/it/risorse/blog/nuove-tecnologie-digitali-che-rivoluzionano-il-settore-life-science",
   },
   {
+    en: "/resources/blog/navigating-the-samd-regulatory-framework-a-global-guide",
+    it: "/it/risorse/blog/orientarsi-nel-quadro-normativo-samd-guida-globale",
+  },
+  {
     en: "/resources/blog/the-compliance-tax-in-samd-development",
     it: "/it/risorse/blog/compliance-tax-nello-sviluppo-samd",
   },

@@ -29,6 +29,9 @@
 # legacy pre-scaffold files (not tracked)
 /.legacy/
 
+# external plugin/tool, not part of this site's codebase
+/claude-seo/
+
 # debug
 npm-debug.log*
 yarn-debug.log*
