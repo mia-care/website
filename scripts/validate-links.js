@@ -4,6 +4,7 @@
 //
 // - Internal links (page or asset) missing from the static export → blocking failure.
 // - Redirect loops / redirects pointing nowhere → blocking failure.
+// - Corrupt PDFs in the static export → blocking failure.
 // - External links returning an error → warning only (third-party sites are out of our control).
 //
 // Requires a static export in ../out (run `npm run build` first).
@@ -58,6 +59,30 @@ for (const file of allFiles) {
     htmlFiles.push(file);
     const route = rel.replace(/\.html$/, "").replace(/\/index$/, "") || "/";
     validPaths.add(normalizePath(route));
+  }
+}
+
+// ---------- PDF integrity check ----------
+
+const PDF_HEADER = "%PDF-";
+const EOF_SCAN_WINDOW_BYTES = 1024; // %%EOF is expected near the end of a well-formed PDF
+
+function isCorruptPdf(buffer) {
+  if (buffer.length < PDF_HEADER.length) return true;
+  if (!buffer.subarray(0, PDF_HEADER.length).toString("latin1").startsWith(PDF_HEADER)) {
+    return true;
+  }
+  const tail = buffer
+    .subarray(Math.max(0, buffer.length - EOF_SCAN_WINDOW_BYTES))
+    .toString("latin1");
+  return !tail.includes("%%EOF");
+}
+
+const corruptPdfs = [];
+for (const file of allFiles) {
+  if (!file.endsWith(".pdf")) continue;
+  if (isCorruptPdf(fs.readFileSync(file))) {
+    corruptPdfs.push(`/${path.relative(OUT_DIR, file).replace(/\\/g, "/")}`);
   }
 }
 
@@ -261,6 +286,15 @@ async function main() {
     console.error("");
   }
 
+  if (corruptPdfs.length > 0) {
+    hasBlockingErrors = true;
+    console.error(`❌  ${corruptPdfs.length} corrupt PDF(s):\n`);
+    for (const pdf of corruptPdfs) {
+      console.error(`   ${pdf}`);
+    }
+    console.error("");
+  }
+
   if (brokenExternal.length > 0) {
     console.warn(
       `⚠️   ${brokenExternal.length} external link(s) returned an error (non-blocking):\n`,
@@ -284,7 +318,7 @@ async function main() {
 
   if (!hasBlockingErrors) {
     console.log(
-      `✅  All internal links/buttons resolve and scripts/redirects.json has no loops or dangling targets.`,
+      `✅  All internal links/buttons resolve, scripts/redirects.json has no loops or dangling targets, and all PDFs are intact.`,
     );
   }
 
