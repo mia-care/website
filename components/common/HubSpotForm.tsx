@@ -36,7 +36,11 @@ const IFRAME_CSS = `
     padding: 0.75rem 1.5rem;
   }
   .hs-button:hover { opacity: 0.9; }
-  .hs-error-msgs, .hs-error-msg { color: #f87171 !important; font-size: 0.75rem; list-style: none; padding: 0; margin-top: 0.25rem; }
+  .hs-form-required, .hsfc-FieldLabel__RequiredIndicator { color: #f87171 !important; font-weight: 700; }
+  .hs-error-msgs, .hs-error-msg { color: #f87171 !important; font-size: 0.8125rem; font-weight: 600; list-style: none; padding: 0; margin: 0.375rem 0 0; }
+  .hs-error-msgs li { list-style: none; margin: 0; }
+  .hs-error-msg::before { content: "⚠ "; }
+  .hs-input.error, input.error, select.error, textarea.error { border-color: #f87171 !important; }
   .legal-consent-container, .legal-consent-container * { color: rgba(240,240,242,0.65) !important; font-size: 0.75rem; }
   .legal-consent-container a { color: #00f096 !important; text-decoration: underline; }
   fieldset { max-width: 100% !important; border: none; padding: 0; }

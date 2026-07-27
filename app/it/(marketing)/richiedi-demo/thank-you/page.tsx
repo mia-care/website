@@ -20,7 +20,7 @@ const NEXT_STEPS = [
   },
   {
     step: "3",
-    title: "Sessione live, senza copioni",
+    title: "Sessione live con i nostri esperti",
     body: "Una call di 1 ora calibrata sulla tua situazione. Porta le tue domande reali.",
   },
 ];
@@ -61,7 +61,7 @@ export default function RequestDemoThankYouPageIt() {
           className="font-display font-bold mb-4 leading-tight"
           style={{ fontSize: "clamp(32px, 4vw, 48px)", letterSpacing: "-0.035em" }}
         >
-          Ti abbiamo agganciato.
+          Ci sentiamo presto!
         </h1>
 
         <p
