@@ -74,6 +74,10 @@ export const LOCALE_PAIRS: { en: string; it: string }[] = [
     it: "/it/risorse/blog/come-accelerare-sviluppo-samd-con-conformita",
   },
   {
+    en: "/resources/blog/master-ai-for-samd-compliance-abstracting-the-regulatory-complexity-in-the-ai-era",
+    it: "/it/risorse/blog/governare-lia-per-la-conformita-samd",
+  },
+  {
     en: "/resources/blog/iec-62304-a-comprehensive-faq-guide",
     it: "/it/risorse/blog/iec-62304-una-guida-faq-completa",
   },
