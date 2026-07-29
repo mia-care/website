@@ -4,6 +4,7 @@ slug: "master-ai-for-samd-compliance-abstracting-the-regulatory-complexity-in-th
 description: "AI is outrunning SaMD compliance. Discover why static frameworks can't keep up, and how compliance-by-design and Mia-Care's P4SaMD close the gap."
 seoTitle: "Master AI for SaMD Compliance in the AI Era"
 date: "2026-07-29"
+featured: true
 author: "dario-esposito"
 categories: ["international-standards"]
 featuredImage: "/blog/images/master-ai-for-samd-compliance-abstracting-the-regulatory-complexity-in-the-ai-era.webp"

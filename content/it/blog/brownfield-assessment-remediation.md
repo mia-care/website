@@ -5,7 +5,6 @@ description: "Il software medicale legacy è un'arma a doppio taglio. Scopri com
 seoTitle: "Brownfield Assessment & Remediation per SaMD Legacy"
 date: "2026-04-20"
 modified: "2026-04-20"
-featured: true
 author: "roberta-egoriti"
 categories: ["technology-application"]
 featuredImage: "/blog/images/brownfield-assessment-remediation.webp"

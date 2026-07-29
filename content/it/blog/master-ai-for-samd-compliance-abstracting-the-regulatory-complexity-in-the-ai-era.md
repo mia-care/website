@@ -4,6 +4,7 @@ slug: "governare-lia-per-la-conformita-samd"
 description: "L'IA sta superando la conformità SaMD. Scopri perché i framework statici non tengono il passo e come compliance-by-design e P4SaMD di Mia-Care colmano il divario."
 seoTitle: "Governare l'IA per la Conformità SaMD nell'Era dell'IA"
 date: "2026-07-29"
+featured: true
 author: "dario-esposito"
 categories: ["international-standards"]
 featuredImage: "/blog/images/master-ai-for-samd-compliance-abstracting-the-regulatory-complexity-in-the-ai-era.webp"

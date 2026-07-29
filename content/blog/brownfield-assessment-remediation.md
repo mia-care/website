@@ -5,7 +5,6 @@ description: "Legacy medical software is a double-edged sword. Learn how brownfi
 seoTitle: "Brownfield Assessment & Remediation for Legacy SaMD"
 date: "2026-04-20"
 modified: "2026-04-20"
-featured: true
 author: "roberta-egoriti"
 categories: ["technology-application"]
 featuredImage: "/blog/images/brownfield-assessment-remediation.webp"
