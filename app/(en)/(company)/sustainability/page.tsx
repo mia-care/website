@@ -165,8 +165,9 @@ export default function SustainabilityPage() {
                 Headquarters
               </p>
               <p className="text-sm" style={{ color: "var(--text-secondary)", lineHeight: 1.7 }}>
-                Via Leopardi, 8<br />
-                20123 Milan
+                Via Imbonati, 18 - MAC7
+                <br />
+                20159 Milan
               </p>
             </div>
 

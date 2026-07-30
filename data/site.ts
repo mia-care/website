@@ -3,7 +3,7 @@ export const SITE = {
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://mia-care.io",
   company: {
     name: "Mia Care srl",
-    address: "Via Leopardi, 8 — 20123 Milan, Italy",
+    address: "Via Imbonati, 18 - MAC7 — 20159 Milan, Italy",
     vat: "IT 11504530962",
     email: "info@mia-care.io",
   },

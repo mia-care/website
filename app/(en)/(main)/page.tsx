@@ -35,9 +35,9 @@ const homeSchema = {
       vatID: SITE.company.vat,
       address: {
         "@type": "PostalAddress",
-        streetAddress: "Via Leopardi 8",
+        streetAddress: "Via Imbonati 18, MAC7",
         addressLocality: "Milan",
-        postalCode: "20123",
+        postalCode: "20159",
         addressCountry: "IT",
       },
       logo: {
