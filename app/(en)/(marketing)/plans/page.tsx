@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     "Choose how you adopt P4SaMD. Standard, Professional, or Unlimited — flexible plans for every stage of your SaMD journey.",
 };
 
-// Keep public/pricing.md in sync if these tiers change — it's a plain-text mirror for AI agents.
+// Keep the Pricing section in public/llms.txt in sync if these tiers change — it's a plain-text mirror for AI agents.
 const TIERS = [
   {
     name: "Standard",

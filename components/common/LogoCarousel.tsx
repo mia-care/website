@@ -42,9 +42,7 @@ const MASK_STYLE = {
     "linear-gradient(to right, transparent 0%, black 8%, black 88%, transparent 100%)",
 };
 
-// Both rows loop the same full logo list — a negative delay and reversed direction
-// keep them out of phase so they never show the same logos at once.
-function MarqueeRow({ reverse, delay }: { reverse?: boolean; delay?: string }) {
+function MarqueeRow() {
   return (
     <div className="overflow-hidden" style={MASK_STYLE}>
       <div
@@ -53,13 +51,11 @@ function MarqueeRow({ reverse, delay }: { reverse?: boolean; delay?: string }) {
           gap: "4rem",
           width: "max-content",
           animation: "marqueeScroll 55s linear infinite",
-          animationDirection: reverse ? "reverse" : "normal",
-          animationDelay: delay,
         }}
       >
         {TRACK.map((logo, i) => (
           <Image
-            key={`${reverse ? "top" : "bottom"}-${logo.alt}-${i}`}
+            key={`${logo.alt}-${i}`}
             src={logo.src}
             alt={i < LOGOS.length ? logo.alt : ""}
             aria-hidden={i >= LOGOS.length ? true : undefined}
@@ -119,10 +115,8 @@ export function LogoMarquee({ locale = "en" }: { locale?: "en" | "it" }) {
             aria-hidden="true"
           />
 
-          {/* Two scrolling rows, opposite directions, offset start */}
-          <div className="flex-1 min-w-0 flex flex-col gap-2 sm:gap-3 pb-5 sm:py-0">
-            <MarqueeRow reverse />
-            <MarqueeRow delay="-27.5s" />
+          <div className="flex-1 min-w-0 pb-5 sm:py-0">
+            <MarqueeRow />
           </div>
         </div>
       </div>

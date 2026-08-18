@@ -210,8 +210,8 @@ function extractHeadings(markdown: string): Heading[] {
   return headings;
 }
 
-// Extracts Q&A pairs from posts structured as "### N. **Question?**" followed by
-// the answer paragraph(s) — the pattern used by FAQ-style guides (e.g. IEC 62304).
+// Extracts Q&A pairs from posts structured as "## N. **Question?**" or "### N. **Question?**"
+// followed by the answer paragraph(s) — the pattern used by FAQ-style guides (e.g. IEC 62304).
 // Posts without this pattern simply yield an empty array.
 function extractFaqs(markdown: string): Faq[] {
   const lines = markdown.split("\n");
@@ -227,7 +227,7 @@ function extractFaqs(markdown: string): Faq[] {
   };
 
   for (const line of lines) {
-    const question = line.match(/^### \d+\.\s+\*\*(.+?)\*\*\s*$/);
+    const question = line.match(/^#{2,3} \d+\.\s+\*\*(.+?)\*\*\s*$/);
     if (question) {
       flush();
       current = { q: stripInlineMarkdown(question[1].trim()), answerLines: [] };

@@ -9,9 +9,36 @@ Regulatory standards covered: EU MDR 2017/745, IVDR 2017/746, FDA 21 CFR Part 82
 ## Product
 
 - [P4SaMD Platform Overview](https://www.mia-care.io/product): Mia-Care P4SaMD unifies eQMS, ALM, and DevOps into a single platform, embedding regulatory compliance directly into your SDLC.
-- [Plans and Pricing](https://www.mia-care.io/plans): Choose how you adopt P4SaMD. Standard, Professional, or Unlimited — flexible plans for every stage of your SaMD journey.
-- [Pricing (plain text)](https://www.mia-care.io/pricing.md): Machine-readable tier structure and features for AI agents comparing products programmatically.
+- [Plans and Pricing](https://www.mia-care.io/plans): Choose how you adopt P4SaMD. Standard, Professional, or Unlimited — flexible plans for every stage of your SaMD journey. Full tier breakdown below in the Pricing section.
 - [Request a Demo](https://www.mia-care.io/request-demo): Get a live P4SaMD session scoped to your regulatory context. No pre-recorded walk-through. Real answers for EU MDR, FDA, ISO 13485, IEC 62304, and EU AI Act.
+
+## Pricing
+
+P4SaMD does not publish numeric list prices. All tiers are quoted per engagement — contact sales@mia-care.io or request a demo at https://mia-care.io/request-demo.
+
+### Standard
+- Price: Custom — contact sales
+- Target: Small teams getting started
+- Limits: 1 company · 3 products · 5 users
+- Features: SDLC Workflow Orchestrator, Requirements & Risk Management, Basic Verification & Validation framework, Documentation Engine (standard templates), BOM & Change Management, Limited AI/ML Compliance Pack, on-demand support
+
+### Professional
+- Price: Custom — contact sales
+- Target: Growing teams scaling compliance
+- Limits: 1 company · 5 products · 10 users
+- Features: Everything in Standard, plus tailored Smart Insight & AI Assistant, document templating system, full AI/ML Compliance Pack, legacy systems assessment, pre-validation package, integrations & MCP Server, ticketing support
+
+### Unlimited
+- Price: Custom — contact sales
+- Target: Enterprises & multi-product organizations
+- Limits: Unlimited companies, products & users
+- Features: Everything in Professional, plus AI-assisted legacy remediation, eQMS integration, support for audit readiness, 24/7 ticketing with dedicated lead & AI assistant
+
+### Deployment models (available on all tiers)
+- SaaS: fully managed cloud deployment, instant provisioning, automatic updates
+- Self-Hosted: private cloud or on-premise, for data residency, sovereign cloud, or network isolation requirements
+
+Full tier comparison: https://www.mia-care.io/plans
 
 ## Capabilities
 
