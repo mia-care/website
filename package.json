@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build && node scripts/generate-redirects.js",
+    "build": "next build && node scripts/generate-redirects.js && node scripts/generate-trailing-slash-copies.js && node scripts/generate-asset-aliases.js",
     "start": "next start",
     "type-check": "tsc --noEmit",
     "lint": "biome check .",
