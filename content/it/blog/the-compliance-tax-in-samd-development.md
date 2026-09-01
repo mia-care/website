@@ -2,7 +2,7 @@
 title: "La &#8220;Compliance Tax&#8221; nello Sviluppo di SaMD: Dal Peso al Vantaggio di Qualità Senza Rivali"
 slug: "compliance-tax-nello-sviluppo-samd"
 description: "La compliance può sembrare una costosa tassa sullo sviluppo di SaMD. Scopri come trasformare questo peso in un motore di qualità con gli strumenti giusti."
-seoTitle: "La Compliance Tax nello Sviluppo di SaMD: Dal Peso al Vantaggio"
+seoTitle: "La Compliance Tax nello Sviluppo di SaMD"
 date: "2025-10-02"
 modified: "2025-11-05"
 author: "roberta-egoriti"

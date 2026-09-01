@@ -2,7 +2,7 @@
 title: "CRUD Encryption: proteggi la condivisione di dati sensibili in sanità"
 slug: "crud-encryption-proteggi-la-condivisione-di-dati-sensibili-in-sanita"
 description: "La condivisione di dati sanitari sensibili nel rispetto del GDPR richiede solide misure di protezione. Scopri come CRUD Encryption protegge le informazioni dei pazienti senza limitarne l'accesso."
-seoTitle: "CRUD Encryption: la Protezione dei Dati Sanitari Sensibili"
+seoTitle: "CRUD Encryption: Proteggere i Dati Sanitari"
 date: "2023-01-17"
 modified: "2023-03-06"
 author: "dario-esposito"

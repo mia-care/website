@@ -24,7 +24,7 @@ export async function generateMetadata({
   const resource = await getResourcePage(slug, "it");
   if (!resource) return {};
   return {
-    title: `${resource.title} | Mia-Care`,
+    title: resource.seoTitle ?? resource.title,
     description: resource.description,
     alternates: {
       canonical: `/it/risorse/${slug}`,

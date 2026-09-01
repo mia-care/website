@@ -19,7 +19,7 @@ export async function generateMetadata({
   const page = await getThankYouPage(slug, "it");
   if (!page) return {};
   return {
-    title: `${page.title} | Mia-Care`,
+    title: page.title,
     robots: { index: false },
   };
 }

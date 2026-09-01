@@ -1,5 +1,6 @@
 ---
 title: "Software Sanitario Potenziato dall'AI: Accelerare l'Innovazione Garantendo la Compliance"
+seoTitle: "Software Sanitario con AI: Innovazione e Compliance"
 description: "Scopri come costruire soluzioni intelligenti regolamentate come Software as a Medical Device (SaMD) in modo più smart, veloce e sicuro."
 type: video
 date: "2026-05-04"

@@ -1,5 +1,6 @@
 ---
 title: "Costruisci una Digital Health Platform con l'Architettura Componibile"
+seoTitle: "Costruisci una Digital Health Platform Componibile"
 description: "L'Architettura Componibile offre una soluzione che abilita un'evoluzione rapida e un assemblaggio senza soluzione di continuità dei componenti IT all'interno di una Digital Health Platform."
 type: whitepaper
 published: true

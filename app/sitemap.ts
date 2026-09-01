@@ -5,6 +5,7 @@ import { useCases } from "@/data/use-cases";
 import { useCases as useCasesIt } from "@/data/use-cases.it";
 import { getAllPostSlugs, getPostMeta } from "@/lib/blog";
 import { getAllResources } from "@/lib/resources";
+import { getAllSuccessCases } from "@/lib/success-cases";
 
 export const dynamic = "force-static";
 
@@ -23,6 +24,7 @@ const PAGE_DATES: Record<string, string> = {
   "/sustainability": "2026-04-26",
   "/resources": "2026-04-26",
   "/resources/blog": "2026-04-26",
+  "/resources/success-cases": "2026-09-01",
 };
 
 // Capabilities, use-cases, competence-center: update when data in /data/*.ts changes
@@ -138,6 +140,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly",
       priority: 0.6,
     }),
+    ...localePair("/resources/success-cases", "/it/risorse/success-cases", {
+      lastModified: PAGE_DATES["/resources/success-cases"],
+      changeFrequency: "weekly",
+      priority: 0.6,
+    }),
   ];
 
   const itCapabilitySlugs = new Set(capabilitiesIt.map((c) => c.slug));
@@ -174,5 +181,22 @@ export default function sitemap(): MetadataRoute.Sitemap {
     blogLocalePair(pairingKey, { changeFrequency: "monthly", priority: 0.75 }),
   );
 
-  return [...staticPages, ...capabilityPages, ...useCasePages, ...resourcePages, ...blogPages];
+  const itSuccessCaseSlugs = new Set(getAllSuccessCases("it").map((sc) => sc.slug));
+  const successCasePages: MetadataRoute.Sitemap = getAllSuccessCases().flatMap((sc) =>
+    sameSlugLocalePair(
+      `/resources/success-cases/${sc.slug}`,
+      `/it/risorse/success-cases/${sc.slug}`,
+      itSuccessCaseSlugs.has(sc.slug),
+      { lastModified: sc.date, changeFrequency: "monthly", priority: 0.7 },
+    ),
+  );
+
+  return [
+    ...staticPages,
+    ...capabilityPages,
+    ...useCasePages,
+    ...resourcePages,
+    ...blogPages,
+    ...successCasePages,
+  ];
 }

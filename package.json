@@ -12,6 +12,7 @@
     "check": "biome check --write .",
     "prepare": "husky",
     "validate:resources": "node scripts/validate-resources.js",
+    "validate:success-cases": "node scripts/validate-success-cases.js",
     "validate:sitemap": "node scripts/validate-sitemap.js",
     "validate:links": "node scripts/validate-links.js"
   },
@@ -27,6 +28,7 @@
     "react-dom": "19.2.4",
     "reading-time": "^1.5.0",
     "remark": "^15.0.1",
+    "remark-gfm": "^4.0.1",
     "remark-html": "^16.0.1",
     "shadcn": "^4.4.0",
     "tailwind-merge": "^3.5.0",

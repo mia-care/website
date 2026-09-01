@@ -2,7 +2,7 @@
 title: "Orientarsi nel Quadro Normativo del SaMD: Una Guida Globale"
 slug: "orientarsi-nel-quadro-normativo-samd-guida-globale"
 description: "Approfondisci il quadro normativo del SaMD per garantire la conformità, stimolare l'innovazione e rafforzare la sicurezza dei pazienti."
-seoTitle: "Orientarsi nel Quadro Normativo del SaMD: Una Guida Globale"
+seoTitle: "Quadro Normativo del SaMD: Guida Globale"
 date: "2026-02-19"
 author: "mia-care"
 categories: ["international-standards"]

@@ -1,5 +1,6 @@
 ---
 title: "Costruisci SaMD Certificati con una Piattaforma di Sviluppo Sanitaria Regolamentata"
+seoTitle: "SaMD Certificati con una Piattaforma Regolamentata"
 description: "Esplora esempi di SaMD, requisiti normativi e le sfide legate allo sviluppo di componenti software."
 type: video
 date: "2026-05-04"

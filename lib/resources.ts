@@ -2,6 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 import matter from "gray-matter";
 import { remark } from "remark";
+import remarkGfm from "remark-gfm";
 import remarkHtml from "remark-html";
 
 export type Locale = "en" | "it";
@@ -15,6 +16,7 @@ export type ResourceType = "whitepaper" | "video" | "guide" | "case-study" | "re
 export type ResourceMeta = {
   slug: string;
   title: string;
+  seoTitle?: string;
   description: string;
   type: ResourceType;
   date?: string;
@@ -91,6 +93,7 @@ export function getResourceMeta(slug: string, locale: Locale = "en"): ResourceMe
   return {
     slug,
     title: (data.title as string) ?? "",
+    seoTitle: (data.seoTitle as string) ?? undefined,
     description: (data.description as string) ?? "",
     type: (data.type as ResourceType) ?? "whitepaper",
     date: data.date as string | undefined,
@@ -116,11 +119,15 @@ export async function getResourcePage(
 
   const { portalId, formId, region } = extractHubSpotIds((data.hubspotEmbed as string) ?? "");
 
-  const processed = await remark().use(remarkHtml, { sanitize: false }).process(content);
+  const processed = await remark()
+    .use(remarkGfm)
+    .use(remarkHtml, { sanitize: false })
+    .process(content);
 
   return {
     slug,
     title: (data.title as string) ?? "",
+    seoTitle: (data.seoTitle as string) ?? undefined,
     description: (data.description as string) ?? "",
     type: (data.type as ResourceType) ?? "whitepaper",
     date: data.date as string | undefined,
@@ -142,7 +149,10 @@ export async function getThankYouPage(
   const raw = fs.readFileSync(tyPath, "utf8");
   const { data, content } = matter(raw);
 
-  const processed = await remark().use(remarkHtml, { sanitize: false }).process(content);
+  const processed = await remark()
+    .use(remarkGfm)
+    .use(remarkHtml, { sanitize: false })
+    .process(content);
 
   const indexMeta = readIndexFrontmatter(slug, locale);
 

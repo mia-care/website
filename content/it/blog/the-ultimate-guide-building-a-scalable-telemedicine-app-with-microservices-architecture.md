@@ -2,7 +2,7 @@
 title: "La Guida Definitiva: Costruire un'Applicazione di Telemedicina Scalabile con l'Architettura a Microservizi"
 slug: "la-guida-definitiva-costruire-unapplicazione-di-telemedicina-con-larchitettura-a-microservizi"
 description: "L'architettura a microservizi sta ridisegnando lo sviluppo delle app di telemedicina. Scopri i vantaggi, le sfide e le best practice per costruire su larga scala."
-seoTitle: "Costruire un'App di Telemedicina Scalabile con i Microservizi"
+seoTitle: "App di Telemedicina Scalabile con i Microservizi"
 date: "2024-04-19"
 modified: "2024-04-19"
 author: "dario-esposito"

@@ -2,7 +2,7 @@
 title: "Sviluppare Piattaforme di Telemedicina con la Tecnologia Cloud‑Native"
 slug: "sviluppa-piattaforme-digitali-per-la-sanita-con-la-tecnologia-cloud-native"
 description: "La tecnologia cloud-native sta alimentando la crescita della telemedicina. Scopri come l'architettura a microservizi rende le piattaforme di cura da remoto scalabili e resilienti."
-seoTitle: "Sviluppare Piattaforme di Telemedicina con la Tecnologia Cloud‑Native"
+seoTitle: "Piattaforme di Telemedicina Cloud-Native"
 date: "2024-05-24"
 modified: "2024-05-24"
 author: "dario-esposito"

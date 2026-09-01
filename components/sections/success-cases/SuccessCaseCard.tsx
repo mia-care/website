@@ -6,10 +6,21 @@ import { PillTag } from "@/components/common/PillTag";
 import { assetPath } from "@/lib/asset";
 import type { SuccessCaseMeta } from "@/lib/success-cases";
 
-export function SuccessCaseCard({ item }: { item: SuccessCaseMeta }) {
+export function SuccessCaseCard({
+  item,
+  locale = "en",
+}: {
+  item: SuccessCaseMeta;
+  locale?: "en" | "it";
+}) {
+  const href =
+    locale === "it"
+      ? `/it/risorse/success-cases/${item.slug}`
+      : `/resources/success-cases/${item.slug}`;
+
   return (
     <Link
-      href={`/resources/success-cases/${item.slug}`}
+      href={href}
       className="group flex flex-col rounded-2xl overflow-hidden transition-all duration-200 cursor-pointer hover:-translate-y-0.5"
       style={{
         background: "var(--bg-surface)",
@@ -81,7 +92,7 @@ export function SuccessCaseCard({ item }: { item: SuccessCaseMeta }) {
         </div>
 
         <span className="text-sm font-semibold mt-auto" style={{ color: "var(--brand-green)" }}>
-          Read the story →
+          {locale === "it" ? "Leggi la storia →" : "Read the story →"}
         </span>
       </div>
     </Link>

@@ -133,6 +133,13 @@ export const LOCALE_PAIRS: { en: string; it: string }[] = [
     en: "/resources/blog/why-life-science-companies-need-a-digital-platform-now",
     it: "/it/risorse/blog/perche-il-life-science-ha-bisogno-di-una-piattaforma-digitale-componibile",
   },
+  // Success cases: same slug both locales (like capabilities/use-cases).
+  { en: "/resources/success-cases", it: "/it/risorse/success-cases" },
+  {
+    en: "/resources/success-cases/italiassistenza",
+    it: "/it/risorse/success-cases/italiassistenza",
+  },
+  { en: "/resources/success-cases/aindo", it: "/it/risorse/success-cases/aindo" },
   // Competence-center resources: same slug both locales (like capabilities/use-cases).
   { en: "/resources", it: "/it/risorse" },
   { en: "/resources/ai-powered-healthcare-samd", it: "/it/risorse/ai-powered-healthcare-samd" },

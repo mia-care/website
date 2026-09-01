@@ -2,7 +2,7 @@
 title: "5 Straordinari Benefici del Monitoraggio Remoto dei Pazienti"
 slug: "5-benefici-del-monitoraggio-remoto-dei-pazienti"
 description: "Il monitoraggio remoto dei pazienti permette ai fornitori di servizi sanitari di seguire i pazienti fuori dalla clinica. Scopri cinque benefici chiave, dai risultati migliori ai costi più bassi."
-seoTitle: "5 Straordinari Benefici del Monitoraggio Remoto dei Pazienti"
+seoTitle: "5 Benefici del Monitoraggio Remoto dei Pazienti"
 date: "2024-01-22"
 modified: "2024-02-22"
 author: "roberta-egoriti"

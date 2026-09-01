@@ -3,6 +3,7 @@ import path from "node:path";
 import matter from "gray-matter";
 import readingTime from "reading-time";
 import { remark } from "remark";
+import remarkGfm from "remark-gfm";
 import remarkHtml from "remark-html";
 import { assetPath } from "./asset";
 
@@ -130,7 +131,10 @@ export async function getPost(slug: string, locale: Locale = "en"): Promise<Post
   const { data, content } = matter(raw);
   const stats = readingTime(content);
 
-  const processed = await remark().use(remarkHtml, { sanitize: false }).process(content);
+  const processed = await remark()
+    .use(remarkGfm)
+    .use(remarkHtml, { sanitize: false })
+    .process(content);
   const contentHtml = processed
     .toString()
     .replace(/src="(\/[^"]*)"/g, (_, p) => `src="${assetPath(p)}"`)

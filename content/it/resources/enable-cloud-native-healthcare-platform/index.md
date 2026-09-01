@@ -1,5 +1,6 @@
 ---
 title: "Abilita una Piattaforma Sanitaria Cloud-Native per un'Interoperabilità Fluida dei Dispositivi Medici"
+seoTitle: "Piattaforma Cloud-Native per Dispositivi Medici"
 description: "Una piattaforma digitale per dispositivi medici può semplificare la gestione dei dispositivi medici e fornire dati in tempo reale sul loro utilizzo."
 type: whitepaper
 published: true
