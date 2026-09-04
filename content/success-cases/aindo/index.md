@@ -12,6 +12,7 @@ metrics:
   - "First certified vertical clinical LLM in Europe (target 2028)"
 quote: "The partnership with Mia-Care represents the ideal meeting point between the speed of artificial intelligence research and the absolute rigor required by clinical medicine. Thanks to P4SaMD, we transform our AI models into certified and secure medical software, simplifying regulatory complexities to bring precision medicine directly to the patient's bedside."
 quoteAuthor: "Daniele Panfilo, PhD, CEO & Co-founder of Aindo"
+quoteAuthorImage: "/images/success-cases/aindo-quote-author.webp"
 ---
 
 ## A strategic alliance to combine the speed of artificial intelligence research with the rigor of clinical medicine
@@ -36,6 +37,8 @@ The primary goal of the project was clear and ambitious: to implement a **rigoro
 
 To achieve this goal without losing the agility that distinguishes an innovative company, Aindo was looking for a technological partner with strong regulatory experience, capable of:
 
+<div class="case-checklist">
+
 * Absorbing the complexity of regulatory processes.
 
 * Minimizing development risks.
@@ -43,6 +46,8 @@ To achieve this goal without losing the agility that distinguishes an innovative
 * Eliminating the need to embed dedicated compliance experts within the software engineering team.
 
 * Slashing time-to-market and time-to-compliance.
+
+</div>
 
 Moreover, the software architecture had to provide appropriate tools to ensure mathematically faithful data while being free of real personal identifiers.
 
@@ -60,42 +65,171 @@ This allows Aindo's engineering team to develop compliant software from the very
 
 Aindo's choice fell on Mia-Care because of three fundamental pillars:
 
-* **Validated technological excellence:** P4SaMD is engineered according to the highest industry standards and validated following GAMP 5 principles, guaranteeing Aindo a development environment natively aligned with the quality requirements of global health authorities.
+<div class="case-why-grid">
 
-* **Integration and operational flexibility:** The platform adapts to the team's operational culture, easily embedding into daily workflows (such as Git or Jira) so that compliance becomes a natural extension of the developer's work rather than an external obstacle.
+<div class="case-why-card">
 
-* **Adaptive regulatory reliability:** In a constantly changing regulatory landscape, Mia-Care continuously updates the platform to align it with the latest developments in EU MDR, EU AI Act, and FDA guidelines, relieving Aindo of the burden of manual regulatory tracking.
+### Validated technological excellence
+
+P4SaMD is engineered according to the highest industry standards and validated following GAMP 5 principles, guaranteeing Aindo a development environment natively aligned with the quality requirements of global health authorities.
+
+</div>
+
+<div class="case-why-card">
+
+### Integration and operational flexibility
+
+The platform adapts to the team's operational culture, easily embedding into daily workflows (such as Git or Jira) so that compliance becomes a natural extension of the developer's work rather than an external obstacle.
+
+</div>
+
+<div class="case-why-card">
+
+### Adaptive regulatory reliability
+
+In a constantly changing regulatory landscape, Mia-Care continuously updates the platform to align it with the latest developments in EU MDR, EU AI Act, and FDA guidelines, relieving Aindo of the burden of manual regulatory tracking.
+
+</div>
+
+</div>
 
 ## A Blueprint to Transform Clinical Data into Ward-Ready Software
 
 The synergy between **Aindo** and **Mia-Care**'s technologies laid the foundations for a blueprint designed to securely transform real clinical data into certified software:
 
-| Layer | Technological Component | Role in the Value Flow |
-| --- | --- | --- |
-| **1. Data Layer** | Real Clinical Data | Selection and curation of real data cohorts from partner institutes of excellence, such as the Centro Cardiologico Monzino IRCCS. |
-| **2. Privacy Layer** | Aindo Synthetic Data | Aindo's AI layer steps in to convert real data into clinical-grade synthetic data, mathematically faithful but devoid of personal information (EuroPrivacyTM/® certified, and evaluated for privacy and utility by NIST). |
-| **3. SaMD Platform** | Mia-Care's P4SaMD | The Mia-Care platform provides the AI-powered orchestration layer for the entire SDLC, supporting end-to-end design, deployment, and traceability. At the same time, it ensures full compliance with the EU AI Act and regulatory standards IEC 62304 and ISO 13485, as well as GAMP 5 guidelines. |
-| **4. Clinical Output** | Certified LLM-based CDSS | The final product: a vertical Clinical Decision Support System (such as a cardiology clinical LLM) ready to be distributed as a certified medical device. |
+<div class="case-blueprint">
+
+<div class="case-blueprint-step">
+
+#### Data Layer
+
+<div class="case-blueprint-tag">Real Clinical Data</div>
+
+Selection and curation of real data cohorts from partner institutes of excellence, such as the Centro Cardiologico Monzino IRCCS.
+
+</div>
+
+<div class="case-blueprint-step">
+
+#### Privacy Layer
+
+<div class="case-blueprint-tag">Aindo Synthetic Data</div>
+
+Aindo's AI layer steps in to convert real data into clinical-grade synthetic data, mathematically faithful but devoid of personal information (EuroPrivacyTM/® certified, and evaluated for privacy and utility by NIST).
+
+</div>
+
+<div class="case-blueprint-step">
+
+#### SaMD Platform
+
+<div class="case-blueprint-tag">Mia-Care's P4SaMD</div>
+
+The Mia-Care platform provides the AI-powered orchestration layer for the entire SDLC, supporting end-to-end design, deployment, and traceability. At the same time, it ensures full compliance with the EU AI Act and regulatory standards IEC 62304 and ISO 13485, as well as GAMP 5 guidelines.
+
+</div>
+
+<div class="case-blueprint-step">
+
+#### Clinical Output
+
+<div class="case-blueprint-tag">Certified LLM-based CDSS</div>
+
+The final product: a vertical Clinical Decision Support System (such as a cardiology clinical LLM) ready to be distributed as a certified medical device.
+
+</div>
+
+</div>
+
+<div class="case-image-tabs">
+<div class="case-image-tabs-nav">
+<details name="aindo-blueprint-img" open><summary>Mia-Care P4SaMD & Aindo</summary></details>
+<details name="aindo-blueprint-img"><summary>Robust Governance. Full Compliance.</summary></details>
+</div>
+
+<div class="case-image-tabs-panels">
+
+<div class="case-image-tab-panel">
+
+![Aindo and Mia-Care blueprint synergy — platform capabilities overview](/images/success-cases/aindo-blueprint-synergy-1.webp)
+
+</div>
+
+<div class="case-image-tab-panel">
+
+![Aindo and Mia-Care blueprint synergy — governance and compliance layer](/images/success-cases/aindo-blueprint-synergy-2.webp)
+
+</div>
+
+</div>
+
+</div>
 
 ## Adoption and Process: An Agile Onboarding to Turn Compliance into a Daily Routine
 
-The adoption process was rapid and non-invasive, following an **Agile methodology**. It began with a one-month PaaS trial, launched on January 27, 2026, which combined the use of Mia-Care's Internal Developer Platform and specific P4SaMD features.
+The adoption process was rapid and non-invasive, following an **Agile methodology**.
 
-During this period, Mia-Care delivered targeted direct training to key figures of Aindo's technical team, introducing them to the use of the prototype and tools. In the initial POC phase, P4SaMD facilitated the creation of a complete backend service in Python natively integrated with Aindo's AI service APIs, allowing the team to quickly familiarize themselves with workflow automation and regulatory guardrails.
+<div class="case-adoption-steps">
+
+1. A one-month PaaS trial, launched on January 27, 2026, combined the use of Mia-Care's Internal Developer Platform and specific P4SaMD features.
+
+2. Mia-Care delivered targeted direct training to key figures of Aindo's technical team, introducing them to the use of the prototype and tools.
+
+3. In the initial POC phase, P4SaMD facilitated the creation of a complete backend service in Python natively integrated with Aindo's AI service APIs, allowing the team to quickly familiarize themselves with workflow automation and regulatory guardrails.
+
+</div>
 
 ## Business and Technological Impact: From Breaking Down Data Silos to Computational and Regulatory Efficiency
 
 The impact of the solution is measured directly on business scalability and the speed of Aindo's scientific research:
 
-* **Documentation and traceability automation:** P4SaMD produces in real time the technical and traceability documentation (from requirements to deployment) required for regulatory audits and certification processes, with an estimated **90%** reduction in documentation time.
+<div class="case-impact-hero">
 
-* **Reduction of time-to-compliance:** Thanks to automated and multi-framework compliance, the time required for new AI feature releases is reduced by **50%**, accelerating innovation without introducing regulatory friction.
+<div class="case-impact-card">
 
-* **Complete AI Governance:** With P4SaMD, Aindo can autonomously manage and govern the compliance of all AI components (models, algorithms, etc.) of the medical software under development.
+### Documentation and traceability automation
 
-* **Single source of truth:** P4SaMD centralizes requirements, controls, and documentation for MDR, EU AI Act, and FDA GMLP into a single system, eliminating fragmentation and aligning all stakeholders on a shared framework.
+P4SaMD produces in real time the technical and traceability documentation (from requirements to deployment) required for regulatory audits and certification processes, with an estimated **90%** reduction in documentation time.
 
-* **Personnel optimization:** Aindo started the SaMD compliance journey without the need to hire additional personnel or dedicated regulatory consultants within the team.
+</div>
+
+<div class="case-impact-card">
+
+### Reduction of time-to-compliance
+
+Thanks to automated and multi-framework compliance, the time required for new AI feature releases is reduced by **50%**, accelerating innovation without introducing regulatory friction.
+
+</div>
+
+</div>
+
+<div class="case-why-grid">
+
+<div class="case-why-card">
+
+### Complete AI Governance
+
+With P4SaMD, Aindo can autonomously manage and govern the compliance of all AI components (models, algorithms, etc.) of the medical software under development.
+
+</div>
+
+<div class="case-why-card">
+
+### Single source of truth
+
+P4SaMD centralizes requirements, controls, and documentation for MDR, EU AI Act, and FDA GMLP into a single system, eliminating fragmentation and aligning all stakeholders on a shared framework.
+
+</div>
+
+<div class="case-why-card">
+
+### Personnel optimization
+
+Aindo started the SaMD compliance journey without the need to hire additional personnel or dedicated regulatory consultants within the team.
+
+</div>
+
+</div>
 
 ## Looking to the Future: The First Cardiology LLM in Europe and Scalability for Oncology Pathways
 

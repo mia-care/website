@@ -791,6 +791,204 @@ body {
 }
 .case-why-card p:last-child { margin-bottom: 0; }
 
+/* Blueprint pipeline — richer vertical steps (title + tag + description),
+   bigger badges than the pillars timeline to signal a more important section. */
+.case-blueprint {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+  margin: 2rem 0;
+  counter-reset: case-blueprint-step;
+}
+.case-blueprint::before {
+  content: "";
+  position: absolute;
+  left: 1.24rem;
+  top: 0.25rem;
+  bottom: 2.5rem;
+  width: 1px;
+  background: var(--bg-border-strong);
+}
+.case-blueprint-step {
+  position: relative;
+  counter-increment: case-blueprint-step;
+  padding-left: 3.5rem;
+}
+.case-blueprint-step::before {
+  content: counter(case-blueprint-step);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  background: var(--bg-surface);
+  border: 2px solid var(--brand-green);
+  color: var(--brand-green);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+.case-blueprint-step h4 {
+  margin: 0.375rem 0 0.625rem !important;
+  font-size: 1.0625rem !important;
+}
+.case-blueprint-tag {
+  display: inline-flex;
+  margin-bottom: 0.625rem;
+  padding: 0.2rem 0.7rem;
+  border-radius: 999px;
+  border: 1px solid rgba(0, 240, 150, 0.25);
+  background: rgba(0, 240, 150, 0.06);
+  color: var(--brand-green);
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+.case-blueprint-step p { margin: 0; }
+
+/* Blueprint synergy images — a real tab bar (two segments side by side,
+   active one underlined) instead of a cramped side-by-side grid, so each
+   image renders at full, readable width and the click-to-switch affordance
+   is obvious. Exclusive open/close is native via details[name=...]; the
+   :has() rule below does the actual panel-switching. Browsers without :has()
+   support just show both panels stacked — still fully readable, not broken. */
+.case-image-tabs {
+  margin: 2rem 0;
+  border: 1px solid var(--bg-border);
+  border-radius: 1rem;
+  overflow: hidden;
+  background: var(--bg-raised);
+}
+.case-image-tabs-nav {
+  display: flex;
+}
+.case-image-tabs-nav details { flex: 1 1 0; }
+.case-image-tabs-nav summary {
+  cursor: pointer;
+  list-style: none;
+  text-align: center;
+  padding: 0.875rem 1rem;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.8125rem;
+  color: var(--text-secondary);
+  border-bottom: 2px solid var(--bg-border);
+  transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+}
+.case-image-tabs-nav summary::-webkit-details-marker { display: none; }
+.case-image-tabs-nav details[open] summary {
+  color: var(--brand-green);
+  border-color: var(--brand-green);
+  background: rgba(0, 240, 150, 0.08);
+}
+.case-image-tab-panel img {
+  display: block;
+  width: 100%;
+  margin: 0 !important;
+}
+@supports selector(:has(a)) {
+  .case-image-tab-panel { display: none; }
+  .case-image-tabs:has(.case-image-tabs-nav details:nth-of-type(1)[open]) .case-image-tab-panel:nth-of-type(1) {
+    display: block;
+  }
+  .case-image-tabs:has(.case-image-tabs-nav details:nth-of-type(2)[open]) .case-image-tab-panel:nth-of-type(2) {
+    display: block;
+  }
+}
+
+/* Adoption steps — lighter than the blueprint/pillars timelines: smaller
+   filled badges, no connecting line, so the two don't look identical. */
+.case-adoption-steps { margin: 1.5rem 0; }
+.case-adoption-steps ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  counter-reset: case-adopt-step;
+}
+.case-adoption-steps li {
+  counter-increment: case-adopt-step;
+  position: relative;
+  padding-left: 2.25rem;
+}
+.case-adoption-steps li::before {
+  content: counter(case-adopt-step);
+  position: absolute;
+  left: 0;
+  top: 0.05rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  background: rgba(0, 240, 150, 0.1);
+  color: var(--brand-green);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.case-adoption-steps li p { margin: 0; }
+
+/* Checklist — plain bullet list with a checkmark instead of a dot */
+.case-checklist ul {
+  list-style: none;
+  margin: 1.25rem 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+}
+.case-checklist li { position: relative; padding-left: 1.75rem; }
+.case-checklist li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  top: 0.05rem;
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 50%;
+  background: rgba(0, 240, 150, 0.12);
+  color: var(--brand-green);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Impact hero cards — the two headline stats get a touch more presence
+   (tinted border, highlighted inline number) without repeating the giant
+   number treatment already used for the hero metric chips above the fold. */
+.case-impact-hero {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.25rem;
+  margin: 2rem 0 1.25rem;
+}
+.case-impact-card {
+  background: var(--bg-raised);
+  border: 1px solid rgba(0, 240, 150, 0.22);
+  border-radius: 1rem;
+  padding: 1.5rem;
+}
+.case-impact-card h3 {
+  margin-top: 0 !important;
+  font-size: 1.0625rem !important;
+}
+.case-impact-card p { margin-bottom: 0; }
+.case-impact-card strong {
+  color: var(--brand-green);
+  font-size: 1.1em;
+}
+
 /* HubSpot form overrides
    HubSpot injects inline element.style rules (e.g. color:#33475b) that beat
    plain class selectors — !important is required throughout this block. */
