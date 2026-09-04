@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { CtaBanner } from "@/components/common/CtaBanner";
 import { JsonLd } from "@/components/common/JsonLd";
 import { PillTag } from "@/components/common/PillTag";
+import { MetricStat } from "@/components/sections/success-cases/MetricStat";
 import { SITE } from "@/data/site";
 import { assetPath } from "@/lib/asset";
 import { localeAlternates } from "@/lib/seo";
@@ -98,7 +99,11 @@ export default async function SuccessCasePage({ params }: { params: Promise<{ sl
 
           <h1
             className="font-display font-bold mb-4 leading-tight"
-            style={{ fontSize: "clamp(28px, 3.5vw, 48px)", letterSpacing: "-0.03em" }}
+            style={{
+              fontSize: "clamp(30px, 4vw, 52px)",
+              letterSpacing: "-0.035em",
+              textWrap: "balance",
+            }}
           >
             {item.title}
           </h1>
@@ -113,21 +118,7 @@ export default async function SuccessCasePage({ params }: { params: Promise<{ sl
           {item.metrics && item.metrics.length > 0 && (
             <div className="flex flex-wrap gap-4 mt-10">
               {item.metrics.map((metric) => (
-                <div
-                  key={metric}
-                  className="px-5 py-3 rounded-xl"
-                  style={{
-                    background: "var(--bg-surface)",
-                    border: "1px solid var(--bg-border)",
-                  }}
-                >
-                  <span
-                    className="font-display font-bold text-base"
-                    style={{ color: "var(--brand-green)" }}
-                  >
-                    {metric}
-                  </span>
-                </div>
+                <MetricStat key={metric} metric={metric} />
               ))}
             </div>
           )}
@@ -141,7 +132,14 @@ export default async function SuccessCasePage({ params }: { params: Promise<{ sl
           style={{ maxHeight: 480, background: "var(--bg-raised)" }}
         >
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="relative rounded-2xl overflow-hidden" style={{ aspectRatio: "16/9" }}>
+            <div
+              className="relative rounded-2xl overflow-hidden"
+              style={{
+                aspectRatio: "16/9",
+                border: "1px solid var(--bg-border)",
+                boxShadow: "0 20px 60px rgba(0,0,0,0.35)",
+              }}
+            >
               <Image
                 src={assetPath(item.featuredImage)}
                 alt=""
@@ -159,69 +157,92 @@ export default async function SuccessCasePage({ params }: { params: Promise<{ sl
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           {item.contentHtml && (
             <div
-              className="blog-prose"
+              className="blog-prose case-study"
               // biome-ignore lint/security/noDangerouslySetInnerHtml: markdown from trusted filesystem
               dangerouslySetInnerHTML={{ __html: item.contentHtml }}
             />
           )}
-
-          {/* Quote */}
-          {item.quote && (
-            <blockquote
-              className="mt-12 px-8 py-6 rounded-2xl"
-              style={{
-                background: "var(--bg-surface)",
-                borderLeft: "3px solid var(--brand-green)",
-              }}
-            >
-              <p
-                className="text-lg font-medium leading-relaxed mb-6"
-                style={{ color: "var(--text-primary)" }}
-              >
-                "{item.quote}"
-              </p>
-              {item.quoteAuthor && (
-                <div className="flex items-center gap-3">
-                  {/* Avatar: photo if available, initials fallback */}
-                  {item.quoteAuthorImage ? (
-                    <Image
-                      src={assetPath(item.quoteAuthorImage)}
-                      alt={item.quoteAuthor}
-                      width={40}
-                      height={40}
-                      className="rounded-full object-cover shrink-0"
-                      style={{ border: "2px solid var(--bg-border)" }}
-                      unoptimized
-                    />
-                  ) : (
-                    <span
-                      className="inline-flex items-center justify-center rounded-full shrink-0 text-xs font-bold"
-                      style={{
-                        width: 40,
-                        height: 40,
-                        background: "var(--bg-raised)",
-                        border: "2px solid var(--bg-border)",
-                        color: "var(--brand-green)",
-                        letterSpacing: "0.05em",
-                      }}
-                    >
-                      {item.quoteAuthor
-                        .split(/[\s,]+/)
-                        .filter(Boolean)
-                        .slice(0, 2)
-                        .map((w) => w[0]?.toUpperCase())
-                        .join("")}
-                    </span>
-                  )}
-                  <cite className="text-sm not-italic" style={{ color: "var(--text-secondary)" }}>
-                    {item.quoteAuthor}
-                  </cite>
-                </div>
-              )}
-            </blockquote>
-          )}
         </div>
       </section>
+
+      {/* Quote — full-bleed, dark + brand glow */}
+      {item.quote && (
+        <section
+          className="relative py-16 sm:py-24 overflow-hidden"
+          style={{
+            background: "var(--bg-surface)",
+            borderTop: "1px solid var(--bg-border)",
+            borderBottom: "1px solid var(--bg-border)",
+          }}
+        >
+          <div
+            aria-hidden
+            className="absolute inset-0 pointer-events-none"
+            style={{
+              background:
+                "radial-gradient(ellipse 60% 60% at 50% 35%, rgba(0,240,150,0.14) 0%, transparent 65%)",
+            }}
+          />
+          <blockquote className="relative max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <span
+              aria-hidden
+              className="block font-display font-bold select-none"
+              style={{ fontSize: 88, lineHeight: 1, color: "var(--brand-green)", opacity: 0.3 }}
+            >
+              "
+            </span>
+            <p
+              className="font-display font-medium leading-snug"
+              style={{
+                fontSize: "clamp(20px, 2.6vw, 30px)",
+                color: "var(--text-primary)",
+                letterSpacing: "-0.01em",
+                textWrap: "balance",
+              }}
+            >
+              {item.quote}
+            </p>
+            {item.quoteAuthor && (
+              <footer className="flex items-center justify-center gap-3 mt-8">
+                {/* Avatar: photo if available, initials fallback */}
+                {item.quoteAuthorImage ? (
+                  <Image
+                    src={assetPath(item.quoteAuthorImage)}
+                    alt={item.quoteAuthor}
+                    width={56}
+                    height={56}
+                    className="rounded-full object-cover shrink-0"
+                    style={{ border: "2px solid rgba(0,240,150,0.35)" }}
+                    unoptimized
+                  />
+                ) : (
+                  <span
+                    className="inline-flex items-center justify-center rounded-full shrink-0 text-sm font-bold"
+                    style={{
+                      width: 56,
+                      height: 56,
+                      background: "var(--bg-raised)",
+                      border: "2px solid rgba(0,240,150,0.35)",
+                      color: "var(--brand-green)",
+                      letterSpacing: "0.05em",
+                    }}
+                  >
+                    {item.quoteAuthor
+                      .split(/[\s,]+/)
+                      .filter(Boolean)
+                      .slice(0, 2)
+                      .map((w) => w[0]?.toUpperCase())
+                      .join("")}
+                  </span>
+                )}
+                <cite className="text-sm not-italic" style={{ color: "var(--text-secondary)" }}>
+                  {item.quoteAuthor}
+                </cite>
+              </footer>
+            )}
+          </blockquote>
+        </section>
+      )}
 
       <CtaBanner />
     </>
