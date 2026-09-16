@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { notFound } from "next/navigation";
+import { redirect } from "next/navigation";
 import { CtaBanner } from "@/components/common/CtaBanner";
 import { JsonLd } from "@/components/common/JsonLd";
 import { PillTag } from "@/components/common/PillTag";
@@ -44,7 +44,7 @@ export async function generateMetadata({
 export default async function SuccessCasePageIt({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const item = await getSuccessCasePage(slug, "it");
-  if (!item) notFound();
+  if (!item) redirect("/it/risorse/success-cases");
 
   const jsonLd = {
     "@context": "https://schema.org",

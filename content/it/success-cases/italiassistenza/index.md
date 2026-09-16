@@ -1,4 +1,5 @@
 ---
+published: false
 title: "Digital Health Transformation: come ItaliAssistenza ha evoluto i servizi di supporto al paziente con l'architettura a microservizi di Mia-Care"
 description: "Come ItaliAssistenza, società del Gruppo Zambon, ha collaborato con Mia-Care per costruire una piattaforma white-label cloud-native a microservizi che unifica i Patient Support Program a livello nazionale."
 date: "2026-09-01"
