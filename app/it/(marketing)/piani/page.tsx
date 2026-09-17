@@ -9,24 +9,51 @@ export const metadata: Metadata = {
   title: { absolute: "Piani P4SaMD" },
   alternates: { canonical: "/it/piani", languages: localeAlternates("/it/piani") },
   description:
-    "Scegli come adottare P4SaMD: Standard, Professional o Unlimited, piani flessibili per ogni fase del tuo percorso SaMD.",
+    "Scegli come adottare P4SaMD: Entry, Standard, Professional o Unlimited, piani flessibili per ogni fase del tuo percorso SaMD.",
 };
 
-const TIERS = [
+type Tier = {
+  name: string;
+  target: string;
+  limits: string;
+  description: string;
+  features: string[];
+  cta: string;
+  highlight: boolean;
+  badge?: string;
+};
+
+// Tenere sincronizzata la sezione Pricing dell'inglese in public/llms.txt se questi tier cambiano.
+const TIERS: Tier[] = [
+  {
+    name: "Entry",
+    target: "Si parte da zero",
+    limits: "1 azienda · 1 prodotto · 3 utenti",
+    description:
+      "Tutto ciò che ti serve per avviare il tuo primo progetto SaMD con la compliance integrata fin dal primo giorno.",
+    features: [
+      "Solo greenfield (nessuna remediation legacy)",
+      "SDLC Workflow Orchestrator",
+      "AI/ML Compliance Pack di base",
+      "Generazione automatica dei Technical File standard",
+      "Integrazioni limitate",
+      "Nessuna integrazione eQMS",
+      "Supporto on-demand",
+    ],
+    cta: "Richiedi una Demo",
+    highlight: false,
+  },
   {
     name: "Standard",
     target: "Piccoli team che iniziano",
+    limits: "1 azienda · 3 prodotti · 5 utenti",
     description:
       "Le fondamenta di cui hai bisogno per costruire il tuo primo SaMD con la compliance fin dal primo giorno.",
     features: [
-      "1 azienda · 3 prodotti · 5 utenti",
-      "SDLC Workflow Orchestrator",
+      "Tutto quanto incluso in Entry",
       "Requirements & Risk Management",
       "Basic Verification & Validation framework",
-      "Documentation Engine (template standard)",
       "BOM & Change Management",
-      "AI/ML Compliance Pack limitato",
-      "Supporto on-demand",
     ],
     cta: "Richiedi una Demo",
     highlight: false,
@@ -34,29 +61,29 @@ const TIERS = [
   {
     name: "Professional",
     target: "Team in crescita che scalano la compliance",
+    limits: "1 azienda · 5 prodotti · 10 utenti",
     description:
       "Insight personalizzati, compliance AI/ML automatizzata e validazione degli strumenti per team che vogliono muoversi rapidamente.",
     features: [
-      "1 azienda · 5 prodotti · 10 utenti",
       "Tutto quanto incluso in Standard",
       "Smart Insight & AI Assistant personalizzato",
-      "Sistema di templating documentale",
+      "Templating documentale personalizzato",
       "AI/ML Compliance Pack completo",
-      "Valutazione dei sistemi legacy",
-      "Pacchetto di pre-validazione",
+      "Valutazione legacy e pacchetto di pre-validazione",
       "Integrazioni & MCP Server",
       "Supporto via ticketing",
     ],
     cta: "Richiedi una Demo",
     highlight: true,
+    badge: "Più popolare",
   },
   {
     name: "Unlimited",
     target: "Enterprise e organizzazioni multi-prodotto",
+    limits: "Aziende, prodotti e utenti illimitati",
     description:
       "Scala illimitata, integrazione eQMS e supporto dedicato per gli ambienti regolamentati più complessi.",
     features: [
-      "Aziende, prodotti e utenti illimitati",
       "Tutto quanto incluso in Professional",
       "Remediation legacy assistita dall'AI",
       "Integrazione eQMS",
@@ -70,36 +97,78 @@ const TIERS = [
 
 type CellValue = string | boolean;
 
-const COMPARISON: { label: string; values: [CellValue, CellValue, CellValue] }[] = [
-  { label: "Aziende", values: ["1", "1", "Illimitate"] },
-  { label: "Prodotti", values: ["3", "5", "Illimitati"] },
-  { label: "Utenti", values: ["5", "10", "Illimitati"] },
+const COMPARISON: { label: string; values: [CellValue, CellValue, CellValue, CellValue] }[] = [
+  { label: "Aziende", values: ["1", "1", "1", "Illimitate"] },
+  { label: "Prodotti", values: ["1", "3", "5", "Illimitati"] },
+  { label: "Utenti", values: ["3", "5", "10", "Illimitati"] },
   {
     label: "Supporto Legacy",
     values: [
-      "Valutazione base",
-      "Valutazione completa e piano di remediation",
-      "Remediation assistita dall'AI",
+      "No (solo greenfield)",
+      "Import base dei metadati e identificazione dei gap",
+      "Piano di remediation (multi-regione)",
+      "Aggiornamenti legacy assistiti dall'AI",
     ],
   },
-  { label: "Smart Insight", values: ["Default", "Personalizzato", "Personalizzato avanzato"] },
+  { label: "Smart Insight", values: ["Default", "Default", "Personalizzato", "Personalizzato"] },
   {
     label: "Documentazione",
-    values: ["Technical File standard", "Templating personalizzato", "Integrazione eQMS"],
+    values: [
+      "Technical File standard",
+      "Technical File standard",
+      "Templating personalizzato per mercati diversi",
+      "Integrazione eQMS completa",
+    ],
   },
   {
     label: "AI/ML Compliance Pack",
-    values: ["Limitato", "Completo", "Completo"],
+    values: ["Limitato", "Limitato", "Automatizzato", "Automatizzato"],
   },
   {
     label: "Validazione Strumenti",
-    values: ["—", "Pacchetto di pre-validazione", "Supporto per l'audit readiness"],
+    values: ["—", "—", "Pacchetto di pre-validazione", "Supporto per l'audit readiness"],
   },
   {
     label: "Supporto",
-    values: ["On-demand", "Ticketing", "Ticketing 24/7 con Lead dedicato & AI assistant"],
+    values: [
+      "On-demand",
+      "On-demand",
+      "Ticketing",
+      "Ticketing 24/7 con Lead dedicato & AI assistant",
+    ],
   },
+  { label: "Token / mese", values: ["1M", "5M", "50M", "500M"] },
 ];
+
+function CheckIcon() {
+  return (
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 24 24"
+      fill="none"
+      aria-hidden="true"
+      className="mt-0.5"
+      style={{ flexShrink: 0 }}
+    >
+      <circle
+        cx="12"
+        cy="12"
+        r="10"
+        fill="rgba(0,240,150,0.12)"
+        stroke="var(--brand-green)"
+        strokeWidth="1.5"
+      />
+      <path
+        d="M8 12.4l2.5 2.5L16 9.5"
+        stroke="var(--brand-green)"
+        strokeWidth="1.75"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
 
 const DISTRIBUTION = [
   {
@@ -183,53 +252,89 @@ export default function PlansPageIt() {
         style={{ background: "var(--bg-surface)", borderTop: "1px solid var(--bg-border)" }}
       >
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {TIERS.map((tier) => (
               <div
                 key={tier.name}
-                className={`rounded-card flex flex-col overflow-hidden transition-all duration-200 hover:-translate-y-1 ${tier.highlight ? "hover:shadow-[0_16px_48px_rgba(0,240,150,0.13)]" : "hover:shadow-[0_8px_32px_rgba(0,0,0,0.25)]"}`}
+                className={`rounded-card flex flex-col transition-all duration-200 hover:-translate-y-1 ${tier.highlight ? "hover:shadow-[0_20px_60px_rgba(0,240,150,0.2)]" : "hover:shadow-[0_8px_32px_rgba(0,0,0,0.25)]"}`}
                 style={{
                   background: tier.highlight ? "var(--bg-raised)" : "var(--bg-base)",
                   border: tier.highlight
-                    ? "1px solid rgba(0,240,150,0.25)"
+                    ? "1px solid rgba(0,240,150,0.35)"
                     : "1px solid var(--bg-border)",
+                  boxShadow: tier.highlight ? "0 0 56px rgba(0,240,150,0.16)" : undefined,
                   position: "relative",
                 }}
               >
-                {tier.highlight && (
+                {tier.highlight && tier.badge && (
                   <span
-                    className="absolute inset-x-0 top-0 h-px"
-                    style={{ background: "var(--brand-gradient)" }}
-                    aria-hidden="true"
-                  />
+                    className="absolute -top-3 left-1/2 -translate-x-1/2 text-[10px] font-bold uppercase px-3 py-1 rounded-full whitespace-nowrap"
+                    style={{
+                      background: "var(--brand-gradient)",
+                      color: "var(--bg-base)",
+                      letterSpacing: "0.08em",
+                      boxShadow: "0 4px 16px rgba(0,240,150,0.35)",
+                    }}
+                  >
+                    {tier.badge}
+                  </span>
                 )}
-                <div className="p-8 flex flex-col flex-1 gap-6">
-                  <div>
+                <div className="p-8 flex flex-col flex-1 gap-5">
+                  <div style={{ minHeight: 104 }}>
                     <h2
-                      className="font-display font-bold text-2xl mb-1"
+                      className="font-display font-bold text-2xl mb-2"
                       style={{ color: "var(--text-primary)" }}
                     >
                       {tier.name}
                     </h2>
-                    <p className="text-sm" style={{ color: "var(--text-muted)" }}>
+                    <span
+                      className="inline-flex items-center px-2.5 py-1 rounded-full border text-xs font-semibold"
+                      style={{
+                        background: "rgba(0,240,150,0.06)",
+                        borderColor: "rgba(0,240,150,0.25)",
+                        color: "var(--brand-green)",
+                      }}
+                    >
                       {tier.target}
-                    </p>
+                    </span>
                   </div>
 
                   <p
                     className="text-sm"
-                    style={{ color: "var(--text-secondary)", lineHeight: 1.7 }}
+                    style={{ color: "var(--text-secondary)", lineHeight: 1.7, minHeight: 120 }}
                   >
                     {tier.description}
                   </p>
 
+                  <div
+                    className="flex items-center justify-center text-sm font-semibold px-4 py-2.5 rounded-lg text-center"
+                    style={{
+                      background: "rgba(255,255,255,0.03)",
+                      border: "1px solid var(--bg-border-strong)",
+                      color: "var(--text-primary)",
+                      minHeight: 60,
+                    }}
+                  >
+                    {tier.limits}
+                  </div>
+
                   <ul className="space-y-3 flex-1">
-                    {tier.features.map((feat) => (
-                      <li key={feat} className="flex items-center gap-3 text-sm">
-                        <span style={{ color: "var(--text-muted)" }}>✓</span>
-                        <span style={{ color: "var(--text-secondary)" }}>{feat}</span>
-                      </li>
-                    ))}
+                    {tier.features.map((feat) => {
+                      const isInherited = feat.startsWith("Tutto quanto incluso in");
+                      return (
+                        <li key={feat} className="flex items-start gap-3 text-sm">
+                          <CheckIcon />
+                          <span
+                            className={isInherited ? "font-semibold" : ""}
+                            style={{
+                              color: isInherited ? "var(--text-primary)" : "var(--text-secondary)",
+                            }}
+                          >
+                            {feat}
+                          </span>
+                        </li>
+                      );
+                    })}
                   </ul>
 
                   <Link

@@ -3,11 +3,13 @@ import { PillTag } from "@/components/common/PillTag";
 
 const TIERS = {
   en: [
+    { name: "Entry", target: "Starting out" },
     { name: "Standard", target: "Small teams" },
     { name: "Professional", target: "Growing teams", highlight: true },
     { name: "Unlimited", target: "Enterprise" },
   ],
   it: [
+    { name: "Entry", target: "Si parte da zero" },
     { name: "Standard", target: "Piccoli team" },
     { name: "Professional", target: "Team in crescita", highlight: true },
     { name: "Unlimited", target: "Enterprise" },
