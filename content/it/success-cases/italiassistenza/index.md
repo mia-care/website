@@ -1,7 +1,6 @@
 ---
-published: false
 title: "Digital Health Transformation: come ItaliAssistenza ha evoluto i servizi di supporto al paziente con l'architettura a microservizi di Mia-Care"
-description: "Come ItaliAssistenza, società del Gruppo Zambon, ha collaborato con Mia-Care per costruire una piattaforma white-label cloud-native a microservizi che unifica i Patient Support Program a livello nazionale."
+description: "Come ItaliAssistenza ha collaborato con Mia-Care per costruire una piattaforma white-label cloud-native a microservizi che unifica i Patient Support Program a livello nazionale."
 date: "2026-09-01"
 client: "ItaliAssistenza"
 industry: "Assistenza Domiciliare e Patient Support Program"
@@ -11,14 +10,13 @@ metrics:
   - "+200 professionisti sanitari"
   - "+60k accessi domiciliari"
   - "-67% time-to-market"
-  - "-39% km per accesso"
   - "+0,5% aderenza terapeutica"
 quote: "La tecnologia cloud-native di Mia-Care ci ha permesso di realizzare una piattaforma che crea valore su più livelli: migliora l'aderenza terapeutica e gli outcome di salute dei pazienti, introduce un modello di gestione più efficiente e orientato ai dati con un migliore controllo dei costi, e riduce drasticamente il time-to-market per il lancio di nuovi Patient Support Program."
 quoteAuthor: "Rossella Candela, COO di ItaliAssistenza"
 quoteAuthorImage: "/images/success-cases/italiassistenza-quote-author.webp"
 ---
 
-**ItaliAssistenza**, società del **Gruppo Zambon**, è la Home Care Company leader da oltre 30 anni nell’assistenza domiciliare in Italia. L’azienda opera su tutto il territorio nazionale tramite le sue tre divisioni.
+**ItaliAssistenza** è la Home Care Company leader da oltre 30 anni nell’assistenza domiciliare in Italia. L’azienda opera su tutto il territorio nazionale tramite le sue tre divisioni.
 
 <div class="case-division-grid">
 
@@ -48,7 +46,7 @@ Dal 2006 leader italiano della progettazione ed erogazione di servizi di support
 
 * App di monitoraggio per il paziente e il suo medico
 
-Attraverso due centrali operative, di cui una 24/7, una rete capillare di oltre 100 professionisti sanitari sul territorio e una piattaforma tecnologica, vengono organizzati più di 20.000 accessi domiciliari e più di 100.000 contatti telefonici in un anno.
+Attraverso due centrali operative, di cui una 24/7, una rete capillare di professionisti sanitari sul territorio e una piattaforma tecnologica, vengono organizzati più di 20.000 accessi domiciliari e più di 100.000 contatti telefonici in un anno.
 
 </div>
 
@@ -72,7 +70,7 @@ Il **primo network nazionale di assistenza domiciliare** per persone anziane, ma
 <div class="case-division-num">03</div>
 </div>
 
-## careApt
+## CareApt
 
 <div class="case-division-stat">Dal 2018</div>
 
@@ -136,94 +134,44 @@ Attraverso la tecnologia a microservizi di Mia-Care, ItaliAssistenza ha realizza
 
 * Un modulo applicativo dedicato ai servizi erogati nell’ambito di prodotti assicurativi, fondi o programmi welfare (di seguito modulo Assicurativo).
 
-Tutti i servizi sono erogati attraverso una suite di touchpoint digitali, ciascuno con funzionalità specifiche per i diversi utenti:
+Tutti i servizi sono erogati attraverso una suite di touchpoint digitali, ciascuno con funzionalità specifiche per i diversi utenti.
 
-<div class="case-accordion">
+<div class="case-portal-grid">
 
-<details class="case-accordion-item" open>
-<summary><div class="case-accordion-icon">AD</div><h3>Portale web per Admin di ItaliAssistenza</h3></summary>
+<div class="case-portal-card">
+<div class="case-portal-head"><div class="case-portal-icon">AD</div><h3>Portale web per Admin di ItaliAssistenza</h3></div>
 
 **Obiettivo:** Monitoraggio delle performance e ottimizzazione dei processi operativi e dell'erogazione dei programmi.
 
-**Funzionalità principali:**
+</div>
 
-* Visualizzazione dello stato dei programmi attivi tramite dashboard con KPI dettagliati.
-
-* Configurazione autonoma e flessibile di nuovi programmi o servizi per gli utenti finali.
-
-* Accesso al modulo Assicurativo per configurare prestazioni associate a pacchetti assicurativi o programmi di welfare, inclusi il monitoraggio di saldo e massimali.
-
-![Dashboard del portale web Admin di ItaliAssistenza con i KPI dei programmi attivi](/images/success-cases/italiassistenza-admin-dashboard.webp)
-
-</details>
-
-<details class="case-accordion-item">
-<summary><div class="case-accordion-icon">CO</div><h3>Portale web per Operatori della Centrale Operativa (CO) di ItaliAssistenza</h3></summary>
+<div class="case-portal-card">
+<div class="case-portal-head"><div class="case-portal-icon">CO</div><h3>Portale web per Operatori della Centrale Operativa (CO) di ItaliAssistenza</h3></div>
 
 **Obiettivo:** Gestione operativa dettagliata di tutte le attività legate ai programmi (*domiciliari, digitali, telefonici*).
 
-**Funzionalità principali:**
+</div>
 
-* Gestione delle adesioni al programma (da parte di medici e assistiti).
-
-* Organizzazione del calendario appuntamenti per gli operatori territoriali.
-
-* Supervisione e conferma delle informazioni relative alla lavorazione degli ordini.
-
-* Assegnazione e gestione degli accessi per stakeholder specifici.
-
-![Portale della Centrale Operativa di ItaliAssistenza con la lista attività per gli operatori CO](/images/success-cases/italiassistenza-co-activity-list.webp)
-
-</details>
-
-<details class="case-accordion-item">
-<summary><div class="case-accordion-icon">OT</div><h3>Portale web per Operatori Territoriali</h3></summary>
+<div class="case-portal-card">
+<div class="case-portal-head"><div class="case-portal-icon">OT</div><h3>Portale web per Operatori Territoriali</h3></div>
 
 **Obiettivo:** Gestione efficiente e snella delle attività di assistenza sul campo, valorizzando il tempo dedicato alla cura.
 
-**Funzionalità e benefici:**
+</div>
 
-* Piena visibilità sugli ordini di lavoro (passati e futuri).
-
-* Strumenti digitali per la compilazione rapida delle schede di valutazione degli assistiti.
-
-* Interfaccia intuitiva per l’ottimizzazione delle attività quotidiane. La riduzione del carico amministrativo permette all’operatore di concentrarsi pienamente sulla relazione e sulla cura del paziente.
-
-![Portale per operatori territoriali di ItaliAssistenza per la gestione delle attività di assistenza quotidiane](/images/success-cases/italiassistenza-field-operator-portal.webp)
-
-</details>
-
-<details class="case-accordion-item">
-<summary><div class="case-accordion-icon">CL</div><h3>Portale web per Clienti</h3></summary>
+<div class="case-portal-card">
+<div class="case-portal-head"><div class="case-portal-icon">CL</div><h3>Portale web per Clienti</h3></div>
 
 **Obiettivo:** Monitoraggio puntuale, trasparente e strategico dei programmi attivi da parte dei Clienti di ItaliAssistenza.
 
-**Funzionalità e benefici:**
+</div>
 
-* Visibilità completa sulle attività dei programmi, sui Centri Medici affiliati e sulla documentazione.
-
-* Accesso in tempo reale alle statistiche dei servizi, con report personalizzati e scaricabili in formati specifici.
-
-* Monitoraggio di KPI configurabili attraverso dashboard avanzate di *engagement analytics*, con report aggregati che garantiscono la totale anonimizzazione dei dati degli assistiti e offrono ai clienti insight fondamentali per valutare il successo delle iniziative.
-
-</details>
-
-<details class="case-accordion-item">
-<summary><div class="case-accordion-icon">APP</div><h3>Portale web e App per Medici, Assistiti e Operatori Territoriali</h3></summary>
+<div class="case-portal-card">
+<div class="case-portal-head"><div class="case-portal-icon">APP</div><h3>Portale web e App per Medici, Assistiti e Operatori Territoriali</h3></div>
 
 **Obiettivo:** Creare un ecosistema connesso per migliorare la comunicazione, l'interazione e la partecipazione attiva all'interno del programma di supporto.
 
-**Benefici:**
-
-* **per il medico:** Gestione completa degli assistiti, visibilità sui dettagli terapeutici e cadenza delle visite, con possibilità di attivare teleconsulti. La disponibilità immediata e strutturata del dato clinico e comportamentale supporta attivamente le decisioni mediche e permette l'individuazione precoce di fattori di rischio o di cambiamenti repentini nello stato di salute del paziente.
-
-* **per l’assistito (rapporto tra paziente e caregiver):** Accesso semplice e intuitivo al diario delle terapie, alle performance associate, al calendario delle visite/attività programmate e a materiali utili. Oltre a fornire mere funzionalità operative, l'applicazione funge da motore per il miglioramento del *Patient Engagement*: rende il paziente parte attiva e consapevole del proprio percorso, incentivando una maggiore aderenza terapeutica e facilitando una comunicazione bidirezionale sicura con il team di cura.
-
-* **per gli operatori territoriali:** il portale permette di integrarsi facilmente con i servizi erogati da ItaliAssistenza, arricchendo il portafoglio di offerta in totale sinergia con servizi terzi.
-
-![App pazienti di ItaliAssistenza per il diario terapeutico e la comunicazione con il team di cura](/images/success-cases/italiassistenza-patient-app.webp)
-
-</details>
+</div>
 
 </div>
 
@@ -321,13 +269,7 @@ Il progetto di trasformazione digitale della piattaforma di PSP ha generato i se
 
 * **+60k** accessi domiciliari conclusi con successo.
 
-* **19** commesse, ognuna delle quali gestisce, tramite la piattaforma, farmaci e gruppi di pazienti specifici e distinti.
-
 * **8 mesi** per la messa in produzione dell’intero progetto, da setup fino a primo rilascio in produzione.
-
-* **-39%** di km medi per accesso, con un conseguente efficientamento dei costi e un impatto ambientale positivo. Dall’introduzione della nuova piattaforma ad oggi, è stato possibile abbattere la media dei chilometri percorsi dalla rete territoriale per singolo accesso, grazie a un miglioramento generale del sistema di monitoraggio e controllo abilitato dalle funzionalità e dai dati della nuova piattaforma.
-
-* **-20%** dei tempi di gestione amministrativa degli incarichi, con un significativo miglioramento della qualità del servizio. La digitalizzazione del diario paziente ha permesso di efficientare la gestione amministrativa degli incarichi della rete territoriale, riducendo i tempi di chiusura delle attività a loro carico del 20%. Questo risultato garantisce ai nostri stakeholder una visione dei dati sui touchpoint digitali tempestiva e sempre aggiornata.
 
 * **+0,5%** di aderenza terapeutica: Maggiore continuità nel percorso di cura, con un impatto positivo sugli outcome clinici, sulla gestione della patologia cronica e sulla qualità di vita dei pazienti.
 

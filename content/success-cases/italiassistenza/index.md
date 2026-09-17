@@ -1,7 +1,6 @@
 ---
-published: false
 title: "Digital Health Transformation: How ItaliAssistenza Evolved Patient Support Services with Mia-Care's Microservices Architecture"
-description: "How ItaliAssistenza, a Zambon Group company, partnered with Mia-Care to build a white-label, cloud-native microservices platform unifying Patient Support Programs nationwide."
+description: "How ItaliAssistenza partnered with Mia-Care to build a white-label, cloud-native microservices platform unifying Patient Support Programs nationwide."
 date: "2026-09-01"
 client: "ItaliAssistenza"
 industry: "Home Care & Patient Support Programs"
@@ -11,14 +10,13 @@ metrics:
   - "+200 healthcare professionals"
   - "+60k home visits completed"
   - "-67% time-to-market"
-  - "-39% km per visit"
   - "+0.5% therapeutic adherence"
 quote: "Mia-Care's cloud-native technology allowed us to build a platform that creates value across multiple levels: it improves therapeutic adherence and patient health outcomes, introduces a more efficient, data-driven management model with better cost control, and drastically reduces time-to-market for launching new Patient Support Programs."
 quoteAuthor: "Rossella Candela, COO of ItaliAssistenza"
 quoteAuthorImage: "/images/success-cases/italiassistenza-quote-author.webp"
 ---
 
-**ItaliAssistenza**, a **Zambon Group** company, has been the leading Home Care Company in Italy for over 30 years. The organization operates nationwide through its three divisions:
+**ItaliAssistenza** has been the leading Home Care Company in Italy for over 30 years. The organization operates nationwide through its three divisions:
 
 <div class="case-division-grid">
 
@@ -48,7 +46,7 @@ Since 2006, it has been the Italian leader in designing and delivering patient s
 
 * Monitoring apps for the patient and their physician
 
-Through two operational centers (one operating 24/7), a nationwide capillary network of over 100 healthcare professionals, and a technology platform, more than 20,000 home visits and over 100,000 phone contacts are organized per year.
+Through two operational centers (one operating 24/7), a nationwide capillary network of healthcare professionals, and a technology platform, more than 20,000 home visits and over 100,000 phone contacts are organized per year.
 
 </div>
 
@@ -72,7 +70,7 @@ The **first national home care network** for the elderly, sick, and disabled. To
 <div class="case-division-num">03</div>
 </div>
 
-## careApt
+## CareApt
 
 <div class="case-division-stat">Since 2018</div>
 
@@ -136,94 +134,44 @@ Leveraging Mia-Care's microservices technology, ItaliAssistenza built:
 
 * An application module dedicated to services delivered within insurance products, funds, or welfare programs (hereafter, Insurance Module).
 
-All services are delivered through a suite of digital touchpoints, each featuring specific functionality tailored to different users:
+All services are delivered through a suite of digital touchpoints, each featuring specific functionality tailored to different users.
 
-<div class="case-accordion">
+<div class="case-portal-grid">
 
-<details class="case-accordion-item" open>
-<summary><div class="case-accordion-icon">AD</div><h3>Web Portal for ItaliAssistenza Admins</h3></summary>
+<div class="case-portal-card">
+<div class="case-portal-head"><div class="case-portal-icon">AD</div><h3>Web Portal for ItaliAssistenza Admins</h3></div>
 
 **Objective:** Performance monitoring and optimization of operational processes and program delivery.
 
-**Main Features:**
+</div>
 
-* Displaying active program status via dashboards with detailed KPIs.
-
-* Autonomous, flexible configuration of new programs or services for end users.
-
-* Access to the Insurance Module to configure services associated with insurance packages or welfare programs, including balance and maximum limit monitoring.
-
-![ItaliAssistenza admin web portal dashboard showing active program KPIs](/images/success-cases/italiassistenza-admin-dashboard.webp)
-
-</details>
-
-<details class="case-accordion-item">
-<summary><div class="case-accordion-icon">CO</div><h3>Web Portal for ItaliAssistenza Operational Center (CO) Operators</h3></summary>
+<div class="case-portal-card">
+<div class="case-portal-head"><div class="case-portal-icon">CO</div><h3>Web Portal for ItaliAssistenza Operational Center (CO) Operators</h3></div>
 
 **Objective:** Detailed operational management of all program-related activities (home, digital, telephone).
 
-**Main Features:**
+</div>
 
-* Management of program enrollments (by physicians and care recipients).
-
-* Appointment scheduling for field operators.
-
-* Supervision and confirmation of order processing details.
-
-* Access assignment and management for specific stakeholders.
-
-![ItaliAssistenza Operational Center portal showing the activity list for CO operators](/images/success-cases/italiassistenza-co-activity-list.webp)
-
-</details>
-
-<details class="case-accordion-item">
-<summary><div class="case-accordion-icon">FO</div><h3>Web Portal for Field Operators</h3></summary>
+<div class="case-portal-card">
+<div class="case-portal-head"><div class="case-portal-icon">FO</div><h3>Web Portal for Field Operators</h3></div>
 
 **Objective:** Efficient and streamlined management of field care activities, maximizing time dedicated to care.
 
-**Features and Benefits:**
+</div>
 
-* Full visibility into past and future work orders.
-
-* Digital tools for rapid completion of care recipient assessment forms.
-
-* Intuitive interface for daily activity optimization. Reduced administrative burden allows operators to focus fully on patient relationships and care.
-
-![ItaliAssistenza field operator portal for managing daily care activities](/images/success-cases/italiassistenza-field-operator-portal.webp)
-
-</details>
-
-<details class="case-accordion-item">
-<summary><div class="case-accordion-icon">CL</div><h3>Web Portal for Clients</h3></summary>
+<div class="case-portal-card">
+<div class="case-portal-head"><div class="case-portal-icon">CL</div><h3>Web Portal for Clients</h3></div>
 
 **Objective:** Precise, transparent, and strategic monitoring of active programs by ItaliAssistenza’s Clients.
 
-**Features and Benefits:**
+</div>
 
-* Complete visibility into program activities, affiliated Medical Centers, and documentation.
-
-* Real-time access to service statistics, featuring custom reports downloadable in specific formats.
-
-* Monitoring configurable KPIs via advanced engagement analytics dashboards, with aggregated reports that guarantee total anonymization of care recipient data while offering clients essential insights to evaluate initiative success.
-
-</details>
-
-<details class="case-accordion-item">
-<summary><div class="case-accordion-icon">APP</div><h3>Web Portal and App for Physicians, Care Recipients, and Field Operators</h3></summary>
+<div class="case-portal-card">
+<div class="case-portal-head"><div class="case-portal-icon">APP</div><h3>Web Portal and App for Physicians, Care Recipients, and Field Operators</h3></div>
 
 **Objective:** Create a connected ecosystem to improve communication, interaction, and active participation within the support program.
 
-**Benefits:**
-
-* **For the physician:** Complete care recipient management, visibility into therapeutic details and visit cadence, with the ability to initiate teleconsultations. Immediate, structured availability of clinical and behavioral data actively supports medical decision-making and enables early identification of risk factors or sudden changes in patient health status.
-
-* **For the care recipient (patient-caregiver relationship):** Simple, intuitive access to the therapy diary, associated performance, scheduled visit/activity calendars, and useful materials. Beyond operational features, the app drives Patient Engagement by making patients active, informed participants in their care journey, encouraging higher therapeutic adherence, and facilitating secure two-way communication with the care team.
-
-* **For field operators:** The portal seamlessly integrates with services provided by ItaliAssistenza, enriching the service portfolio in total synergy with third-party services.
-
-![ItaliAssistenza patient app for therapy tracking and communication with the care team](/images/success-cases/italiassistenza-patient-app.webp)
-
-</details>
+</div>
 
 </div>
 
@@ -321,13 +269,7 @@ The PSP platform digital transformation project generated the following outcomes
 
 * **+60k** successfully completed home visits.
 
-* **19** active contracts, each managing specific, distinct patient groups and drugs through the platform.
-
 * **8 months** to take the full project live, from setup to first production release.
-
-* **-39%** average kilometers per visit, yielding cost efficiency and positive environmental impact. Platform adoption reduced average distance traveled per visit through enhanced system monitoring and control.
-
-* **-20%** administrative task management time, driving significant service quality improvements. Digitalizing patient diaries streamlined administrative tasks, cutting activity closure times by 20% and ensuring timely, updated data across touchpoints.
 
 * **+0.5%** therapeutic adherence, leading to greater care continuity and positive clinical outcomes in chronic disease management and overall quality of life.
 

@@ -569,16 +569,12 @@ body {
   padding: 1.375rem 1.5rem;
   margin: 0;
 }
-/* The two-sentence outliers get a double-wide tile instead of stretching
-   their shorter row-mates — positional, so re-check if the KPI list changes. */
-.case-kpi-grid li:nth-child(8),
-.case-kpi-grid li:nth-child(9) {
-  grid-column: span 2;
-}
-/* Last item would otherwise sit alone in a trailing row — stretch it full-width
-   to close the grid cleanly instead of leaving a gap. */
+/* 8 items at 3 columns tessellate as two full rows plus a closing row of
+   single + double — only the last (longest) tile goes double-wide, so the
+   final row fills exactly instead of leaving the second-to-last one stranded
+   alone. Positional, so re-check the math if the KPI list changes. */
 .case-kpi-grid li:last-child {
-  grid-column: 1 / -1;
+  grid-column: span 2;
 }
 .case-kpi-grid li p { margin: 0; }
 .case-kpi-grid strong {
@@ -653,38 +649,26 @@ body {
   font-weight: 600;
 }
 
-/* Portal accordion */
-.case-accordion { display: flex; flex-direction: column; gap: 0.75rem; margin: 2rem 0; }
-.case-accordion-item {
+/* Portal cards — static, non-interactive (just an icon, title, and objective) */
+.case-portal-grid { display: flex; flex-direction: column; gap: 0.75rem; margin: 2rem 0; }
+.case-portal-card {
   background: var(--bg-raised);
   border: 1px solid var(--bg-border);
   border-radius: 0.875rem;
-  overflow: hidden;
+  padding: 1.125rem 1.25rem 1.375rem;
 }
-.case-accordion-item > summary {
-  cursor: pointer;
-  list-style: none;
+.case-portal-head {
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  padding: 1.125rem 1.25rem;
+  margin-bottom: 0.625rem;
 }
-.case-accordion-item > summary::-webkit-details-marker { display: none; }
-.case-accordion-item > summary h3 {
+.case-portal-head h3 {
   margin: 0 !important;
   font-size: 1rem !important;
   color: var(--text-primary);
 }
-.case-accordion-item > summary::after {
-  content: "+";
-  margin-left: auto;
-  font-size: 1.25rem;
-  line-height: 1;
-  color: var(--brand-green);
-  transition: transform 0.2s ease;
-}
-.case-accordion-item[open] > summary::after { transform: rotate(45deg); }
-.case-accordion-icon {
+.case-portal-icon {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -699,14 +683,7 @@ body {
   font-weight: 700;
   font-size: 0.6875rem;
 }
-.case-accordion-item > *:not(summary) {
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
-}
-.case-accordion-item > *:last-child { padding-bottom: 1.5rem; }
-.case-accordion-item > p:first-of-type { margin-top: 0; }
-.case-accordion-item ul { padding-left: 2.75rem; }
-.case-accordion-item img { margin: 1rem 1.5rem 1.5rem; width: calc(100% - 3rem); }
+.case-portal-card p { margin: 0; }
 
 /* Pillars timeline */
 .case-timeline { margin: 2rem 0; }
