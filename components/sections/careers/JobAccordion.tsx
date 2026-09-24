@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { ApplyEmailMenu } from "@/components/sections/careers/ApplyEmailMenu";
 import { Sheet, SheetClose, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
 type JobSection = {
@@ -115,16 +116,17 @@ function JobBody({ job, locale = "en" }: { job: Job; locale?: "en" | "it" }) {
       </div>
 
       <div className="mt-7">
-        <a
-          href={`mailto:${job.applyEmail}?subject=${t.applySubject}: ${encodeURIComponent(job.title)}`}
+        <ApplyEmailMenu
+          to={job.applyEmail}
+          subject={`${t.applySubject}: ${job.title}`}
+          label={t.apply}
+          locale={locale}
           className="inline-flex items-center gap-2 px-6 py-2.5 rounded-lg text-sm font-semibold transition-all hover:-translate-y-px"
           style={{
             background: "linear-gradient(90deg, var(--brand-green), var(--brand-cyan))",
             color: "#0b0c10",
           }}
-        >
-          {t.apply}
-        </a>
+        />
       </div>
     </>
   );

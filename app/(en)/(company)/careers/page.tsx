@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { CtaBanner } from "@/components/common/CtaBanner";
 import { PillTag } from "@/components/common/PillTag";
+import { ApplyEmailMenu } from "@/components/sections/careers/ApplyEmailMenu";
 import { JobAccordion } from "@/components/sections/careers/JobAccordion";
 import { getAllJobs } from "@/lib/jobs";
 import { localeAlternates } from "@/lib/seo";
@@ -140,16 +141,17 @@ export default function CareersPage() {
                 people.
               </p>
             </div>
-            <a
-              href="mailto:career@mia-care.io?subject=Spontaneous Application"
+            <ApplyEmailMenu
+              to="career@mia-care.io"
+              subject="Spontaneous Application"
+              label="Apply now →"
               className="shrink-0 inline-flex items-center gap-2 px-6 py-2.5 rounded-lg text-sm font-semibold transition-all hover:-translate-y-px"
               style={{
                 background: "#ffffff",
                 color: "#0b0c10",
               }}
-            >
-              Apply now →
-            </a>
+              chevronClassName="inline-flex items-center justify-center rounded-lg border border-black/15 px-2 text-black/60 transition-colors hover:bg-black/10"
+            />
           </div>
         </div>
       </section>
