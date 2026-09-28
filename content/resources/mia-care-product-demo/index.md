@@ -4,7 +4,6 @@ description: "Take a tour of Mia-Care Platform for Software as a Medical Device,
 type: video
 date: "2026-05-04"
 published: true
-featured: true
 featuredImage: /competence-center/mia-care-product-demo.jpg
 hubspotEmbed: |
   <script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/embed/v2.js"></script>

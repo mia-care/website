@@ -4,7 +4,6 @@ description: "Fai un tour della Mia-Care Platform for Software as a Medical Devi
 type: video
 date: "2026-05-04"
 published: true
-featured: true
 featuredImage: /competence-center/mia-care-product-demo.jpg
 hubspotEmbed: |
   <script charset="utf-8" type="text/javascript" src="//js-eu1.hsforms.net/forms/embed/v2.js"></script>
