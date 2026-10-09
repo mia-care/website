@@ -172,7 +172,11 @@ export const LOCALE_PAIRS: { en: string; it: string }[] = [
 ];
 
 export function getCounterpartPath(pathname: string, target: "en" | "it"): string | null {
-  const pair = LOCALE_PAIRS.find((p) => p.en === pathname || p.it === pathname);
+  // In the browser usePathname() keeps the URL's trailing slash, and "/it" is
+  // only ever served as "/it/" (see SLASH_CANONICAL in
+  // scripts/generate-trailing-slash-copies.js), so match without it.
+  const path = pathname.length > 1 ? pathname.replace(/\/$/, "") : pathname;
+  const pair = LOCALE_PAIRS.find((p) => p.en === path || p.it === path);
   if (!pair) return null;
   return target === "en" ? pair.en : pair.it;
 }

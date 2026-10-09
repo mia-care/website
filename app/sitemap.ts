@@ -89,7 +89,7 @@ function blogLocalePair(
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticPages: MetadataRoute.Sitemap = [
-    ...localePair("/", "/it", {
+    ...localePair("/", "/it/", {
       lastModified: PAGE_DATES["/"],
       changeFrequency: "weekly",
       priority: 1,
