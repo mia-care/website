@@ -1,11 +1,12 @@
 import { LOCALE_PAIRS } from "@/data/locale-pairs";
 
-// On GitHub Pages "/it" is also a directory (it holds every other Italian
-// page), so a request to "/it" is redirected to "/it/" and "/it/" is the URL
-// that actually serves the Italian homepage. hreflang and canonical must point
-// at that served URL, otherwise crawlers report "no self-referencing hreflang".
-// LOCALE_PAIRS keeps "/it" because the language switcher matches it against
-// usePathname(), which returns the path without the trailing slash.
+// The Italian homepage is served only at "/it/": the build moves it.html to
+// it/index.html (SLASH_CANONICAL in scripts/generate-trailing-slash-copies.js),
+// so GitHub Pages answers "/it" with a 301 to "/it/". hreflang and canonical
+// must point at that served URL, otherwise crawlers report "no self-referencing
+// hreflang". LOCALE_PAIRS keeps "/it" because next/link strips trailing
+// slashes from hrefs anyway (trailingSlash is off) and getCounterpartPath
+// matches without one.
 function servedUrl(path: string): string {
   return path === "/it" ? "/it/" : path;
 }
