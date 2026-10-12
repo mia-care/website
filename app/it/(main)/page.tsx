@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   description:
     "P4SaMD integra la conformità a IEC 62304, EU MDR, EU AI Act e GAMP 5 nel tuo SDLC. Costruisci e certifica software medicale fino a 3x più velocemente.",
   alternates: {
-    canonical: "/it",
+    canonical: "/it/",
     languages: localeAlternates("/it"),
   },
 };
