@@ -42,11 +42,37 @@ This isn't a role where you plug in an API and call it a day. You'll be shaping 
 - Comfort with ambiguity: requirements evolve, and you help shape them rather than wait for them
 - A background in classical machine learning (supervised and unsupervised methods, feature engineering, model evaluation) is considered a plus. We value engineers who understand the fundamentals beneath the generative layer
 
-## We Offer
-- Hybrid workplace — 50% smart working, 50% in-office
-- Inclusive environment with a strong DE&I commitment
-- Training path and access to Mia-Platform learning hub
-- Creative and agile work environment
-- Team building events and company perks
-- Ticket restaurants
-- Corporate benefits: gyms, travel, technology, language courses
+## Why Mia-Care
+- Mia-Care is building the AI-native software platform for medical device software lifecycle management. We sit at the intersection of two of the most demanding fields in tech, AI and medical device regulation, and we're building the infrastructure that will shape how this industry works for years to come
+- We're a startup, so there's no playbook: we're writing it. If blank-slate problems energize you, if you'd rather architect a solution than maintain one, and if "we've always done it this way" genuinely bothers you, you'll fit right in
+- Our culture is built on Better Development, and that applies to our people as much as to our software
+
+## Total Compensation
+- A competitive base salary, incentives tied to individual and team performance, and complete employee benefits
+- National Collective Agreement (CCNL): Terziario, Commercio
+- Total package between €40,000 and €55,000 (base salary plus performance-based variable bonus)
+- We're hiring for multiple positions across different seniority levels. The final offer and compensation band are tailored to individual experience and background
+- Meal vouchers worth €7.00 per working day
+- Health insurance
+- Pension plan
+- Dedicated corporate discounts and promo codes for services, products and travel
+
+## Smart Hybrid Work (50/50)
+- A standard baseline of 50% in the office and 50% remote, combining in-person collaboration with remote autonomy
+- Seasonal full remote: during peak summer and the year-end holidays we switch to 100% remote
+- Our Milan HQ is built for focus, collaboration and fun: great workstations, ping-pong, games and lounge areas, two fully stocked kitchens with free snacks and drinks, a rooftop terrace and beer on tap after 6:30 PM
+
+## Growth, Learning & Tech Community
+- Structured career paths, training courses and certifications
+- Direct access to the Mia-Platform learning hub and our company library, both physical in the Milan office and digital
+- An active tech community, with local meetups like Master the Vibe
+
+## Celebrate Everything & Big Events
+- We take our core value Have Fun very seriously: every area has a dedicated budget to celebrate milestones and organize team building during work hours
+- Iconic internal events like Platmosphere, annual Kick-Offs, Summer and Winter parties and monthly breakfasts
+- A premium Welcome Kit on your first day
+
+## Diversity, Community & Planet
+- High-level DE&I talks, where family and friends are always welcome to join
+- Processes actively aligned with official gender equality standards
+- No single-use plastic, minimal waste and Carbon Neutral major corporate events

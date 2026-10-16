@@ -22,13 +22,25 @@ Mia-Care sta costruendo la piattaforma software AI-native per la gestione del ci
 - Soft skill: ottime capacità relazionali, attitudine al lavoro di squadra e precisione
 - Lingue: buona conoscenza dell'inglese. L'italiano è facoltativo per la maggior parte dei ruoli tecnici e di prodotto, ma è gradito
 
-## Cosa offriamo
+## Come puoi unirti a noi
 - Collaborazioni flessibili in base al tuo percorso di studi e alla tua fase di carriera: stage curricolari ed extracurricolari, oppure contratti entry level a tempo pieno con pacchetti competitivi e benefit completi
-- Smart working ibrido, 50% in ufficio e 50% da remoto, con full remote nei periodi di picco estivo e durante le festività di fine anno
-- Una sede a Milano pensata per concentrarsi e divertirsi: ping-pong, giochi e aree lounge, due cucine fornite di snack e bevande gratuiti, una terrazza sul tetto e birra alla spina dopo le 18:30
-- Percorsi di carriera strutturati, corsi di formazione, certificazioni, il learning hub di Mia-Platform e una biblioteca aziendale (fisica e digitale)
-- Una community tech attiva, con meetup locali come Master the Vibe
-- Un budget dedicato in ogni area per festeggiare i traguardi e organizzare team building in orario di lavoro
-- Eventi interni iconici come Platmosphere, i Kick-Off annuali, le feste d'estate e d'inverno, le colazioni mensili e un Welcome Kit premium il primo giorno
-- Talk DE&I aperti a familiari e amici, e processi allineati agli standard ufficiali sulla parità di genere
-- Un ambiente attento al pianeta: niente plastica monouso, rifiuti ridotti al minimo ed eventi aziendali principali Carbon Neutral
+
+## Smart Hybrid Work (50/50)
+- Una modalità standard di 50% in ufficio e 50% da remoto, che unisce la collaborazione in presenza all'autonomia del lavoro da remoto
+- Full remote stagionale: nei periodi di picco estivo e durante le festività di fine anno passiamo al 100% da remoto
+- La nostra sede di Milano è pensata per concentrarsi, collaborare e divertirsi: postazioni di lavoro curate, ping-pong, giochi e aree lounge, due cucine fornite con snack e bevande gratuiti, una terrazza sul tetto e birra alla spina dopo le 18:30
+
+## Crescita, formazione e tech community
+- Percorsi di carriera strutturati, corsi di formazione e certificazioni
+- Accesso diretto al learning hub di Mia-Platform e alla biblioteca aziendale, sia fisica nella sede di Milano sia digitale
+- Una tech community attiva, con meetup locali come Master the Vibe
+
+## Celebriamo tutto e grandi eventi
+- Prendiamo molto sul serio il nostro valore Have Fun: ogni area ha un budget dedicato per festeggiare i traguardi e organizzare attività di team building in orario di lavoro
+- Eventi interni iconici come Platmosphere, i Kick-Off annuali, le feste d'estate e d'inverno e le colazioni mensili
+- Un Welcome Kit premium il primo giorno
+
+## Diversità, comunità e pianeta
+- Talk di alto livello su DE&I, aperti anche a familiari e amici
+- Processi allineati agli standard ufficiali sulla parità di genere
+- Niente plastica monouso, riduzione degli sprechi ed eventi aziendali principali Carbon Neutral

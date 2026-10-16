@@ -22,13 +22,25 @@ Mia-Care is building the AI-native software platform for medical device software
 - Soft skills: excellent relational skills, a teamwork mentality, and precision
 - Languages: proficient English. Italian is optional for most technical and product roles, but welcome
 
-## We Offer
+## How You Can Join Us
 - Flexible collaboration tailored to your studies and career stage: curricular and extracurricular internships, or full-time entry-level contracts with competitive packages and comprehensive benefits
-- Smart hybrid work, 50% office and 50% remote, switching to full remote during peak summer and year-end holidays
-- A Milan HQ built for focus and fun: ping-pong, games and lounge areas, two fully stocked kitchens with free snacks and drinks, a rooftop terrace, and beer on tap after 6:30 PM
-- Structured career paths, training courses, certifications, the Mia-Platform learning hub, and a company library (physical and digital)
+
+## Smart Hybrid Work (50/50)
+- A standard baseline of 50% in the office and 50% remote, combining in-person collaboration with remote autonomy
+- Seasonal full remote: during peak summer and the year-end holidays we switch to 100% remote
+- Our Milan HQ is built for focus, collaboration and fun: great workstations, ping-pong, games and lounge areas, two fully stocked kitchens with free snacks and drinks, a rooftop terrace and beer on tap after 6:30 PM
+
+## Growth, Learning & Tech Community
+- Structured career paths, training courses and certifications
+- Direct access to the Mia-Platform learning hub and our company library, both physical in the Milan office and digital
 - An active tech community, with local meetups like Master the Vibe
-- A dedicated budget in every area for celebrating milestones and team building during work hours
-- Iconic internal events like Platmosphere, annual Kick-Offs, Summer and Winter parties, monthly breakfasts, and a premium Welcome Kit on Day 1
-- DE&I talks open to family and friends, and processes aligned with official gender equality standards
-- A planet-friendly workplace: no single-use plastic, minimal waste, and Carbon Neutral major corporate events
+
+## Celebrate Everything & Big Events
+- We take our core value Have Fun very seriously: every area has a dedicated budget to celebrate milestones and organize team building during work hours
+- Iconic internal events like Platmosphere, annual Kick-Offs, Summer and Winter parties and monthly breakfasts
+- A premium Welcome Kit on your first day
+
+## Diversity, Community & Planet
+- High-level DE&I talks, where family and friends are always welcome to join
+- Processes actively aligned with official gender equality standards
+- No single-use plastic, minimal waste and Carbon Neutral major corporate events
