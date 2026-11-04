@@ -74,7 +74,7 @@ export const webinar: WebinarContent = {
   title: "From Algorithm to Clinic",
   subtitle: "What It Really Takes to Bring AI Medical Software to Market",
   dateLabel: "November 30, 2026",
-  timeLabel: "17:30 CET (Europe Time) | 11:30 EST (U.S. Time)",
+  timeLabel: "5:30 PM CET (Europe Time) | 11:30 AM EST (U.S. Time)",
   languageLabel: "English",
   formatLabel: "Online, free",
   startDate: "2026-11-30T17:30:00+01:00",
@@ -93,23 +93,23 @@ export const webinar: WebinarContent = {
   agendaHeading: "Agenda",
   agenda: [
     {
-      time: "17:30",
+      time: "5:30 PM",
       title: "SaMD in the AI Era: New Trends and New Challenges in Medical Software",
       speaker: SPEAKER_MARZIO,
     },
     {
-      time: "17:40",
+      time: "5:40 PM",
       title:
         "From Algorithm to Clinical Practice: Managing the Lifecycle of AI-Enabled Medical Software with P4SaMD",
       speaker: SPEAKER_MARZIO,
     },
     {
-      time: "17:55",
+      time: "5:55 PM",
       title:
         "Clinical-Grade Synthetic Data: Training Models Without Waiting for the Data. A success case",
       speaker: SPEAKER_ALESSANDRO,
     },
-    { time: "18:15", title: "Q&A" },
+    { time: "6:15 PM", title: "Q&A" },
   ],
   speakersHeading: "Speakers",
   speakers: [SPEAKER_MARZIO, SPEAKER_ALESSANDRO],

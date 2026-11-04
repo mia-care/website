@@ -8,7 +8,7 @@ export const metadata: Metadata = {
     absolute: "Webinar: From Algorithm to Clinic, AI Medical Software to Market | Mia-Care",
   },
   description:
-    "Free webinar on November 30, 2026, 17:30 CET (11:30 EST). How to bring AI medical software to market under EU MDR, IVDR, EU AI Act and FDA PCCP, with a case study by Aindo.",
+    "Free webinar on November 30, 2026, 5:30 PM CET (11:30 AM EST). How to bring AI medical software to market under EU MDR, IVDR, EU AI Act and FDA PCCP, with a case study by Aindo.",
   alternates: { canonical: webinar.path, languages: localeAlternates(webinar.path) },
 };
 
