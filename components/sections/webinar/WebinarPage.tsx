@@ -103,7 +103,24 @@ export function WebinarPage({ webinar: w }: { webinar: WebinarContent }) {
                     {label}
                   </dt>
                   <dd className="text-sm font-semibold" style={{ color: "var(--text-primary)" }}>
-                    {value}
+                    {/* "A | B" values (e.g. two time zones) go on separate lines */}
+                    {value.split(" | ").map((part) => {
+                      // "17:30 CET (Europe Time)": the zone note goes small and muted under the time
+                      const [main, note] = part.split(" (");
+                      return (
+                        <span key={part} className="block [&+&]:mt-1.5">
+                          {main}
+                          {note && (
+                            <span
+                              className="block font-normal text-xs"
+                              style={{ color: "var(--text-muted)" }}
+                            >
+                              ({note}
+                            </span>
+                          )}
+                        </span>
+                      );
+                    })}
                   </dd>
                 </div>
               ))}
