@@ -5,7 +5,8 @@ type Props = {
   eyebrow: string;
   title: string;
   body: string;
-  details: string;
+  /** One line each (e.g. date, then one line per time zone). */
+  details: string[];
   primary: { label: string; href: string };
   secondary: { label: string; href: string };
 };
@@ -50,7 +51,11 @@ export function WebinarThankYou({ eyebrow, title, body, details, primary, second
           {body}
         </p>
         <p className="text-sm font-semibold mb-10" style={{ color: "var(--brand-green)" }}>
-          {details}
+          {details.map((line) => (
+            <span key={line} className="block">
+              {line}
+            </span>
+          ))}
         </p>
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
           <Link
