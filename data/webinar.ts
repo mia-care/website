@@ -93,23 +93,23 @@ export const webinar: WebinarContent = {
   agendaHeading: "Agenda",
   agenda: [
     {
-      time: "17:30",
+      time: "5:30 PM",
       title: "SaMD in the AI Era: New Trends and New Challenges in Medical Software",
       speaker: SPEAKER_MARZIO,
     },
     {
-      time: "17:40",
+      time: "5:40 PM",
       title:
         "From Algorithm to Clinical Practice: Managing the Lifecycle of AI-Enabled Medical Software with P4SaMD",
       speaker: SPEAKER_MARZIO,
     },
     {
-      time: "17:55",
+      time: "5:55 PM",
       title:
         "Clinical-Grade Synthetic Data: Training Models Without Waiting for the Data. A success case",
       speaker: SPEAKER_ALESSANDRO,
     },
-    { time: "18:15", title: "Q&A" },
+    { time: "6:15 PM", title: "Q&A" },
   ],
   speakersHeading: "Speakers",
   speakers: [SPEAKER_MARZIO, SPEAKER_ALESSANDRO],

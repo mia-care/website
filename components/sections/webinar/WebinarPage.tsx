@@ -199,7 +199,7 @@ export function WebinarPage({ webinar: w }: { webinar: WebinarContent }) {
                     style={i > 0 ? { borderTop: "1px solid var(--bg-border)" } : undefined}
                   >
                     <span
-                      className="font-display font-bold text-sm sm:text-base shrink-0 w-12 tabular-nums"
+                      className="font-display font-bold text-sm sm:text-base shrink-0 min-w-12 whitespace-nowrap tabular-nums"
                       style={{ color: "var(--brand-green)" }}
                     >
                       {item.time}
