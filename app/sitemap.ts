@@ -25,6 +25,7 @@ const PAGE_DATES: Record<string, string> = {
   "/resources": "2026-04-26",
   "/resources/blog": "2026-04-26",
   "/resources/success-cases": "2026-09-01",
+  "/webinar/ai-medical-software": "2026-11-03",
 };
 
 // Capabilities, use-cases, competence-center: update when data in /data/*.ts changes
@@ -108,6 +109,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: PAGE_DATES["/request-demo"],
       changeFrequency: "monthly",
       priority: 0.9,
+    }),
+    ...localePair("/webinar/ai-medical-software", "/it/webinar/software-medicale-ai", {
+      lastModified: PAGE_DATES["/webinar/ai-medical-software"],
+      changeFrequency: "weekly",
+      priority: 0.8,
     }),
     ...localePair("/about-us", "/it/chi-siamo", {
       lastModified: PAGE_DATES["/about-us"],

@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { SITE } from "@/data/site";
+import { assetPath } from "@/lib/asset";
 
 // Injected directly into the HubSpot iframe via cssRequired —
 // parent-page CSS cannot reach cross-origin iframes.
@@ -58,6 +59,7 @@ declare global {
           region: string;
           target: string;
           cssRequired?: string;
+          redirectUrl?: string;
           onFormReady?: () => void;
           onFormSubmitted?: () => void;
         }) => void;
@@ -70,6 +72,9 @@ type Props = {
   portalId?: string;
   formId?: string;
   region?: string;
+  /** Site path (e.g. "/webinar/x/thank-you") to send the user to after submit.
+   *  Overrides the redirect set in HubSpot, so one form can serve several pages. */
+  redirectTo?: string;
 };
 
 function FormSkeleton() {
@@ -91,6 +96,7 @@ export function HubSpotForm({
   portalId = SITE.hubspot.portalId,
   formId = SITE.hubspot.formId,
   region = SITE.hubspot.region,
+  redirectTo,
 }: Props) {
   const containerRef = useRef<HTMLDivElement>(null);
   const loaded = useRef(false);
@@ -113,6 +119,9 @@ export function HubSpotForm({
           region,
           target: `#${targetId}`,
           cssRequired: IFRAME_CSS,
+          ...(redirectTo
+            ? { redirectUrl: `${window.location.origin}${assetPath(redirectTo)}` }
+            : {}),
           onFormReady: () => setIsLoading(false),
         });
       }
@@ -132,7 +141,7 @@ export function HubSpotForm({
     return () => {
       document.head.removeChild(script);
     };
-  }, [portalId, formId, region]);
+  }, [portalId, formId, region, redirectTo]);
 
   return (
     <div style={{ minHeight: 400 }}>

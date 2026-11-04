@@ -10,6 +10,7 @@ export const LOCALE_PAIRS: { en: string; it: string }[] = [
   { en: "/sustainability", it: "/it/sostenibilita" },
   { en: "/plans", it: "/it/piani" },
   { en: "/request-demo", it: "/it/richiedi-demo" },
+  { en: "/webinar/ai-medical-software", it: "/it/webinar/software-medicale-ai" },
   { en: "/privacy-policy", it: "/it/informativa-privacy" },
   { en: "/cookie-policy", it: "/it/informativa-cookie" },
   { en: "/careers", it: "/it/lavora-con-noi" },
