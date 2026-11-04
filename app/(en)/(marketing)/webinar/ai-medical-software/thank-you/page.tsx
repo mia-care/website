@@ -13,7 +13,10 @@ export default function WebinarThankYouPage() {
       eyebrow="Registration confirmed"
       title="You're in. See you there!"
       body="We've saved your seat. You'll get an email with the link to join, plus a reminder before the session starts."
-      details={`${webinar.dateLabel} · ${webinar.timeLabel} · ${webinar.languageLabel}`}
+      details={[
+        `${webinar.dateLabel} · ${webinar.languageLabel}`,
+        ...webinar.timeLabel.split(" | "),
+      ]}
       primary={{ label: "Explore Master AI for Compliance", href: "/capabilities/ai-compliance" }}
       secondary={{ label: "Browse resources", href: "/resources" }}
     />
