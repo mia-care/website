@@ -12,7 +12,7 @@ function eventSchema(w: WebinarContent): Record<string, unknown> {
   return {
     "@context": "https://schema.org",
     "@type": "Event",
-    name: w.title,
+    name: w.subtitle ? `${w.title}: ${w.subtitle}` : w.title,
     description: w.abstract[0],
     startDate: w.startDate,
     endDate: w.endDate,
@@ -68,11 +68,24 @@ export function WebinarPage({ webinar: w }: { webinar: WebinarContent }) {
           <div className="min-w-0">
             <PillTag className="mb-6">{w.eyebrow}</PillTag>
             <h1
-              className="font-display font-bold mb-8 leading-tight"
+              className={`font-display font-bold leading-tight ${w.subtitle ? "mb-4" : "mb-8"}`}
               style={{ fontSize: "clamp(32px, 4vw, 48px)", letterSpacing: "-0.035em" }}
             >
               {w.title}
             </h1>
+            {w.subtitle && (
+              <p
+                className="font-display font-semibold mb-8"
+                style={{
+                  fontSize: "clamp(20px, 2.2vw, 26px)",
+                  lineHeight: 1.35,
+                  color: "var(--brand-green)",
+                  letterSpacing: "-0.01em",
+                }}
+              >
+                {w.subtitle}
+              </p>
+            )}
 
             {/* Key facts */}
             <dl className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3 mb-8">

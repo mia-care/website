@@ -21,6 +21,8 @@ export type WebinarContent = {
   thankYouPath: string;
   eyebrow: string;
   title: string;
+  /** Optional line shown under the title. */
+  subtitle?: string;
   dateLabel: string;
   timeLabel: string;
   languageLabel: string;
