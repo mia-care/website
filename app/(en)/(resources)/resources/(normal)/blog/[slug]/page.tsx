@@ -11,7 +11,7 @@ import { getCategoryName } from "@/data/blog-categories";
 import { SITE } from "@/data/site";
 import { assetPath } from "@/lib/asset";
 import { formatDate, getAllPostSlugs, getPost, getRelatedPosts } from "@/lib/blog";
-import { localeAlternates } from "@/lib/seo";
+import { BLOG_PUBLISHER_NAME, blogAuthorSchema, localeAlternates } from "@/lib/seo";
 
 export function generateStaticParams() {
   return getAllPostSlugs().map((slug) => ({ slug }));
@@ -66,17 +66,10 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     datePublished: post.date,
     dateModified: post.modified ?? post.date,
     image: post.featuredImage ? `${SITE.url}${post.featuredImage}` : undefined,
-    author: author
-      ? {
-          "@type": "Organization",
-          name: author.name,
-          url: SITE.url,
-          sameAs: author.sameAs,
-        }
-      : undefined,
+    author: author ? blogAuthorSchema(author, SITE.url) : undefined,
     publisher: {
       "@type": "Organization",
-      name: SITE.company.name,
+      name: BLOG_PUBLISHER_NAME,
       logo: {
         "@type": "ImageObject",
         url: `${SITE.url}/images/mia-care-logo.png`,
@@ -180,11 +173,22 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
             className="flex flex-wrap items-center gap-4 text-sm pt-6"
             style={{ borderTop: "1px solid var(--bg-border)", color: "var(--text-muted)" }}
           >
-            {author && (
-              <span className="font-medium" style={{ color: "var(--text-secondary)" }}>
-                {author.name}
-              </span>
-            )}
+            {author &&
+              (author.linkedin && !author.isOrganization ? (
+                <a
+                  href={author.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-medium hover:text-brand-green transition-colors"
+                  style={{ color: "var(--text-secondary)" }}
+                >
+                  {author.name}
+                </a>
+              ) : (
+                <span className="font-medium" style={{ color: "var(--text-secondary)" }}>
+                  {author.name}
+                </span>
+              ))}
             <span>·</span>
             <time dateTime={post.date}>{formatDate(post.date)}</time>
             <span>·</span>

@@ -4,7 +4,7 @@ slug: "iec-62304-a-comprehensive-faq-guide"
 description: "The IEC 62304 software life cycle can be confusing. This FAQ guide answers the most common questions on classification, risk, and compliance."
 seoTitle: "IEC 62304: A Comprehensive FAQ Guide"
 date: "2025-12-04"
-modified: "2025-12-23"
+modified: "2026-11-05"
 author: "dario-esposito"
 categories: ["international-standards"]
 featuredImage: "/blog/images/iec-62304-a-comprehensive-faq-guide.webp"
@@ -112,6 +112,8 @@ Yes, SOUP can be incorporated into a medical device. However, the manufacturer t
 ### 18. **What is the difference among SOUP, OTS and COTS?**
 
 SOUP (Software of Unknown Provenance) is a software item already developed and generally available but not developed for incorporation into the medical device; they are also known as OTS. SOUP is also defined as an item previously developed for which adequate records of the development processes are not available. The latest part of the definition applies also to items previously developed by the same manufacturer. The COTS (Commercial Off-The-Shelf) differ from OTS when they are made available by commercial suppliers.
+
+*For software already on the market, see [Legacy Regulated Software Remediation](/use-cases/legacy-remediation).*
 
 ## Software Testing [Clause 5.6, 5.7]
 
