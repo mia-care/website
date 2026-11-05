@@ -4,6 +4,7 @@ slug: "come-costruire-un-fascicolo-tecnico-per-un-samd-gia-esistente"
 description: "Leggi questa guida passo dopo passo per creare un fascicolo tecnico a partire da un SaMD esistente."
 seoTitle: "Fascicolo tecnico per un SaMD esistente: guida passo dopo passo"
 date: "2026-11-05"
+featured: true
 author: "dario-esposito"
 categories: ["international-standards"]
 featuredImage: "/blog/images/how-to-build-a-technical-file-for-software-as-a-medical-device-that-already-exists.webp"

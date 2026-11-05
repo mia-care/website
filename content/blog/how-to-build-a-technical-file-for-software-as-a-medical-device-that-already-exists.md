@@ -4,6 +4,7 @@ slug: "how-to-build-a-technical-file-for-software-as-a-medical-device-that-alrea
 description: "Read this step-by-step guide to build a technical file starting from existing SaMD."
 seoTitle: "Build a Technical File for Existing SaMD: Step-by-Step Guide"
 date: "2026-11-05"
+featured: true
 author: "dario-esposito"
 categories: ["international-standards"]
 featuredImage: "/blog/images/how-to-build-a-technical-file-for-software-as-a-medical-device-that-already-exists.webp"
