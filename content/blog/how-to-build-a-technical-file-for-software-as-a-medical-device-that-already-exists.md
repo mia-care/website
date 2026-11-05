@@ -72,18 +72,18 @@ You can do all of this with documents and spreadsheets; many teams do. A platfor
 
 ## Frequently asked questions
 
-### Do we have to rewrite existing software to certify it?
+### 1. **Do we have to rewrite existing software to certify it?**
 
 Usually not. If it is already on the market as a medical device, IEC 62304 offers a legacy route based on risk assessment and documented gap closure. If not, you rebuild the documentation and evidence retrospectively, but the code itself rarely needs rewriting.
 
-### How long does it take?
+### 2. **How long does it take?**
 
 It depends on the class, the size of the software and how much evidence exists. Start with the gap analysis: it gives you a realistic plan.
 
-### Can we reuse our existing tests?
+### 3. **Can we reuse our existing tests?**
 
 Yes, once they are linked to requirements and risk controls and their results are recorded.
 
-### Who decides whether the technical file is sufficient?
+### 4. **Who decides whether the technical file is sufficient?**
 
 The notified body in the EU; the FDA for US submissions.

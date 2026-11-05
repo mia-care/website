@@ -72,18 +72,18 @@ Un fascicolo tecnico non è un deliverable una tantum. Ogni release modifica req
 
 ## Domande frequenti
 
-### Dobbiamo riscrivere il software esistente per certificarlo?
+### 1. **Dobbiamo riscrivere il software esistente per certificarlo?**
 
 Di solito no. Se è già sul mercato come dispositivo medico, la norma IEC 62304 offre un percorso legacy basato sulla valutazione del rischio e sulla chiusura documentata dei gap. In caso contrario, si ricostruiscono la documentazione e le evidenze retrospettivamente, ma il codice in sé raramente necessita di essere riscritto.
 
-### Quanto tempo ci vuole?
+### 2. **Quanto tempo ci vuole?**
 
 Dipende dalla classe, dalle dimensioni del software e da quante evidenze esistono già. Iniziate con l'analisi dei gap: vi fornirà un piano realistico.
 
-### Possiamo riutilizzare i nostri test esistenti?
+### 3. **Possiamo riutilizzare i nostri test esistenti?**
 
 Sì, una volta che sono stati collegati ai requisiti e ai controlli del rischio e che i relativi risultati sono stati registrati.
 
-### Chi decide se il fascicolo tecnico è sufficiente?
+### 4. **Chi decide se il fascicolo tecnico è sufficiente?**
 
 L'organismo notificato nell'UE; l'FDA per le sottomissioni negli Stati Uniti.
