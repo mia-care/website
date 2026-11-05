@@ -71,6 +71,10 @@ export const LOCALE_PAIRS: { en: string; it: string }[] = [
     it: "/it/risorse/blog/dalla-classificazione-alla-certificazione-guida-completa-per-lo-sviluppo-di-samd",
   },
   {
+    en: "/resources/blog/how-to-build-a-technical-file-for-software-as-a-medical-device-that-already-exists",
+    it: "/it/risorse/blog/come-costruire-un-fascicolo-tecnico-per-un-samd-gia-esistente",
+  },
+  {
     en: "/resources/blog/how-to-speed-up-samd-development-with-compliance",
     it: "/it/risorse/blog/come-accelerare-sviluppo-samd-con-conformita",
   },
