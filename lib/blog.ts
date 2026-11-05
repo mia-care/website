@@ -235,8 +235,12 @@ function extractFaqs(markdown: string): Faq[] {
     if (question) {
       flush();
       current = { q: stripInlineMarkdown(question[1].trim()), answerLines: [] };
-    } else if (/^#{1,6}\s/.test(line)) {
+    } else if (/^#{1,6}\s/.test(line) || /^!\[/.test(line.trim())) {
+      // A heading or an image closes the answer: what follows an image (e.g. a
+      // table caption) is not part of the visible answer text.
       flush();
+    } else if (/^\*[^*].*\*\.?$/.test(line.trim())) {
+      // Standalone italic lines are captions or editorial notes, not answer text.
     } else if (current) {
       current.answerLines.push(line.trim());
     }

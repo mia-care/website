@@ -4,6 +4,7 @@ export const AUTHORS: Author[] = [
   {
     slug: "mia-care",
     name: "Mia-Care Editorial Team",
+    isOrganization: true,
     role: "Esperti P4SaMD",
     bio: "Il team di Mia-Care riunisce esperti in compliance del software medicale, affari regolatori ed ingegneria della sanità digitale.",
     linkedin: "https://www.linkedin.com/company/mia-care",
@@ -13,19 +14,26 @@ export const AUTHORS: Author[] = [
     slug: "marzio-ghezzi",
     name: "Marzio Ghezzi",
     role: "CEO, Mia-Care",
+    jobTitle: "CEO",
     bio: "Marzio Ghezzi è il CEO di Mia-Care, alla guida della missione dell'azienda di rendere la compliance regolatoria parte integrante dello sviluppo del software medicale.",
   },
   {
     slug: "dario-esposito",
     name: "Dario Esposito",
     role: "Technical Writer, Mia-Care",
+    jobTitle: "Technical Writer",
     bio: "Dario Esposito è Technical Writer in Mia-Care, impegnato a rendere più semplici da comprendere e implementare la compliance SaMD e gli standard di interoperabilità sanitaria.",
+    linkedin: "https://www.linkedin.com/in/dario-esposito-091562171/",
+    sameAs: ["https://www.linkedin.com/in/dario-esposito-091562171/"],
   },
   {
     slug: "roberta-egoriti",
     name: "Roberta Egoriti",
     role: "Product Manager, Mia-Care",
+    jobTitle: "Product Manager",
     bio: "Roberta Egoriti è Product Manager in Mia-Care, e lavora su come compliance, sicurezza e architettura della piattaforma si combinano nel prodotto P4SaMD.",
+    linkedin: "https://www.linkedin.com/in/roberta-egoriti-b6537414b/",
+    sameAs: ["https://www.linkedin.com/in/roberta-egoriti-b6537414b/"],
   },
 ];
 

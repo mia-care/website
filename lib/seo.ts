@@ -1,3 +1,4 @@
+import type { Author } from "@/data/authors";
 import { LOCALE_PAIRS } from "@/data/locale-pairs";
 
 // The Italian homepage is served only at "/it/": the build moves it.html to
@@ -23,3 +24,29 @@ export function localeAlternates(
   if (!pair) return undefined;
   return { en: pair.en, it: servedUrl(pair.it), "x-default": pair.en };
 }
+
+// schema.org author node for blog posts. Real people are emitted as Person
+// (Google reads author.url as the profile that identifies them); collective
+// bylines like the editorial team stay Organization.
+export function blogAuthorSchema(author: Author, siteUrl: string) {
+  if (author.isOrganization) {
+    return {
+      "@type": "Organization",
+      name: author.name,
+      url: siteUrl,
+      sameAs: author.sameAs,
+    };
+  }
+  return {
+    "@type": "Person",
+    name: author.name,
+    jobTitle: author.jobTitle,
+    url: author.linkedin,
+    sameAs: author.sameAs,
+    worksFor: { "@type": "Organization", name: BLOG_PUBLISHER_NAME, url: siteUrl },
+  };
+}
+
+// Brand name used as schema.org publisher on blog posts (the legal name
+// "Mia Care srl" in SITE.company stays for the footer).
+export const BLOG_PUBLISHER_NAME = "Mia-Care";
