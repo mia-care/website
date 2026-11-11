@@ -32,9 +32,15 @@ const COPY = {
 
 const PLAYER_ORIGIN = "https://www.youtube-nocookie.com";
 
-// Caption track each locale gets when the player starts. EN: off, the English text is burned into
-// the video. IT: the Italian track uploaded to YouTube.
-const CAPTION_TRACK = { en: {}, it: { languageCode: "it" } };
+// Caption language each locale starts with. EN: none, the English text is burned into the video.
+// IT: the Italian track uploaded to YouTube.
+const CAPTION_LANGUAGE = { en: null, it: "it" } as const;
+
+type CaptionTrack = { languageCode?: string };
+type PlayerMessage = {
+  event?: string;
+  info?: { captions?: { track?: CaptionTrack; tracklist?: CaptionTrack[] } };
+};
 
 // Player with sound, opened in the modal. A fresh iframe on every open restarts the video from 0:00.
 // The player API is enabled so the effect below can set the caption track.
@@ -110,10 +116,12 @@ export function HeroVideo({ locale = "en" }: { locale?: "en" | "it" }) {
     if (loop?.getAttribute("src")) loop.play().catch(() => {});
   }, [open]);
 
-  // Caption track, set once when the player loads its captions module. URL parameters are not
+  // Caption track, checked once when the player reports its captions module. URL parameters are not
   // enough: YouTube turns English captions on by itself (ignoring cc_load_policy=0), and a caption
   // language the visitor picked on any YouTube embed is remembered for 30 days and wins over
-  // cc_lang_pref. Later loads are left alone, so the CC button still works as usual.
+  // cc_lang_pref. The track is only changed when it is not the wanted one: setting the same track
+  // again reloads it and can leave the player without captions. Later reports are left alone, so
+  // the CC button still works as usual.
   useEffect(() => {
     const iframe = iframeRef.current;
     if (!open || !iframe) return;
@@ -142,20 +150,23 @@ export function HeroVideo({ locale = "en" }: { locale?: "en" | "it" }) {
       if (typeof e.data !== "string") return;
       window.clearInterval(handshake);
       if (done) return;
-      let data: { event?: string; info?: { namespaces?: string[] } } | undefined;
+      let data: PlayerMessage | undefined;
       try {
         data = JSON.parse(e.data);
       } catch {
         return;
       }
-      if (data?.event === "apiInfoDelivery" && data.info?.namespaces?.includes("captions")) {
-        done = true;
-        post({
-          event: "command",
-          func: "setOption",
-          args: ["captions", "track", CAPTION_TRACK[locale]],
-        });
-      }
+      const captions = data?.event === "apiInfoDelivery" ? data.info?.captions : undefined;
+      if (!captions) return;
+      done = true;
+
+      const wanted = CAPTION_LANGUAGE[locale];
+      if ((captions.track?.languageCode ?? null) === wanted) return;
+      // An empty track turns captions off; otherwise use the player's own entry for that language
+      const track = wanted
+        ? (captions.tracklist?.find((tr) => tr.languageCode === wanted) ?? { languageCode: wanted })
+        : {};
+      post({ event: "command", func: "setOption", args: ["captions", "track", track] });
     };
 
     iframe.addEventListener("load", onLoad);
