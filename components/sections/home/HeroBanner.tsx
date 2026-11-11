@@ -2,10 +2,19 @@
 
 import Link from "next/link";
 import { HelixCanvas } from "./HelixCanvas";
-import { HeroProductFloating } from "./HeroProductFloating";
+import { HeroVideo } from "./HeroVideo";
 
-// Words in the H1: ["The", "compliance", "bottleneck", "ends", "here."]
-// "ends here." gets text-brand-gradient, rest plain
+// The helix keeps the height band of the previous hero, so it sits behind the copy as before
+const HELIX_BAND = "clamp(500px, 65vh, 720px)";
+
+// Words in the H1, one span each. EN: "ends here." gets the brand gradient.
+// IT: "La compliance non frena più i tuoi rilasci.", the gradient is on "non frena più".
+const GRADIENT_WORD: React.CSSProperties = {
+  WebkitBackgroundClip: "text",
+  WebkitTextFillColor: "transparent",
+  backgroundClip: "text",
+  backgroundImage: "var(--brand-gradient, linear-gradient(90deg,#00f096,#00f0f0))",
+};
 
 const COPY = {
   en: {
@@ -23,8 +32,8 @@ const COPY = {
     subtitle: (
       <>
         Le organizzazioni che sviluppano <strong>Software as a Medical Device</strong> passano 6-12
-        mesi in validazione regolatoria per ogni rilascio. P4SaMD integra la compliance direttamente
-        nel tuo workflow, rendendo l'audit-readiness la norma, non la scadenza.
+        mesi in validazione regolatoria per ogni rilascio. P4SaMD porta la compliance dentro il tuo
+        workflow, così sei pronto per l'audit ogni giorno, non solo quando arriva la scadenza.
       </>
     ),
     ctaDemo: { label: "Richiedi una Demo →", href: "/it/richiedi-demo" },
@@ -39,17 +48,21 @@ export function HeroBanner({ locale = "en" }: { locale?: "en" | "it" }) {
   }
 
   return (
-    <section
-      className="relative overflow-hidden"
-      style={{
-        minHeight: "clamp(500px, 65vh, 720px)",
-        backgroundColor: "#000",
-        background:
-          "radial-gradient(ellipse 80% 55% at 50% -5%, rgba(0,240,150,0.09) 0%, transparent 50%)",
-      }}
-    >
-      {/* ── Animation fills the entire hero ────────────────────────────── */}
-      <div aria-hidden="true" style={{ position: "absolute", inset: 0, zIndex: 0 }}>
+    <section className="relative overflow-hidden" style={{ background: "#000" }}>
+      {/* ── Helix animation, faded out at the bottom of its band ───────── */}
+      <div
+        aria-hidden="true"
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          right: 0,
+          height: HELIX_BAND,
+          zIndex: 0,
+          maskImage: "linear-gradient(to bottom, #000 70%, transparent 100%)",
+          WebkitMaskImage: "linear-gradient(to bottom, #000 70%, transparent 100%)",
+        }}
+      >
         <HelixCanvas style={{ height: "100%" }} />
       </div>
 
@@ -58,7 +71,10 @@ export function HeroBanner({ locale = "en" }: { locale?: "en" | "it" }) {
         aria-hidden="true"
         style={{
           position: "absolute",
-          inset: 0,
+          top: 0,
+          left: 0,
+          right: 0,
+          height: HELIX_BAND,
           zIndex: 1,
           background:
             "linear-gradient(to bottom, rgba(0,0,0,0.78) 0%, rgba(0,0,0,0.45) 60%, transparent 88%)",
@@ -66,74 +82,53 @@ export function HeroBanner({ locale = "en" }: { locale?: "en" | "it" }) {
         }}
       />
 
-      {/* ── Copy + product panel ────────────────────────────────────────── */}
+      {/* ── Centered copy, then the video frame resting on the logo marquee ── */}
       <div
         className="relative w-full max-w-7xl mx-auto px-6 lg:px-12"
         style={{
           zIndex: 2,
-          paddingTop: "clamp(3.5rem, 8vw, 6rem)",
-          paddingBottom: "clamp(2rem, 4vw, 3rem)",
+          // Spacing follows viewport height too, so the video frame peeks above the fold on laptops
+          paddingTop: "clamp(2rem, 6vh, 4rem)",
         }}
       >
-        <div className="flex flex-col lg:flex-row lg:items-center lg:gap-12">
-          {/* Left: copy */}
-          <div className="flex-1 min-w-0 text-center lg:text-left">
+        <div className="flex flex-col items-center">
+          <div className="w-full text-center">
             {/* H1 — each word is independently repulsable */}
             <h1
-              className="font-display font-bold leading-tight mb-8 animate-fade-in-up"
+              className="font-display font-bold leading-tight mb-6 mx-auto text-balance animate-fade-in-up"
               style={{
-                fontSize: "clamp(34px, 5vw, 64px)",
+                fontSize: "clamp(34px, min(5vw, 8vh), 64px)",
+                // In em, so it scales with the font: always two lines on desktop, also on short
+                // laptop screens where the smaller font would fit the whole title on one line.
+                // Must stay wider than the longest line ("non frena più i tuoi rilasci." ≈ 13.3em).
+                maxWidth: "15em",
                 letterSpacing: "-0.03em",
                 animationDelay: "80ms",
               }}
             >
               {locale === "it" ? (
                 <>
-                  {wordSpan(0, "Il collo di bottiglia")} {wordSpan(1, "della compliance")}{" "}
-                  {wordSpan(2, "finisce", {
-                    WebkitBackgroundClip: "text",
-                    WebkitTextFillColor: "transparent",
-                    backgroundClip: "text",
-                    backgroundImage:
-                      "var(--brand-gradient, linear-gradient(90deg,#00f096,#00f0f0))",
-                  })}{" "}
-                  {wordSpan(3, "qui.", {
-                    WebkitBackgroundClip: "text",
-                    WebkitTextFillColor: "transparent",
-                    backgroundClip: "text",
-                    backgroundImage:
-                      "var(--brand-gradient, linear-gradient(90deg,#00f096,#00f0f0))",
-                  })}
+                  {/* "non frena più" is one span: it wraps as a unit and the gradient runs across it */}
+                  {wordSpan(0, "La")} {wordSpan(1, "compliance")}{" "}
+                  {wordSpan(2, "non frena più", GRADIENT_WORD)} {wordSpan(3, "i")}{" "}
+                  {wordSpan(4, "tuoi")} {wordSpan(5, "rilasci.")}
                 </>
               ) : (
                 <>
                   {wordSpan(0, "The")} {wordSpan(1, "compliance")} {wordSpan(2, "bottleneck")}{" "}
-                  {wordSpan(3, "ends", {
-                    WebkitBackgroundClip: "text",
-                    WebkitTextFillColor: "transparent",
-                    backgroundClip: "text",
-                    backgroundImage:
-                      "var(--brand-gradient, linear-gradient(90deg,#00f096,#00f0f0))",
-                  })}{" "}
-                  {wordSpan(4, "here.", {
-                    WebkitBackgroundClip: "text",
-                    WebkitTextFillColor: "transparent",
-                    backgroundClip: "text",
-                    backgroundImage:
-                      "var(--brand-gradient, linear-gradient(90deg,#00f096,#00f0f0))",
-                  })}
+                  {wordSpan(3, "ends", GRADIENT_WORD)} {wordSpan(4, "here.", GRADIENT_WORD)}
                 </>
               )}
             </h1>
 
             {/* Subtitle */}
             <p
-              className="text-base mb-12 mx-auto lg:mx-0 animate-fade-in-up"
+              className="text-base mb-10 mx-auto animate-fade-in-up"
               style={{
                 color: "var(--text-primary)",
                 lineHeight: 1.75,
                 fontSize: "clamp(14px, 1.1vw, 17px)",
-                maxWidth: "540px",
+                maxWidth: "620px",
                 animationDelay: "160ms",
               }}
             >
@@ -142,7 +137,7 @@ export function HeroBanner({ locale = "en" }: { locale?: "en" | "it" }) {
 
             {/* CTAs */}
             <div
-              className="flex flex-wrap gap-4 justify-center lg:justify-start animate-fade-in-up"
+              className="flex flex-wrap gap-4 justify-center animate-fade-in-up"
               style={{ animationDelay: "240ms" }}
             >
               <Link
@@ -164,9 +159,12 @@ export function HeroBanner({ locale = "en" }: { locale?: "en" | "it" }) {
             </div>
           </div>
 
-          {/* Right: floating product cards — desktop only */}
-          <div className="hidden lg:block w-[480px] flex-shrink-0">
-            <HeroProductFloating />
+          {/* Video in a glass browser frame, cut at 3/4 so it rests on the logo marquee */}
+          <div
+            className="w-full flex justify-center animate-fade-in-up"
+            style={{ marginTop: "clamp(2rem, 5vh, 3.5rem)", animationDelay: "320ms" }}
+          >
+            <HeroVideo locale={locale} />
           </div>
         </div>
       </div>

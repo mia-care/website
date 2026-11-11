@@ -362,6 +362,100 @@ body {
   transform-origin: top center;
 }
 
+/* 7h. Homepage hero video (components/sections/home/HeroVideo.tsx) */
+@keyframes heroPlayRing {
+  0%   { opacity: 0.55; transform: scale(1); }
+  100% { opacity: 0;    transform: scale(1.45); }
+}
+
+@keyframes heroBackdropIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.hero-video-play {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  padding: 0;
+  border: 0;
+  background: radial-gradient(ellipse at 50% 37%, rgba(0, 0, 0, 0.28), transparent 60%);
+  cursor: pointer;
+}
+
+.hero-video-play:focus-visible { outline: none; }
+
+/* Centered in the visible 3/4 of the video, not in the full video */
+.hero-video-play-circle {
+  position: absolute;
+  left: 50%;
+  top: calc(37.5% - 2px);
+  width: clamp(56px, 8cqw, 88px);
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background-image: var(--brand-gradient);
+  color: var(--bg-base);
+  box-shadow: 0 0 32px rgba(0, 240, 150, 0.3), 0 8px 24px rgba(0, 0, 0, 0.45);
+  transform: translate(-50%, -50%);
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s;
+}
+
+.hero-video-play-circle::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(0, 240, 150, 0.6);
+  animation: heroPlayRing 2.4s ease-out infinite;
+}
+
+.hero-video-play-circle svg {
+  width: 34%;
+  height: 34%;
+  margin-left: 8%;
+}
+
+.hero-video-play:hover .hero-video-play-circle,
+.hero-video-play:focus-visible .hero-video-play-circle {
+  transform: translate(-50%, -50%) scale(1.06);
+  box-shadow: 0 0 44px rgba(0, 240, 150, 0.42), 0 8px 24px rgba(0, 0, 0, 0.45);
+}
+
+.hero-video-play:focus-visible .hero-video-play-circle {
+  outline: 2px solid rgba(0, 240, 150, 0.6);
+  outline-offset: 4px;
+}
+
+/* Capped at 880px and by viewport height, so on a laptop the player stays well under full height */
+.hero-video-modal {
+  width: min(880px, calc(100% - 32px), calc((100vh - 160px) * 16 / 9));
+  width: min(880px, calc(100% - 32px), calc((100dvh - 160px) * 16 / 9));
+  max-width: none;
+  max-height: none;
+  margin: auto;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--text-primary);
+  overflow: visible;
+}
+
+.hero-video-modal[open] {
+  animation: navDropdownIn 0.22s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.hero-video-modal::backdrop {
+  background: rgba(3, 4, 8, 0.86);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+.hero-video-modal[open]::backdrop {
+  animation: heroBackdropIn 0.2s ease-out both;
+}
+
 .dark {
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);
