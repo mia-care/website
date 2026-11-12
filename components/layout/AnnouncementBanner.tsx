@@ -2,15 +2,19 @@
 
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-import type { Announcement } from "@/data/announcement";
+import { type Announcement, isAnnouncementActive } from "@/data/announcement";
 
-const STORAGE_KEY = "banner-dismissed-at";
+const STORAGE_KEY_PREFIX = "banner-dismissed-at:";
 const _BANNER_H = 40;
 const DISMISS_DAYS = 15;
 
-function isDismissed(): boolean {
+function storageKey(id: string): string {
+  return `${STORAGE_KEY_PREFIX}${id}`;
+}
+
+function isDismissed(id: string): boolean {
   try {
-    const raw = localStorage.getItem(STORAGE_KEY);
+    const raw = localStorage.getItem(storageKey(id));
     if (!raw) return false;
     return Date.now() - Number(raw) < DISMISS_DAYS * 24 * 60 * 60 * 1000;
   } catch {
@@ -35,12 +39,12 @@ export function AnnouncementBanner({ config }: { config: Announcement }) {
 
   // Effect 1: decide visibility
   useEffect(() => {
-    if (!config.enabled || isDismissed()) {
+    if (!isAnnouncementActive(config) || isDismissed(config.id)) {
       setBannerHeight(0);
       return;
     }
     setVisible(true);
-  }, [config.enabled]);
+  }, [config]);
 
   // Effect 2: wire up ResizeObserver + scroll once the banner is in the DOM
   useEffect(() => {
@@ -84,7 +88,7 @@ export function AnnouncementBanner({ config }: { config: Announcement }) {
 
   const dismiss = () => {
     try {
-      localStorage.setItem(STORAGE_KEY, String(Date.now()));
+      localStorage.setItem(storageKey(config.id), String(Date.now()));
     } catch {}
     dismissed.current = true;
     if (bannerRef.current) bannerRef.current.style.transform = "translateY(-100%)";
@@ -95,11 +99,15 @@ export function AnnouncementBanner({ config }: { config: Announcement }) {
   if (!visible) return null;
 
   const inner = (
-    <span className="flex items-center gap-2">
-      {config.icon && <span aria-hidden="true">{config.icon}</span>}
+    <span>
+      {config.icon && (
+        <span aria-hidden="true" className="mr-2">
+          {config.icon}
+        </span>
+      )}
       <span>{config.message}</span>
       {config.link && (
-        <span className="font-semibold underline underline-offset-2 opacity-80">
+        <span className="ml-2 whitespace-nowrap font-semibold underline underline-offset-2 opacity-80">
           {config.link.label} →
         </span>
       )}

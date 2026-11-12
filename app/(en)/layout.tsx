@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import localFont from "next/font/local";
 import Script from "next/script";
 import { CookieBanner } from "@/components/common/CookieBanner";
-import { announcement } from "@/data/announcement";
+import { announcement, isAnnouncementActive } from "@/data/announcement";
 import "../globals.css";
 
 const inter = Inter({
@@ -77,7 +77,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     >
       <head>
         {/* Set --banner-h before first paint to prevent layout shift */}
-        <style>{`:root { --banner-h: ${announcement.enabled ? "40px" : "0px"}; }`}</style>
+        <style>{`:root { --banner-h: ${isAnnouncementActive(announcement) ? "40px" : "0px"}; }`}</style>
         <Script id="gtm-init" strategy="afterInteractive">{`
           (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
           new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
