@@ -75,9 +75,12 @@ export type Post = PostMeta & {
   contentHtml: string;
   headings: Heading[];
   faqs: Faq[];
+  howToSteps: HowToStep[];
 };
 
 export type Faq = { q: string; a: string };
+
+export type HowToStep = { name: string; text: string; id: string };
 
 export type Heading = {
   id: string;
@@ -141,6 +144,7 @@ export async function getPost(slug: string, locale: Locale = "en"): Promise<Post
     .replace(/<img /g, '<img loading="lazy" ');
   const headings = extractHeadings(content);
   const faqs = extractFaqs(content);
+  const howToSteps = extractHowToSteps(content);
 
   return {
     title: decodeEntities(data.title ?? ""),
@@ -159,6 +163,7 @@ export async function getPost(slug: string, locale: Locale = "en"): Promise<Post
     contentHtml,
     headings,
     faqs,
+    howToSteps,
   };
 }
 
@@ -247,6 +252,44 @@ function extractFaqs(markdown: string): Faq[] {
   }
   flush();
   return faqs;
+}
+
+// Extracts HowTo steps from posts whose sections are headed "## Step N: Name" (EN) or
+// "## Passaggio N: Name" (IT). `text` is the section body as plain text (up to the next
+// heading); `id` is the heading anchor, so each step can link to its section.
+// Posts without such headings yield an empty array, and no HowTo schema is rendered.
+function extractHowToSteps(markdown: string): HowToStep[] {
+  const lines = markdown.split("\n");
+  const steps: HowToStep[] = [];
+  let current: { name: string; id: string; bodyLines: string[] } | null = null;
+
+  const flush = () => {
+    if (current) {
+      const text = stripInlineMarkdown(
+        current.bodyLines
+          .map((l) => l.trim().replace(/^(?:[*-]|\d+\.)\s+/, ""))
+          .filter(Boolean)
+          .join(" "),
+      );
+      if (current.name && text) steps.push({ name: current.name, text, id: current.id });
+    }
+    current = null;
+  };
+
+  for (const line of lines) {
+    const step = line.match(/^## (?:Step|Passaggio) \d+:\s*(.+?)\s*$/i);
+    if (step) {
+      flush();
+      const heading = stripInlineMarkdown(line.replace(/^## /, "").trim());
+      current = { name: stripInlineMarkdown(step[1]), id: slugifyHeading(heading), bodyLines: [] };
+    } else if (/^#{1,6}\s/.test(line)) {
+      flush();
+    } else if (current) {
+      current.bodyLines.push(line);
+    }
+  }
+  flush();
+  return steps;
 }
 
 function slugifyHeading(text: string): string {

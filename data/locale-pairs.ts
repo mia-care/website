@@ -39,6 +39,10 @@ export const LOCALE_PAIRS: { en: string; it: string }[] = [
     it: "/it/risorse/blog/5-benefici-del-monitoraggio-remoto-dei-pazienti",
   },
   {
+    en: "/resources/blog/add-ai-feature-certified-medical-device",
+    it: "/it/risorse/blog/aggiungere-funzionalita-ia-dispositivo-medico-certificato",
+  },
+  {
     en: "/resources/blog/brownfield-assessment-remediation",
     it: "/it/risorse/blog/valutazione-e-bonifica-brownfield-per-software-medicale-legacy",
   },

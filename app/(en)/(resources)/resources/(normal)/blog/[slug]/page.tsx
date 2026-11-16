@@ -114,6 +114,24 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         }
       : null;
 
+  const howToSchema =
+    post.howToSteps.length >= 2
+      ? {
+          "@context": "https://schema.org",
+          "@type": "HowTo",
+          name: post.title,
+          description: post.description,
+          image: post.featuredImage ? `${SITE.url}${post.featuredImage}` : undefined,
+          step: post.howToSteps.map((step, i) => ({
+            "@type": "HowToStep",
+            position: i + 1,
+            name: step.name,
+            text: step.text,
+            url: `${canonicalUrl}#${step.id}`,
+          })),
+        }
+      : null;
+
   return (
     <>
       <script
@@ -122,6 +140,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
       />
       <JsonLd schema={breadcrumbSchema} />
       {faqSchema && <JsonLd schema={faqSchema} />}
+      {howToSchema && <JsonLd schema={howToSchema} />}
 
       {/* Hero */}
       <section className="py-16" style={{ borderBottom: "1px solid var(--bg-border)" }}>
