@@ -26,6 +26,7 @@ const PAGE_DATES: Record<string, string> = {
   "/resources/blog": "2026-04-26",
   "/resources/success-cases": "2026-09-01",
   "/webinar/ai-medical-software": "2026-11-03",
+  "/webinar/code-to-certification": "2026-11-19",
 };
 
 // Capabilities, use-cases, competence-center: update when data in /data/*.ts changes
@@ -115,6 +116,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly",
       priority: 0.8,
     }),
+    {
+      url: `${BASE}/webinar/code-to-certification`,
+      lastModified: PAGE_DATES["/webinar/code-to-certification"],
+      changeFrequency: "weekly",
+      priority: 0.8,
+    },
     ...localePair("/about-us", "/it/chi-siamo", {
       lastModified: PAGE_DATES["/about-us"],
       changeFrequency: "monthly",

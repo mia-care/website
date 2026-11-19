@@ -7,6 +7,8 @@ export type WebinarSpeaker = {
   role: string;
   company: string;
   photo: string;
+  /** Optional short bio shown on the speaker card. */
+  bio?: string;
 };
 
 export type WebinarAgendaItem = {
@@ -29,12 +31,17 @@ export type WebinarContent = {
   formatLabel: string;
   /** ISO 8601 with offset, used for the Event structured data. */
   startDate: string;
-  endDate: string;
+  /** Omit when the duration has not been announced. */
+  endDate?: string;
+  /** Social sharing image (also used in the Event structured data). */
+  ogImage?: string;
   abstract: string[];
-  coverHeading: string;
-  coverItems: string[];
-  agendaHeading: string;
-  agenda: WebinarAgendaItem[];
+  /** "What we will cover" list; the section is hidden when empty. */
+  coverHeading?: string;
+  coverItems?: string[];
+  /** The agenda section is hidden when empty. */
+  agendaHeading?: string;
+  agenda?: WebinarAgendaItem[];
   speakersHeading: string;
   speakers: WebinarSpeaker[];
   formHeading: string;
