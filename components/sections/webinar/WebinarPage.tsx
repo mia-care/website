@@ -15,7 +15,8 @@ function eventSchema(w: WebinarContent): Record<string, unknown> {
     name: w.subtitle ? `${w.title}: ${w.subtitle}` : w.title,
     description: w.abstract[0],
     startDate: w.startDate,
-    endDate: w.endDate,
+    ...(w.endDate ? { endDate: w.endDate } : {}),
+    ...(w.ogImage ? { image: `${SITE.url}${w.ogImage}` } : {}),
     inLanguage: w.locale,
     eventStatus: "https://schema.org/EventScheduled",
     eventAttendanceMode: "https://schema.org/OnlineEventAttendanceMode",
@@ -151,77 +152,81 @@ export function WebinarPage({ webinar: w }: { webinar: WebinarContent }) {
             </div>
 
             {/* What we will cover */}
-            <div className="mb-12">
-              <h2
-                className="font-display font-semibold text-xl mb-5"
-                style={{ color: "var(--text-primary)" }}
-              >
-                {w.coverHeading}
-              </h2>
-              <ul className="space-y-4">
-                {w.coverItems.map((item) => (
-                  <li key={item.slice(0, 32)} className="flex items-start gap-3 text-sm">
-                    <span
-                      className="mt-0.5 shrink-0 w-4 h-4 rounded-full flex items-center justify-center"
-                      style={{
-                        background: "rgba(0,240,150,0.1)",
-                        color: "var(--brand-green)",
-                        fontSize: 10,
-                      }}
-                      aria-hidden="true"
-                    >
-                      ✓
-                    </span>
-                    <span style={{ color: "var(--text-primary)", opacity: 0.8, lineHeight: 1.7 }}>
-                      {item}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            </div>
+            {w.coverItems && w.coverItems.length > 0 && (
+              <div className="mb-12">
+                <h2
+                  className="font-display font-semibold text-xl mb-5"
+                  style={{ color: "var(--text-primary)" }}
+                >
+                  {w.coverHeading}
+                </h2>
+                <ul className="space-y-4">
+                  {w.coverItems.map((item) => (
+                    <li key={item.slice(0, 32)} className="flex items-start gap-3 text-sm">
+                      <span
+                        className="mt-0.5 shrink-0 w-4 h-4 rounded-full flex items-center justify-center"
+                        style={{
+                          background: "rgba(0,240,150,0.1)",
+                          color: "var(--brand-green)",
+                          fontSize: 10,
+                        }}
+                        aria-hidden="true"
+                      >
+                        ✓
+                      </span>
+                      <span style={{ color: "var(--text-primary)", opacity: 0.8, lineHeight: 1.7 }}>
+                        {item}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
 
             {/* Agenda */}
-            <div className="mb-12">
-              <h2
-                className="font-display font-semibold text-xl mb-5"
-                style={{ color: "var(--text-primary)" }}
-              >
-                {w.agendaHeading}
-              </h2>
-              <ol
-                className="rounded-card overflow-hidden"
-                style={{ background: "var(--bg-surface)", border: "1px solid var(--bg-border)" }}
-              >
-                {w.agenda.map((item, i) => (
-                  <li
-                    key={item.time}
-                    className="flex gap-4 sm:gap-6 p-4 sm:p-5"
-                    style={i > 0 ? { borderTop: "1px solid var(--bg-border)" } : undefined}
-                  >
-                    <span
-                      className="font-display font-bold text-sm sm:text-base shrink-0 min-w-12 whitespace-nowrap tabular-nums"
-                      style={{ color: "var(--brand-green)" }}
+            {w.agenda && w.agenda.length > 0 && (
+              <div className="mb-12">
+                <h2
+                  className="font-display font-semibold text-xl mb-5"
+                  style={{ color: "var(--text-primary)" }}
+                >
+                  {w.agendaHeading}
+                </h2>
+                <ol
+                  className="rounded-card overflow-hidden"
+                  style={{ background: "var(--bg-surface)", border: "1px solid var(--bg-border)" }}
+                >
+                  {w.agenda.map((item, i) => (
+                    <li
+                      key={item.time}
+                      className="flex gap-4 sm:gap-6 p-4 sm:p-5"
+                      style={i > 0 ? { borderTop: "1px solid var(--bg-border)" } : undefined}
                     >
-                      {item.time}
-                    </span>
-                    <div className="min-w-0">
-                      <p
-                        className="font-semibold text-sm sm:text-base"
-                        style={{ color: "var(--text-primary)", lineHeight: 1.5 }}
+                      <span
+                        className="font-display font-bold text-sm sm:text-base shrink-0 min-w-12 whitespace-nowrap tabular-nums"
+                        style={{ color: "var(--brand-green)" }}
                       >
-                        {item.title}
-                      </p>
-                      {item.speaker && (
-                        <p className="text-sm mt-1" style={{ color: "var(--text-muted)" }}>
-                          {item.speaker.name}, {item.speaker.role} {w.labels.at}{" "}
-                          {item.speaker.company}
+                        {item.time}
+                      </span>
+                      <div className="min-w-0">
+                        <p
+                          className="font-semibold text-sm sm:text-base"
+                          style={{ color: "var(--text-primary)", lineHeight: 1.5 }}
+                        >
+                          {item.title}
                         </p>
-                      )}
-                    </div>
-                  </li>
-                ))}
-              </ol>
-            </div>
+                        {item.speaker && (
+                          <p className="text-sm mt-1" style={{ color: "var(--text-muted)" }}>
+                            {item.speaker.name}, {item.speaker.role} {w.labels.at}{" "}
+                            {item.speaker.company}
+                          </p>
+                        )}
+                      </div>
+                    </li>
+                  ))}
+                </ol>
+              </div>
+            )}
 
             {/* Speakers */}
             <div>
@@ -231,31 +236,47 @@ export function WebinarPage({ webinar: w }: { webinar: WebinarContent }) {
               >
                 {w.speakersHeading}
               </h2>
-              <div className="grid sm:grid-cols-2 gap-4">
+              {/* With bios the cards get tall: stack them so short ones don't leave empty space */}
+              <div
+                className={`grid gap-4 ${w.speakers.some((sp) => sp.bio) ? "" : "sm:grid-cols-2"}`}
+              >
                 {w.speakers.map((s) => (
                   <div
                     key={s.name}
-                    className="rounded-card p-5 flex items-center gap-4"
+                    className="rounded-card p-5"
                     style={{
                       background: "var(--bg-surface)",
                       border: "1px solid var(--bg-border)",
                     }}
                   >
-                    <SpeakerAvatar speaker={s} size={72} />
-                    <div className="min-w-0">
-                      <p
-                        className="font-display font-semibold text-base"
-                        style={{ color: "var(--text-primary)" }}
-                      >
-                        {s.name}
-                      </p>
-                      <p className="text-sm" style={{ color: "var(--text-secondary)" }}>
-                        {s.role}
-                      </p>
-                      <p className="text-sm font-semibold" style={{ color: "var(--brand-green)" }}>
-                        {s.company}
-                      </p>
+                    <div className="flex items-center gap-4">
+                      <SpeakerAvatar speaker={s} size={72} />
+                      <div className="min-w-0">
+                        <p
+                          className="font-display font-semibold text-base"
+                          style={{ color: "var(--text-primary)" }}
+                        >
+                          {s.name}
+                        </p>
+                        <p className="text-sm" style={{ color: "var(--text-secondary)" }}>
+                          {s.role}
+                        </p>
+                        <p
+                          className="text-sm font-semibold"
+                          style={{ color: "var(--brand-green)" }}
+                        >
+                          {s.company}
+                        </p>
+                      </div>
                     </div>
+                    {s.bio && (
+                      <p
+                        className="text-sm mt-4"
+                        style={{ color: "var(--text-secondary)", lineHeight: 1.7 }}
+                      >
+                        {s.bio}
+                      </p>
+                    )}
                   </div>
                 ))}
               </div>
@@ -284,9 +305,13 @@ export function WebinarPage({ webinar: w }: { webinar: WebinarContent }) {
               {w.formHeading}
             </h2>
             <p className="text-sm mb-6" style={{ color: "var(--text-muted)" }}>
-              {w.dateLabel} · {w.timeLabel}
-              <br />
-              {w.formNote}
+              <span className="block">{w.dateLabel}</span>
+              {w.timeLabel.split(" | ").map((t) => (
+                <span key={t} className="block">
+                  {t}
+                </span>
+              ))}
+              <span className="block mt-2">{w.formNote}</span>
             </p>
             <HubSpotForm
               portalId={WEBINAR_HUBSPOT.portalId}
