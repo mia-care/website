@@ -9,12 +9,14 @@ const COPY = {
     pill: "Capabilities Involved",
     heading: "The P4SaMD capabilities that power this use case.",
     explore: "Explore →",
+    upcoming: "Upcoming",
     hrefPrefix: "/capabilities",
   },
   it: {
     pill: "Capability Coinvolte",
     heading: "Le capability P4SaMD che alimentano questo caso d'uso.",
     explore: "Esplora →",
+    upcoming: "In arrivo",
     hrefPrefix: "/it/capabilities",
   },
 };
@@ -45,15 +47,33 @@ export function CapabilitiesInvolved({ uc, locale = "en" }: { uc: UseCase; local
                 border: "1px solid var(--bg-border)",
               }}
             >
-              <span className="label-caps" style={{ color: "var(--brand-green)", opacity: 0.7 }}>
-                {cap.code}
-              </span>
+              <div className="flex items-center justify-between gap-2">
+                <span className="label-caps" style={{ color: "var(--brand-green)", opacity: 0.7 }}>
+                  {cap.code}
+                </span>
+                {uc.upcomingCapabilities?.includes(cap.slug) && (
+                  <span
+                    className="text-xs font-semibold px-2 py-0.5 rounded-full"
+                    style={{
+                      color: "var(--text-secondary)",
+                      border: "1px solid var(--bg-border-strong)",
+                    }}
+                  >
+                    {t.upcoming}
+                  </span>
+                )}
+              </div>
               <h3
                 className="font-display font-semibold text-sm leading-snug group-hover:text-brand-green transition-colors"
                 style={{ color: "var(--text-primary)" }}
               >
                 {cap.name}
               </h3>
+              {uc.capabilityNotes?.[cap.slug] && (
+                <p className="text-xs font-semibold" style={{ color: "var(--brand-green)" }}>
+                  {uc.capabilityNotes[cap.slug]}
+                </p>
+              )}
               <span
                 className="text-xs font-semibold mt-auto transition-colors group-hover:text-brand-green"
                 style={{ color: "var(--text-muted)" }}

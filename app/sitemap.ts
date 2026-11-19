@@ -29,7 +29,7 @@ const PAGE_DATES: Record<string, string> = {
 };
 
 // Capabilities, use-cases, competence-center: update when data in /data/*.ts changes
-const DATA_LAST_MODIFIED = "2026-04-26";
+const DATA_LAST_MODIFIED = "2026-11-19";
 
 type Entry = MetadataRoute.Sitemap[number];
 

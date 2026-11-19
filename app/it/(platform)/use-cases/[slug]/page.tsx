@@ -9,10 +9,13 @@ import { CaseStudyBlock } from "@/components/sections/use-case/CaseStudyBlock";
 import { NarrativeStory } from "@/components/sections/use-case/NarrativeStory";
 import { OtherUseCases } from "@/components/sections/use-case/OtherUseCases";
 import { StickyDemoPill } from "@/components/sections/use-case/StickyDemoPill";
+import { UseCaseFaq } from "@/components/sections/use-case/UseCaseFaq";
 import { UseCaseHero } from "@/components/sections/use-case/UseCaseHero";
+import { UseCaseSections } from "@/components/sections/use-case/UseCaseSections";
 import { SITE } from "@/data/site";
 import { getUseCaseBySlug, useCases } from "@/data/use-cases.it";
 import { localeAlternates } from "@/lib/seo";
+import { buildUseCaseSchemas } from "@/lib/use-case-schema";
 
 export function generateStaticParams() {
   return useCases.map((uc) => ({ slug: uc.slug }));
@@ -61,15 +64,20 @@ export default async function UseCasePageIt({ params }: { params: Promise<{ slug
   return (
     <>
       <JsonLd schema={useCaseSchema} />
+      {buildUseCaseSchemas(uc, { path: `/it/use-cases/${uc.slug}`, locale: "it" }).map((schema) => (
+        <JsonLd key={String(schema["@type"])} schema={schema} />
+      ))}
       <Breadcrumb
         locale="it"
         items={[{ label: "Casi d'Uso", href: "/it/#use-cases" }, { label: uc.name }]}
       />
-      <UseCaseHero uc={uc} />
+      <UseCaseHero uc={uc} locale="it" />
       <LogoMarquee locale="it" />
       <NarrativeStory uc={uc} locale="it" />
+      <UseCaseSections uc={uc} />
       <CaseStudyBlock uc={uc} locale="it" />
       <CapabilitiesInvolved uc={uc} locale="it" />
+      <UseCaseFaq uc={uc} />
       <OtherUseCases currentSlug={uc.slug} locale="it" />
       <CtaBanner locale="it" />
       <StickyDemoPill locale="it" />

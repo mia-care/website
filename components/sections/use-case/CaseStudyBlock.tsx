@@ -70,11 +70,16 @@ export function CaseStudyBlock({ uc, locale = "en" }: { uc: UseCase; locale?: "e
         {/* Results */}
         <div>
           <h3
-            className="font-display font-semibold text-xl mb-6"
+            className={`font-display font-semibold text-xl ${caseStudy.outcomesNote ? "mb-2" : "mb-6"}`}
             style={{ color: "var(--text-primary)" }}
           >
-            {t.outcomes}
+            {caseStudy.outcomesHeading ?? t.outcomes}
           </h3>
+          {caseStudy.outcomesNote && (
+            <p className="text-sm mb-6" style={{ color: "var(--text-muted)" }}>
+              {caseStudy.outcomesNote}
+            </p>
+          )}
           <ResultsGrid results={caseStudy.results} />
         </div>
       </div>
