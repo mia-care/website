@@ -29,7 +29,7 @@ In the EU, software classification follows [Rule 11 of the Medical Device Regula
 
 ## Step 3: Plan for the AI Act (EU)
 
-Most AI-enabled medical devices are "high-risk" under the [EU AI Act](https://artificialintelligenceact.eu/), because they are covered by the MDR and need a notified body. After the AI Omnibus (Regulation (EU) 2026/1744), these obligations apply from **2 August 2028**.
+Most AI-enabled medical devices are "high-risk" under the [EU AI Act](https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng), because they are covered by the MDR and need a notified body. After the AI Omnibus (Regulation (EU) 2026/1744), these obligations apply from **2 August 2028**.
 
 Joint guidance MDCG 2025-6 says you prepare **one technical documentation file and one conformity assessment** through the MDR route, with the AI Act requirements built in. Your notified body must also meet the AI Act requirements for notified bodies. Requirements to plan for: risk management across the AI life cycle, data governance for training and test data, automatic logging, transparency, human oversight, and declared accuracy and robustness.
 
@@ -63,7 +63,7 @@ The work is easier when requirements, risks and tests are already linked, becaus
 
 ## How P4SaMD supports this
 
-**P4SaMD**, the compliance platform for Software as a Medical Device (SaMD) by Mia-Care, a Mia-Platform company, keeps requirements, risks, change requests and tests linked with two-way traceability, manages versions in line with [IEC 62304](https://mia-care.io/resources/blog/iec-62304-a-comprehensive-faq-guide) (the medical device software life-cycle standard), and uses a risk matrix aligned with ISO 14971. That gives you the impact view a change assessment needs, including AI risks. For the AI feature, [P4SaMD is adding capabilities along the AI life cycle](https://mia-care.io/resources/blog/master-ai-for-samd-compliance-abstracting-the-regulatory-complexity-in-the-ai-era): registering and classifying each AI system, checking training data, blocking a model version that misses its acceptance criteria, and tracking models in production against the agreed change plan. P4SaMD supports compliance; the notified body or the FDA decides.
+**P4SaMD**, the compliance platform for Software as a Medical Device (SaMD) by Mia-Care, a Mia-Platform company, keeps requirements, risks, change requests and tests linked with two-way traceability, manages versions in line with [IEC 62304](https://mia-care.io/resources/blog/iec-62304-a-comprehensive-faq-guide) (the medical device software life-cycle standard), and uses a risk matrix aligned with ISO 14971. That gives you the impact view a change assessment needs, including [AI risks](https://mia-care.io/use-cases/high-risk-ai-cdss). For the AI feature, [P4SaMD is adding capabilities along the AI life cycle](https://mia-care.io/resources/blog/master-ai-for-samd-compliance-abstracting-the-regulatory-complexity-in-the-ai-era): registering and classifying each AI system, checking training data, blocking a model version that misses its acceptance criteria, and tracking models in production against the agreed change plan. P4SaMD supports compliance; the notified body or the FDA decides.
 
 Want to see it in practice? On November 30th, Mia-Care hosts the free webinar "From Algorithm to Clinic: AI Medical Software to Market", with a case study by Aindo: [mia-care.io/webinar/ai-medical-software](https://mia-care.io/webinar/ai-medical-software).
 
