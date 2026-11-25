@@ -53,5 +53,6 @@ export const webinar: WebinarContent = {
   formNote: "Sessione online gratuita. Riceverai via email il link per partecipare.",
   ctaLabel: "Iscriviti ora",
   hubspotFormId: "226b578c-327e-49a2-8797-3860590cc35f",
+  ogImage: "/images/webinars/ai-medical-software/og-image.jpg",
   labels: { date: "Data", time: "Orario", language: "Lingua", format: "Formato", at: "di" },
 };
