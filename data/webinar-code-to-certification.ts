@@ -23,8 +23,9 @@ export const webinar: WebinarContent = {
   timeLabel: "4:00 PM GMT (UK Time) | 5:00 PM CET (Europe Time) | 11:00 AM EST (US Time)",
   languageLabel: "English",
   formatLabel: "Online, free",
-  // 4 PM GMT = 5 PM CET = 11 AM EST. The end time has not been announced.
+  // 4 PM GMT = 5 PM CET = 11 AM EST. Ends at 6 PM CET, as in the agenda.
   startDate: "2027-01-28T17:00:00+01:00",
+  endDate: "2027-01-28T18:00:00+01:00",
   ogImage: `${DIR}/og-image.jpg`,
   abstract: [
     "AI-based healthcare solutions only create value once they reach patients, and the route to market is where many promising projects stall. Regulatory expectations are often discovered late, when evidence is missing and documentation has to be rebuilt, at a high cost in time and budget.",
@@ -32,6 +33,21 @@ export const webinar: WebinarContent = {
   ],
   speakersHeading: "Speakers",
   speakers: [SPEAKER_MARZIO, SPEAKER_STEVEN],
+  agendaHeading: "Agenda (CET)",
+  agenda: [
+    { time: "5:00 - 5:10 PM", title: "Introduction" },
+    {
+      time: "5:10 - 5:30 PM",
+      title: "Clinical track: What a notified body looks for",
+      speaker: SPEAKER_STEVEN,
+    },
+    {
+      time: "5:30 - 5:50 PM",
+      title: "Software/AI track: How to build the evidence",
+      speaker: SPEAKER_MARZIO,
+    },
+    { time: "5:50 - 6:00 PM", title: "Final remarks & Q&A" },
+  ],
   formHeading: "Save your seat",
   formNote: "Free online session. You will receive the link to join by email.",
   ctaLabel: "Register now",
